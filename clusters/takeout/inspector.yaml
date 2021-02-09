@@ -1,14 +1,7 @@
----
-apiVersion: helm.fluxcd.io/v1
-kind: HelmRelease
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: HelmRepository
 metadata:
   name: inspector
-  namespace: monitoring
 spec:
-  releaseName: inspector
-  chart:
-    git: ssh://git@github.com/tyzbit/racher-cd-apps
-    ref: main
-    path: charts/inspector
-  values:
-    
+  interval: 5m
+  url: git@github.com/tyzbit/rancher-cd-apps
