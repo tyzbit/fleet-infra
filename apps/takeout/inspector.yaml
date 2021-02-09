@@ -1,13 +1,14 @@
-apiVersion: helm.fluxcd.io/v1
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: inspector
   namespace: monitoring
 spec:
-  releaseName: inspector
-  chart: inspector
-  sourceRef:
-    kind: HelmRepository
-    name: rancher-cd-apps
-    namespace: flux-system
-  values:
+  chart:
+    spec:
+      chart: inspector
+      sourceRef:
+        kind: HelmRepository
+        name: rancher-cd-apps
+  interval: 1m0s
