@@ -4,4 +4,4 @@ metadata:
   name: inspector
 spec:
   interval: 5m
-  url: https://github.com/tyzbit/rancher-cd-apps
+  url: https://tyzbit.github.io/rancher-cd-apps
