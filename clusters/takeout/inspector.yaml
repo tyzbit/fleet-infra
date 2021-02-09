@@ -2,6 +2,22 @@ apiVersion: source.toolkit.fluxcd.io/v1beta1
 kind: HelmRepository
 metadata:
   name: inspector
+  namespace: monitoring
 spec:
   interval: 5m
   url: https://tyzbit.github.io/rancher-cd-apps
+---
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: inspector
+  namespace: monitoring
+spec:
+  releaseName: inspector
+  chart: inspector
+  sourceRef:
+    kind: HelmRepository
+    name: inspector
+    namespace: monitoring
+  values:
+    
