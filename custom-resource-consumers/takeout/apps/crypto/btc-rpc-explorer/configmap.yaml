@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: btc-address-watcher
+  namespace: crypto
+data:
+  script.sh: |
+    apk add curl jq
+    ADDRESSKV=($(env | grep BTCADDRESS | sort))
+    while :; do
+      for thisaddresskv in "$${ADDRESSKV[@]}"; do
+        key=$${thisaddresskv%=*}
+        address=$${thisaddresskv#*=}
+        number=$(echo "$${key}" | tr -d [:upper:] | tr -d [:lower:])
+        balance=$(curl -s "$${BTC_EXPLORER_API}/address/$${address}" | jq -r '.txHistory.balanceSat')
+        if [ -f $${address} ]; then
+          previousbalance=$(cat $${address})
+          if [[ "$balance" -ne "$${previousbalance}" ]]; then
+            echo "$${address} balance changed from $${previousbalance} to $${balance}"
+            curl -s --retry 3 "$${HEALTHCHECK_API}/$${number}"
+          fi
+        fi
+        echo "$balance" > "$${address}"
+        curl -s --retry 3 "$${HEALTHCHECK_API}"
+      done
+      sleep $${SLEEP}
+    done

@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: {{ include "inspector.fullname" . }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    {{- include "inspector.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "inspector.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "inspector.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env: 
+            - name: KUBERNETES_HOSTNAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+          volumeMounts:
+            - name: inspector-configs
+              mountPath: /inspector/
+          {{- with .Values.additionalMounts }}
+          {{- toYaml . | nindent 12 }}
+          {{- end }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          {{- with .Values.securityContext }}
+          securityContext:
+            {{ toYaml .}}
+          {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{ toYaml .}}
+      {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+    {{- toYaml . | nindent 8 }}
+    {{- end }}
+      terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds | default 10 }}
+      volumes:
+        - name: inspector-configs
+          persistentVolumeClaim:
+            claimName: inspector-configs
+      {{- with .Values.additionalVolumes }}
+      {{- toYaml . | nindent 8 }}
+      {{- end }}

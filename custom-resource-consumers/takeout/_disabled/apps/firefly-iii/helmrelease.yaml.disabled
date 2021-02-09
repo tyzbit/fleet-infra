@@ -1,0 +1,79 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: firefly-iii-database
+  namespace: flux-system
+spec:
+  releaseName: firefly-iii-db
+  targetNamespace: personal
+  timeout: 2m
+  chart:
+    spec:
+      chart: postgresql
+      version: "11.0.6"
+      sourceRef:
+        kind: HelmRepository
+        name: bitcnami
+        namespace: flux-system
+  interval: 1m0s
+  valuesFrom:
+  - kind: Secret
+    name: firefly-iii-db-config
+  values:
+    primary:
+      persistence:
+        existingClaim: firefly-iii-db-longhorn-database
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: firefly-iii
+  namespace: flux-system
+spec:
+  releaseName: firefly-iii
+  targetNamespace: personal
+  timeout: 2m
+  chart:
+    spec:
+      chart: firefly-iii
+      version: "1.1.0"
+      sourceRef:
+        kind: HelmRepository
+        name: firefly-iii
+        namespace: flux-system
+  interval: 1m0s
+  values:
+    # -- Set to false to not deploy Firefly III
+    enabled: true
+    config:
+      existingSecret: firefly-iii-config
+    persistence:
+      existingClaim: firefly-iii-data-longhorn-webapp
+    cronjob:
+      auth:
+        existingSecret: firefly-iii-importer
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: firefly-iii-importer
+  namespace: flux-system
+spec:
+  releaseName: firefly-iii-importer
+  targetNamespace: personal
+  timeout: 2m
+  chart:
+    spec:
+      chart: importer
+      version: "1.1.3"
+      sourceRef:
+        kind: HelmRepository
+        name: firefly-iii
+        namespace: flux-system
+  interval: 1m0s
+  values:
+    # -- Set to false to not deploy the importer
+    enabled: true
+    fireflyiii:
+      auth:
+        existingSecret: firefly-iii-importer

@@ -1,0 +1,34 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: external-dns
+  namespace: flux-system
+spec:
+  targetNamespace: kube-system
+  releaseName: external-dns
+  chart:
+    spec:
+      chart: ./charts/external-dns
+      version: "v0.10.2" # Set in the referenced GitRepository
+      sourceRef:
+        kind: GitRepository
+        name: external-dns
+        namespace: flux-system
+  interval: 1m0s
+  values:
+    provider: cloudflare
+    triggerLoopOnEvent: true
+    txtOwnerId: "takeout-automatic"
+    sources:
+    - ingress
+    extraArgs: 
+    - --annotation-filter=external-dns.alpha.kubernetes.io/exclude notin (true)
+    env:
+      - name: CF_API_KEY
+        valueFrom:
+          secretKeyRef:
+            key: apikey
+            name: cloudflare-global-apikey
+      - name: CF_API_EMAIL
+        value: "tyzbit@gmail.com"
+    

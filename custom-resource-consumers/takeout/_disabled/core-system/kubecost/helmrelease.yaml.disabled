@@ -1,0 +1,45 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: kubecost
+  namespace: flux-system
+spec:
+  targetNamespace: kubecost
+  releaseName: kubecost
+  chart:
+    spec:
+      chart: cost-analyzer
+      sourceRef:
+        kind: HelmRepository
+        name: kubecost
+        namespace: flux-system
+  interval: 1m0s
+  values:
+    global:
+      prometheus:
+        fqdn: http://prometheus.monitoring.svc.cluster.local
+        enabled: false
+    kubecostToken: ZWRtdHZldGFqbmRia2FvZm9wQGtpYWJ3cy5jb20=xm343yadf98
+    prometheus:
+      alertmanager:
+        persistentVolume:
+          enabled: false
+      server:
+        persistentVolume:
+          enabled: false
+    persistentVolume:
+      enabled: false
+    ingress:
+      enabled: true
+      annotations:
+        kubernetes.io/ingress.class: nginx
+        cert-manager.io/cluster-issuer: letsencrypt
+        acme.cert-manager.io/http01-edit-in-place: "false"
+      tls:
+        - hosts:
+          - "kubecost.${blog_domain}"
+          secretName: letsencrypt-kubecost
+      hosts:
+        - "kubecost.${blog_domain}"
+      paths:
+        - "/"

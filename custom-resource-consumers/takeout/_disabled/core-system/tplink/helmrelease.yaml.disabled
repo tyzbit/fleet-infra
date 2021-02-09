@@ -1,0 +1,25 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: tplink
+  namespace: flux-system
+spec:
+  chart:
+    spec:
+      chart: ./charts/tplink
+      sourceRef:
+        kind: GitRepository
+        name: flux-system
+        namespace: flux-system
+  interval: 1m0s
+  values:
+    namespace: monitoring
+    devices:
+      - name: server-ups
+        address: 192.168.1.10
+      - name: network-ups
+        address: 192.168.1.11
+      - name: server-ups-2
+        address: 192.168.1.12
+      # - name: internet-ups
+      #   address: 192.168.1.151

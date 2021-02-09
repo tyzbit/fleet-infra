@@ -1,0 +1,118 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: frigate-config
+  namespace: home-automation
+data:
+  config.yml: |
+    database:
+      path: /db/frigate.db
+    logger:
+      default: info
+      # logs:
+      #   frigate.record: debug
+    mqtt:
+      host: mosquitto
+    # ffmpeg:
+    #   hwaccel_args:
+    #     - -hwaccel
+    #     - vaapi
+    #     - -hwaccel_device
+    #     - /dev/dri/renderD128
+    #     - -hwaccel_output_format
+    #     - yuv420p
+    cameras:
+      frontdoor:
+        snapshots:
+          timestamp: True
+        motion:
+          mask:
+            - 0,390,190,281,413,219,612,181,842,131,1149,113,1138,0,0,0
+        ffmpeg:
+          inputs:
+            - path: 'rtsp://{FRIGATE_FRONTDOOR_CREDENTIALS}@frontdoor:554'
+              roles:
+                - detect
+                - rtmp
+        detect:
+          width: 1280
+          height: 720
+          fps: 5
+      backdoor:
+        snapshots:
+          timestamp: True
+        ffmpeg:
+          inputs:
+            - path: 'rtsp://{FRIGATE_BACKDOOR_CREDENTIALS}@backdoor:554/live'
+              roles:
+                - detect
+                - rtmp
+        detect:
+          width: 1920
+          height: 1080
+          fps: 5
+      driveway:
+        snapshots:
+          timestamp: True
+        motion:
+          mask:
+            - 1820,127,1775,335,1605,1080,1920,1080,1920,252,1920,0,1252,0,1443,45
+            - 595,687,218,948,172,865,103,718,373,553,538,627
+        objects:
+          filters:
+            person:
+              mask: 
+              - 1820,127,1775,335,1605,1080,1920,1080,1920,252,1920,0,1252,0,1443,45
+              - 595,687,218,948,172,865,103,718,373,553,538,627
+        ffmpeg:
+          inputs:
+            - path: 'rtsp://{FRIGATE_DRIVEWAY_CREDENTIALS}@driveway:554/live'
+              roles:
+                - detect
+                - rtmp
+        detect:
+          width: 1920
+          height: 1080
+          fps: 5
+      porch:
+        snapshots:
+          timestamp: True
+        ffmpeg:
+          inputs:
+            - path: 'rtsp://{FRIGATE_PORCH_CREDENTIALS}@porch:554/live'
+              roles:
+                - detect
+                - rtmp
+        detect:
+          width: 2688
+          height: 1520
+          fps: 5
+      court:
+        ffmpeg:
+          inputs:
+            - path: 'rtsp://{FRIGATE_COURT_CREDENTIALS}@court:554/live'
+              roles:
+                - detect
+        detect:
+          width: 1920
+          height: 1080
+          fps: 5
+    record:
+      enabled: True
+      retain:
+        days: 1
+      # retain_days: 1 # deprecated in 0.10
+      events:
+        retain:
+          default: 30
+          mode: active_objects
+    objects:
+      track:
+        - person
+    birdseye:
+      enabled: True
+      mode: objects
+    detectors:
+      coral:
+        type: edgetpu
+        device: usb

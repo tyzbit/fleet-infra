@@ -1,0 +1,127 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: wordpress-${resume_name}
+  namespace: flux-system
+spec:
+  releaseName: wordpress-${resume_name}
+  targetNamespace: personal
+  timeout: 10m
+  chart:
+    spec:
+      chart: wordpress
+      version: "10.10.3"
+      sourceRef:
+        kind: HelmRepository
+        name: bitnami
+        namespace: flux-system
+  interval: 1m0s
+  valuesFrom:
+  - kind: Secret
+    name: wordpress-${resume_name}-values
+    valuesKey: wordpressUsername
+    targetPath: wordpressUsername
+  - kind: Secret
+    name: wordpress-${resume_name}-values
+    valuesKey: wordpressPassword
+    targetPath: wordpressPassword
+  - kind: Secret
+    name: wordpress-${resume_name}-values
+    valuesKey: wordpressEmail
+    targetPath: wordpressEmail
+  - kind: Secret
+    name: wordpress-${resume_name}-values
+    valuesKey: wordpressTablePrefix
+    targetPath: wordpressTablePrefix
+  - kind: Secret
+    name: wordpress-${resume_name}-values
+    valuesKey: mariadbAuthRootPassword
+    targetPath: mariadb.auth.rootPassword
+  - kind: Secret
+    name: wordpress-${resume_name}-values
+    valuesKey: mariadbAuthUsername
+    targetPath: mariadb.auth.username
+  - kind: Secret
+    name: wordpress-${resume_name}-values
+    valuesKey: mariadbAuthPassword
+    targetPath: mariadb.auth.password
+  - kind: Secret
+    name: wordpress-${resume_name}-values
+    valuesKey: mariadbAuthDatabase
+    targetPath: mariadb.auth.database
+  - kind: Secret
+    name: wordpress-${resume_name}-values
+    valuesKey: smtpHost
+    targetPath: smtpHost
+  - kind: Secret
+    name: wordpress-${resume_name}-values
+    valuesKey: smtpPort
+    targetPath: smtpPort
+  - kind: Secret
+    name: wordpress-${resume_name}-values
+    valuesKey: smtpUser
+    targetPath: smtpUser
+  - kind: Secret
+    name: wordpress-${resume_name}-values
+    valuesKey: smtpPassword
+    targetPath: smtpPassword
+  values:
+    replicaCount: 1 # active longhorn-database nas
+    image:
+      tag: "5.9.1" # {"$imagepolicy": "flux-system:wordpress-${resume_name}:tag"}
+      pullPolicy: Always
+      pullSecrets:
+      - name: docker-hub
+    wordpressBlogName: ${resume_pretty_name}
+    wordpressConfigureCache: true
+    wordpressScheme: https
+    allowEmptyPassword: false
+    # # Custom .htaccess directives
+    # customHTAccessCM: wordpress-${resume_name}-htaccess
+    # # Disable .htaccess in apache
+    # allowOverrideNone: false
+    htaccessPersistenceEnabled: true
+    # the rest of the stmp settings are secrets
+    smtpProtocol: tls
+    livenessProbe:
+      enabled: false
+    resources:
+      requests:
+        cpu: 300m
+        memory: 512Mi
+    ingress:
+      enabled: true
+      annotations:
+        kubernetes.io/ingress.class: nginx
+        cert-manager.io/cluster-issuer: letsencrypt
+        acme.cert-manager.io/http01-edit-in-place: "false"
+        nginx.ingress.kubernetes.io/proxy-body-size: 256m
+        external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+        external-dns.alpha.kubernetes.io/target: ${blog_domain_ddns}
+      hostname: "${resume_domain}"
+      tls: true
+    service:
+      type: NodePort
+    persistence:
+      existingClaim: wordpress-${resume_name}-nas
+    # run a container to fix volume permissions at the start
+    volumePermissions:
+      enabled: true
+    memcached:
+      enabled: true
+    mariadb:
+      primary:
+        persistence:
+          existingClaim: wordpress-${resume_name}-mariadb-longhorn-database
+    affinity:
+      podAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+        - podAffinityTerm:
+            labelSelector:
+              matchExpressions:
+              - key: app.kubernetes.io/instance
+                operator: In
+                values:
+                - wordpress-${resume_name}
+            topologyKey: kubernetes.io/hostname
+          weight: 100

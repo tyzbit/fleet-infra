@@ -1,0 +1,25 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: handbrake-oauth2-proxy
+  namespace: media
+spec:
+  targetNamespace: media
+  releaseName: handbrake-oauth2-proxy
+  chart:
+    spec:
+      chart: oauth2-proxy
+      version: "6.0.1"
+      sourceRef:
+        kind: HelmRepository
+        name: oauth2-proxy
+        namespace: flux-system
+  interval: 1m0s
+  values:
+    extraArgs:
+      provider: github
+      github-org: "${blog_name}"
+      github-team: "super-admins,handbrake"
+      cookie-expire: 168h0m0s
+    config:
+      existingSecret: handbrake-oauth2-proxy

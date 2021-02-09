@@ -1,0 +1,32 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: kube-ops-view
+  namespace: flux-system
+spec:
+  targetNamespace: monitoring
+  releaseName: kube-ops-view
+  chart:
+    spec:
+      chart: ./old-helm-charts/stable/kube-ops-view
+      sourceRef:
+        kind: GitRepository
+        name: flux-system
+        namespace: flux-system
+  interval: 1m0s
+  values:
+    rbac:
+      create: true
+    ingress:
+      enabled: true
+      hostname: kube-ops-view.${blog_domain}
+      tls:
+        - hosts:
+            - "*.${blog_domain}"
+          secretName: letsencrypt
+      annotations:
+        kubernetes.io/ingress.class: nginx
+        nginx.ingress.kubernetes.io/proxy-body-size: 256m
+        cert-manager.io/cluster-issuer: letsencrypt
+        acme.cert-manager.io/http01-edit-in-place: "false"
+      

@@ -1,0 +1,193 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: newrelic-bundle
+  namespace: flux-system
+spec:
+  targetNamespace: monitoring
+  releaseName: nri-bundle
+  timeout: 5m
+  chart:
+    spec:
+      chart: nri-bundle
+      sourceRef:
+        kind: HelmRepository
+        name: newrelic
+        namespace: flux-system
+  interval: 1m0s
+  valuesFrom:
+    - kind: Secret
+      name: newrelic
+      valuesKey: license-key
+      targetPath: global.licenseKey
+    # - kind: Secret
+    #   name: newrelic
+    #   valuesKey: config
+    #   targetPath: newrelic-infrastructure.config
+    # - kind: Secret
+    #   name: newrelic
+    #   valuesKey: pixie-apikey
+    #   targetPath: newrelic-pixie.apiKey
+    # - kind: Secret
+    #   name: newrelic
+    #   valuesKey: pixie-deploykey
+    #   targetPath: pixie-chart.deployKey
+  values:
+    global:
+      cluster: takeout
+    infrastructure:
+      enabled: true
+      image:
+        pullPolicy: Always
+    newrelic-infrastructure:
+      # privileged: true
+      config:
+        enable_process_metrics: false
+        network_interface_filters:
+          prefix:
+            - dummy
+            - lo
+            - cali
+            - vxlan
+        daemontools_interval_sec: 60
+        network_interface_interval_sec: 60
+        metrics_network_sample_rate: 30
+        metrics_nfs_sample_rate: 120
+        metrics_process_sample_rate: 60
+        metrics_storage_sample_rate: 120
+        metrics_system_sample_rate: 30
+        strip_command_line: true
+      # https://github.com/newrelic/nri-kubernetes/blob/1037cd509fc421e21ccbfabcc6e10cfe992bada2/deploy/newrelic-infra.yaml#L178-L182
+      # integrations_config: # TODO: find configuration for this
+      #   - name: nri-kubernetes-config.yml
+      #     data:
+      #       integration_name: com.newrelic.kubernetes
+      #       instances:
+      #         - name: nri-kubernetes
+      #           command: metrics
+    kubeEvents:
+      enabled: true
+    ksm:
+      enabled: true
+    # https://github.com/kubernetes/kube-state-metrics/blob/848354c3c7aae95d809bee7811b6cdfd4a305867/charts/kube-state-metrics/values.yaml
+    kube-state-metrics:
+      collectors:
+        deployments: true
+        jobs: true
+        nodes: true
+        pods: true
+        
+        persistentvolumeclaims: false
+        persistentvolumes: false
+        volumeattachments: false
+
+        certificatesigningrequests: false
+        configmaps: false
+        cronjobs: false
+        endpoints: false
+        horizontalpodautoscalers: false
+        ingresses: false
+        limitranges: false
+        mutatingwebhookconfigurations: false
+        namespaces: false
+        networkpolicies: false
+        poddisruptionbudgets: false
+        replicasets: false
+        replicationcontrollers: false
+        resourcequotas: false
+        secrets: false
+        services: false
+        storageclasses: false
+        validatingwebhookconfigurations: false
+    prometheus:
+      enabled: true
+    nri-prometheus:
+      config:
+        scrape_timeout: "90s"
+        transformations:
+          - description: "Exclude all but kasa metrics"
+            ignore_metrics:
+              - except:
+                - kasa_
+    logging:
+      enabled: true
+      image:
+        pullPolicy: Always
+    newrelic-logging:
+      fluentBit:
+        config:
+          filters: |
+            [FILTER]
+                Name                kubernetes
+                Match               kube.*
+                # We need the full DNS suffix as Windows only supports resolving names with this suffix
+                # See: https://kubernetes.io/docs/setup/production-environment/windows/intro-windows-in-kubernetes/#dns-limitations
+                Kube_URL            https://kubernetes.default.svc.cluster.local:443
+                Buffer_Size         $${K8S_BUFFER_SIZE}
+                K8S-Logging.Exclude $${K8S_LOGGING_EXCLUDE}
+
+            [FILTER]
+                Name           record_modifier
+                Match          *
+                Record         cluster_name $${CLUSTER_NAME}
+
+            # Filter pings from oauth2-proxy
+            [FILTER]
+                Name     grep
+                Match    kube.*
+                Exclude  log GET \\- \\"/ping\\"
+
+            # Filter nzbget/ingress jsonrpc hits
+            [FILTER]
+                Name     grep
+                Match    kube.*
+                Exclude  log /POST \\/jsonrpc/ 
+
+            # Filter nextcloud propfind
+            [FILTER]
+                Name     grep
+                Match    kube.*
+                Exclude  log /PROPFIND \\/remote\\.php\\/dav\\/files\\/tyler/ 
+
+            # Filter New Relic event truncated messages
+            [FILTER]
+                Name     grep
+                Match    kube.*
+                Exclude  log /event truncated to NRDB limit/ 
+
+            # Filter wordpress
+            [FILTER]
+                Name     grep
+                Match    kube.*
+                Exclude  log /GET \\/wp-login\\.php/ 
+
+            # Filter flux reconciliations
+            [FILTER]
+                Name     grep
+                Match    kube.*
+                Exclude  log /([Rr]econcili?ation finished in|All dependencies are ready, proceeding with reconciliation)/
+
+            # Filter etcd status checks
+            [FILTER]
+                Name     grep
+                Match    kube.*
+                Exclude  log /etcdserver\\/api\\/etcdhttp: \\/health OK \\(status code 200\\)/
+
+            # Filter unwanted containers
+            [FILTER]
+                Name     grep
+                Match    *
+                Exclude  $kubernetes['container_name'] /(kube\\-events|calico\\-node|oauth2\\-proxy|kube\\-apiserver|mosquitto)/
+
+            # Filter unwanted namespaces
+            [FILTER]
+                Name     grep
+                Match    *
+                Exclude  $kubernetes['namespace_name'] /(metallb\\-system)/
+    webhook:
+      enabled: false
+    # newrelic-pixie:
+    #   enabled: true
+    # pixie-chart:
+    #   enabled: true
+    #   clusterName: takeout

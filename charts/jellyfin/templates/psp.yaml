@@ -1,0 +1,31 @@
+{{- if .Values.podSecurityPolicy.create -}}
+apiVersion: policy/v1beta1
+kind: PodSecurityPolicy
+metadata:
+  name: {{ include "jellyfin.fullname" . }}-psp
+spec:
+  privileged: false
+  allowPrivilegeEscalation: false
+  {{- with .Values.podSecurityPolicy.allowedHostPaths }}
+  allowedHostPaths:
+    {{- toYaml . | nindent 2 }}
+  {{- end }}
+  fsGroup:
+    rule: RunAsAny
+  runAsUser:
+    rule: RunAsAny
+  seLinux:
+    rule: RunAsAny
+  supplementalGroups:
+    rule: RunAsAny
+  volumes:
+    - 'emptyDir'
+    - 'projected'
+    - 'secret'
+    - 'downwardAPI'
+    - 'persistentVolumeClaim'
+    - 'hostPath'
+  hostNetwork: false
+  hostPID: false
+  hostIPC: false
+{{- end -}}

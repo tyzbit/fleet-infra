@@ -1,0 +1,15 @@
+{{- if .Values.podSecurityPolicy.create -}}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ template "jellyfin.fullname" . }}-clusterrole
+rules:
+  - apiGroups:
+      - policy
+    resources:
+      - podsecuritypolicies
+    resourceNames:
+      - {{ include "jellyfin.fullname" . }}-psp
+    verbs:
+      - use
+{{- end }}

@@ -1,0 +1,26 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: nfs-subdir-external-provisioner-nas-volatile
+  namespace: flux-system
+spec:
+  targetNamespace: kube-system
+  releaseName: nfs-subdir-extr-prov-nas-volatile
+  timeout: 2m
+  chart:
+    spec:
+      chart: nfs-subdir-external-provisioner
+      version: "4.0.14"
+      sourceRef:
+        kind: HelmRepository
+        name: nfs-subdir-external-provisioner
+        namespace: flux-system
+  interval: 1m0s
+  values:
+    fullnameOverride: nfs-ext-prov-nas-volatile
+    storageClass:
+      name: nas-volatile
+      pathPattern: "$${.PVC.namespace}-$${.PVC.name}"
+    nfs:
+      server: nas.jura
+      path: /volume1/volatile_cluster_storage

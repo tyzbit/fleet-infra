@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nfs-test
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: nfs-test
+  template:
+    metadata:
+      labels:
+        app: nfs-test
+    spec:
+      containers:
+      - name: nfs-test
+        command: ["tail","-f","/dev/null"]
+        image: busybox
+        volumeMounts:
+          - mountPath: /doorman
+            name: testvol
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+      volumes:
+        - name: testvol
+          persistentVolumeClaim:
+            claimName: doorman-test

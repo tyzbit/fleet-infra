@@ -1,0 +1,81 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: motion
+  annotations:
+
+  labels:
+    app: motion
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: motion
+  template:
+    metadata:
+      annotations:
+      labels:
+        app: motion
+    spec:
+      initContainers:
+      - name: copy-data
+        image: tyzbit/motion-browser
+        imagePullPolicy: Always
+        command: ["cp","-r","/var/www/html/","/shared-www/"]
+        volumeMounts:
+        - mountPath: "/shared-www"
+          name: shared-www
+      containers:
+      - name: nginx
+        image: nginx:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+          name: http
+          protocol: TCP
+        volumeMounts:
+          - mountPath: "/usr/share/nginx/"
+            name: shared-www
+          - mountPath: "/etc/nginx/conf.d/"
+            name: motion-config
+          - mountPath: "/passwords"
+            name: motion-credentials
+          - mountPath: "/media/camera/"
+            name: braavos-camera
+        resources:
+          requests:
+            cpu: 100m
+          limits:
+            memory: 128Mi
+      - name: motion-browser
+        image: tyzbit/motion-browser
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 9000
+          name: http
+          protocol: TCP
+        volumeMounts:
+          - mountPath: "/media/Camera/"
+            name: braavos-camera
+        resources:
+          requests:
+            cpu: 250m
+            memory: 128Mi
+          limits:
+            cpu: 250m
+            memory: 128Mi
+      volumes:
+        - name: shared-www
+          emptyDir: 
+            medium: Memory
+        - name: motion-config
+          configMap:
+            name: motion-config
+        - name: motion-credentials
+          secret:
+            secretName: motion-credentials
+        - name: braavos-camera
+          persistentVolumeClaim:
+            claimName: braavos-camera-pvc
+      imagePullSecrets:
+        - name: docker-hub

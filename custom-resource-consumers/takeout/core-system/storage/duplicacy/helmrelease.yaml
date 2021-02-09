@@ -1,0 +1,25 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: duplicacy-oauth2-proxy
+  namespace: storage
+spec:
+  targetNamespace: storage
+  releaseName: duplicacy-oauth2-proxy
+  chart:
+    spec:
+      chart: oauth2-proxy
+      version: "6.0.1"
+      sourceRef:
+        kind: HelmRepository
+        name: oauth2-proxy
+        namespace: flux-system
+  interval: 1m0s
+  values:
+    extraArgs:
+      provider: github
+      github-org: "${blog_name}"
+      github-team: "super-admins,duplicacy"
+      cookie-expire: 168h0m0s
+    config:
+      existingSecret: duplicacy-oauth2-proxy

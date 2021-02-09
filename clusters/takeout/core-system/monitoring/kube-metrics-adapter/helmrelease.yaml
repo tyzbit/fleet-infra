@@ -1,0 +1,17 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: kube-metrics-adapter
+  namespace: flux-system
+spec:
+  targetNamespace: kube-system
+  chart:
+    spec:
+      chart: ./charts/kube-metrics-adapter
+      sourceRef:
+        kind: GitRepository
+        name: flux-system
+        namespace: flux-system
+  interval: 1m0s
+  values:
+    enableCustomMetricsApi: true

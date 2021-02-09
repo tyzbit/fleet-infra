@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: nfs-server
+  namespace: media
+spec:
+  serviceName: nfs-server
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nfs-server
+  template:
+    metadata:
+      labels:
+        app: nfs-server
+    spec:
+      hostNetwork: true
+      containers:
+      - name: nfs-server
+        image: erichough/nfs-server
+        env:
+        - name: NFS_EXPORT_0
+          value: "/nfs-data                  *(ro,no_subtree_check)"
+        volumeMounts:
+          - name: nfs-data
+            mountPath: /nfs-data
+        resources:
+          requests:
+            cpu: "50m"
+          limits:
+            memory: "256Mi"
+        ports:
+        - containerPort: 80
+        securityContext:
+          privileged: true
+      volumes:
+        - name: nfs-data
+          emptyDir: {}
+      nodeSelector:
+        kubernetes.io/hostname: doorman

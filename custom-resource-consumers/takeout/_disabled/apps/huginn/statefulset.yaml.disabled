@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: huginn-db
+  labels:
+    app: huginn-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: huginn-db
+  serviceName: huginn-db
+  template:
+    metadata:
+      annotations:
+      labels:
+        app: huginn-db
+    spec:
+      # securityContext:
+      #   runAsUser: 1001
+      #   fsGroup: 1001
+      containers:
+        - name: huginn-db
+          image: mysql:8.0
+          #command: ["tail","-f","/dev/null"]
+          envFrom:
+          - secretRef:
+              name: huginn-db-config
+          ports:
+            - containerPort: 3306
+              name: tcp-mysql
+              protocol: TCP
+          volumeMounts:
+            - name: huginn-db-data
+              mountPath: /var/lib/mysql
+          resources:
+            limits:
+              memory: 1Gi
+            requests:
+              cpu: 500m
+      nodeSelector:
+        node.longhorn.io/create-default-disk: "true"
+      imagePullSecrets:
+        - name: docker-hub
+  volumeClaimTemplates:
+  - apiVersion: v1
+    kind: PersistentVolume
+    metadata:
+      name: huginn-db-data
+    spec:
+      accessModes: 
+        - ReadWriteOnce
+      volumeMode: Filesystem
+      storageClassName: longhorn
+      resources:
+        requests:
+          storage: 10Gi
+          

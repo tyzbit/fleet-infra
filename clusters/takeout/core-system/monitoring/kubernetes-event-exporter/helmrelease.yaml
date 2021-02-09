@@ -1,0 +1,24 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: kubernetes-event-exporter
+  namespace: flux-system
+spec:
+  targetNamespace: kube-system
+  releaseName: kubernetes-event-exporter
+  timeout: 5m
+  chart:
+    spec:
+      chart: kubernetes-event-exporter
+      version: "1.2.8"
+      sourceRef:
+        kind: HelmRepository
+        name: bitnami
+        namespace: flux-system
+  interval: 1m0s
+  valuesFrom:
+    - kind: Secret
+      name: kubernetes-event-exporter
+  values:
+    serviceAccount:
+      name: kubernetes-event-exporter

@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: filebrowser
+  namespace: media
+spec:
+  serviceName: filebrowser
+  replicas: 1 # active nas
+  selector:
+    matchLabels:
+      app: filebrowser
+  template:
+    metadata:
+      labels:
+        app: filebrowser
+    spec:
+      containers:
+      - name: filebrowser
+        image: filebrowser/filebrowser:v2
+        # commented out because alpine v 3.15 doesn't have packages built yet
+        # command: # ["sh","-c","tail -f /dev/null"]
+        # - sh
+        # - -c
+        # - >
+        #   apk add
+        #   mktorrent
+        #   unrar
+        #   util-linux
+        #   && 
+        #   /filebrowser -d /db/database.db
+        command: ["/filebrowser","-d","/db/database.db"]
+        # util-linux has rename
+        env:
+        - name: TZ
+          value: America/New_York
+        volumeMounts:
+          - name: filebrowser-config
+            mountPath: /db
+          # - name: braavos
+          #   mountPath: /srv/braavos
+          - name: media
+            mountPath: /srv/media
+          - name: media
+            subPath: shared
+            mountPath: /srv/shared
+          - name: temp
+            subPath: media
+            mountPath: /srv/temp
+        resources:
+          requests:
+            cpu: "50m"
+          limits:
+            memory: "256Mi"
+        ports:
+        - containerPort: 80
+      imagePullSecrets:
+        - name: docker-hub
+      volumes:
+        - name: filebrowser-config
+          persistentVolumeClaim:
+            claimName: filebrowser-config-nas
+        - name: media
+          persistentVolumeClaim:
+            claimName: nas-volume1-media
+        - name: temp
+          persistentVolumeClaim:
+            claimName: stash-temp-data-nas

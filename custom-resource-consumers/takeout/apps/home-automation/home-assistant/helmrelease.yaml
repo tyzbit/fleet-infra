@@ -1,0 +1,109 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: home-assistant
+  namespace: flux-system
+spec:
+  releaseName: home-assistant
+  targetNamespace: home-automation
+  timeout: 15m
+  interval: 1m0s
+  chart:
+    spec:
+      chart: home-assistant
+      version: "12.0.1"
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home
+        namespace: flux-system
+  valuesFrom:
+  - kind: Secret
+    name: home-assistant-values
+    valuesKey: username
+    targetPath: mariadb.auth.username
+  - kind: Secret
+    name: home-assistant-values
+    valuesKey: password
+    targetPath: mariadb.auth.password
+  - kind: Secret
+    name: home-assistant-values
+    valuesKey: rootPassword
+    targetPath: mariadb.auth.rootPassword
+  values:
+    image:
+      pullPolicy: Always
+      tag: "2021.12"
+    controller:
+      replicas: 1 # active longhorn-database nas
+    env:
+      TZ: America/New_York
+    persistence:
+      config:
+        enabled: true
+        existingClaim: home-assistant-config-nas
+    additionalContainers:
+      - name: filebrowser
+        image: filebrowser/filebrowser:v2
+        args: ["-d","/db/database.db"]
+        env:
+        - name: TZ
+          value: America/New_York
+        volumeMounts:
+        - name: config
+          subPath: filebrowser
+          mountPath: /db
+        - name: config
+          mountPath: /srv/homeassistant
+    ingress:
+      main:
+        enabled: true
+        annotations: 
+          kubernetes.io/ingress.class: nginx
+          cert-manager.io/cluster-issuer: letsencrypt
+          acme.cert-manager.io/http01-edit-in-place: "false"
+          external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+          external-dns.alpha.kubernetes.io/target: ${personal_domain_ddns}
+        hosts:
+        - host: "home.${personal_domain}"
+          paths:
+          - path: "/"
+        - host: "home-fb.${personal_domain}"
+          paths:
+          - path: "/"
+            service: 
+              name: home-assistant-filebrowser
+              port: 80
+        tls:
+        - hosts:
+          - "home.${personal_domain}"
+          - "home-fb.${personal_domain}"
+          secretName: home.${personal_domain}-multi-tls
+    service:
+      filebrowser:
+        enabled: true
+        primary: false
+        name: home-assistant-filebrowser
+        ports:
+          fbhttp:
+            enabled: true
+            port: 80
+    mariadb:
+      enabled: true
+      primary:
+        existingConfigmap: home-assistant-db-config
+        nodeSelector:
+          longhorn: primary
+        persistence:
+          enabled: true
+          existingClaim: home-assistant-mariadb-longhorn-database
+        resources:
+          requests:
+            cpu: 100m
+          limits:
+            memory: 14Gi
+    # influxdb:
+    #   enabled: true
+    #   persistence:
+    #     enabled: true
+    #     storageClass: longhorn
+    #     size: 8Gi

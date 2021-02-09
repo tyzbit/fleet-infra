@@ -1,0 +1,19 @@
+{{- range $index, $device := .Values.devices }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "tplink.fullname" $ }}-{{ $index }}
+  namespace: {{ $.Values.namespace }}
+  labels:
+    {{- include "tplink.labels" $ | nindent 4 }}
+spec:
+  type: {{ $.Values.service.type }}
+  ports:
+    - port: {{ $.Values.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "tplink.selectorLabels" $ | nindent 4 }}
+---
+{{- end }}

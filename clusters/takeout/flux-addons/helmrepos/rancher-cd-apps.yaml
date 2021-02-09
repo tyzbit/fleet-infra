@@ -1,0 +1,9 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: HelmRepository
+metadata:
+  name: rancher-cd-apps
+  namespace: flux-system
+spec:
+  interval: 30s
+  timeout: 1m0s
+  url: https://tyzbit.github.io/rancher-cd-apps

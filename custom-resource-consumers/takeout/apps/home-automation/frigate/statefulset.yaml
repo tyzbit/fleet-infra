@@ -1,0 +1,100 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: frigate
+  namespace: home-automation
+  labels:
+    app: frigate
+spec:
+  replicas: 1 # active longhorn-database nas
+  serviceName: frigate
+  selector:
+    matchLabels:
+      app: frigate
+  template:
+    metadata:
+      annotations: {}
+      labels:
+        app: frigate
+    spec:
+      containers:
+      - name: frigate
+        image: docker.io/blakeblackshear/frigate:0.10.0-amd64 # {"$imagepolicy": "flux-system:frigate"}
+        # command: ["tail","-f","/dev/null"]
+        imagePullPolicy: Always
+        env:
+        - name: TZ
+          value: America/New_York
+        envFrom:
+        - secretRef:
+            name: frigate
+        ports:
+        - containerPort: 5000
+          name: http-frigate
+          protocol: TCP
+        - containerPort: 1935
+          name: rtmp-frigate
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /db
+          name: frigate-database
+        - mountPath: /media/frigate
+          subPath: media
+          name: frigate-data
+        - mountPath: /dev/bus/usb
+          name: usb
+        - mountPath: /dev/dri
+          name: dri
+        - mountPath: /config
+          name: frigate-config
+        - mountPath: /tmp/cache
+          name: cache
+        - mountPath: /dev/shm
+          name: dshm
+        resources:
+          requests:
+            cpu: 1000m
+          limits:
+            memory: 1536Mi
+        livenessProbe:
+          initialDelaySeconds: 60
+          tcpSocket:
+            port: rtmp-frigate
+        securityContext:
+          privileged: true
+          # - name: lsyncd
+          #   image: allthings/lsyncd
+          #   args:
+          #     # - -delay 1
+          #     - -rsync
+          #     - /frigate/frigate-clips
+          #     - /amazon
+          #   imagePullPolicy: Always
+          #   volumeMounts:
+          #     - mountPath: /amazon
+          #       subPath: frigate-clips
+      imagePullSecrets:
+      - name: docker-hub
+      volumes:
+      - name: frigate-database
+        persistentVolumeClaim:
+          claimName: frigate-database-longhorn-database
+      - name: frigate-data
+        persistentVolumeClaim:
+          claimName: frigate-data-nas
+      - name: frigate-config
+        configMap:
+          name: frigate-config
+      - name: usb
+        hostPath:
+          path: /dev/bus/usb
+      - name: dri
+        persistentVolumeClaim:
+          claimName: dri-pvc
+      - name: cache
+        emptyDir: {}
+      - name: dshm
+        emptyDir:
+          medium: Memory
+      nodeSelector:
+        coral: attached

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: bitcoin-blockchain-longhorn-crypto
+  namespace: crypto
+spec:
+  resources:
+    requests:
+      storage: 650Gi
+  volumeMode: Filesystem
+  storageClassName: longhorn-crypto
+  accessModes:
+    - ReadWriteOnce

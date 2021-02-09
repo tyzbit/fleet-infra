@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: n8n-data-longhorn-database
+  namespace: home-automation
+spec:
+  accessModes: 
+    - ReadWriteOnce
+  volumeMode: Filesystem
+  storageClassName: longhorn-database
+  resources:
+    requests:
+      storage: 4Gi
