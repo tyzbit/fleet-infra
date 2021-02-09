@@ -6,7 +6,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 5m0s
-  path: ./btc-rpc-explorer.yaml
+  path: ./btc-rpc-explorer
   prune: true
   sourceRef:
     kind: GitRepository
