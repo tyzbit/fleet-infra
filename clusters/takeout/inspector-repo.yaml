@@ -1,0 +1,9 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: HelmRepository
+metadata:
+  name: inspector
+  namespace: monitoring
+spec:
+  interval: 5m
+  url: https://tyzbit.github.io/rancher-cd-apps
+    
