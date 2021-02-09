@@ -1,19 +1,14 @@
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
-kind: Kustomization
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
 metadata:
   name: inspector
-  namespace: flux-system
+  namespace: monitoring
 spec:
-  interval: 5m
-  sourceRef:
-    kind: GitRepository
-    name: apps
-  path: ./inspector
-  prune: true
-  validation: client
-  healthChecks:
-    - apiVersion: helm.toolkit.fluxcd.io/v1beta1
-      kind: HelmRelease
-      name: inspector
-      namespace: default
+  releaseName: inspector
+  chart:
+    git: ssh://git@github.com/tyzbit/racher-cd-apps
+    ref: main
+    path: charts/inspector
+  values:
+    
