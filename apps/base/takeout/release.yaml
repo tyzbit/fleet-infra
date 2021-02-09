@@ -11,4 +11,5 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: rancher-cd-apps
+        namespace: flux-system
   interval: 1m0s
