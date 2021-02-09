@@ -5,11 +5,15 @@ metadata:
   name: inspector
   namespace: flux-system
 spec:
-  interval: 5m0s
-  path: ./inspector
-  prune: true
+  interval: 5m
   sourceRef:
     kind: GitRepository
     name: apps
+  path: ./inspector
+  prune: true
   validation: client
-
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v1beta1
+      kind: HelmRelease
+      name: inspector
+      namespace: default
