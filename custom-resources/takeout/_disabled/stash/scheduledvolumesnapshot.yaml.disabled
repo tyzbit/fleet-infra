@@ -1,0 +1,27 @@
+apiVersion: k8s.ryanorth.io/v1beta1
+kind: ScheduledVolumeSnapshot
+metadata:
+  name: stash-temp-iscsi
+  namespace: default
+spec:
+  snapshotClassName: synology-snapshotclass
+  persistentVolumeClaimName: stash-temp-iscsi
+  snapshotFrequency: 6h
+  snapshotRetention: 3d
+  # snapshotLabels:
+  #   firstLabel: someLabelValue
+  #   secondLabel: anotherLabelValue
+---
+apiVersion: k8s.ryanorth.io/v1beta1
+kind: ScheduledVolumeSnapshot
+metadata:
+  name: stash-temp-previews-iscsi
+  namespace: default
+spec:
+  snapshotClassName: synology-snapshotclass
+  persistentVolumeClaimName: stash-temp-previews-iscsi
+  snapshotFrequency: 6h
+  snapshotRetention: 3d
+  # snapshotLabels:
+  #   firstLabel: someLabelValue
+  #   secondLabel: anotherLabelValue

@@ -1,0 +1,41 @@
+---
+apiVersion: image.toolkit.fluxcd.io/v1alpha2
+kind: ImageUpdateAutomation
+metadata:
+  name: flux-system-custom-resources
+  namespace: flux-system
+spec:
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  git:
+    commit:
+      author:
+        name: fluxcdbot
+        email: fluxcdbot@users.noreply.github.com
+      messageTemplate: '{{range .Updated.Images}}{{println .}}{{end}}'
+  interval: 2m0s
+  update:
+    path: ./custom-resources/takeout
+    strategy: Setters
+---
+# apiVersion: image.toolkit.fluxcd.io/v1alpha1
+# kind: ImageUpdateAutomation
+# metadata:
+#   name: flux-system
+#   namespace: flux-system
+# spec:
+#   checkout:
+#     branch: main
+#     gitRepositoryRef:
+#       name: flux-system
+#   commit:
+#     authorEmail: fluxcdbot@users.noreply.github.com
+#     authorName: fluxcdbot
+#     messageTemplate: '{{range .Updated.Images}}{{println .}}{{end}}'
+#   interval: 2m0s
+#   push:
+#     branch: main
+#   update:
+#     path: ./clusters/takeout
+#     strategy: Setters

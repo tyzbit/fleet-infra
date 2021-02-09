@@ -1,0 +1,61 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: neko
+  namespace: flux-system
+spec:
+  targetNamespace: media
+  chart:
+    spec:
+      chart: neko
+      version: "0.2.0"
+      sourceRef:
+        kind: HelmRepository
+        name: tyzbit
+        namespace: flux-system
+  interval: 2m0s
+  values:
+    service:
+      annotations:
+        metallb.universe.tf/allow-shared-ip: media-neko
+      type: LoadBalancer
+      loadBalancerIP: 192.168.1.74
+      port: 80
+    imagePullSecrets:
+      - name: docker-hub
+    # securityContext:
+    #   privileged: true
+    # persistence:
+    #   dri:
+    #     existingClaim: dri-pvc
+    #     path: /dev/dri
+    existingSecret: neko
+    ingress:
+      enabled: true
+      annotations:
+        kubernetes.io/ingress.class: nginx
+        cert-manager.io/cluster-issuer: letsencrypt
+        nginx.ingress.kubernetes.io/proxy-read-timeout: "14400"
+        nginx.ingress.kubernetes.io/proxy-send-timeout: "14400"
+        # nginx.ingress.kubernetes.io/server-snippets: |
+        #   location / {
+        #     proxy_set_header Upgrade $http_upgrade;
+        #     proxy_http_version 1.1;
+        #     proxy_set_header X-Forwarded-Host $http_host;
+        #     proxy_set_header X-Forwarded-Proto $scheme;
+        #     proxy_set_header X-Forwarded-For $remote_addr;
+        #     proxy_set_header Host $host;
+        #     proxy_set_header Connection "upgrade";
+        #     proxy_cache_bypass $http_upgrade;
+        #     }
+        external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
+        external-dns.alpha.kubernetes.io/target: ${blog_domain_ddns}
+      hosts:
+        - host: neko.${blog_domain}
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+      - secretName: neko.${blog_domain}-tls
+        hosts:
+          - neko.${blog_domain}

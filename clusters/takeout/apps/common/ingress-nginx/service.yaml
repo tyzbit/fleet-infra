@@ -1,0 +1,113 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: default-backend
+  namespace: default
+spec:
+  selector:
+    app: default-backend
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: simulacrum
+  namespace: default
+spec:
+  ports:
+  - name: default
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  - name: unraid
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  clusterIP: None
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: simulacrum
+  namespace: default
+subsets:
+- addresses:
+  # list all external ips for this service
+  - ip: 192.168.1.50
+  ports:
+  - name: default
+    port: 8080
+    protocol: TCP
+  - name: unraid
+    port: 80
+    protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: architect
+  namespace: default
+spec:
+  ports:
+  - name: http
+    port: 443
+    protocol: TCP
+    targetPort: 443
+  - name: k8s
+    port: 6443
+    protocol: TCP
+    targetPort: 6443
+  clusterIP: None
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: architect
+  namespace: default
+subsets:
+- addresses:
+  # list all external ips for this service
+  - ip: 192.168.1.1
+  ports:
+  - name: http
+    port: 443
+    protocol: TCP
+  - name: k8s
+    port: 6443
+    protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: warehouse
+  namespace: default
+spec:
+  ports:
+  - name: https
+    port: 8001
+    protocol: TCP
+    targetPort: 8001
+  clusterIP: None
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: warehouse
+  namespace: default
+subsets:
+- addresses:
+  # list all external ips for this service
+  - ip: 192.168.1.55
+  ports:
+  - name: https
+    port: 8001
+    protocol: TCP
+

@@ -1,0 +1,90 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: handbrake
+  namespace: media
+  labels:
+    app: handbrake
+spec:
+  serviceName: handbrake
+  selector:
+    matchLabels:
+      app: handbrake
+  replicas: 1 # active nas
+  template:
+    metadata:
+      labels:
+        app: handbrake
+    spec:
+      containers:
+        - name: handbrake
+          image: jlesage/handbrake:v1.24.2
+          imagePullPolicy: Always
+          command: # ["sh","-c","tail -f /dev/null"]
+          - sh
+          - -c
+          - |
+            apk add curl &&
+            /init
+          env:
+            - name: USER_ID
+              value: "568"
+            - name: GROUP_ID
+              value: "568"
+            - name: KEEP_APP_RUNNING
+              value: "1"
+            - name: AUTOMATED_CONVERSION_PRESET
+              value: General/1080p30 QSV Plex
+          volumeMounts:
+            - name: handbrake-config
+              mountPath: /config
+            - name: media
+              subPath: watch
+              mountPath: /watch
+            - name: media
+              subPath: transcoded
+              mountPath: /output
+            - name: dri
+              mountPath: /dev/dri
+            - name: media
+              mountPath: /storage/media
+            - name: temp
+              subPath: media
+              mountPath: /storage/temp
+          securityContext:
+            privileged: true
+          resources:
+            requests: 
+              cpu: 100m
+            limits:
+              memory: 3Gi
+      volumes:
+        - name: dri
+          persistentVolumeClaim:
+            claimName: dri-pvc
+        - name: handbrake-config
+          persistentVolumeClaim:
+            claimName: handbrake-config-nas
+        - name: media
+          persistentVolumeClaim:
+            claimName: nas-volume1-media
+        - name: temp
+          persistentVolumeClaim:
+            claimName: stash-temp-data-nas
+      imagePullSecrets:
+        - name: docker-hub
+      nodeSelector:
+        graphics: dri
+  # volumeClaimTemplates:
+  #   - apiVersion: v1
+  #     kind: PersistentVolumeClaim
+  #     metadata:
+  #       name: handbrake-config
+  #     spec:
+  #       accessModes:
+  #         - ReadWriteMany
+  #       volumeMode: Filesystem
+  #       storageClassName: nfs-client
+  #       resources:
+  #         requests:
+  #           storage: 1Gi

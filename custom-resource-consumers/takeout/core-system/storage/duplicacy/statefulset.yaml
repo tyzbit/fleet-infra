@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: duplicacy
+  namespace: storage
+spec:
+  selector:
+    matchLabels:
+      app: duplicacy
+  serviceName: duplicacy
+  replicas: 1 # active nfs-client-volatile nas
+  template:
+    metadata:
+      labels:
+        app: duplicacy
+    spec:
+      containers:
+      - name: duplicacy
+        image: saspus/duplicacy-web:v1.5.0
+        env:
+        - name: TZ
+          value: America/New_York
+        ports:
+        - containerPort: 3875
+          name: http-duplicacy
+        volumeMounts:
+        - name: duplicacy-config
+          mountPath: /config
+        - name: duplicacy-logs
+          mountPath: /logs
+        - name: duplicacy-cache
+          mountPath: /cache
+        - name: nas-volume1
+          mountPath: /volume1
+          readOnly: true
+        - name: nas-volume1-cluster-storage
+          mountPath: /cluster_storage
+          readOnly: true
+        resources:
+          requests:
+            cpu: 1500m
+          limits:
+            memory: 10Gi
+      volumes:
+        - name: duplicacy-config
+          persistentVolumeClaim:
+            claimName: duplicacy-config-nas-volatile
+        - name: duplicacy-logs
+          persistentVolumeClaim:
+            claimName: duplicacy-logs-nas-volatile
+        - name: duplicacy-cache
+          emptyDir: {}
+        - name: nas-volume1
+          persistentVolumeClaim:
+            claimName: nas-volume1
+        - name: nas-volume1-cluster-storage
+          persistentVolumeClaim:
+            claimName: nas-volume1-cluster-storage
+      # nodeSelector:
+      #   kubernetes.io/hostname: propman

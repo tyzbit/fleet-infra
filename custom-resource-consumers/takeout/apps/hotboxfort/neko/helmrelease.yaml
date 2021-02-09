@@ -1,0 +1,46 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: hotboxfort-neko
+  namespace: flux-system
+spec:
+  targetNamespace: hotboxfort
+  chart:
+    spec:
+      chart: neko
+      version: "0.1.3"
+      sourceRef:
+        kind: HelmRepository
+        name: tyzbit
+        namespace: flux-system
+  interval: 2m0s
+  valuesFrom:
+    - kind: Secret
+      name: hotboxfort-neko
+  values:
+    service:
+      annotations:
+        metallb.universe.tf/allow-shared-ip: hotboxfort-neko
+      type: LoadBalancer
+      loadBalancerIP: 192.168.1.75
+      port: 80
+    imagePullSecrets:
+      - name: docker-hub
+    ingress:
+      enabled: true
+      annotations:
+        kubernetes.io/ingress.class: nginx
+        cert-manager.io/cluster-issuer: letsencrypt
+        nginx.ingress.kubernetes.io/proxy-read-timeout: "14400"
+        nginx.ingress.kubernetes.io/proxy-send-timeout: "14400"
+        external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
+        external-dns.alpha.kubernetes.io/target: ${hotboxfort_domain_ddns}
+      hosts:
+        - host: movienight.${hotboxfort_domain}
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+      - secretName: movienight.${hotboxfort_domain}-tls
+        hosts:
+          - movienight.${hotboxfort_domain}

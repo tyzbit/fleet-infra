@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: qdirstat
+  namespace: media
+  labels:
+    app: qdirstat
+spec:
+  serviceName: qdirstat
+  selector:
+    matchLabels:
+      app: qdirstat
+  replicas: 1 # active nas
+  template:
+    metadata:
+      labels:
+        app: qdirstat
+    spec:
+      containers:
+        - name: qdirstat
+          image: jlesage/qdirstat:v1.4.0
+          imagePullPolicy: Always
+          # command: ["sh","-c","tail -f /dev/null"]
+          volumeMounts:
+            - name: qdirstat-config-nas
+              mountPath: /config
+            - name: nas-volume1-media
+              mountPath: /mount/nas-volume1-media
+            - name: temp
+              subPath: media
+              mountPath: /mount/temp
+          resources:
+            requests: 
+              cpu: 250m
+            limits:
+              memory: 512Mi
+      volumes:
+        - name: qdirstat-config-nas
+          persistentVolumeClaim:
+            claimName: qdirstat-config-nas
+        - name: nas-volume1-media
+          persistentVolumeClaim:
+            claimName: nas-volume1-media
+        - name: temp
+          persistentVolumeClaim:
+            claimName: stash-temp-data-nas
+      imagePullSecrets:
+        - name: docker-hub

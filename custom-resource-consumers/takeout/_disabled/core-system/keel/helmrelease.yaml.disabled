@@ -1,0 +1,43 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: keel
+  namespace: flux-system
+spec:
+  targetNamespace: kube-system
+  chart:
+    spec:
+      chart: keel
+      sourceRef:
+        kind: HelmRepository
+        name: keel
+        namespace: flux-system
+  interval: 2m0s
+  values:
+    helmProvider:
+      enabled: false
+    ingress:
+      enabled: true
+      annotations: 
+        kubernetes.io/ingress.class: nginx
+        cert-manager.io/cluster-issuer: letsencrypt
+        acme.cert-manager.io/http01-edit-in-place: "false"
+      tls:
+        - hosts:
+          - "keel.${blog_domain}"
+          secretName: letsencrypt-keel
+      hosts:
+        - host: "keel.${blog_domain}"
+          paths:
+            - "/"
+      secret:
+        name: keel
+    image:
+      tag: latest
+    nameOverride: kube-system-keel
+    persistence:
+      storageClass: longhorn
+    service:
+      enabled: true
+      type: NodePort
+      

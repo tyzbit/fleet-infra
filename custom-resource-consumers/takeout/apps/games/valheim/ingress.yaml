@@ -1,0 +1,58 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: valheim-server
+  namespace: games
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt
+    acme.cert-manager.io/http01-edit-in-place: "false"
+    external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
+    external-dns.alpha.kubernetes.io/target: ${blog_domain_ddns}
+spec:
+  tls:
+    - hosts:
+        - "valheim.${blog_domain}"
+        - "*.valheim.${blog_domain}"
+      secretName: valheim.${blog_domain}-multi-tls
+  rules:
+  - host: valheim.${blog_domain}
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: valheim-server-tcp
+            port:
+              number: 80
+  - host: map.valheim.${blog_domain}
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: valheim-server-tcp
+            port:
+              number: 3000
+  - host: supervisor.valheim.${blog_domain}
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: valheim-server-tcp
+            port:
+              number: 9001
+  - host: files.valheim.${blog_domain}
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: valheim-server-tcp
+            port:
+              number: 80

@@ -1,0 +1,90 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: iperf3-server
+  namespace: media
+  labels:
+    app: iperf3-server
+spec:
+  selector:
+    matchLabels:
+      app: iperf3-server
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 100%
+      maxSurge: 100%
+  template:
+    metadata:
+      annotations: {}
+      labels:
+        app: iperf3-server
+    spec:
+      # tolerations:
+      # - key: "colo"
+      #   operator: "Equal"
+      #   value: "aws"
+      #   effect: "NoSchedule"
+      containers:
+        - name: iperf3
+          image: networkstatic/iperf3:latest
+          args: ["-s"]
+          resources:
+            requests: 
+              cpu: 100m
+            limits:
+              memory: 128Mi
+      imagePullSecrets:
+        - name: docker-hub
+      # nodeSelector:
+      #   kubernetes.io/hostname: weatherman
+        # colo: aws
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: iperf3-client
+  namespace: default
+  labels:
+    app: iperf3-client
+spec:
+  selector:
+    matchLabels:
+      app: iperf3-client
+  replicas: 0
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 100%
+      maxSurge: 100%
+  template:
+    metadata:
+      annotations: {}
+      labels:
+        app: iperf3-client
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - iperf3-server
+            topologyKey: "kubernetes.io/hostname"
+      containers:
+        - name: iperf3-client
+          image: networkstatic/iperf3:latest
+          command: ["tail","-f","/dev/null"]
+          #args: ["-c","iperf3-server","-t","0"]
+          resources:
+            requests: 
+              cpu: 100m
+            limits:
+              memory: 128Mi
+      imagePullSecrets:
+        - name: docker-hub
+      nodeSelector:
+        kubernetes.io/hostname: cameraman

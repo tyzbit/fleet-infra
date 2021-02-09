@@ -1,0 +1,23 @@
+# pulled from https://github.com/richstokes/k8s-fah
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: network-tools
+  labels:
+    app: network-tools
+spec:
+  selector:
+    matchLabels:
+      app: network-tools
+  template:
+    metadata:
+      annotations: {}
+      labels:
+        app: network-tools
+    spec:
+      containers:
+        - name: network-tools
+          image: praqma/network-multitool:latest
+          command: ["tail","-f","/dev/null"]
+      imagePullSecrets:
+        - name: docker-hub

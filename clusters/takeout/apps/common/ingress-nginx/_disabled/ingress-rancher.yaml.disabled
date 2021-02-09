@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: rancher
+  namespace: cattle-system
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt
+    acme.cert-manager.io/http01-edit-in-place: "false"
+spec:
+  tls:
+    - hosts:
+        - "rancher.${blog_domain}"
+      secretName: letsencrypt-rancher
+  rules:
+  - host: rancher.${blog_domain}
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: rancher
+            port:
+              number: 80

@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: bitcoin
+  namespace: crypto
+  annotations: {}
+  labels:
+    app: bitcoin
+spec:
+  replicas: 1 # active longhorn-crypto
+  selector:
+    matchLabels:
+      app: bitcoin
+  serviceName: bitcoin
+  template:
+    metadata:
+      annotations: {}
+      labels:
+        app: bitcoin
+    spec:
+      containers:
+      - name: bitcoin
+        image: kylemanna/bitcoind
+        command: ["sh","-c","usermod -d /blockchain bitcoin && btc_oneshot"]
+        # command: ["tail","-f","/dev/null"]
+        env:
+        - name: HOME
+          value: "/blockchain"
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8333
+          name: bitcoin
+          protocol: TCP
+        - containerPort: 8332
+          name: bitcoin-rpc
+          protocol: TCP
+        - containerPort: 28332
+          name: bitcoin-mq
+          protocol: TCP
+        - containerPort: 28333
+          name: bitcoin-mq2
+          protocol: TCP
+        volumeMounts:
+          - mountPath: "/blockchain"
+            name: bitcoin-blockchain
+          - mountPath: "/blockchain/.bitcoin/bitcoin.conf"
+            subPath: "bitcoin.conf"
+            name: bitcoin-config
+        resources:
+          requests:
+            cpu: 100m
+          limits:
+            memory: 2048Mi
+      volumes:
+        - name: bitcoin-config
+          secret:
+            secretName: bitcoin-config
+        - name: bitcoin-blockchain
+          persistentVolumeClaim:
+            claimName: bitcoin-blockchain-longhorn-crypto
+      imagePullSecrets:
+        - name: docker-hub

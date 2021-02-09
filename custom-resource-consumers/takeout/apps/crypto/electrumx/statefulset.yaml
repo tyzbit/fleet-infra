@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: electrumx
+  namespace: crypto
+  annotations: {}
+  labels:
+    app: electrumx
+spec:
+  replicas: 1 # active longhorn-crypto
+  selector:
+    matchLabels:
+      app: electrumx
+  serviceName: electrumx
+  template:
+    metadata:
+      annotations: {}
+      labels:
+        app: electrumx
+    spec:
+      # affinity:
+      #   podAffinity:
+      #     requiredDuringSchedulingIgnoredDuringExecution:
+      #     - labelSelector:
+      #         matchExpressions:
+      #         - key: app
+      #           operator: In
+      #           values:
+      #           - bitcoin
+      #       topologyKey: kubernetes.io/hostname
+      containers:
+      - name: electrumx
+        image: lukechilds/electrumx:v1.16.0
+        # command: ["tail","-f","/dev/null"]
+        imagePullPolicy: Always
+        env: 
+          - name: COIN
+            value: BitcoinSegwit
+          - name: DAEMON_URL
+            valueFrom:
+              secretKeyRef:
+                name: electrumx
+                key: DAEMON_URL
+        ports:
+        - containerPort: 50002
+          name: electrumx
+          protocol: TCP
+        volumeMounts:
+          # - mountPath: "/data"
+          #   name: electrumx-data
+          - mountPath: "/data"
+            name: electrumx-data
+        resources:
+          requests:
+            cpu: 100m
+          limits:
+            memory: 3072Mi
+      # nodeSelector:
+      #   longhorn: primary
+      imagePullSecrets:
+        - name: docker-hub
+      volumes:
+        - name: electrumx-data
+          persistentVolumeClaim:
+            claimName: electrumx-data-longhorn-crypto

@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: sickchill
+  namespace: default
+spec:
+  type: ClusterIP
+  selector:
+    app: sickchill
+  ports:
+    - name: sickchill
+      protocol: TCP
+      port: 80
+      targetPort: 8081

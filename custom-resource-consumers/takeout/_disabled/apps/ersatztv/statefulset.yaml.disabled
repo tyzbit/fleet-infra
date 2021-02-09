@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: ersatztv
+spec:
+  selector:
+    matchLabels:
+      app: ersatztv
+  serviceName: ersatztv
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: ersatztv
+    spec:
+      containers:
+      - name: ersatztv
+        image: jasongdove/ersatztv:develop-vaapi
+        env:
+        - name: TZ
+          value: America/New_York
+        ports:
+        - containerPort: 8409
+          name: web
+        volumeMounts:
+        - name: ersatztv-data
+          mountPath: /root/.local/share/ersatztv
+        - name: braavos-media-pvc
+          mountPath: /braavos/
+          readOnly: true
+        - name: dev-dri
+          mountPath: /dev/dri
+        securityContext:
+          privileged: true
+      volumes:
+        - name: braavos-media-pvc
+          persistentVolumeClaim:
+            claimName: braavos-media-pvc
+        - name: dev-dri
+          persistentVolumeClaim:
+            claimName: dri-pvc
+      nodeSelector:
+        graphics: dri
+  volumeClaimTemplates:
+  - metadata:
+      name: ersatztv-data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi

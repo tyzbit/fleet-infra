@@ -1,0 +1,29 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: kubectl-fzf
+  namespace: flux-system
+spec:
+  targetNamespace: kube-system
+  releaseName: kubectl-fzf
+  chart:
+    spec:
+      chart: ./k8s
+      version: "v2.0.4" # Set in the referenced GitRepository
+      sourceRef:
+        kind: GitRepository
+        name: kubectl-fzf
+        namespace: flux-system
+  interval: 2m0s
+  values:
+    contextName: takeout
+    image:
+      cache_builder:
+        tag: 2.0.4
+    resources:
+      rsyncd:
+        memory: 128M
+        cpu: 0.2
+      cache_builder:
+        memory: 256M
+        cpu: 1

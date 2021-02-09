@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: project-zomboid-secondary-data-longhorn-gameserver
+  namespace: games
+spec:
+  accessModes: 
+    - ReadWriteOnce
+  volumeMode: Filesystem
+  storageClassName: longhorn-gameserver
+  resources:
+    requests:
+      storage: 40Gi

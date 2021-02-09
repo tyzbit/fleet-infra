@@ -1,0 +1,26 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: motioneye-oauth2-proxy
+  namespace: home-automation
+spec:
+  targetNamespace: home-automation
+  releaseName: motioneye-oauth2-proxy
+  chart:
+    spec:
+      chart: oauth2-proxy
+      version: "6.0.1"
+      sourceRef:
+        kind: HelmRepository
+        name: oauth2-proxy
+        namespace: flux-system
+  interval: 2m0s
+  values:
+    replicaCount: 0
+    extraArgs:
+      provider: github
+      github-org: "${blog_name}"
+      github-team: "super-admins,motioneye"
+      cookie-expire: 168h0m0s
+    config:
+      existingSecret: motioneye-oauth2-proxy

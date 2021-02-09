@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k4dirstat
+  labels:
+    app: k4dirstat
+spec:
+  selector:
+    matchLabels:
+      app: k4dirstat
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 100%
+      maxSurge: 100%
+  template:
+    metadata:
+      labels:
+        app: k4dirstat
+    spec:
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app.kubernetes.io/instance
+                operator: In
+                values:
+                - default-qbittorrent
+            topologyKey: kubernetes.io/hostname
+      containers:
+        - name: k4dirstat
+          image: tyzbit/k4dirstat:latest
+          imagePullPolicy: Always
+          # env:
+            # - name: RESOLUTION_BIT_DEPTH
+            #   value: 1280x720x16
+          volumeMounts:
+            - name: braavos
+              mountPath: /mount/braavos
+            - name: downloads
+              mountPath: /mount/downloads
+            - name: amazon-kubernetes-storage
+              mountPath: /mount/amazon-kubernetes-storage
+          resources:
+            requests: 
+              cpu: 500m
+            limits:
+              memory: 512Mi
+      volumes:
+        - name: braavos
+          persistentVolumeClaim:
+            claimName: braavos-media-pvc
+        - name: downloads
+          persistentVolumeClaim:
+            claimName: qbittorrent-downloads
+        - name: amazon-kubernetes-storage
+          persistentVolumeClaim:
+            claimName: amazon-kubernetes-storage
+      imagePullSecrets:
+        - name: docker-hub

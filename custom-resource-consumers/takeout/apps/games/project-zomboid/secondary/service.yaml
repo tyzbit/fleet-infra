@@ -1,0 +1,60 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: project-zomboid-secondary-tcp
+  namespace: games
+  annotations:
+    metallb.universe.tf/allow-shared-ip: games-project-zomboid-server-secondary
+spec:
+  type: LoadBalancer
+  loadBalancerIP: 192.168.1.73
+  externalTrafficPolicy: Local
+  selector:
+    app: project-zomboid-secondary
+  ports:
+  - port: 27015
+    protocol: TCP
+    name: data1
+    targetPort: 27015
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: project-zomboid-secondary-udp
+  namespace: games
+  annotations:
+    metallb.universe.tf/allow-shared-ip: games-project-zomboid-server-secondary
+spec:
+  type: LoadBalancer
+  loadBalancerIP: 192.168.1.73
+  externalTrafficPolicy: Local
+  selector:
+    app: project-zomboid-secondary
+  ports:
+  - port: 8766
+    protocol: UDP
+    name: data2
+    targetPort: 8766
+  - port: 8767
+    protocol: UDP
+    name: data3
+    targetPort: 8767
+  - port: 16261
+    protocol: UDP
+    name: data4
+    targetPort: 16261
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: project-zomboid-secondary-filebrowser
+  namespace: games
+spec:
+  type: ClusterIP
+  selector:
+    app: project-zomboid-secondary
+  ports:
+  - port: 80
+    protocol: TCP
+    name: fb-http
+    targetPort: 80

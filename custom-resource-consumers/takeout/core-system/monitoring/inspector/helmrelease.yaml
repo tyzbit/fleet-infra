@@ -1,0 +1,37 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: inspector
+  namespace: flux-system
+spec:
+  chart:
+    spec:
+      chart: inspector
+      version: "0.4.0"
+      sourceRef:
+        kind: HelmRepository
+        name: tyzbit
+        namespace: flux-system
+  interval: 2m0s
+  values:
+    image:
+      tag: 1.0.4 # {"$imagepolicy": "flux-system:inspector:tag"}
+    namespace: monitoring
+    imagePullSecrets:
+      - name: docker-hub
+    storageClassName: nas
+    securityContext:
+      privileged: true
+    terminationGracePeriodSeconds: 1
+    tolerations:
+      - effect: NoSchedule
+        operator: Exists
+    additionalMounts: 
+      - name: dev
+        mountPath: /host_dev/
+    additionalVolumes:
+    - name: dev
+      hostPath:
+        path: /dev/
+    # nodeSelector:
+    #   faketag: fakevalue

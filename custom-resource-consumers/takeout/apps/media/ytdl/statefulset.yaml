@@ -1,0 +1,69 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: youtube-dl
+  namespace: media
+  annotations: {}
+  labels:
+    app: youtube-dl
+spec:
+  replicas: 1 # active nas
+  selector:
+    matchLabels:
+      app: youtube-dl
+  serviceName: youtube-dl
+  template:
+    metadata:
+      annotations: {}
+      labels:
+        app: youtube-dl
+    spec:
+      containers:
+        - name: youtube-dl
+          image: tzahi12345/youtubedl-material@sha256:45c8c55ba8ec4661c548a0f9965ecd584cac32d461805e49c7b16783ad46c334 # 88cc8d0 || 2021/09/29
+          # image: tzahi12345/youtubedl-material@sha256:9a5304ed3a3a5a205c88f84bbf40668bd247c77d53102146085979e22725cb21 # 2021/09/26
+          #image: tyzbit/ytdl-material:latest
+          # command: ["tail","-f","/dev/null"]
+          # command: ["sh","-c","npm i nodemon -g && /app/entrypoint.sh nodemon app.js"]
+          imagePullPolicy: Always
+          env:
+            - name: ALLOW_CONFIG_MUTATIONS
+              value: "true"
+          ports:
+            - containerPort: 17442
+              name: http-youtube-dl
+              protocol: TCP
+          volumeMounts:
+          # mount specific subdirectories so as not to clobber the files in /app
+            - mountPath: /app/appdata
+              subPath: appdata
+              name: youtube-dl-data
+            - mountPath: /app/audio
+              subPath: audio
+              name: youtube-dl-data
+            - mountPath: /app/subscriptions
+              subPath: subscriptions
+              name: youtube-dl-data
+            - mountPath: /app/users
+              subPath: users
+              name: youtube-dl-data
+            - mountPath: /app/video
+              subPath: video
+              name: youtube-dl-data
+          resources:
+            requests:
+              cpu: 100m
+            limits:
+              memory: 2Gi
+          livenessProbe:
+            initialDelaySeconds: 60
+            httpGet:
+              port: http-youtube-dl
+      volumes:
+        - name: youtube-dl-data
+          persistentVolumeClaim:
+            claimName: youtube-dl-data-nas
+      imagePullSecrets:
+        - name: docker-hub
+      # nodeSelector:
+      #   longhorn: primary

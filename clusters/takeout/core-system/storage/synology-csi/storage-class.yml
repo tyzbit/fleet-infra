@@ -1,0 +1,17 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: synology-iscsi-storage
+  # annotations:
+  #   storageclass.kubernetes.io/is-default-class: "true"
+provisioner: csi.san.synology.com
+# if all params are empty, synology CSI will choose an available location to create volume
+parameters:
+  dsm: 'nas'
+  location: '/volume1'
+  fsType: 'btrfs'
+  # possible values:
+  # thin, BLUN, BLUN_THICK, ADV, FILE
+  # type: thin
+reclaimPolicy: Delete
+allowVolumeExpansion: true

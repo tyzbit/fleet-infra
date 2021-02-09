@@ -1,0 +1,18 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: flux-system-custom-resource-consumers
+  namespace: flux-system
+spec:
+  interval: 2m0s
+  dependsOn:
+    - name: flux-system-custom-resources
+  path: ./custom-resource-consumers/takeout
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  postBuild:
+    substituteFrom:
+      - kind: Secret
+        name: sensitive-values

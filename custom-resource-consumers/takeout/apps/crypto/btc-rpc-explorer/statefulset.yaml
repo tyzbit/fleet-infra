@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: btc-rpc-explorer-cache
+  namespace: crypto
+  labels:
+    app: btc-rpc-explorer-cache
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: btc-rpc-explorer-cache
+  serviceName: btc-rpc-explorer-cache
+  template:
+    metadata:
+      labels:
+        app: btc-rpc-explorer-cache
+    spec:
+      containers:
+        - name: btc-rpc-explorer-cache
+          image: redis:6.2
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 6379
+              name: redis
+              protocol: TCP
+          volumeMounts:
+            - name: btc-rpc-explorer-cache
+              mountPath: /data
+          resources:
+            requests:
+              cpu: 50m
+            limits:
+              memory: 128Mi
+      imagePullSecrets:
+        - name: docker-hub
+      volumes:
+        - name: btc-rpc-explorer-cache
+          emptyDir: {}

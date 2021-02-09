@@ -1,0 +1,22 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: rancher
+  namespace: flux-system
+spec:
+  targetNamespace: cattle-system
+  releaseName: rancher
+  chart:
+    spec:
+      chart: rancher
+      version: "2.6.0"
+      sourceRef:
+        kind: HelmRepository
+        name: rancher-latest
+        namespace: flux-system
+  interval: 2m0s
+  values:
+    hostname: rancher.${blog_domain}
+    letsEncrypt:
+      ingress:
+        class: nginx

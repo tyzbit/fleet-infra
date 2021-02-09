@@ -1,0 +1,91 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: valheim-server
+  namespace: games
+  annotations:
+    reloader.stakater.com/auto: "true"
+spec:
+  selector:
+    matchLabels:
+      app: valheim-server
+  serviceName: valheim-server
+  replicas: 1 # active longhorn
+  template:
+    metadata:
+      labels:
+        app: valheim-server
+    spec:
+      containers:
+      - name: valheim-server
+        image: lloesche/valheim-server
+        command: 
+          - sh
+          - -c
+          - >-
+            apt update
+            &&
+            apt install -y
+            git
+            &
+            /usr/local/sbin/bootstrap
+        envFrom:
+          - name: valheim-config
+            configMapRef:
+                name: valheim-config
+          - name: valheim-config
+            secretRef:
+                name: valheim-config
+        ports:
+        - containerPort: 2456
+          protocol: UDP
+          name: server-one
+        - containerPort: 2457
+          protocol: UDP
+          name: server-two
+        - containerPort: 3000
+          protocol: TCP
+          name: status
+        - containerPort: 9001
+          protocol: TCP
+          name: supervisor
+        volumeMounts:
+        - name: valheim-data
+          subPath: config
+          mountPath: /config
+        - name: valheim-data
+          subPath: data
+          mountPath: /opt/valheim
+        resources:
+          requests:
+            cpu: 500m
+          limits:
+            memory: 6Gi
+      - name: valheim-files
+        image: nginx
+        volumeMounts:
+        - name: valheim-data
+          readOnly: true
+          subPath: config
+          mountPath: /usr/share/nginx/html
+        - mountPath: /etc/nginx/conf.d/
+          name: valheim-files-config
+        resources:
+          requests:
+            cpu: 50m
+          limits:
+            memory: 128Mi
+        ports:
+        - containerPort: 80
+      nodeSelector:
+        graphics: dri
+        # longhorn: primary
+      imagePullSecrets:
+        - name: docker-hub
+      volumes:
+        - name: valheim-data
+          persistentVolumeClaim:
+            claimName: valheim-data-longhorn
+        - name: valheim-files-config
+          configMap:
+            name: valheim-files-config

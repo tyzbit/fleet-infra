@@ -1,0 +1,63 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: jellyfin
+  namespace: flux-system
+spec:
+  targetNamespace: default
+  dependsOn:
+    - name: longhorn
+      namespace: flux-system
+  chart:
+    spec:
+      chart: jellyfin
+      version: "2.0.0"
+      sourceRef:
+        kind: HelmRepository
+        name: kfirfer
+        namespace: flux-system
+  interval: 2m0s
+  values:
+    fullnameOverride: jellyfin
+    image:
+      pullPolicy: Always
+    ingress:
+      enabled: true
+      ingresses:
+        - name: jellyfin
+          annotations: 
+            kubernetes.io/ingress.class: nginx
+            cert-manager.io/cluster-issuer: letsencrypt
+            acme.cert-manager.io/http01-edit-in-place: "false"
+          tls:
+            - hosts:
+              - "jellyfin.${blog_domain}"
+              secretName: letsencrypt-jellyfin
+          hosts:
+            - "jellyfin.${blog_domain}"
+          path: "/"
+          secret:
+            name: jellyfin
+    persistence:
+      config:
+        enabled: true
+        size: 20Gi
+        storageClass: longhorn-static
+      media:
+        enabled: true
+        existingClaim: braavos-media-pvc
+    resources:
+      requests:
+        cpu: 1000m
+      limits:
+        memory: 2Gi
+    extraVolumeMounts:
+      - name: dri-pvc
+        mountPath: /dev/dri
+    extraVolumes:
+      - name: dri-pvc
+        persistentVolumeClaim:
+          claimName: dri-pvc
+    securityContext:
+      privileged: true
+    

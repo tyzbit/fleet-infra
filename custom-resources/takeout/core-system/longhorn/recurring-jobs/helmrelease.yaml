@@ -1,0 +1,85 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: longhorn-recurring-jobs
+  namespace: flux-system
+spec:
+  targetNamespace: longhorn-system
+  releaseName: longhorn-recurring-jobs
+  timeout: 2m
+  chart:
+    spec:
+      chart: longhorn-recurring-jobs
+      version: "2.0.2"
+      sourceRef:
+        kind: HelmRepository
+        name: tyzbit
+        namespace: flux-system
+  interval: 2m0s
+  values:
+    minuteStep: 5
+    hourStep: 2
+    createStorageClasses: true
+    allowVolumeExpansion: true
+    reclaimPolicy: Retain
+    parameters:
+      replicaAutoBalance: "ignored"
+      dataLocality: "best-effort"
+      numberOfReplicas: "3"
+      staleReplicaTimeout: "30"
+    groups:
+      "Blog":
+        snapshot:
+          - interval: 10m
+            retain: 6
+            # concurrency: 10
+        backup: 
+          - interval: 2h
+            retain: 4
+      "Crypto":
+        reclaimPolicy: Delete
+        parameters:
+          numberOfReplicas: "2"
+        snapshot:
+          - interval: 10m
+            retain: 1
+      "Database":
+        snapshot:
+          - interval: 10m
+            retain: 6
+        backup:
+          - interval: 1h
+            retain: 6
+      "Gameserver":
+        parameters:
+          numberOfReplicas: "2"
+        snapshot:
+          - interval: 10m
+            retain: 6
+          - interval: 1h
+            retain: 6
+        backup:
+          - interval: 2h
+            retain: 4
+      "Plex":
+        snapshot:
+          - interval: 10m
+            retain: 6
+        backup:
+          - interval: 2h
+            retain: 4
+          - interval: 12h
+            retain: 4
+      "Multimedia":
+        backup:
+          - interval: 2h
+            retain: 4
+      "Webapp":
+        snapshot:
+          - interval: 10m
+            retain: 6
+        backup:
+          - interval: 2h
+            retain: 4
+          - interval: 12h
+            retain: 4

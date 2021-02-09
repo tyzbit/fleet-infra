@@ -1,0 +1,140 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: frigate-config
+  namespace: home-automation
+data:
+  config.yml: |
+    logger:
+      default: info
+      # logs:
+      #   frigate.record: debug
+    database:
+      path: /db/frigate.db
+    mqtt:
+      host: mosquitto
+    record:
+      enabled: True
+      retain:
+        days: 1
+      events:
+        retain:
+          default: 30
+          mode: active_objects
+    snapshots:
+      enabled: True
+      retain:
+        default: 30
+        objects:
+          person: 365
+    objects:
+      track:
+        - person
+    birdseye:
+      enabled: True
+      # objects, motion, continuous
+      mode: continuous
+    detectors:
+      coral:
+        type: edgetpu
+        device: usb
+    # ffmpeg:
+      # input_args:
+      #   - -c:v
+      #   - h264_qsv
+      # hwaccel_args:
+      #   - -hwaccel
+      #   - vaapi
+      #   - -hwaccel_device
+      #   - /dev/dri/renderD128
+      #   - -init_hw_device 
+      #   - vaapi=gpu 
+      #   - -filter_hw_device 
+      #   - gpu
+      #   - -hwaccel_output_format
+      #   - yuv420p
+      # output_args:
+      #   detect: "-vf 'format=nv12,hwupload' -c:v h264_vaapi -an -pix_fmt yuv420p -f rawvideo"
+    cameras:
+      frontdoor:
+        motion:
+          mask:
+            - 0,390,190,281,413,219,612,181,842,131,1149,113,1138,0,0,0
+        ffmpeg:
+          inputs:
+            - path: 'rtsp://{FRIGATE_FRONTDOOR_CREDENTIALS}@frontdoor:554'
+              roles:
+                - detect
+                - rtmp
+        detect:
+          width: 1280
+          height: 720
+          fps: 5
+        mqtt:
+          height: 540
+      backdoor:
+        ffmpeg:
+          inputs:
+            - path: 'rtsp://{FRIGATE_BACKDOOR_CREDENTIALS}@backdoor:554/live'
+              roles:
+                - detect
+                - rtmp
+        detect:
+          width: 1920
+          height: 1080
+          fps: 5
+        mqtt:
+          height: 540
+      driveway:
+        motion:
+          mask:
+            - 1820,127,1775,335,1605,1080,1920,1080,1920,252,1920,0,1252,0,1443,45
+            - 595,687,218,948,172,865,103,718,373,553,538,627
+        objects:
+          filters:
+            person:
+              # min_score: 0.72
+              mask: 
+              - 1820,127,1775,335,1605,1080,1920,1080,1920,252,1920,0,1252,0,1443,45
+              - 595,687,218,948,172,865,103,718,373,553,538,627
+        ffmpeg:
+          inputs:
+            - path: 'rtsp://{FRIGATE_DRIVEWAY_CREDENTIALS}@driveway:554/live'
+              roles:
+                - detect
+                - rtmp
+        detect:
+          width: 1920
+          height: 1080
+          fps: 5
+        mqtt:
+          height: 540
+      porch:
+        ffmpeg:
+          inputs:
+            - path: 'rtsp://{FRIGATE_PORCH_CREDENTIALS}@porch:554/live'
+              roles:
+                - detect
+                - rtmp
+        detect:
+          width: 2688
+          height: 1520
+          fps: 5
+        # objects:
+        #   filters:
+        #     person:
+        #       min_score: 0.73
+        mqtt:
+          height: 540
+      court:
+        snapshots:
+          enabled: False
+        ffmpeg:
+          inputs:
+            - path: 'rtsp://{FRIGATE_COURT_CREDENTIALS}@court:554/live'
+              roles:
+                - detect
+        detect:
+          width: 1920
+          height: 1080
+          fps: 5

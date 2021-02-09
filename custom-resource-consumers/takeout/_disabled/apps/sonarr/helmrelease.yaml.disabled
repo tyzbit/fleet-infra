@@ -1,0 +1,54 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: sonarr
+  namespace: flux-system
+spec:
+  chart:
+    spec:
+      chart: sonarr
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home
+        namespace: flux-system
+  interval: 2m0s
+  values:
+    image:
+      pullPolicy: Always
+    ingress:
+      enabled: true
+      annotations: 
+        kubernetes.io/ingress.class: nginx
+        cert-manager.io/cluster-issuer: letsencrypt
+        acme.cert-manager.io/http01-edit-in-place: "false"
+      tls:
+        - hosts:
+          - "sonarr.${blog_domain}"
+          secretName: letsencrypt-sonarr
+      hosts:
+        - "sonarr.${blog_domain}"
+      paths:
+        - "/"
+    persistence:
+      config:
+        enabled: true
+        emptyDir:
+          enabled: false
+
+      media:
+        enabled: false
+        emptyDir:
+          enabled: false
+        mountPath: /media
+        ## Persistent Volume Storage Class
+        ## If defined, storageClassName: <storageClass>
+        ## If set to "-", storageClassName: "", which disables dynamic provisioning
+        ## If undefined (the default) or set to null, no storageClassName spec is
+        ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
+        ##   GKE, AWS & OpenStack)
+        storageClass: "longhorn"
+        accessMode: ReadWriteOnce
+        size: 1Gi
+        ## Do not delete the pvc upon helm uninstall
+        # skipuninstall: false
+        # existingClaim: ""

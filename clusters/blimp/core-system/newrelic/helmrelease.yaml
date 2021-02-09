@@ -1,0 +1,48 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: newrelic-bundle
+  namespace: flux-system
+spec:
+  targetNamespace: monitoring
+  releaseName: nri-bundle
+  chart:
+    spec:
+      chart: nri-bundle
+      sourceRef:
+        kind: HelmRepository
+        name: newrelic
+        namespace: flux-system
+  interval: 2m0s
+  valuesFrom:
+    - kind: Secret
+      name: newrelic
+      valuesKey: license-key
+      targetPath: global.licenseKey
+  values:
+    global:
+      cluster: blimp
+    infrastructure:
+      enabled: true
+      image:
+        pullPolicy: Always
+    kubeEvents:
+      enabled: false
+    ksm:
+      enabled: true
+    prometheus:
+      enabled: false
+    nri-prometheus:
+      config:
+        scrape_timeout: "90s"
+        transformations:
+          - description: "Exclude all but kasa metrics"
+            ignore_metrics:
+              - except:
+                - kasa_
+    logging:
+      enabled: true
+      image:
+        pullPolicy: Always
+    webhook:
+      enabled: false

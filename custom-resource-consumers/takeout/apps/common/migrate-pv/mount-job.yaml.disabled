@@ -1,0 +1,33 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: mount-pv-iscsi
+  namespace: media
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      containers:
+      - name: migrate-pv
+        image: debian
+        command: [ "/bin/bash", "-c" ]
+        args:
+          - tail -f /dev/null
+        volumeMounts:
+        # - mountPath: /src_vol
+        #   name: src
+        #   readOnly: true
+        - mountPath: /dst_vol
+          subPath: media
+          name: dst
+      restartPolicy: Never
+      nodeSelector:
+        kubernetes.io/hostname: cameraman
+      volumes:
+      # - name: src
+      #   persistentVolumeClaim:
+      #     claimName: nas-volume1-media
+      - name: dst
+        persistentVolumeClaim:
+          claimName: testing-iscsi
+      terminationGracePeriodSeconds: 1
