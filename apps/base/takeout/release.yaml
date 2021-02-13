@@ -25,5 +25,5 @@ spec:
   values:
     namespace: monitoring
     imagePullSecrets: 
-      - docker-hub
+      - name: docker-hub
     storageClassName: nfs-client
