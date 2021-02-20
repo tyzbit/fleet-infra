@@ -1,15 +1,18 @@
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
-kind: Kustomization
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
 metadata:
-  name: tplink
+  name: inspector
   namespace: flux-system
 spec:
-  interval: 5m0s
-  path: ./tplink
-  prune: true
-  sourceRef:
-    kind: GitRepository
-    name: apps
-  validation: client
-
+  chart:
+    spec:
+      chart: tplink
+      sourceRef:
+        kind: HelmRepository
+        name: rancher-cd-apps
+        namespace: flux-system
+  interval: 1m0s
+  values:
+    devices:
+      - 192.168.1.140
+      - 192.168.1.141
