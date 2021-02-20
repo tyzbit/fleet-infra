@@ -13,6 +13,7 @@ spec:
         namespace: flux-system
   interval: 1m0s
   values:
+    namespace: default
     devices:
       - 192.168.1.140
       - 192.168.1.141
