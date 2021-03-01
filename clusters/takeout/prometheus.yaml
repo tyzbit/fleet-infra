@@ -16,6 +16,7 @@ spec:
     alertmanager:
       enabled: false
     server:
+      fullnameOverride: prometheus
       persistentVolume:
         size: 8Gi
         storageClass: longhorn
