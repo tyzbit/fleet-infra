@@ -6,7 +6,7 @@ metadata:
 spec:
   chart:
     spec:
-      chart: kiali-operator
+      chart: prometheus
       sourceRef:
         kind: HelmRepository
         name: prometheus-community
