@@ -14,7 +14,7 @@ spec:
   interval: 1m0s
   values:
     alertmanager:
-      enabled: "false"
+      enabled: false
     server:
       persistentVolume:
         size: 8Gi
