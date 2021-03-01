@@ -13,7 +13,6 @@ spec:
         namespace: flux-system
   interval: 1m0s
   values:
-    existingSecret: grafana-credentials
     namespaceOverride: monitoring
     persistence:
       enabled: true
