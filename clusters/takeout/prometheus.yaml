@@ -17,6 +17,8 @@ spec:
       enabled: false
     server:
       fullnameOverride: prometheus
+      service:
+        servicePort: 9090
       persistentVolume:
         size: 8Gi
         storageClass: longhorn
