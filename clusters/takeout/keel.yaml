@@ -8,7 +8,6 @@ spec:
   chart:
     spec:
       chart: keel
-      version: latest
       sourceRef:
         kind: HelmRepository
         name: keel
@@ -37,6 +36,8 @@ spec:
             - "/"
       secret:
         name: keel
+    image:
+      tag: latest
     nameOverride: kube-system-keel
     persistence:
       storageClass: longhorn
