@@ -32,7 +32,8 @@ spec:
         secretName: letsencrypt-keel
       hosts:
         - host: "keel.qtosw.com"
-          path: /
+          paths:
+            - "/"
       secret:
         name: keel
     persistence:
