@@ -39,5 +39,6 @@ spec:
     persistence:
       storageClass: longhorn
     service:
+      enabled: true
       type: NodePort
       
