@@ -27,13 +27,13 @@ spec:
         cert-manager.io/cluster-issuer: letsencrypt
         acme.cert-manager.io/http01-edit-in-place: "true"
       tls:
-        hosts:
+        - hosts:
           - "keel.qtosw.com"
-        secretName: letsencrypt-keel
+          secretName: letsencrypt-keel
       hosts:
-        host: "keel.qtosw.com"
-        paths:
-          - "/"
+        - host: "keel.qtosw.com"
+          paths:
+            - "/"
       secret:
         name: keel
     persistence:
