@@ -5,6 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   targetNamespace: kube-system
+  releaseName: kube-system-keel
   chart:
     spec:
       chart: keel
