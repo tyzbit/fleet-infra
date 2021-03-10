@@ -8,6 +8,7 @@ spec:
   chart:
     spec:
       chart: keel
+      version: latest
       sourceRef:
         kind: HelmRepository
         name: keel
