@@ -51,4 +51,8 @@ spec:
     extraVolumeMounts:
       - name: dri-pvc
         mountPath: /dev/dri
+    extraVolume:
+      - name: dri-pvc
+        persistentVolumeClaim:
+          claimName: dri-pvc
     
