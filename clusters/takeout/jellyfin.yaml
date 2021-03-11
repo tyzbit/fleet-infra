@@ -48,3 +48,7 @@ spec:
       limits:
         cpu: 2000m
         memory: 2Gi
+    extraVolumeMounts:
+      - name: dri-pvc
+        mountPath: /dev/dri
+    
