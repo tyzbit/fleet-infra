@@ -14,6 +14,7 @@ spec:
         namespace: flux-system
   interval: 1m0s
   values:
+    fullnameOverride: jellyfin
     ingress:
       enabled: true
       annotations: 
@@ -35,6 +36,7 @@ spec:
     persistence:
       config:
         enabled: true
+        size: 20Gi
         storageClass: longhorn
       media:
         enabled: true
