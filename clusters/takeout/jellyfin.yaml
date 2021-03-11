@@ -56,5 +56,5 @@ spec:
         persistentVolumeClaim:
           claimName: dri-pvc
     securityContext:
-      priveleged: true
+      privileged: true
     
