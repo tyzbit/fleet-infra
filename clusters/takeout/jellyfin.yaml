@@ -10,7 +10,7 @@ spec:
       chart: jellyfin
       sourceRef:
         kind: HelmRepository
-        name: kfirfer
+        name: rancher-cd-apps
         namespace: flux-system
   interval: 1m0s
   values:
@@ -55,4 +55,6 @@ spec:
       - name: dri-pvc
         persistentVolumeClaim:
           claimName: dri-pvc
+    securityContext:
+      priveleged: true
     
