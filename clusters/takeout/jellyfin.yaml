@@ -28,7 +28,7 @@ spec:
           - "jellyfin.qtosw.com"
           secretName: letsencrypt-jellyfin
       hosts:
-        - host: "jellyfin.qtosw.com"
+        - "jellyfin.qtosw.com"
       path: "/"
       secret:
         name: keel
