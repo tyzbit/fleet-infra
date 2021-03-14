@@ -24,7 +24,7 @@ spec:
       chart: cost-analyzer
       sourceRef:
         kind: HelmRepository
-        name: cost-analyzer
+        name: kubecost
         namespace: flux-system
   interval: 1m0s
   values:
