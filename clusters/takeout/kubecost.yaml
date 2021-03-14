@@ -24,7 +24,7 @@ spec:
       chart: cost-analyzer
       sourceRef:
         kind: HelmRepository
-        name: kubecost
+        name: cost-analyzer
         namespace: flux-system
   interval: 1m0s
   values:
@@ -52,6 +52,6 @@ spec:
           - "kubecost.qtosw.com"
           secretName: letsencrypt-kubecost
       hosts:
-        - host: "kubecost.qtosw.com"
-          paths:
-            - "/"
+        - "kubecost.qtosw.com"
+      paths:
+        - "/"
