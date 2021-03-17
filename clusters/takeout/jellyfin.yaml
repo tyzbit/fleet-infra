@@ -10,7 +10,7 @@ spec:
       chart: jellyfin
       sourceRef:
         kind: HelmRepository
-        name: rancher-cd-apps
+        name: kfirfer
         namespace: flux-system
   interval: 1m0s
   values:
