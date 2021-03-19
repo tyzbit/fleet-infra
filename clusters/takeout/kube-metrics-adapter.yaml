@@ -4,6 +4,7 @@ metadata:
   name: kube-metrics-adapter
   namespace: flux-system
 spec:
+  targetNamespace: kube-system
   chart:
     spec:
       chart: kube-metrics-adapter
