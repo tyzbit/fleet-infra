@@ -10,11 +10,8 @@ spec:
       chart: kube-metrics-adapter
       sourceRef:
         kind: HelmRepository
-        name: banzaicloud
+        name: rancher-cd-apps
         namespace: flux-system
   interval: 1m0s
   values:
-    resources:
-      limits:
-        cpu: 250m
-        memory: 256Mi
+    
