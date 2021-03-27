@@ -20,5 +20,3 @@ spec:
       # path: /nfs/cluster_storage
       server: simulacrum.jura
       path: /mnt/user/KubernetesStorage/
-    storageClass:
-      reclaimPolicy: Retain
