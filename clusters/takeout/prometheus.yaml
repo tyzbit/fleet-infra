@@ -4,9 +4,9 @@ metadata:
   name: prometheus
   namespace: flux-system
 spec:
+  targetNamespace: monitoring
   chart:
     spec:
-      targetNamespace: monitoring
       chart: prometheus
       sourceRef:
         kind: HelmRepository
