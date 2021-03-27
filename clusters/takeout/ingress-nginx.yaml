@@ -4,6 +4,7 @@ metadata:
   name: ingress-nginx
   namespace: flux-system
 spec:
+  targetNamespace: kube-system
   chart:
     spec:
       chart: ingress-nginx
