@@ -15,8 +15,8 @@ spec:
   interval: 1m0s
   values:
     fullnameOverride: deluge
-    puid: "99"
-    pgid: "100"
+    puid: "0"
+    pgid: "0"
     ingress:
       enabled: true
       annotations: 
