@@ -1,22 +1,19 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: jellyfin
+  name: deluge
   namespace: flux-system
 spec:
-  targetNamespace: default
+  targetNamespace: monitoring
   chart:
     spec:
-      chart: jellyfin
+      chart: deluge
       sourceRef:
         kind: HelmRepository
-        name: kfirfer
+        name: nikdoof
         namespace: flux-system
   interval: 1m0s
   values:
-    fullnameOverride: jellyfin
-    image:
-      pullPolicy: Always
     ingress:
       enabled: true
       annotations: 
@@ -28,33 +25,21 @@ spec:
         acme.cert-manager.io/http01-edit-in-place: "true"
       tls:
         - hosts:
-          - "jellyfin.qtosw.com"
-          secretName: letsencrypt-jellyfin
+          - "torrent.qtosw.com"
+          secretName: letsencrypt-deluge
       hosts:
-        - "jellyfin.qtosw.com"
-      path: "/"
-      secret:
-        name: keel
+        - "torrent.qtosw.com"
     persistence:
-      config:
+      config: 
         enabled: true
-        size: 20Gi
         storageClass: longhorn
-      media:
+        size: 1Gi
+      downloads:
         enabled: true
-        existingClaim: braavos-media-pvc
-    resources:
-      requests:
-        cpu: 1000m
-      limits:
-        memory: 2Gi
-    extraVolumeMounts:
-      - name: dri-pvc
-        mountPath: /dev/dri
-    extraVolumes:
-      - name: dri-pvc
-        persistentVolumeClaim:
-          claimName: dri-pvc
-    securityContext:
-      privileged: true
-    
+        size: 200Gi
+        storageClass: nfs-client
+      resources:
+        requests:
+          cpu: 200m
+        limits:
+          memory: 512m
