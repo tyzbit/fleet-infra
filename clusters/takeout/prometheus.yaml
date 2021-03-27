@@ -6,6 +6,7 @@ metadata:
 spec:
   chart:
     spec:
+      targetNamespace: monitoring
       chart: prometheus
       sourceRef:
         kind: HelmRepository
@@ -19,7 +20,6 @@ spec:
       fullnameOverride: prometheus
       service:
         servicePort: 9090
-      persistentVolume:
-        size: 8Gi
-        storageClass: longhorn
-    forceNamespace: istio-system
+      # persistentVolume:
+      #   size: 8Gi
+      #   storageClass: longhorn
