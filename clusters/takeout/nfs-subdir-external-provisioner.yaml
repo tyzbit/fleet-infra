@@ -5,7 +5,6 @@ metadata:
   namespace: flux-system
 spec:
   targetNamespace: kube-system
-  releaseName: ""
   chart:
     spec:
       chart: nfs-subdir-external-provisioner
@@ -15,6 +14,7 @@ spec:
         namespace: flux-system
   interval: 1m0s
   values:
+    fullnameOverride: nfs-subdir-external-provisioner
     nfs:
       # server: braavos.jura
       # path: /nfs/cluster_storage
