@@ -4,7 +4,7 @@ metadata:
   name: deluge
   namespace: flux-system
 spec:
-  targetNamespace: monitoring
+  targetNamespace: default
   chart:
     spec:
       chart: deluge
