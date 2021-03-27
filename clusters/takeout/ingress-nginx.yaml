@@ -15,8 +15,8 @@ spec:
   interval: 1m0s
   values:
     controller:
-        metrics:
-          service:
-            annotations:
-              prometheus.io/scrape: "true"
-              prometheus.io/port: "10254"
+      metrics:
+        service:
+          annotations:
+            prometheus.io/scrape: "true"
+            prometheus.io/port: "10254"
