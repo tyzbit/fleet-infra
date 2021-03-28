@@ -20,11 +20,11 @@ spec:
     kubeEvents:
       enabled: true
     nri-kube-events:
-      fullnameOverride: newrelic-kube-events
+      nameOverride: newrelic-kube-events
     prometheus:
       enabled: true
     nri-prometheus:
-      fullnameOverride: newrelic-prometheus
+      nameOverride: newrelic-prometheus
       config:
         transformations:
           - description: "Exclude all but kasa metrics"
@@ -34,4 +34,6 @@ spec:
     logging:
       enabled: true
     newrelic-logging:
-      fullnameOverride: newrelic-logging
+      nameOverride: newrelic-logging
+    webhook:
+      enabled: false
