@@ -15,8 +15,9 @@ spec:
         namespace: flux-system
   interval: 1m0s
   values:
-    podAnnotations:
-      linkerd.io/inject: enabled
+    namespaceOverride: monitoring
+    # podAnnotations:
+    #   linkerd.io/inject: enabled
     persistence:
       enabled: true
       storageClass: longhorn
