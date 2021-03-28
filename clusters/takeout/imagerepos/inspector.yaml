@@ -4,7 +4,7 @@ metadata:
   name: inspector
   namespace: flux-system
 spec:
-  secretRef: 
+  secretRef:
     name: docker-hub
   image: docker.io/tyzbit/inspector
   interval: 1m0s
