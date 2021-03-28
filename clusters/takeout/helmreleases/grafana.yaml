@@ -4,6 +4,8 @@ metadata:
   name: grafana
   namespace: flux-system
 spec:
+  targetNamespace: monitoring
+  releaseName: grafana
   chart:
     spec:
       chart: grafana
@@ -13,7 +15,6 @@ spec:
         namespace: flux-system
   interval: 1m0s
   values:
-    namespaceOverride: monitoring
     podAnnotations:
       linkerd.io/inject: enabled
     persistence:
