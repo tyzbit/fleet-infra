@@ -1,0 +1,37 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: newrelic-bundle
+  namespace: flux-system
+spec:
+  targetNamespace: monitoring
+  chart:
+    spec:
+      chart: nri-bundle
+      sourceRef:
+        kind: HelmRepository
+        name: newrelic
+        namespace: flux-system
+  interval: 1m0s
+  values:
+    global:
+      cluster: takeout
+      licenseKey: 904ebcc921b150ac3de8f20d424991f88425NRAL
+    kubeEvents:
+      enabled: true
+    nri-kube-events:
+      fullnameOverride: newrelic-kube-events
+    prometheus:
+      enabled: true
+    nri-prometheus:
+      fullnameOverride: newrelic-prometheus
+      config:
+        transformations:
+          - description: "Exclude all but kasa metrics"
+            ignore_metrics:
+              - except:
+                - kasa_
+    logging:
+      enabled: true
+    newrelic-logging:
+      fullnameOverride: newrelic-logging
