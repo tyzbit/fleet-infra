@@ -24,7 +24,7 @@ spec:
     prometheus:
       enabled: true
     nri-prometheus:
-      nameOverride: newrelic-prometheus
+      fullnameOverride: newrelic-prometheus
       config:
         transformations:
           - description: "Exclude all but kasa metrics"
