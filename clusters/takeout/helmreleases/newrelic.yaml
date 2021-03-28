@@ -14,10 +14,14 @@ spec:
         name: newrelic
         namespace: flux-system
   interval: 1m0s
+  valuesFrom:
+    - kind: Secret
+      name: newrelic
+      valuesKey: license-key
+      targetPath: global.licenseKey
   values:
     global:
       cluster: takeout
-      licenseKey: 904ebcc921b150ac3de8f20d424991f88425NRAL
     infrastructure:
       enabled: true
     kubeEvents:
