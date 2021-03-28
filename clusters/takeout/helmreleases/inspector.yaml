@@ -13,6 +13,8 @@ spec:
         namespace: flux-system
   interval: 1m0s
   values:
+    image:
+      tag: latest # {"$imagepolicy": "flux-system:inspector:tag"}
     namespace: monitoring
     imagePullSecrets: 
       - name: docker-hub

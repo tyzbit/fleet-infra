@@ -1,0 +1,11 @@
+apiVersion: image.toolkit.fluxcd.io/v1alpha1
+kind: ImagePolicy
+metadata:
+  name: inspector
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: inspector
+  policy:
+    semver:
+      range: ">= 1.0.0"
