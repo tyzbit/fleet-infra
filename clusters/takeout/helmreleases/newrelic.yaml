@@ -17,6 +17,10 @@ spec:
     global:
       cluster: takeout
       licenseKey: 904ebcc921b150ac3de8f20d424991f88425NRAL
+    infrastructure:
+      enabled: true
+    newrelic-infrastructure:
+      fullnameOverride: newrelic-infrastructure
     kubeEvents:
       enabled: true
     nri-kube-events:
