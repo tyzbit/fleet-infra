@@ -5,6 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   targetNamespace: kubecost
+  releaseName: kubecost
   chart:
     spec:
       chart: cost-analyzer

@@ -5,6 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   targetNamespace: monitoring
+  releaseName: prometheus
   chart:
     spec:
       chart: prometheus
