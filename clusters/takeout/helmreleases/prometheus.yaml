@@ -24,7 +24,7 @@ spec:
       # persistentVolume:
       #   size: 8Gi
       #   storageClass: longhorn
-    extraScrapeConfigs:
+    extraScrapeConfigs: |
     - job_name: kubecost
       honor_labels: true
       scrape_interval: 1m
