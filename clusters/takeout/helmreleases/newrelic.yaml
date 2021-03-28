@@ -30,6 +30,7 @@ spec:
       enabled: true
     nri-prometheus:
       config:
+        scrape_timeout: "90s"
         transformations:
           - description: "Exclude all but kasa metrics"
             ignore_metrics:
