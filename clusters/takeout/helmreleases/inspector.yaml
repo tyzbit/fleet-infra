@@ -14,8 +14,8 @@ spec:
   interval: 1m0s
   values:
     image:
-      tag: latest # {"$imagepolicy": "flux-system:inspector:tag"}
+      tag: 1.0.1 # {"$imagepolicy": "flux-system:inspector:tag"}
     namespace: monitoring
-    imagePullSecrets: 
-      - name: docker-hub
+    imagePullSecrets:
+    - name: docker-hub
     storageClassName: nfs-client
