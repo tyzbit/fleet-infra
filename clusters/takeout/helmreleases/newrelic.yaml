@@ -5,6 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   targetNamespace: monitoring
+  releaseName: nri-bundle
   chart:
     spec:
       chart: nri-bundle
@@ -20,11 +21,11 @@ spec:
     infrastructure:
       enabled: true
     newrelic-infrastructure:
-      fullnameOverride: newrelic-infrastructure
+      # fullnameOverride: newrelic-infrastructure
     kubeEvents:
       enabled: true
     nri-kube-events:
-      nameOverride: newrelic-kube-events
+      # nameOverride: newrelic-kube-events
     prometheus:
       enabled: true
     nri-prometheus:
@@ -38,6 +39,6 @@ spec:
     logging:
       enabled: true
     newrelic-logging:
-      nameOverride: newrelic-logging
+      # nameOverride: newrelic-logging
     webhook:
       enabled: false
