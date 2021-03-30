@@ -7,6 +7,7 @@ metadata:
 spec:
   interval: 5m0s
   path: ./namespaces
+  prune: true
   sourceRef:
     kind: GitRepository
     name: apps
