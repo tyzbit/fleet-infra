@@ -26,6 +26,8 @@ spec:
       enabled: true
     kubeEvents:
       enabled: true
+    ksm:
+      enabled: true
     prometheus:
       enabled: true
     nri-prometheus:
