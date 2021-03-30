@@ -22,4 +22,4 @@ spec:
       storageOverProvisioningPercentage: 0
       storageMinimalAvailablePercentage: 10
       guaranteedEngineCPU: 1
-      # defaultDataPath: /mnt/external/longhorn
+      defaultDataPath: /mnt/external/longhorn
