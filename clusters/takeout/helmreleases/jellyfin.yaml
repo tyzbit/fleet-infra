@@ -5,6 +5,9 @@ metadata:
   namespace: flux-system
 spec:
   targetNamespace: default
+  dependsOn:
+    - name: longhorn
+      namespace: flux-system
   chart:
     spec:
       chart: jellyfin

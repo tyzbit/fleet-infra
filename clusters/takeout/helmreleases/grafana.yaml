@@ -6,6 +6,9 @@ metadata:
 spec:
   targetNamespace: monitoring
   releaseName: grafana
+  dependsOn:
+    - name: longhorn
+      namespace: flux-system
   chart:
     spec:
       chart: grafana
