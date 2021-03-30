@@ -16,10 +16,10 @@ spec:
   interval: 1m0s
   values: 
     defaultSettings:
-      backupTarget: s3://takeout-backups@us-east-1/
-      backupTargetCredentialSecret: longhorn-takeout-backups
+      # backupTarget: s3://takeout-backups@us-east-1/
+      # backupTargetCredentialSecret: longhorn-takeout-backups
       createDefaultDiskLabeledNodes: true
       storageOverProvisioningPercentage: 0
       storageMinimalAvailablePercentage: 10
       guaranteedEngineCPU: 1
-      defaultDataPath: /mnt/external/longhorn
+      # defaultDataPath: /mnt/external/longhorn
