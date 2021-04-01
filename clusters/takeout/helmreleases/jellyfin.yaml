@@ -42,7 +42,7 @@ spec:
       config:
         enabled: true
         size: 20Gi
-        storageClass: longhorn
+        storageClass: longhorn-static
       media:
         enabled: true
         existingClaim: braavos-media-pvc
