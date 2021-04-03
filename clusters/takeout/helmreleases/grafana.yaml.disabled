@@ -24,4 +24,6 @@ spec:
     #   linkerd.io/inject: enabled
     persistence:
       enabled: true
+      accessModes: 
+        - ReadWriteMany
       storageClass: longhorn
