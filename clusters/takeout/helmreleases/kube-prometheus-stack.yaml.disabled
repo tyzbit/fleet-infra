@@ -6,9 +6,6 @@ metadata:
 spec:
   targetNamespace: monitoring
   releaseName: prometheus
-  dependsOn:
-    - name: longhorn
-      namespace: flux-system
   chart:
     spec:
       chart: kube-prometheus-stack
