@@ -18,9 +18,9 @@ metadata:
   name: flux-system
   namespace: flux-system
 spec:
-  interval: 10m0s
+  interval: 1m0s
   path: ./clusters/takeout
-  prune: false
+  prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
