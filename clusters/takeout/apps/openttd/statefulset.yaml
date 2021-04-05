@@ -15,6 +15,11 @@ spec:
       containers:
       - name: openttd
         image: bateau/openttd
+        env:
+          - name: loadgame
+            value: "true"
+          - name: savename
+            value: "christianserver"
         volumeMounts:
           - mountPath: /home/openttd/
             name: openttd-data
