@@ -15,13 +15,6 @@ spec:
       containers:
       - name: openttd
         image: bateau/openttd
-        env:
-          - name: loadgame
-            value: last-autosave
-          - name: PUID
-            value: "0"
-          - name: PGID
-            value: "0"
         volumeMounts:
           - mountPath: /home/openttd/
             name: openttd-data
