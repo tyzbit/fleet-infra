@@ -16,7 +16,7 @@ spec:
       - name: openttd
         image: bateau/openttd
         volumeMounts:
-          - mountPath: /home/openttd
+          - mountPath: /home/openttd/.openttd
             name: openttd-data
         resources:
           requests:
