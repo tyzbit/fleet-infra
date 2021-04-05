@@ -7,7 +7,7 @@ metadata:
   labels:
     app: nextcloud
 spec:
-  replicas: 1 # active longhorn
+  replicas: 2 # active longhorn
   selector:
     matchLabels:
       app: nextcloud
