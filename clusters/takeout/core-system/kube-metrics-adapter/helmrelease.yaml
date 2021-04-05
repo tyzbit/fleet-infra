@@ -7,10 +7,10 @@ spec:
   targetNamespace: kube-system
   chart:
     spec:
-      chart: kube-metrics-adapter
+      chart: ./charts/kube-metrics-adapter
       sourceRef:
-        kind: HelmRepository
-        name: rancher-cd-apps
+        kind: GitRepository
+        name: flux-system
         namespace: flux-system
   interval: 1m0s
   values:
