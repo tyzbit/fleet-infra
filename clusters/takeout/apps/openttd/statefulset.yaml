@@ -23,13 +23,13 @@ spec:
           - name: PGID
             value: "0"
         volumeMounts:
-          - mountPath: /home/openttd/.openttd
+          - mountPath: /home/openttd/
             name: openttd-data
         resources:
           requests:
             cpu: 500m
           limits:
-            memory: 6Gi
+            memory: 1024Mi
         ports:
         - name: main-tcp
           containerPort: 3979
