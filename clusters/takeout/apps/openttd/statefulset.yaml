@@ -16,13 +16,13 @@ spec:
       - name: openttd
         image: bateau/openttd
         # command: ["tail","-f","/dev/null"]
-        env:
-          - name: loadgame
-            value: "true"
-          - name: savename
-            value: "christianserver.ttd"
-          - name: savepath
-            value: "/openttd-data/"
+        # env:
+        #   - name: loadgame
+        #     value: "true"
+        #   - name: savename
+        #     value: "christianserver.ttd"
+        #   - name: savepath
+        #     value: "/openttd-data/"
         volumeMounts:
           - mountPath: /openttd-data/
             name: openttd-data
