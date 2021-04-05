@@ -8,8 +8,6 @@ spec:
     app: openttd
   ports:
   - port: 3979
-    protocol: TCP
     targetPort: 3979
-  - port: 3979
-    protocol: UDP
-    targetPort: 3979
+  - port: 3978
+    targetPort: 3978
