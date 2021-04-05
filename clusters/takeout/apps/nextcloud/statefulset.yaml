@@ -1,0 +1,101 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: nextcloud-db
+  annotations: {}
+  labels:
+    app: nextcloud-db
+spec:
+  replicas: 1 # active longhorn
+  selector:
+    matchLabels:
+      app: nextcloud-db
+  serviceName: nextcloud-db
+  template:
+    metadata:
+      annotations: {}
+        # linkerd.io/inject: enabled
+      labels:
+        app: nextcloud-db
+    spec:
+      containers:
+        - name: nextcloud-db
+          image: mariadb:10.5
+          imagePullPolicy: Always
+          envFrom:
+          - secretRef:
+              name: nextcloud-db
+          ports:
+            - containerPort: 3306
+              name: sql
+              protocol: TCP
+          volumeMounts:
+            - name: nextcloud-db
+              mountPath: /var/lib/mysql
+          resources:
+            requests:
+              cpu: 10m
+            limits:
+              memory: 768Mi
+      nodeSelector:
+        node.longhorn.io/create-default-disk: "true"
+      imagePullSecrets:
+        - name: docker-hub
+  volumeClaimTemplates:
+  - apiVersion: v1
+    kind: PersistentVolume
+    metadata:
+      name: nextcloud-db
+    spec:
+      accessModes: 
+        - ReadWriteOnce
+      volumeMode: Filesystem
+      storageClassName: longhorn
+      resources:
+        requests:
+          storage: 5Gi
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: nextcloud-cache
+  annotations: {}
+    # fluxcd.io/ignore: "true"
+  labels:
+    app: nextcloud-cache
+spec:
+  replicas: 1 # active longhorn
+  selector:
+    matchLabels:
+      app: nextcloud-cache
+  serviceName: nextcloud-cache
+  template:
+    metadata:
+      annotations: {}
+        # linkerd.io/inject: enabled
+      labels:
+        app: nextcloud-cache
+    spec:
+      containers:
+        - name: nextcloud-cache
+          image: redis:6.2
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 6379
+              name: redis
+              protocol: TCP
+          volumeMounts:
+            - name: nextcloud-cache
+              mountPath: /data
+          resources:
+            requests:
+              cpu: 10m
+            limits:
+              memory: 32Mi
+      # nodeSelector:
+      #   node.longhorn.io/create-default-disk: "true"
+      imagePullSecrets:
+        - name: docker-hub
+      volumes:
+        - name: nextcloud-cache
+          emptyDir: {}

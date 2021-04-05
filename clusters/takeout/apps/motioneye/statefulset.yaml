@@ -1,0 +1,85 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: motioneye
+  annotations: {}
+    # fluxcd.io/ignore: "true"
+  labels:
+    app: motioneye
+spec:
+  replicas: 1 # active longhorn
+  serviceName: motioneye
+  selector:
+    matchLabels:
+      app: motioneye
+  template:
+    metadata:
+      annotations: {}
+        # linkerd.io/inject: enabled
+      labels:
+        app: motioneye
+    spec:
+      containers:
+      - name: motioneye
+        image: ccrisan/motioneye:0.42-amd64
+        imagePullPolicy: Always
+        # command: ["tail","-f","/dev/null"]
+        env:
+        - name: TZ
+          value: America/New_York
+        - name: UID
+          value: "1000"
+        - name: GID
+          value: "100"
+        ports:
+        - containerPort: 8765
+          name: http
+          protocol: TCP
+        - containerPort: 9081
+          name: tcp-stream1
+          protocol: TCP
+        - containerPort: 9082
+          name: tcp-stream2
+          protocol: TCP
+        - containerPort: 9083
+          name: tcp-stream3
+          protocol: TCP
+        - containerPort: 9084
+          name: tcp-stream4
+          protocol: TCP
+        volumeMounts:
+          - mountPath: "/dev/dri"
+            name: dri
+          - mountPath: "/var/lib/motioneye/"
+            name: braavos-camera
+          - mountPath: "/etc/motioneye"
+            name: motioneye-config
+        resources:
+          requests:
+            cpu: 1000m
+          limits:
+            memory: 2Gi
+      volumes:
+        - name: dri
+          persistentVolumeClaim:
+            claimName: dri-pvc
+        - name: braavos-camera
+          persistentVolumeClaim:
+            claimName: braavos-camera-pvc
+      nodeSelector:
+        graphics: dri
+      imagePullSecrets:
+        - name: docker-hub
+  volumeClaimTemplates:
+  - apiVersion: v1
+    kind: PersistentVolume
+    metadata:
+      name: motioneye-config
+    spec:
+      accessModes: 
+        - ReadWriteOnce
+      volumeMode: Filesystem
+      storageClassName: longhorn
+      resources:
+        requests:
+          storage: 128Mi

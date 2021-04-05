@@ -1,0 +1,75 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: youtube-dl
+  annotations: {}
+    # fluxcd.io/ignore: "true"
+  labels:
+    app: youtube-dl
+spec:
+  replicas: 1 # active longhorn
+  selector:
+    matchLabels:
+      app: youtube-dl
+  serviceName: youtube-dl
+  template:
+    metadata:
+      annotations: {}
+      # linkerd.io/inject: enabled
+      labels:
+        app: youtube-dl
+    spec:
+      containers:
+        - name: youtube-dl
+          image: tzahi12345/youtubedl-material:nightly
+          # command: ["tail","-f","/dev/null"]
+          # command: ["sh","-c","npm i nodemon -g && /app/entrypoint.sh nodemon app.js"]
+          imagePullPolicy: Always
+          env:
+            - name: ALLOW_CONFIG_MUTATIONS
+              value: "true"
+          ports:
+            - containerPort: 17442
+              name: http-youtube-dl
+              protocol: TCP
+          volumeMounts:
+          # mount specific subdirectories so as not to clobber the files in /app
+            - mountPath: /app/appdata
+              subPath: appdata
+              name: youtube-dl-data
+            - mountPath: /app/audio
+              subPath: audio
+              name: youtube-dl-data
+            - mountPath: /app/subscriptions
+              subPath: subscriptions
+              name: youtube-dl-data
+            - mountPath: /app/users
+              subPath: users
+              name: youtube-dl-data
+            - mountPath: /app/video
+              subPath: video
+              name: youtube-dl-data
+          resources:
+            requests:
+              cpu: 100m
+            limits:
+              memory: 1Gi
+          livenessProbe:
+            initialDelaySeconds: 60
+            httpGet:
+              port: http-youtube-dl
+      imagePullSecrets:
+        - name: docker-hub
+  volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolume
+      metadata:
+        name: youtube-dl-data
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        volumeMode: Filesystem
+        storageClassName: longhorn
+        resources:
+          requests:
+            storage: 50Gi

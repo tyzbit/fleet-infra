@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: btc-rpc-explorer-cache
+  annotations:
+    keel.sh/policy: all
+    keel.sh/trigger: poll
+    keel.sh/approvals: "1"
+    keel.sh/pollSchedule: "@every 1m"
+  labels:
+    app: btc-rpc-explorer-cache
+spec:
+  replicas: 1 # active longhorn
+  selector:
+    matchLabels:
+      app: btc-rpc-explorer-cache
+  serviceName: btc-rpc-explorer-cache
+  template:
+    metadata:
+      annotations: {}
+        # linkerd.io/inject: enabled
+      labels:
+        app: btc-rpc-explorer-cache
+    spec:
+      # affinity:
+      #   podAffinity:
+      #     requiredDuringSchedulingIgnoredDuringExecution:
+      #     - labelSelector:
+      #         matchExpressions:
+      #         - key: app
+      #           operator: In
+      #           values:
+      #           - bitcoin
+      #           - btc-rpc-explorer
+      #           - electrumx
+      #       topologyKey: kubernetes.io/hostname
+      containers:
+        - name: btc-rpc-explorer-cache
+          image: redis:6.2
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 6379
+              name: redis
+              protocol: TCP
+          volumeMounts:
+            - name: btc-rpc-explorer-cache
+              mountPath: /data
+          resources:
+            requests:
+              cpu: 50m
+            limits:
+              memory: 128Mi
+      # nodeSelector:
+      #   node.longhorn.io/create-default-disk: "true"
+      imagePullSecrets:
+        - name: docker-hub
+      volumes:
+        - name: btc-rpc-explorer-cache
+          emptyDir: {}

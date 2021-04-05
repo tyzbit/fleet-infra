@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: bitcoin
+spec:
+  type: LoadBalancer
+  selector:
+    app: bitcoin
+  ports:
+    - name: tcp-bitcoin
+      protocol: TCP
+      port: 8333
+      targetPort: 8333
+    - name: http-bitcoin-rpc
+      protocol: TCP
+      port: 8332
+      targetPort: 8332
+    - name: tcp-bitcoin-mq
+      protocol: TCP
+      port: 28332
+      targetPort: 28332
+    - name: tcp-bitcoin-mq2
+      protocol: TCP
+      port: 28333
+      targetPort: 28333

@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: n8n
+  labels:
+    app: n8n
+spec:
+  replicas: 1 # active longhorn
+  selector:
+    matchLabels:
+      app: n8n
+  serviceName: n8n
+  template:
+    metadata:
+      annotations: {}
+        # linkerd.io/inject: enabled
+      labels:
+        app: n8n
+    spec:
+      containers:
+        - name: n8n
+          image: n8nio/n8n:latest
+          imagePullPolicy: Always
+          #command: ["tail","-f","/dev/null"]
+          envFrom:
+          - secretRef:
+              name: n8n-config
+          ports:
+            - containerPort: 5678
+              name: http
+              protocol: TCP
+          volumeMounts:
+            - name: n8n-data
+              mountPath: /home/node/.n8n
+          resources:
+            requests:
+              cpu: 500m
+            limits:
+              memory: 512Mi
+      imagePullSecrets:
+        - name: docker-hub
+      serviceAccount: n8n
+  volumeClaimTemplates:
+  - apiVersion: v1
+    kind: PersistentVolume
+    metadata:
+      name: n8n-data
+    spec:
+      accessModes: 
+        - ReadWriteOnce
+      volumeMode: Filesystem
+      storageClassName: longhorn
+      resources:
+        requests:
+          storage: 1Gi

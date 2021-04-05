@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nextcloud-data
+spec:
+  accessModes: 
+    - ReadWriteMany
+  volumeMode: Filesystem
+  storageClassName: longhorn-static
+  resources:
+    requests:
+      storage: 240Gi

@@ -1,0 +1,21 @@
+apiVersion: cert-manager.io/v1alpha2
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: tyzbit@gmail.com
+    privateKeySecretRef:
+      name: letsencrypt
+    solvers:
+    # An empty 'selector' means that this solver matches all domains
+    # - http01:
+    #     ingress:
+    #       class: nginx
+    - dns01:
+        cloudflare:
+          email: tyzbit@gmail.com
+          apiKeySecretRef:
+            name: cloudflare-global-apikey
+            key: apikey

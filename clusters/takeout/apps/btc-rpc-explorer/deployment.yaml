@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: btc-rpc-explorer
+  labels:
+    app: btc-rpc-explorer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: btc-rpc-explorer
+  template:
+    metadata:
+      annotations: {}
+        # linkerd.io/inject: enabled
+      labels:
+        app: btc-rpc-explorer
+    spec:
+      # affinity:
+      #   podAffinity:
+      #     requiredDuringSchedulingIgnoredDuringExecution:
+      #     - labelSelector:
+      #         matchExpressions:
+      #         - key: app
+      #           operator: In
+      #           values:
+      #           - bitcoin
+      #           - btc-rpc-explorer-cache
+      #           - electrumx
+      #       topologyKey: kubernetes.io/hostname
+      containers:
+        - name: btc-rpc-explorer
+          image: tyzbit/btc-rpc-explorer:configurable-mapbox
+          imagePullPolicy: Always
+          env:
+            - name: BTCEXP_HOST
+              value: "0.0.0.0"
+            - name: BTCEXP_ADDRESS_API
+              value: electrumx
+            - name: BTCEXP_NO_RATES
+              value: "false"
+            - name: BTCEXP_SLOW_DEVICE_MODE
+              value: "false"
+          envFrom:
+            - secretRef:
+                name: btc-rpc-explorer
+          ports:
+            - containerPort: 3002
+              name: http
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 100m
+            limits:
+              memory: 512Mi
+      imagePullSecrets:
+        - name: docker-hub

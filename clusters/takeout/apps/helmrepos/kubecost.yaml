@@ -1,0 +1,9 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: HelmRepository
+metadata:
+  name: kubecost
+  namespace: flux-system
+spec:
+  interval: 1m
+  timeout: 1m0s
+  url: https://kubecost.github.io/cost-analyzer/

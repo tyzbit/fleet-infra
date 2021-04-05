@@ -1,0 +1,91 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: shared-ingress
+  namespace: default
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/proxy-body-size: 256m
+    cert-manager.io/cluster-issuer: letsencrypt
+    acme.cert-manager.io/http01-edit-in-place: "true"
+spec:
+  defaultBackend:
+    service: 
+      name: simulacrum
+      port: 
+        number: 8080
+  tls:
+    - hosts:
+        - "*.qtosw.com"
+      secretName: letsencrypt
+  rules:
+  - host: btc.qtosw.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: btc-rpc-explorer
+            port:
+              number: 80
+  - host: cloud.qtosw.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: nextcloud
+            port:
+              number: 80
+  # - host: huginn.qtosw.com
+  #   http:
+  #     paths:
+  #     - pathType: Prefix
+  #       path: "/"
+  #       backend:
+  #         service:
+  #           name: huginn
+  #           port:
+  #             number: 80
+  # - host: motion.qtosw.com
+  #   http:
+  #     paths:
+  #     - pathType: Prefix
+  #       path: "/"
+  #       backend:
+  #         service:
+  #           name: motion
+  #           port:
+  #             number: 80
+  - host: plex-backup.qtosw.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: plex
+            port:
+              number: 32400
+  - host: ytdl.qtosw.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: youtube-dl
+            port:
+              number: 80
+  # - host: xibo.qtosw.com
+  #   http:
+  #     paths:
+  #     - pathType: Prefix
+  #       path: "/"
+  #       backend:
+  #         service:
+  #           name: xibo-web
+  #           port:
+  #             number: 80

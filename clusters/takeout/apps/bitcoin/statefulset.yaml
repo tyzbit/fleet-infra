@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: bitcoin
+  annotations: {}
+    # fluxcd.io/ignore: "true"
+  labels:
+    app: bitcoin
+spec:
+  replicas: 1 # active longhorn
+  selector:
+    matchLabels:
+      app: bitcoin
+  serviceName: bitcoin
+  template:
+    metadata:
+      annotations: {}
+        # linkerd.io/inject: enabled
+      labels:
+        app: bitcoin
+    spec:
+      containers:
+      - name: bitcoin
+        image: kylemanna/bitcoind
+        command: ["sh","-c","usermod -d /blockchain bitcoin && btc_oneshot"]
+        # command: ["tail","-f","/dev/null"]
+        env:
+        - name: HOME
+          value: "/blockchain"
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8333
+          name: bitcoin
+          protocol: TCP
+        - containerPort: 8332
+          name: bitcoin-rpc
+          protocol: TCP
+        - containerPort: 28332
+          name: bitcoin-mq
+          protocol: TCP
+        - containerPort: 28333
+          name: bitcoin-mq2
+          protocol: TCP
+        volumeMounts:
+          - mountPath: "/blockchain"
+            name: bitcoin-blockchain
+          # - mountPath: "/simulacrum"
+          #   name: simulacrum-blockchain
+        resources:
+          requests:
+            cpu: 100m
+          limits:
+            memory: 2048Mi
+      # volumes:
+      #   - name: simulacrum-blockchain
+      #     nfs: 
+      #       server: simulacrum
+      #       path: /mnt/user/Blockchain
+      imagePullSecrets:
+        - name: docker-hub
+  volumeClaimTemplates:
+  - apiVersion: v1
+    kind: PersistentVolume
+    metadata:
+      name: bitcoin-blockchain
+    spec:
+      accessModes: 
+        - ReadWriteOnce
+      volumeMode: Filesystem
+      storageClassName: longhorn
+      resources:
+        requests:
+          storage: 450Gi
