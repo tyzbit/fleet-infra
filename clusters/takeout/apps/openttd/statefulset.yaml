@@ -15,6 +15,9 @@ spec:
       containers:
       - name: openttd
         image: bateau/openttd
+        env:
+          - name: loadgame
+            value: last-autosave
         volumeMounts:
           - mountPath: /home/openttd/.openttd
             name: openttd-data
