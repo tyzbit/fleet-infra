@@ -21,12 +21,14 @@ spec:
             value: "true"
           - name: savename
             value: "christianserver.ttd"
+          - name: savepath
+            value: "/openttd-data/"
         volumeMounts:
-          - mountPath: /home/openttd/
+          - mountPath: /openttd-data/
             name: openttd-data
         resources:
           requests:
-            cpu: 500m
+            cpu: 1000m
           limits:
             memory: 1024Mi
         ports:
