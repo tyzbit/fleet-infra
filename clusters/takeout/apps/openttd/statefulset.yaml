@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: openttd
+spec:
+  serviceName: openttd
+  selector:
+    matchLabels:
+      app: openttd
+  template:
+    metadata:
+      labels:
+        app: openttd
+    spec:
+      containers:
+      - name: openttd
+        image: bateau/openttd
+        volumeMounts:
+          - mountPath: /home/openttd
+            name: openttd-data
+        resources:
+          requests:
+            cpu: 500m
+          limits:
+            memory: 6Gi
+        ports:
+        - containerPort: 3979
+  volumeClaimTemplates:
+  - apiVersion: v1
+    kind: PersistentVolume
+    metadata:
+      name: openttd-data
+    spec:
+      accessModes: 
+        - ReadWriteOnce
+      volumeMode: Filesystem
+      storageClassName: longhorn
+      resources:
+        requests:
+          storage: 1Gi
