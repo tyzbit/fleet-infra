@@ -24,8 +24,10 @@ spec:
           limits:
             memory: 6Gi
         ports:
-        - containerPort: 3979
-        - containerPort: 3978
+        - name: main
+          containerPort: 3979
+        - name: alt
+          containerPort: 3978
   volumeClaimTemplates:
   - apiVersion: v1
     kind: PersistentVolume

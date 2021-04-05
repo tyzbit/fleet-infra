@@ -7,7 +7,9 @@ spec:
   selector:
     app: openttd
   ports:
-  - port: 3979
+  - name: main
+    port: 3979
     targetPort: 3979
-  - port: 3978
+  - name: alt
+    port: 3978
     targetPort: 3978
