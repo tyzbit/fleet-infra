@@ -7,9 +7,19 @@ spec:
   selector:
     app: openttd
   ports:
-  - name: main
+  - name: main-tcp
     port: 3979
+    protocol: TCP
     targetPort: 3979
-  - name: alt
+  - name: main-udp
+    port: 3979
+    protocol: UDP
+    targetPort: 3979
+  - name: alt-tcp
+    protocol: TCP
+    port: 3978
+    targetPort: 3978
+  - name: alt-udp
+    protocol: UDP
     port: 3978
     targetPort: 3978

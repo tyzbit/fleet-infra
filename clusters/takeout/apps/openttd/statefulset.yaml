@@ -24,10 +24,18 @@ spec:
           limits:
             memory: 6Gi
         ports:
-        - name: main
+        - name: main-tcp
           containerPort: 3979
-        - name: alt
+          protocol: TCP
+        - name: main-udp
+          containerPort: 3979
+          protocol: UDP
+        - name: alt-tcp
           containerPort: 3978
+          protocol: TCP
+        - name: alt-udp
+          containerPort: 3978
+          protocol: UDP
   volumeClaimTemplates:
   - apiVersion: v1
     kind: PersistentVolume
