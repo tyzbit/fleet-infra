@@ -1,0 +1,46 @@
+{{- range $index, $device := .Values.devices }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: smartplug-{{ $device.name }}
+  namespace: {{ $.Values.namespace }}
+  labels:
+    {{- include "tplink.labels" $ | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "tplink.selectorLabels" $ | nindent 6 }}
+  template:
+    metadata:
+      annotations:
+        {{- range $key, $value := $.Values.podAnnotations }}
+        {{- $key | nindent 8 }}: {{ $value }}
+        {{- end }}
+        prometheus.io/scrape: "true" 
+        prometheus.io/port: "{{ $.Values.service.port }}"
+        prometheus.io/path: "/metrics?address={{ $device.address }}&legacy=false"
+      labels:
+        {{- include "tplink.selectorLabels" $ | nindent 8 }}
+    spec:
+      imagePullSecrets:
+        {{- toYaml $.Values.imagePullSecrets | nindent 8 }}
+      containers:
+        - name: {{ $.Chart.Name }}
+          image: "{{ $.Values.image.repository }}:{{ $.Values.image.tag | default $.Chart.AppVersion }}"
+          imagePullPolicy: {{ $.Values.image.pullPolicy }}
+          ports:
+            - name: prometheus
+              containerPort: {{ $.Values.service.port }}
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: prometheus
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: prometheus
+          resources:
+            {{- toYaml $.Values.resources | nindent 12 }}
+---
+{{- end }}

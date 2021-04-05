@@ -1,0 +1,10 @@
+apiVersion: v2
+appVersion: "10.6.4"
+description: Jellyfin
+name: jellyfin
+version: 1.0.3
+icon: https://developer.asustor.com/uploadIcons/0020_999_1568614440_Jellyfin_256.png
+home: https://github.com/kfirfer/helm/tree/master/charts/jellyfin
+maintainers:
+  - email: kfirfer@gmail.com
+    name: kfir

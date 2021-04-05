@@ -6,10 +6,10 @@ metadata:
 spec:
   chart:
     spec:
-      chart: inspector
+      chart: ./charts/inspector
       sourceRef:
-        kind: HelmRepository
-        name: rancher-cd-apps
+        kind: GitRepository
+        name: flux-system
         namespace: flux-system
   interval: 1m0s
   values:
