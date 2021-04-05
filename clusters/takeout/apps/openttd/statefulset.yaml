@@ -15,7 +15,7 @@ spec:
       containers:
       - name: openttd
         image: bateau/openttd
-        # command: ["tail","-f","/dev/null"]
+        command: ["tail","-f","/dev/null"]
         env:
           - name: loadgame
             value: "true"
