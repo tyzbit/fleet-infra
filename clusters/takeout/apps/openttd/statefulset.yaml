@@ -20,8 +20,8 @@ spec:
         env:
           - name: loadgame
             value: "true"
-          - name: savename
-            value: "christianserver.sav"
+          # - name: savename
+          #   value: "christianserver.sav"
         #   - name: savepath
         #     value: "/openttd-data/"
         volumeMounts:
