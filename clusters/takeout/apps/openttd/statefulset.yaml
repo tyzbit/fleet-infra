@@ -4,7 +4,7 @@ metadata:
   name: openttd
 spec:
   serviceName: openttd
-  replicas: 0
+  replicas: 1
   selector:
     matchLabels:
       app: openttd
@@ -16,16 +16,16 @@ spec:
       containers:
       - name: openttd
         image: bateau/openttd
-        # command: ["tail","-f","/dev/null"]
-        # env:
-        #   - name: loadgame
-        #     value: "true"
-        #   - name: savename
-        #     value: "christianserver.ttd"
+        command: ["tail","-f","/dev/null"]
+        env:
+          - name: loadgame
+            value: "true"
+          - name: savename
+            value: "christianserver.sav"
         #   - name: savepath
         #     value: "/openttd-data/"
         volumeMounts:
-          - mountPath: /openttd-data/
+          - mountPath: /home/openttd/.openttd/
             name: openttd-data
         resources:
           requests:
