@@ -1,0 +1,131 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: xibo-web
+  annotations:
+    # fluxcd.io/ignore: "true"
+  labels:
+    app: xibo-web
+spec:
+  replicas: 0
+  serviceName: xibo-web
+  selector:
+    matchLabels:
+      app: xibo-web
+  template:
+    metadata:
+      annotations:
+        # linkerd.io/inject: enabled
+      labels:
+        app: xibo-web
+    spec:
+      containers:
+      - name: xibo-web
+        image: xibosignage/xibo-cms:latest
+        imagePullPolicy: IfNotPresent
+        # command: ["tail","-f","/dev/null"]
+        envFrom:
+          - secretRef:
+              name: xibo-web-config
+        ports:
+        - containerPort: 80
+          name: http
+          protocol: TCP
+        volumeMounts:
+          - name: xibo-web-data
+            subPath: db
+            mountPath: /shared/db
+          - name: xibo-web-data
+            subPath: backup
+            mountPath: /shared/backup
+          - name: xibo-web-data
+            subPath: custom-themes
+            mountPath: /shared/cms/web/theme/custom
+          - name: xibo-web-data
+            subPath: custom-modules
+            mountPath: /shared/cms/custom
+          - name: xibo-web-data
+            subPath: userscripts
+            mountPath: /shared/cms/web/userscripts
+        resources:
+          requests:
+            cpu: 500m
+            memory: 256Mi
+          limits:
+            cpu: 500m
+            memory: 256Mi
+      nodeSelector:
+        node.longhorn.io/create-default-disk: "true"
+      imagePullSecrets:
+        - name: docker-hub
+  volumeClaimTemplates:
+  - apiVersion: v1
+    kind: PersistentVolume
+    metadata:
+      name: xibo-web-data
+    spec:
+      accessModes: 
+        - ReadWriteOnce
+      volumeMode: Filesystem
+      storageClassName: longhorn
+      resources:
+        requests:
+          storage: 40Gi
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: xibo-db
+  labels:
+    app: xibo-db
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: xibo-db
+  serviceName: xibo-db
+  template:
+    metadata:
+      annotations:
+        # linkerd.io/inject: enabled
+      labels:
+        app: xibo-db
+    spec:
+      containers:
+        - name: xibo-db
+          image: mariadb:10.5
+          imagePullPolicy: Always
+          envFrom:
+          - secretRef:
+              name: xibo-db
+          ports:
+            - containerPort: 3306
+              name: sql
+              protocol: TCP
+          volumeMounts:
+            - name: xibo-db
+              mountPath: /var/lib/mysql
+          resources:
+            limits:
+              cpu: 500m
+              memory: 768Mi
+            requests:
+              cpu: 500m
+              memory: 768Mi
+      imagePullSecrets:
+        - name: docker-hub
+      nodeSelector:
+        node.longhorn.io/create-default-disk: "true"
+  volumeClaimTemplates:
+  - apiVersion: v1
+    kind: PersistentVolume
+    metadata:
+      name: xibo-db
+    spec:
+      accessModes: 
+        - ReadWriteOnce
+      volumeMode: Filesystem
+      storageClassName: longhorn
+      resources:
+        requests:
+          storage: 5Gi

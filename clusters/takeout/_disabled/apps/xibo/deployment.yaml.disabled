@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: xibo-xmr
+  annotations:
+    # fluxcd.io/ignore: "true"
+  labels:
+    app: xibo-xmr
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: xibo-xmr
+  template:
+    metadata:
+      annotations:
+        # linkerd.io/inject: enabled
+      labels:
+        app: xibo-xmr
+    spec:
+      containers:
+      - name: xibo-xmr
+        image: xibosignage/xibo-xmr:latest
+        imagePullPolicy: IfNotPresent
+        # command: ["tail","-f","/dev/null"]
+        envFrom:
+          - secretRef:
+              name: xibo-xmr-config
+        ports:
+        - containerPort: 9505
+          name: http
+          protocol: TCP
+        resources:
+          requests:
+            cpu: 500m
+            memory: 256Mi
+          limits:
+            cpu: 500m
+            memory: 256Mi
+      imagePullSecrets:
+        - name: docker-hub
