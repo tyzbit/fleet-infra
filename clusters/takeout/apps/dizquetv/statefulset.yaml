@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: dizquetv
+spec:
+  selector:
+    matchLabels:
+      app: dizquetv
+  serviceName: diszquetv
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: dizquetv
+    spec:
+      containers:
+      - name: dizquetv
+        image: vexorian/dizquetv:latest
+        ports:
+        - containerPort: 8000
+          name: web
+        volumeMounts:
+        - name: dizquetv-data
+          mountPath: /home/node/app/.dizquetv
+  volumeClaimTemplates:
+  - metadata:
+      name: dizquetv-data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi
