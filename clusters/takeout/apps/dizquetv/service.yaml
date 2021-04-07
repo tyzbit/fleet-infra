@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: dizquetv
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: dizquetv
   ports:
