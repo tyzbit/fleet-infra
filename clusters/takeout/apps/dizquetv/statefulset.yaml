@@ -22,6 +22,13 @@ spec:
         volumeMounts:
         - name: dizquetv-data
           mountPath: /home/node/app/.dizquetv
+        - name: dev-dri
+          persistentVolumeClaim:
+            claimName: dri-pvc
+      securityContext:
+        privileged: true
+      nodeSelector:
+        graphics: dri
   volumeClaimTemplates:
   - metadata:
       name: dizquetv-data

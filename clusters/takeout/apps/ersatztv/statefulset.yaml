@@ -28,10 +28,19 @@ spec:
         - name: braavos-media-pvc
           mountPath: /media
           readOnly: true
+        - name: dev-dri
+          mountPath: /dev/dri
       volumes:
         - name: braavos-media-pvc
           persistentVolumeClaim:
             claimName: braavos-media-pvc
+        - name: dev-dri
+          persistentVolumeClaim:
+            claimName: dri-pvc
+      securityContext:
+        privileged: true
+      nodeSelector:
+        graphics: dri
   volumeClaimTemplates:
   - metadata:
       name: ersatztv-data
