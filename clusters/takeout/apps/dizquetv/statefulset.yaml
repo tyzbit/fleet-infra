@@ -6,7 +6,7 @@ spec:
   selector:
     matchLabels:
       app: dizquetv
-  serviceName: diszquetv
+  serviceName: dizquetv
   replicas: 1
   template:
     metadata:
