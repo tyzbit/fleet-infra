@@ -25,8 +25,8 @@ spec:
         - name: dev-dri
           persistentVolumeClaim:
             claimName: dri-pvc
-      securityContext:
-        privileged: true
+        securityContext:
+          privileged: true
       nodeSelector:
         graphics: dri
   volumeClaimTemplates:

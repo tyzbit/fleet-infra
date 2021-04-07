@@ -30,6 +30,8 @@ spec:
           readOnly: true
         - name: dev-dri
           mountPath: /dev/dri
+        securityContext:
+          privileged: true
       volumes:
         - name: braavos-media-pvc
           persistentVolumeClaim:
@@ -37,8 +39,6 @@ spec:
         - name: dev-dri
           persistentVolumeClaim:
             claimName: dri-pvc
-      securityContext:
-        privileged: true
       nodeSelector:
         graphics: dri
   volumeClaimTemplates:
