@@ -26,6 +26,11 @@ spec:
           mountPath: /dev/dri
         securityContext:
           privileged: true
+        resources:
+          requests:
+            cpu: 500m
+          limits:
+            memory: 1Gi
       volumes:
         - name: dev-dri
           persistentVolumeClaim:
