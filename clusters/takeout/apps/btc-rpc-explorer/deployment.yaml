@@ -30,7 +30,7 @@ spec:
       #       topologyKey: kubernetes.io/hostname
       containers:
         - name: btc-rpc-explorer
-          image: tyzbit/btc-rpc-explorer:configurable-mapbox
+          image: tyzbit/btc-rpc-explorer
           imagePullPolicy: Always
           env:
             - name: BTCEXP_HOST
