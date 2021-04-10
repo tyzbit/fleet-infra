@@ -44,6 +44,9 @@ spec:
         volumeMounts:
           - mountPath: "/blockchain"
             name: bitcoin-blockchain
+          - mountPath: "/blockchain"
+            subPath: "bitcoin.conf"
+            name: bitcoin-config
           # - mountPath: "/simulacrum"
           #   name: simulacrum-blockchain
         resources:
@@ -56,6 +59,10 @@ spec:
       #     nfs: 
       #       server: simulacrum
       #       path: /mnt/user/Blockchain
+      volumes:
+        - name: bitcoin-config
+          secret:
+            secretName: bitcoin-config
       imagePullSecrets:
         - name: docker-hub
   volumeClaimTemplates:
