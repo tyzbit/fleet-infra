@@ -44,7 +44,7 @@ spec:
         volumeMounts:
           - mountPath: "/blockchain"
             name: bitcoin-blockchain
-          - mountPath: "/blockchain/.bitcoin"
+          - mountPath: "/blockchain/.bitcoin/bitcoin.conf"
             subPath: "bitcoin.conf"
             name: bitcoin-config
           # - mountPath: "/simulacrum"
