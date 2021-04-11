@@ -24,6 +24,8 @@ spec:
       cluster: takeout
     infrastructure:
       enabled: true
+      image:
+        pullPolicy: Always
     kubeEvents:
       enabled: true
     ksm:
@@ -40,5 +42,7 @@ spec:
                 - kasa_
     logging:
       enabled: true
+      image:
+        pullPolicy: Always
     webhook:
       enabled: false
