@@ -30,8 +30,7 @@ spec:
       #       topologyKey: kubernetes.io/hostname
       containers:
       - name: nextcloud
-        # image: nextcloud:21.0.0
-        image: nextcloud:21.0.0
+        image: nextcloud:21.0.1
         imagePullPolicy: Always
         # command: ["tail","-f","/dev/null"]
         envFrom:
