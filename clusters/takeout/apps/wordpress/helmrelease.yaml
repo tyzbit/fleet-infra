@@ -70,7 +70,7 @@ spec:
     allowEmptyPassword: false
     allowOverrideNone: false
     customHTAccessCM: wordpress-htaccess
-    smtpProtocol: SMTP
+    smtpProtocol: tls
     wordpressExtraConfigContent: |
       define('MULTISITE', true);
       define('SUBDOMAIN_INSTALL', false);
