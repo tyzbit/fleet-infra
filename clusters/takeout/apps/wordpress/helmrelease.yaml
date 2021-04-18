@@ -67,7 +67,6 @@ spec:
       pullSecrets:
       - name: docker-hub
     wordpressConfigureCache: true
-    existingSecret: wordpress
     allowEmptyPassword: false
     allowOverrideNone: false
     customHTAccessCM: wordpress-htaccess
