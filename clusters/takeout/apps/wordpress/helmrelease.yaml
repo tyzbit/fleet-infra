@@ -66,6 +66,8 @@ spec:
     service:
       type: LoadBalancer
     persistence:
+      accessModes: 
+      - ReadWriteMany
       storageClass: longhorn
       size: 10Gi
     metrics:
