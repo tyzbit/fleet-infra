@@ -61,7 +61,7 @@ spec:
     wordpressConfigureCache: true
     existingSecret: wordpress
     allowEmptyPassword: false
-    allowOverrideNone: true
+    allowOverrideNone: false
     customHTAccessCM: wordpress-htaccess
     wordpressExtraConfigContent: |
       define('MULTISITE', true);
