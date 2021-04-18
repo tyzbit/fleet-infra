@@ -36,6 +36,22 @@ spec:
     name: wordpress-values
     valuesKey: mariadbAuthDatabase
     targetPath: mariadb.auth.database
+  - kind: Secret
+    name: wordpress-values
+    valuesKey: smtpHost
+    targetPath: smtpHost
+  - kind: Secret
+    name: wordpress-values
+    valuesKey: smtpPort
+    targetPath: smtpPort
+  - kind: Secret
+    name: wordpress-values
+    valuesKey: smtpUser
+    targetPath: smtpUser
+  - kind: Secret
+    name: wordpress-values
+    valuesKey: smtpPassword
+    targetPath: smtpPassword
   values:
     image:
       tag: "5.7.1" # {"$imagepolicy": "flux-system:wordpress:tag"}
