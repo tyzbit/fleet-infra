@@ -61,7 +61,7 @@ spec:
       tls: true
       certManager: true
     service:
-      type: NodePort
+      type: LoadBalancer
     persistence:
       storageClass: longhorn
       size: 10Gi
