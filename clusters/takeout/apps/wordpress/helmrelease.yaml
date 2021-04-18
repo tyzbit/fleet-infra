@@ -26,6 +26,10 @@ spec:
     targetPath: wordpressPassword
   - kind: Secret
     name: wordpress-values
+    valuesKey: wordpressEmail
+    targetPath: wordpressEmail
+  - kind: Secret
+    name: wordpress-values
     valuesKey: wordpressTablePrefix
     targetPath: wordpressTablePrefix
   - kind: Secret
@@ -88,6 +92,10 @@ spec:
       hostname: "qtosw.com"
       extraHosts:
       - name: "tylerphawkins.com"
+        path: /
+      - name: "qtosw.jura"
+        path: /
+      - name: "tylerphawkins.jura"
         path: /
       tls: true
       certManager: true
