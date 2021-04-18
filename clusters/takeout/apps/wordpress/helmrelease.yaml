@@ -1,0 +1,74 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: wordpress
+  namespace: flux-system
+spec:
+  releaseName: wordpress
+  targetNamespace: default
+  chart:
+    spec:
+      chart: wordpress
+      version: "10.10.6"
+      sourceRef:
+        kind: HelmRepository
+        name: bitnami
+        namespace: flux-system
+  interval: 1m0s
+  valuesFrom:
+  - kind: Secret
+    name: wordpress-values
+    valuesKey: wordpressTablePrefix
+    targetPath: wordpressTablePrefix
+  - kind: Secret
+    name: wordpress-values
+    valuesKey: mariadbAuthRootPassword
+    targetPath: mariadb.auth.rootPassword
+  - kind: Secret
+    name: wordpress-values
+    valuesKey: mariadbAuthUsername
+    targetPath: mariadb.auth.username
+  - kind: Secret
+    name: wordpress-values
+    valuesKey: mariadbAuthPassword
+    targetPath: mariadb.auth.password
+  - kind: Secret
+    name: wordpress-values
+    valuesKey: mariadbAuthDatabase
+    targetPath: mariadb.auth.database
+  values:
+    image:
+      tag: "5.7.0" # {"$imagepolicy": "flux-system:wordpress:tag"}
+      pullPolicy: Always
+      pullSecrets:
+        - name: docker-hub
+    wordpressConfigureCache: true
+    resources:
+      requests:
+        cpu: 200m
+      limits:
+        memory: 1Gi
+    ingress:
+      enabled: true
+      # annotations: 
+      #   kubernetes.io/ingress.class: nginx
+      #   cert-manager.io/cluster-issuer: letsencrypt
+      #   acme.cert-manager.io/http01-edit-in-place: "true"
+      hostname: "qtosw.com"
+      extraHosts:
+        - "tylerphawkins.com"
+      tls: true
+      certManager: true
+    service:
+      type: NodePort
+    persistence:
+      storageClass: longhorn
+      size: 10Gi
+    metrics:
+      enabled: true
+    mariadb:
+      primary:
+        persistence:
+          storageClass: longhorn
+          size: 8Gi
+

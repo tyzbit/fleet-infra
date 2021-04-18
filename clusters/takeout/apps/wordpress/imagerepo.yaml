@@ -1,0 +1,10 @@
+apiVersion: image.toolkit.fluxcd.io/v1alpha1
+kind: ImageRepository
+metadata:
+  name: wordpress
+  namespace: flux-system
+spec:
+  secretRef:
+    name: docker-hub
+  image: docker.io/bitnami/wordpress
+  interval: 1m0s
