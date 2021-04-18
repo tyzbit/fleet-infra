@@ -75,6 +75,8 @@ spec:
       enabled: true
     metrics:
       enabled: true
+    memcached:
+      enabled: true
     mariadb:
       primary:
         persistence:
