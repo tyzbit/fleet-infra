@@ -62,7 +62,7 @@ spec:
     existingSecret: wordpress
     allowEmptyPassword: false
     allowOverrideNone: true
-    customAccessCM: wordpress-htaccess
+    customHTAccessCM: wordpress-htaccess
     wordpressExtraConfigContent: |
       define('MULTISITE', true);
       define('SUBDOMAIN_INSTALL', false);
