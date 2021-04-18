@@ -72,8 +72,6 @@ spec:
     allowOverrideNone: false
     customHTAccessCM: wordpress-htaccess
     smtpProtocol: tls
-    wordpressExtraConfigContent: |
-      define('MULTISITE', true);
     resources:
       requests:
         cpu: 200m
