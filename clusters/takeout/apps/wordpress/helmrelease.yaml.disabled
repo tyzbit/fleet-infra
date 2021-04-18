@@ -72,6 +72,8 @@ spec:
     allowOverrideNone: false
     customHTAccessCM: wordpress-htaccess
     smtpProtocol: tls
+    livenessProbe:
+      enabled: false
     resources:
       requests:
         cpu: 200m
