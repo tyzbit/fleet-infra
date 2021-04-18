@@ -38,10 +38,10 @@ spec:
     targetPath: mariadb.auth.database
   values:
     image:
-      tag: "5.7.0" # {"$imagepolicy": "flux-system:wordpress:tag"}
+      tag: "5.7.1" # {"$imagepolicy": "flux-system:wordpress:tag"}
       pullPolicy: Always
       pullSecrets:
-        - name: docker-hub
+      - name: docker-hub
     wordpressConfigureCache: true
     resources:
       requests:
@@ -56,7 +56,7 @@ spec:
       #   acme.cert-manager.io/http01-edit-in-place: "true"
       hostname: "qtosw.com"
       extraHosts:
-        - "tylerphawkins.com"
+      - "tylerphawkins.com"
       tls: true
       certManager: true
     service:
@@ -71,4 +71,3 @@ spec:
         persistence:
           storageClass: longhorn
           size: 8Gi
-
