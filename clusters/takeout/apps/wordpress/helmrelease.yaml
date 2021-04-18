@@ -66,6 +66,7 @@ spec:
       pullPolicy: Always
       pullSecrets:
       - name: docker-hub
+    wordpressBlogName: Quick Think of Something Witty
     wordpressConfigureCache: true
     allowEmptyPassword: false
     allowOverrideNone: false
