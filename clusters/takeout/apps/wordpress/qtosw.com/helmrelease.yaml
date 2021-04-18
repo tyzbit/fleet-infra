@@ -1,10 +1,10 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: wordpress
+  name: wordpress-qtosw
   namespace: flux-system
 spec:
-  releaseName: wordpress
+  releaseName: wordpress-qtosw
   targetNamespace: default
   chart:
     spec:
@@ -17,51 +17,51 @@ spec:
   interval: 1m0s
   valuesFrom:
   - kind: Secret
-    name: wordpress-values
+    name: wordpress-qtosw-values
     valuesKey: wordpressUsername
     targetPath: wordpressUsername
   - kind: Secret
-    name: wordpress-values
+    name: wordpress-qtosw-values
     valuesKey: wordpressPassword
     targetPath: wordpressPassword
   - kind: Secret
-    name: wordpress-values
+    name: wordpress-qtosw-values
     valuesKey: wordpressEmail
     targetPath: wordpressEmail
   - kind: Secret
-    name: wordpress-values
+    name: wordpress-qtosw-values
     valuesKey: wordpressTablePrefix
     targetPath: wordpressTablePrefix
   - kind: Secret
-    name: wordpress-values
+    name: wordpress-qtosw-values
     valuesKey: mariadbAuthRootPassword
     targetPath: mariadb.auth.rootPassword
   - kind: Secret
-    name: wordpress-values
+    name: wordpress-qtosw-values
     valuesKey: mariadbAuthUsername
     targetPath: mariadb.auth.username
   - kind: Secret
-    name: wordpress-values
+    name: wordpress-qtosw-values
     valuesKey: mariadbAuthPassword
     targetPath: mariadb.auth.password
   - kind: Secret
-    name: wordpress-values
+    name: wordpress-qtosw-values
     valuesKey: mariadbAuthDatabase
     targetPath: mariadb.auth.database
   - kind: Secret
-    name: wordpress-values
+    name: wordpress-qtosw-values
     valuesKey: smtpHost
     targetPath: smtpHost
   - kind: Secret
-    name: wordpress-values
+    name: wordpress-qtosw-values
     valuesKey: smtpPort
     targetPath: smtpPort
   - kind: Secret
-    name: wordpress-values
+    name: wordpress-qtosw-values
     valuesKey: smtpUser
     targetPath: smtpUser
   - kind: Secret
-    name: wordpress-values
+    name: wordpress-qtosw-values
     valuesKey: smtpPassword
     targetPath: smtpPassword
   values:
@@ -73,8 +73,6 @@ spec:
     wordpressBlogName: Quick Think of Something Witty
     wordpressConfigureCache: true
     allowEmptyPassword: false
-    allowOverrideNone: false
-    customHTAccessCM: wordpress-htaccess
     smtpProtocol: tls
     livenessProbe:
       enabled: false
@@ -90,13 +88,6 @@ spec:
       #   cert-manager.io/cluster-issuer: letsencrypt
       #   acme.cert-manager.io/http01-edit-in-place: "true"
       hostname: "qtosw.com"
-      extraHosts:
-      - name: "tylerphawkins.com"
-        path: /
-      - name: "qtosw.jura"
-        path: /
-      - name: "tylerphawkins.jura"
-        path: /
       tls: true
       certManager: true
     service:
