@@ -44,6 +44,7 @@ spec:
       - name: docker-hub
     wordpressConfigureCache: true
     existingSecret: wordpress
+    allowEmptyPassword: false
     wordpressExtraConfigContent: |
       define( 'WP_ALLOW_MULTISITE', true );
     resources:
@@ -70,6 +71,8 @@ spec:
       - ReadWriteMany
       storageClass: longhorn
       size: 10Gi
+    volumePermissions:
+      enabled: true
     metrics:
       enabled: true
     mariadb:
