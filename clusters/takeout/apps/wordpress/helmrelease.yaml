@@ -56,7 +56,8 @@ spec:
       #   acme.cert-manager.io/http01-edit-in-place: "true"
       hostname: "qtosw.com"
       extraHosts:
-      - "tylerphawkins.com"
+      - name: "tylerphawkins.com"
+        path: /
       tls: true
       certManager: true
     service:
