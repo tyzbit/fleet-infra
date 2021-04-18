@@ -18,6 +18,14 @@ spec:
   valuesFrom:
   - kind: Secret
     name: wordpress-values
+    valuesKey: wordpressUsername
+    targetPath: wordpressUsername
+  - kind: Secret
+    name: wordpress-values
+    valuesKey: wordpressPassword
+    targetPath: wordpressPassword
+  - kind: Secret
+    name: wordpress-values
     valuesKey: wordpressTablePrefix
     targetPath: wordpressTablePrefix
   - kind: Secret
