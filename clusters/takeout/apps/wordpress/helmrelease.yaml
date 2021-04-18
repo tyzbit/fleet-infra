@@ -43,6 +43,9 @@ spec:
       pullSecrets:
       - name: docker-hub
     wordpressConfigureCache: true
+    existingSecret: wordpress
+    wordpressExtraConfigContent: |
+      define( 'WP_ALLOW_MULTISITE', true );
     resources:
       requests:
         cpu: 200m
