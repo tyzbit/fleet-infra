@@ -88,6 +88,9 @@ spec:
         cert-manager.io/cluster-issuer: letsencrypt
         acme.cert-manager.io/http01-edit-in-place: "true"
       hostname: "tylerphawkins.com"
+      extraHosts:
+      - name: "tylerphawkins.jura"
+        path: /
       tls: true
     service:
       type: LoadBalancer
