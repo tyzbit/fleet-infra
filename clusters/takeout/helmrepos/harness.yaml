@@ -4,6 +4,6 @@ metadata:
   name: harness
   namespace: flux-system
 spec:
-  interval: 1m
+  interval: 10m
   timeout: 1m0s
   url: https://app.harness.io/storage/harness-download/harness-helm-charts/
