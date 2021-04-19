@@ -1,4 +1,4 @@
- apiVersion: extensions/v1beta1
+apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: openvpn-web-ui
