@@ -44,6 +44,9 @@ spec:
         ports:
         - containerPort: 1194
           protocol: UDP
+        securityContext:
+          capabilities:
+            add: ["NET_ADMIN"]
   volumeClaimTemplates:
   - apiVersion: v1
     kind: PersistentVolume
