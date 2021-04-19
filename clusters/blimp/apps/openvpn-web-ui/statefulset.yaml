@@ -20,6 +20,9 @@ spec:
           - mountPath: /etc/openvpn
             subPath: openvpn
             name: openvpn-web-ui
+          - mountPath: /opt/openvpn-gui/db
+            subPath: db
+            name: openvpn-web-ui
         resources:
           requests:
             cpu: 100m
@@ -32,9 +35,6 @@ spec:
         volumeMounts:
           - mountPath: /etc/openvpn
             subPath: openvpn
-            name: openvpn-web-ui
-          - mountPath: /opt/openvpn-gui/db
-            subPath: db
             name: openvpn-web-ui
         resources:
           requests:
