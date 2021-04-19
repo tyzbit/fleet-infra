@@ -91,7 +91,7 @@ spec:
       hostname: "tylerphawkins.com"
       tls: true
     service:
-      type: LoadBalancer
+      type: NodePort
     persistence:
       accessModes:
       - ReadWriteMany
