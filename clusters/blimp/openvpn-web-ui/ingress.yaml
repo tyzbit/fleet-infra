@@ -11,8 +11,5 @@ spec:
         paths:
           - path: /
             backend: 
+              serviceName: openvpn-web-ui
               servicePort: 8080
-              resource:
-                kind: Service
-                name: openvpn-web-ui
-
