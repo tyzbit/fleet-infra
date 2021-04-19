@@ -80,7 +80,7 @@ spec:
       requests:
         cpu: 200m
       limits:
-        memory: 1Gi
+        memory: 256Mi
     ingress:
       enabled: true
       annotations: 
