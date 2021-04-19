@@ -1,9 +1,10 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: openvpn-web-ui
   namespace: default
 spec:
+  serviceName: openvpn-web-ui
   selector:
     matchLabels:
       app: openvpn-web-ui
@@ -15,6 +16,9 @@ spec:
       containers:
       - name: openvpn-web-ui
         image: awalach/openvpn-web-ui
+        volumeMounts:
+          - mountPath: /etc/openvpn
+            name: openvpn-web-ui
         resources:
           requests:
             cpu: 100m
@@ -24,6 +28,13 @@ spec:
         - containerPort: 8080
       - name: openvpn
         image: awalach/openvpn
+        volumeMounts:
+          - mountPath: /
+            subPath: /etc/openvpn
+            name: openvpn-web-ui
+          - mountPath: /
+            subPath: /opt/openvpn-gui/db
+            name: openvpn-web-ui-db
         resources:
           requests:
             cpu: 100m
@@ -32,3 +43,15 @@ spec:
         ports:
         - containerPort: 1194
           protocol: UDP
+  volumeClaimTemplates:
+  - apiVersion: v1
+    kind: PersistentVolume
+    metadata:
+      name: openvpn-web-ui
+    spec:
+      accessModes: 
+        - ReadWriteOnce
+      volumeMode: Filesystem
+      resources:
+        requests:
+          storage: 1Gi
