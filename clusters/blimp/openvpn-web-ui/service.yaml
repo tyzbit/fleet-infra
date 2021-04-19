@@ -10,16 +10,6 @@ spec:
   - port: 8080
     targetPort: 8080
     protocol: TCP
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: openvpn
-spec:
-  type: LoadBalancer
-  selector:
-    app: openvpn-web-ui
-  ports:
   - port: 1194
     targetPort: 1194
     protocol: UDP
