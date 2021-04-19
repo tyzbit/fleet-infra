@@ -1,0 +1,17 @@
+ apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: openvpn-web-ui
+  labels:
+      name: openvpn-web-ui
+spec:
+  rules:
+  - host: vpn.qtosw.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            serviceName: openvpn-web-ui
+            servicePort: 8080
