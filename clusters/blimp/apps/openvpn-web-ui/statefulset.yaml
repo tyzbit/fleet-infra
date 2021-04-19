@@ -18,6 +18,7 @@ spec:
         image: awalach/openvpn-web-ui
         volumeMounts:
           - mountPath: /etc/openvpn
+            subPath: openvpn
             name: openvpn-web-ui
         resources:
           requests:
