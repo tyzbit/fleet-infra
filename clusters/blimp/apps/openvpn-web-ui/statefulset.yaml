@@ -43,7 +43,7 @@ spec:
             memory: 128Mi
         ports:
         - containerPort: 1194
-          protocol: UDP
+          protocol: TCP
         securityContext:
           capabilities:
             add: ["NET_ADMIN"]

@@ -11,7 +11,7 @@ spec:
     port: 8080
     targetPort: 8080
     protocol: TCP
-  - name: ovpn-udp
+  - name: ovpn-tcp
     port: 1194
     targetPort: 1194
-    protocol: UDP
+    protocol: TCP
