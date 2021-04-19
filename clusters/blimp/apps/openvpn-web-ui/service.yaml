@@ -15,3 +15,7 @@ spec:
     port: 1194
     targetPort: 1194
     protocol: TCP
+  - name: ovpn-udp
+    port: 1194
+    targetPort: 1194
+    protocol: UDP

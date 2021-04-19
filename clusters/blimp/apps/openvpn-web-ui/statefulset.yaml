@@ -50,6 +50,8 @@ spec:
         ports:
         - containerPort: 1194
           protocol: TCP
+        - containerPort: 1194
+          protocol: UDP
         securityContext:
           capabilities:
             add: ["NET_ADMIN"]
