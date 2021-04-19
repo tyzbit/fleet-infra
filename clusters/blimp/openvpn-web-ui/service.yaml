@@ -7,9 +7,11 @@ spec:
   selector:
     app: openvpn-web-ui
   ports:
-  - port: 8080
+  - name: http
+    port: 8080
     targetPort: 8080
     protocol: TCP
-  - port: 1194
+  - name: ovpn-udp
+    port: 1194
     targetPort: 1194
     protocol: UDP
