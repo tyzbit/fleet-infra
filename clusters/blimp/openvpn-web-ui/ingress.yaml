@@ -9,5 +9,10 @@ spec:
     - host: vpn.qtosw.com
       http:
         paths:
-          - backend: openvn-web-ui
-            path: /
+          - path: /
+            backend: 
+              servicePort: 8080
+              resource:
+                kind: Service
+                name: openvpn-web-ui
+
