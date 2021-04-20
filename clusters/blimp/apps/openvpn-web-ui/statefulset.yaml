@@ -32,12 +32,12 @@ spec:
         - containerPort: 8080
       - name: openvpn
         image: awalach/openvpn
-        command: 
-        - "sh"
-        - "-c"
-        - |
-          iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE &&
-          ovpn_run_simple
+        # command: 
+        # - "sh"
+        # - "-c"
+        # - |
+        #   iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE &&
+        #   ovpn_run_simple
         volumeMounts:
           - mountPath: /etc/openvpn
             subPath: openvpn
