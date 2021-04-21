@@ -19,11 +19,11 @@ spec:
         env:
         - name: TZ
           value: America/New_York
-        resources:
-          requests:
-            cpu: 200m
-          limits:
-            memory: 256Mi
+        # resources:
+        #   requests:
+        #     cpu: 200m
+        #   limits:
+        #     memory: 256Mi
         ports:
         - containerPort: 943
           name: http
