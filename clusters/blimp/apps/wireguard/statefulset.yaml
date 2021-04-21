@@ -47,7 +47,7 @@ spec:
           limits:
             memory: 128Mi
         ports:
-        - containerPort: 51820
+        - containerPort: 31194
           protocol: UDP
         securityContext:
           capabilities:
