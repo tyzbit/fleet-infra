@@ -10,8 +10,10 @@ spec:
   - name: http
     port: 8080
     targetPort: 8080
+    nodePort: 32665
     protocol: TCP
   - name: ovpn-udp
     port: 1194
     targetPort: 1194
+    nodePort: 30784
     protocol: UDP
