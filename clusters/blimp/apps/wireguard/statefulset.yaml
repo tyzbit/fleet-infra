@@ -31,33 +31,33 @@ spec:
         ports:
         - containerPort: 5000
       - name: wireguard
-        image: cmulk/wireguard-docker:alpine
-        command:
-        - sh
-        - -c
-        - |
-          echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6 &&
-          run
+        image: linuxserver/wireguard
         env:
         - name: WATCH_CHANGES
           value: "1"
         volumeMounts:
-          - mountPath: /etc/wireguard
+          - mountPath: /config
             subPath: wireguard
             name: wireguard
+          - mountPath: /lib/modules
+            name: modules
         resources:
           requests:
             cpu: 100m
           limits:
             memory: 128Mi
         ports:
-        - containerPort: 31347
+        - containerPort: 51820
           protocol: UDP
         securityContext:
           capabilities:
             add: ["NET_ADMIN","SYS_MODULE"]
       imagePullSecrets:
         - name: docker-hub
+      volumes:
+        - name: modules
+          hostPath:
+            path: /lib/modules
   volumeClaimTemplates:
   - apiVersion: v1
     kind: PersistentVolume

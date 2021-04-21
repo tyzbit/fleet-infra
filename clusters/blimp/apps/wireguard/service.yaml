@@ -12,6 +12,6 @@ spec:
     targetPort: 5000
     protocol: TCP
   - name: wireguard-udp
-    port: 5555
-    targetPort: 5555
+    port: 51820
+    targetPort: 51820
     protocol: UDP
