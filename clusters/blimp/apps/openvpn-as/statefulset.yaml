@@ -19,6 +19,11 @@ spec:
         env:
         - name: TZ
           value: America/New_York
+        resources:
+          requests:
+            cpu: 200m
+          limits:
+            mem: 256Mi
         ports:
         - containerPort: 943
           name: http
@@ -35,8 +40,6 @@ spec:
         - name: docker-hub
       securityContext:
         runAsNonRoot: true
-        runAsUser: 1000
-        fsGroup: 1000
   volumeClaimTemplates:
   - metadata:
       name: openvpn-as-config
