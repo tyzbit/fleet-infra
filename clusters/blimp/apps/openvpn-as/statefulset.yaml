@@ -38,8 +38,6 @@ spec:
           mountPath: /config
       imagePullSecrets:
         - name: docker-hub
-      securityContext:
-        runAsNonRoot: true
   volumeClaimTemplates:
   - metadata:
       name: openvpn-as-config
