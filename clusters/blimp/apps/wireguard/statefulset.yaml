@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: wireguard
+  namespace: default
+spec:
+  serviceName: wireguard
+  selector:
+    matchLabels:
+      app: wireguard
+  template:
+    metadata:
+      labels:
+        app: wireguard
+    spec:
+      containers:
+      - name: wireguard
+        image: ngoduykhanh/wireguard-ui
+        volumeMounts:
+          - mountPath: /etc/wireguard
+            subPath: wireguard
+            name: wireguard
+          - mountPath: /app/db
+            subPath: db
+            name: wireguard
+        resources:
+          requests:
+            cpu: 100m
+          limits:
+            memory: 128Mi
+        ports:
+        - containerPort: 5000
+      - name: openvpn
+        image: cmulk/wireguard-docker
+        volumeMounts:
+          - mountPath: /etc/wireguard
+            subPath: wireguard
+            name: wireguard
+        resources:
+          requests:
+            cpu: 100m
+          limits:
+            memory: 128Mi
+        ports:
+        - containerPort: 5555
+          protocol: UDP
+        securityContext:
+          capabilities:
+            add: ["NET_ADMIN","SYS_MODULE"]
+      imagePullSecrets:
+        - name: docker-hub
+  volumeClaimTemplates:
+  - apiVersion: v1
+    kind: PersistentVolume
+    metadata:
+      name: wireguard
+    spec:
+      accessModes: 
+        - ReadWriteOnce
+      volumeMode: Filesystem
+      resources:
+        requests:
+          storage: 128Mi

@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: wireguard
+spec:
+  type: NodePort
+  selector:
+    app: wireguard
+  ports:
+  - name: http
+    port: 5000
+    targetPort: 5000
+    protocol: TCP
+  - name: wireguard-udp
+    port: 5555
+    targetPort: 5555
+    protocol: UDP
