@@ -14,8 +14,8 @@ spec:
         app: wireguard
     spec:
       containers:
-      - name: wireguard
-        image: ngoduykhanh/wireguard-ui
+      - name: wireguard-ui
+        image: ngoduykhanh/wireguard-ui:latest
         volumeMounts:
           - mountPath: /etc/wireguard
             subPath: wireguard
@@ -30,8 +30,8 @@ spec:
             memory: 128Mi
         ports:
         - containerPort: 5000
-      - name: openvpn
-        image: cmulk/wireguard-docker
+      - name: wireguard
+        image: cmulk/wireguard-docker:alpine
         volumeMounts:
           - mountPath: /etc/wireguard
             subPath: wireguard
