@@ -13,7 +13,7 @@ spec:
     nodePort: 32665
     protocol: TCP
   - name: ovpn-udp
-    port: 1194
-    targetPort: 1194
-    nodePort: 30784
+    port: 31194
+    targetPort: 31194
+    nodePort: 31194
     protocol: UDP
