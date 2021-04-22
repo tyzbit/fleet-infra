@@ -80,9 +80,9 @@ spec:
     resources:
       requests:
         cpu: 200m
-        memory: {}
+        memory: ""
       limits:
-        cpu: {} 
+        cpu: ""
         memory: 512Mi
     ingress:
       enabled: true
