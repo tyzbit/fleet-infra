@@ -74,6 +74,7 @@ spec:
     wordpressConfigureCache: true
     wordpressScheme: https
     allowEmptyPassword: false
+    # the rest of the stmp settings are secrets
     smtpProtocol: tls
     livenessProbe:
       enabled: false
@@ -96,6 +97,7 @@ spec:
       - ReadWriteMany
       storageClass: longhorn
       size: 4Gi
+    # run a container to fix volume permissions at the start
     volumePermissions:
       enabled: true
     metrics:

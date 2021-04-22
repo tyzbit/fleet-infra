@@ -74,8 +74,11 @@ spec:
     wordpressConfigureCache: true
     wordpressScheme: https
     allowEmptyPassword: false
+    # Custom .htaccess directives
     customHTAccessCM: wordpress-qtosw-htaccess
+    # Disable .htaccess in apache
     allowOverrideNone: true
+    # the rest of the smtp settings are secrets
     smtpProtocol: tls
     livenessProbe:
       enabled: false
@@ -98,8 +101,10 @@ spec:
       - ReadWriteMany
       storageClass: longhorn
       size: 10Gi
+    # run a container to fix volume permissions at the start
     volumePermissions:
       enabled: true
+    # prometheus metrics
     metrics:
       enabled: true
     memcached:
