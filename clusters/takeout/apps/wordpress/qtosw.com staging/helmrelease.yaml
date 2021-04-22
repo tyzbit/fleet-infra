@@ -92,10 +92,7 @@ spec:
     service:
       type: NodePort
     persistence:
-      accessModes:
-      - ReadWriteMany
-      storageClass: nfs-client
-      size: 10Gi
+      existingClaim: wordpress-qtosw-staging
     volumePermissions:
       enabled: true
     metrics:
@@ -105,5 +102,5 @@ spec:
     mariadb:
       primary:
         persistence:
-          storageClass: longhorn
+          storageClass: local
           size: 8Gi
