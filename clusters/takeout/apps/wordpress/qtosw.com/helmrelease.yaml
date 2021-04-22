@@ -74,6 +74,7 @@ spec:
     wordpressConfigureCache: true
     wordpressScheme: https
     allowEmptyPassword: false
+    customHTAccessCM: wordpress-qtosw-htaccess
     allowOverrideNone: true
     smtpProtocol: tls
     livenessProbe:
