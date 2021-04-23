@@ -22,6 +22,8 @@ spec:
       createDefaultDiskLabeledNodes: true
       storageOverProvisioningPercentage: 100
       storageMinimalAvailablePercentage: 10
-      guaranteedEngineCPU: 1
+      # guaranteedEngineCPU: 1 # deprecated
+      guaranteedEngineManagerCPU: 20
+      guaranteedReplicaManagerCPU: 20
       defaultDataPath: /mnt/external/longhorn
       concurrentAutomaticEngineUpgradePerNodeLimit: 3
