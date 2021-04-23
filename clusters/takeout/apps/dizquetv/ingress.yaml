@@ -13,8 +13,8 @@ metadata:
 spec:
   tls:
     - hosts:
-        - "ersatztv.qtosw.com"
-      secretName: letsencrypt-ersatztv
+        - "*.qtosw.com"
+      secretName: letsencrypt
   rules:
   - host: ersatztv.qtosw.com
     http:
