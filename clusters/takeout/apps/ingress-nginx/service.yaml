@@ -3,6 +3,7 @@ kind: Service
 metadata:
   name: simulacrum
 spec:
+  externalTrafficPolicy: Local
   ports:
   - name: default
     port: 80
