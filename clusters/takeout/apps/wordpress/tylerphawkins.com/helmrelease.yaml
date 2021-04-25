@@ -74,6 +74,10 @@ spec:
     wordpressConfigureCache: true
     wordpressScheme: https
     allowEmptyPassword: false
+    # Custom .htaccess directives
+    customHTAccessCM: wordpress-tylerphawkins-htaccess
+    # Disable .htaccess in apache
+    allowOverrideNone: true
     # the rest of the stmp settings are secrets
     smtpProtocol: tls
     livenessProbe:

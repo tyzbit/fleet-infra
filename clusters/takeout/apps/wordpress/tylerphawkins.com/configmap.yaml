@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: wordpress-tylerphawkins-htaccess
+  name: wordpress-qtosw-htaccess
 data:
   wordpress-htaccess.conf: |
     # BEGIN WordPress
