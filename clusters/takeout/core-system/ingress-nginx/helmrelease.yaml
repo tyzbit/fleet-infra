@@ -19,6 +19,8 @@ spec:
   interval: 1m0s
   values:
     controller:
+      service:
+        externalTrafficPolicy: Local
       metrics:
         service:
           annotations:
