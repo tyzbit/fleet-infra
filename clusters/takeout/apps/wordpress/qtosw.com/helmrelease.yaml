@@ -77,7 +77,7 @@ spec:
     # Custom .htaccess directives
     customHTAccessCM: wordpress-qtosw-htaccess
     # Disable .htaccess in apache
-    allowOverrideNone: true
+    allowOverrideNone: false
     # the rest of the smtp settings are secrets
     smtpProtocol: tls
     livenessProbe:
