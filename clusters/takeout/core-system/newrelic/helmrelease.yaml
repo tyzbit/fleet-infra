@@ -54,6 +54,8 @@ spec:
         pullPolicy: Always
     webhook:
       enabled: false
+    newrelic-infrastructure:
+      privileged: true
     newrelic-pixie:
       enabled: true
     pixie-chart:
