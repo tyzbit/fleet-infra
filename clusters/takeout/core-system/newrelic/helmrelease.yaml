@@ -19,6 +19,14 @@ spec:
       name: newrelic
       valuesKey: license-key
       targetPath: global.licenseKey
+    - kind: Secret
+      name: newrelic
+      valuesKey: pixie-apikey
+      targetPath: newrelic-pixie.apiKey
+    - kind: Secret
+      name: newrelic
+      valuesKey: pixie-deploykey
+      targetPath: pixie-chart.deployKey
   values:
     global:
       cluster: takeout
@@ -46,3 +54,8 @@ spec:
         pullPolicy: Always
     webhook:
       enabled: false
+    newrelic-pixie:
+      enabled: true
+    pixie-chart:
+      enabled: true
+      clusterName: takeout
