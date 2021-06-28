@@ -21,7 +21,8 @@ spec:
     spec:
       containers:
         - name: youtube-dl
-          image: tzahi12345/youtubedl-material:nightly
+          # image: tzahi12345/youtubedl-material:nightly
+          image: tyzbit/ytdl-material:latest
           # command: ["tail","-f","/dev/null"]
           # command: ["sh","-c","npm i nodemon -g && /app/entrypoint.sh nodemon app.js"]
           imagePullPolicy: Always
