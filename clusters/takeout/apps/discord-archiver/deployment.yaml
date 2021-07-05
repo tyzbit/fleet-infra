@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: discord-archiver
+spec:
+  selector:
+    matchLabels:
+      app: discord-archiver
+  template:
+    metadata:
+      labels:
+        app: discord-archiver
+    spec:
+      containers:
+      - name: discord-archiver
+        image: tyzbit/discord-archiver
+        volumeMounts:
+          - name: discord-archiver-config
+            subPath: /config.json
+            mountPath: /config.json
+        resources:
+          requests:
+            cpu: "50m"
+          limits:
+            memory: "128Mi"
+      volumes:
+        - name: discord-archiver-config
+          secret:
+            secretName: discord-archiver-config
