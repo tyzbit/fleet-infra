@@ -16,7 +16,7 @@ spec:
         image: tyzbit/discord-archiver
         volumeMounts:
           - name: discord-archiver-config
-            subPath: /config.json
+            subPath: config.json
             mountPath: /config.json
         resources:
           requests:
