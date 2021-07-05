@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: discord-archiver
-        image: docker.io/tyzbit/discord-archiver:1.0.0 # {"$imagepolicy": "flux-system:discord-archiver"}
+        image: docker.io/tyzbit/discord-archiver:1.0.1 # {"$imagepolicy": "flux-system:discord-archiver"}
         volumeMounts:
         - name: discord-archiver-config
           subPath: config.json
