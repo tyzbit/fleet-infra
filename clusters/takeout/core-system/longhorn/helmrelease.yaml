@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: longhorn
-      version: "1.1.1"
+      version: "1.1.2"
       sourceRef:
         kind: HelmRepository
         name: longhorn
@@ -22,7 +22,6 @@ spec:
       createDefaultDiskLabeledNodes: true
       storageOverProvisioningPercentage: 100
       storageMinimalAvailablePercentage: 10
-      # guaranteedEngineCPU: 1 # deprecated
       guaranteedEngineManagerCPU: 20
       guaranteedReplicaManagerCPU: 20
       defaultDataPath: /mnt/external/longhorn
