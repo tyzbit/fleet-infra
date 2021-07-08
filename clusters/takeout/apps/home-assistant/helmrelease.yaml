@@ -1,0 +1,52 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: home-assistant
+  namespace: flux-system
+spec:
+  releaseName: home-assistant
+  targetNamespace: default
+  chart:
+    spec:
+      chart: home-assistant
+      version: "9.2.0"
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home
+        namespace: flux-system
+  valuesFrom:
+  - kind: Secret
+    name: home-assistant-values
+    valuesKey: username
+    targetPath: mariadb.auth.username
+  - kind: Secret
+    name: home-assistant-values
+    valuesKey: password
+    targetPath: mariadb.auth.password
+  - kind: Secret
+    name: home-assistant-values
+    valuesKey: rootpassword
+    targetPath: mariadb.auth.rootPassword
+  interval: 1m0s
+  values:
+    env:
+      TZ: America/New_York
+    persistence:
+      config:
+        enabled: true
+        storageClass: longhorn
+    ingress:
+      main:
+        enabled: true
+    mariadb:
+      enabled: true
+      primary:
+        persistence:
+          enabled: true
+          storageClass: longhorn
+    influxdb:
+      enabled: true
+      persistence:
+        enabled: true
+        storageClass: longhorn
+        size: 8Gi
