@@ -43,7 +43,8 @@ spec:
           cert-manager.io/cluster-issuer: letsencrypt
           acme.cert-manager.io/http01-edit-in-place: "true"
         hosts:
-        - host: "home.qtosw.com"
+          paths:
+            - path: "home.qtosw.com"
         tls:
           - hosts:
             - "home.qtosw.com"
