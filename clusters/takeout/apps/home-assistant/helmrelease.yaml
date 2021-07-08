@@ -25,7 +25,7 @@ spec:
     targetPath: mariadb.auth.password
   - kind: Secret
     name: home-assistant-values
-    valuesKey: rootpassword
+    valuesKey: rootPassword
     targetPath: mariadb.auth.rootPassword
   interval: 1m0s
   values:
