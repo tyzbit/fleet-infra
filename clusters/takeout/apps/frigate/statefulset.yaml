@@ -44,6 +44,8 @@ spec:
               name: dri
             - mountPath: /config
               name: config
+            - mountPath: /tmp/cache
+              name: cache
           resources:
             requests:
               cpu: 2000m
@@ -67,6 +69,8 @@ spec:
         - name: dri
           persistentVolumeClaim:
             claimName: dri-pvc
+        - name: cache
+          emptyDir: {}
       nodeSelector:
         kubernetes.io/hostname: showman
   volumeClaimTemplates:
