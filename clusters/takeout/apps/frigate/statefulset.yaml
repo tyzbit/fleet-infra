@@ -41,7 +41,7 @@ spec:
             - mountPath: /dev/bus/usb
               name: usb
             - mountPath: /dev/dri
-              name: dri-pvc
+              name: dri
           resources:
             requests:
               cpu: 2000m
