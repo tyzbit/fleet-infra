@@ -1,0 +1,88 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: frigate-config
+type: Opaque
+data:
+  config.yml: |
+    mqtt:
+      host: mosquitto
+    cameras:
+      frontdoor:
+        clips:
+          enabled: true
+        snapshots:
+          timestamp: true
+        motion:
+          mask:
+            - 0,390,190,281,413,219,612,181,842,131,1149,113,1138,0,0,0
+        ffmpeg:
+          inputs:
+            - path: 'rtsp://{FRIGATE_FRONTDOOR_CREDENTIALS}@tv-ip302pi:554'
+              roles:
+                - detect
+                - rtmp
+                - clips
+        width: 1280
+        height: 720
+        fps: 5
+      backdoor:
+        clips:
+          enabled: true
+        snapshots:
+          timestamp: true
+        ffmpeg:
+          inputs:
+            - path: 'rtsp://{FRIGATE_BACKDOOR_CREDENTIALS}@backdoor:554/live'
+              roles:
+                - detect
+                - rtmp
+                - clips
+        width: 1920
+        height: 1080
+        fps: 5
+      driveway:
+        clips:
+          enabled: true
+        snapshots:
+          timestamp: true
+        motion:
+          mask:
+            - 1770,227,1838,345,1725,830,1920,967,1920,252,1920,0,1252,0,1483,142
+        objects:
+          filters:
+            person:
+              mask: 1770,227,1838,345,1725,830,1920,967,1920,252,1920,0,1252,0,1483,142
+        ffmpeg:
+          inputs:
+            - path: 'rtsp://{FRIGATE_DRIVEWAY_CREDENTIALS}@driveway:554/live'
+              roles:
+                - detect
+                - rtmp
+                - clips
+        width: 1920
+        height: 1080
+        fps: 5
+      porch:
+        clips:
+          enabled: true
+        snapshots:
+          timestamp: true
+        ffmpeg:
+          inputs:
+            - path: 'rtsp://{FRIGATE_PORCH_CREDENTIALS}@AMC047AD_C51725:554/live'
+              roles:
+                - detect
+                - rtmp
+                - clips
+        width: 2688
+        height: 1520
+        fps: 5
+    clips:
+      max_seconds: 300
+      retain:
+        default: 30
+    detectors:
+      coral:
+        type: edgetpu
+        device: usb

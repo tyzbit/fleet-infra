@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: frigate
+  annotations: {}
+    # fluxcd.io/ignore: "true"
+  labels:
+    app: frigate
+spec:
+  replicas: 1 # active longhorn
+  selector:
+    matchLabels:
+      app: frigate
+  serviceName: frigate
+  template:
+    metadata:
+      annotations: {}
+      # linkerd.io/inject: enabled
+      labels:
+        app: frigate
+    spec:
+      containers:
+        - name: frigate
+          image: blakeblackshear/frigate:stable-amd64
+          # command: ["tail","-f","/dev/null"]
+          imagePullPolicy: Always
+          envFrom:
+            - secretRef:
+                name: frigate
+          ports:
+            - containerPort: 5000
+              name: http-frigate
+              protocol: TCP
+            - containerPort: 1935
+              name: rtmp-frigate
+              protocol: TCP
+          volumeMounts:
+          # mount specific subdirectories so as not to clobber the files in /app
+            - mountPath: /media/frigate
+              name: frigate
+            - mountPath: /dev/bus/usb
+              name: usb
+            - mountPath: /dev/dri
+              name: dri-pvc
+          resources:
+            requests:
+              cpu: 2000m
+            limits:
+              memory: 1Gi
+          livenessProbe:
+            initialDelaySeconds: 60
+            httpGet:
+              port: http-frigate
+          securityContext:
+            privileged: true
+      imagePullSecrets:
+        - name: docker-hub
+      volumes:
+        - name: usb
+          hostPath:
+            path: /dev/bus/usb
+        - name: dri
+          persistentVolumeClaim:
+            claimName: dri-pvc
+  volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolume
+      metadata:
+        name: frigate
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        volumeMode: Filesystem
+        storageClassName: longhorn
+        resources:
+          requests:
+            storage: 20Gi
