@@ -14,7 +14,7 @@ spec:
         - "*.qtosw.com"
       secretName: letsencrypt
   rules:
-  - host: ytdl.qtosw.com
+  - host: frigate.qtosw.com
     http:
       paths:
       - pathType: Prefix
