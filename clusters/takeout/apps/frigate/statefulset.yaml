@@ -72,7 +72,7 @@ spec:
         - name: cache
           emptyDir: {}
       nodeSelector:
-        kubernetes.io/hostname: showman
+        coral: attached
   volumeClaimTemplates:
     - apiVersion: v1
       kind: PersistentVolume
