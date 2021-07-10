@@ -66,8 +66,8 @@ spec:
       #   - name: braavos-camera
       #     persistentVolumeClaim:
       #       claimName: braavos-camera-pvc
-      nodeSelector:
-        graphics: dri
+      # nodeSelector:
+      #   graphics: dri
       imagePullSecrets:
         - name: docker-hub
   volumeClaimTemplates:
