@@ -67,6 +67,8 @@ spec:
         - name: dri
           persistentVolumeClaim:
             claimName: dri-pvc
+      nodeSelector:
+        kubernetes.io/hostname: showman
   volumeClaimTemplates:
     - apiVersion: v1
       kind: PersistentVolume
