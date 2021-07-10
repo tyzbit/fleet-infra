@@ -42,6 +42,8 @@ spec:
               name: usb
             - mountPath: /dev/dri
               name: dri
+            - mountPath: /config
+              name: config
           resources:
             requests:
               cpu: 2000m
@@ -56,6 +58,9 @@ spec:
       imagePullSecrets:
         - name: docker-hub
       volumes:
+        - name: config
+          configMap:
+            name: frigate-config
         - name: usb
           hostPath:
             path: /dev/bus/usb
