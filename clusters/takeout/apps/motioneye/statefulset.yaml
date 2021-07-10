@@ -48,10 +48,10 @@ spec:
           name: tcp-stream4
           protocol: TCP
         volumeMounts:
-          - mountPath: "/dev/dri"
-            name: dri
-          - mountPath: "/var/lib/motioneye/"
-            name: braavos-camera
+          # - mountPath: "/dev/dri"
+          #   name: dri
+          # - mountPath: "/var/lib/motioneye/"
+          #   name: braavos-camera
           - mountPath: "/etc/motioneye"
             name: motioneye-config
         resources:
@@ -59,13 +59,13 @@ spec:
             cpu: 1000m
           limits:
             memory: 2Gi
-      volumes:
-        - name: dri
-          persistentVolumeClaim:
-            claimName: dri-pvc
-        - name: braavos-camera
-          persistentVolumeClaim:
-            claimName: braavos-camera-pvc
+      # volumes:
+      #   - name: dri
+      #     persistentVolumeClaim:
+      #       claimName: dri-pvc
+      #   - name: braavos-camera
+      #     persistentVolumeClaim:
+      #       claimName: braavos-camera-pvc
       nodeSelector:
         graphics: dri
       imagePullSecrets:
