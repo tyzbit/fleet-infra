@@ -1,8 +1,9 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: sickchill
 spec:
+  serviceName: sickchill
   selector:
     matchLabels:
       app: sickchill
@@ -49,4 +50,16 @@ spec:
         - name: sickchill-config
           persistentVolumeClaim:
             claimName: sickchill-config
+  volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: sickchill-config
+      spec:
+        resources:
+          requests:
+            storage: 512Mi
+        volumeMode: Filesystem
+        accessModes:
+          - ReadWriteOnce
 
