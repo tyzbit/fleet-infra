@@ -1,8 +1,9 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: filebrowser
 spec:
+  serviceName: filebrowser
   selector:
     matchLabels:
       app: filebrowser
@@ -14,7 +15,12 @@ spec:
       containers:
       - name: filebrowser
         image: filebrowser/filebrowser
+        env:
+        - name: TZ
+          value: America/New_York
         volumeMounts:
+          - name: filebrowser-config
+            mountPath: /db
           - name: braavos
             mountPath: /srv/braavos
           - name: deluge-downloads
@@ -33,3 +39,15 @@ spec:
         - name: deluge-downloads
           persistentVolumeClaim:
             claimName: deluge-downloads
+  volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: filebrowser-config
+      spec:
+        resources:
+          requests:
+            storage: 512Mi
+        volumeMode: Filesystem
+        accessModes:
+          - ReadWriteOnce
