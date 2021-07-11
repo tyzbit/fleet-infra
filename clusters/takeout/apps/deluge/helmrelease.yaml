@@ -41,7 +41,8 @@ spec:
         storageClass: longhorn
       extraExistingClaimMounts:
       - name: braavos-media-pvc
-        path: /braavos
+        mountPath: /braavos
+        readOnly: false
         existingClaim: braavos-media-pvc
       resources:
         requests:
