@@ -48,8 +48,8 @@ spec:
           - path: "/"
         tls:
         - hosts:
-          - "home.qtosw.com"
-          secretName: letsencrypt-home
+          - "*.qtosw.com"
+          secretName: letsencrypt
     mariadb:
       enabled: true
       primary:

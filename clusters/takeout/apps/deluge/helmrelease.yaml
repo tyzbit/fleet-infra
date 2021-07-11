@@ -25,8 +25,8 @@ spec:
         acme.cert-manager.io/http01-edit-in-place: "true"
       tls:
         - hosts:
-          - "torrent.qtosw.com"
-          secretName: letsencrypt-deluge
+          - "*.qtosw.com"
+          secretName: letsencrypt
       hosts:
         - "torrent.qtosw.com"
     persistence:
@@ -36,8 +36,8 @@ spec:
         size: 1Gi
       downloads:
         enabled: true
-        size: 200Gi
-        storageClass: nfs-client
+        size: 500Gi
+        storageClass: longhorn
       resources:
         requests:
           cpu: 200m
