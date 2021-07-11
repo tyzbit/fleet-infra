@@ -15,6 +15,7 @@ spec:
       containers:
       - name: filebrowser
         image: filebrowser/filebrowser
+        args: ["-d","/db/database.db"]
         env:
         - name: TZ
           value: America/New_York
