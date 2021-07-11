@@ -1,28 +1,6 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: mosquitto
-  namespace: flux-system
-spec:
-  releaseName: mosquitto
-  targetNamespace: default
-  interval: 1m0s
-  chart:
-    spec:
-      chart: mosquitto
-      version: "3.2.0"
-      sourceRef:
-        kind: HelmRepository
-        name: k8s-at-home
-        namespace: flux-system
-  values:
-    service:
-      main:
-        type: LoadBalancer
----
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
-kind: HelmRelease
-metadata:
   name: home-assistant
   namespace: flux-system
 spec:
