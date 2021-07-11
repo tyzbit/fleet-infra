@@ -39,6 +39,10 @@ spec:
         size: 500Gi
         accessMode: ReadWriteMany
         storageClass: longhorn
+      extraExistingClaimMounts:
+      - name: braavos-media-pvc
+        path: /braavos
+        existingClaim: braavos-media-pvc
       resources:
         requests:
           cpu: 200m
