@@ -15,6 +15,7 @@ spec:
       containers:
       - name: filebrowser
         image: filebrowser/filebrowser
+        command: ["/filebrowser","-a","0.0.0.0"]
         env:
         - name: TZ
           value: America/New_York
