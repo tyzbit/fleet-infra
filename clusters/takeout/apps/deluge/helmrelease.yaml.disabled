@@ -36,8 +36,13 @@ spec:
         size: 1Gi
       downloads:
         enabled: true
-        size: 500Gi
+        size: 20Gi
+        accessMode: ReadWriteMany
         storageClass: longhorn
+      extraExistingClaimMounts:
+      - name: seeding
+        mountPath: /seeding
+        existingClaim: deluge-seeding
       resources:
         requests:
           cpu: 200m
