@@ -25,7 +25,6 @@ spec:
           - mountPath: /config
             name: sickchill-config
           - mountPath: /downloads
-            subPath: sick_seeding
             name: deluge-downloads
           - mountPath: /tv
             subPath: "tv shows"
