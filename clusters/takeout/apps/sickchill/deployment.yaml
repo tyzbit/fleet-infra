@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sickchill
+spec:
+  selector:
+    matchLabels:
+      app: sickchill
+  template:
+    metadata:
+      labels:
+        app: sickchill
+    spec:
+      containers:
+      - name: sickchill
+        image: sickchill/sickchill
+        env:
+        - name: TZ
+          value: America/New_York
+        - name: PUID
+          value: "1000"
+        - name: PGID
+          value: "100"
+        volumeMounts:
+          - mountPath: /config
+            name: sickchill-config
+          - mountPath: /downloads
+            subPath: sick_seeding
+            name: deluge-downloads
+          - mountPath: /tv
+            subPath: "tv shows"
+            name: braavos
+          - mountPath: /anime
+            subPath: "anime"
+            name: braavos
+        resources:
+          requests:
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+        ports:
+        - containerPort: 8081
+      volumes:
+        - name: deluge-downloads
+          persistentVolumeClaim:
+            claimName: deluge-downloads
+        - name: braavos
+          persistentVolumeClaim:
+            claimName: braavos-media-pvc
+        - name: sickchill-config
+          persistentVolumeClaim:
+            claimName: sickchill-config
+
