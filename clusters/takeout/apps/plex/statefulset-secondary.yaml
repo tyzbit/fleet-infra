@@ -22,7 +22,7 @@ spec:
         - name: plex-secondary
           image: plexinc/pms-docker:latest
           imagePullPolicy: Always
-          command: ["tail","-f","/dev/null"]
+          # command: ["tail","-f","/dev/null"]
           envFrom:
             - configMapRef:
                 name: plex-secondary-config
