@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: plex-secondary-config
 data:
-  ADVERTISE_IP: "192.168.1.64:32400"
+  ADVERTISE_IP: "192.168.1.70:32400"
