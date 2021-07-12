@@ -21,6 +21,6 @@ spec:
         path: "/"
         backend:
           service:
-            name: plex
+            name: plex-secondary
             port:
               number: 32400

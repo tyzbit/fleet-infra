@@ -5,7 +5,7 @@ metadata:
   labels:
     app: plex
 spec:
-  replicas: 2 # active longhorn
+  replicas: 1 # active longhorn
   selector:
     matchLabels:
       app: plex

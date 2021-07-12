@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: plex-secondary
+  labels:
+    app: plex-secondary
+spec:
+  replicas: 1 # active longhorn
+  selector:
+    matchLabels:
+      app: plex-secondary
+  serviceName: plex-secondary
+  template:
+    metadata:
+      annotations: {}
+        # linkerd.io/inject: enabled
+      labels:
+        app: plex-secondary
+    spec:
+      # hostNetwork: true
+      containers:
+        - name: plex-secondary
+          image: plexinc/pms-docker:latest
+          imagePullPolicy: Always
+          command: ["tail","-f","/dev/null"]
+          envFrom:
+            - configMapRef:
+                name: plex-secondary-config
+          ports:
+            - containerPort: 32400
+          volumeMounts:
+            - mountPath: "/braavos"
+              name: braavos
+            - mountPath: "/dev/dri"
+              name: dri
+            - mountPath: "/config"
+              name: plex-secondary-config
+            - mountPath: "/transcode"
+              name: transcode
+          # note to myself in the future: this is needed in order to use /dev/dri
+          # there is an alternative but it's more work
+          securityContext:
+            privileged: true
+          resources:
+            requests:
+              cpu: 100m
+            limits:
+              memory: 2560Mi
+      volumes:
+        - name: braavos
+          persistentVolumeClaim:
+            claimName: braavos-media-pvc
+        - name: dri
+          persistentVolumeClaim:
+            claimName: dri-pvc
+        - name: transcode
+          emptyDir:
+            medium: Memory
+      nodeSelector:
+        graphics: dri
+        node.longhorn.io/create-default-disk: "true"
+      imagePullSecrets:
+        - name: docker-hub
+  volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolume
+      metadata:
+        name: plex-secondary-config
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        volumeMode: Filesystem
+        storageClassName: longhorn
+        resources:
+          requests:
+            storage: 40Gi
