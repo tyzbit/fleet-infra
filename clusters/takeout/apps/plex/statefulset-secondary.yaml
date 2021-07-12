@@ -61,6 +61,16 @@ spec:
         node.longhorn.io/create-default-disk: "true"
       imagePullSecrets:
         - name: docker-hub
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - topologyKey: "kubernetes.io/hostname"
+            labelSelector:
+              matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                    - "plex"
   volumeClaimTemplates:
     - apiVersion: v1
       kind: PersistentVolume
