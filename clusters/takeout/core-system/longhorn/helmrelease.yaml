@@ -17,6 +17,7 @@ spec:
   interval: 1m0s
   values:
     defaultSettings:
+      defaultReplicaCount: 3
       backupTarget: s3://takeout-backups@us-east-1/
       backupTargetCredentialSecret: longhorn-takeout-backups
       createDefaultDiskLabeledNodes: true
