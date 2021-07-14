@@ -22,6 +22,8 @@ spec:
     - host: unraid.qtosw.com
       http:
         paths:
-          - backend:
+          - pathType: Prefix
+            path: /
+            backend:
               service:
                 name: simulacrum
