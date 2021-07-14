@@ -21,5 +21,5 @@ spec:
         address: 192.168.1.141
       - name: server-ups-2
         address: 192.168.1.142
-      - name: internet-ups
-        address: 192.168.1.151
+      # - name: internet-ups
+      #   address: 192.168.1.151
