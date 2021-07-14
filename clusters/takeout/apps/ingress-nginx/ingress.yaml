@@ -18,3 +18,10 @@ spec:
     - hosts:
         - "*.qtosw.com"
       secretName: letsencrypt
+  rules:
+    - host: unraid.qtosw.com
+      http:
+        paths:
+          - backend:
+              service:
+                name: simulacrum
