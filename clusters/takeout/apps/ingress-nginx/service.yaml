@@ -5,9 +5,13 @@ metadata:
 spec:
   ports:
   - name: default
-    port: 80
+    port: 8080
     protocol: TCP
     targetPort: 8080
+  - name: unraid
+    port: 80
+    protocol: TCP
+    targetPort: 80
   clusterIP: None
   type: ClusterIP
 ---
@@ -22,4 +26,7 @@ subsets:
   ports:
   - name: default
     port: 8080
+    protocol: TCP
+  - name: unraid
+    port: 80
     protocol: TCP
