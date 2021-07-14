@@ -19,11 +19,13 @@ spec:
         - "*.qtosw.com"
       secretName: letsencrypt
   rules:
-    - host: unraid.qtosw.com
-      http:
-        paths:
-          - pathType: Prefix
-            path: /
-            backend:
-              service:
-                name: simulacrum
+  - host: unraid.qtosw.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: simulacrum
+            port:
+              number: 80
