@@ -24,6 +24,9 @@ spec:
           image: blakeblackshear/frigate:stable-amd64
           # command: ["tail","-f","/dev/null"]
           imagePullPolicy: Always
+          env:
+            - name: TZ
+              value: America/New_York
           envFrom:
             - secretRef:
                 name: frigate
