@@ -25,16 +25,14 @@ spec:
         volumeMounts:
         - name: duplicacy-config
           mountPath: /config
-        - name: logs
+        - name: duplicacy-logs
           mountPath: /logs
-        - name: cache
+        - name: duplicacy-cache
           mountPath: /cache
         - name: braavos-media-pvc
           mountPath: /braavos
       volumes:
-        - name: cache
-          emptyDir: {}
-        - name: logs
+        - name: duplicacy-cache
           emptyDir: {}
         - name: braavos-media-pvc
           persistentVolumeClaim:
@@ -47,3 +45,10 @@ spec:
       resources:
         requests:
           storage: 1Gi
+  - metadata:
+      name: duplicacy-logs
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 40Gi
