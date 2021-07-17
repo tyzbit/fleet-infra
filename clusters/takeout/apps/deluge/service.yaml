@@ -10,3 +10,4 @@ spec:
   ports:
   - port: 6881
     targetPort: 6881
+    protocol: udp
