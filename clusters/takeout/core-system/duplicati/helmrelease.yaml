@@ -16,6 +16,8 @@ spec:
         name: k8s-at-home
         namespace: flux-system
   values:
+    env:
+      TZ: America/New_York
     persistence:
       config:
         enabled: true
