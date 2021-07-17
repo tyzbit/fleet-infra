@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: duplicacy
+spec:
+  selector:
+    matchLabels:
+      app: duplicacy
+  serviceName: duplicacy
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: duplicacy
+    spec:
+      containers:
+      - name: duplicacy
+        image: saspus/duplicacy-web:v1.5.0
+        env:
+        - name: TZ
+          value: America/Eastern
+        ports:
+        - containerPort: 3875
+          name: http-duplicacy
+        volumeMounts:
+        - name: config
+          mountPath: /config
+        - name: logs
+          mountPath: /logs
+        - name: cache
+          mountPath: /cache
+        - name: braavos
+          mountPath: /braavos
+      volumes:
+        - name: cache
+          emptyDir: {}
+        - name: logs
+          emptyDir: {}
+        - name: braavos-media-pvc
+          persistentVolumeClaim:
+            claimName: braavos-media-pvc
+  volumeClaimTemplates:
+  - metadata:
+      name: config
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi
