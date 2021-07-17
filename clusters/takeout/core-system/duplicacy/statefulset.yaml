@@ -23,13 +23,13 @@ spec:
         - containerPort: 3875
           name: http-duplicacy
         volumeMounts:
-        - name: config
+        - name: duplicacy-config
           mountPath: /config
         - name: logs
           mountPath: /logs
         - name: cache
           mountPath: /cache
-        - name: braavos
+        - name: braavos-media-pvc
           mountPath: /braavos
       volumes:
         - name: cache
@@ -41,7 +41,7 @@ spec:
             claimName: braavos-media-pvc
   volumeClaimTemplates:
   - metadata:
-      name: config
+      name: duplicacy-config
     spec:
       accessModes: [ "ReadWriteOnce" ]
       resources:
