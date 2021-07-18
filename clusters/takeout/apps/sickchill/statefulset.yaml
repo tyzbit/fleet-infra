@@ -12,6 +12,16 @@ spec:
       labels:
         app: sickchill
     spec:
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - deluge
+            topologyKey: kubernetes.io/hostname
       containers:
       - name: sickchill
         image: sickchill/sickchill
