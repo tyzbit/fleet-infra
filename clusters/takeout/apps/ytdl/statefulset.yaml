@@ -70,7 +70,7 @@ spec:
         accessModes:
           - ReadWriteOnce
         volumeMode: Filesystem
-        storageClassName: longhorn
+        storageClassName: longhorn-static
         resources:
           requests:
             storage: 50Gi
