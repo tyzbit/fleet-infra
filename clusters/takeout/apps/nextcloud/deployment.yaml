@@ -32,7 +32,7 @@ spec:
       - name: nextcloud
         image: nextcloud:21.0.3
         imagePullPolicy: Always
-        # command: ["tail","-f","/dev/null"]
+        command: ["tail","-f","/dev/null"]
         envFrom:
           - secretRef:
               name: nextcloud-config
