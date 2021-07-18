@@ -17,10 +17,10 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
           - labelSelector:
               matchExpressions:
-              - key: app
+              - key: app.kubernetes.io/instance
                 operator: In
                 values:
-                - deluge
+                - default-deluge
             topologyKey: kubernetes.io/hostname
       containers:
       - name: sickchill
