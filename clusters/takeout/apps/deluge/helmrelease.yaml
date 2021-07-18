@@ -38,7 +38,7 @@ spec:
       downloads:
         enabled: true
         size: 500Gi
-        accessMode: ReadWriteMany
+        accessMode: ReadWriteOnce
         storageClass: longhorn
       extraExistingClaimMounts:
       - name: braavos-media-pvc
