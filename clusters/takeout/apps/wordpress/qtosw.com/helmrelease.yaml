@@ -99,8 +99,8 @@ spec:
       type: NodePort
     persistence:
       accessModes:
-      - ReadWriteMany
-      storageClass: longhorn
+      - ReadWriteOnce
+      storageClass: longhorn-static
       size: 10Gi
     # run a container to fix volume permissions at the start
     volumePermissions:
