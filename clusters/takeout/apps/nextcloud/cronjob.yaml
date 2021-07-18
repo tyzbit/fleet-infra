@@ -5,7 +5,7 @@ metadata:
   namespace: default
 spec:
   successfulJobsHistoryLimit: 1
-  schedule: "*/5 * * * *"
+  schedule: "*/15 * * * *"
   jobTemplate:
     spec:
       activeDeadlineSeconds: 900
@@ -14,6 +14,16 @@ spec:
       parallelism: 1
       template:
         spec:
+          affinity:
+            podAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+              - labelSelector:
+                  matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                    - nextcloud
+                topologyKey: kubernetes.io/hostname
           containers:
           - name: nextcloud-cron
             # Same image as in /etc/kubernetes/manifests/etcd.yaml
