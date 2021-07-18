@@ -115,3 +115,15 @@ spec:
         persistence:
           storageClass: longhorn
           size: 8Gi
+    affinity:
+      podAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+          - podAffinityTerm: 
+              labelSelector:
+                matchExpressions:
+                - key: app.kubernetes.io/instance
+                  operator: In
+                  values:
+                  - wordpress-qtosw
+              topologyKey: kubernetes.io/hostname
+            weight: 100
