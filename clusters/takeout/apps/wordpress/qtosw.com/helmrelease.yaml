@@ -118,12 +118,12 @@ spec:
     affinity:
       podAffinity:
         preferredDuringSchedulingIgnoredDuringExecution:
-          - podAffinityTerm: 
-              labelSelector:
-                matchExpressions:
-                - key: app.kubernetes.io/instance
-                  operator: In
-                  values:
-                  - wordpress-qtosw
-              topologyKey: kubernetes.io/hostname
-            weight: 100
+        - podAffinityTerm:
+            labelSelector:
+              matchExpressions:
+              - key: app.kubernetes.io/instance
+                operator: In
+                values:
+                - wordpress-qtosw
+            topologyKey: kubernetes.io/hostname
+          weight: 100
