@@ -13,6 +13,6 @@ spec:
     port: 45342
     targetPort: 45342
   - name: udp
-    protocol: udp
+    protocol: UDP
     port: 45342
     targetPort: 45342
