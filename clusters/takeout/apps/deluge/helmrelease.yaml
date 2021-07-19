@@ -30,6 +30,9 @@ spec:
           secretName: letsencrypt
       hosts:
         - "torrent.qtosw.com"
+    btservice:
+      enabled: true
+      type: LoadBalancer
     persistence:
       config: 
         enabled: true
