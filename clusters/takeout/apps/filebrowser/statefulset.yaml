@@ -34,7 +34,7 @@ spec:
             mountPath: /db
           - name: braavos
             mountPath: /srv/braavos
-          - name: deluge-downloads
+          - name: downloads
             mountPath: /srv/downloads
         resources:
           requests:
@@ -47,7 +47,7 @@ spec:
         - name: braavos
           persistentVolumeClaim:
             claimName: braavos-media-pvc
-        - name: deluge-downloads
+        - name: downloads
           persistentVolumeClaim:
             claimName: deluge-downloads
   volumeClaimTemplates:

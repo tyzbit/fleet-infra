@@ -36,7 +36,7 @@ spec:
           - mountPath: /data
             name: sickchill-config
           - mountPath: /downloads
-            name: deluge-downloads
+            name: downloads
           - mountPath: /tv
             subPath: "tv shows"
             name: braavos
@@ -51,7 +51,7 @@ spec:
         ports:
         - containerPort: 8081
       volumes:
-        - name: deluge-downloads
+        - name: downloads
           persistentVolumeClaim:
             claimName: deluge-downloads
         - name: braavos
