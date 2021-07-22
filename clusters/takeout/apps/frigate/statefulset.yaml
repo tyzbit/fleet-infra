@@ -51,9 +51,9 @@ spec:
               name: cache
           resources:
             requests:
-              cpu: 2000m
+              cpu: 1500m
             limits:
-              memory: 1Gi
+              memory: 1200Mi
           livenessProbe:
             initialDelaySeconds: 60
             httpGet:
