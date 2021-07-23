@@ -16,10 +16,10 @@ spec:
     namespace: monitoring
     devices:
       - name: server-ups
-        address: 192.168.1.140
+        address: 192.168.1.10
       - name: network-ups
-        address: 192.168.1.141
+        address: 192.168.1.11
       - name: server-ups-2
-        address: 192.168.1.142
+        address: 192.168.1.12
       # - name: internet-ups
       #   address: 192.168.1.151

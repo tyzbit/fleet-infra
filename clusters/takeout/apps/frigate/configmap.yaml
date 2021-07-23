@@ -25,7 +25,7 @@ data:
             - 0,390,190,281,413,219,612,181,842,131,1149,113,1138,0,0,0
         ffmpeg:
           inputs:
-            - path: 'rtsp://{FRIGATE_FRONTDOOR_CREDENTIALS}@tv-ip302pi:554'
+            - path: 'rtsp://{FRIGATE_FRONTDOOR_CREDENTIALS}@frontdoor:554'
               roles:
                 - detect
                 - rtmp
@@ -77,7 +77,7 @@ data:
           timestamp: true
         ffmpeg:
           inputs:
-            - path: 'rtsp://{FRIGATE_PORCH_CREDENTIALS}@AMC047AD_C51725:554/live'
+            - path: 'rtsp://{FRIGATE_PORCH_CREDENTIALS}@porch:554/live'
               roles:
                 - detect
                 - rtmp
