@@ -82,8 +82,8 @@ data:
                 - detect
                 - rtmp
                 - clips
-        width: 1920
-        height: 1080
+        width: 2688
+        height: 1520
         fps: 5
     clips:
       max_seconds: 300
