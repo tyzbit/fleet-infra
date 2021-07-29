@@ -12,8 +12,3 @@ spec:
       port: 32201
       targetPort: 32201
       nodePort: 32201
-    - name: iperf-udp
-      protocol: UDP
-      port: 32201
-      targetPort: 32201
-      nodePort: 32201

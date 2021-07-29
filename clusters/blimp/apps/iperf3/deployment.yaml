@@ -29,9 +29,6 @@ spec:
             - name: iperf
               protocol: TCP
               containerPort: 32201
-            - name: iperf-udp
-              protocol: UDP
-              containerPort: 32201
           # resources:
           #   requests: 
           #     cpu: 100m
