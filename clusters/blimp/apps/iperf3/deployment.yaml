@@ -25,6 +25,8 @@ spec:
         - name: iperf3
           image: networkstatic/iperf3:latest
           args: ["-p","5201","-s","-B","0.0.0.0"]
+          ports:
+            - containerPort: 5201
           # resources:
           #   requests: 
           #     cpu: 100m
