@@ -11,4 +11,4 @@ spec:
       protocol: TCP
       port: 5201
       targetPort: 5201
-      nodePort: 35201
+      nodePort: 32201
