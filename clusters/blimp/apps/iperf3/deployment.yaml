@@ -24,7 +24,7 @@ spec:
       containers:
         - name: iperf3
           image: networkstatic/iperf3:latest
-          args: ["-s"]
+          args: ["-s","-B","0.0.0.0"]
           # resources:
           #   requests: 
           #     cpu: 100m
