@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: iperf3-server
+  labels:
+    app: iperf3-server
+spec:
+  selector:
+    matchLabels:
+      app: iperf3-server
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 100%
+      maxSurge: 100%
+  template:
+    metadata:
+      annotations: {}
+        # linkerd.io/inject: enabled
+      labels:
+        app: iperf3-server
+    spec:
+      containers:
+        - name: iperf3
+          image: networkstatic/iperf3:latest
+          args: ["-s"]
+          resources:
+            requests: 
+              cpu: 100m
+            limits:
+              memory: 128Mi
