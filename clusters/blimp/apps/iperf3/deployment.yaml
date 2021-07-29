@@ -26,7 +26,7 @@ spec:
           image: networkstatic/iperf3:latest
           args: ["-p","32201","-s","-B","0.0.0.0"]
           ports:
-            - name: iperf
+            - name: iperf-tcp
               protocol: TCP
               containerPort: 32201
           # resources:
