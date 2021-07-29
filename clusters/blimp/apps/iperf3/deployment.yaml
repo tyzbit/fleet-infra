@@ -26,7 +26,12 @@ spec:
           image: networkstatic/iperf3:latest
           args: ["-p","32201","-s","-B","0.0.0.0"]
           ports:
-            - containerPort: 32201
+            - name: iperf
+              protocol: TCP
+              containerPort: 32201
+            - name: iperf-udp
+              protocol: UDP
+              containerPort: 32201
           # resources:
           #   requests: 
           #     cpu: 100m

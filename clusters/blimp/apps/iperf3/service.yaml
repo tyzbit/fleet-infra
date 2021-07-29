@@ -7,12 +7,12 @@ spec:
   selector:
     app: iperf3-server
   ports:
-    - name: tcp
+    - name: iperf-tcp
       protocol: TCP
       port: 32201
       targetPort: 32201
       nodePort: 32201
-    - name: udp
+    - name: iperf-udp
       protocol: UDP
       port: 32201
       targetPort: 32201
