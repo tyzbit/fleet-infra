@@ -9,11 +9,11 @@ spec:
   ports:
     - name: tcp
       protocol: TCP
-      port: 5201
-      targetPort: 5201
+      port: 32201
+      targetPort: 32201
       nodePort: 32201
     - name: udp
       protocol: UDP
-      port: 5201
-      targetPort: 5201
+      port: 32201
+      targetPort: 32201
       nodePort: 32201
