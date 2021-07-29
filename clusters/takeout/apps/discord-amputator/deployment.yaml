@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: discord-amputator
-        image: docker.io/tyzbit/discord-amputator:1.0.0 # {"$imagepolicy": "flux-system:discord-amputator"}
+        image: docker.io/tyzbit/discord-amputator:1.1.0 # {"$imagepolicy": "flux-system:discord-amputator"}
         volumeMounts:
         - name: discord-amputator-config
           subPath: config.json
