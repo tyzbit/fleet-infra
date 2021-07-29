@@ -25,8 +25,8 @@ spec:
         - name: iperf3
           image: networkstatic/iperf3:latest
           args: ["-s"]
-          resources:
-            requests: 
-              cpu: 100m
-            limits:
-              memory: 128Mi
+          # resources:
+          #   requests: 
+          #     cpu: 100m
+          #   limits:
+          #     memory: 128Mi
