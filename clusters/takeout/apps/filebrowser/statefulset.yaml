@@ -24,7 +24,7 @@ spec:
             topologyKey: kubernetes.io/hostname
       containers:
       - name: filebrowser
-        image: filebrowser/filebrowser
+        image: filebrowser/filebrowser:v2
         args: ["-d","/db/database.db"]
         env:
         - name: TZ
