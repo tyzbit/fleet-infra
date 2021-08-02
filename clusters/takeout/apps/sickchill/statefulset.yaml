@@ -47,7 +47,7 @@ spec:
           requests:
             cpu: "100m"
           limits:
-            memory: "512Mi"
+            memory: "1Gi"
         ports:
         - containerPort: 8081
       volumes:
