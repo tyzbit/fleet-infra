@@ -56,8 +56,8 @@ spec:
               memory: 1200Mi
           livenessProbe:
             initialDelaySeconds: 60
-            httpGet:
-              port: http-frigate
+            tcpSocket:
+              port: rtmp-frigate
           securityContext:
             privileged: true
       imagePullSecrets:
@@ -78,7 +78,7 @@ spec:
         coral: attached
   volumeClaimTemplates:
     - apiVersion: v1
-      kind: PersistentVolume
+      kind: PersistentVolumeClaim
       metadata:
         name: frigate
       spec:
