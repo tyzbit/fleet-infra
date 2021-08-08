@@ -29,6 +29,8 @@ spec:
     valuesKey: rootPassword
     targetPath: mariadb.auth.rootPassword
   values:
+    image:
+      tag: "2021.8"
     env:
       TZ: America/New_York
     persistence:
