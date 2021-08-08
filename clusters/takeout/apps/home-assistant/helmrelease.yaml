@@ -30,6 +30,7 @@ spec:
     targetPath: mariadb.auth.rootPassword
   values:
     image:
+      pullPolicy: Always
       tag: "2021.8"
     env:
       TZ: America/New_York
