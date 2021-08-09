@@ -66,6 +66,9 @@ spec:
       imagePullSecrets:
         - name: docker-hub
       volumes:
+        - name: amazon-kubernetes-storage
+          persistentVolumeClaim:
+            claimName: amazon-kubernetes-storage
         - name: config
           configMap:
             name: frigate-config
@@ -79,10 +82,6 @@ spec:
           emptyDir: {}
       nodeSelector:
         coral: attached
-    volumes:
-      - name: amazon-kubernetes-storage
-        persistentVolumeClaim:
-          claimName: amazon-kubernetes-storage
   volumeClaimTemplates:
     - apiVersion: v1
       kind: PersistentVolumeClaim
