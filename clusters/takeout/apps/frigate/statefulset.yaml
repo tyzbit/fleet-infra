@@ -52,6 +52,8 @@ spec:
               name: config
             - mountPath: /tmp/cache
               name: cache
+            - mountPath: /dev/shm
+              name: dshm
           resources:
             requests:
               cpu: 1000m
@@ -80,6 +82,9 @@ spec:
             claimName: dri-pvc
         - name: cache
           emptyDir: {}
+        - name: dshm
+          emptyDir:
+            medium: Memory
       nodeSelector:
         coral: attached
   # volumeClaimTemplates:

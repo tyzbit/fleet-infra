@@ -38,8 +38,6 @@ spec:
             mountPath: /srv/downloads
           - name: amazon-kubernetes-storage
             mountPath: /srv/amazon-kubernetes-storage
-          - mountPath: /dev/shm
-            name: dshm
         resources:
           requests:
             cpu: "50m"
@@ -57,9 +55,6 @@ spec:
         - name: amazon-kubernetes-storage
           persistentVolumeClaim:
             claimName: amazon-kubernetes-storage
-        - name: dshm
-          emptyDir:
-            medium: Memory
   volumeClaimTemplates:
     - apiVersion: v1
       kind: PersistentVolumeClaim
