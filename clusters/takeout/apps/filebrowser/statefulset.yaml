@@ -36,6 +36,8 @@ spec:
             mountPath: /srv/braavos
           - name: downloads
             mountPath: /srv/downloads
+          - name: amazon-kubernetes-storage
+            mountPath: /srv/amazon-kubernetes-storage
         resources:
           requests:
             cpu: "50m"
@@ -50,6 +52,9 @@ spec:
         - name: downloads
           persistentVolumeClaim:
             claimName: deluge-downloads
+        - name: amazon-kubernetes-storage
+          persistentVolumeClaim:
+            claimName: amazon-kubernetes-storage
   volumeClaimTemplates:
     - apiVersion: v1
       kind: PersistentVolumeClaim
