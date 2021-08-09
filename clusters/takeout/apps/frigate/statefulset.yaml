@@ -82,16 +82,16 @@ spec:
           emptyDir: {}
       nodeSelector:
         coral: attached
-  volumeClaimTemplates:
-    - apiVersion: v1
-      kind: PersistentVolumeClaim
-      metadata:
-        name: frigate
-      spec:
-        accessModes:
-          - ReadWriteOnce
-        volumeMode: Filesystem
-        storageClassName: longhorn
-        resources:
-          requests:
-            storage: 80Gi
+  # volumeClaimTemplates:
+  #   - apiVersion: v1
+  #     kind: PersistentVolumeClaim
+  #     metadata:
+  #       name: frigate
+  #     spec:
+  #       accessModes:
+  #         - ReadWriteOnce
+  #       volumeMode: Filesystem
+  #       storageClassName: longhorn
+  #       resources:
+  #         requests:
+  #           storage: 80Gi
