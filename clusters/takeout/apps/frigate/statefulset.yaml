@@ -39,8 +39,11 @@ spec:
               protocol: TCP
           volumeMounts:
           # mount specific subdirectories so as not to clobber the files in /app
+            # - mountPath: /media/frigate
+            #   name: frigate
             - mountPath: /media/frigate
-              name: frigate
+              subPath: frigate-clips
+              name: amazon-kubernetes-storage
             - mountPath: /dev/bus/usb
               name: usb
             - mountPath: /dev/dri
@@ -76,6 +79,10 @@ spec:
           emptyDir: {}
       nodeSelector:
         coral: attached
+    volumes:
+      - name: amazon-kubernetes-storage
+        persistentVolumeClaim:
+          claimName: amazon-kubernetes-storage
   volumeClaimTemplates:
     - apiVersion: v1
       kind: PersistentVolumeClaim

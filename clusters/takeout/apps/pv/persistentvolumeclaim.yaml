@@ -57,3 +57,18 @@ spec:
   resources:
     requests:
       storage: 1Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: amazon-kubernetes-storage
+  namespace: default
+spec:
+  volumeName: amazon-kubernetes-storage
+  accessModes: 
+    - ReadWriteMany
+  volumeMode: Filesystem
+  storageClassName: ""
+  resources:
+    requests:
+      storage: 10Ti

@@ -59,3 +59,17 @@ spec:
   nfs:
     path: /nfs/k8s-backup/
     server: braavos.jura
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: amazon-kubernetes-storage
+spec:
+  accessModes:
+  - ReadWriteMany
+  capacity:
+    storage: 10Ti
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    path: /
+    server: 172.30.1.83
