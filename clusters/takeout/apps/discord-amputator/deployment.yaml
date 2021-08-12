@@ -28,3 +28,5 @@ spec:
       - name: discord-amputator-config
         secret:
           secretName: discord-amputator-config
+      nodeSelector:
+        kubernetes.io/hostname: freeman
