@@ -10,6 +10,7 @@ spec:
     metadata:
       labels:
         app: discord-amputator
+        colo: aws
     spec:
       containers:
       - name: discord-amputator
