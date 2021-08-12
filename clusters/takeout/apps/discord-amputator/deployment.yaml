@@ -33,5 +33,5 @@ spec:
       - name: discord-amputator-config
         secret:
           secretName: discord-amputator-config
-      nodeSelector:
-        colo: aws
+      # nodeSelector:
+      #   colo: aws
