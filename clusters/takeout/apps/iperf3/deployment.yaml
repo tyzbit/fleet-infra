@@ -52,7 +52,7 @@ spec:
   selector:
     matchLabels:
       app: iperf3-client
-  replicas: 0
+  replicas: 1
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -75,7 +75,6 @@ spec:
                 values:
                 - iperf3-server
             topologyKey: "kubernetes.io/hostname"
-
       containers:
         - name: iperf3-client
           image: networkstatic/iperf3:latest
