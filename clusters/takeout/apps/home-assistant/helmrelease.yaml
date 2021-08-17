@@ -58,6 +58,7 @@ spec:
       primary:
         persistence:
           enabled: true
+          size: 20Gi
           storageClass: longhorn
     # influxdb:
     #   enabled: true
