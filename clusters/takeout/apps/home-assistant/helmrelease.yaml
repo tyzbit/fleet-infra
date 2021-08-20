@@ -38,6 +38,19 @@ spec:
       config:
         enabled: true
         storageClass: longhorn
+    additionalContainers:
+      - name: filebrowser
+        image: filebrowser/filebrowser:v2
+        args: ["-d","/db/database.db"]
+        env:
+        - name: TZ
+          value: America/New_York
+        volumeMounts:
+        - name: config
+          subPath: filebrowser
+          mountPath: /db
+        - name: config
+          mountPath: /srv/homeassistant
     ingress:
       main:
         enabled: true
@@ -49,10 +62,20 @@ spec:
         - host: "home.qtosw.com"
           paths:
           - path: "/"
+        - host: "home-fb.qtosw.com"
+          paths:
+            service: home-assistant-filebrowser
+            port: 80
+          - path: "/"
         tls:
         - hosts:
           - "*.qtosw.com"
           secretName: letsencrypt
+    service:
+      secondary:
+        ports:
+          http:
+            port: 80
     mariadb:
       enabled: true
       primary:
