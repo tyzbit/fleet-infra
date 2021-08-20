@@ -64,9 +64,9 @@ spec:
           - path: "/"
         - host: "home-fb.qtosw.com"
           paths:
+          - path: "/"
             service: home-assistant-filebrowser
             port: 80
-          - path: "/"
         tls:
         - hosts:
           - "*.qtosw.com"
