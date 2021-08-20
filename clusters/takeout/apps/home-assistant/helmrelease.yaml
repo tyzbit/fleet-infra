@@ -75,7 +75,7 @@ spec:
     service:
       filebrowser:
         enabled: true
-        primary: true
+        primary: false
         name: home-assistant-filebrowser
         ports:
           http:
