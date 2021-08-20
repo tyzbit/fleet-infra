@@ -73,8 +73,12 @@ spec:
           secretName: letsencrypt
     service:
       secondary:
+        enabled: true
+        primary: false
+        name: home-assistant-filebrowser
         ports:
           http:
+            primary: false
             port: 80
     mariadb:
       enabled: true
