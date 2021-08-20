@@ -78,6 +78,7 @@ spec:
         name: home-assistant-filebrowser
         ports:
           http:
+            enabled: true
             port: 80
     mariadb:
       enabled: true
