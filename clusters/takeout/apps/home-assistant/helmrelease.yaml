@@ -72,9 +72,9 @@ spec:
           - "*.qtosw.com"
           secretName: letsencrypt
     service:
-      secondary:
+      filebrowser:
         enabled: true
-        primary: false
+        primary: true
         name: home-assistant-filebrowser
         ports:
           http:
