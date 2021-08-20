@@ -78,7 +78,7 @@ spec:
         primary: false
         name: home-assistant-filebrowser
         ports:
-          http:
+          fbhttp:
             enabled: true
             port: 80
     mariadb:
