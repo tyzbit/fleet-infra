@@ -21,9 +21,9 @@ spec:
     server:
       ingress:
         enabled: true
-      hosts:
-        - host: vault.jura
-          paths: []
+        hosts:
+          - host: vault.jura
+            paths: []
       dataStorage:
         storageClass: longhorn
     ui:
