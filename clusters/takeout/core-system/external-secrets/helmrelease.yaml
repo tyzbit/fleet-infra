@@ -1,0 +1,20 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: external-secrets
+  namespace: flux-system
+spec:
+  targetNamespace: kube-system
+  releaseName: external-secrets
+  chart:
+    spec:
+      chart: kubernetes-external-secrets
+      version: "v8.3.0"
+      sourceRef:
+        kind: HelmRepository
+        name: external-secrets
+        namespace: flux-system
+  interval: 1m0s
+  values:
+    env:
+      VAULT_ADDR: https://vault.vault.svc.cluster.local:8200
