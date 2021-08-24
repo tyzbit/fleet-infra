@@ -8,8 +8,8 @@ spec:
   releaseName: vault
   chart:
     spec:
-      chart: kubernetes-vault
-      version: "v8.3.0"
+      chart: vault
+      version: "v0.15.0"
       sourceRef:
         kind: HelmRepository
         name: hashicorp
