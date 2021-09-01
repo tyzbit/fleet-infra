@@ -35,7 +35,7 @@
 apiVersion: longhorn.io/v1beta1
 kind: RecurringJob
 metadata:
-  name: SnapshotDailyRetainTwo
+  name: snapshot-daily-retain-2
   namespace: longhorn-system
 spec:
   cron: "0 1 * * *"
@@ -46,12 +46,12 @@ spec:
   retain: 2
   concurrency: 5
   labels:
-    jobname: SnapshotDailyRetainTwo
+    jobname: snapshot-daily-retain-2
 ---
 apiVersion: longhorn.io/v1beta1
 kind: RecurringJob
 metadata:
-  name: BackupDailyRetainOne
+  name: backup-daily-retain-1
   namespace: longhorn-system
 spec:
   cron: "45 2 * * *"
@@ -62,12 +62,12 @@ spec:
   retain: 1
   concurrency: 5
   labels:
-    jobname: BackupDailyRetainOne
+    jobname: backup-daily-retain-1
 ---
 apiVersion: longhorn.io/v1beta1
 kind: RecurringJob
 metadata:
-  name: SnapshotEverySixHoursRetainFour
+  name: snapshot-every-6-hours-retain-4
   namespace: longhorn-system
 spec:
   cron: "50 0/6 * * *"
@@ -78,12 +78,12 @@ spec:
   retain: 4
   concurrency: 5
   labels:
-    jobname: SnapshotEverySixHoursRetainFour
+    jobname: snapshot-every-6-hours-retain-4
 ---
 apiVersion: longhorn.io/v1beta1
 kind: RecurringJob
 metadata:
-  name: BackupDailyRetainSeven
+  name: backup-daily-retain-7
   namespace: longhorn-system
 spec:
   cron: "40 0 * * *"
@@ -94,12 +94,12 @@ spec:
   retain: 7
   concurrency: 5
   labels:
-    jobname: BackupDailyRetainSeven
+    jobname: backup-daily-retain-7
 ---
 apiVersion: longhorn.io/v1beta1
 kind: RecurringJob
 metadata:
-  name: SnapshotHourlyRetainSix
+  name: snapshot-hourly-retain-6
   namespace: longhorn-system
 spec:
   cron: "20 * * * *"
@@ -111,12 +111,12 @@ spec:
   retain: 6
   concurrency: 5
   labels:
-    jobname: SnapshotHourlyRetainSix
+    jobname: snapshot-hourly-retain-6
 ---
 apiVersion: longhorn.io/v1beta1
 kind: RecurringJob
 metadata:
-  name: BackupEveryTwoHoursRetainOne
+  name: backup-every-2-hours-retain-1
   namespace: longhorn-system
 spec:
   cron: "15 1/2 * * *"
@@ -127,12 +127,12 @@ spec:
   retain: 1
   concurrency: 5
   labels:
-    jobname: BackupEveryTwoHoursRetainOne
+    jobname: backup-every-2-hours-retain-1
 ---
 apiVersion: longhorn.io/v1beta1
 kind: RecurringJob
 metadata:
-  name: BackupHourlyRetainSix
+  name: backup-hourly-retain-6
   namespace: longhorn-system
 spec:
   cron: "10 * * * *"
@@ -143,12 +143,12 @@ spec:
   retain: 6
   concurrency: 5
   labels:
-    jobname: BackupHourlyRetain6
+    jobname: backup-hourly-retain-6
 ---
 apiVersion: longhorn.io/v1beta1
 kind: RecurringJob
 metadata:
-  name: SnapshotEveryTenMinutesRetainSix
+  name: snapshot-every-10-minutes-retain-6
   namespace: longhorn-system
 spec:
   cron: "0/10 * * *"
@@ -158,5 +158,5 @@ spec:
   retain: 6
   concurrency: 5
   labels:
-    jobname: SnapshotEveryTenMinutesRetainSix
+    jobname: snapshot-every-10-minutes-retain-6
 ---
