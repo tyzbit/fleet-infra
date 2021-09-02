@@ -71,7 +71,7 @@ metadata:
   namespace: longhorn-system
 spec:
   cron: "50 0/6 * * *"
-  task: backup
+  task: snapshot
   groups:
   - SlowMediumPriorityHighCriticality
   - SlowHighPriorityHighCriticality
@@ -103,7 +103,7 @@ metadata:
   namespace: longhorn-system
 spec:
   cron: "20 * * * *"
-  task: backup
+  task: snapshot
   groups:
   - FastLowPriorityLowCriticality
   - FastLowPriorityHighCriticality
@@ -152,7 +152,7 @@ metadata:
   namespace: longhorn-system
 spec:
   cron: "0/10 * * *"
-  task: backup
+  task: snapshot
   groups:
   - FastHighPriorityHighCriticality
   retain: 6
