@@ -45,7 +45,7 @@ spec:
             requests:
               cpu: 100m
             limits:
-              memory: 3072Mi
+              memory: 6144Mi
       volumes:
         - name: braavos
           persistentVolumeClaim:
