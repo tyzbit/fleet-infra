@@ -54,8 +54,8 @@ spec:
           persistentVolumeClaim:
             claimName: dri-pvc
         - name: transcode
-          emptyDir:
-            medium: Memory
+          emptyDir: {}
+            # medium: Memory
       nodeSelector:
         graphics: dri
         node.longhorn.io/create-default-disk: "true"
