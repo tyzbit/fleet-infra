@@ -37,7 +37,7 @@ spec:
               requests:
                 cpu: 200m
               limits:
-                memory: 256Mi
+                memory: 768Mi
           restartPolicy: Never
           volumes:
             - name: nextcloud-data
