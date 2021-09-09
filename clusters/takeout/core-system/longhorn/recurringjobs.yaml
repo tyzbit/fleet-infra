@@ -151,7 +151,7 @@ metadata:
   name: snapshot-every-10-minutes-retain-6
   namespace: longhorn-system
 spec:
-  cron: "0/10 * * *"
+  cron: "0/10 * * * *"
   task: snapshot
   groups:
   - FastHighPriorityHighCriticality
