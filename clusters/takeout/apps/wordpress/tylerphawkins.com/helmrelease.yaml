@@ -66,7 +66,7 @@ spec:
     targetPath: smtpPassword
   values:
     image:
-      tag: "5.7.2" # {"$imagepolicy": "flux-system:wordpress-tylerphawkins:tag"}
+      tag: "5.8.1" # {"$imagepolicy": "flux-system:wordpress-tylerphawkins:tag"}
       pullPolicy: Always
       pullSecrets:
       - name: docker-hub
