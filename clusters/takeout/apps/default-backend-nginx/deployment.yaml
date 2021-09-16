@@ -21,7 +21,7 @@ spec:
         volumeMounts:
         - name: default-backend-html
           subPath: index.html
-          mountPath: /usr/share/nginx/html/
+          mountPath: /usr/share/nginx/html/index.html
         resources:
           requests:
             cpu: "10m"
@@ -31,6 +31,3 @@ spec:
       - name: default-backend-html
         configMap:
           name: default-backend-html
-          items:
-            - key: index.html
-              path: index.html
