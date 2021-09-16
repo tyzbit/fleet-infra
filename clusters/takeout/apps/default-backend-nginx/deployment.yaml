@@ -13,11 +13,11 @@ spec:
     spec:
       containers:
       - name: default-backend
-        image: nginx:1.21 # {"$imagepolicy": "flux-system:default-backend"}
+        image: docker.io/nginx:1.21.3 # {"$imagepolicy": "flux-system:default-backend"}
         ports:
-          - containerPort: 80
-            name: http
-            protocol: TCP
+        - containerPort: 80
+          name: http
+          protocol: TCP
         volumeMounts:
         - name: default-backend-html
           subPath: index.html
@@ -32,5 +32,5 @@ spec:
         configMap:
           name: default-backend-html
           items:
-            - key: index.html
-              path: index.html
+          - key: index.html
+            path: index.html
