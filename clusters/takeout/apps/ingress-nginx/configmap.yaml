@@ -4,9 +4,13 @@ metadata:
   name: default-backend-html
 data:
   index.html: |
+    <!DOCTYPE html>
     <html>
     <head>
     </head>
+    <title>
+    Access denied.
+    </title>
     <body>
     Access denied.
     </body>
