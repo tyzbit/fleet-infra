@@ -11,9 +11,9 @@ metadata:
 spec:
   defaultBackend:
     service: 
-      name: simulacrum
+      name: default-backend
       port: 
-        number: 8080
+        number: 80
   tls:
     - hosts:
         - "*.qtosw.com"
