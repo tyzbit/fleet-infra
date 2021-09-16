@@ -31,3 +31,6 @@ spec:
       - name: default-backend-html
         configMap:
           name: default-backend-html
+          items:
+            - key: index.html
+              path: index.html
