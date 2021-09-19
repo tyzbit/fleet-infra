@@ -28,8 +28,8 @@ spec:
     app.kubernetes.io/instance: default-deluge
     app.kubernetes.io/name: deluge
   ports:
-  - name: tcp
-    protocol: TCP
+  - name: udp
+    protocol: UDP
     port: 58946
     targetPort: 58946
     nodePort: 32000
