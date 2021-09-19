@@ -1,25 +1,7 @@
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   name: deluge-bt-tcp
-#   annotations:
-#     metallb.universe.tf/allow-shared-ip: deluge-bt
-# spec:
-#   type: LoadBalancer
-#   selector:
-#     app.kubernetes.io/instance: default-deluge
-#     app.kubernetes.io/name: deluge
-#   ports:
-#   - name: tcp
-#     protocol: TCP
-#     port: 45342
-#     targetPort: 45342
-#     nodePort: 32022
----
 apiVersion: v1
 kind: Service
 metadata:
-  name: deluge-bt #-udp
+  name: deluge-bt #-tcp
   annotations:
     metallb.universe.tf/allow-shared-ip: deluge-bt
 spec:
@@ -28,8 +10,26 @@ spec:
     app.kubernetes.io/instance: default-deluge
     app.kubernetes.io/name: deluge
   ports:
-  - name: udp
-    protocol: UDP
+  - name: tcp
+    protocol: TCP
     port: 45342
     targetPort: 45342
     nodePort: 32022
+---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: deluge-bt-udp
+#   annotations:
+#     metallb.universe.tf/allow-shared-ip: deluge-bt
+# spec:
+#   type: LoadBalancer
+#   selector:
+#     app.kubernetes.io/instance: default-deluge
+#     app.kubernetes.io/name: deluge
+#   ports:
+#   - name: udp
+#     protocol: UDP
+#     port: 45342
+#     targetPort: 45342
+#     nodePort: 32022
