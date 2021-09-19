@@ -27,9 +27,11 @@ spec:
       config:
         enabled: true
         storageClass: longhorn
+        accessMode: RWO
       downloads:
         enabled: true
         storageClass: longhorn
+        accessMode: RWO
     ingress:
       main:
         enabled: true
