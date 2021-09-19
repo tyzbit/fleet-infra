@@ -38,7 +38,7 @@ metadata:
   name: snapshot-daily-retain-2
   namespace: longhorn-system
 spec:
-  cron: "0 1 * * *"
+  cron: "0 5 * * *"
   task: snapshot
   groups:
   - SlowLowPriorityLowCriticality
@@ -54,7 +54,7 @@ metadata:
   name: backup-daily-retain-1
   namespace: longhorn-system
 spec:
-  cron: "45 2 * * *"
+  cron: "45 6 * * *"
   task: backup
   groups:
   - SlowMediumPriorityLowCriticality
@@ -86,7 +86,7 @@ metadata:
   name: backup-daily-retain-7
   namespace: longhorn-system
 spec:
-  cron: "40 0 * * *"
+  cron: "40 4 * * *"
   task: backup
   groups:
   - SlowHighPriorityLowCriticality
