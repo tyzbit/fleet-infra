@@ -26,10 +26,12 @@ spec:
     persistence:
       config:
         enabled: true
+        size: 2Gi
         storageClass: longhorn
         accessMode: RWO
       downloads:
         enabled: true
+        size: 50Gi
         storageClass: longhorn
         accessMode: RWO
     ingress:
