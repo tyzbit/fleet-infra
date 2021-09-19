@@ -28,12 +28,12 @@ spec:
         enabled: true
         size: 2Gi
         storageClass: longhorn
-        accessMode: RWO
+        accessMode: ReadWriteOnce
       downloads:
         enabled: true
         size: 50Gi
         storageClass: longhorn
-        accessMode: RWO
+        accessMode: ReadWriteOnce
     ingress:
       main:
         enabled: true
