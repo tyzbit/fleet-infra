@@ -21,20 +21,17 @@ spec:
     puid: "0"
     pgid: "0"
     ingress:
-      main:
-        enabled: true
-        annotations: 
-          kubernetes.io/ingress.class: nginx
-          cert-manager.io/cluster-issuer: letsencrypt
-          acme.cert-manager.io/http01-edit-in-place: "true"
-        hosts:
-        - host: "qbt.qtosw.com"
-          paths:
-          - path: "/"
-        tls:
+      enabled: true
+      annotations: 
+        kubernetes.io/ingress.class: nginx
+        cert-manager.io/cluster-issuer: letsencrypt
+        acme.cert-manager.io/http01-edit-in-place: "true"
+      tls:
         - hosts:
           - "*.qtosw.com"
           secretName: letsencrypt
+      hosts:
+        - "torrent.qtosw.com"
     persistence:
       config: 
         enabled: true
