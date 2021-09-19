@@ -1,0 +1,47 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: transmission
+  namespace: flux-system
+spec:
+  releaseName: transmission
+  targetNamespace: default
+  interval: 1m0s
+  chart:
+    spec:
+      chart: transmission
+      version: "8.0.1"
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home
+        namespace: flux-system
+  valuesFrom:
+    - kind: Secret
+      name: transmission
+      valuesKey: rpc-password
+      targetPath: env.TRANSMISSION_RPC_PASSWORD
+  values:
+    env:
+      TZ: America/New_York
+    persistence:
+      config:
+        enabled: true
+        storageClass: longhorn
+      downloads:
+        enabled: true
+        storageClass: longhorn
+    ingress:
+      main:
+        enabled: true
+        annotations: 
+          kubernetes.io/ingress.class: nginx
+          cert-manager.io/cluster-issuer: letsencrypt
+          acme.cert-manager.io/http01-edit-in-place: "true"
+        hosts:
+        - host: "transmission.qtosw.com"
+          paths:
+          - path: "/"
+        tls:
+        - hosts:
+          - "*.qtosw.com"
+          secretName: letsencrypt
