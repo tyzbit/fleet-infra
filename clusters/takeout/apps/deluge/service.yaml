@@ -19,7 +19,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: deluge-bt-udp
+  name: deluge-bt #-udp
   annotations:
     metallb.universe.tf/allow-shared-ip: deluge-bt
 spec:
