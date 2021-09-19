@@ -25,6 +25,8 @@ spec:
       TZ: America/New_York
       TRANSMISSION_RPC_WHITELIST: "*.*.*.*"
       TRANSMISSION_RPC_WHITELIST_ENABLED: "true"
+      TRANSMISSION_RPC_HOST_WHITELIST: "*.*.*.*"
+      TRANSMISSION_RPC_HOST_WHITELIST_ENABLED: "true"
     persistence:
       config:
         enabled: true
