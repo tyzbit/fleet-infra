@@ -30,8 +30,8 @@ spec:
   ports:
   - name: tcp
     protocol: TCP
-    port: 32000
-    targetPort: 32000
+    port: 58946
+    targetPort: 58946
     nodePort: 32000
 ---
 # apiVersion: v1
