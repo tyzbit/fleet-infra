@@ -51,7 +51,7 @@ spec:
     persistence:
       config: 
         enabled: true
-        size: 50Gi
+        size: 1Gi
         accessMode: ReadWriteOnce
         storageClass: longhorn
       downloads: 
