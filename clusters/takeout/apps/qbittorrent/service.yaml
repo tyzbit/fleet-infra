@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: qbittorrent-incoming
 spec:
-  type: LoadBalancer
+  type: NodePort
   selector:
     app.kubernetes.io/instance: default-qbittorrent
     app.kubernetes.io/name: qbittorrent
@@ -12,3 +12,9 @@ spec:
     protocol: TCP
     port: 32123
     targetPort: 32123
+    nodePort: 32123
+  - name: udp
+    protocol: UDP
+    port: 32123
+    targetPort: 32123
+    nodePort: 32123

@@ -16,8 +16,6 @@ spec:
   interval: 1m0s
   values:
     fullnameOverride: qbittorrent
-    puid: "0"
-    pgid: "0"
     ingress:
       main:
         enabled: true
@@ -33,6 +31,23 @@ spec:
         - hosts:
           - "*.qtosw.com"
           secretName: letsencrypt
+    initContainers:
+      - name: fixperms
+        image: busybox
+        command: 
+        - sh
+        - -c
+        - |
+          chown 596:596 /config -R &&
+          chown 596:596 /downloads -R
+        env:
+        - name: TZ
+          value: America/New_York
+        volumeMounts:
+        - name: config
+          mountPath: /config
+        - name: downloads
+          mountPath: /downloads
     persistence:
       config: 
         enabled: true
