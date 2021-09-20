@@ -20,7 +20,7 @@ spec:
               - key: app.kubernetes.io/instance
                 operator: In
                 values:
-                - default-deluge
+                - default-qbittorrent
             topologyKey: kubernetes.io/hostname
       containers:
       - name: sickchill
