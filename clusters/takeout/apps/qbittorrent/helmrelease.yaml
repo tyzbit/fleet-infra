@@ -38,9 +38,7 @@ spec:
         command: 
         - sh
         - -c
-        - |
-          chown 568:568 /config -R &&
-          chown 568:568 /downloads -R
+        - chown 568:568 /config -R
         env:
         - name: TZ
           value: America/New_York
