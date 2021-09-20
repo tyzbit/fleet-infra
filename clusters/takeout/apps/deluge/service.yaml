@@ -1,11 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: deluge-bt
-  annotations:
-    metallb.universe.tf/allow-shared-ip: deluge-bt
+  name: deluge-incoming
 spec:
-  type: LoadBalancer
+  type: NodePort
   selector:
     app.kubernetes.io/instance: default-deluge
     app.kubernetes.io/name: deluge
@@ -14,7 +12,12 @@ spec:
     protocol: TCP
     port: 58946
     targetPort: 58946
-    # nodePort: 32000
+    nodePort: 32000
+  - name: udp
+    protocol: UDP
+    port: 58946
+    targetPort: 58946
+    nodePort: 32000
 ---
 # apiVersion: v1
 # kind: Service
