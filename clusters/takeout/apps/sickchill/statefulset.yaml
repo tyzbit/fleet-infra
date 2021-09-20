@@ -53,7 +53,7 @@ spec:
       volumes:
         - name: downloads
           persistentVolumeClaim:
-            claimName: deluge-downloads
+            claimName: qbittorrent-downloads
         - name: braavos
           persistentVolumeClaim:
             claimName: braavos-media-pvc
