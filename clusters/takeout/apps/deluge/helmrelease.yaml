@@ -47,8 +47,8 @@ spec:
         mountPath: /braavos
         readOnly: false
         existingClaim: braavos-media-pvc
-      resources:
-        requests:
-          cpu: 200m
-        limits:
-          memory: 512m
+    resources:
+      requests:
+        cpu: 200m
+      limits:
+        memory: 2Gi
