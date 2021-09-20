@@ -47,8 +47,6 @@ spec:
         volumeMounts:
         - name: config
           mountPath: /config
-        - name: downloads
-          mountPath: /downloads
     persistence:
       config: 
         enabled: true
