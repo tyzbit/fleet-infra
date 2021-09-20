@@ -32,7 +32,8 @@ spec:
           - "*.qtosw.com"
           secretName: letsencrypt
     initContainers:
-      - name: fixperms
+      fixperms:
+        name: fixperms
         image: busybox
         command: 
         - sh
