@@ -51,7 +51,7 @@ spec:
             claimName: braavos-media-pvc
         - name: downloads
           persistentVolumeClaim:
-            claimName: deluge-downloads
+            claimName: qbittorrent-downloads
         - name: amazon-kubernetes-storage
           persistentVolumeClaim:
             claimName: amazon-kubernetes-storage
