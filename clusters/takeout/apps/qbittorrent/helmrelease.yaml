@@ -59,8 +59,11 @@ spec:
         size: 400Gi
         accessMode: ReadWriteOnce
         storageClass: longhorn
+      braavos:
+        enabled: true
+        existingClaim: braavos-media-pvc
     resources:
       requests:
-        cpu: 500m
+        cpu: 200m
       limits:
         memory: 2Gi
