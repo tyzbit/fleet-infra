@@ -52,5 +52,5 @@ spec:
   ports:
   - name: udp
     protocol: UDP
-    port: 32123
+    port: 32124
     targetPort: 32123
