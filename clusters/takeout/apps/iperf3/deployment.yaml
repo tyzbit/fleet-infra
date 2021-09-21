@@ -8,7 +8,7 @@ spec:
   selector:
     matchLabels:
       app: iperf3-server
-  replicas: 1
+  replicas: 0
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -21,11 +21,11 @@ spec:
       labels:
         app: iperf3-server
     spec:
-      # tolerations:
-      # - key: "colo"
-      #   operator: "Equal"
-      #   value: "aws"
-      #   effect: "NoSchedule"
+      tolerations:
+      - key: "colo"
+        operator: "Equal"
+        value: "aws"
+        effect: "NoSchedule"
       containers:
         - name: iperf3
           image: networkstatic/iperf3:latest
@@ -37,9 +37,9 @@ spec:
               memory: 128Mi
       imagePullSecrets:
         - name: docker-hub
-      # nodeSelector:
-      #   # kubernetes.io/hostname: weatherman
-      #   colo: aws
+      nodeSelector:
+        # kubernetes.io/hostname: weatherman
+        colo: aws
 ---
 apiVersion: apps/v1
 kind: Deployment
