@@ -65,7 +65,7 @@ spec:
     app.kubernetes.io/instance: default-qbittorrent
     app.kubernetes.io/name: qbittorrent
   ports:
-  - name: udp
-    protocol: UDP
+  - name: tcp
+    protocol: TCP
     port: 9000
     targetPort: 9000
