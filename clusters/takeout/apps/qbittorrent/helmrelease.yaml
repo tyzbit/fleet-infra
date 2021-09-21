@@ -67,3 +67,5 @@ spec:
         cpu: 200m
       limits:
         memory: 2Gi
+    nodeSelector:
+      kubernetes.io/hostname: cameraman
