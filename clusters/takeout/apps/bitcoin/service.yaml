@@ -4,6 +4,7 @@ metadata:
   name: bitcoin
 spec:
   type: LoadBalancer
+  externalTrafficPolicy: Local
   selector:
     app: bitcoin
   ports:
