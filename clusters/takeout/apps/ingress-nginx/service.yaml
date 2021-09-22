@@ -44,3 +44,36 @@ subsets:
   - name: unraid
     port: 80
     protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: architect
+spec:
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  - name: https
+    port: 443
+    protocol: TCP
+    targetPort: 443
+  clusterIP: None
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: simulacrum
+subsets:
+- addresses:
+  # list all external ips for this service
+  - ip: 192.168.1.1
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+  - name: https
+    port: 443
+    protocol: TCP
