@@ -39,8 +39,7 @@ spec:
         size: 1Gi
       downloads:
         enabled: true
-        # size: 800Gi
-        size: 10Gi
+        size: 800Gi
         accessMode: ReadWriteOnce
         storageClass: longhorn
       extraExistingClaimMounts:
