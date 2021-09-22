@@ -62,6 +62,7 @@ metadata:
     nginx.ingress.kubernetes.io/auth-realm: 'Authentication Required'
     cert-manager.io/cluster-issuer: letsencrypt
     acme.cert-manager.io/http01-edit-in-place: "true"
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
 spec:
   tls:
     - hosts:
@@ -77,4 +78,4 @@ spec:
           service:
             name: architect
             port:
-              number: 80
+              number: 443
