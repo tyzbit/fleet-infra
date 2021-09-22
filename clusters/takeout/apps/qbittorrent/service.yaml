@@ -28,6 +28,7 @@ metadata:
 spec:
   type: LoadBalancer
   loadBalancerIP: 192.168.1.66
+  externalTrafficPolicy: Local
   selector:
     app.kubernetes.io/instance: default-qbittorrent
     app.kubernetes.io/name: qbittorrent
@@ -46,6 +47,7 @@ metadata:
 spec:
   type: LoadBalancer
   loadBalancerIP: 192.168.1.66
+  externalTrafficPolicy: Local
   selector:
     app.kubernetes.io/instance: default-qbittorrent
     app.kubernetes.io/name: qbittorrent
