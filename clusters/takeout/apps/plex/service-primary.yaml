@@ -4,6 +4,7 @@ metadata:
   name: plex
 spec:
   type: LoadBalancer
+  externalTrafficPolicy: Local
   selector:
     app: plex
   ports:
