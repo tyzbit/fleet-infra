@@ -25,7 +25,11 @@ spec:
       containers:
       - name: filebrowser
         image: filebrowser/filebrowser:v2
-        args: ["-d","/db/database.db"]
+        command:
+        - sh
+        - -c
+        - |
+          apk add mktorrent && /filebrowser -d /db/database.db
         env:
         - name: TZ
           value: America/New_York
