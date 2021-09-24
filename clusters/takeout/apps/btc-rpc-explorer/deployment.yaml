@@ -5,7 +5,7 @@ metadata:
   labels:
     app: btc-rpc-explorer
 spec:
-  replicas: 1
+  replicas: 0 # active longhorn
   selector:
     matchLabels:
       app: btc-rpc-explorer
