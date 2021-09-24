@@ -42,6 +42,8 @@ spec:
         - name: braavos-media-pvc
           persistentVolumeClaim:
             claimName: braavos-media-pvc
+      nodeSelector:
+        kubernetes.io/hostname: fireman
   volumeClaimTemplates:
   - metadata:
       name: duplicacy-config
