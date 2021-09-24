@@ -109,7 +109,7 @@ spec:
     matchLabels:
       app: nextcloud
   serviceName: nextcloud
-  replicas: 1
+  replicas: 0 # active longhorn
   template:
     metadata:
       labels:
