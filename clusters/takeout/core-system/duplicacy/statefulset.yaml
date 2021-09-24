@@ -7,7 +7,7 @@ spec:
     matchLabels:
       app: duplicacy
   serviceName: duplicacy
-  replicas: 0 # active longhorn
+  replicas: 1 # active longhorn
   template:
     metadata:
       labels:
