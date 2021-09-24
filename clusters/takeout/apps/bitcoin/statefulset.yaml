@@ -54,17 +54,14 @@ spec:
             cpu: 100m
           limits:
             memory: 2048Mi
-      # volumes:
-      #   - name: simulacrum-blockchain
-      #     nfs: 
-      #       server: simulacrum
-      #       path: /mnt/user/Blockchain
       volumes:
         - name: bitcoin-config
           secret:
             secretName: bitcoin-config
       imagePullSecrets:
         - name: docker-hub
+      nodeSelector:
+        longhorn: primary
   volumeClaimTemplates:
   - apiVersion: v1
     kind: PersistentVolume

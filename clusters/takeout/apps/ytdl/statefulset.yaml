@@ -61,6 +61,8 @@ spec:
               port: http-youtube-dl
       imagePullSecrets:
         - name: docker-hub
+      nodeSelector:
+        longhorn: primary
   volumeClaimTemplates:
     - apiVersion: v1
       kind: PersistentVolume

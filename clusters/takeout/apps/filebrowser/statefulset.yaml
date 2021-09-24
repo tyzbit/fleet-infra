@@ -59,6 +59,8 @@ spec:
         - name: amazon-kubernetes-storage
           persistentVolumeClaim:
             claimName: amazon-kubernetes-storage
+      nodeSelector:
+        longhorn: primary
   volumeClaimTemplates:
     - apiVersion: v1
       kind: PersistentVolumeClaim
