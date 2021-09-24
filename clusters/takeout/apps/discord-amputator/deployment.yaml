@@ -12,11 +12,11 @@ spec:
         app: discord-amputator
         colo: aws
     spec:
-      tolerations:
-      - key: "colo"
-        operator: "Equal"
-        value: "aws"
-        effect: "NoSchedule"
+      # tolerations:
+      # - key: "colo"
+      #   operator: "Equal"
+      #   value: "aws"
+      #   effect: "NoSchedule"
       containers:
       - name: discord-amputator
         image: docker.io/tyzbit/discord-amputator:1.1.0 # {"$imagepolicy": "flux-system:discord-amputator"}
@@ -33,5 +33,5 @@ spec:
       - name: discord-amputator-config
         secret:
           secretName: discord-amputator-config
-      nodeSelector:
-        colo: aws
+      # nodeSelector:
+      #   colo: aws
