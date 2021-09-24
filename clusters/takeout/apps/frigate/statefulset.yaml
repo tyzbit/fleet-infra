@@ -7,7 +7,7 @@ metadata:
   labels:
     app: frigate
 spec:
-  replicas: 1 # active longhorn
+  replicas: 0 # active longhorn
   selector:
     matchLabels:
       app: frigate
