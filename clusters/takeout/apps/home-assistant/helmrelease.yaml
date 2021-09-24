@@ -56,7 +56,6 @@ spec:
         enabled: true
         annotations: 
           kubernetes.io/ingress.class: nginx
-          nginx.ingress.kubernetes.io/forwarded-for-header: Upstream-IP
           cert-manager.io/cluster-issuer: letsencrypt
           acme.cert-manager.io/http01-edit-in-place: "true"
         hosts:
