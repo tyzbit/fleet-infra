@@ -66,6 +66,6 @@ spec:
       requests:
         cpu: 200m
       limits:
-        memory: 2Gi
+        memory: 6Gi
     nodeSelector:
       longhorn: primary
