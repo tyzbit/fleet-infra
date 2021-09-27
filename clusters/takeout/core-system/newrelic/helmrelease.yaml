@@ -19,10 +19,10 @@ spec:
       name: newrelic
       valuesKey: license-key
       targetPath: global.licenseKey
-    - kind: Secret
-      name: newrelic
-      valuesKey: config
-      targetPath: newrelic-infrastructure.config
+    # - kind: Secret
+    #   name: newrelic
+    #   valuesKey: config
+    #   targetPath: newrelic-infrastructure.config
     # - kind: Secret
     #   name: newrelic
     #   valuesKey: pixie-apikey
@@ -38,6 +38,22 @@ spec:
       enabled: true
       image:
         pullPolicy: Always
+    newrelic-infrastructure:
+      config: |
+        enable_process_metrics: false
+        network_interface_filters:
+          prefix:
+            - dummy
+            - lo
+            - cali
+            - vxlan
+        daemontools_interval_sec: 30
+        network_interface_interval_sec: 60
+        metrics_network_sample_rate: 30
+        metrics_process_sample_rate: 60
+        metrics_storage_sample_rate: 120
+        metrics_system_sample_rate: 30
+        strip_command_line: true
     kubeEvents:
       enabled: true
     ksm:
