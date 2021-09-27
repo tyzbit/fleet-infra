@@ -19,6 +19,10 @@ spec:
       name: newrelic
       valuesKey: license-key
       targetPath: global.licenseKey
+    - kind: Secret
+      name: newrelic-infra-config
+      valuesKey: config
+      targetPath: infrastructure.config
     # - kind: Secret
     #   name: newrelic
     #   valuesKey: pixie-apikey
