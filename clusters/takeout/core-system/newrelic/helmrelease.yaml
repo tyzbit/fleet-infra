@@ -22,7 +22,7 @@ spec:
     - kind: Secret
       name: newrelic
       valuesKey: config
-      targetPath: infrastructure.config
+      targetPath: newrelic-infrastructure.config
     # - kind: Secret
     #   name: newrelic
     #   valuesKey: pixie-apikey
