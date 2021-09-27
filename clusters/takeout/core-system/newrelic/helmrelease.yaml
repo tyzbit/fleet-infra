@@ -20,7 +20,7 @@ spec:
       valuesKey: license-key
       targetPath: global.licenseKey
     - kind: Secret
-      name: newrelic-infra-config
+      name: newrelic
       valuesKey: config
       targetPath: infrastructure.config
     # - kind: Secret
