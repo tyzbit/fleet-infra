@@ -39,7 +39,7 @@ spec:
       image:
         pullPolicy: Always
     newrelic-infrastructure:
-      config: |
+      config:
         enable_process_metrics: false
         network_interface_filters:
           prefix:
