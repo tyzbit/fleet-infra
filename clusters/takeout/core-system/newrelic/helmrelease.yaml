@@ -74,10 +74,11 @@ spec:
         deployments: true
         jobs: true
         nodes: true
-        persistentvolumeclaims: true
-        persistentvolumes: true
         pods: true
-        volumeattachments: true
+        
+        persistentvolumeclaims: false
+        persistentvolumes: false
+        volumeattachments: false
 
         certificatesigningrequests: false
         configmaps: false
