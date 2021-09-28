@@ -69,32 +69,33 @@ spec:
     ksm:
       enabled: true
     kube-state-metrics:
-      # collectors:
-      #   deployments: true
-      #   jobs: true
-      #   nodes: true
-      #   persistentvolumeclaims: true
-      #   persistentvolumes: true
-      #   pods: true
+      collectors:
+        deployments: true
+        jobs: true
+        nodes: true
+        persistentvolumeclaims: true
+        persistentvolumes: true
+        pods: true
+        volumeattachments: true
 
-      #   certificatesigningrequests: false
-      #   configmaps: false
-      #   cronjobs: false
-      #   endpoints: false
-      #   horizontalpodautoscalers: false
-      #   ingresses: false
-      #   limitranges: false
-      #   mutatingwebhookconfigurations: false
-      #   namespaces: false
-      #   networkpolicies: false
-      #   poddisruptionbudgets: false
-      #   replicasets: false
-      #   replicationcontrollers: false
-      #   resourcequotas: false
-      #   secrets: false
-      #   services: false
-      #   storageclasses: false
-      #   validatingwebhookconfigurations: false
+        certificatesigningrequests: false
+        configmaps: false
+        cronjobs: false
+        endpoints: false
+        horizontalpodautoscalers: false
+        ingresses: false
+        limitranges: false
+        mutatingwebhookconfigurations: false
+        namespaces: false
+        networkpolicies: false
+        poddisruptionbudgets: false
+        replicasets: false
+        replicationcontrollers: false
+        resourcequotas: false
+        secrets: false
+        services: false
+        storageclasses: false
+        validatingwebhookconfigurations: false
     prometheus:
       enabled: true
     nri-prometheus:
