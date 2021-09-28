@@ -56,10 +56,46 @@ spec:
         metrics_storage_sample_rate: 120
         metrics_system_sample_rate: 30
         strip_command_line: true
+      integrations_config: # TODO: find configuration for this
+        - name: nri-kubernetes-config.yml
+          data:
+            integration_name: com.newrelic.kubernetes
+            instances:
+              - name: nri-kubernetes
+                command: metrics
     kubeEvents:
       enabled: true
     ksm:
       enabled: true
+    kube-state-metrics:
+      collectors:
+        # - certificatesigningrequests
+        # - configmaps
+        # - cronjobs
+        - daemonsets
+        - deployments
+        # - endpoints
+        # - horizontalpodautoscalers
+        # - ingresses
+        - jobs
+        # - limitranges
+        # - mutatingwebhookconfigurations
+        # - namespaces
+        # - networkpolicies
+        - nodes
+        - persistentvolumeclaims
+        - persistentvolumes
+        # - poddisruptionbudgets
+        - pods
+        # - replicasets
+        # - replicationcontrollers
+        # - resourcequotas
+        # - secrets
+        # - services
+        - statefulsets
+        # - storageclasses
+        # - validatingwebhookconfigurations
+        # - volumeattachments
     prometheus:
       enabled: true
     nri-prometheus:
