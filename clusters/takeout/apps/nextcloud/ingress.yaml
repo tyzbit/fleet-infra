@@ -24,24 +24,3 @@ spec:
             name: nextcloud
             port:
               number: 80
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: nextcloud-local
-  namespace: default
-  annotations:
-    kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/proxy-body-size: 256m
-spec:
-  rules:
-  - host: nextcloud.jura
-    http:
-      paths:
-      - pathType: Prefix
-        path: "/"
-        backend:
-          service:
-            name: nextcloud
-            port:
-              number: 80
