@@ -50,6 +50,7 @@ spec:
         daemontools_interval_sec: 60
         network_interface_interval_sec: 60
         metrics_network_sample_rate: 30
+        metrics_nfs_sample_rate: 120
         metrics_process_sample_rate: 60
         metrics_storage_sample_rate: 120
         metrics_system_sample_rate: 30
