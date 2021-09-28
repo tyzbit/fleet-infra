@@ -74,8 +74,15 @@ spec:
         pods: true
         nodes: true
 
+        endpoints: false
+        mutatingwebhookconfigurations: false
         namespaces: false
+        networkpolicies: false
         replicasets: false
+        secrets: false
+        services: false
+        storageclasses: false
+        validatingwebhookconfigurations: false
 
         certificatesigningrequests: false
         replicationcontrollers: false
