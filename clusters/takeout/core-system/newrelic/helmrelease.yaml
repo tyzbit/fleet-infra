@@ -56,6 +56,7 @@ spec:
         metrics_storage_sample_rate: 120
         metrics_system_sample_rate: 30
         strip_command_line: true
+      # https://github.com/newrelic/nri-kubernetes/blob/1037cd509fc421e21ccbfabcc6e10cfe992bada2/deploy/newrelic-infra.yaml#L178-L182
       integrations_config: # TODO: find configuration for this
         - name: nri-kubernetes-config.yml
           data:
@@ -69,33 +70,25 @@ spec:
       enabled: true
     kube-state-metrics:
       collectors:
-        # - certificatesigningrequests
-        # - configmaps
-        # - cronjobs
-        - daemonsets
-        - deployments
-        # - endpoints
-        # - horizontalpodautoscalers
-        # - ingresses
-        - jobs
-        # - limitranges
-        # - mutatingwebhookconfigurations
-        # - namespaces
-        # - networkpolicies
-        - nodes
-        - persistentvolumeclaims
-        - persistentvolumes
-        # - poddisruptionbudgets
-        - pods
-        # - replicasets
-        # - replicationcontrollers
-        # - resourcequotas
-        # - secrets
-        # - services
-        - statefulsets
-        # - storageclasses
-        # - validatingwebhookconfigurations
-        # - volumeattachments
+        deployments: true
+        pods: true
+        nodes: true
+
+        namespaces: false
+        replicasets: false
+
+        certificatesigningrequests: false
+        replicationcontrollers: false
+        resourcequotas: false
+        cronjobs: false
+        horizontalpodautoscalers: false
+        jobs: false
+        limitranges: false
+        persistentvolumeclaims: false
+        persistentvolumes: false
+        configmaps: false
+        ingresses: false
+        poddisruptionbudgets: false
     prometheus:
       enabled: true
     nri-prometheus:
