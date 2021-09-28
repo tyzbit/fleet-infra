@@ -73,6 +73,8 @@ spec:
         deployments: true
         pods: true
         nodes: true
+        persistentvolumeclaims: true
+        persistentvolumes: true
 
         endpoints: false
         mutatingwebhookconfigurations: false
@@ -91,8 +93,6 @@ spec:
         horizontalpodautoscalers: false
         jobs: false
         limitranges: false
-        persistentvolumeclaims: false
-        persistentvolumes: false
         configmaps: false
         ingresses: false
         poddisruptionbudgets: false
