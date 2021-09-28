@@ -71,31 +71,30 @@ spec:
     kube-state-metrics:
       collectors:
         deployments: true
-        pods: true
+        jobs: true
         nodes: true
         persistentvolumeclaims: true
         persistentvolumes: true
+        pods: true
 
+        certificatesigningrequests: false
+        configmaps: false
+        cronjobs: false
         endpoints: false
+        horizontalpodautoscalers: false
+        ingresses: false
+        limitranges: false
         mutatingwebhookconfigurations: false
         namespaces: false
         networkpolicies: false
+        poddisruptionbudgets: false
         replicasets: false
+        replicationcontrollers: false
+        resourcequotas: false
         secrets: false
         services: false
         storageclasses: false
         validatingwebhookconfigurations: false
-
-        certificatesigningrequests: false
-        replicationcontrollers: false
-        resourcequotas: false
-        cronjobs: false
-        horizontalpodautoscalers: false
-        jobs: false
-        limitranges: false
-        configmaps: false
-        ingresses: false
-        poddisruptionbudgets: false
     prometheus:
       enabled: true
     nri-prometheus:
