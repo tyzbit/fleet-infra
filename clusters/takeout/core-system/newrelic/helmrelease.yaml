@@ -57,13 +57,13 @@ spec:
         metrics_system_sample_rate: 30
         strip_command_line: true
       # https://github.com/newrelic/nri-kubernetes/blob/1037cd509fc421e21ccbfabcc6e10cfe992bada2/deploy/newrelic-infra.yaml#L178-L182
-      integrations_config: # TODO: find configuration for this
-        - name: nri-kubernetes-config.yml
-          data:
-            integration_name: com.newrelic.kubernetes
-            instances:
-              - name: nri-kubernetes
-                command: metrics
+      # integrations_config: # TODO: find configuration for this
+      #   - name: nri-kubernetes-config.yml
+      #     data:
+      #       integration_name: com.newrelic.kubernetes
+      #       instances:
+      #         - name: nri-kubernetes
+      #           command: metrics
     kubeEvents:
       enabled: true
     ksm:
