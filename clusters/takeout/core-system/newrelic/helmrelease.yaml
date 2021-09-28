@@ -39,6 +39,7 @@ spec:
       image:
         pullPolicy: Always
     newrelic-infrastructure:
+      # privileged: true
       config:
         enable_process_metrics: false
         network_interface_filters:
@@ -75,8 +76,6 @@ spec:
         pullPolicy: Always
     webhook:
       enabled: false
-    # newrelic-infrastructure:
-    #   privileged: true
     # newrelic-pixie:
     #   enabled: true
     # pixie-chart:
