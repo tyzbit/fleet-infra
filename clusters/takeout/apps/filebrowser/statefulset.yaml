@@ -29,7 +29,8 @@ spec:
         - sh
         - -c
         - |
-          apk add mktorrent && /filebrowser -d /db/database.db
+          apk add mktorrent util-linux && /filebrowser -d /db/database.db
+        # util-linux has rename
         env:
         - name: TZ
           value: America/New_York
