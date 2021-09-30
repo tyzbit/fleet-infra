@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: baobab
 spec:
-  type: LoadBalancer
+  type: NodePort
   selector:
     app: baobab
   ports:
