@@ -9,5 +9,5 @@ spec:
   ports:
     - name: tcp
       protocol: TCP
-      port: 5900
+      port: 6080
       targetPort: 6080
