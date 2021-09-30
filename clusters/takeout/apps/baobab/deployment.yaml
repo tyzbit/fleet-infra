@@ -1,15 +1,19 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   name: baobab
   labels:
     app: baobab
 spec:
-  serviceName: baobab
   selector:
     matchLabels:
       app: baobab
   replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 100%
+      maxSurge: 100%
   template:
     metadata:
       labels:
@@ -29,21 +33,10 @@ spec:
         - name: baobab
           image: tyzbit/baobab:latest
           imagePullPolicy: Always
-          command:
-          - sh
-          - -c
-          # add this to reset settings to default, or if no settings exist in the storage
-          # cp /usr/share/glib-2.0/schemas/org.gnome.baobab.gschema.xml /config/org.gnome.baobab.gschema.xml &&
-          - |
-            rm /usr/share/glib-2.0/schemas/org.gnome.baobab.gschema.xml &&
-            ln -s /config/org.gnome.baobab.gschema.xml /usr/share/glib-2.0/schemas/org.gnome.baobab.gschema.xml &&
-            /startup.sh
           env:
             - name: RESOLUTION_BIT_DEPTH
               value: 1280x720x16
           volumeMounts:
-            - name: baobab-config
-              mountPath: /config
             - name: braavos
               mountPath: /mount/braavos
             - name: downloads
@@ -67,15 +60,3 @@ spec:
             claimName: amazon-kubernetes-storage
       imagePullSecrets:
         - name: docker-hub
-  volumeClaimTemplates:
-    - apiVersion: v1
-      kind: PersistentVolumeClaim
-      metadata:
-        name: baobab-config
-      spec:
-        resources:
-          requests:
-            storage: 128Mi
-        volumeMode: Filesystem
-        accessModes:
-          - ReadWriteOnce
