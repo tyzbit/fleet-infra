@@ -34,8 +34,7 @@ spec:
               value: 1280x720x16
           volumeMounts:
             - name: baobab-config
-              subPath: org.gnome.baobab.gschema.xml
-              mountPath: /usr/share/glib-2.0/schemas/org.gnome.baobab.gschema.xml
+              mountPath: /usr/share/glib-2.0/schemas/
             - name: braavos
               mountPath: /mount/braavos
             - name: downloads
