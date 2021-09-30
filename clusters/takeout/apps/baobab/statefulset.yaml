@@ -32,9 +32,10 @@ spec:
           command:
           - sh
           - -c
+          # add this to reset settings to default, or if no settings exist in the storage
+          # cp /usr/share/glib-2.0/schemas/org.gnome.baobab.gschema.xml /config/org.gnome.baobab.gschema.xml &&
+          # rm /usr/share/glib-2.0/schemas/org.gnome.baobab.gschema.xml &&
           - |
-            cp /usr/share/glib-2.0/schemas/org.gnome.baobab.gschema.xml /config/org.gnome.baobab.gschema.xml &&
-            rm /usr/share/glib-2.0/schemas/org.gnome.baobab.gschema.xml &&
             ln -s /config/org.gnome.baobab.gschema.xml /usr/share/glib-2.0/schemas/org.gnome.baobab.gschema.xml &&
             /startup.sh
           env:
