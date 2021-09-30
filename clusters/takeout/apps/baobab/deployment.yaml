@@ -1,13 +1,13 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: baobab
+  name: k4dirstat
   labels:
-    app: baobab
+    app: k4dirstat
 spec:
   selector:
     matchLabels:
-      app: baobab
+      app: k4dirstat
   replicas: 1
   strategy:
     type: RollingUpdate
@@ -17,7 +17,7 @@ spec:
   template:
     metadata:
       labels:
-        app: baobab
+        app: k4dirstat
     spec:
       affinity:
         podAffinity:
@@ -30,8 +30,8 @@ spec:
                 - default-qbittorrent
             topologyKey: kubernetes.io/hostname
       containers:
-        - name: baobab
-          image: tyzbit/baobab:latest
+        - name: k4dirstat
+          image: tyzbit/k4dirstat:latest
           imagePullPolicy: Always
           env:
             - name: RESOLUTION_BIT_DEPTH
