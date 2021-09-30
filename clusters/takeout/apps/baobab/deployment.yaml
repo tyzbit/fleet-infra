@@ -33,6 +33,9 @@ spec:
         - name: baobab
           image: tyzbit/baobab:latest
           imagePullPolicy: Always
+          env:
+            - name: RESOLUTION_BIT_DEPTH
+              value: 1024x576x16
           volumeMounts:
             - name: braavos
               mountPath: /mount/braavos
