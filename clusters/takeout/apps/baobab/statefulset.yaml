@@ -1,10 +1,11 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: Statefulset
 metadata:
   name: baobab
   labels:
     app: baobab
 spec:
+  serviceName: baobab
   selector:
     matchLabels:
       app: baobab
@@ -37,6 +38,9 @@ spec:
             - name: RESOLUTION_BIT_DEPTH
               value: 1280x720x16
           volumeMounts:
+            - name: baobab-config
+              subPath: org.gnome.baobab.gschema.xml
+              mountPath: /usr/share/glib-2.0/schemas/org.gnome.baobab.gschema.xml
             - name: braavos
               mountPath: /mount/braavos
             - name: downloads
@@ -60,3 +64,15 @@ spec:
             claimName: amazon-kubernetes-storage
       imagePullSecrets:
         - name: docker-hub
+  volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: baobab-config
+      spec:
+        resources:
+          requests:
+            storage: 128Mi
+        volumeMode: Filesystem
+        accessModes:
+          - ReadWriteOnce
