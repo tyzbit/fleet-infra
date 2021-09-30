@@ -29,12 +29,18 @@ spec:
         - name: baobab
           image: tyzbit/baobab:latest
           imagePullPolicy: Always
+          command:
+          - sh
+          - -c
+          - |
+            ln -s /config/org.gnome.baobab.gschema.xml /usr/share/glib-2.0/schemas/org.gnome.baobab.gschema.xml &&
+            /startup.sh
           env:
             - name: RESOLUTION_BIT_DEPTH
               value: 1280x720x16
           volumeMounts:
             - name: baobab-config
-              mountPath: /usr/share/glib-2.0/schemas/
+              mountPath: /config
             - name: braavos
               mountPath: /mount/braavos
             - name: downloads
