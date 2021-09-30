@@ -32,6 +32,7 @@ spec:
       containers:
         - name: baobab
           image: tyzbit/baobab:latest
+          imagePullPolicy: Always
           volumeMounts:
             - name: braavos
               mountPath: /mount/braavos
