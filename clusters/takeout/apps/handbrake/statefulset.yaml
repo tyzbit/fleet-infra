@@ -1,0 +1,80 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: handbrake
+  labels:
+    app: handbrake
+spec:
+  serviceName: handbrake
+  selector:
+    matchLabels:
+      app: handbrake
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: handbrake
+    spec:
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app.kubernetes.io/instance
+                operator: In
+                values:
+                - default-qbittorrent
+            topologyKey: kubernetes.io/hostname
+      containers:
+        - name: handbrake
+          image: jlesage/handbrake:latest
+          imagePullPolicy: Always
+          volumeMounts:
+            - name: handbrake-config
+              mountPath: /config
+            - name: downloads
+              subPath: watch
+              mountPath: /watch
+            - name: downloads
+              subpath: transcoded
+              mountPath: /output
+            - name: dri
+              mountPath: /dev/dri
+            - name: braavos
+              mountPath: /mount/braavos
+            - name: downloads
+              mountPath: /mount/downloads
+          securityContext:
+            privileged: true
+          resources:
+            requests: 
+              cpu: 100m
+            limits:
+              memory: 2Gi
+      volumes:
+        - name: handbrake-output
+          emptyDir: {}
+        - name: dri
+          persistentVolumeClaim:
+            claimName: dri-pvc
+        - name: braavos
+          persistentVolumeClaim:
+            claimName: braavos-media-pvc
+        - name: downloads
+          persistentVolumeClaim:
+            claimName: qbittorrent-downloads
+      imagePullSecrets:
+        - name: docker-hub
+  volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: handbrake-config
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        volumeMode: Filesystem
+        storageClassName: longhorn
+        resources:
+          requests:
+            storage: 1Gi
