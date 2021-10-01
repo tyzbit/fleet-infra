@@ -29,6 +29,15 @@ spec:
         - name: handbrake
           image: jlesage/handbrake:latest
           imagePullPolicy: Always
+          env:
+            - name: USER_ID
+              value: "568"
+            - name: GROUP_ID
+              value: "568"
+            - name: KEEP_APP_RUNNING
+              value: "1"
+            - name: AUTOMATED_CONVERSION_PRESET
+              value: General/1080p30 QSV Plex
           volumeMounts:
             - name: handbrake-config
               mountPath: /config
