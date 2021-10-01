@@ -41,9 +41,9 @@ spec:
             - name: dri
               mountPath: /dev/dri
             - name: braavos
-              mountPath: /home/braavos
+              mountPath: /storage/braavos
             - name: downloads
-              mountPath: /home/downloads
+              mountPath: /storage/downloads
           securityContext:
             privileged: true
           resources:
