@@ -29,6 +29,12 @@ spec:
         - name: handbrake
           image: jlesage/handbrake:latest
           imagePullPolicy: Always
+          command:
+          - sh
+          - -c
+          - |
+            apk add curl &&
+            /init
           env:
             - name: USER_ID
               value: "568"
