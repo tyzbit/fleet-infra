@@ -36,7 +36,7 @@ spec:
               subPath: watch
               mountPath: /watch
             - name: downloads
-              subpath: transcoded
+              subPath: transcoded
               mountPath: /output
             - name: dri
               mountPath: /dev/dri
