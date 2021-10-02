@@ -70,7 +70,6 @@ spec:
       pullPolicy: Always
       pullSecrets:
       - name: docker-hub
-    replicaCount: 1 # active longhorn
     wordpressBlogName: Tyler P Hawkins
     wordpressConfigureCache: true
     wordpressScheme: https
