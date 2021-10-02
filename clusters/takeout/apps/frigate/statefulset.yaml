@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: frigate
   annotations: {}
@@ -8,6 +8,7 @@ metadata:
     app: frigate
 spec:
   replicas: 1 # active longhorn
+  serviceName: frigate
   selector:
     matchLabels:
       app: frigate
