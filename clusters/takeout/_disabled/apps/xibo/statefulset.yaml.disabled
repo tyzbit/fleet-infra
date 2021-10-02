@@ -15,7 +15,6 @@ spec:
   template:
     metadata:
       annotations:
-        # linkerd.io/inject: enabled
       labels:
         app: xibo-web
     spec:
@@ -87,7 +86,6 @@ spec:
   template:
     metadata:
       annotations:
-        # linkerd.io/inject: enabled
       labels:
         app: xibo-db
     spec:

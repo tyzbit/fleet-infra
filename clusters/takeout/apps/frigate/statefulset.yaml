@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   name: frigate
   annotations: {}
@@ -11,11 +11,9 @@ spec:
   selector:
     matchLabels:
       app: frigate
-  serviceName: frigate
   template:
     metadata:
       annotations: {}
-      # linkerd.io/inject: enabled
       labels:
         app: frigate
     spec:
@@ -38,9 +36,6 @@ spec:
               name: rtmp-frigate
               protocol: TCP
           volumeMounts:
-          # mount specific subdirectories so as not to clobber the files in /app
-            # - mountPath: /media/frigate
-            #   name: frigate
             - mountPath: /media/frigate
               subPath: frigate-clips
               name: amazon-kubernetes-storage
@@ -87,16 +82,3 @@ spec:
             medium: Memory
       nodeSelector:
         coral: attached
-  # volumeClaimTemplates:
-  #   - apiVersion: v1
-  #     kind: PersistentVolumeClaim
-  #     metadata:
-  #       name: frigate
-  #     spec:
-  #       accessModes:
-  #         - ReadWriteOnce
-  #       volumeMode: Filesystem
-  #       storageClassName: longhorn
-  #       resources:
-  #         requests:
-  #           storage: 80Gi

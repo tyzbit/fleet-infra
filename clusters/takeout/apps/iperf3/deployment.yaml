@@ -17,7 +17,6 @@ spec:
   template:
     metadata:
       annotations: {}
-        # linkerd.io/inject: enabled
       labels:
         app: iperf3-server
     spec:
@@ -60,7 +59,6 @@ spec:
   template:
     metadata:
       annotations: {}
-        # linkerd.io/inject: enabled
       labels:
         app: iperf3-client
     spec:
