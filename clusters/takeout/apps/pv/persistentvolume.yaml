@@ -1,23 +1,6 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: braavos-camera-pv
-spec:
-  accessModes:
-  - ReadWriteOnce
-  - ReadOnlyMany
-  - ReadWriteMany
-  capacity:
-    storage: 16Ti
-  nfs:
-    path: /nfs/Camera/
-    server: braavos.jura
-  persistentVolumeReclaimPolicy: Retain
-  volumeMode: Filesystem
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
   name: braavos-media-pv
 spec:
   accessModes:
