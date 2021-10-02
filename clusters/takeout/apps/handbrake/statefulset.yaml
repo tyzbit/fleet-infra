@@ -9,7 +9,7 @@ spec:
   selector:
     matchLabels:
       app: handbrake
-  replicas: 0 # active longhorn
+  replicas: 1 # active longhorn
   template:
     metadata:
       labels:

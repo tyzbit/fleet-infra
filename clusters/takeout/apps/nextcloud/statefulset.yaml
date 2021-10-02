@@ -6,7 +6,7 @@ metadata:
   labels:
     app: nextcloud-db
 spec:
-  replicas: 0 # active longhorn
+  replicas: 1 # active longhorn
   selector:
     matchLabels:
       app: nextcloud-db
@@ -64,7 +64,7 @@ metadata:
   labels:
     app: nextcloud-cache
 spec:
-  replicas: 0 # active longhorn
+  replicas: 1 # active longhorn
   selector:
     matchLabels:
       app: nextcloud-cache
@@ -109,7 +109,7 @@ spec:
     matchLabels:
       app: nextcloud
   serviceName: nextcloud
-  replicas: 0 # active longhorn
+  replicas: 1 # active longhorn
   template:
     metadata:
       labels:
