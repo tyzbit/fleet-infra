@@ -70,6 +70,7 @@ spec:
       pullPolicy: Always
       pullSecrets:
       - name: docker-hub
+    replicaCount: 0 # active longhorn
     wordpressBlogName: Quick Think of Something Witty
     wordpressConfigureCache: true
     wordpressScheme: https

@@ -4,6 +4,7 @@ metadata:
   name: filebrowser
 spec:
   serviceName: filebrowser
+  replicas: 0 # active longhorn
   selector:
     matchLabels:
       app: filebrowser
