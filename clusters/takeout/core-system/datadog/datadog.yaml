@@ -16,4 +16,6 @@ spec:
         namespace: flux-system
   interval: 1m0s
   values:
-    apiKeyExistingSecret: datadog-apikey
+    datadog:
+      site: datadoghq.com
+      apiKeyExistingSecret: datadog-apikey
