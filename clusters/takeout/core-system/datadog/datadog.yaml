@@ -18,4 +18,4 @@ spec:
   values:
     datadog:
       site: datadoghq.com
-      apiKeyExistingSecret: datadog-license-key
+      apiKeyExistingSecret: datadog-apikey
