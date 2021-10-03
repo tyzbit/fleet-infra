@@ -21,6 +21,7 @@ spec:
       apiKeyExistingSecret: datadog-apikey
       processAgent:
         enabled: true
+        processCollection: true
     clusterAgent:
       enabled: true
       metricsProvider:
