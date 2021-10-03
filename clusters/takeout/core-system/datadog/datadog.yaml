@@ -18,6 +18,7 @@ spec:
   values:
     datadog:
       site: datadoghq.com
+      clusterName: takeout
       apiKeyExistingSecret: datadog-apikey
       processAgent:
         enabled: true
