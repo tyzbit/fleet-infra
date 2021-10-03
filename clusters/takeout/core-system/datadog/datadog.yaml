@@ -23,3 +23,5 @@ spec:
       enabled: true
       metricsProvider:
         enabled: true
+    processAgent:
+      enabled: true
