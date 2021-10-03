@@ -33,7 +33,7 @@ spec:
       pullPolicy: Always
       tag: "2021.9"
     controller:
-      replicas: 0
+      replicas: 1 # active longhorn
     env:
       TZ: America/New_York
     persistence:
