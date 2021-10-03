@@ -19,3 +19,7 @@ spec:
     datadog:
       site: datadoghq.com
       apiKeyExistingSecret: datadog-apikey
+    clusterAgent:
+      enabled: true
+      metricsProvider:
+        enabled: true
