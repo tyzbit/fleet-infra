@@ -5,11 +5,11 @@ metadata:
   labels:
     app: qdirstat
 spec:
+  serviceName: qdirstat
   selector:
     matchLabels:
       app: qdirstat
-  replicas: 1
-  serviceName: qdirstat
+  replicas: 1 # active longhorn
   template:
     metadata:
       labels:
