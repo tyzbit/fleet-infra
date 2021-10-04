@@ -5,7 +5,14 @@ metadata:
   name: tyzbit
 rules:
 - apiGroups: ["argoproj.io"]
-  resources: ["workflows"]
+  resources:
+    - workflows
+    - workflowtemplates
+    - clusterworkflowtemplates
+    - cronworkflows
+    - sensors
+    - eventsources
+    - workfloweventbindings
   verbs: ["list","update"]
 ---
 apiVersion: v1
