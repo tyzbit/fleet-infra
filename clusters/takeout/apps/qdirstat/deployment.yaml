@@ -1,0 +1,75 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: qdirstat
+  labels:
+    app: qdirstat
+spec:
+  selector:
+    matchLabels:
+      app: qdirstat
+  replicas: 1
+  serviceName: qdirstat
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 100%
+      maxSurge: 100%
+  template:
+    metadata:
+      labels:
+        app: qdirstat
+    spec:
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app.kubernetes.io/instance
+                operator: In
+                values:
+                - default-qbittorrent
+            topologyKey: kubernetes.io/hostname
+      containers:
+        - name: qdirstat
+          image: jlesage/qdirstat:latest
+          imagePullPolicy: Always
+          volumeMounts:
+            - name: qdirstat-config
+              mountPath: /config
+            - name: braavos
+              mountPath: /mount/braavos
+            - name: downloads
+              mountPath: /mount/downloads
+            - name: amazon-kubernetes-storage
+              mountPath: /mount/amazon-kubernetes-storage
+          resources:
+            requests: 
+              cpu: 500m
+            limits:
+              memory: 512Mi
+      volumes:
+        - name: braavos
+          persistentVolumeClaim:
+            claimName: braavos-media-pvc
+        - name: downloads
+          persistentVolumeClaim:
+            claimName: qbittorrent-downloads
+        - name: amazon-kubernetes-storage
+          persistentVolumeClaim:
+            claimName: amazon-kubernetes-storage
+      imagePullSecrets:
+        - name: docker-hub
+  volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: qdirstat-config
+      spec:
+        accessModes: 
+          - ReadWriteOnce
+        volumeMode: Filesystem
+        storageClassName: longhorn
+        resources:
+          requests:
+            storage: 1Gi
