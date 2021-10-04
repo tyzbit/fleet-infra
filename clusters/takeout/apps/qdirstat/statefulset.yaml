@@ -10,11 +10,6 @@ spec:
       app: qdirstat
   replicas: 1
   serviceName: qdirstat
-  strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxUnavailable: 100%
-      maxSurge: 100%
   template:
     metadata:
       labels:
