@@ -24,6 +24,7 @@ spec:
     requests:
       storage: 16Ti
   volumeMode: Filesystem
+  storageClassName: ""
   accessModes:
     - ReadWriteMany
   volumeName: testvol
