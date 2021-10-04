@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: testvol
+spec:
+  capacity:
+    storage: 16Ti
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: slow
+  mountOptions:
+    - nfsvers=4.2
+  nfs:
+    path: /nfs/k8s-backup/
+    server: braavos.jura
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: testvol
+spec:
+  resources:
+    requests:
+      storage: 16Ti
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  volumeName: testvol

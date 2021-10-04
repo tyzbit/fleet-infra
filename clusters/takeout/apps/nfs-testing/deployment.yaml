@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nfs-test
+spec:
+  selector:
+    matchLabels:
+      app: nfs-test
+  template:
+    metadata:
+      labels:
+        app: nfs-test
+    spec:
+      containers:
+      - name: nfs-test
+        image: busybox
+        volumeMounts:
+          - mountPath: /braavos
+            name: testvol
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+      volumes:
+        - name: testvol
+          persistentVolumeClaim:
+            claimName: testvol
