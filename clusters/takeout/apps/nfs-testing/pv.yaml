@@ -9,7 +9,6 @@ spec:
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: slow
   mountOptions:
     - nfsvers=4.2
   nfs:
