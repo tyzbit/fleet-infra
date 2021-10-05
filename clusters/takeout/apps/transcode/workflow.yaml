@@ -41,7 +41,11 @@ spec:
       container:
         image: busybox
         command: ["sh", "-c"]
-        args: ["find \"/braavos/{{workflow.parameters.path}}/\" -type f > /tmp/filelist.txt && wc -l /tmp/filelist.txt > /tmp/count.txt"]
+        args: 
+          - >-
+            ls -l "/braavos/{{workflow.parameters.path}}"; 
+            find "/braavos/{{workflow.parameters.path}}" -type f > /tmp/filelist.txt &&
+            wc -l /tmp/filelist.txt > /tmp/count.txt
         volumeMounts:
           - name: braavos
             mountPath: /braavos
