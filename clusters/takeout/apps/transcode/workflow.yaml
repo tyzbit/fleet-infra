@@ -3,7 +3,7 @@ kind: Workflow
 metadata:
   name: transcode-movies
   generateName: transcode-movies-
-  namespace: argo
+  namespace: default
 spec:
   arguments:
     parameters:
