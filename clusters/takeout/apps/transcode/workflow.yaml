@@ -38,7 +38,7 @@ spec:
         labels:
           should-be-deleted: "true"
       container:
-        image: buxybox
+        image: busybox
         command: [sh, -c]
         args: ["find \"/braavos/{{workflow.parameters.path}}/\" -type f > /tmp/filelist.txt && wc -l /tmp/filelist.txt > /tmp/count.txt"]
         volumeMounts:
