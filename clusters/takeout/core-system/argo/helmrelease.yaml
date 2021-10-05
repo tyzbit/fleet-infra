@@ -34,3 +34,6 @@ spec:
         secretKeySecret:
           name: argo-bucket-credentials
           key: secret-key
+        insecure: "false"
+        bucket: qtosw-argo-repo
+        region: us-east-1
