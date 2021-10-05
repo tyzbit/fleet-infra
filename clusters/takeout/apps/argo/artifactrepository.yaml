@@ -1,0 +1,14 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ArtifactRepository
+metadata:
+  name: argo-repo
+  namespace: default
+spec:
+  s3:
+    bucket: qtosw-argo-repo
+    accessKeySecret:
+      name: argo-bucket-credentials
+      key: access-key
+    secretKeySecret:
+      name: argo-bucket-credentials
+      key: secret-key
