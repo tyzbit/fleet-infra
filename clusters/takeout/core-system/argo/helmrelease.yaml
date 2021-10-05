@@ -26,4 +26,11 @@ spec:
           - secretName: letsencrypt-argo
             hosts:
               - argo.qtosw.com
-              
+    artifactRepository:
+      s3:
+        accessKeySecret:
+          name: argo-bucket-credentials
+          key: access-key
+        secretKeySecret:
+          name: argo-bucket-credentials
+          key: secret-key
