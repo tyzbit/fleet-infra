@@ -6,7 +6,7 @@ metadata:
 rules:
 - apiGroups: [""]
   resources: ["pods"]
-  verbs: ["get", "watch", "list", "update"]
+  verbs: ["get", "watch", "list", "patch", "update"]
 ---
 apiVersion: v1
 kind: ServiceAccount
