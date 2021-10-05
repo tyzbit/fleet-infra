@@ -59,7 +59,7 @@ spec:
           - name: index
         artifacts:
           - name: file
-            valueFrom: /tmp/filelist.txt
+            path: /tmp/filelist.txt
       container:
         name: transcode
         image: busybox
