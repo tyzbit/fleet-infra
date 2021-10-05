@@ -20,7 +20,7 @@ spec:
       steps: 
         - - name: listfiles
             template: listfiles
-          - name: transcode
+        - - name: transcode
             template: transcode
             arguments:
               parameters:
