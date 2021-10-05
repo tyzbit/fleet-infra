@@ -60,7 +60,7 @@ spec:
         parameters:
           - name: index
         artifacts:
-          - name: file
+          - name: filelist
             path: /tmp/filelist.txt
       container:
         name: transcode
