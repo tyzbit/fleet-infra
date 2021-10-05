@@ -1,0 +1,81 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  name: transcode-movies
+  generateName: transcode-movies-
+  namespace: argo
+spec:
+  arguments:
+    parameters:
+      - name: path
+        value: 3D movies
+  entrypoint: transcode-movies
+  parallelism: 10
+  volumes:
+  - name: braavos
+    persistentVolumeClaim:
+      claimName: braavos-media-pvc
+  templates:
+    - name: transcode-files
+      steps: 
+        - - name: listfiles
+            template: listfiles
+        - - name: transcode
+            template: transcode
+            arguments:
+              parameters:
+                - name: index
+                  value: "{{item}}"
+              artifacts:
+                - name: filelist
+                  from: "{{steps.listfiles.outputs.artifacts.filelist}}"
+            withSequence:
+              count: "{{steps.listfiles.outputs.parameters.count}}"
+    - name: listfiles
+      metadata:
+        labels:
+          should-be-deleted: "true"
+      container:
+        image: buxybox
+        command: [sh, -c]
+        args: ["find \"/braavos/{{workflow.parameters.path}}/\" -type f > /tmp/filelist.txt; wc -l /tmp/filelist.txt > /tmp/count.txt"]
+        volumeMounts:
+          - name: braavos
+            mountPath: /braavos
+      outputs:
+        artifacts:
+          - name: filelist
+            path: /tmp/filelist.txt
+        parameters:
+          - name: filelist
+            valueFrom:
+              path: /tmp/count.txt
+    - name: transcode
+      metadata:
+        labels:
+          should-be-deleted: "false"
+      inputs:
+        parameters:
+          - name: index
+        artifacts:
+          - name: file
+            valueFrom: /tmp/filelist.txt
+      container:
+        name: transcode
+        image: busybox
+        command: ["sh","-c"]
+        args: 
+          - sed -n '{{inputs.parameters.index}}p' /tmp/filelist
+  ttlStrategy:
+    secondsAfterCompletion: 300
+  podGC:
+    # Pod GC strategy must be one of the following:
+    # * OnPodCompletion - delete pods immediately when pod is completed (including errors/failures)
+    # * OnPodSuccess - delete pods immediately when pod is successful
+    # * OnWorkflowCompletion - delete pods when workflow is completed
+    # * OnWorkflowSuccess - delete pods when workflow is successful
+    strategy: OnPodSuccess
+    # Use label selector to only delete the pods whose labels match with the specified label selector (available since v3.0.0-rc3).
+    labelSelector:
+      matchLabels:
+        should-be-deleted: "true"
