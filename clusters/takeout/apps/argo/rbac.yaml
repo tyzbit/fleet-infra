@@ -2,7 +2,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   namespace: default
-  name: argo
+  name: argo-worker
 rules:
 - apiGroups: [""]
   resources: ["pods"]
@@ -12,17 +12,17 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   namespace: default
-  name: argo
+  name: argo-worker
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   namespace: default
-  name: argo
+  name: argo-worker
 subjects:
   - kind: ServiceAccount
-    name: argo
+    name: argo-worker
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
-  name: argo
+  name: argo-worker
