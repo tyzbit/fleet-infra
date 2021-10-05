@@ -4,7 +4,7 @@ metadata:
   name: braavos-media-pvc
   namespace: argo
 spec:
-  volumeName: braavos-media-pv
+  volumeName: braavos-media-pv-argo
   accessModes: 
     - ReadWriteMany
   volumeMode: Filesystem
