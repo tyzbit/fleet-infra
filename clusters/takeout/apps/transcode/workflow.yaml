@@ -10,6 +10,7 @@ spec:
       - name: path
         value: 3D movies
   entrypoint: transcode-movies
+  serviceAccountName: argo
   imagePullSecrets:
     - name: docker-hub
   parallelism: 10
