@@ -16,7 +16,7 @@ spec:
     persistentVolumeClaim:
       claimName: braavos-media-pvc
   templates:
-    - name: transcode-files
+    - name: transcode-movies
       steps: 
         - - name: listfiles
             template: listfiles
