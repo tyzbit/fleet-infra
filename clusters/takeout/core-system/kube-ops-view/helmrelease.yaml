@@ -8,11 +8,10 @@ spec:
   releaseName: kube-ops-view
   chart:
     spec:
-      chart: kube-ops-view
-      version: "1.2.4"
+      chart: ./old-helm-charts/stable/kube-ops-view
       sourceRef:
-        kind: HelmRepository
-        name: kubernetes-charts
+        kind: GitRepository
+        name: flux-system
         namespace: flux-system
   interval: 1m0s
   values:
