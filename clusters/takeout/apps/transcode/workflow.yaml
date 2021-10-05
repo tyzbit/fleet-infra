@@ -38,7 +38,7 @@ spec:
       container:
         image: buxybox
         command: [sh, -c]
-        args: ["find \"/braavos/{{workflow.parameters.path}}/\" -type f > /tmp/filelist.txt; wc -l /tmp/filelist.txt > /tmp/count.txt"]
+        args: ["find \"/braavos/{{workflow.parameters.path}}/\" -type f > /tmp/filelist.txt && wc -l /tmp/filelist.txt > /tmp/count.txt"]
         volumeMounts:
           - name: braavos
             mountPath: /braavos
@@ -49,7 +49,7 @@ spec:
             archive:
               none: {}
         parameters:
-          - name: filelist
+          - name: count
             valueFrom:
               path: /tmp/count.txt
     - name: transcode
