@@ -46,6 +46,8 @@ spec:
         artifacts:
           - name: filelist
             path: /tmp/filelist.txt
+            archive:
+              none: {}
         parameters:
           - name: filelist
             valueFrom:
