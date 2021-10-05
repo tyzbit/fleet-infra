@@ -49,6 +49,8 @@ spec:
         artifacts:
           - name: filelist
             path: /tmp/filelist.txt
+            archive:
+              tar: {}
         parameters:
           - name: count
             valueFrom:
