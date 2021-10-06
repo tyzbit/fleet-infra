@@ -17,7 +17,7 @@ spec:
   interval: 1m0s
   valuesFrom:
     - kind: Secret
-      name: grafana
+      name: grafana-auth
       valuesKey: adminPassword
       targetPath: grafana.adminPassword
   values: 
