@@ -36,4 +36,6 @@ spec:
             hosts: ["grafana.qtosw.com"]
       plugins:
         - marcusolsson-hexmap-panel
+      persistence:
+        storageClassName: longhorn
     
