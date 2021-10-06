@@ -37,5 +37,6 @@ spec:
       plugins:
         - marcusolsson-hexmap-panel
       persistence:
+        enabled: true
         storageClassName: longhorn
     
