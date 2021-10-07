@@ -16,6 +16,8 @@ spec:
   interval: 1m0s
   values:
     fullnameOverride: nfs-subdir-external-provisioner
+    storageClass:
+      pathPattern: "${.PVC.namespace}-${.PVC.name}"
     nfs:
       server: braavos.jura
       path: /nfs/cluster_storage
