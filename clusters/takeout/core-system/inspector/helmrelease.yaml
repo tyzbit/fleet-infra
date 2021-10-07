@@ -19,3 +19,5 @@ spec:
     imagePullSecrets:
     - name: docker-hub
     storageClassName: nfs-client
+    nodeSelector:
+      faketag: fakevalue
