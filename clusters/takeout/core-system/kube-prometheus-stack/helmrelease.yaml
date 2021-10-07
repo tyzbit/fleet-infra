@@ -26,7 +26,7 @@ spec:
     additionalPrometheusRules:
       - name: custom-rules
         groups:
-          - name: 
+          - name: kubelet
             rules:
             - record: kubelet_volume_stats_used_percent
               expr: kubelet_volume_stats_used_bytes{} / kubelet_volume_stats_capacity_bytes{} * 100
