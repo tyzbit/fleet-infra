@@ -55,8 +55,8 @@ spec:
             cpu: 100m
           limits:
             memory: 3072Mi
-      nodeSelector:
-        longhorn: primary
+      # nodeSelector:
+      #   longhorn: primary
       imagePullSecrets:
         - name: docker-hub
       # volumes:
