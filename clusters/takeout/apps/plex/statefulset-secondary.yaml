@@ -5,7 +5,7 @@ metadata:
   labels:
     app: plex-secondary
 spec:
-  replicas: 0 # active nfs-client
+  replicas: 1 # active nfs-client
   selector:
     matchLabels:
       app: plex-secondary
@@ -28,14 +28,16 @@ spec:
           ports:
             - containerPort: 32400
           volumeMounts:
-            - mountPath: "/braavos"
-              name: braavos
+            # - mountPath: "/braavos"
+            #   name: braavos
+            - mountPath: "/warehouse"
+              name: warehouse
             - mountPath: "/dev/dri"
               name: dri
             - mountPath: "/config"
               name: plex-secondary-config
-            - mountPath: "/config-old"
-              name: plex-secondary-config-old
+            # - mountPath: "/config-old"
+            #   name: plex-secondary-config-old
             - mountPath: "/transcode"
               name: transcode
           # note to myself in the future: this is needed in order to use /dev/dri
@@ -48,15 +50,15 @@ spec:
             limits:
               memory: 8192Mi
       volumes:
-        - name: braavos
-          persistentVolumeClaim:
-            claimName: braavos-media-pvc
+        # - name: braavos
+        #   persistentVolumeClaim:
+        #     claimName: braavos-media-pvc
         - name: warehouse
           persistentVolumeClaim:
             claimName: warehouse-media
-        - name: plex-secondary-config
-          persistentVolumeClaim:
-            claimName: plex-secondary-config-plex-secondary-0
+        # - name: plex-secondary-config
+        #   persistentVolumeClaim:
+        #     claimName: plex-secondary-config-plex-secondary-0
         - name: dri
           persistentVolumeClaim:
             claimName: dri-pvc
@@ -82,7 +84,7 @@ spec:
     - apiVersion: v1
       kind: PersistentVolume
       metadata:
-        name: plex-secondary-config-volatile
+        name: plex-secondary-config
       spec:
         accessModes:
           - ReadWriteMany
