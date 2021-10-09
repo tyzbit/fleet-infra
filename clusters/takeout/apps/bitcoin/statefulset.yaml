@@ -43,10 +43,10 @@ spec:
         volumeMounts:
           # - mountPath: "/blockchain"
           #   name: bitcoin-blockchain
+          # - mountPath: "/blockchain"
+          #   name: bitcoin-blockchain-volatile
           - mountPath: "/blockchain"
-            name: bitcoin-blockchain-volatile
-          # - mountPath: "/blockchain-old"
-          #   name: bitcoin-blockchain
+            name: bitcoin-blockchain
           - mountPath: "/blockchain/.bitcoin/bitcoin.conf"
             subPath: "bitcoin.conf"
             name: bitcoin-config
@@ -66,18 +66,18 @@ spec:
         #     claimName: bitcoin-blockchain-bitcoin-0
       imagePullSecrets:
         - name: docker-hub
-      # nodeSelector:
-      #   longhorn: primary
+      nodeSelector:
+        longhorn: primary
   volumeClaimTemplates:
   - apiVersion: v1
     kind: PersistentVolume
     metadata:
-      name: bitcoin-blockchain-volatile
+      name: bitcoin-blockchain
     spec:
       accessModes: 
         - ReadWriteOnce
       volumeMode: Filesystem
-      storageClassName: nfs-client-volatile
+      storageClassName: longhorn
       resources:
         requests:
-          storage: 1Gi
+          storage: 450Gi
