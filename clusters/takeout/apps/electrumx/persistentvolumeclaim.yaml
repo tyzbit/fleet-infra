@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: bitcoin-blockchain-volatile
+  name: electrumx-data-volatile
 spec:
   resources:
     requests:
