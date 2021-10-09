@@ -7,7 +7,7 @@ metadata:
   labels:
     app: bitcoin
 spec:
-  replicas: 1 # active longhorn
+  replicas: 0 # active volatile-nfs
   selector:
     matchLabels:
       app: bitcoin
@@ -43,8 +43,8 @@ spec:
         volumeMounts:
           - mountPath: "/blockchain"
             name: bitcoin-blockchain
-          - mountPath: "/blockchain-volatile"
-            name: bitcoin-blockchain-volatile
+          # - mountPath: "/blockchain-volatile"
+          #   name: bitcoin-blockchain-volatile
           - mountPath: "/blockchain/.bitcoin/bitcoin.conf"
             subPath: "bitcoin.conf"
             name: bitcoin-config
@@ -59,9 +59,9 @@ spec:
         - name: bitcoin-config
           secret:
             secretName: bitcoin-config
-        - name: bitcoin-blockchain-volatile
-          persistentVolumeClaim:
-            claimName: bitcoin-blockchain-volatile
+        # - name: bitcoin-blockchain-volatile
+        #   persistentVolumeClaim:
+        #     claimName: bitcoin-blockchain-volatile
       imagePullSecrets:
         - name: docker-hub
       nodeSelector:
@@ -70,12 +70,12 @@ spec:
   - apiVersion: v1
     kind: PersistentVolume
     metadata:
-      name: bitcoin-blockchain
+      name: bitcoin-blockchain-volatile
     spec:
       accessModes: 
         - ReadWriteOnce
       volumeMode: Filesystem
-      storageClassName: longhorn
+      storageClassName: nfs-client-volatile
       resources:
         requests:
-          storage: 500Gi
+          storage: 1Gi
