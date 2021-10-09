@@ -21,7 +21,7 @@ spec:
         - name: plex-secondary
           image: plexinc/pms-docker:latest
           imagePullPolicy: Always
-          # command: ["tail","-f","/dev/null"]
+          command: ["tail","-f","/dev/null"]
           envFrom:
             - configMapRef:
                 name: plex-secondary-config
@@ -34,6 +34,8 @@ spec:
               name: dri
             - mountPath: "/config"
               name: plex-secondary-config
+            - mountPath: "/config-old"
+              name: plex-secondary-config-old
             - mountPath: "/transcode"
               name: transcode
           # note to myself in the future: this is needed in order to use /dev/dri
@@ -49,6 +51,12 @@ spec:
         - name: braavos
           persistentVolumeClaim:
             claimName: braavos-media-pvc
+        - name: warehouse
+          persistentVolumeClaim:
+            claimName: warehouse-media
+        - name: plex-secondary-config-old
+          persistentVolumeClaim:
+            claimName: plex-secondary-config-plex-secondary-0
         - name: dri
           persistentVolumeClaim:
             claimName: dri-pvc
@@ -77,9 +85,9 @@ spec:
         name: plex-secondary-config
       spec:
         accessModes:
-          - ReadWriteOnce
+          - ReadWriteMany
         volumeMode: Filesystem
-        storageClassName: longhorn
+        storageClassName: nfs-client
         resources:
           requests:
-            storage: 40Gi
+            storage: 1Gi
