@@ -61,6 +61,11 @@ spec:
         size: 800Gi
         accessMode: ReadWriteOnce
         storageClass: longhorn
+      downloads-volatile: 
+        enabled: true
+        size: 1Gi
+        accessMode: ReadWriteOnce
+        storageClass: nfs-client-volatile
       braavos:
         enabled: true
         existingClaim: braavos-media-pvc
