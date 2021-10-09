@@ -16,7 +16,7 @@ spec:
       containers:
       - name: dizquetv
         image: vexorian/dizquetv:latest
-        command: ["sh","-c","tail /dev/null"]
+        command: ["sh","-c","tail -f /dev/null"]
         ports:
         - containerPort: 8000
           name: web
