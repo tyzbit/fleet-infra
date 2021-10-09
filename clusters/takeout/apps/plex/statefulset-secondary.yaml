@@ -5,7 +5,7 @@ metadata:
   labels:
     app: plex-secondary
 spec:
-  replicas: 1 # active nfs-client
+  replicas: 0 # active nfs-client
   selector:
     matchLabels:
       app: plex-secondary
@@ -21,7 +21,7 @@ spec:
         - name: plex-secondary
           image: plexinc/pms-docker:latest
           imagePullPolicy: Always
-          command: ["tail","-f","/dev/null"]
+          # command: ["tail","-f","/dev/null"]
           envFrom:
             - configMapRef:
                 name: plex-secondary-config
@@ -33,7 +33,7 @@ spec:
             - mountPath: "/dev/dri"
               name: dri
             - mountPath: "/config"
-              name: plex-secondary-config-volatile
+              name: plex-secondary-config
             - mountPath: "/config-old"
               name: plex-secondary-config-old
             - mountPath: "/transcode"
@@ -54,7 +54,7 @@ spec:
         - name: warehouse
           persistentVolumeClaim:
             claimName: warehouse-media
-        - name: plex-secondary-config-old
+        - name: plex-secondary-config
           persistentVolumeClaim:
             claimName: plex-secondary-config-plex-secondary-0
         - name: dri
