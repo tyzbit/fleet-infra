@@ -7,7 +7,7 @@ spec:
     matchLabels:
       app: dizquetv
   serviceName: dizquetv
-  replicas: 1 # active longhorn
+  replicas: 1 # active volatile-nfs
   template:
     metadata:
       labels:
@@ -16,12 +16,15 @@ spec:
       containers:
       - name: dizquetv
         image: vexorian/dizquetv:latest
+        command: ["sh","-c","tail /dev/null"]
         ports:
         - containerPort: 8000
           name: web
         volumeMounts:
         - name: dizquetv-data
           mountPath: /home/node/app/.dizquetv
+        - name: dizquetv-data-old
+          mountPath: /home/node/app/.dizquetv-old
         - name: dev-dri
           mountPath: /dev/dri
         securityContext:
@@ -32,6 +35,9 @@ spec:
           limits:
             memory: 1Gi
       volumes:
+        - name: dizquetv-data-old
+          persistentVolumeClaim:
+            claimName: dizquetv-data-dizquetv-0
         - name: dev-dri
           persistentVolumeClaim:
             claimName: dri-pvc
@@ -39,9 +45,10 @@ spec:
         graphics: dri
   volumeClaimTemplates:
   - metadata:
-      name: dizquetv-data
+      name: dizquetv-data-volatile
     spec:
       accessModes: [ "ReadWriteOnce" ]
+      storageClassName: nfs-client-volatile
       resources:
         requests:
           storage: 1Gi
