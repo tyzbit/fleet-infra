@@ -16,15 +16,15 @@ spec:
       containers:
       - name: dizquetv
         image: vexorian/dizquetv:latest
-        command: ["sh","-c","tail -f /dev/null"]
+        # command: ["sh","-c","tail -f /dev/null"]
         ports:
         - containerPort: 8000
           name: web
         volumeMounts:
         - name: dizquetv-data-volatile
           mountPath: /home/node/app/.dizquetv
-        - name: dizquetv-data-old
-          mountPath: /home/node/app/.dizquetv-old
+        # - name: dizquetv-data-old
+        #   mountPath: /home/node/app/.dizquetv-old
         - name: dev-dri
           mountPath: /dev/dri
         securityContext:
@@ -35,9 +35,9 @@ spec:
           limits:
             memory: 1Gi
       volumes:
-        - name: dizquetv-data-old
-          persistentVolumeClaim:
-            claimName: dizquetv-data-dizquetv-0
+        # - name: dizquetv-data-old
+        #   persistentVolumeClaim:
+        #     claimName: dizquetv-data-dizquetv-0
         - name: dev-dri
           persistentVolumeClaim:
             claimName: dri-pvc
