@@ -43,6 +43,8 @@ spec:
         volumeMounts:
           - mountPath: "/blockchain"
             name: bitcoin-blockchain
+          - mountPath: "/blockchain-volatile"
+            name: bitcoin-blockchain-volatile
           - mountPath: "/blockchain/.bitcoin/bitcoin.conf"
             subPath: "bitcoin.conf"
             name: bitcoin-config
@@ -57,6 +59,9 @@ spec:
         - name: bitcoin-config
           secret:
             secretName: bitcoin-config
+        - name: bitcoin-blockchain-volatile
+          persistentVolumeClaim:
+            claimName: bitcoin-blockchain-volatile
       imagePullSecrets:
         - name: docker-hub
       nodeSelector:
