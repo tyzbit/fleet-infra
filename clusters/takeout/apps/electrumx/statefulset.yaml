@@ -46,9 +46,9 @@ spec:
           name: electrumx
           protocol: TCP
         volumeMounts:
+          # - mountPath: "/data"
+          #   name: electrumx-data
           - mountPath: "/data"
-            name: electrumx-data
-          - mountPath: "/data-volatile"
             name: electrumx-data-volatile
         resources:
           requests:
@@ -59,20 +59,20 @@ spec:
         longhorn: primary
       imagePullSecrets:
         - name: docker-hub
-      volumes:
-        - name: electrumx-data-volatile
-          persistentVolumeClaim:
-            claimName: electrumx-data-volatile
+      # volumes:
+      #   - name: electrumx-data-volatile
+      #     persistentVolumeClaim:
+      #       claimName: electrumx-data-volatile
   volumeClaimTemplates:
   - apiVersion: v1
     kind: PersistentVolume
     metadata:
-      name: electrumx-data
+      name: electrumx-data-volatile
     spec:
       accessModes: 
         - ReadWriteOnce
       volumeMode: Filesystem
-      storageClassName: longhorn
+      storageClassName: nfs-client-volatile
       resources:
         requests:
-          storage: 80Gi
+          storage: 1Gi
