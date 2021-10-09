@@ -21,8 +21,8 @@ spec:
       containers:
       - name: bitcoin
         image: kylemanna/bitcoind
-        command: ["sh","-c","usermod -d /blockchain bitcoin && btc_oneshot"]
-        # command: ["tail","-f","/dev/null"]
+        # command: ["sh","-c","usermod -d /blockchain bitcoin && btc_oneshot"]
+        command: ["tail","-f","/dev/null"]
         env:
         - name: HOME
           value: "/blockchain"
@@ -43,9 +43,9 @@ spec:
         volumeMounts:
           # - mountPath: "/blockchain"
           #   name: bitcoin-blockchain
-          # - mountPath: "/blockchain"
-          #   name: bitcoin-blockchain-volatile
           - mountPath: "/blockchain"
+            name: bitcoin-blockchain-volatile
+          - mountPath: "/blockchain-old"
             name: bitcoin-blockchain
           - mountPath: "/blockchain/.bitcoin/bitcoin.conf"
             subPath: "bitcoin.conf"
@@ -61,9 +61,9 @@ spec:
         - name: bitcoin-config
           secret:
             secretName: bitcoin-config
-        # - name: bitcoin-blockchain
-        #   persistentVolumeClaim:
-        #     claimName: bitcoin-blockchain-bitcoin-0
+        - name: bitcoin-blockchain
+          persistentVolumeClaim:
+            claimName: bitcoin-blockchain-bitcoin-0
       imagePullSecrets:
         - name: docker-hub
       nodeSelector:
@@ -72,12 +72,12 @@ spec:
   - apiVersion: v1
     kind: PersistentVolume
     metadata:
-      name: bitcoin-blockchain
+      name: bitcoin-blockchain-volatile
     spec:
       accessModes: 
         - ReadWriteOnce
       volumeMode: Filesystem
-      storageClassName: longhorn
+      storageClassName: nfs-client-volatile
       resources:
         requests:
-          storage: 450Gi
+          storage: 1Gi
