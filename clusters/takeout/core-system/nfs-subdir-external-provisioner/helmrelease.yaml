@@ -20,9 +20,9 @@ spec:
       name: nfs-client
       pathPattern: "${.PVC.namespace}-${.PVC.name}"
     nfs:
-      server: braavos.jura
-      path: /nfs/cluster_storage
-      # server: warehouse.jura
-      # path: /volume1/cluster_storage
+      # server: braavos.jura
+      # path: /nfs/cluster_storage
+      server: warehouse.jura
+      path: /volume1/cluster_storage
       # server: simulacrum.jura
       # path: /mnt/user/KubernetesStorage/
