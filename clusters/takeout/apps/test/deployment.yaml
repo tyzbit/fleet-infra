@@ -18,7 +18,7 @@ spec:
         command: ["sh","-c","tail -f /dev/null"]
         volumeMounts:
           - mountPath: /storage
-            name: storage
+            name: test-storage
         resources:
           limits:
             memory: "128Mi"
