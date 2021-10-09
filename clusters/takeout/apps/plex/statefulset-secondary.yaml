@@ -5,7 +5,7 @@ metadata:
   labels:
     app: plex-secondary
 spec:
-  replicas: 1 # active nfs-client
+  replicas: 0 # active nfs-client
   selector:
     matchLabels:
       app: plex-secondary
@@ -36,8 +36,8 @@ spec:
               name: dri
             - mountPath: "/config"
               name: plex-secondary-config
-            # - mountPath: "/config-old"
-            #   name: plex-secondary-config-old
+            - mountPath: "/config-old"
+              name: plex-secondary-config-old
             - mountPath: "/transcode"
               name: transcode
           # note to myself in the future: this is needed in order to use /dev/dri
@@ -56,9 +56,9 @@ spec:
         - name: warehouse
           persistentVolumeClaim:
             claimName: warehouse-media
-        # - name: plex-secondary-config
-        #   persistentVolumeClaim:
-        #     claimName: plex-secondary-config-plex-secondary-0
+        - name: plex-secondary-config-old
+          persistentVolumeClaim:
+            claimName: plex-secondary-config-old-plex-secondary-0
         - name: dri
           persistentVolumeClaim:
             claimName: dri-pvc
