@@ -48,7 +48,7 @@ spec:
         volumeMounts:
           - mountPath: "/data"
             name: electrumx-data
-          - mountPath: "/data"
+          - mountPath: "/data-volatile"
             name: electrumx-data-volatile
         resources:
           requests:
