@@ -56,6 +56,11 @@ spec:
         size: 1Gi
         accessMode: ReadWriteOnce
         storageClass: longhorn
+      config-volatile: 
+        enabled: true
+        size: 1Gi
+        accessMode: ReadWriteOnce
+        storageClass: nfs-client-volatile
       downloads: 
         enabled: true
         size: 800Gi
