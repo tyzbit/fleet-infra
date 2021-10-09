@@ -21,7 +21,7 @@ spec:
         - containerPort: 8000
           name: web
         volumeMounts:
-        - name: dizquetv-data
+        - name: dizquetv-data-volatile
           mountPath: /home/node/app/.dizquetv
         - name: dizquetv-data-old
           mountPath: /home/node/app/.dizquetv-old
