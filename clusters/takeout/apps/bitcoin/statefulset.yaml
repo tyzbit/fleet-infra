@@ -7,7 +7,7 @@ metadata:
   labels:
     app: bitcoin
 spec:
-  replicas: 0 # active volatile-nfs
+  replicas: 1 # active volatile-nfs
   selector:
     matchLabels:
       app: bitcoin
@@ -41,10 +41,10 @@ spec:
           name: bitcoin-mq2
           protocol: TCP
         volumeMounts:
+          # - mountPath: "/blockchain"
+          #   name: bitcoin-blockchain
           - mountPath: "/blockchain"
-            name: bitcoin-blockchain
-          # - mountPath: "/blockchain-volatile"
-          #   name: bitcoin-blockchain-volatile
+            name: bitcoin-blockchain-volatile
           - mountPath: "/blockchain/.bitcoin/bitcoin.conf"
             subPath: "bitcoin.conf"
             name: bitcoin-config
@@ -64,8 +64,8 @@ spec:
         #     claimName: bitcoin-blockchain-volatile
       imagePullSecrets:
         - name: docker-hub
-      nodeSelector:
-        longhorn: primary
+      # nodeSelector:
+      #   longhorn: primary
   volumeClaimTemplates:
   - apiVersion: v1
     kind: PersistentVolume
