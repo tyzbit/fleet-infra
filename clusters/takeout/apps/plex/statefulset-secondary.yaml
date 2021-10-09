@@ -33,7 +33,7 @@ spec:
             - mountPath: "/dev/dri"
               name: dri
             - mountPath: "/config"
-              name: plex-secondary-config
+              name: plex-secondary-config-volatile
             - mountPath: "/config-old"
               name: plex-secondary-config-old
             - mountPath: "/transcode"
