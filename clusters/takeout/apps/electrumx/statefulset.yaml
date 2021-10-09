@@ -48,8 +48,8 @@ spec:
         volumeMounts:
           - mountPath: "/data"
             name: electrumx-data
-          # - mountPath: "/data"
-          #   name: electrumx-data-volatile
+          - mountPath: "/data"
+            name: electrumx-data-volatile
         resources:
           requests:
             cpu: 100m
@@ -59,10 +59,10 @@ spec:
         longhorn: primary
       imagePullSecrets:
         - name: docker-hub
-      # volumes:
-      #   - name: electrumx-data-volatile
-      #     persistentVolumeClaim:
-      #       claimName: electrumx-data-volatile
+      volumes:
+        - name: electrumx-data-volatile
+          persistentVolumeClaim:
+            claimName: electrumx-data-volatile
   volumeClaimTemplates:
   - apiVersion: v1
     kind: PersistentVolume
