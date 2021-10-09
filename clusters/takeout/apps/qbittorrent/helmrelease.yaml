@@ -17,7 +17,7 @@ spec:
   values:
     fullnameOverride: qbittorrent
     controller:
-      replicas: 0
+      replicas: 1
     ingress:
       main:
         enabled: true
