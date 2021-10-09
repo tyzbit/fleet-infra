@@ -21,7 +21,7 @@ spec:
         - containerPort: 8000
           name: web
         volumeMounts:
-        - name: dizquetv-data-volatile
+        - name: dizquetv-data
           mountPath: /home/node/app/.dizquetv
         # - name: dizquetv-data-old
         #   mountPath: /home/node/app/.dizquetv-old
@@ -45,10 +45,10 @@ spec:
         graphics: dri
   volumeClaimTemplates:
   - metadata:
-      name: dizquetv-data-volatile
+      name: dizquetv-data
     spec:
       accessModes: [ "ReadWriteOnce" ]
-      storageClassName: nfs-client-volatile
+      storageClassName: nfs-client
       resources:
         requests:
           storage: 1Gi
