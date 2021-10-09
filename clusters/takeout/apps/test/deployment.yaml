@@ -15,6 +15,7 @@ spec:
       containers:
       - name: test
         image: busybox
+        command: ["sh","-c","tail -f /dev/null"]
         volumeMounts:
           - mountPath: /storage
             name: storage
