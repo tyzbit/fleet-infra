@@ -46,10 +46,10 @@ spec:
           name: electrumx
           protocol: TCP
         volumeMounts:
-          # - mountPath: "/data"
-          #   name: electrumx-data
           - mountPath: "/data"
-            name: electrumx-data-volatile
+            name: electrumx-data
+          # - mountPath: "/data"
+          #   name: electrumx-data-volatile
         resources:
           requests:
             cpu: 100m
@@ -67,12 +67,12 @@ spec:
   - apiVersion: v1
     kind: PersistentVolume
     metadata:
-      name: electrumx-data-volatile
+      name: electrumx-data #-volatile
     spec:
       accessModes: 
         - ReadWriteOnce
       volumeMode: Filesystem
-      storageClassName: nfs-client-volatile
+      storageClassName: longhorn
       resources:
         requests:
-          storage: 1Gi
+          storage: 80Gi
