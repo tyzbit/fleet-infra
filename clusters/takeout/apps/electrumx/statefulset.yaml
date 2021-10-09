@@ -7,7 +7,7 @@ metadata:
   labels:
     app: electrumx
 spec:
-  replicas: 1 # active longhorn
+  replicas: 0 # active longhorn
   selector:
     matchLabels:
       app: electrumx
@@ -48,8 +48,8 @@ spec:
         volumeMounts:
           - mountPath: "/data"
             name: electrumx-data
-          - mountPath: "/data-volatile"
-            name: electrumx-data-volatile
+          # - mountPath: "/data-volatile"
+          #   name: electrumx-data-volatile
         resources:
           requests:
             cpu: 100m
@@ -59,20 +59,20 @@ spec:
         longhorn: primary
       imagePullSecrets:
         - name: docker-hub
-      volumes:
-        - name: electrumx-data-volatile
-          persistentVolumeClaim:
-            claimName: electrumx-data-volatile
+      # volumes:
+      #   - name: electrumx-data-volatile
+      #     persistentVolumeClaim:
+      #       claimName: electrumx-data-volatile
   volumeClaimTemplates:
   - apiVersion: v1
     kind: PersistentVolume
     metadata:
-      name: electrumx-data #-volatile
+      name: electrumx-data-volatile
     spec:
       accessModes: 
         - ReadWriteOnce
       volumeMode: Filesystem
-      storageClassName: longhorn
+      storageClassName: nfs-client-volatile
       resources:
         requests:
-          storage: 80Gi
+          storage: 1Gi
