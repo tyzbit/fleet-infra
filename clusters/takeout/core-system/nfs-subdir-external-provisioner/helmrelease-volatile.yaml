@@ -15,14 +15,14 @@ spec:
         namespace: flux-system
   interval: 1m0s
   values:
-    fullnameOverride: nfs-provisioner
+    fullnameOverride: nfs-provisioner-volatile
     storageClass:
-      name: nfs-client
+      name: nfs-client-volatile
       pathPattern: "${.PVC.namespace}-${.PVC.name}"
     nfs:
-      server: braavos.jura
-      path: /nfs/cluster_storage
-      # server: warehouse.jura
-      # path: /volume1/cluster_storage
+      server: warehouse.jura
+      path: /volume1/volatile_cluster_storage
+      # server: braavos.jura
+      # path: /nfs/cluster_storage
       # server: simulacrum.jura
       # path: /mnt/user/KubernetesStorage/
