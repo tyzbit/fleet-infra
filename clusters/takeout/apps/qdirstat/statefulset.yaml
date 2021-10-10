@@ -9,22 +9,12 @@ spec:
   selector:
     matchLabels:
       app: qdirstat
-  replicas: 0 # active longhorn
+  replicas: 1 # active nfs-client
   template:
     metadata:
       labels:
         app: qdirstat
     spec:
-      affinity:
-        podAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-          - labelSelector:
-              matchExpressions:
-              - key: app.kubernetes.io/instance
-                operator: In
-                values:
-                - default-qbittorrent
-            topologyKey: kubernetes.io/hostname
       containers:
         - name: qdirstat
           image: jlesage/qdirstat:latest
@@ -55,6 +45,8 @@ spec:
             claimName: amazon-kubernetes-storage
       imagePullSecrets:
         - name: docker-hub
+      nodeSelector:
+        kubernetes.io/hostname: cameraman
   volumeClaimTemplates:
     - apiVersion: v1
       kind: PersistentVolumeClaim
