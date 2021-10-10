@@ -19,11 +19,12 @@ spec:
         - name: qdirstat
           image: jlesage/qdirstat:latest
           imagePullPolicy: Always
+          command: ["sh","-c","tail -f /dev/null"]
           volumeMounts:
             - name: qdirstat-config
               mountPath: /config
-            - name: braavos
-              mountPath: /mount/braavos
+            - name: warehouse
+              mountPath: /mount/warehouse
             - name: downloads
               mountPath: /mount/downloads
             - name: amazon-kubernetes-storage
@@ -34,9 +35,9 @@ spec:
             limits:
               memory: 512Mi
       volumes:
-        - name: braavos
+        - name: warehouse
           persistentVolumeClaim:
-            claimName: braavos-media-pvc
+            claimName: warehouse-media
         - name: downloads
           persistentVolumeClaim:
             claimName: qbittorrent-downloads
@@ -54,9 +55,9 @@ spec:
         name: qdirstat-config
       spec:
         accessModes: 
-          - ReadWriteOnce
+          - ReadWriteMany
         volumeMode: Filesystem
-        storageClassName: longhorn
+        storageClassName: nfs-client
         resources:
           requests:
             storage: 1Gi
