@@ -62,6 +62,7 @@ spec:
         - name: docker-hub
       nodeSelector:
         longhorn: primary
+        kubernetes.io/hostname: anchorman
   volumeClaimTemplates:
     - apiVersion: v1
       kind: PersistentVolume
