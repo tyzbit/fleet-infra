@@ -5,7 +5,7 @@ metadata:
   labels:
     app: plex-secondary
 spec:
-  replicas: 0 # active nfs-client
+  replicas: 1 # active nfs-client
   selector:
     matchLabels:
       app: plex-secondary
@@ -90,7 +90,7 @@ spec:
         accessModes:
           - ReadWriteOnce
         volumeMode: Filesystem
-        storageClassName: longhorn
+        storageClassName: longhorn-static
         resources:
           requests:
             storage: 40Gi
