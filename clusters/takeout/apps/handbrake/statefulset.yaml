@@ -57,8 +57,6 @@ spec:
             limits:
               memory: 4Gi
       volumes:
-        - name: handbrake-output
-          emptyDir: {}
         - name: dri
           persistentVolumeClaim:
             claimName: dri-pvc
@@ -79,9 +77,9 @@ spec:
         name: handbrake-config
       spec:
         accessModes:
-          - ReadWriteOnce
+          - ReadWriteMany
         volumeMode: Filesystem
-        storageClassName: longhorn
+        storageClassName: nfs-client
         resources:
           requests:
             storage: 1Gi
