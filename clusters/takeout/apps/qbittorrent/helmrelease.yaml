@@ -82,5 +82,5 @@ spec:
         cpu: 200m
       limits:
         memory: 6Gi
-    # nodeSelector:
-    #   kubernetes.io/hostname: cameraman
+    nodeSelector:
+      kubernetes.io/hostname: cameraman
