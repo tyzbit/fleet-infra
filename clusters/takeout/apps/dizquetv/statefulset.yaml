@@ -7,7 +7,7 @@ spec:
     matchLabels:
       app: dizquetv
   serviceName: dizquetv
-  replicas: 0 # active nfs-client
+  replicas: 1 # active nfs-client
   template:
     metadata:
       labels:
