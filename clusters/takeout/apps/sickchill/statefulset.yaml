@@ -13,16 +13,6 @@ spec:
       labels:
         app: sickchill
     spec:
-      affinity:
-        podAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-          - labelSelector:
-              matchExpressions:
-              - key: app.kubernetes.io/instance
-                operator: In
-                values:
-                - default-qbittorrent
-            topologyKey: kubernetes.io/hostname
       containers:
       - name: sickchill
         image: sickchill/sickchill
