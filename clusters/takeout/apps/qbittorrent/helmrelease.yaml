@@ -51,29 +51,16 @@ spec:
         - name: downloads
           mountPath: /downloads
     persistence:
-      # config: 
-      #   enabled: true
-      #   size: 1Gi
-      #   accessMode: ReadWriteOnce
-      #   storageClass: longhorn
       config: 
         enabled: true
         size: 1Gi
         accessMode: ReadWriteMany
         storageClass: nfs-client
-      # downloads: 
-      #   enabled: true
-      #   size: 800Gi
-      #   accessMode: ReadWriteOnce
-      #   storageClass: longhorn
       downloads: 
         enabled: true
         size: 1Gi
         accessMode: ReadWriteMany
         storageClass: nfs-client-volatile
-      braavos:
-        enabled: true
-        existingClaim: braavos-media-pvc
       warehouse:
         enabled: true
         existingClaim: warehouse-media
