@@ -19,7 +19,7 @@ spec:
         - name: qdirstat
           image: jlesage/qdirstat:latest
           imagePullPolicy: Always
-          command: ["sh","-c","tail -f /dev/null"]
+          # command: ["sh","-c","tail -f /dev/null"]
           volumeMounts:
             - name: qdirstat-config
               mountPath: /config
@@ -46,8 +46,6 @@ spec:
             claimName: amazon-kubernetes-storage
       imagePullSecrets:
         - name: docker-hub
-      nodeSelector:
-        kubernetes.io/hostname: cameraman
   volumeClaimTemplates:
     - apiVersion: v1
       kind: PersistentVolumeClaim
