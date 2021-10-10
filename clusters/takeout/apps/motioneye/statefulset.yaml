@@ -7,7 +7,7 @@ metadata:
   labels:
     app: motioneye
 spec:
-  replicas: 1 # active longhorn
+  replicas: 1 # active nfs-client
   serviceName: motioneye
   selector:
     matchLabels:
@@ -22,7 +22,7 @@ spec:
       - name: motioneye
         image: ccrisan/motioneye:0.42-amd64
         imagePullPolicy: Always
-        command: ["tail","-f","/dev/null"]
+        # command: ["tail","-f","/dev/null"]
         env:
         - name: TZ
           value: America/New_York
@@ -69,7 +69,6 @@ spec:
       #       claimName: braavos-camera-pvc
       nodeSelector:
         graphics: dri
-        kubernetes.io/hostname: anchorman
       imagePullSecrets:
         - name: docker-hub
   volumeClaimTemplates:
