@@ -19,12 +19,12 @@ spec:
         - name: handbrake
           image: jlesage/handbrake:latest
           imagePullPolicy: Always
-          command: ["sh","-c","tail -f /dev/null"]
-          # - sh
-          # - -c
-          # - |
-          #   apk add curl &&
-          #   /init
+          command: # ["sh","-c","tail -f /dev/null"]
+          - sh
+          - -c
+          - |
+            apk add curl &&
+            /init
           env:
             - name: USER_ID
               value: "568"
@@ -68,8 +68,6 @@ spec:
             claimName: qbittorrent-downloads
       imagePullSecrets:
         - name: docker-hub
-      nodeSelector:
-        kubernetes.io/hostname: cameraman
   volumeClaimTemplates:
     - apiVersion: v1
       kind: PersistentVolumeClaim
