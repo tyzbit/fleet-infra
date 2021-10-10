@@ -16,7 +16,7 @@ spec:
       containers:
       - name: sickchill
         image: sickchill/sickchill
-        command: ["sh","-c","tail -f /dev/null"]
+        # command: ["sh","-c","tail -f /dev/null"]
         env:
         - name: TZ
           value: America/New_York
