@@ -41,17 +41,11 @@ spec:
           name: bitcoin-mq2
           protocol: TCP
         volumeMounts:
-          # - mountPath: "/blockchain"
-          #   name: bitcoin-blockchain
           - mountPath: "/blockchain"
             name: bitcoin-blockchain-volatile
-          # - mountPath: "/blockchain-old"
-          #   name: bitcoin-blockchain
           - mountPath: "/blockchain/.bitcoin/bitcoin.conf"
             subPath: "bitcoin.conf"
             name: bitcoin-config
-          # - mountPath: "/simulacrum"
-          #   name: simulacrum-blockchain
         resources:
           requests:
             cpu: 100m
@@ -61,13 +55,8 @@ spec:
         - name: bitcoin-config
           secret:
             secretName: bitcoin-config
-        # - name: bitcoin-blockchain
-        #   persistentVolumeClaim:
-        #     claimName: bitcoin-blockchain-bitcoin-0
       imagePullSecrets:
         - name: docker-hub
-      nodeSelector:
-        longhorn: primary
   volumeClaimTemplates:
   - apiVersion: v1
     kind: PersistentVolume
