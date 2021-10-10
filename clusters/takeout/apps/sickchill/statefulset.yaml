@@ -4,7 +4,7 @@ metadata:
   name: sickchill
 spec:
   serviceName: sickchill
-  replicas: 1
+  replicas: 1 # active nfs-client
   selector:
     matchLabels:
       app: sickchill
