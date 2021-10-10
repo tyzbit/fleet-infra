@@ -56,9 +56,6 @@ spec:
         - name: warehouse
           persistentVolumeClaim:
             claimName: warehouse-media
-        - name: plex-secondary-config-old
-          persistentVolumeClaim:
-            claimName: plex-secondary-config-old-plex-secondary-0
         - name: dri
           persistentVolumeClaim:
             claimName: dri-pvc
