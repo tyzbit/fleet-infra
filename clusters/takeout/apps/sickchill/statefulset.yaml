@@ -52,8 +52,6 @@ spec:
         - name: sickchill-config
           persistentVolumeClaim:
             claimName: sickchill-config
-      nodeSelector:
-        kubernetes.io/hostname: anchorman
   volumeClaimTemplates:
     - apiVersion: v1
       kind: PersistentVolumeClaim
