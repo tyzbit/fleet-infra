@@ -45,5 +45,5 @@ spec:
         - marcusolsson-hexmap-panel
       persistence:
         enabled: true
-        storageClassName: longhorn
+        storageClassName: nfs-client
     
