@@ -13,16 +13,6 @@ spec:
       labels:
         app: filebrowser
     spec:
-      affinity:
-        podAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-          - labelSelector:
-              matchExpressions:
-              - key: app.kubernetes.io/instance
-                operator: In
-                values:
-                - default-qbittorrent
-            topologyKey: kubernetes.io/hostname
       containers:
       - name: filebrowser
         image: filebrowser/filebrowser:v2
@@ -38,8 +28,8 @@ spec:
         volumeMounts:
           - name: filebrowser-config
             mountPath: /db
-          - name: braavos
-            mountPath: /srv/braavos
+          - name: warehouse
+            mountPath: /srv/warehouse
           - name: downloads
             mountPath: /srv/downloads
           - name: amazon-kubernetes-storage
@@ -52,9 +42,9 @@ spec:
         ports:
         - containerPort: 80
       volumes:
-        - name: braavos
+        - name: warehouse
           persistentVolumeClaim:
-            claimName: braavos-media-pvc
+            claimName: warehouse-media
         - name: downloads
           persistentVolumeClaim:
             claimName: qbittorrent-downloads
@@ -73,5 +63,6 @@ spec:
           requests:
             storage: 512Mi
         volumeMode: Filesystem
+        storageClassName: nfs-client
         accessModes:
-          - ReadWriteOnce
+          - ReadWriteMany
