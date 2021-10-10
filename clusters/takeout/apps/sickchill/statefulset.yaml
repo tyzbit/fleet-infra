@@ -4,6 +4,7 @@ metadata:
   name: sickchill
 spec:
   serviceName: sickchill
+  replicas: 0
   selector:
     matchLabels:
       app: sickchill
