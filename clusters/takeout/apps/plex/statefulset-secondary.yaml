@@ -21,7 +21,7 @@ spec:
         - name: plex-secondary
           image: plexinc/pms-docker:latest
           imagePullPolicy: Always
-          # command: ["tail","-f","/dev/null"]
+          command: ["tail","-f","/dev/null"]
           envFrom:
             - configMapRef:
                 name: plex-secondary-config
@@ -68,6 +68,7 @@ spec:
       nodeSelector:
         graphics: dri
         # longhorn: primary
+        kubernetes.io/hostname: anchorman
       imagePullSecrets:
         - name: docker-hub
       affinity:
