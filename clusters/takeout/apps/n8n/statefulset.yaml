@@ -20,7 +20,7 @@ spec:
         - name: n8n
           image: n8nio/n8n:latest
           imagePullPolicy: Always
-          command: ["tail","-f","/dev/null"]
+          # command: ["tail","-f","/dev/null"]
           envFrom:
           - secretRef:
               name: n8n-config
@@ -39,8 +39,8 @@ spec:
       imagePullSecrets:
         - name: docker-hub
       serviceAccount: n8n
-      nodeSelector:
-        kubernetes.io/hostname: trainman
+      # nodeSelector:
+      #   kubernetes.io/hostname: trainman
   volumeClaimTemplates:
   - apiVersion: v1
     kind: PersistentVolume
