@@ -9,32 +9,22 @@ spec:
   selector:
     matchLabels:
       app: handbrake
-  replicas: 0 # active longhorn
+  replicas: 1 # active nfs-client
   template:
     metadata:
       labels:
         app: handbrake
     spec:
-      affinity:
-        podAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-          - labelSelector:
-              matchExpressions:
-              - key: app.kubernetes.io/instance
-                operator: In
-                values:
-                - default-qbittorrent
-            topologyKey: kubernetes.io/hostname
       containers:
         - name: handbrake
           image: jlesage/handbrake:latest
           imagePullPolicy: Always
-          command:
-          - sh
-          - -c
-          - |
-            apk add curl &&
-            /init
+          command: ["sh","-c","tail -f /dev/null"]
+          # - sh
+          # - -c
+          # - |
+          #   apk add curl &&
+          #   /init
           env:
             - name: USER_ID
               value: "568"
@@ -55,8 +45,8 @@ spec:
               mountPath: /output
             - name: dri
               mountPath: /dev/dri
-            - name: braavos
-              mountPath: /storage/braavos
+            - name: warehouse
+              mountPath: /storage/warehouse
             - name: downloads
               mountPath: /storage/downloads
           securityContext:
@@ -72,14 +62,16 @@ spec:
         - name: dri
           persistentVolumeClaim:
             claimName: dri-pvc
-        - name: braavos
+        - name: warehouse
           persistentVolumeClaim:
-            claimName: braavos-media-pvc
+            claimName: warehouse-media
         - name: downloads
           persistentVolumeClaim:
             claimName: qbittorrent-downloads
       imagePullSecrets:
         - name: docker-hub
+      nodeSelector:
+        kubernetes.io/hostname: 
   volumeClaimTemplates:
     - apiVersion: v1
       kind: PersistentVolumeClaim
