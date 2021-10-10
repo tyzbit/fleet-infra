@@ -16,7 +16,7 @@ spec:
       containers:
       - name: dizquetv
         image: vexorian/dizquetv:latest
-        command: ["sh","-c","tail -f /dev/null"]
+        # command: ["sh","-c","tail -f /dev/null"]
         ports:
         - containerPort: 8000
           name: web
@@ -38,7 +38,7 @@ spec:
             claimName: dri-pvc
       nodeSelector:
         graphics: dri
-        kubernetes.io/hostname: cameraman
+        # kubernetes.io/hostname: cameraman
   volumeClaimTemplates:
   - metadata:
       name: dizquetv-data
