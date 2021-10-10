@@ -14,16 +14,16 @@ spec:
       parallelism: 1
       template:
         spec:
-          affinity:
-            podAffinity:
-              requiredDuringSchedulingIgnoredDuringExecution:
-              - labelSelector:
-                  matchExpressions:
-                  - key: app
-                    operator: In
-                    values:
-                    - nextcloud
-                topologyKey: kubernetes.io/hostname
+          # affinity:
+          #   podAffinity:
+          #     requiredDuringSchedulingIgnoredDuringExecution:
+          #     - labelSelector:
+          #         matchExpressions:
+          #         - key: app
+          #           operator: In
+          #           values:
+          #           - nextcloud
+          #       topologyKey: kubernetes.io/hostname
           containers:
           - name: nextcloud-cron
             # Same image as in /etc/kubernetes/manifests/etcd.yaml
