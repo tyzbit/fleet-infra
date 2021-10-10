@@ -5,7 +5,7 @@ metadata:
   labels:
     app: plex-secondary
 spec:
-  replicas: 1 # active nfs-client
+  replicas: 0 # active nfs-client
   selector:
     matchLabels:
       app: plex-secondary
@@ -30,14 +30,14 @@ spec:
           volumeMounts:
             - mountPath: "/braavos"
               name: braavos
-            - mountPath: "/warehouse"
-              name: warehouse
+            # - mountPath: "/warehouse"
+            #   name: warehouse
             - mountPath: "/dev/dri"
               name: dri
             - mountPath: "/config"
               name: plex-secondary-config
-            - mountPath: "/config-old"
-              name: plex-secondary-config-old
+            # - mountPath: "/config-old"
+            #   name: plex-secondary-config-old
             - mountPath: "/transcode"
               name: transcode
           # note to myself in the future: this is needed in order to use /dev/dri
@@ -67,8 +67,8 @@ spec:
             # medium: Memory
       nodeSelector:
         graphics: dri
-        # longhorn: primary
-        kubernetes.io/hostname: anchorman
+        longhorn: primary
+        # kubernetes.io/hostname: anchorman
       imagePullSecrets:
         - name: docker-hub
       affinity:
@@ -88,9 +88,9 @@ spec:
         name: plex-secondary-config
       spec:
         accessModes:
-          - ReadWriteMany
+          - ReadWriteOnce
         volumeMode: Filesystem
-        storageClassName: nfs-client
+        storageClassName: longhorn
         resources:
           requests:
-            storage: 1Gi
+            storage: 40Gi
