@@ -16,7 +16,7 @@ spec:
       - name: nextcloud
         image: nextcloud:21.0.5
         imagePullPolicy: Always
-        command: ["tail","-f","/dev/null"]
+        # command: ["tail","-f","/dev/null"]
         envFrom:
           - secretRef:
               name: nextcloud-config
@@ -38,5 +38,5 @@ spec:
             claimName: nextcloud-data
       imagePullSecrets:
         - name: docker-hub
-      nodeSelector:
-        kubernetes.io/hostname: weatherman
+      # nodeSelector:
+      #   kubernetes.io/hostname: weatherman
