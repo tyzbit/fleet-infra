@@ -30,8 +30,8 @@ spec:
           volumeMounts:
             - mountPath: "/braavos"
               name: braavos
-            # - mountPath: "/warehouse"
-            #   name: warehouse
+            - mountPath: "/warehouse"
+              name: warehouse
             - mountPath: "/dev/dri"
               name: dri
             - mountPath: "/config"
