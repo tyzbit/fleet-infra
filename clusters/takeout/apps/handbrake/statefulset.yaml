@@ -71,7 +71,7 @@ spec:
       imagePullSecrets:
         - name: docker-hub
       nodeSelector:
-        kubernetes.io/hostname: 
+        kubernetes.io/hostname: cameraman
   volumeClaimTemplates:
     - apiVersion: v1
       kind: PersistentVolumeClaim
