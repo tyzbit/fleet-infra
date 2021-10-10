@@ -4,7 +4,7 @@ metadata:
   name: sickchill
 spec:
   serviceName: sickchill
-  replicas: 0
+  replicas: 1
   selector:
     matchLabels:
       app: sickchill
@@ -26,6 +26,7 @@ spec:
       containers:
       - name: sickchill
         image: sickchill/sickchill
+        command: ["sh","-c","tail -f /dev/null"]
         env:
         - name: TZ
           value: America/New_York
@@ -40,10 +41,10 @@ spec:
             name: downloads
           - mountPath: /tv
             subPath: "tv shows"
-            name: braavos
+            name: warehouse
           - mountPath: /anime
             subPath: "anime"
-            name: braavos
+            name: warehouse
         resources:
           requests:
             cpu: "100m"
@@ -55,12 +56,14 @@ spec:
         - name: downloads
           persistentVolumeClaim:
             claimName: qbittorrent-downloads
-        - name: braavos
+        - name: warehouse
           persistentVolumeClaim:
-            claimName: braavos-media-pvc
+            claimName: warehouse-media
         - name: sickchill-config
           persistentVolumeClaim:
             claimName: sickchill-config
+      nodeSelector:
+        kubernetes.io/hostname: anchorman
   volumeClaimTemplates:
     - apiVersion: v1
       kind: PersistentVolumeClaim
