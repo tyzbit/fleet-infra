@@ -28,8 +28,8 @@ spec:
           ports:
             - containerPort: 32400
           volumeMounts:
-            # - mountPath: "/braavos"
-            #   name: braavos
+            - mountPath: "/braavos"
+              name: braavos
             - mountPath: "/warehouse"
               name: warehouse
             - mountPath: "/dev/dri"
@@ -50,9 +50,9 @@ spec:
             limits:
               memory: 8192Mi
       volumes:
-        # - name: braavos
-        #   persistentVolumeClaim:
-        #     claimName: braavos-media-pvc
+        - name: braavos
+          persistentVolumeClaim:
+            claimName: braavos-media-pvc
         - name: warehouse
           persistentVolumeClaim:
             claimName: warehouse-media
