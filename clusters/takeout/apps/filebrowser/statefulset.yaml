@@ -42,6 +42,9 @@ spec:
         ports:
         - containerPort: 80
       volumes:
+        - name: filebrowser-config
+          persistentVolumeClaim:
+            claimName: temp-filebrowser-config # CHANGEME
         - name: warehouse
           persistentVolumeClaim:
             claimName: warehouse-media
@@ -51,18 +54,18 @@ spec:
         - name: amazon-kubernetes-storage
           persistentVolumeClaim:
             claimName: amazon-kubernetes-storage
-      nodeSelector:
-        kubernetes.io/hostname: cameraman
-  volumeClaimTemplates:
-    - apiVersion: v1
-      kind: PersistentVolumeClaim
-      metadata:
-        name: filebrowser-config
-      spec:
-        resources:
-          requests:
-            storage: 512Mi
-        volumeMode: Filesystem
-        storageClassName: nfs-client
-        accessModes:
-          - ReadWriteMany
+      # nodeSelector:
+      #   kubernetes.io/hostname: cameraman
+  # volumeClaimTemplates:
+  #   - apiVersion: v1
+  #     kind: PersistentVolumeClaim
+  #     metadata:
+  #       name: filebrowser-config
+  #     spec:
+  #       resources:
+  #         requests:
+  #           storage: 512Mi
+  #       volumeMode: Filesystem
+  #       storageClassName: nfs-client
+  #       accessModes:
+  #         - ReadWriteMany

@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: temp-dizquetv-data # CHANGEME
+  name: temp-filebrowser-config # CHANGEME
 spec:
   resources:
     requests:
