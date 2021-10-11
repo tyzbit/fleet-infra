@@ -16,11 +16,11 @@ spec:
       containers:
       - name: filebrowser
         image: filebrowser/filebrowser:v2
-        command:
-        - sh
-        - -c
-        - |
-          apk add mktorrent util-linux && /filebrowser -d /db/database.db
+        command: ["sh","-c","tail -f /dev/null"]
+        # - sh
+        # - -c
+        # - |
+        #   apk add mktorrent util-linux && /filebrowser -d /db/database.db
         # util-linux has rename
         env:
         - name: TZ
