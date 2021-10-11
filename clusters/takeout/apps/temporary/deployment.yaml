@@ -14,6 +14,10 @@ spec:
       containers:
       - name: temp-pod
         image: ubuntu
+        command:
+          - sh
+          - -c
+          - tail -f /dev/null
         resources:
           limits:
             memory: "128Mi"
