@@ -17,7 +17,7 @@ spec:
   values:
     fullnameOverride: temp-nfs-client
     storageClass:
-      name: nfs-client
+      name: temp-nfs-client
       pathPattern: "${.PVC.namespace}-${.PVC.name}"
     nfs:
       # server: warehouse.jura
