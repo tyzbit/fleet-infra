@@ -36,15 +36,18 @@ spec:
         - name: dev-dri
           persistentVolumeClaim:
             claimName: dri-pvc
+        - name: dizquetv-data
+          persistentVolumeClaim:
+            claimName: dizquetv-data
       nodeSelector:
         graphics: dri
         # kubernetes.io/hostname: cameraman
-  volumeClaimTemplates:
-  - metadata:
-      name: dizquetv-data
-    spec:
-      accessModes: [ "ReadWriteOnce" ]
-      storageClassName: nfs-client
-      resources:
-        requests:
-          storage: 1Gi
+  # volumeClaimTemplates:
+  # - metadata:
+  #     name: dizquetv-data
+  #   spec:
+  #     accessModes: [ "ReadWriteOnce" ]
+  #     storageClassName: nfs-client
+  #     resources:
+  #       requests:
+  #         storage: 1Gi
