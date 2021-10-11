@@ -38,7 +38,7 @@ spec:
             claimName: dri-pvc
         - name: dizquetv-data
           persistentVolumeClaim:
-            claimName: dizquetv-data
+            claimName: temp-dizquetv-data
       nodeSelector:
         graphics: dri
         # kubernetes.io/hostname: cameraman
