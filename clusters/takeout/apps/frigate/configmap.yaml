@@ -80,6 +80,18 @@ data:
           width: 2688
           height: 1520
           fps: 5
+      court:
+        record:
+          enabled: false
+        ffmpeg:
+          inputs:
+            - path: 'rtsp://{FRIGATE_COURT_CREDENTIALS}@court:554/live'
+              roles:
+                - detect
+        detect:
+          width: 1920
+          height: 1080
+          fps: 5
     record:
       enabled: true
       retain_days: 0
