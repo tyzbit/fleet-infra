@@ -100,7 +100,7 @@ data:
           default: 30
     birdseye:
       enabled: true
-      mode: objects
+      mode: continuous
     detectors:
       coral:
         type: edgetpu
