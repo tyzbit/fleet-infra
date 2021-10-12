@@ -16,6 +16,8 @@ data:
     #     - yuv420p
     cameras:
       frontdoor:
+        snapshots:
+          timestamp: true
         motion:
           mask:
             - 0,390,190,281,413,219,612,181,842,131,1149,113,1138,0,0,0
@@ -30,6 +32,8 @@ data:
           height: 720
           fps: 5
       backdoor:
+        snapshots:
+          timestamp: true
         ffmpeg:
           inputs:
             - path: 'rtsp://{FRIGATE_BACKDOOR_CREDENTIALS}@backdoor:554/live'
@@ -41,6 +45,8 @@ data:
           height: 1080
           fps: 5
       driveway:
+        snapshots:
+          timestamp: true
         motion:
           mask:
             - 1820,127,1775,335,1605,1080,1920,1080,1920,252,1920,0,1252,0,1443,45
@@ -62,11 +68,6 @@ data:
           height: 1080
           fps: 5
       porch:
-        clips:
-          enabled: true
-        record:
-          enabled: true
-          retain_days: 0
         snapshots:
           timestamp: true
         ffmpeg:
