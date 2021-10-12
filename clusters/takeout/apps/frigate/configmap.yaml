@@ -25,6 +25,10 @@ data:
               roles:
                 - detect
                 - rtmp
+        detect:
+          width: 1280
+          height: 720
+          fps: 5
       backdoor:
         ffmpeg:
           inputs:
@@ -32,6 +36,10 @@ data:
               roles:
                 - detect
                 - rtmp
+        detect:
+          width: 1920
+          height: 1080
+          fps: 5
       driveway:
         motion:
           mask:
@@ -49,20 +57,34 @@ data:
               roles:
                 - detect
                 - rtmp
+        detect:
+          width: 1920
+          height: 1080
+          fps: 5
       porch:
+        clips:
+          enabled: true
+        record:
+          enabled: true
+          retain_days: 0
+        snapshots:
+          timestamp: true
         ffmpeg:
           inputs:
             - path: 'rtsp://{FRIGATE_PORCH_CREDENTIALS}@porch:554/live'
               roles:
                 - detect
                 - rtmp
-    clips:
-      max_seconds: 300
-      retain:
-        default: 30
+        detect:
+          width: 2688
+          height: 1520
+          fps: 5
     record:
-      retain:
-        default: 0
+      enabled: true
+      retain_days: 0
+      events:
+        retain:
+          default: 30
     detectors:
       coral:
         type: edgetpu
