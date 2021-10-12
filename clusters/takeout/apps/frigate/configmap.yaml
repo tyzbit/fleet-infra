@@ -29,7 +29,6 @@ data:
               roles:
                 - detect
                 - rtmp
-                - clips
         width: 1280
         height: 720
         fps: 5
@@ -44,7 +43,6 @@ data:
               roles:
                 - detect
                 - rtmp
-                - clips
         width: 1920
         height: 1080
         fps: 5
@@ -69,7 +67,6 @@ data:
               roles:
                 - detect
                 - rtmp
-                - clips
         width: 1920
         height: 1080
         fps: 5
@@ -84,7 +81,6 @@ data:
               roles:
                 - detect
                 - rtmp
-                - clips
         width: 2688
         height: 1520
         fps: 5
@@ -92,6 +88,9 @@ data:
       max_seconds: 300
       retain:
         default: 30
+    record:
+      retain:
+        default: 0
     detectors:
       coral:
         type: edgetpu
