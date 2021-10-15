@@ -7,7 +7,7 @@ metadata:
   labels:
     app: motioneye
 spec:
-  replicas: 1 # active nfs-client
+  replicas: 0 # active nfs-client
   serviceName: motioneye
   selector:
     matchLabels:

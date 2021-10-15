@@ -4,7 +4,7 @@ metadata:
   name: filebrowser
 spec:
   serviceName: filebrowser
-  replicas: 1 # active nfs-client
+  replicas: 0 # active nfs-client
   selector:
     matchLabels:
       app: filebrowser
