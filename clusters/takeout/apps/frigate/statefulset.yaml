@@ -54,7 +54,7 @@ spec:
             requests:
               cpu: 1000m
             limits:
-              memory: 1200Mi
+              memory: 2Gi
           livenessProbe:
             initialDelaySeconds: 60
             tcpSocket:
