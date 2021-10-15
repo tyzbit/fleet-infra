@@ -29,7 +29,7 @@ spec:
             - containerPort: 32400
           volumeMounts:
             - mountPath: "/braavos"
-              name: braavos-media-pvc
+              name: braavos
             - mountPath: "/dev/dri"
               name: dri
             - mountPath: "/config"
