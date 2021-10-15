@@ -27,5 +27,4 @@ spec:
       # server: simulacrum.jura
       # path: /mnt/user/KubernetesStorage/
       # mountOptions:
-      #   - nfsvers=3
-      #   - local_lock=posix
+      #   - nfsvers=4
