@@ -5,7 +5,7 @@ metadata:
   labels:
     app: plex-secondary
 spec:
-  replicas: 1 # active nfs-client
+  replicas: 0 # active nfs-client
   selector:
     matchLabels:
       app: plex-secondary
@@ -35,8 +35,8 @@ spec:
             - mountPath: "/dev/dri"
               name: dri
             - mountPath: "/config"
-              # name: plex-secondary-config
-              name: plex-secondary-config-nfs
+              name: plex-secondary-config
+              # name: plex-secondary-config-nfs
             # - mountPath: "/config-old"
             #   name: plex-secondary-config-old
             - mountPath: "/transcode"
@@ -57,9 +57,9 @@ spec:
         - name: warehouse
           persistentVolumeClaim:
             claimName: warehouse-media
-        - name: plex-secondary-config-nfs
-          persistentVolumeClaim:
-            claimName: plex-secondary-config
+        # - name: plex-secondary-config-nfs
+        #   persistentVolumeClaim:
+        #     claimName: plex-secondary-config
         - name: dri
           persistentVolumeClaim:
             claimName: dri-pvc
@@ -69,7 +69,7 @@ spec:
       nodeSelector:
         graphics: dri
         longhorn: primary
-        kubernetes.io/hostname: anchorman
+        # kubernetes.io/hostname: anchorman
       imagePullSecrets:
         - name: docker-hub
       affinity:
