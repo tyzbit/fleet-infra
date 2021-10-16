@@ -26,5 +26,5 @@ spec:
       # path: /nfs/cluster_storage
       # server: simulacrum.jura
       # path: /mnt/user/KubernetesStorage/
-      # mountOptions:
-      #   - nfsvers=4
+      mountOptions:
+        - nfsvers=4.1
