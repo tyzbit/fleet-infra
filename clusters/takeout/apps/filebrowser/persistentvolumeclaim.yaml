@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: temp-filebrowser-config # CHANGEME
+  name: filebrowser-config
 spec:
   resources:
     requests:
       storage: 1Gi
   volumeMode: Filesystem
-  storageClassName: longhorn # CHANGEME
+  storageClassName: nfs-fast
   accessModes:
     - ReadWriteMany
