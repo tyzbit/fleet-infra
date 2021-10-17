@@ -28,8 +28,10 @@ spec:
         volumeMounts:
           - name: filebrowser-config
             mountPath: /db
-          - name: warehouse
-            mountPath: /srv/warehouse
+          - name: braavos
+            mountPath: /srv/braavos
+          # - name: warehouse
+          #   mountPath: /srv/warehouse
           - name: downloads
             mountPath: /srv/downloads
           - name: amazon-kubernetes-storage
@@ -45,9 +47,12 @@ spec:
         - name: filebrowser-config
           persistentVolumeClaim:
             claimName: filebrowser-config
-        - name: warehouse
+        - name: braavos
           persistentVolumeClaim:
-            claimName: warehouse-media
+            claimName: braavos-media-pvc
+        # - name: warehouse
+        #   persistentVolumeClaim:
+        #     claimName: warehouse-media
         - name: downloads
           persistentVolumeClaim:
             claimName: qbittorrent-downloads
