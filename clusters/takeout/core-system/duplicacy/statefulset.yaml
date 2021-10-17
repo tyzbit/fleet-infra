@@ -37,6 +37,12 @@ spec:
           limits:
             memory: 10Gi
       volumes:
+        - name: duplicacy-config
+          persistentVolumeClaim:
+            claimName: duplicacy-config
+        - name: duplicacy-logs
+          persistentVolumeClaim:
+            claimName: duplicacy-logs
         - name: duplicacy-cache
           emptyDir: {}
         - name: braavos-media-pvc
@@ -44,18 +50,18 @@ spec:
             claimName: braavos-media-pvc
       nodeSelector:
         kubernetes.io/hostname: propman
-  volumeClaimTemplates:
-  - metadata:
-      name: duplicacy-config
-    spec:
-      accessModes: [ "ReadWriteOnce" ]
-      resources:
-        requests:
-          storage: 1Gi
-  - metadata:
-      name: duplicacy-logs
-    spec:
-      accessModes: [ "ReadWriteOnce" ]
-      resources:
-        requests:
-          storage: 40Gi
+  # volumeClaimTemplates:
+  # - metadata:
+  #     name: duplicacy-config
+  #   spec:
+  #     accessModes: [ "ReadWriteOnce" ]
+  #     resources:
+  #       requests:
+  #         storage: 1Gi
+  # - metadata:
+  #     name: duplicacy-logs
+  #   spec:
+  #     accessModes: [ "ReadWriteOnce" ]
+  #     resources:
+  #       requests:
+  #         storage: 40Gi
