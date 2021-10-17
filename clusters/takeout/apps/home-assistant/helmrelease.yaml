@@ -39,7 +39,7 @@ spec:
     persistence:
       config:
         enabled: true
-        storageClass: longhorn-static
+        storageClass: nfs-fast
     additionalContainers:
       - name: filebrowser
         image: filebrowser/filebrowser:v2
