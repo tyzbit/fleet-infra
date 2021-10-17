@@ -9,7 +9,7 @@ spec:
   selector:
     matchLabels:
       app: qdirstat
-  replicas: 0 # active nfs-client-fast
+  replicas: 1 # active nfs-client-fast
   template:
     metadata:
       labels:
@@ -23,8 +23,10 @@ spec:
           volumeMounts:
             - name: qdirstat-config
               mountPath: /config
-            - name: warehouse
-              mountPath: /mount/warehouse
+            - name: braavos
+              mountPath: /mount/braavos
+            # - name: warehouse
+            #   mountPath: /mount/warehouse
             - name: downloads
               mountPath: /mount/downloads
             - name: amazon-kubernetes-storage
@@ -35,9 +37,15 @@ spec:
             limits:
               memory: 512Mi
       volumes:
-        - name: warehouse
+        - name: qdirstat-config
           persistentVolumeClaim:
-            claimName: warehouse-media
+            claimName: qdirstat-config
+        - name: braavos
+          persistentVolumeClaim:
+            claimName: braavos-media-pvc
+        # - name: warehouse
+        #   persistentVolumeClaim:
+        #     claimName: warehouse-media
         - name: downloads
           persistentVolumeClaim:
             claimName: qbittorrent-downloads
@@ -46,16 +54,16 @@ spec:
             claimName: amazon-kubernetes-storage
       imagePullSecrets:
         - name: docker-hub
-  volumeClaimTemplates:
-    - apiVersion: v1
-      kind: PersistentVolumeClaim
-      metadata:
-        name: qdirstat-config
-      spec:
-        accessModes: 
-          - ReadWriteMany
-        volumeMode: Filesystem
-        storageClassName: nfs-client
-        resources:
-          requests:
-            storage: 1Gi
+  # volumeClaimTemplates:
+  #   - apiVersion: v1
+  #     kind: PersistentVolumeClaim
+  #     metadata:
+  #       name: qdirstat-config
+  #     spec:
+  #       accessModes: 
+  #         - ReadWriteMany
+  #       volumeMode: Filesystem
+  #       storageClassName: nfs-client
+  #       resources:
+  #         requests:
+  #           storage: 1Gi
