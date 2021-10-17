@@ -44,6 +44,6 @@ spec:
       plugins:
         - marcusolsson-hexmap-panel
       persistence:
-        enabled: false
+        enabled: true
         storageClassName: nfs-fast
     
