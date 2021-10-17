@@ -55,18 +55,21 @@ spec:
         - name: bitcoin-config
           secret:
             secretName: bitcoin-config
+        - name: bitcoin-blockchain
+          persistentVolumeClaim:
+            claimName: bitcoin-blockchain
       imagePullSecrets:
         - name: docker-hub
-  volumeClaimTemplates:
-  - apiVersion: v1
-    kind: PersistentVolume
-    metadata:
-      name: bitcoin-blockchain-volatile
-    spec:
-      accessModes: 
-        - ReadWriteOnce
-      volumeMode: Filesystem
-      storageClassName: nfs-client-volatile
-      resources:
-        requests:
-          storage: 1Gi
+  # volumeClaimTemplates:
+  # - apiVersion: v1
+  #   kind: PersistentVolume
+  #   metadata:
+  #     name: bitcoin-blockchain-volatile
+  #   spec:
+  #     accessModes: 
+  #       - ReadWriteOnce
+  #     volumeMode: Filesystem
+  #     storageClassName: nfs-client-volatile
+  #     resources:
+  #       requests:
+  #         storage: 1Gi
