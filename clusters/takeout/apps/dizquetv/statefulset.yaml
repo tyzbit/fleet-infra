@@ -7,7 +7,7 @@ spec:
     matchLabels:
       app: dizquetv
   serviceName: dizquetv
-  replicas: 0 # active nfs-client-fast
+  replicas: 1 # active nfs-client-fast
   template:
     metadata:
       labels:
@@ -38,7 +38,7 @@ spec:
             claimName: dri-pvc
         - name: dizquetv-data
           persistentVolumeClaim:
-            claimName: temp-dizquetv-data # CHANGEME
+            claimName: dizquetv-data
       nodeSelector:
         graphics: dri
         # kubernetes.io/hostname: cameraman
