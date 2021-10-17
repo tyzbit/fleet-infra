@@ -7,7 +7,7 @@ metadata:
   labels:
     app: motioneye
 spec:
-  replicas: 0 # active nfs-client
+  replicas: 1 # active nfs-client
   serviceName: motioneye
   selector:
     matchLabels:
@@ -64,6 +64,9 @@ spec:
         - name: dri
           persistentVolumeClaim:
             claimName: dri-pvc
+        - name: motioneye-config
+          persistentVolumeClaim:
+            claimName: motioneye-config
       #   - name: braavos-camera
       #     persistentVolumeClaim:
       #       claimName: braavos-camera-pvc
@@ -71,16 +74,16 @@ spec:
         graphics: dri
       imagePullSecrets:
         - name: docker-hub
-  volumeClaimTemplates:
-  - apiVersion: v1
-    kind: PersistentVolume
-    metadata:
-      name: motioneye-config
-    spec:
-      accessModes: 
-        - ReadWriteMany
-      volumeMode: Filesystem
-      storageClassName: nfs-client
-      resources:
-        requests:
-          storage: 128Mi
+  # volumeClaimTemplates:
+  # - apiVersion: v1
+  #   kind: PersistentVolume
+  #   metadata:
+  #     name: motioneye-config
+  #   spec:
+  #     accessModes: 
+  #       - ReadWriteMany
+  #     volumeMode: Filesystem
+  #     storageClassName: nfs-fast
+  #     resources:
+  #       requests:
+  #         storage: 1Gi
