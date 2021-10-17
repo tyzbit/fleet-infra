@@ -35,7 +35,7 @@ spec:
             - mountPath: "/dev/dri"
               name: dri
             - mountPath: "/config"
-              name: plex-secondary-config
+              name: plex-secondary-config-nfs
               # name: plex-secondary-config-nfs
             # - mountPath: "/config-old"
             #   name: plex-secondary-config-old
@@ -57,7 +57,7 @@ spec:
         # - name: warehouse
         #   persistentVolumeClaim:
         #     claimName: warehouse-media
-        - name: plex-secondary-config
+        - name: plex-secondary-config-nfs
           persistentVolumeClaim:
             claimName: plex-secondary-config
         - name: dri
