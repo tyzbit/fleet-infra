@@ -5,7 +5,7 @@ metadata:
   labels:
     app: plex-secondary
 spec:
-  replicas: 0 # active nfs-client
+  replicas: 1 # active nfs-client
   selector:
     matchLabels:
       app: plex-secondary
@@ -30,8 +30,8 @@ spec:
           volumeMounts:
             - mountPath: "/braavos"
               name: braavos
-            - mountPath: "/warehouse"
-              name: warehouse
+            # - mountPath: "/warehouse"
+            #   name: warehouse
             - mountPath: "/dev/dri"
               name: dri
             - mountPath: "/config"
@@ -54,12 +54,12 @@ spec:
         - name: braavos
           persistentVolumeClaim:
             claimName: braavos-media-pvc
-        - name: warehouse
-          persistentVolumeClaim:
-            claimName: warehouse-media
-        # - name: plex-secondary-config-nfs
+        # - name: warehouse
         #   persistentVolumeClaim:
-        #     claimName: plex-secondary-config
+        #     claimName: warehouse-media
+        - name: plex-secondary-config
+          persistentVolumeClaim:
+            claimName: plex-secondary-config
         - name: dri
           persistentVolumeClaim:
             claimName: dri-pvc
@@ -68,7 +68,7 @@ spec:
             # medium: Memory
       nodeSelector:
         graphics: dri
-        longhorn: primary
+        # longhorn: primary
         # kubernetes.io/hostname: anchorman
       imagePullSecrets:
         - name: docker-hub
