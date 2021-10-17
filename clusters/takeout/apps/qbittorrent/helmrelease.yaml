@@ -17,7 +17,7 @@ spec:
   values:
     fullnameOverride: qbittorrent
     controller:
-      replicas: 1 # active nfs-client
+      replicas: 1 # active nfs-client-fast
     ingress:
       main:
         enabled: true

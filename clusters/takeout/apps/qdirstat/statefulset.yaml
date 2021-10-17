@@ -9,7 +9,7 @@ spec:
   selector:
     matchLabels:
       app: qdirstat
-  replicas: 0 # active nfs-client
+  replicas: 0 # active nfs-client-fast
   template:
     metadata:
       labels:

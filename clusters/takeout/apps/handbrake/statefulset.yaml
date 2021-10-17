@@ -9,7 +9,7 @@ spec:
   selector:
     matchLabels:
       app: handbrake
-  replicas: 0 # active nfs-client
+  replicas: 1 # active nfs-client-fast
   template:
     metadata:
       labels:
@@ -60,6 +60,9 @@ spec:
         - name: dri
           persistentVolumeClaim:
             claimName: dri-pvc
+        - name: handbrake-config
+          persistentVolumeClaim:
+            claimName: handbrake-config
         - name: warehouse
           persistentVolumeClaim:
             claimName: warehouse-media
@@ -68,16 +71,16 @@ spec:
             claimName: qbittorrent-downloads
       imagePullSecrets:
         - name: docker-hub
-  volumeClaimTemplates:
-    - apiVersion: v1
-      kind: PersistentVolumeClaim
-      metadata:
-        name: handbrake-config
-      spec:
-        accessModes:
-          - ReadWriteMany
-        volumeMode: Filesystem
-        storageClassName: nfs-client
-        resources:
-          requests:
-            storage: 1Gi
+  # volumeClaimTemplates:
+  #   - apiVersion: v1
+  #     kind: PersistentVolumeClaim
+  #     metadata:
+  #       name: handbrake-config
+  #     spec:
+  #       accessModes:
+  #         - ReadWriteMany
+  #       volumeMode: Filesystem
+  #       storageClassName: nfs-client
+  #       resources:
+  #         requests:
+  #           storage: 1Gi
