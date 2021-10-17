@@ -4,7 +4,7 @@ metadata:
   name: filebrowser
 spec:
   serviceName: filebrowser
-  replicas: 0 # active nfs-client
+  replicas: 1 # active nfs-client
   selector:
     matchLabels:
       app: filebrowser
@@ -16,12 +16,12 @@ spec:
       containers:
       - name: filebrowser
         image: filebrowser/filebrowser:v2
-        command: # ["sh","-c","tail -f /dev/null"]
-        - sh
-        - -c
-        - |
-          apk add mktorrent util-linux && /filebrowser -d /db/database.db
-        # util-linux has rename
+        command: ["sh","-c","tail -f /dev/null"]
+        # - sh
+        # - -c
+        # - |
+        #   apk add mktorrent util-linux && /filebrowser -d /db/database.db
+        # # util-linux has rename
         env:
         - name: TZ
           value: America/New_York
@@ -44,7 +44,7 @@ spec:
       volumes:
         - name: filebrowser-config
           persistentVolumeClaim:
-            claimName: temp-filebrowser-config # CHANGEME
+            claimName: temp-filebrowser-config
         - name: warehouse
           persistentVolumeClaim:
             claimName: warehouse-media
@@ -55,7 +55,7 @@ spec:
           persistentVolumeClaim:
             claimName: amazon-kubernetes-storage
       nodeSelector:
-        kubernetes.io/hostname: weatherman
+        kubernetes.io/hostname: anchorman
   # volumeClaimTemplates:
   #   - apiVersion: v1
   #     kind: PersistentVolumeClaim
