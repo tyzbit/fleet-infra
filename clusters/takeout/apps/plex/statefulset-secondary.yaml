@@ -28,14 +28,14 @@ spec:
           ports:
             - containerPort: 32400
           volumeMounts:
-            - mountPath: "/braavos"
+            - mountPath: "/warehouse"
               name: braavos
             # - mountPath: "/warehouse"
             #   name: warehouse
             - mountPath: "/dev/dri"
               name: dri
             - mountPath: "/config"
-              name: plex-secondary-config-nfs
+              name: plex-secondary-config
               # name: plex-secondary-config-nfs
             # - mountPath: "/config-old"
             #   name: plex-secondary-config-old
@@ -57,9 +57,9 @@ spec:
         # - name: warehouse
         #   persistentVolumeClaim:
         #     claimName: warehouse-media
-        - name: plex-secondary-config-nfs
-          persistentVolumeClaim:
-            claimName: plex-secondary-config
+        # - name: plex-secondary-config-nfs
+        #   persistentVolumeClaim:
+        #     claimName: plex-secondary-config
         - name: dri
           persistentVolumeClaim:
             claimName: dri-pvc
@@ -68,7 +68,7 @@ spec:
             # medium: Memory
       nodeSelector:
         graphics: dri
-        # longhorn: primary
+        longhorn: primary
         # kubernetes.io/hostname: anchorman
       imagePullSecrets:
         - name: docker-hub
