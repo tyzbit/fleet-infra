@@ -17,7 +17,7 @@ spec:
   values:
     fullnameOverride: qbittorrent
     controller:
-      replicas: 0 # active nfs-client
+      replicas: 1 # active nfs-client
     ingress:
       main:
         enabled: true
@@ -33,34 +33,34 @@ spec:
         - hosts:
           - "*.qtosw.com"
           secretName: letsencrypt
-    initContainers:
-      fixperms:
-        name: fixperms
-        image: busybox
-        command: 
-        - sh
-        - -c
-        - chown 568:568 /config -R &&
-          chown 568:568 /downloads -R
-        env:
-        - name: TZ
-          value: America/New_York
-        volumeMounts:
-        - name: config
-          mountPath: /config
-        - name: downloads
-          mountPath: /downloads
+    # initContainers:
+    #   fixperms:
+    #     name: fixperms
+    #     image: busybox
+    #     command: 
+    #     - sh
+    #     - -c
+    #     - chown 568:568 /config -R &&
+    #       chown 568:568 /downloads -R
+    #     env:
+    #     - name: TZ
+    #       value: America/New_York
+    #     volumeMounts:
+    #     - name: config
+    #       mountPath: /config
+    #     - name: downloads
+    #       mountPath: /downloads
     persistence:
       config: 
         enabled: true
         size: 1Gi
         accessMode: ReadWriteMany
-        storageClass: nfs-client
+        storageClass: nfs-fast
       downloads: 
         enabled: true
         size: 1Gi
         accessMode: ReadWriteMany
-        storageClass: nfs-client-volatile
+        storageClass: nfs-fast-volatile
       warehouse:
         enabled: true
         existingClaim: warehouse-media
