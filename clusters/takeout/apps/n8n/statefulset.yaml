@@ -5,11 +5,12 @@ metadata:
   labels:
     app: n8n
 spec:
-  replicas: 0 # active nfs-client
+  replicas: 1 # active nfs-client
   selector:
     matchLabels:
       app: n8n
   serviceName: n8n
+  serviceAccount: n8n
   template:
     metadata:
       annotations: {}
@@ -36,21 +37,24 @@ spec:
               cpu: 500m
             limits:
               memory: 1Gi
+      volumes:
+        - name: n8n-data
+          persistentVolumeClaim:
+            claimName: n8n-data
       imagePullSecrets:
         - name: docker-hub
-      serviceAccount: n8n
       # nodeSelector:
       #   kubernetes.io/hostname: trainman
-  volumeClaimTemplates:
-  - apiVersion: v1
-    kind: PersistentVolume
-    metadata:
-      name: n8n-data
-    spec:
-      accessModes: 
-        - ReadWriteMany
-      volumeMode: Filesystem
-      storageClassName: nfs-client
-      resources:
-        requests:
-          storage: 1Gi
+  # volumeClaimTemplates:
+  # - apiVersion: v1
+  #   kind: PersistentVolume
+  #   metadata:
+  #     name: n8n-data
+  #   spec:
+  #     accessModes: 
+  #       - ReadWriteMany
+  #     volumeMode: Filesystem
+  #     storageClassName: nfs-client
+  #     resources:
+  #       requests:
+  #         storage: 1Gi
