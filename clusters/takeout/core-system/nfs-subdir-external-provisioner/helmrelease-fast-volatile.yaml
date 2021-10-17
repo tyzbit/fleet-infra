@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: nfs-subdir-external-provisioner
+  name: nfs-subdir-external-provisioner-volatile
   namespace: flux-system
 spec:
   targetNamespace: kube-system
@@ -15,13 +15,13 @@ spec:
         namespace: flux-system
   interval: 1m0s
   values:
-    fullnameOverride: nfs-provisioner
+    fullnameOverride: nfs-provisioner-fast-volatile
     storageClass:
-      name: nfs-client
+      name: nfs-fast-volatile
       pathPattern: "${.PVC.namespace}-${.PVC.name}"
     nfs:
       server: warehouse.jura
-      path: /volume1/cluster_storage
+      path: /volume1/volatile_cluster_storage
       # server: braavos.jura
       # path: /nfs/cluster_storage
       # server: simulacrum.jura
