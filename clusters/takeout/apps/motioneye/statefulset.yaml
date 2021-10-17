@@ -22,7 +22,7 @@ spec:
       - name: motioneye
         image: ccrisan/motioneye:0.42-amd64
         imagePullPolicy: Always
-        # command: ["tail","-f","/dev/null"]
+        command: ["tail","-f","/dev/null"]
         env:
         - name: TZ
           value: America/New_York
