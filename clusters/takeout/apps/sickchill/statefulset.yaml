@@ -4,7 +4,7 @@ metadata:
   name: sickchill
 spec:
   serviceName: sickchill
-  replicas: 0 # active nfs-client
+  replicas: 1 # active nfs-client
   selector:
     matchLabels:
       app: sickchill
@@ -31,10 +31,10 @@ spec:
             name: downloads
           - mountPath: /tv
             subPath: "tv shows"
-            name: warehouse
+            name: braavos
           - mountPath: /anime
             subPath: "anime"
-            name: warehouse
+            name: braavos
         resources:
           requests:
             cpu: "100m"
@@ -46,23 +46,26 @@ spec:
         - name: downloads
           persistentVolumeClaim:
             claimName: qbittorrent-downloads
-        - name: warehouse
+        - name: braavos
           persistentVolumeClaim:
-            claimName: warehouse-media
+            claimName: braavos-media-pvc
+        # - name: warehouse
+        #   persistentVolumeClaim:
+        #     claimName: warehouse-media
         - name: sickchill-config
           persistentVolumeClaim:
             claimName: sickchill-config
-  volumeClaimTemplates:
-    - apiVersion: v1
-      kind: PersistentVolumeClaim
-      metadata:
-        name: sickchill-config
-      spec:
-        resources:
-          requests:
-            storage: 1Gi
-        volumeMode: Filesystem
-        storageClassName: nfs-client
-        accessModes:
-          - ReadWriteMany
+  # volumeClaimTemplates:
+  #   - apiVersion: v1
+  #     kind: PersistentVolumeClaim
+  #     metadata:
+  #       name: sickchill-config
+  #     spec:
+  #       resources:
+  #         requests:
+  #           storage: 1Gi
+  #       volumeMode: Filesystem
+  #       storageClassName: nfs-client
+  #       accessModes:
+  #         - ReadWriteMany
 
