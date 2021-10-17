@@ -7,6 +7,6 @@ spec:
     requests:
       storage: 1Gi
   volumeMode: Filesystem
-  storageClassName: sickchill-config
+  storageClassName: nfs-fast
   accessModes:
     - ReadWriteMany
