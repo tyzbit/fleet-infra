@@ -42,7 +42,7 @@ spec:
           protocol: TCP
         volumeMounts:
           - mountPath: "/blockchain"
-            name: bitcoin-blockchain-volatile
+            name: bitcoin-blockchain
           - mountPath: "/blockchain/.bitcoin/bitcoin.conf"
             subPath: "bitcoin.conf"
             name: bitcoin-config
