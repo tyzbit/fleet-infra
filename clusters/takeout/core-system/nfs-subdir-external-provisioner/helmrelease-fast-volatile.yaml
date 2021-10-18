@@ -15,6 +15,7 @@ spec:
         namespace: flux-system
   interval: 1m0s
   values:
+    fakekey: fakevalue
     fullnameOverride: nfs-provisioner-fast-volatile
     storageClass:
       name: nfs-fast-volatile
