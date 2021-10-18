@@ -6,7 +6,7 @@ metadata:
 spec:
   targetNamespace: monitoring
   releaseName: datadog
-  timeout: 10m
+  timeout: 20m
   chart:
     spec:
       chart: datadog
