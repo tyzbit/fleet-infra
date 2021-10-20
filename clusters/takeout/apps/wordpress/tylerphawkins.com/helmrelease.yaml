@@ -100,8 +100,8 @@ spec:
     persistence:
       accessModes:
       - ReadWriteOnce
-      storageClass: longhorn-static
-      size: 4Gi
+      storageClass: nfs-fast
+      size: 1Gi
     # run a container to fix volume permissions at the start
     volumePermissions:
       enabled: true
