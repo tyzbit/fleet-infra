@@ -6,6 +6,7 @@ metadata:
 spec:
   releaseName: wordpress-qtosw
   targetNamespace: default
+  timeout: 10m
   chart:
     spec:
       chart: wordpress
@@ -100,8 +101,8 @@ spec:
     persistence:
       accessModes:
       - ReadWriteOnce
-      storageClass: longhorn-static
-      size: 10Gi
+      storageClass: nfs-fast
+      size: 1Gi
     # run a container to fix volume permissions at the start
     volumePermissions:
       enabled: true
