@@ -25,9 +25,9 @@ spec:
   - ReadOnlyMany
   - ReadWriteMany
   capacity:
-    storage: 32Ti
+    storage: 80Ti
   nfs:
-    path: /volume1/media/
+    path: /volume2/media/
     server: warehouse.jura
   persistentVolumeReclaimPolicy: Retain
   volumeMode: Filesystem
