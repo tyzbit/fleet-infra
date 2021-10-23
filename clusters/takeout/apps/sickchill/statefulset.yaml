@@ -31,10 +31,10 @@ spec:
             name: downloads
           - mountPath: /tv
             subPath: "tv shows"
-            name: braavos
+            name: warehouse
           - mountPath: /anime
             subPath: "anime"
-            name: braavos
+            name: warehouse
         resources:
           requests:
             cpu: "100m"
@@ -46,26 +46,13 @@ spec:
         - name: downloads
           persistentVolumeClaim:
             claimName: qbittorrent-downloads
-        - name: braavos
-          persistentVolumeClaim:
-            claimName: braavos-media-pvc
-        # - name: warehouse
+        # - name: braavos
         #   persistentVolumeClaim:
-        #     claimName: warehouse-media
+        #     claimName: braavos-media-pvc
+        - name: warehouse
+          persistentVolumeClaim:
+            claimName: warehouse-media
         - name: sickchill-config
           persistentVolumeClaim:
             claimName: sickchill-config
-  # volumeClaimTemplates:
-  #   - apiVersion: v1
-  #     kind: PersistentVolumeClaim
-  #     metadata:
-  #       name: sickchill-config
-  #     spec:
-  #       resources:
-  #         requests:
-  #           storage: 1Gi
-  #       volumeMode: Filesystem
-  #       storageClassName: nfs-client
-  #       accessModes:
-  #         - ReadWriteMany
 

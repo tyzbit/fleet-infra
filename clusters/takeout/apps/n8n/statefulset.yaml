@@ -45,16 +45,3 @@ spec:
         - name: docker-hub
       # nodeSelector:
       #   kubernetes.io/hostname: trainman
-  # volumeClaimTemplates:
-  # - apiVersion: v1
-  #   kind: PersistentVolume
-  #   metadata:
-  #     name: n8n-data
-  #   spec:
-  #     accessModes: 
-  #       - ReadWriteMany
-  #     volumeMode: Filesystem
-  #     storageClassName: nfs-client
-  #     resources:
-  #       requests:
-  #         storage: 1Gi

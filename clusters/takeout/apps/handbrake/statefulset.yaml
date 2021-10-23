@@ -47,8 +47,8 @@ spec:
               mountPath: /dev/dri
             - name: braavos
               mountPath: /storage/braavos
-            # - name: warehouse
-            #   mountPath: /storage/warehouse
+            - name: warehouse
+              mountPath: /storage/warehouse
             - name: downloads
               mountPath: /storage/downloads
           securityContext:
@@ -68,9 +68,9 @@ spec:
         - name: braavos
           persistentVolumeClaim:
             claimName: braavos-media-pvc
-        # - name: warehouse
-        #   persistentVolumeClaim:
-        #     claimName: warehouse-media
+        - name: warehouse
+          persistentVolumeClaim:
+            claimName: warehouse-media
         - name: downloads
           persistentVolumeClaim:
             claimName: qbittorrent-downloads

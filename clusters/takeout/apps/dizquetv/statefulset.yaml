@@ -42,12 +42,3 @@ spec:
       nodeSelector:
         graphics: dri
         # kubernetes.io/hostname: cameraman
-  # volumeClaimTemplates:
-  # - metadata:
-  #     name: dizquetv-data
-  #   spec:
-  #     accessModes: [ "ReadWriteOnce" ]
-  #     storageClassName: nfs-client
-  #     resources:
-  #       requests:
-  #         storage: 1Gi

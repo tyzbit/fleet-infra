@@ -25,8 +25,8 @@ spec:
               mountPath: /config
             - name: braavos
               mountPath: /mount/braavos
-            # - name: warehouse
-            #   mountPath: /mount/warehouse
+            - name: warehouse
+              mountPath: /mount/warehouse
             - name: downloads
               mountPath: /mount/downloads
             - name: amazon-kubernetes-storage
@@ -43,9 +43,9 @@ spec:
         - name: braavos
           persistentVolumeClaim:
             claimName: braavos-media-pvc
-        # - name: warehouse
-        #   persistentVolumeClaim:
-        #     claimName: warehouse-media
+        - name: warehouse
+          persistentVolumeClaim:
+            claimName: warehouse-media
         - name: downloads
           persistentVolumeClaim:
             claimName: qbittorrent-downloads
@@ -54,16 +54,3 @@ spec:
             claimName: amazon-kubernetes-storage
       imagePullSecrets:
         - name: docker-hub
-  # volumeClaimTemplates:
-  #   - apiVersion: v1
-  #     kind: PersistentVolumeClaim
-  #     metadata:
-  #       name: qdirstat-config
-  #     spec:
-  #       accessModes: 
-  #         - ReadWriteMany
-  #       volumeMode: Filesystem
-  #       storageClassName: nfs-client
-  #       resources:
-  #         requests:
-  #           storage: 1Gi

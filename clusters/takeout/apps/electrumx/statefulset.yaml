@@ -63,16 +63,3 @@ spec:
         - name: electrumx-data
           persistentVolumeClaim:
             claimName: electrumx-data
-  # volumeClaimTemplates:
-  # - apiVersion: v1
-  #   kind: PersistentVolume
-  #   metadata:
-  #     name: electrumx-data-volatile
-  #   spec:
-  #     accessModes: 
-  #       - ReadWriteOnce
-  #     volumeMode: Filesystem
-  #     storageClassName: nfs-client-volatile
-  #     resources:
-  #       requests:
-  #         storage: 1Gi

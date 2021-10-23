@@ -66,16 +66,3 @@ spec:
         - name: docker-hub
       # nodeSelector:
       #   longhorn: primary
-  # volumeClaimTemplates:
-  #   - apiVersion: v1
-  #     kind: PersistentVolume
-  #     metadata:
-  #       name: youtube-dl-data
-  #     spec:
-  #       accessModes:
-  #         - ReadWriteMany
-  #       volumeMode: Filesystem
-  #       storageClassName: nfs-client
-  #       resources:
-  #         requests:
-  #           storage: 1Gi

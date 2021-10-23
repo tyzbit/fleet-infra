@@ -74,16 +74,3 @@ spec:
         graphics: dri
       imagePullSecrets:
         - name: docker-hub
-  # volumeClaimTemplates:
-  # - apiVersion: v1
-  #   kind: PersistentVolume
-  #   metadata:
-  #     name: motioneye-config
-  #   spec:
-  #     accessModes: 
-  #       - ReadWriteMany
-  #     volumeMode: Filesystem
-  #     storageClassName: nfs-fast
-  #     resources:
-  #       requests:
-  #         storage: 1Gi

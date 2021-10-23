@@ -28,10 +28,10 @@ spec:
           ports:
             - containerPort: 32400
           volumeMounts:
+            # - mountPath: "/media"
+            #   name: braavos
             - mountPath: "/media"
-              name: braavos
-            # - mountPath: "/warehouse"
-            #   name: warehouse
+              name: warehouse
             - mountPath: "/dev/dri"
               name: dri
             - mountPath: "/config"
@@ -51,12 +51,12 @@ spec:
             limits:
               memory: 8192Mi
       volumes:
-        - name: braavos
-          persistentVolumeClaim:
-            claimName: braavos-media-pvc
-        # - name: warehouse
+        # - name: braavos
         #   persistentVolumeClaim:
-        #     claimName: warehouse-media
+        #     claimName: braavos-media-pvc
+        - name: warehouse
+          persistentVolumeClaim:
+            claimName: warehouse-media
         # - name: plex-secondary-config-nfs
         #   persistentVolumeClaim:
         #     claimName: plex-secondary-config
