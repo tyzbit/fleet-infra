@@ -27,6 +27,9 @@ spec:
       media:
         enabled: true
         existingClaim: warehouse-media
+      downloads:
+        enabled: true
+        existingClaim: qbittorrent-downloads
     ingress:
       main:
         enabled: true
