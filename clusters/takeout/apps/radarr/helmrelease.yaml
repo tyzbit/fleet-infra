@@ -15,25 +15,9 @@ spec:
         kind: HelmRepository
         name: k8s-at-home
         namespace: flux-system
-  valuesFrom:
-  - kind: Secret
-    name: radarr-values
-    valuesKey: username
-    targetPath: mariadb.auth.username
-  - kind: Secret
-    name: radarr-values
-    valuesKey: password
-    targetPath: mariadb.auth.password
-  - kind: Secret
-    name: radarr-values
-    valuesKey: rootPassword
-    targetPath: mariadb.auth.rootPassword
   values:
-    image:
-      pullPolicy: Always
-      tag: "2021.9"
     controller:
-      replicas: 1 # active longhorn
+      replicas: 1 # active nfs-client
     env:
       TZ: America/New_York
     persistence:

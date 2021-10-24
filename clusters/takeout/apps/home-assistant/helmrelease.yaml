@@ -33,7 +33,7 @@ spec:
       pullPolicy: Always
       tag: "2021.9"
     controller:
-      replicas: 1 # active longhorn
+      replicas: 1 # active nfs-client
     env:
       TZ: America/New_York
     persistence:
