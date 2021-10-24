@@ -28,7 +28,7 @@ spec:
           ports:
             - containerPort: 32400
           volumeMounts:
-            - mountPath: "/braavos"
+            - mountPath: "/media"
               name: warehouse
             - mountPath: "/dev/dri"
               name: dri
