@@ -30,6 +30,9 @@ spec:
       downloads:
         enabled: true
         existingClaim: qbittorrent-downloads
+    probes:
+      liveness:
+        enabled: false
     ingress:
       main:
         enabled: true
