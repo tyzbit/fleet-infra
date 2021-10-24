@@ -7,7 +7,7 @@ spec:
     matchLabels:
       app: duplicacy
   serviceName: duplicacy
-  replicas: 1 # active longhorn
+  replicas: 0 # active nfs-client
   template:
     metadata:
       labels:
@@ -50,18 +50,3 @@ spec:
             claimName: braavos-media-pvc
       nodeSelector:
         kubernetes.io/hostname: propman
-  # volumeClaimTemplates:
-  # - metadata:
-  #     name: duplicacy-config
-  #   spec:
-  #     accessModes: [ "ReadWriteOnce" ]
-  #     resources:
-  #       requests:
-  #         storage: 1Gi
-  # - metadata:
-  #     name: duplicacy-logs
-  #   spec:
-  #     accessModes: [ "ReadWriteOnce" ]
-  #     resources:
-  #       requests:
-  #         storage: 40Gi
