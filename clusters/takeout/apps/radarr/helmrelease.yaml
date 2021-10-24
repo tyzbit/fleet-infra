@@ -23,7 +23,7 @@ spec:
     persistence:
       config:
         enabled: true
-        storageClass: nfs-fast
+        storageClass: longhorn
       media:
         enabled: true
         existingClaim: warehouse-media
