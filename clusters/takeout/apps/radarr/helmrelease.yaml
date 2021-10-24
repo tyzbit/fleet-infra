@@ -34,20 +34,9 @@ spec:
     probes:
       liveness:
         enabled: false
-    initContainers:
-      fixperms:
-        name: fixperms
-        image: busybox
-        command: 
-        - sh
-        - -c
-        - chown 568:568 /config -R
-        env:
-        - name: TZ
-          value: America/New_York
-        volumeMounts:
-        - name: config
-          mountPath: /config
+    podSecurityContext:
+      runAsUser: 568
+      runAsGroup: 568
     ingress:
       main:
         enabled: true
