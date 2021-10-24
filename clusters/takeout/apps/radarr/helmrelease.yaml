@@ -6,7 +6,7 @@ metadata:
 spec:
   releaseName: radarr
   targetNamespace: default
-  timeout: 10m
+  timeout: 2m
   interval: 1m0s
   chart:
     spec:
