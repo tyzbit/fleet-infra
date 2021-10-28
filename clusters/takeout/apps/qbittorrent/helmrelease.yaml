@@ -63,7 +63,7 @@ spec:
         storageClass: nfs-fast-volatile
       warehouse:
         enabled: true
-        existingClaim: braavos-media-pvc
+        existingClaim: warehouse-media
         # existingClaim: warehouse-media
     resources:
       requests:
