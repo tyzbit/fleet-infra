@@ -28,7 +28,7 @@ spec:
         storageClass: longhorn
       downloads:
         enabled: true
-        accessMode: RWO
+        accessMode: ReadWriteMany
         size: 1Gi
         storageClass: nfs-client
     ingress:
