@@ -30,7 +30,7 @@ spec:
         enabled: true
         accessMode: ReadWriteMany
         size: 1Gi
-        storageClass: nfs-client
+        storageClass: nfs-fast
     ingress:
       main:
         enabled: true
