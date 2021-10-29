@@ -23,10 +23,12 @@ spec:
     persistence:
       config:
         enabled: true
+        size: 5Gi
         storageClass: longhorn
       downloads:
         enabled: true
         accessMode: RWX
+        size: 1Gi
         storageClass: nfs-client
     ingress:
       main:
