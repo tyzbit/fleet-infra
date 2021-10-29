@@ -1,0 +1,60 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: sonarr
+  namespace: flux-system
+spec:
+  releaseName: sonarr
+  targetNamespace: default
+  timeout: 2m
+  interval: 1m0s
+  chart:
+    spec:
+      chart: sonarr
+      version: "15.1.0"
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home
+        namespace: flux-system
+  values:
+    controller:
+      replicas: 1 # active longhorn
+    env:
+      TZ: America/New_York
+    initContainers:
+      fixperms:
+        name: fixperms
+        image: busybox
+        command: 
+        - sh
+        - -c
+        - chown 568:568 /config -R
+        env:
+        - name: TZ
+          value: America/New_York
+        volumeMounts:
+        - name: config
+          mountPath: /config
+    persistence:
+      config:
+        enabled: true
+        size: 5Gi
+        storageClass: longhorn
+      media:
+        enabled: true
+        existingClaim: warehouse-media
+    ingress:
+      main:
+        enabled: true
+        annotations: 
+          kubernetes.io/ingress.class: nginx
+          cert-manager.io/cluster-issuer: letsencrypt
+          acme.cert-manager.io/http01-edit-in-place: "true"
+        hosts:
+        - host: "shows.qtosw.com"
+          paths:
+          - path: "/"
+        tls:
+        - hosts:
+          - "*.qtosw.com"
+          secretName: letsencrypt
