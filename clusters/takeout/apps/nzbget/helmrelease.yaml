@@ -6,7 +6,7 @@ metadata:
 spec:
   releaseName: nzbget
   targetNamespace: default
-  timeout: 1m
+  timeout: 2m
   interval: 1m0s
   chart:
     spec:
@@ -28,7 +28,7 @@ spec:
         command: 
         - sh
         - -c
-        - chown 1000:1000 /config -R
+        - chown 568:568 /config -R
         env:
         - name: TZ
           value: America/New_York
