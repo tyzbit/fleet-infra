@@ -26,6 +26,7 @@ spec:
         storageClass: longhorn
       downloads:
         enabled: true
+        accessMode: RWX
         storageClass: nfs-client
     ingress:
       main:
