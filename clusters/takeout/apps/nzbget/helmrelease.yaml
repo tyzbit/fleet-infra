@@ -21,6 +21,20 @@ spec:
       replicas: 1 # active nfs-client
     env:
       TZ: America/New_York
+    initContainers:
+      fixperms:
+        name: fixperms
+        image: busybox
+        command: 
+        - sh
+        - -c
+        - chown 1000:1000 /config -R
+        env:
+        - name: TZ
+          value: America/New_York
+        volumeMounts:
+        - name: config
+          mountPath: /config
     persistence:
       config:
         enabled: true
