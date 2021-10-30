@@ -40,6 +40,9 @@ spec:
         enabled: true
         size: 5Gi
         storageClass: longhorn
+      media:
+        enabled: true
+        existingClaim: warehouse-media
       downloads:
         enabled: true
         accessMode: ReadWriteMany
