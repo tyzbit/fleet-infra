@@ -81,6 +81,8 @@ spec:
             claimName: nzbget-downloads
       imagePullSecrets:
         - name: docker-hub
+      nodeSelector:
+        graphics: dri
   # volumeClaimTemplates:
   #   - apiVersion: v1
   #     kind: PersistentVolumeClaim
