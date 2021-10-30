@@ -37,10 +37,10 @@ spec:
           volumeMounts:
             - name: handbrake-config
               mountPath: /config
-            - name: downloads
+            - name: torrent-downloads
               subPath: watch
               mountPath: /watch
-            - name: downloads
+            - name: torrent-downloads
               subPath: transcoded
               mountPath: /output
             - name: dri
