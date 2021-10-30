@@ -40,9 +40,12 @@ spec:
         enabled: true
         size: 5Gi
         storageClass: longhorn
-      downloads:
+      nzb_downloads:
         enabled: true
         existingClaim: nzbget-downloads
+      torrent_downloads:
+        enabled: true
+        existingClaim: qbittorrent-downloads
       media:
         enabled: true
         existingClaim: warehouse-media
