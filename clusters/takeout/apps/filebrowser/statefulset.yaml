@@ -32,8 +32,10 @@ spec:
             mountPath: /srv/braavos
           - name: warehouse
             mountPath: /srv/warehouse
-          - name: downloads
-            mountPath: /srv/downloads
+          - name: qbt-downloads
+            mountPath: /srv/torrent_downloads
+          - name: nzb-downloads
+            mountPath: /srv/usenet_downloads
           - name: amazon-kubernetes-storage
             mountPath: /srv/amazon-kubernetes-storage
         resources:
@@ -53,9 +55,12 @@ spec:
         - name: warehouse
           persistentVolumeClaim:
             claimName: warehouse-media
-        - name: downloads
+        - name: qbt-downloads
           persistentVolumeClaim:
             claimName: qbittorrent-downloads
+        - name: nzb-downloads
+          persistentVolumeClaim:
+            claimName: nzbget-downloads
         - name: amazon-kubernetes-storage
           persistentVolumeClaim:
             claimName: amazon-kubernetes-storage
