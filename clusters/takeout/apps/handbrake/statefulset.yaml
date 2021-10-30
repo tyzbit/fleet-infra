@@ -49,8 +49,10 @@ spec:
               mountPath: /storage/braavos
             - name: warehouse
               mountPath: /storage/warehouse
-            - name: downloads
-              mountPath: /storage/downloads
+            - name: torrent-downloads
+              mountPath: /storage/torrent_downloads
+            - name: usenet-downloads
+              mountPath: /storage/usenet_downloads
           securityContext:
             privileged: true
           resources:
@@ -71,9 +73,12 @@ spec:
         - name: warehouse
           persistentVolumeClaim:
             claimName: warehouse-media
-        - name: downloads
+        - name: torrent-downloads
           persistentVolumeClaim:
             claimName: qbittorrent-downloads
+        - name: usenet-downloads
+          persistentVolumeClaim:
+            claimName: nzbget-downloads
       imagePullSecrets:
         - name: docker-hub
   # volumeClaimTemplates:
