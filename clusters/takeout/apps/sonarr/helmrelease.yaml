@@ -6,7 +6,7 @@ metadata:
 spec:
   releaseName: sonarr
   targetNamespace: default
-  timeout: 1m
+  timeout: 2m
   interval: 1m0s
   chart:
     spec:
@@ -40,10 +40,10 @@ spec:
         enabled: true
         size: 5Gi
         storageClass: longhorn
-      nzb_downloads:
+      nzb-downloads:
         enabled: true
         existingClaim: nzbget-downloads
-      torrent_downloads:
+      torrent-downloads:
         enabled: true
         existingClaim: qbittorrent-downloads
       media:
