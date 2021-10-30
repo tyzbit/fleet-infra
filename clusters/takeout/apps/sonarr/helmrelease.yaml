@@ -40,6 +40,9 @@ spec:
         enabled: true
         size: 5Gi
         storageClass: longhorn
+      downloads:
+        enabled: true
+        existingClaim: nzbget-downloads
       media:
         enabled: true
         existingClaim: warehouse-media
