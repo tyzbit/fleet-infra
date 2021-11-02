@@ -59,6 +59,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: nextcloud-cache
+  namespace: default
   annotations: {}
     # fluxcd.io/ignore: "true"
   labels:
