@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: iperf3-server
+  namespace: default
   labels:
     app: iperf3-server
 spec:
@@ -44,6 +45,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: iperf3-client
+  namespace: default
   labels:
     app: iperf3-client
 spec:

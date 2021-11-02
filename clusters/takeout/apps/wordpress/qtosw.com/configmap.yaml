@@ -2,6 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: wordpress-tylerphawkins-htaccess
+  namespace: default
 data:
   wordpress-htaccess.conf: |
     # BEGIN WordPress

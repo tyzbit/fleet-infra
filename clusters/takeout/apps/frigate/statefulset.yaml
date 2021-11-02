@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: frigate
+  namespace: default
   annotations: {}
     # fluxcd.io/ignore: "true"
   labels:

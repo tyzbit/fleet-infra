@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: plex
+  namespace: default
   labels:
     app: plex
 spec:

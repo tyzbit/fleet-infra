@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: btc-rpc-explorer-cache
+  namespace: default
   annotations:
     keel.sh/policy: all
     keel.sh/trigger: poll

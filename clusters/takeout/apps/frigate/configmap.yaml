@@ -2,6 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: frigate-config
+  namespace: default
 data:
   config.yml: |
     mqtt:

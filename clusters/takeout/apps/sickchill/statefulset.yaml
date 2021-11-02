@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: sickchill
+  namespace: default
 spec:
   serviceName: sickchill
   replicas: 0 # active nfs-client-fast

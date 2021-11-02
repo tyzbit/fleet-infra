@@ -2,5 +2,6 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: plex-secondary-config
+  namespace: default
 data:
   ADVERTISE_IP: "192.168.1.70:32400"

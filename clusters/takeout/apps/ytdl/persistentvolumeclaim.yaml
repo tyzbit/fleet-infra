@@ -2,6 +2,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: youtube-dl-data
+  namespace: default
 spec:
   resources:
     requests:
