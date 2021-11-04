@@ -7,13 +7,13 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  commit:
-    authorEmail: fluxcdbot@users.noreply.github.com
-    authorName: fluxcdbot
-    messageTemplate: '{{range .Updated.Images}}{{println .}}{{end}}'
+  git:
+    commit:
+      author:
+        name: fluxcdbot
+        email: fluxcdbot@users.noreply.github.com
+      messageTemplate: '{{range .Updated.Images}}{{println .}}{{end}}'
   interval: 1m0s
-  push:
-    branch: main
   update:
     path: ./clusters/takeout
     strategy: Setters
