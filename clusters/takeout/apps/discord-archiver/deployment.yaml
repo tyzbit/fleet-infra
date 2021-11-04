@@ -20,7 +20,7 @@ spec:
       #   effect: "NoSchedule"
       containers:
         - name: discord-archiver
-          image: docker.io/tyzbit/discord-archiver:1.4.0 # {"$imagepolicy": "flux-system:discord-archiver"}
+          image: docker.io/tyzbit/discord-archiver:1.4.1 # {"$imagepolicy": "flux-system:discord-archiver"}
           volumeMounts:
             - name: discord-archiver-config
               subPath: config.json
