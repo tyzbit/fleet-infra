@@ -21,7 +21,7 @@ spec:
         - sh
         - -c
         - |
-          apk add mktorrent util-linux unrar rar && /filebrowser -d /db/database.db
+          apk add mktorrent util-linux unrar && /filebrowser -d /db/database.db
         # util-linux has rename
         env:
         - name: TZ
