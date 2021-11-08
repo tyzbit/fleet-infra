@@ -31,7 +31,7 @@ spec:
   values:
     image:
       pullPolicy: Always
-      tag: "2021.9"
+      tag: "2021.11"
     controller:
       replicas: 1 # active nfs-client
     env:
