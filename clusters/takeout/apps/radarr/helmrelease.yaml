@@ -28,6 +28,9 @@ spec:
       media:
         enabled: true
         existingClaim: warehouse-media
+      nzb-downloads:
+        enabled: true
+        existingClaim: nzbget-downloads
       downloads:
         enabled: true
         existingClaim: qbittorrent-downloads
