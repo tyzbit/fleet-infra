@@ -31,7 +31,7 @@ spec:
       nzb-downloads:
         enabled: true
         existingClaim: nzbget-downloads
-      downloads:
+      torrent-downloads:
         enabled: true
         existingClaim: qbittorrent-downloads
     probes:
