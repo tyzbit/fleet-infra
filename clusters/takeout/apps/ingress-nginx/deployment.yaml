@@ -14,22 +14,22 @@ spec:
         app: default-backend
     spec:
       containers:
-      - name: default-backend
-        image: docker.io/nginx:1.21.3 # {"$imagepolicy": "flux-system:default-backend"}
-        ports:
-        - containerPort: 80
-          name: http
-          protocol: TCP
-        volumeMounts:
-        - name: default-backend-html
-          subPath: index.html
-          mountPath: /usr/share/nginx/html/index.html
-        resources:
-          requests:
-            cpu: "10m"
-          limits:
-            memory: "16Mi"
+        - name: default-backend
+          image: docker.io/nginx:1.21.4 # {"$imagepolicy": "flux-system:default-backend"}
+          ports:
+            - containerPort: 80
+              name: http
+              protocol: TCP
+          volumeMounts:
+            - name: default-backend-html
+              subPath: index.html
+              mountPath: /usr/share/nginx/html/index.html
+          resources:
+            requests:
+              cpu: "10m"
+            limits:
+              memory: "16Mi"
       volumes:
-      - name: default-backend-html
-        configMap:
-          name: default-backend-html
+        - name: default-backend-html
+          configMap:
+            name: default-backend-html
