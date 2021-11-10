@@ -17,60 +17,60 @@ spec:
         namespace: flux-system
   interval: 1m0s
   valuesFrom:
-  - kind: Secret
-    name: wordpress-tylerphawkins-values
-    valuesKey: wordpressUsername
-    targetPath: wordpressUsername
-  - kind: Secret
-    name: wordpress-tylerphawkins-values
-    valuesKey: wordpressPassword
-    targetPath: wordpressPassword
-  - kind: Secret
-    name: wordpress-tylerphawkins-values
-    valuesKey: wordpressEmail
-    targetPath: wordpressEmail
-  - kind: Secret
-    name: wordpress-tylerphawkins-values
-    valuesKey: wordpressTablePrefix
-    targetPath: wordpressTablePrefix
-  - kind: Secret
-    name: wordpress-tylerphawkins-values
-    valuesKey: mariadbAuthRootPassword
-    targetPath: mariadb.auth.rootPassword
-  - kind: Secret
-    name: wordpress-tylerphawkins-values
-    valuesKey: mariadbAuthUsername
-    targetPath: mariadb.auth.username
-  - kind: Secret
-    name: wordpress-tylerphawkins-values
-    valuesKey: mariadbAuthPassword
-    targetPath: mariadb.auth.password
-  - kind: Secret
-    name: wordpress-tylerphawkins-values
-    valuesKey: mariadbAuthDatabase
-    targetPath: mariadb.auth.database
-  - kind: Secret
-    name: wordpress-tylerphawkins-values
-    valuesKey: smtpHost
-    targetPath: smtpHost
-  - kind: Secret
-    name: wordpress-tylerphawkins-values
-    valuesKey: smtpPort
-    targetPath: smtpPort
-  - kind: Secret
-    name: wordpress-tylerphawkins-values
-    valuesKey: smtpUser
-    targetPath: smtpUser
-  - kind: Secret
-    name: wordpress-tylerphawkins-values
-    valuesKey: smtpPassword
-    targetPath: smtpPassword
+    - kind: Secret
+      name: wordpress-tylerphawkins-values
+      valuesKey: wordpressUsername
+      targetPath: wordpressUsername
+    - kind: Secret
+      name: wordpress-tylerphawkins-values
+      valuesKey: wordpressPassword
+      targetPath: wordpressPassword
+    - kind: Secret
+      name: wordpress-tylerphawkins-values
+      valuesKey: wordpressEmail
+      targetPath: wordpressEmail
+    - kind: Secret
+      name: wordpress-tylerphawkins-values
+      valuesKey: wordpressTablePrefix
+      targetPath: wordpressTablePrefix
+    - kind: Secret
+      name: wordpress-tylerphawkins-values
+      valuesKey: mariadbAuthRootPassword
+      targetPath: mariadb.auth.rootPassword
+    - kind: Secret
+      name: wordpress-tylerphawkins-values
+      valuesKey: mariadbAuthUsername
+      targetPath: mariadb.auth.username
+    - kind: Secret
+      name: wordpress-tylerphawkins-values
+      valuesKey: mariadbAuthPassword
+      targetPath: mariadb.auth.password
+    - kind: Secret
+      name: wordpress-tylerphawkins-values
+      valuesKey: mariadbAuthDatabase
+      targetPath: mariadb.auth.database
+    - kind: Secret
+      name: wordpress-tylerphawkins-values
+      valuesKey: smtpHost
+      targetPath: smtpHost
+    - kind: Secret
+      name: wordpress-tylerphawkins-values
+      valuesKey: smtpPort
+      targetPath: smtpPort
+    - kind: Secret
+      name: wordpress-tylerphawkins-values
+      valuesKey: smtpUser
+      targetPath: smtpUser
+    - kind: Secret
+      name: wordpress-tylerphawkins-values
+      valuesKey: smtpPassword
+      targetPath: smtpPassword
   values:
     image:
-      tag: "5.8.1" # {"$imagepolicy": "flux-system:wordpress-tylerphawkins:tag"}
+      tag: "5.8.2" # {"$imagepolicy": "flux-system:wordpress-tylerphawkins:tag"}
       pullPolicy: Always
       pullSecrets:
-      - name: docker-hub
+        - name: docker-hub
     wordpressBlogName: Tyler P Hawkins
     wordpressConfigureCache: true
     wordpressScheme: https
@@ -100,7 +100,7 @@ spec:
       type: NodePort
     persistence:
       accessModes:
-      - ReadWriteOnce
+        - ReadWriteOnce
       storageClass: nfs-fast
       size: 1Gi
     # run a container to fix volume permissions at the start
@@ -118,12 +118,12 @@ spec:
     affinity:
       podAffinity:
         preferredDuringSchedulingIgnoredDuringExecution:
-        - podAffinityTerm:
-            labelSelector:
-              matchExpressions:
-              - key: app.kubernetes.io/instance
-                operator: In
-                values:
-                - wordpress-tylerphawkins
-            topologyKey: kubernetes.io/hostname
-          weight: 100
+          - podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                  - key: app.kubernetes.io/instance
+                    operator: In
+                    values:
+                      - wordpress-tylerphawkins
+              topologyKey: kubernetes.io/hostname
+            weight: 100
