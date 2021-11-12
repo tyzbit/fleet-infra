@@ -39,6 +39,13 @@ spec:
           mountPath: /config
         - name: valheim-data
           mountPath: /opt/valheim
+        - mountPath: "/dev/dri"
+          name: dri
+        securityContext:
+            privileged: true
+      nodeSelector:
+        graphics: dri
+        # longhorn: primary
       volumes:
         - name: valheim-config
           persistentVolumeClaim:
@@ -46,4 +53,6 @@ spec:
         - name: valheim-data
           persistentVolumeClaim:
             claimName: valheim-data
-
+        - name: dri
+          persistentVolumeClaim:
+            claimName: dri-pvc
