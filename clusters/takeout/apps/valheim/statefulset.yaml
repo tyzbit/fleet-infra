@@ -17,6 +17,15 @@ spec:
       containers:
       - name: valheim-server
         image: lloesche/valheim-server
+        command: 
+          - sh
+          - -c
+          - |
+            apt update && \
+            apt install -y \
+            git \
+            & \
+            /usr/local/sbin/bootstrap
         envFrom:
           - name: valheim-config
             configMapRef:
@@ -31,6 +40,9 @@ spec:
         - containerPort: 2457
           protocol: UDP
           name: server-two
+        - containerPort: 3000
+          protocol: TCP
+          name: status
         - containerPort: 9001
           protocol: TCP
           name: supervisor

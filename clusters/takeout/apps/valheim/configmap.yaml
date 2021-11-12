@@ -8,11 +8,6 @@ data:
   WORLD_NAME: Namek
   SERVER_PUBLIC: "true"
 
-  # POST_BOOTSTRAP_HOOK: |
-  #   apt-get update && \
-  #   DEBIAN_FRONTEND=noninteractive apt-get -y install \
-  #   git
-
   STATUS_HTTP: "true"
   SUPERVISOR_HTTP: "true"
 
