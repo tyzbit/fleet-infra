@@ -6,7 +6,7 @@ metadata:
 data:
   SERVER_NAME: qtosw
   WORLD_NAME: Namek
-  SERVER_PUBLIC: "false"
+  SERVER_PUBLIC: "true"
   SUPERVISOR_HTTP: "true"
 
   BACKUPS: "true"
