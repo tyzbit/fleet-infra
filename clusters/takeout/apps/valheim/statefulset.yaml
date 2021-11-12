@@ -22,7 +22,7 @@ spec:
             configMapRef:
                 name: valheim-config
           - name: valheim-config
-            secretMapRef:
+            secretRef:
                 name: valheim-config
         ports:
         - containerPort: 2456
