@@ -12,6 +12,7 @@ metadata:
         proxy_pass http://valheim-server-tcp:9001;
         proxy_set_header Host $host;
         proxy_set_header X-Forwarded-Proto https;
+      }
 spec:
   tls:
     - hosts:
