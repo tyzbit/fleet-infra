@@ -15,5 +15,5 @@ data:
 
   TZ: America/New_York
   # Mods
-  BEPINEX: "false"
+  BEPINEX: "true"
   VALHEIM_PLUS: "false"
