@@ -10,11 +10,14 @@ spec:
     app: valheim-server
   ports:
   - port: 2456
+    protocol: TCP
     name: server-one
     targetPort: 2456
   - port: 2457
+    protocol: TCP
     name: server-two
     targetPort: 2457
   - port: 9001
+    protocol: TCP
     name: supervisor
     targetPort: 9001
