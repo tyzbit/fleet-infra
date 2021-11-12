@@ -8,7 +8,7 @@ data:
   WORLD_NAME: Namek
   SERVER_PUBLIC: "true"
 
-  STATUS_HTTP: "true"
+  STATUS_HTTP: "false"
   SUPERVISOR_HTTP: "true"
 
   BACKUPS: "true"
