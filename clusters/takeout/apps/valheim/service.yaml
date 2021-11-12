@@ -12,6 +12,10 @@ spec:
   selector:
     app: valheim-server
   ports:
+  - port: 80
+    protocol: TCP
+    name: status
+    targetPort: 80
   - port: 9001
     protocol: TCP
     name: supervisor

@@ -22,4 +22,11 @@ spec:
           service:
             name: valheim-server-tcp
             port:
+              number: 80
+      - pathType: Prefix
+        path: "/supervisor"
+        backend:
+          service:
+            name: valheim-server-tcp
+            port:
               number: 9001

@@ -7,10 +7,14 @@ data:
   SERVER_NAME: qtosw
   WORLD_NAME: Namek
   SERVER_PUBLIC: "true"
+
+  STATUS_HTTP: "true"
   SUPERVISOR_HTTP: "true"
 
   BACKUPS: "true"
   BACKUPS_CRON: 0 * * * *
+  BACKUPS_MAX_AGE: "7" # days
+  BACKUPS_MAX_COUNT: "0"
   BACKUPS_DIRECTORY: /config/backups
 
   TZ: America/New_York
