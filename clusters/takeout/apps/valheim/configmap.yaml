@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: valheim-config
+data:
+  SERVER_NAME: qtosw
+  WORLD_NAME: Namek
+  SERVER_PUBLIC: "false"
+
+  BACKUPS: "true"
+  BACKUPS_CRON: 0 * * * *
+  BACKUPS_DIRECTORY: /config/backups
+
+  TZ: America/New_York
+  # Mods
+  BEPINEX: "false"
+  VALHEIM_PLUS: "false"

@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: valheim-server
+spec:
+  selector:
+    matchLabels:
+      app: valheim-server
+  serviceName: valheim-server
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: valheim-server
+    spec:
+      containers:
+      - name: valheim-server
+        image: lloesche/valheim-server
+        envFrom:
+          - name: valheim-config
+            configMapRef:
+                name: valheim-config
+          - name: valheim-config
+            secretMapRef:
+                name: valheim-config
+        ports:
+        - containerPort: 2456
+        - containerPort: 2457
+        - containerPort: 9001
+        volumeMounts:
+        - name: valheim-config
+          mountPath: /config
+        - name: valheim-data
+          mountPath: /opt/valheim
+      volumes:
+        - name: valheim-config
+          persistentVolumeClaim:
+            claimName: valheim-config
+        - name: valheim-data
+          persistentVolumeClaim:
+            claimName: valheim-data
+
