@@ -20,6 +20,6 @@ spec:
         path: "/"
         backend:
           service:
-            name: valheim-server-tcp
+            name: valheim-server
             port:
               number: 9001
