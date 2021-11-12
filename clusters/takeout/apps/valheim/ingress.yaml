@@ -12,7 +12,7 @@ spec:
     - hosts:
         - "*.qtosw.com"
         - "*.valheim.qtosw.com"
-      secretName: letsencrypt
+      secretName: valheim.qtosw.com-tls
   rules:
   - host: valheim.qtosw.com
     http:
