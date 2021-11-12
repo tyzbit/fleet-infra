@@ -7,6 +7,11 @@ metadata:
     kubernetes.io/ingress.class: nginx
     cert-manager.io/cluster-issuer: letsencrypt
     acme.cert-manager.io/http01-edit-in-place: "true"
+    nginx.ingress.kubernetes.io/server-snippet: |
+      location /supervisor {
+        proxy_pass http://valheim-server-tcp:9001;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-Proto https;
 spec:
   tls:
     - hosts:
@@ -23,10 +28,10 @@ spec:
             name: valheim-server-tcp
             port:
               number: 80
-      - pathType: Prefix
-        path: "/supervisor"
-        backend:
-          service:
-            name: valheim-server-tcp
-            port:
-              number: 9001
+      # - pathType: Prefix
+      #   path: "/supervisor"
+      #   backend:
+      #     service:
+      #       name: valheim-server-tcp
+      #       port:
+      #         number: 9001
