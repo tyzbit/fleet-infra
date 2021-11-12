@@ -26,10 +26,19 @@ spec:
                 name: valheim-config
         ports:
         - containerPort: 2456
+          protocol: TCP
+          name: server-one
+        - containerPort: 2456
+          protocol: UDP
           name: server-one
         - containerPort: 2457
+          protocol: TCP
+          name: server-two
+        - containerPort: 2457
+          protocol: UDP
           name: server-two
         - containerPort: 9001
+          protocol: TCP
           name: supervisor
         volumeMounts:
         - name: valheim-config
