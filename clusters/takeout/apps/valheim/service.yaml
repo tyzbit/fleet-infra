@@ -15,3 +15,6 @@ spec:
   - port: 2457
     name: server-two
     targetPort: 2457
+  - port: 9001
+    name: supervisor
+    targetPort: 9001
