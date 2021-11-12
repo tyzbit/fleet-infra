@@ -23,7 +23,17 @@ spec:
             name: valheim-server-tcp
             port:
               number: 80
-  - host: valheim-supervisor.qtosw.com
+  - host: map.valheim.qtosw.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: valheim-server-tcp
+            port:
+              number: 3000
+  - host: supervisor.valheim.qtosw.com
     http:
       paths:
       - pathType: Prefix
