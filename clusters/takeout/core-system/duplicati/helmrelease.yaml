@@ -23,7 +23,7 @@ spec:
     persistence:
       config:
         enabled: true
-        size: 20Gi
+        size: 100Gi
         storageClass: longhorn
       volume1:
         enabled: true
