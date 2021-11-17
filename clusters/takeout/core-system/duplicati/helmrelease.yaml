@@ -30,6 +30,9 @@ spec:
       volume2:
         enabled: true
         existingClaim: warehouse-volume2
+      tmp:
+        enabled: true
+        type: emptyDir
     ingress:
       main:
         enabled: true
