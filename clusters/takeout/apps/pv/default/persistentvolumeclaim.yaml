@@ -34,7 +34,7 @@ metadata:
   name: warehouse-volume1
   namespace: default
 spec:
-  volumeName: warehouse-media
+  volumeName: warehouse-volume1
   accessModes: 
     - ReadWriteMany
   volumeMode: Filesystem
@@ -49,7 +49,7 @@ metadata:
   name: warehouse-volume2
   namespace: default
 spec:
-  volumeName: warehouse-media
+  volumeName: warehouse-volume2
   accessModes: 
     - ReadWriteMany
   volumeMode: Filesystem
