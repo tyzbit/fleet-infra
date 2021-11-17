@@ -31,6 +31,36 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
+  name: warehouse-volume1
+  namespace: default
+spec:
+  volumeName: warehouse-media
+  accessModes: 
+    - ReadWriteMany
+  volumeMode: Filesystem
+  storageClassName: ""
+  resources:
+    requests:
+      storage: 1024Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: warehouse-volume2
+  namespace: default
+spec:
+  volumeName: warehouse-media
+  accessModes: 
+    - ReadWriteMany
+  volumeMode: Filesystem
+  storageClassName: ""
+  resources:
+    requests:
+      storage: 1024Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
   name: dri-pvc
   namespace: default
 spec:

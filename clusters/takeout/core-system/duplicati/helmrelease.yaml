@@ -1,0 +1,45 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: duplicati
+  namespace: flux-system
+spec:
+  releaseName: duplicati
+  targetNamespace: default
+  interval: 1m0s
+  chart:
+    spec:
+      chart: duplicati
+      version: "4.0.0"
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home
+        namespace: flux-system
+  values:
+    env:
+      TZ: America/New_York
+    persistence:
+      config:
+        enabled: true
+      volume1:
+        enabled: true
+        existingClaim: warehouse-volume1
+      volume2:
+        enabled: true
+        existingClaim: warehouse-volume2
+    ingress:
+      main:
+        enabled: true
+        annotations: 
+          kubernetes.io/ingress.class: nginx
+          cert-manager.io/cluster-issuer: letsencrypt
+          acme.cert-manager.io/http01-edit-in-place: "true"
+        hosts:
+        - host: "duplicati.qtosw.com"
+          paths:
+          - path: "/"
+        tls:
+        - hosts:
+          - "*.qtosw.com"
+          secretName: letsencrypt
+      
