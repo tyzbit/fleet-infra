@@ -18,6 +18,8 @@ spec:
   values:
     env:
       TZ: America/New_York
+      PUID: "0"
+      PGID: "0"
     persistence:
       config:
         enabled: true
