@@ -21,6 +21,7 @@ spec:
     persistence:
       config:
         enabled: true
+        storageClass: longhorn
       volume1:
         enabled: true
         existingClaim: warehouse-volume1
