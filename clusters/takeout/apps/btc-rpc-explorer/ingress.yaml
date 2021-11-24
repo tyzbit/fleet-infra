@@ -11,10 +11,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - "*.qtosw.com"
+        - "*.tybit.io"
       secretName: letsencrypt
   rules:
-  - host: btc.qtosw.com
+  - host: btc.tyzbit.io
     http:
       paths:
       - pathType: Prefix
