@@ -17,7 +17,7 @@ spec:
         # - "*.qtosw.com"
         - "*.tyzbit.io"
       # secretName: letsencrypt
-      secretName: tyzbit.io
+      secretName: tyzbit.io-tls
   rules:
   - host: files.tyzbit.io
     http:
