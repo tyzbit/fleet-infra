@@ -12,20 +12,9 @@ spec:
   tls:
     - hosts:
         - "*.qtosw.com"
-        - "*.tybit.io"
-      secretName: letsencrypt-tyz-and-qtosw
+      secretName: letsencrypt
   rules:
   - host: btc.qtosw.com
-    http:
-      paths:
-      - pathType: Prefix
-        path: "/"
-        backend:
-          service:
-            name: btc-rpc-explorer
-            port:
-              number: 80
-  - host: btc.tyzbit.io
     http:
       paths:
       - pathType: Prefix
