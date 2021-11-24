@@ -66,10 +66,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - "*.qtosw.com"
-      secretName: letsencrypt
+        - "*.tyzbit.io"
+      secretName: tyzbit.io-tls
   rules:
-  - host: architect.qtosw.com
+  - host: architect.tyzbit.io
     http:
       paths:
       - pathType: Prefix
