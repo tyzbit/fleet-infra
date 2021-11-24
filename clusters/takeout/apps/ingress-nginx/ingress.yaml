@@ -35,10 +35,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - "*.qtosw.com"
-      secretName: letsencrypt
+        - "*.tyzbit.io"
+      secretName: tyzbit.io-tls
   rules:
-  - host: unraid.qtosw.com
+  - host: unraid.tyzbit.io
     http:
       paths:
       - pathType: Prefix
