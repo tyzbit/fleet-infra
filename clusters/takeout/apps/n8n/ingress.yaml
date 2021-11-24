@@ -13,8 +13,8 @@ metadata:
 spec:
   tls:
     - hosts:
-        - "n8n.qtosw.com"
-      secretName: letsencrypt-n8n
+        - "*.qtosw.com"
+      secretName: letsencrypt
   rules:
   - host: n8n.qtosw.com
     http:
