@@ -16,7 +16,7 @@ spec:
         namespace: flux-system
   interval: 1m0s
   values:
-    hostname: rancher.tyzbit.io
+    hostname: rancher.qtosw.com
     letsEncrypt:
       ingress:
         class: nginx
