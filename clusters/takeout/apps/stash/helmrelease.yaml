@@ -54,10 +54,10 @@ spec:
           nginx.ingress.kubernetes.io/auth-secret: stash-credentials
           nginx.ingress.kubernetes.io/auth-realm: 'Authentication Required'
         hosts:
-        - host: "stash.qtosw.com"
+        - host: "stash.tyzbit.io"
           paths:
           - path: "/"
         tls:
         - hosts:
-          - "*.qtosw.com"
-          secretName: letsencrypt
+          - "*.tyzbit.io"
+          secretName: tyzbit.io-tls

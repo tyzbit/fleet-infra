@@ -13,8 +13,8 @@ metadata:
 spec:
   tls:
     - hosts:
-        - "longhorn.qtosw.com"
-      secretName: letsencrypt-longhorn
+        - "longhorn.tyzbit.io"
+      secretName: tyzbit.io-tls
   rules:
   - host: longhorn.jura
     http:
@@ -26,7 +26,7 @@ spec:
             name: longhorn-frontend
             port:
               number: 80
-  - host: longhorn.qtosw.com
+  - host: longhorn.tyzbit.io
     http:
       paths:
       - pathType: Prefix

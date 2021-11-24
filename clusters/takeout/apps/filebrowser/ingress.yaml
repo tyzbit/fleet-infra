@@ -14,9 +14,7 @@ metadata:
 spec:
   tls:
     - hosts:
-        # - "*.qtosw.com"
         - "*.tyzbit.io"
-      # secretName: letsencrypt
       secretName: tyzbit.io-tls
   rules:
   - host: files.tyzbit.io

@@ -35,10 +35,10 @@ spec:
           nginx.ingress.kubernetes.io/auth-secret: jackett-credentials
           nginx.ingress.kubernetes.io/auth-realm: 'Authentication Required'
         hosts:
-        - host: "jackett.qtosw.com"
+        - host: "jackett.tyzbit.io"
           paths:
           - path: "/"
         tls:
         - hosts:
-          - "*.qtosw.com"
-          secretName: letsencrypt
+          - "*.tyzbit.io"
+          secretName: tyzbit.io-tls

@@ -60,10 +60,10 @@ spec:
           cert-manager.io/cluster-issuer: letsencrypt
           acme.cert-manager.io/http01-edit-in-place: "true"
         hosts:
-        - host: "shows.qtosw.com"
+        - host: "shows.tyzbit.io"
           paths:
           - path: "/"
         tls:
         - hosts:
-          - "*.qtosw.com"
-          secretName: letsencrypt
+          - "*.tyzbit.io"
+          secretName: tyzbit.io-tls

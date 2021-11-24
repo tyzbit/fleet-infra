@@ -61,10 +61,10 @@ spec:
           cert-manager.io/cluster-issuer: letsencrypt
           acme.cert-manager.io/http01-edit-in-place: "true"
         hosts:
-        - host: "home.qtosw.com"
+        - host: "home.tyzbit.io"
           paths:
           - path: "/"
-        - host: "home-fb.qtosw.com"
+        - host: "home-fb.tyzbit.io"
           paths:
           - path: "/"
             service: 
@@ -72,8 +72,8 @@ spec:
               port: 80
         tls:
         - hosts:
-          - "*.qtosw.com"
-          secretName: letsencrypt
+          - "*.tyzbit.io"
+          secretName: tyzbit.io-tls
     service:
       filebrowser:
         enabled: true

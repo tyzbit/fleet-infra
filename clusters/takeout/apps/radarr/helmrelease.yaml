@@ -62,10 +62,10 @@ spec:
           nginx.ingress.kubernetes.io/auth-secret: movies-credentials
           nginx.ingress.kubernetes.io/auth-realm: 'Authentication Required'
         hosts:
-        - host: "movies.qtosw.com"
+        - host: "movies.tyzbit.io"
           paths:
           - path: "/"
         tls:
         - hosts:
-          - "*.qtosw.com"
-          secretName: letsencrypt
+          - "*.tyzbit.io"
+          secretName: tyzbit.io-tls
