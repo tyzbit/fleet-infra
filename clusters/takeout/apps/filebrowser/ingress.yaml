@@ -14,10 +14,12 @@ metadata:
 spec:
   tls:
     - hosts:
-        - "*.qtosw.com"
-      secretName: letsencrypt
+        # - "*.qtosw.com"
+        - "*.tyzbit.io"
+      # secretName: letsencrypt
+      secretName: letsencrypt-tyz
   rules:
-  - host: files.qtosw.com
+  - host: files.tyzbit.io
     http:
       paths:
       - pathType: Prefix
