@@ -55,6 +55,11 @@ spec:
           name: dri
         securityContext:
             privileged: true
+        resources:
+          requests:
+            cpu: 2000m
+          limits:
+            memory: 6Gi
       nodeSelector:
         graphics: dri
         # longhorn: primary
