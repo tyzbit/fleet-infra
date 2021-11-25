@@ -5,7 +5,7 @@ metadata:
   namespace: default
 data:
   SERVER_NAME: qtosw
-  WORLD_NAME: WeLoveYouDerek
+  WORLD_NAME: CommunismWorks
   SERVER_PUBLIC: "true"
 
   STATUS_HTTP: "false"
