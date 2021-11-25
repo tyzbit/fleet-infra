@@ -5,7 +5,7 @@ metadata:
   namespace: default
 data:
   SERVER_NAME: qtosw
-  WORLD_NAME: Namek
+  WORLD_NAME: WeLoveYouDerek
   SERVER_PUBLIC: "true"
 
   STATUS_HTTP: "false"
