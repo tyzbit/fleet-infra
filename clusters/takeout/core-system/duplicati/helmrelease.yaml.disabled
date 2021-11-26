@@ -31,7 +31,7 @@ spec:
       config:
         enabled: true
         size: 100Gi
-        storageClass: longhorn
+        storageClass: nfs-fast-volatile
       volume1:
         enabled: true
         existingClaim: warehouse-volume1
