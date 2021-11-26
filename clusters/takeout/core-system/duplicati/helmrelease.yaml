@@ -16,10 +16,17 @@ spec:
         name: k8s-at-home
         namespace: flux-system
   values:
+    controller:
+      replicas: 0 # active longhorn
     env:
       TZ: America/New_York
       PUID: "0"
       PGID: "0"
+    resources:
+      requests:
+        cpu: 3000m
+      limits:
+        memory: 10Gi
     persistence:
       config:
         enabled: true
