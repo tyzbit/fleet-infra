@@ -68,7 +68,7 @@ spec:
           args:
             # - -delay 1
             - -rsync
-            - /frigate
+            - /frigate/frigate-clips
             - /amazon
           imagePullPolicy: Always
           volumeMounts:
