@@ -38,6 +38,8 @@ spec:
               name: rtmp-frigate
               protocol: TCP
           volumeMounts:
+            - mountPath: /db
+              name: frigate-database
             - mountPath: /media/frigate
               subPath: frigate-clips
               name: amazon-kubernetes-storage
@@ -68,6 +70,9 @@ spec:
         - name: amazon-kubernetes-storage
           persistentVolumeClaim:
             claimName: amazon-kubernetes-storage
+        - name: frigate-database
+          persistentVolumeClaim:
+            claimName: frigate-database
         - name: config
           configMap:
             name: frigate-config

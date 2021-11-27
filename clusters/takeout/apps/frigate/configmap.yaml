@@ -5,6 +5,8 @@ metadata:
   namespace: default
 data:
   config.yml: |
+    database:
+      path: /db/frigate.db
     mqtt:
       host: mosquitto
     # ffmpeg:
