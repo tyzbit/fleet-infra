@@ -8,7 +8,7 @@ metadata:
   labels:
     app: frigate
 spec:
-  replicas: 1 # active longhorn
+  replicas: 1 # active nfs-client
   serviceName: frigate
   selector:
     matchLabels:
@@ -63,26 +63,26 @@ spec:
               port: rtmp-frigate
           securityContext:
             privileged: true
-        - name: lsyncd
-          image: allthings/lsyncd
-          args:
-            # - -delay 1
-            - -rsync
-            - /frigate/frigate-clips
-            - /amazon
-          imagePullPolicy: Always
-          volumeMounts:
-            - mountPath: /amazon
-              subPath: frigate-clips
-              name: amazon-kubernetes-storage
-            - mountPath: /frigate
-              name: frigate-media
+        # - name: lsyncd
+        #   image: allthings/lsyncd
+        #   args:
+        #     # - -delay 1
+        #     - -rsync
+        #     - /frigate/frigate-clips
+        #     - /amazon
+        #   imagePullPolicy: Always
+        #   volumeMounts:
+        #     - mountPath: /amazon
+        #       subPath: frigate-clips
+        #       name: amazon-kubernetes-storage
+        #     - mountPath: /frigate
+        #       name: frigate-media
       imagePullSecrets:
         - name: docker-hub
       volumes:
-        - name: amazon-kubernetes-storage
-          persistentVolumeClaim:
-            claimName: amazon-kubernetes-storage
+        # - name: amazon-kubernetes-storage
+        #   persistentVolumeClaim:
+        #     claimName: amazon-kubernetes-storage
         - name: frigate-database
           persistentVolumeClaim:
             claimName: frigate-database
