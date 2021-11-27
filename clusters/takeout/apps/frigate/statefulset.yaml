@@ -76,8 +76,7 @@ spec:
               subPath: frigate-clips
               name: amazon-kubernetes-storage
             - mountPath: /frigate
-              subPath: frigate-clips
-              name: amazon-kubernetes-storage
+              name: frigate-media
       imagePullSecrets:
         - name: docker-hub
       volumes:
