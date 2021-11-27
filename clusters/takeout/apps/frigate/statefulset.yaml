@@ -41,14 +41,13 @@ spec:
             - mountPath: /db
               name: frigate-database
             - mountPath: /media/frigate
-              subPath: frigate-clips
-              name: amazon-kubernetes-storage
+              name: frigate-media
             - mountPath: /dev/bus/usb
               name: usb
             - mountPath: /dev/dri
               name: dri
             - mountPath: /config
-              name: config
+              name: frigate-config
             - mountPath: /tmp/cache
               name: cache
             - mountPath: /dev/shm
@@ -64,6 +63,21 @@ spec:
               port: rtmp-frigate
           securityContext:
             privileged: true
+        - name: lsyncd
+          image: allthings/lsyncd
+          args:
+            # - -delay 1
+            - -rsync
+            - /frigate
+            - /amazon
+          imagePullPolicy: Always
+          volumeMounts:
+            - mountPath: /amazon
+              subPath: frigate-clips
+              name: amazon-kubernetes-storage
+            - mountPath: /frigate
+              subPath: frigate-clips
+              name: amazon-kubernetes-storage
       imagePullSecrets:
         - name: docker-hub
       volumes:
@@ -73,7 +87,10 @@ spec:
         - name: frigate-database
           persistentVolumeClaim:
             claimName: frigate-database
-        - name: config
+        - name: frigate-media
+          persistentVolumeClaim:
+            claimName: frigate-media
+        - name: frigate-config
           configMap:
             name: frigate-config
         - name: usb

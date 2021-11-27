@@ -11,3 +11,17 @@ spec:
   storageClassName: nfs-fast
   accessModes:
     - ReadWriteMany
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: frigate-media
+  namespace: default
+spec:
+  resources:
+    requests:
+      storage: 1Gi
+  volumeMode: Filesystem
+  storageClassName: nfs-fast
+  accessModes:
+    - ReadWriteMany
