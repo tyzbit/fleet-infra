@@ -37,8 +37,8 @@ spec:
             mountPath: /srv/torrent_downloads
           - name: nzb-downloads
             mountPath: /srv/usenet_downloads
-          - name: amazon-kubernetes-storage
-            mountPath: /srv/amazon-kubernetes-storage
+          # - name: amazon-kubernetes-storage
+          #   mountPath: /srv/amazon-kubernetes-storage
         resources:
           requests:
             cpu: "50m"
@@ -62,9 +62,9 @@ spec:
         - name: nzb-downloads
           persistentVolumeClaim:
             claimName: nzbget-downloads
-        - name: amazon-kubernetes-storage
-          persistentVolumeClaim:
-            claimName: amazon-kubernetes-storage
+        # - name: amazon-kubernetes-storage
+        #   persistentVolumeClaim:
+        #     claimName: amazon-kubernetes-storage
       # nodeSelector:
       #   kubernetes.io/hostname: anchorman
   # volumeClaimTemplates:
