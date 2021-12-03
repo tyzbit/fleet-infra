@@ -47,7 +47,7 @@ spec:
         enabled: true
         accessMode: ReadWriteMany
         size: 1Gi
-        storageClass: nfs-fast
+        storageClass: nfs-fast-volatile
     ingress:
       main:
         enabled: true
