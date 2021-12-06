@@ -33,7 +33,7 @@ data:
       listen 80 default;
       server_name files.valheim.qtosw.com;
       location / {
-        root /usr/share/nginx/html/worlds;
+        root /usr/share/nginx/html;
         index index.html index.htm;
         autoindex on;
       }
