@@ -25,11 +25,11 @@ spec:
           - mountPath: /etc/nginx/conf.d/
             name: valheim-files-config
           - mountPath: /usr/share/nginx/html/
-            name: valheim-data
+            name: valheim-config
       volumes:
-        - name: valheim-data
+        - name: valheim-config
           persistentVolumeClaim:
-            claimName: valheim-data
+            claimName: valheim-config
         - name: valheim-files-config
           configMap:
             name: valheim-files-config
