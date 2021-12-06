@@ -54,13 +54,13 @@ spec:
             name: valheim-server-tcp
             port:
               number: 80
-  # - host: files.valheim.qtosw.com
-  #   http:
-  #     paths:
-  #     - pathType: Prefix
-  #       path: "/"
-  #       backend:
-  #         service:
-  #           name: valheim-files
-  #           port:
-  #             number: 80
+  - host: files-test.valheim.qtosw.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: valheim-server-tcp
+            port:
+              number: 80

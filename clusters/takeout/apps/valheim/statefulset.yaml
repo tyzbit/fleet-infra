@@ -64,6 +64,7 @@ spec:
         image: nginx
         volumeMounts:
         - name: valheim-config
+          readOnly: true
           mountPath: /usr/share/nginx/html
         - mountPath: /etc/nginx/conf.d/
           name: valheim-files-config
