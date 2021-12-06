@@ -26,6 +26,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: valheim-files-config
+  namespace: default
 data:
   nginx.conf: |
     server {
