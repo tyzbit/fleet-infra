@@ -23,6 +23,7 @@ spec:
         - containerPort: 80
         volumeMounts:
           - mountPath: /etc/nginx/conf.d/
+            readOnly: true
             name: valheim-files-config
           - mountPath: /usr/share/nginx/html/
             name: valheim-config
