@@ -51,6 +51,6 @@ spec:
         path: "/"
         backend:
           service:
-            name: valheim-server-tcp
+            name: valheim-files
             port:
               number: 80
