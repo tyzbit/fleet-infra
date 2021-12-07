@@ -25,6 +25,7 @@ spec:
     persistence:
       data:
         enabled: true
+        accessMode: ReadWriteMany
         storageClass: nfs-fast
     ingress:
       main:
