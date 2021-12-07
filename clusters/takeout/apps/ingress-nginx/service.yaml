@@ -79,3 +79,6 @@ subsets:
   - name: http
     port: 443
     protocol: TCP
+  - name: k8s
+    port: 6443
+    protocol: TCP
