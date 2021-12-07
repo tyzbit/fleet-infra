@@ -1,0 +1,44 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: syncthing
+  namespace: flux-system
+spec:
+  releaseName: syncthing
+  targetNamespace: default
+  interval: 1m0s
+  chart:
+    spec:
+      chart: syncthing
+      version: "3.2.0"
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home
+        namespace: flux-system
+  values:
+    image:
+      pullPolicy: Always
+    controller:
+      replicas: 1 # active nfs-client
+    env:
+      TZ: America/New_York
+    persistence:
+      data:
+        enabled: true
+        storageClass: nfs-fast
+    ingress:
+      main:
+        enabled: true
+        annotations: 
+          kubernetes.io/ingress.class: nginx
+          cert-manager.io/cluster-issuer: letsencrypt
+          acme.cert-manager.io/http01-edit-in-place: "true"
+        hosts:
+        - host: "sync.tyzbit.io"
+          paths:
+          - path: "/"
+        tls:
+        - hosts:
+          - "*.tyzbit.io"
+          secretName: tyzbit.io-tls
+
