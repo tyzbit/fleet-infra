@@ -59,6 +59,10 @@ spec:
     port: 443
     protocol: TCP
     targetPort: 443
+  - name: k8s
+    port: 6443
+    protocol: TCP
+    targetPort: 6443
   clusterIP: None
   type: ClusterIP
 ---
