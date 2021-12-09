@@ -26,7 +26,7 @@ spec:
       requests:
         cpu: 3000m
       limits:
-        memory: 10Gi
+        memory: 4Gi
     persistence:
       config:
         enabled: true
