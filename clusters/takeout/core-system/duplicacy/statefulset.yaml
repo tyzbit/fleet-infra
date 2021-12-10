@@ -8,7 +8,7 @@ spec:
     matchLabels:
       app: duplicacy
   serviceName: duplicacy
-  replicas: 0 # active nfs-client-volatile
+  replicas: 1 # active nfs-client-volatile
   template:
     metadata:
       labels:

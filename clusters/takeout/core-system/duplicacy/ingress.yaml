@@ -14,7 +14,7 @@ spec:
         - "*.qtosw.com"
       secretName: letsencrypt
   rules:
-  - host: duplicacy.qtosw.com
+  - host: backup.qtosw.com
     http:
       paths:
       - pathType: Prefix
