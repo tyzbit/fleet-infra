@@ -12,7 +12,7 @@ spec:
   tls:
     - hosts:
         - "*.qtosw.com"
-      secretName: letsencrypt
+      secretName: tyzbit.io-tls
   rules:
   - host: backup.tyzbit.io
     http:
