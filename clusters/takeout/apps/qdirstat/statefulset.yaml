@@ -24,8 +24,8 @@ spec:
           volumeMounts:
             - name: qdirstat-config
               mountPath: /config
-            - name: braavos
-              mountPath: /mount/braavos
+            # - name: braavos
+            #   mountPath: /mount/braavos
             - name: warehouse
               mountPath: /mount/warehouse
             - name: downloads
@@ -41,9 +41,9 @@ spec:
         - name: qdirstat-config
           persistentVolumeClaim:
             claimName: qdirstat-config
-        - name: braavos
-          persistentVolumeClaim:
-            claimName: braavos-media-pvc
+        # - name: braavos
+        #   persistentVolumeClaim:
+        #     claimName: braavos-media-pvc
         - name: warehouse
           persistentVolumeClaim:
             claimName: warehouse-media
