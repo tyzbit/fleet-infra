@@ -12,9 +12,9 @@ spec:
   tls:
     - hosts:
         - "*.qtosw.com"
-      secretName: letsencrypt
+      secretName: tyzbit.io-tls
   rules:
-  - host: duplicacy.qtosw.com
+  - host: backup.tyzbit.io
     http:
       paths:
       - pathType: Prefix

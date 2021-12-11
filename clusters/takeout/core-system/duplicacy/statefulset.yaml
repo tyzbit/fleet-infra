@@ -8,7 +8,7 @@ spec:
     matchLabels:
       app: duplicacy
   serviceName: duplicacy
-  replicas: 0 # active nfs-client
+  replicas: 1 # active nfs-client-volatile
   template:
     metadata:
       labels:
@@ -30,8 +30,10 @@ spec:
           mountPath: /logs
         - name: duplicacy-cache
           mountPath: /cache
-        - name: braavos-media-pvc
-          mountPath: /braavos
+        - name: warehouse-volume1
+          mountPath: /volume1
+        - name: warehouse-volume2
+          mountPath: /volume2
         resources:
           requests:
             cpu: 1500m
@@ -46,8 +48,11 @@ spec:
             claimName: duplicacy-logs
         - name: duplicacy-cache
           emptyDir: {}
-        - name: braavos-media-pvc
+        - name: warehouse-volume1
           persistentVolumeClaim:
-            claimName: braavos-media-pvc
-      nodeSelector:
-        kubernetes.io/hostname: propman
+            claimName: warehouse-volume1
+        - name: warehouse-volume2
+          persistentVolumeClaim:
+            claimName: warehouse-volume2
+      # nodeSelector:
+      #   kubernetes.io/hostname: propman
