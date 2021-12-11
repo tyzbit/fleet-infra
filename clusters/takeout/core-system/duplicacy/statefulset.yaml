@@ -38,7 +38,7 @@ spec:
           requests:
             cpu: 1500m
           limits:
-            memory: 10Gi
+            memory: 8Gi
       volumes:
         - name: duplicacy-config
           persistentVolumeClaim:
@@ -54,5 +54,5 @@ spec:
         - name: warehouse-volume2
           persistentVolumeClaim:
             claimName: warehouse-volume2
-      nodeSelector:
-        kubernetes.io/hostname: propman
+      # nodeSelector:
+      #   kubernetes.io/hostname: propman
