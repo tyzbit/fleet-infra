@@ -54,7 +54,7 @@ spec:
             requests:
               cpu: 100m
             limits:
-              memory: 1Gi
+              memory: 512Mi
           livenessProbe:
             initialDelaySeconds: 60
             httpGet:
