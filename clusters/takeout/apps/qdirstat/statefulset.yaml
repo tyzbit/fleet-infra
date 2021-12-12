@@ -30,8 +30,8 @@ spec:
               mountPath: /mount/warehouse
             - name: downloads
               mountPath: /mount/downloads
-            - name: amazon-kubernetes-storage
-              mountPath: /mount/amazon-kubernetes-storage
+            # - name: amazon-kubernetes-storage
+            #   mountPath: /mount/amazon-kubernetes-storage
           resources:
             requests: 
               cpu: 500m
@@ -50,8 +50,8 @@ spec:
         - name: downloads
           persistentVolumeClaim:
             claimName: qbittorrent-downloads
-        - name: amazon-kubernetes-storage
-          persistentVolumeClaim:
-            claimName: amazon-kubernetes-storage
+        # - name: amazon-kubernetes-storage
+        #   persistentVolumeClaim:
+        #     claimName: amazon-kubernetes-storage
       imagePullSecrets:
         - name: docker-hub
