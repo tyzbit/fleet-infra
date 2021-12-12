@@ -29,8 +29,8 @@ spec:
         volumeMounts:
           - name: filebrowser-config
             mountPath: /db
-          - name: braavos
-            mountPath: /srv/braavos
+          # - name: braavos
+          #   mountPath: /srv/braavos
           - name: warehouse
             mountPath: /srv/warehouse
           - name: qbt-downloads
@@ -50,9 +50,9 @@ spec:
         - name: filebrowser-config
           persistentVolumeClaim:
             claimName: filebrowser-config
-        - name: braavos
-          persistentVolumeClaim:
-            claimName: braavos-media-pvc
+        # - name: braavos
+        #   persistentVolumeClaim:
+        #     claimName: braavos-media-pvc
         - name: warehouse
           persistentVolumeClaim:
             claimName: warehouse-media
