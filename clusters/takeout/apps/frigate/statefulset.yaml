@@ -74,15 +74,9 @@ spec:
         #   volumeMounts:
         #     - mountPath: /amazon
         #       subPath: frigate-clips
-        #       name: amazon-kubernetes-storage
-        #     - mountPath: /frigate
-        #       name: frigate-media
       imagePullSecrets:
         - name: docker-hub
       volumes:
-        # - name: amazon-kubernetes-storage
-        #   persistentVolumeClaim:
-        #     claimName: amazon-kubernetes-storage
         - name: frigate-database
           persistentVolumeClaim:
             claimName: frigate-database
