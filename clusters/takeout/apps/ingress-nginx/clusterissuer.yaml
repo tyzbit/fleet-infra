@@ -9,13 +9,13 @@ spec:
     privateKeySecretRef:
       name: letsencrypt
     solvers:
+    # An empty 'selector' means that this solver matches all domains
+    # - http01:
+    #     ingress:
+    #       class: nginx
     - dns01:
         cloudflare:
           email: tyzbit@gmail.com
           apiKeySecretRef:
             name: cloudflare-global-apikey
             key: apikey
-    # An empty 'selector' means that this solver matches all domains
-    - http01:
-        ingress:
-          class: nginx
