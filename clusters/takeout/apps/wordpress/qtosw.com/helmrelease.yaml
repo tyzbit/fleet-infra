@@ -106,9 +106,6 @@ spec:
     # run a container to fix volume permissions at the start
     volumePermissions:
       enabled: true
-    # prometheus metrics
-    metrics:
-      enabled: true
     memcached:
       enabled: true
     mariadb:

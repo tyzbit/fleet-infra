@@ -106,8 +106,6 @@ spec:
     # run a container to fix volume permissions at the start
     volumePermissions:
       enabled: true
-    metrics:
-      enabled: true
     memcached:
       enabled: true
     mariadb:
