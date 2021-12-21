@@ -83,6 +83,34 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
+  name: warehouse
+  namespace: default
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/proxy-body-size: 256m
+    cert-manager.io/cluster-issuer: letsencrypt
+    acme.cert-manager.io/http01-edit-in-place: "true"
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+spec:
+  tls:
+    - hosts:
+        - "warehouse-01.myasustor.com"
+      secretName: warehouse-01.myasustor.com-tls
+  rules:
+  - host: warehouse-01.myasustor.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: warehouse
+            port:
+              number: 8001
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
   name: takeout
   namespace: default
   annotations:
