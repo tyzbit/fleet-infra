@@ -54,7 +54,7 @@ spec:
         annotations: 
           kubernetes.io/ingress.class: nginx
           cert-manager.io/cluster-issuer: letsencrypt
-          acme.cert-manager.io/http01-edit-in-place: "true"
+          acme.cert-manager.io/http01-edit-in-place: "false"
         hosts:
         - host: "usenet.tyzbit.io"
           paths:

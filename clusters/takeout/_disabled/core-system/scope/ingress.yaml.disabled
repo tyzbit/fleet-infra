@@ -9,7 +9,7 @@ metadata:
     nginx.ingress.kubernetes.io/auth-secret: scope-credentials
     nginx.ingress.kubernetes.io/auth-realm: 'Authentication Required'
     cert-manager.io/cluster-issuer: letsencrypt
-    acme.cert-manager.io/http01-edit-in-place: "true"
+    acme.cert-manager.io/http01-edit-in-place: "false"
 spec:
   tls:
     - hosts:

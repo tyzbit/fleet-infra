@@ -58,7 +58,7 @@ spec:
           nginx.ingress.kubernetes.io/auth-secret: shows-credentials
           nginx.ingress.kubernetes.io/auth-realm: 'Authentication Required'
           cert-manager.io/cluster-issuer: letsencrypt
-          acme.cert-manager.io/http01-edit-in-place: "true"
+          acme.cert-manager.io/http01-edit-in-place: "false"
         hosts:
         - host: "shows.tyzbit.io"
           paths:
