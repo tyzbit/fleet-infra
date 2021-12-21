@@ -5,7 +5,7 @@ metadata:
   namespace: default
 spec:
   successfulJobsHistoryLimit: 1
-  schedule: "33 5 * * *"
+  schedule: "33 19 * * *"
   jobTemplate:
     spec:
       activeDeadlineSeconds: 900
