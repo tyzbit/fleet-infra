@@ -17,7 +17,7 @@ spec:
           containers:
           - name: recycling-bin-cleanup
             # Same image as in /etc/kubernetes/manifests/etcd.yaml
-            image: busybox:21.0.7
+            image: busybox
             imagePullPolicy: Always
             # command: ["sh", "-c", "find '/media/recycling bin' -type d -mtime +90 -delete"]
             command: ["tail","-f","/dev/null"]
