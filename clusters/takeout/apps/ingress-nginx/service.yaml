@@ -93,7 +93,7 @@ spec:
   - name: https
     port: 8001
     protocol: TCP
-    targetPort: 443
+    targetPort: 8001
   clusterIP: None
   type: ClusterIP
 ---
