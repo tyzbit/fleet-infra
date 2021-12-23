@@ -20,7 +20,11 @@ data:
     cameras:
       frontdoor:
         record:
-          enabled: false
+          enabled: true
+          retain_days: 0
+          events:
+            retain:
+              default: 30
         snapshots:
           timestamp: true
         motion:
@@ -38,7 +42,11 @@ data:
           fps: 5
       backdoor:
         record:
-          enabled: false
+          enabled: true
+          retain_days: 0
+          events:
+            retain:
+              default: 30
         snapshots:
           timestamp: true
         ffmpeg:
@@ -53,7 +61,11 @@ data:
           fps: 5
       driveway:
         record:
-          enabled: false
+          enabled: true
+          retain_days: 0
+          events:
+            retain:
+              default: 30
         snapshots:
           timestamp: true
         motion:
@@ -78,7 +90,11 @@ data:
           fps: 5
       porch:
         record:
-          enabled: false
+          enabled: true
+          retain_days: 0
+          events:
+            retain:
+              default: 30
         snapshots:
           timestamp: true
         ffmpeg:
