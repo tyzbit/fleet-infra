@@ -37,6 +37,8 @@ data:
           height: 720
           fps: 5
       backdoor:
+        record:
+          enabled: false
         snapshots:
           timestamp: true
         ffmpeg:
