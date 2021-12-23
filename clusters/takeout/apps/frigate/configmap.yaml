@@ -96,7 +96,7 @@ data:
           height: 1080
           fps: 5
     record:
-      enabled: true
+      enabled: false
       retain_days: 0
       events:
         retain:
