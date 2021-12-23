@@ -19,6 +19,8 @@ data:
     #     - yuv420p
     cameras:
       frontdoor:
+        record:
+          enabled: false
         snapshots:
           timestamp: true
         motion:
@@ -48,6 +50,8 @@ data:
           height: 1080
           fps: 5
       driveway:
+        record:
+          enabled: false
         snapshots:
           timestamp: true
         motion:
@@ -71,6 +75,8 @@ data:
           height: 1080
           fps: 5
       porch:
+        record:
+          enabled: false
         snapshots:
           timestamp: true
         ffmpeg:
@@ -96,7 +102,7 @@ data:
           height: 1080
           fps: 5
     record:
-      enabled: false
+      enabled: true
       retain_days: 0
       events:
         retain:
