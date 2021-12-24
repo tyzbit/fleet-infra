@@ -3,7 +3,7 @@ kind: StatefulSet
 metadata:
   name: xibo-web
   annotations:
-    # fluxcd.io/ignore: "true"
+
   labels:
     app: xibo-web
 spec:

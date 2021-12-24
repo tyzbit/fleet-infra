@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: xibo-xmr
   annotations:
-    # fluxcd.io/ignore: "true"
+
   labels:
     app: xibo-xmr
 spec:

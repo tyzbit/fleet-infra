@@ -4,7 +4,7 @@ metadata:
   name: electrumx
   namespace: default
   annotations: {}
-    # fluxcd.io/ignore: "true"
+
   labels:
     app: electrumx
 spec:

@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: nextcloud
   annotations: {}
-    # fluxcd.io/ignore: "true"
+
   labels:
     app: nextcloud
 spec:

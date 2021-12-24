@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: motion
   annotations:
-    # fluxcd.io/ignore: "true"
+
   labels:
     app: motion
 spec:
