@@ -44,16 +44,12 @@ spec:
         storageClass: longhorn
       temp:
         enabled: true
-        mountPath: /temp/
+        mountPath: /media/temp/
         existingClaim: stash-temp
       temp-previews:
         enabled: true
-        mountPath: /temp_previews/
+        mountPath: /media/temp_previews/
         existingClaim: stash-temp-previews
-      warehouse:
-        enabled: true
-        mountPath: /warehouse/
-        existingClaim: warehouse-media
     ingress:
       main:
         enabled: true
