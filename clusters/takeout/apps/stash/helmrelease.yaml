@@ -42,9 +42,16 @@ spec:
         enabled: true
         size: 5Gi
         storageClass: longhorn
-      media:
+      temp:
         enabled: true
-        existingClaim: warehouse-media
+        size: 1Gi
+        storageClass: nfs-fast
+        mountPath: /media/temp/
+      temp-previews:
+        enabled: true
+        size: 1Gi
+        storageClass: nfs-fast
+        mountPath: /media/temp_previews/
     ingress:
       main:
         enabled: true
