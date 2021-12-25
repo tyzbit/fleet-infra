@@ -53,7 +53,7 @@ spec:
       warehouse:
         enabled: true
         mountPath: /warehouse/
-        existingClaim: warehouse
+        existingClaim: warehouse-media
     ingress:
       main:
         enabled: true
