@@ -40,14 +40,14 @@ spec:
         enabled: true
         size: 5Gi
         storageClass: longhorn
-      media:
-        enabled: true
-        existingClaim: warehouse-media
       downloads:
         enabled: true
         accessMode: ReadWriteMany
         size: 1Gi
         storageClass: nfs-fast-volatile
+      temp:
+        enabled: true
+        existingClaim: stash-temp
     ingress:
       main:
         enabled: true

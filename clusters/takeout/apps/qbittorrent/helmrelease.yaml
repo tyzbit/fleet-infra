@@ -64,7 +64,9 @@ spec:
       warehouse:
         enabled: true
         existingClaim: warehouse-media
-        # existingClaim: braavos-media-pvc
+      temp:
+        enabled: true
+        existingClaim: stash-temp
     resources:
       requests:
         cpu: 200m

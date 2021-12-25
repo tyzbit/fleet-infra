@@ -37,6 +37,8 @@ spec:
             mountPath: /srv/torrent_downloads
           - name: nzb-downloads
             mountPath: /srv/usenet_downloads
+          - name: temp
+            mountPath: /srv/temp
         resources:
           requests:
             cpu: "50m"
@@ -60,6 +62,9 @@ spec:
         - name: nzb-downloads
           persistentVolumeClaim:
             claimName: nzbget-downloads
+        - name: temp
+          persistentVolumeClaim:
+            claimName: stash-temp
       # nodeSelector:
       #   kubernetes.io/hostname: anchorman
   # volumeClaimTemplates:

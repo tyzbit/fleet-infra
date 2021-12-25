@@ -30,6 +30,8 @@ spec:
               mountPath: /mount/warehouse
             - name: downloads
               mountPath: /mount/downloads
+            - name: temp
+              mountPath: /mount/temp
           resources:
             requests: 
               cpu: 500m
@@ -48,5 +50,8 @@ spec:
         - name: downloads
           persistentVolumeClaim:
             claimName: qbittorrent-downloads
+        - name: temp
+          persistentVolumeClaim:
+            claimName: stash-temp
       imagePullSecrets:
         - name: docker-hub

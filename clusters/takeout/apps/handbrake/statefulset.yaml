@@ -46,14 +46,14 @@ spec:
               mountPath: /output
             - name: dri
               mountPath: /dev/dri
-            # - name: braavos
-            #   mountPath: /storage/braavos
             - name: warehouse
               mountPath: /storage/warehouse
             - name: torrent-downloads
               mountPath: /storage/torrent_downloads
             - name: usenet-downloads
               mountPath: /storage/usenet_downloads
+            - name: temp
+              mountPath: /storage/temp
           securityContext:
             privileged: true
           resources:
@@ -68,12 +68,12 @@ spec:
         - name: handbrake-config
           persistentVolumeClaim:
             claimName: handbrake-config
-        # - name: braavos
-        #   persistentVolumeClaim:
-        #     claimName: braavos-media-pvc
         - name: warehouse
           persistentVolumeClaim:
             claimName: warehouse-media
+        - name: temp
+          persistentVolumeClaim:
+            claimName: stash-temp
         - name: torrent-downloads
           persistentVolumeClaim:
             claimName: qbittorrent-downloads
