@@ -1,24 +1,6 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: braavos-media-pv
-  namespace: default
-spec:
-  accessModes:
-  - ReadWriteOnce
-  - ReadOnlyMany
-  - ReadWriteMany
-  capacity:
-    storage: 16Ti
-  nfs:
-    path: /nfs/media/
-    server: braavos.jura
-  persistentVolumeReclaimPolicy: Retain
-  volumeMode: Filesystem
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
   name: warehouse-media
   namespace: default
 spec:
@@ -99,18 +81,3 @@ spec:
   nfs:
     path: /nfs/k8s-backup/
     server: braavos.jura
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: amazon-kubernetes-storage
-  namespace: default
-spec:
-  accessModes:
-  - ReadWriteMany
-  capacity:
-    storage: 10Ti
-  persistentVolumeReclaimPolicy: Retain
-  nfs:
-    path: /
-    server: 172.30.1.83

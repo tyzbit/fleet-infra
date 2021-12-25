@@ -44,14 +44,10 @@ spec:
         storageClass: longhorn
       temp:
         enabled: true
-        size: 1Gi
-        storageClass: nfs-fast
-        mountPath: /media/temp/
+        existingClaim: stash-temp
       temp-previews:
         enabled: true
-        size: 1Gi
-        storageClass: nfs-fast
-        mountPath: /media/temp_previews/
+        existingClaim: stash-temp-previews
     ingress:
       main:
         enabled: true
