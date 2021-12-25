@@ -66,18 +66,3 @@ spec:
     path: /dev/dri
   persistentVolumeReclaimPolicy: Retain
   volumeMode: Filesystem
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: braavos-etcd-backup-pv
-  namespace: default
-spec:
-  accessModes:
-  - ReadWriteMany
-  capacity:
-    storage: 1Gi
-  persistentVolumeReclaimPolicy: Retain
-  nfs:
-    path: /nfs/k8s-backup/
-    server: braavos.jura

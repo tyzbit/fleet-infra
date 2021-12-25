@@ -57,18 +57,3 @@ spec:
   resources:
     requests:
       storage: 256Mi
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: braavos-etcd-backup-pvc
-  namespace: kube-system
-spec:
-  volumeName: braavos-etcd-backup-pv
-  accessModes: 
-    - ReadWriteMany
-  volumeMode: Filesystem
-  storageClassName: ""
-  resources:
-    requests:
-      storage: 1Gi
