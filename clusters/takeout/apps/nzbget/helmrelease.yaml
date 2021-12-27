@@ -6,7 +6,7 @@ metadata:
 spec:
   releaseName: nzbget
   targetNamespace: default
-  timeout: 2m
+  timeout: 4m
   interval: 1m0s
   chart:
     spec:
@@ -38,7 +38,7 @@ spec:
     persistence:
       config:
         enabled: true
-        size: 5Gi
+        size: 40Gi
         storageClass: longhorn
       downloads:
         enabled: true

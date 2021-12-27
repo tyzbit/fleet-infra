@@ -6,7 +6,7 @@ metadata:
 spec:
   releaseName: radarr
   targetNamespace: default
-  timeout: 5m
+  timeout: 4m
   interval: 1m0s
   chart:
     spec:
@@ -24,6 +24,7 @@ spec:
     persistence:
       config:
         enabled: true
+        size: 50Gi
         storageClass: longhorn
       media:
         enabled: true
