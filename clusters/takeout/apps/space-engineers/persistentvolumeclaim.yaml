@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: space-engineers-data
+  namespace: default
+spec:
+  accessModes: 
+    - ReadWriteMany
+  volumeMode: Filesystem
+  storageClassName: nfs-fast
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: space-engineers-steam
+  namespace: default
+spec:
+  accessModes: 
+    - ReadWriteMany
+  volumeMode: Filesystem
+  storageClassName: nfs-fast
+  resources:
+    requests:
+      storage: 1Gi

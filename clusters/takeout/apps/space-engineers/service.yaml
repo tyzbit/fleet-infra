@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: space-engineers-udp
+  namespace: default
+spec:
+  type: LoadBalancer
+  externalTrafficPolicy: Local
+  selector:
+    app: space-engineers
+  ports:
+  - port: 27016
+    protocol: UDP
+    name: game-data
+    targetPort: 27016

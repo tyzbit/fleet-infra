@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: space-engineers
+spec:
+  selector:
+    matchLabels:
+      app: space-engineers
+  serviceName: space-engineers
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: space-engineers
+    spec:
+      containers:
+      - name: space-engineers
+        image: mmmaxwwwell/space-engineers-dedicated-docker-linux:latest
+        command: ["tail","-f","/dev/null"]
+        ports:
+        - containerPort: 27016
+          name: game-data
+          protocol: UDP
+        volumeMounts:
+        - name: space-engineers-config
+          mountPath: /appdata/space-engineers/SpaceEngineersDedicated/SpaceEngineers-Dedicated.cfg
+          subPath: SpaceEngineers-Dedicated.cfg
+        - name: space-engineers-data
+          mountPath: /appdata/space-engineers
+        - name: space-engineers-steam
+          mountPath: /home/wine/.steam
+        resources:
+          limits:
+            memory: 10Gi
+          requests:
+            cpu: 3000m
+      nodeSelector:
+        graphics: dri
+      volumes:
+        - name: space-engineers-config
+          secret:
+            secretName: space-engineers-config
+        - name: space-engineers-data
+          persistentVolumeClaim:
+            claimName: space-engineers-data
+        - name: space-engineers-steam
+          persistentVolumeClaim:
+            claimName: space-engineers-steam
