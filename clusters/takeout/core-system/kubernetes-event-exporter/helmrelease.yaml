@@ -31,7 +31,7 @@ spec:
       receivers:
         - name: "Discord"
           webhook:
-            endpoint: "https://example.com" # overridden by secret
+            # endpoint: "https://example.com"
             headers:
               User-Agent: kube-event-exporter 1.0
             layout:
