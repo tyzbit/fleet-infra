@@ -6,6 +6,7 @@ metadata:
 spec:
   targetNamespace: kube-system
   releaseName: kubernetes-event-exporter
+  timeout: 2m
   chart:
     spec:
       chart: kubernetes-event-exporter
