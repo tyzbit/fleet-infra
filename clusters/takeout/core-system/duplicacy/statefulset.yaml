@@ -32,8 +32,10 @@ spec:
           mountPath: /cache
         - name: warehouse-volume1
           mountPath: /volume1
+          readOnly: true
         - name: warehouse-volume2
           mountPath: /volume2
+          readOnly: true
         resources:
           requests:
             cpu: 1500m
