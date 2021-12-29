@@ -24,6 +24,8 @@ spec:
     serviceAccount:
       create: false
       name: kubernetes-event-exporter
+    rbac:
+      create: false
     config:
       route:
         routes:
