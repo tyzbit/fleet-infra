@@ -22,11 +22,6 @@ spec:
       valuesKey: discordWebhook
       targetPath: config.receivers[0].webhook.endpoint
   values:
-    serviceAccount:
-      create: false
-      name: kubernetes-event-exporter
-    rbac:
-      create: false
     config:
       route:
         routes:
