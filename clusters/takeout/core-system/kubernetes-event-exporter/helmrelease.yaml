@@ -16,11 +16,6 @@ spec:
         name: bitnami
         namespace: flux-system
   interval: 1m0s
-  valuesFrom:
-    - kind: Secret
-      name: kubernetes-event-exporter
-      valuesKey: discordWebhook
-      targetPath: config.receivers[0].webhook.endpoint
   values:
     config:
       route:
@@ -41,4 +36,8 @@ spec:
                 ```
                 {{ .Message }}
                 ```
-
+  valuesFrom:
+    - kind: Secret
+      name: kubernetes-event-exporter
+      valuesKey: discordWebhook
+      targetPath: config.receivers[0].webhook.endpoint
