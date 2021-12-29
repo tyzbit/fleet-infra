@@ -1,0 +1,30 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: kubernetes-event-exporter
+  namespace: flux-system
+spec:
+  targetNamespace: kube-system
+  releaseName: kubernetes-event-exporter
+  chart:
+    spec:
+      chart: kubernetes-event-exporter
+      version: "1.2.8"
+      sourceRef:
+        kind: HelmRepository
+        name: bitnami
+        namespace: flux-system
+  interval: 1m0s
+  valuesFrom:
+    - kind: Secret
+      name: kubernetes-event-exporter
+      valuesKey: discordWebhook
+      targetPath: config.receivers[0].webhook.endpoint
+  values:
+    config:
+      receivers:
+        - name: "Discord"
+          webhook:
+            endpoint: "https://example.com" # overridden by secret
+            headers:
+              User-Agent: kube-event-exporter 1.0
