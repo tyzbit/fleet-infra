@@ -19,5 +19,3 @@ spec:
   valuesFrom:
     - kind: Secret
       name: kubernetes-event-exporter
-      valuesKey: config
-      targetPath: config
