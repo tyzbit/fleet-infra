@@ -20,7 +20,7 @@ spec:
     - kind: Secret
       name: kubernetes-event-exporter
       valuesKey: discordWebhook
-      targetPath: config.receivers[0].webhook.endpoint
+      targetPath: config.receivers[0].slack.endpoint
   values:
     config:
       route:
@@ -30,7 +30,10 @@ spec:
               receiver: "Discord"
       receivers:
         - name: "Discord"
-          webhook:
-            endpoint: "https://example.com" # overridden by secret
-            headers:
-              User-Agent: kube-event-exporter 1.0
+          slack:
+            message: "Event {{ .Reason }} for {{ .InvolvedObject.Namespace }}/{{ .InvolvedObject.Name }} on K8s cluster takeout"
+            fields:
+              message: "{{ .Message }}"
+              namespace: "{{ .Namespace }}"
+              reason: "{{ .Reason }}"
+              object: "{{ .Namespace }}"
