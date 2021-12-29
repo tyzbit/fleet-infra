@@ -22,6 +22,11 @@ spec:
       targetPath: config.receivers[0].webhook.endpoint
   values:
     config:
+      route:
+        routes:
+          - match:
+            - kind: "Pod|Deployment|ReplicaSet"
+              receiver: "Discord"
       receivers:
         - name: "Discord"
           webhook:
