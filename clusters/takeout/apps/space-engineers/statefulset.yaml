@@ -17,7 +17,7 @@ spec:
       containers:
       - name: space-engineers
         image: mmmaxwwwell/space-engineers-dedicated-docker-linux:latest
-        command: ["tail","-f","/dev/null"]
+        # command: ["tail","-f","/dev/null"]
         ports:
         - containerPort: 27016
           name: game-data
