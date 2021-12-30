@@ -27,8 +27,7 @@ spec:
                   cd /tmp && \
                   curl -LO https://github.com/mmmaxwwwell/space-engineers-dedicated-docker-linux/raw/main/star-system.zip && \
                   unzip star-system.zip && \
-                  mv World /appdata/space-engineers/ &&
-                  mv /appdata/space-engineers/Sandbox_config.sbc /appdata/space-engineers/Sandbox_config.sbc.old;
+                  mv World /appdata/space-engineers/;
                 fi; 
                 chmod 777 -R /appdata/space-engineers/ && \
                 chmod 777 -R /home/wine/.steam/
@@ -49,7 +48,7 @@ spec:
         # - mountPath: "/dev/dri"
         #   name: dri
         - name: space-engineers-config
-          mountPath: /appdata/space-engineers/SpaceEngineersDedicated/SpaceEngineers-Dedicated.cfg
+          mountPath: /appdata/space-engineers/World/Sandbox_config.sbc
           subPath: SpaceEngineers-Dedicated.cfg
         - name: space-engineers-data
           mountPath: /appdata/space-engineers
