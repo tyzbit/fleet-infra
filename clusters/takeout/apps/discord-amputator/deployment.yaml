@@ -20,20 +20,20 @@ spec:
       #   value: "aws"
       #   effect: "NoSchedule"
       containers:
-      - name: discord-amputator
-        image: docker.io/tyzbit/discord-amputator:1.1.0 # {"$imagepolicy": "flux-system:discord-amputator"}
-        volumeMounts:
-        - name: discord-amputator-config
-          subPath: config.json
-          mountPath: /config.json
-        resources:
-          requests:
-            cpu: "50m"
-          limits:
-            memory: "128Mi"
+        - name: discord-amputator
+          image: docker.io/tyzbit/discord-amputator:2.0.0 # {"$imagepolicy": "flux-system:discord-amputator"}
+          volumeMounts:
+            - name: discord-amputator-config
+              subPath: config.json
+              mountPath: /config.json
+          resources:
+            requests:
+              cpu: "50m"
+            limits:
+              memory: "128Mi"
       volumes:
-      - name: discord-amputator-config
-        secret:
-          secretName: discord-amputator-config
+        - name: discord-amputator-config
+          secret:
+            secretName: discord-amputator-config
       # nodeSelector:
       #   colo: aws
