@@ -16,7 +16,7 @@ spec:
     spec:
       initContainers:
         - name: space-engineers-init
-          image: alpine
+          image: busybox
           command: 
             - bash
             - -c
