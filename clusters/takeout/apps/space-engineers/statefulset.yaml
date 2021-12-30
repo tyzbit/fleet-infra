@@ -29,10 +29,13 @@ spec:
                   unzip star-system.zip && \
                   mv World /appdata/space-engineers/;
                 fi; 
-                chmod 777 -R /appdata/space-engineers/
+                chmod 777 -R /appdata/space-engineers/ && \
+                chmod 777 -R /home/wine/.steam/
           volumeMounts:
             - name: space-engineers-data
               mountPath: /appdata/space-engineers
+            - name: space-engineers-steam
+              mountPath: /home/wine/.steam
       containers:
       - name: space-engineers
         image: mmmaxwwwell/space-engineers-dedicated-docker-linux:latest
