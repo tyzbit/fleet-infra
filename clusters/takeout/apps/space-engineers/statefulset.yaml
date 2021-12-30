@@ -23,8 +23,8 @@ spec:
           name: game-data
           protocol: UDP
         volumeMounts:
-        - mountPath: "/dev/dri"
-          name: dri
+        # - mountPath: "/dev/dri"
+        #   name: dri
         - name: space-engineers-config
           mountPath: /appdata/space-engineers/SpaceEngineersDedicated/SpaceEngineers-Dedicated.cfg
           subPath: SpaceEngineers-Dedicated.cfg
@@ -37,8 +37,8 @@ spec:
             memory: 10Gi
           requests:
             cpu: 3000m
-      nodeSelector:
-        graphics: dri
+      # nodeSelector:
+      #   graphics: dri
       volumes:
         - name: dri
           persistentVolumeClaim:
