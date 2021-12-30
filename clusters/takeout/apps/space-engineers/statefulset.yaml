@@ -48,7 +48,7 @@ spec:
         # - mountPath: "/dev/dri"
         #   name: dri
         - name: space-engineers-config
-          mountPath: /appdata/space-engineers/SpaceEngineersDedicated/SpaceEngineers-Dedicated.cfg
+          mountPath: /appdata/space-engineers/World/SpaceEngineers-Dedicated.cfg
           subPath: SpaceEngineers-Dedicated.cfg
         - name: space-engineers-data
           mountPath: /appdata/space-engineers
