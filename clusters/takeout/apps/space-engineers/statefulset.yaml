@@ -16,9 +16,9 @@ spec:
     spec:
       initContainers:
         - name: space-engineers-init
-          image: busybox
-          command: 
-            - /bin/bash
+          image: ubuntu
+          command:
+            - bash
             - -c
             - |
                 chmod 777 -R /appdata/space-engineers/ &&
