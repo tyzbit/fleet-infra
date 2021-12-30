@@ -21,7 +21,7 @@ spec:
       #   effect: "NoSchedule"
       containers:
         - name: discord-amputator
-          image: docker.io/tyzbit/discord-amputator:2.0.1 # {"$imagepolicy": "flux-system:discord-amputator"}
+          image: docker.io/tyzbit/discord-amputator:2.0.2 # {"$imagepolicy": "flux-system:discord-amputator"}
           volumeMounts:
             - name: discord-amputator-config
               subPath: config.json
