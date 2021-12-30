@@ -21,7 +21,6 @@ spec:
             - bash
             - -c
             - |
-                chmod 777 -R /appdata/space-engineers/ &&
                 if [ ! -f /appdata/space-engineers/World/Sandbox.sbc ]; then
                   apt-get update && \
                   apt-get install curl unzip -y && \
@@ -29,7 +28,8 @@ spec:
                   curl -LO https://github.com/mmmaxwwwell/space-engineers-dedicated-docker-linux/raw/main/star-system.zip && \
                   unzip star-system.zip && \
                   mv World /appdata/space-engineers/;
-                fi
+                fi; 
+                chmod 777 -R /appdata/space-engineers/
           volumeMounts:
             - name: space-engineers-data
               mountPath: /appdata/space-engineers
