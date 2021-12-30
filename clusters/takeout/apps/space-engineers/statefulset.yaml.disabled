@@ -15,9 +15,19 @@ spec:
         app: space-engineers
     spec:
       initContainers:
-        - name: fix-folder-perms-space-engineers
+        - name: space-engineers-init
           image: alpine
-          command: ["sh","-c","chmod 777 -R /appdata/space-engineers/"]
+          command: 
+            - bash
+            - -c
+            - |
+                chmod 777 -R /appdata/space-engineers/ &&
+                if [ ! -f /appdata/space-engineers/World/Sandbox.sbc ]; then
+                  cd /tmp && \
+                  curl -LO https://github.com/mmmaxwwwell/space-engineers-dedicated-docker-linux/raw/main/star-system.zip && \
+                  unzip star-system.zip && \
+                  mv World /appdata/space-engineers/;
+                fi
           volumeMounts:
             - name: space-engineers-data
               mountPath: /appdata/space-engineers
