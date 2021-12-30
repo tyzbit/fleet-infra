@@ -5,12 +5,12 @@ metadata:
   namespace: default
 spec:
   accessModes: 
-    - ReadWriteMany
+    - ReadWriteOnce
   volumeMode: Filesystem
-  storageClassName: nfs-fast
+  storageClassName: longhorn
   resources:
     requests:
-      storage: 1Gi
+      storage: 50Gi
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -19,9 +19,9 @@ metadata:
   namespace: default
 spec:
   accessModes: 
-    - ReadWriteMany
+    - ReadWriteOnce
   volumeMode: Filesystem
-  storageClassName: nfs-fast
+  storageClassName: longhorn
   resources:
     requests:
-      storage: 1Gi
+      storage: 10Gi
