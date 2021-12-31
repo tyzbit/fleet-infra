@@ -21,7 +21,6 @@ metadata:
   namespace: default
 spec:
   type: ClusterIP
-  externalTrafficPolicy: Local
   selector:
     app: space-engineers
   ports:
