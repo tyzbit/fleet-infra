@@ -60,6 +60,24 @@ spec:
             memory: 10Gi
           requests:
             cpu: 3000m
+      - name: filebrowser
+        image: filebrowser/filebrowser:v2
+        args: ["-d","/db/database.db"]
+        ports:
+        - containerPort: 80
+          name: fb-http
+          protocol: TCP
+        env:
+        - name: TZ
+          value: America/New_York
+        volumeMounts:
+        - name: space-engineers-data
+          subPath: filebrowser
+          mountPath: /db
+        - name: space-engineers-data
+          mountPath: /srv/space-engineers-data
+        - name: space-engineers-steam
+          mountPath: /srv/space-engineers-steam
       # nodeSelector:
       #   graphics: dri
       volumes:

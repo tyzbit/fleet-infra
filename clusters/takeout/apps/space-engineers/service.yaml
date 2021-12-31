@@ -13,3 +13,19 @@ spec:
     protocol: UDP
     name: game-data
     targetPort: 27016
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: space-engineers-fb
+  namespace: default
+spec:
+  type: ClusterIP
+  externalTrafficPolicy: Local
+  selector:
+    app: space-engineers
+  ports:
+  - port: 80
+    protocol: TCP
+    name: fb-http
+    targetPort: 80
