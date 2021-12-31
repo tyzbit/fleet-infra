@@ -84,9 +84,9 @@ spec:
         - name: dri
           persistentVolumeClaim:
             claimName: dri-pvc
-        - name: space-engineers-config
+        - name: space-engineers-server-config
           secret:
-            secretName: space-engineers-config
+            secretName: space-engineers-server-config
         - name: space-engineers-data
           persistentVolumeClaim:
             claimName: space-engineers-data
