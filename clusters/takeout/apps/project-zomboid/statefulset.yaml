@@ -21,10 +21,13 @@ spec:
             - bash
             - -c
             - |
-                chmod 777 -R /server-data
+                chmod 777 -R /server-data && \
+                chmod 777 -R /server-files
           volumeMounts:
             - name: project-zomboid-data
               mountPath: /server-data
+            - name: project-zomboid-files
+              mountPath: /server-files
       containers:
       - name: project-zomboid
         image: afey/zomboid:latest
