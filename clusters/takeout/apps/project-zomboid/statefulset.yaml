@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: project-zomboid
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: project-zomboid
+  serviceName: project-zomboid
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: project-zomboid
+    spec:
+      containers:
+      - name: project-zomboid
+        image: afey/zomboid:latest
+        # command: ["tail","-f","/dev/null"]
+        envFrom:
+        - name:
+          secretRef:
+              name: project-zomboid-config
+        env:
+        - name: SERVER_NAME
+          value: QTOSW
+        - name: SERVER_PUBLIC_NAME
+          value: QTOSW
+        - name: SERVER_PUBLIC_DESC
+          value: Quick, Think of Something Witty
+        ports:
+        - containerPort: 8766
+          name: data1
+          protocol: UDP
+        - containerPort: 8767
+          name: data2
+          protocol: UDP
+        - containerPort: 16261
+          name: data3
+          protocol: UDP
+        volumeMounts:
+        - name: project-zomboid-data
+          mountPath: /server-data
+        resources:
+          limits:
+            memory: 4Gi
+          requests:
+            cpu: 1000m
+      - name: filebrowser
+        image: filebrowser/filebrowser:v2
+        args: ["-d","/db/database.db"]
+        ports:
+        - containerPort: 80
+          name: fb-http
+          protocol: TCP
+        env:
+        - name: TZ
+          value: America/New_York
+        volumeMounts:
+        - name: project-zomboid-data
+          subPath: filebrowser
+          mountPath: /db
+      volumes:
+        - name: project-zomboid-data
+          persistentVolumeClaim:
+            claimName: project-zomboid-data
