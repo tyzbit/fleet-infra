@@ -53,6 +53,8 @@ spec:
         volumeMounts:
         - name: project-zomboid-data
           mountPath: /server-data
+        - name: project-zomboid-files
+          mountPath: /server-files
         resources:
           limits:
             memory: 4Gi
@@ -78,3 +80,6 @@ spec:
         - name: project-zomboid-data
           persistentVolumeClaim:
             claimName: project-zomboid-data
+        - name: project-zomboid-files
+          persistentVolumeClaim:
+            claimName: project-zomboid-files

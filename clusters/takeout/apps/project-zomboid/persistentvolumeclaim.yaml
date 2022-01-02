@@ -11,3 +11,17 @@ spec:
   resources:
     requests:
       storage: 100Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: project-zomboid-files
+  namespace: default
+spec:
+  accessModes: 
+    - ReadWriteOnce
+  volumeMode: Filesystem
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 40Gi
