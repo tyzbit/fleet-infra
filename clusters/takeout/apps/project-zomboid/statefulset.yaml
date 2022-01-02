@@ -21,7 +21,7 @@ spec:
             - bash
             - -c
             - |
-                chmod 777 -R /server-datta
+                chmod 777 -R /server-data
           volumeMounts:
             - name: project-zomboid-data
               mountPath: /server-data
