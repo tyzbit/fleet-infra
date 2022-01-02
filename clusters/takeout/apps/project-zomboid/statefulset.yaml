@@ -14,6 +14,17 @@ spec:
       labels:
         app: project-zomboid
     spec:
+      initContainers:
+        - name: project-zomboid-init
+          image: ubuntu
+          command:
+            - bash
+            - -c
+            - |
+                chmod 777 -R /server-datta
+          volumeMounts:
+            - name: project-zomboid-data
+              mountPath: /server-data
       containers:
       - name: project-zomboid
         image: afey/zomboid:latest
