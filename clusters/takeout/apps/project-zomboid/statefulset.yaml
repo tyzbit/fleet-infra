@@ -24,7 +24,7 @@ spec:
                 chmod 777 -R /server-data && \
                 chmod 777 -R /server-files && \
                 chown 1000:1000 /server-data -R && \
-                chown 1000:1000 /server-files -R \
+                chown 1000:1000 /server-files -R && \
                 chown 1000:1000 /server-data/lost+found -R && \
                 chown 1000:1000 /server-files/lost+found -R
           volumeMounts:
