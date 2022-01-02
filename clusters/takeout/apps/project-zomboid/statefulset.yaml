@@ -72,6 +72,8 @@ spec:
         - name: project-zomboid-data
           subPath: filebrowser
           mountPath: /db
+        - name: project-zomboid-data
+          mountPath: /srv/server-data
       volumes:
         - name: project-zomboid-data
           persistentVolumeClaim:
