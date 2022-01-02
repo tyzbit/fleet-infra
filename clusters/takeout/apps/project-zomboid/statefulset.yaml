@@ -22,7 +22,9 @@ spec:
             - -c
             - |
                 chmod 777 -R /server-data && \
-                chmod 777 -R /server-files
+                chmod 777 -R /server-files && \
+                chown 1000:1000 /server-data && \
+                chown 1000:1000 /server-files
           volumeMounts:
             - name: project-zomboid-data
               mountPath: /server-data
