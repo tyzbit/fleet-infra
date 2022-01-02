@@ -9,17 +9,21 @@ spec:
   selector:
     app: project-zomboid
   ports:
+  - port: 27015
+    protocol: TCP
+    name: data1
+    targetPort: 27015
   - port: 8766
     protocol: UDP
-    name: data1
+    name: data2
     targetPort: 8766
   - port: 8767
     protocol: UDP
-    name: data2
+    name: data3
     targetPort: 8767
   - port: 16261
     protocol: UDP
-    name: data3
+    name: data4
     targetPort: 16261
 ---
 apiVersion: v1
