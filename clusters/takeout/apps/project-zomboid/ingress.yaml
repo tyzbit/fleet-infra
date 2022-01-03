@@ -41,7 +41,7 @@ spec:
   tls:
     - hosts:
         - "*.projectzomboid.qtosw.com"
-      secretName: tprojectzomboid.qtosw.com-tls
+      secretName: projectzomboid.qtosw.com-tls
   rules:
   - host: files.projectzomboid.qtosw.com
     http:
