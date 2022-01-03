@@ -13,9 +13,9 @@ spec:
     - http01:
         ingress:
           class: nginx
-    # - dns01:
-    #     cloudflare:
-    #       email: tyzbit@gmail.com
-    #       apiKeySecretRef:
-    #         name: cloudflare-global-apikey
-    #         key: apikey
+    - dns01:
+        cloudflare:
+          email: tyzbit@gmail.com
+          apiKeySecretRef:
+            name: cloudflare-global-apikey
+            key: apikey
