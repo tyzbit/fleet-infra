@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: space-engineers-files-config
+  name: project-zomboid-files-config
   namespace: default
 data:
   nginx.conf: |
     server {
       listen 8080 default;
-      server_name files.spaceengineers.qtosw.com;
+      server_name files.projectzomboid.qtosw.com;
       location / {
         root /usr/share/nginx/html;
         index index.html index.htm;

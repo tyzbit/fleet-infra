@@ -83,7 +83,25 @@ spec:
           mountPath: /db
         - name: project-zomboid-data
           mountPath: /srv/server-data
+      - name: project-zomboid-files
+        image: nginx
+        volumeMounts:
+        - name: project-zomboid-data
+          readOnly: true
+          mountPath: /usr/share/nginx/html
+        - mountPath: /etc/nginx/conf.d/
+          name: project-zomboid-files-config
+        resources:
+          requests:
+            cpu: 50m
+          limits:
+            memory: 128Mi
+        ports:
+        - containerPort: 8080
       volumes:
+        - name: project-zomboid-files-config
+          configMap:
+              name: project-zomboid-files-config
         - name: project-zomboid-data
           persistentVolumeClaim:
             claimName: project-zomboid-data
