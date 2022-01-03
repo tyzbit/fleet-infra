@@ -17,7 +17,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: space-engineers-filebrowser
+  name: space-engineers-files
   namespace: default
 spec:
   type: ClusterIP
@@ -28,3 +28,7 @@ spec:
     protocol: TCP
     name: fb-http
     targetPort: 80
+  - port: 8080
+    protocol: TCP
+    name: nginx-http
+    targetPort: 8080

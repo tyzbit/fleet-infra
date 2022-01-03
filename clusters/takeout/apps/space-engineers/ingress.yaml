@@ -22,6 +22,16 @@ spec:
         path: "/"
         backend:
           service:
-            name: space-engineers-filebrowser
+            name: space-engineers-files
             port:
               number: 80
+  - host: files.spaceengineers.qtosw.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: space-engineers-files
+            port:
+              number: 8080

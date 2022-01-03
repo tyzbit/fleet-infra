@@ -78,6 +78,21 @@ spec:
           mountPath: /srv/space-engineers-data
         - name: space-engineers-steam
           mountPath: /srv/space-engineers-steam
+      - name: space-engineers-files
+        image: nginx
+        volumeMounts:
+        - name: space-engineers-data
+          readOnly: true
+          mountPath: /usr/share/nginx/html
+        - mountPath: /etc/nginx/conf.d/
+          name: space-engineers-files-config
+        resources:
+          requests:
+            cpu: 50m
+          limits:
+            memory: 128Mi
+        ports:
+        - containerPort: 8080
       # nodeSelector:
       #   graphics: dri
       volumes:
