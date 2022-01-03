@@ -13,6 +13,10 @@ spec:
     - http01:
         ingress:
           class: nginx
+      selector:
+        dnsNames:
+          - '*.qtosw.com'
+          - '*.tyzbit.io'
     # - dns01:
     #     cloudflare:
     #       email: tyzbit@gmail.com
