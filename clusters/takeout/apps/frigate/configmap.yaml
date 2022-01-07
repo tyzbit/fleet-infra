@@ -9,8 +9,8 @@ data:
       path: /db/frigate.db
     logger:
       default: info
-      logs:
-        frigate.record: debug
+      # logs:
+      #   frigate.record: debug
     mqtt:
       host: mosquitto
     # ffmpeg:
