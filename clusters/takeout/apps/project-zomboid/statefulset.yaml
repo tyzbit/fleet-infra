@@ -64,7 +64,7 @@ spec:
           mountPath: /server-files
         resources:
           limits:
-            memory: 8Gi
+            memory: 16Gi
           requests:
             cpu: 1000m
       - name: filebrowser
