@@ -18,7 +18,7 @@ spec:
         namespace: flux-system
   values:
     controller:
-      replicas: 0 # active longhorn
+      replicas: 1 # active longhorn
     env:
       TZ: America/New_York
     initContainers:
