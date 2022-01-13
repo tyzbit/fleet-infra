@@ -85,6 +85,8 @@ spec:
             port: 80
     mariadb:
       enabled: true
+      nodeSelector:
+        longhorn: primary
       primary:
         persistence:
           enabled: true
