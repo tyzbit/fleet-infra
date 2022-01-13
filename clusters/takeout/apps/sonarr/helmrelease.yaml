@@ -19,6 +19,8 @@ spec:
   values:
     controller:
       replicas: 1 # active longhorn
+    nodeSelector:
+      longhorn: primary
     env:
       TZ: America/New_York
     initContainers:

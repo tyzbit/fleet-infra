@@ -19,6 +19,8 @@ spec:
   values:
     controller:
       replicas: 1 # active nfs-client
+    nodeSelector:
+      longhorn: primary
     env:
       TZ: America/New_York
     initContainers:
