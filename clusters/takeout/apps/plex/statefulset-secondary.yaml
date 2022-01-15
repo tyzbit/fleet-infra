@@ -86,16 +86,16 @@ spec:
                   operator: In
                   values:
                     - "plex"
-  # volumeClaimTemplates:
-  #   - apiVersion: v1
-  #     kind: PersistentVolume
-  #     metadata:
-  #       name: plex-secondary-config
-  #     spec:
-  #       accessModes:
-  #         - ReadWriteOnce
-  #       volumeMode: Filesystem
-  #       storageClassName: longhorn-static
-  #       resources:
-  #         requests:
-  #           storage: 40Gi
+  volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolume
+      metadata:
+        name: plex-secondary-config
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        volumeMode: Filesystem
+        storageClassName: longhorn-static
+        resources:
+          requests:
+            storage: 40Gi
