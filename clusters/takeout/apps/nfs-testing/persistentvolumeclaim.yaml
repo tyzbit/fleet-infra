@@ -5,7 +5,7 @@ metadata:
   namespace: default
 spec:
   accessModes: 
-    - ReadWriteMany
+    - ReadWriteOnce
   volumeMode: Filesystem
   storageClassName: "doorman-test"
   resources:
