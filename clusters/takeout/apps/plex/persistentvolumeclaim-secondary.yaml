@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: plex-secondary-config
+  namespace: default
+spec:
+  accessModes: 
+    - ReadWriteOnce
+  volumeMode: Filesystem
+  storageClassName: openebs-cstor-primary-2-replicas
+  resources:
+    requests:
+      storage: 40Gi
