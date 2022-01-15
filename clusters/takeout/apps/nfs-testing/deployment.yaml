@@ -15,7 +15,7 @@ spec:
       - name: nfs-test
         image: busybox
         volumeMounts:
-          - mountPath: /braavos
+          - mountPath: /doorman
             name: testvol
         resources:
           limits:
@@ -24,4 +24,4 @@ spec:
       volumes:
         - name: testvol
           persistentVolumeClaim:
-            claimName: testvol
+            claimName: doorman-test
