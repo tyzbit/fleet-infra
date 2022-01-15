@@ -11,7 +11,7 @@ metadata:
   labels:
     app: btc-rpc-explorer-cache
 spec:
-  replicas: 1 # active longhorn
+  replicas: 0 # active longhorn
   selector:
     matchLabels:
       app: btc-rpc-explorer-cache
