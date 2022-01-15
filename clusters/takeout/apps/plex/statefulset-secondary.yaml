@@ -52,6 +52,9 @@ spec:
             limits:
               memory: 8192Mi
       volumes:
+        - name: plex-secondary-config
+          persistentVolumeClaim:
+            claimName: plex-secondary-config
         # - name: braavos
         #   persistentVolumeClaim:
         #     claimName: braavos-media-pvc
