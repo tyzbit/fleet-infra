@@ -28,7 +28,7 @@ spec:
       volumes:
       - name: src
         persistentVolumeClaim:
-          claimName: plex-secondary-config-0
+          claimName: plex-secondary-config-plex-secondary-0
       - name: dst
         persistentVolumeClaim:
           claimName: plex-secondary-config
