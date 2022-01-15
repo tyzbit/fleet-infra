@@ -14,6 +14,7 @@ spec:
     spec:
       containers:
       - name: nfs-test
+        command: ["tail","-f","/dev/null"]
         image: busybox
         volumeMounts:
           - mountPath: /doorman
