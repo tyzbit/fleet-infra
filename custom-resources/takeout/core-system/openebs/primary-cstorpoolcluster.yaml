@@ -14,18 +14,18 @@ spec:
         dataRaidGroupType: "stripe"
 
     - nodeSelector:
-        kubernetes.io/hostname: "doorman"
-      dataRaidGroups:
-        - blockDevices:
-            - blockDeviceName: "blockdevice-03075260aadf6a860f78f4fc6f6dc502"
-      poolConfig:
-        dataRaidGroupType: "stripe"
-
-    - nodeSelector:
         kubernetes.io/hostname: "cameraman"
       dataRaidGroups:
         - blockDevices:
             - blockDeviceName: "blockdevice-bca9341f63e063a7ee949447f529646a"
+      poolConfig:
+        dataRaidGroupType: "stripe"
+
+    - nodeSelector:
+        kubernetes.io/hostname: "doorman"
+      dataRaidGroups:
+        - blockDevices:
+            - blockDeviceName: "blockdevice-03075260aadf6a860f78f4fc6f6dc502"
       poolConfig:
         dataRaidGroupType: "stripe"
 
