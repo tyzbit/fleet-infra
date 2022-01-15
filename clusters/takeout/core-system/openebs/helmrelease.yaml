@@ -4,8 +4,6 @@ metadata:
   name: openebs-cstor
   namespace: flux-system
 spec:
-  install:
-    createNamespace: true
   targetNamespace: openebs
   releaseName: openebs-cstor
   chart:
