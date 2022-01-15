@@ -9,7 +9,7 @@ spec:
         kubernetes.io/hostname: "anchorman"
       dataRaidGroups:
         - blockDevices:
-            - blockDeviceName: "blockdevice-6e5d0fae3ad9c95eb4a72f9238de8a4c"
+            - blockDeviceName: "blockdevice-761660e053c8f3f424a949cb6e39c95a"
       poolConfig:
         dataRaidGroupType: "stripe"
 
