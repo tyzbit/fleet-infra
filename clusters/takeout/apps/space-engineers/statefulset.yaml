@@ -8,7 +8,7 @@ spec:
     matchLabels:
       app: space-engineers
   serviceName: space-engineers
-  replicas: 0
+  replicas: 1
   template:
     metadata:
       labels:
