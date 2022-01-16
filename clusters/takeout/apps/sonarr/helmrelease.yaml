@@ -40,7 +40,7 @@ spec:
     persistence:
       config:
         enabled: true
-        size: 5Gi
+        size: 20Gi
         storageClass: longhorn
       nzb-downloads:
         enabled: true
