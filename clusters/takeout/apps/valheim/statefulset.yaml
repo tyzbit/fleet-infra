@@ -57,7 +57,7 @@ spec:
             privileged: true
         resources:
           requests:
-            cpu: 2000m
+            cpu: 500m
           limits:
             memory: 6Gi
       - name: valheim-files
