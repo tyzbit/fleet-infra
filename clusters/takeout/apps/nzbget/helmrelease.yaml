@@ -18,7 +18,7 @@ spec:
         namespace: flux-system
   values:
     controller:
-      replicas: 0 # active nfs-client
+      replicas: 1 # active nfs-client
     nodeSelector:
       longhorn: primary
     env:
@@ -46,7 +46,7 @@ spec:
         enabled: true
         accessMode: ReadWriteMany
         size: 1Gi
-        storageClass: nfs-fast-volatile
+        storageClass: temp-nfs-fast-volatile
       temp:
         enabled: true
         existingClaim: stash-temp

@@ -20,7 +20,7 @@ spec:
     image:
       tag: v0.11.0
     controller:
-      replicas: 0 # active nfs-client
+      replicas: 1 # active longhorn
     nodeSelector:
       longhorn: primary
     env:

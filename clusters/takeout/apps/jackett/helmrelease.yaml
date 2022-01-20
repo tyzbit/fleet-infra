@@ -17,13 +17,13 @@ spec:
         namespace: flux-system
   values:
     controller:
-      replicas: 0 # active nfs-client
+      replicas: 1 # active nfs-client
     env:
       TZ: America/New_York
     persistence:
       config:
         enabled: true
-        storageClass: nfs-fast
+        storageClass: temp-nfs-fast
     ingress:
       main:
         enabled: true
