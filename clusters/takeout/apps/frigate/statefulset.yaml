@@ -4,7 +4,6 @@ metadata:
   name: frigate
   namespace: default
   annotations: {}
-
   labels:
     app: frigate
 spec:

@@ -61,7 +61,6 @@ metadata:
   name: nextcloud-cache
   namespace: default
   annotations: {}
-
   labels:
     app: nextcloud-cache
 spec:

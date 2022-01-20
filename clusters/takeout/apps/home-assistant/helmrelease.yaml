@@ -33,13 +33,13 @@ spec:
       pullPolicy: Always
       tag: "2021.11"
     controller:
-      replicas: 0 # active nfs-client
+      replicas: 1 # active nfs-client
     env:
       TZ: America/New_York
     persistence:
       config:
         enabled: true
-        storageClass: nfs-fast
+        storageClass: temp-nfs-fast
     additionalContainers:
       - name: filebrowser
         image: filebrowser/filebrowser:v2

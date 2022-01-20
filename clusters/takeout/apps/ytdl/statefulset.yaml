@@ -4,7 +4,6 @@ metadata:
   name: youtube-dl
   namespace: default
   annotations: {}
-
   labels:
     app: youtube-dl
 spec:

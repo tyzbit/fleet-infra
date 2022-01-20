@@ -4,7 +4,6 @@ metadata:
   name: motioneye
   namespace: default
   annotations: {}
-
   labels:
     app: motioneye
 spec:
