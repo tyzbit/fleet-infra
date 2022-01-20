@@ -8,7 +8,7 @@ metadata:
   labels:
     app: youtube-dl
 spec:
-  replicas: 1 # active nfs-client-fast
+  replicas: 0 # active nfs-client-fast
   selector:
     matchLabels:
       app: youtube-dl

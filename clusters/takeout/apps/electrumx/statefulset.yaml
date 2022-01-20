@@ -4,11 +4,10 @@ metadata:
   name: electrumx
   namespace: default
   annotations: {}
-
   labels:
     app: electrumx
 spec:
-  replicas: 0 # active nfs-client-volatile
+  replicas: 0 # inactive nfs-client-volatile
   selector:
     matchLabels:
       app: electrumx
