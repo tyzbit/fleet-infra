@@ -4,7 +4,6 @@ metadata:
   name: bitcoin
   namespace: default
   annotations: {}
-
   labels:
     app: bitcoin
 spec:
