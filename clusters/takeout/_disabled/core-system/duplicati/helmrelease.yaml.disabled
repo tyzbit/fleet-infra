@@ -17,7 +17,7 @@ spec:
         namespace: flux-system
   values:
     controller:
-      replicas: 0 # active nfs-client-volatile
+      replicas: 1 # inactive nfs-client-volatile
     env:
       TZ: America/New_York
       PUID: "0"

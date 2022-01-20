@@ -19,7 +19,7 @@ spec:
     image:
       pullPolicy: Always
     controller:
-      replicas: 0 # active nfs-client
+      replicas: 1 # inactive nfs-client
     env:
       TZ: America/New_York
     persistence:
