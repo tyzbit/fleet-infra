@@ -1,0 +1,119 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: project-zomboid-secondary-tcp
+  namespace: default
+  annotations:
+    metallb.universe.tf/allow-shared-ip: default-project-zomboid-server-secondary
+spec:
+  type: LoadBalancer
+  loadBalancerIP: 192.168.1.73
+  externalTrafficPolicy: Local
+  selector:
+    app: project-zomboid
+  ports:
+  - port: 27015
+    protocol: TCP
+    name: data1
+    targetPort: 27015
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: project-zomboid-udp
+  namespace: default
+  annotations:
+    metallb.universe.tf/allow-shared-ip: default-project-zomboid-server-secondary
+spec:
+  type: LoadBalancer
+  loadBalancerIP: 192.168.1.73
+  externalTrafficPolicy: Local
+  selector:
+    app: project-zomboid
+  ports:
+  - port: 8766
+    protocol: UDP
+    name: data2
+    targetPort: 8766
+  - port: 8767
+    protocol: UDP
+    name: data3
+    targetPort: 8767
+  - port: 16261
+    protocol: UDP
+    name: data4
+    targetPort: 16261
+  - port: 16262
+    protocol: UDP
+    name: data5
+    targetPort: 16262
+  - port: 16263
+    protocol: UDP
+    name: data6
+    targetPort: 16263
+  - port: 16264
+    protocol: UDP
+    name: data7
+    targetPort: 16264
+  - port: 16265
+    protocol: UDP
+    name: data8
+    targetPort: 16265
+  - port: 16266
+    protocol: UDP
+    name: data9
+    targetPort: 16266
+  - port: 16267
+    protocol: UDP
+    name: data10
+    targetPort: 16267
+  - port: 16268
+    protocol: UDP
+    name: data11
+    targetPort: 16268
+  - port: 16269
+    protocol: UDP
+    name: data12
+    targetPort: 16269
+  - port: 16270
+    protocol: UDP
+    name: data13
+    targetPort: 16270
+  - port: 16271
+    protocol: UDP
+    name: data14
+    targetPort: 16271
+  - port: 16272
+    protocol: UDP
+    name: data15
+    targetPort: 16272
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: project-zomboid-filebrowser-secondary
+  namespace: default
+spec:
+  type: ClusterIP
+  selector:
+    app: project-zomboid-secondary
+  ports:
+  - port: 80
+    protocol: TCP
+    name: fb-http
+    targetPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: project-zomboid-secondary-files
+  namespace: default
+spec:
+  type: ClusterIP
+  selector:
+    app: project-zomboid-secondary
+  ports:
+  - port: 8080
+    protocol: TCP
+    name: fb-http
+    targetPort: 8080

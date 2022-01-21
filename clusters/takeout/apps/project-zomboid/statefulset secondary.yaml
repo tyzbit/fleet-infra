@@ -1,0 +1,110 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: project-zomboid-secondary
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: project-zomboid-secondary
+  serviceName: project-zomboid-secondary
+  replicas: 1 # active longhorn
+  template:
+    metadata:
+      labels:
+        app: project-zomboid-secondary
+    spec:
+      initContainers:
+        - name: project-zomboid-init
+          image: ubuntu
+          command:
+            - bash
+            - -c
+            - |
+                chmod 777 -R /server-data && \
+                chmod 777 -R /server-files && \
+                chown 1000:1000 /server-data -R && \
+                chown 1000:1000 /server-files -R && \
+                chown 1000:1000 /server-data/lost+found -R && \
+                chown 1000:1000 /server-files/lost+found -R
+          volumeMounts:
+            - name: project-zomboid-secondary-data
+              mountPath: /server-data
+            - name: project-zomboid-secondary-files
+              mountPath: /server-files
+      containers:
+      - name: project-zomboid
+        image: afey/zomboid:latest
+        # command: ["tail","-f","/dev/null"]
+        envFrom:
+        - name:
+          secretRef:
+              name: project-zomboid-secondary-config
+        env:
+        - name: SERVER_NAME
+          value: QTOSW-SECONDARY
+        - name: SERVER_PUBLIC_NAME
+          value: QTOSW-SECONDARY
+        - name: SERVER_PUBLIC_DESC
+          value: Quick, Think of Something Witty Part Deux
+        ports:
+        - containerPort: 8766
+          name: data1
+          protocol: UDP
+        - containerPort: 8767
+          name: data2
+          protocol: UDP
+        - containerPort: 16261
+          name: data3
+          protocol: UDP
+        volumeMounts:
+        - name: project-zomboid-secondary-data
+          mountPath: /server-data
+        - name: project-zomboid-secondary-files
+          mountPath: /server-files
+        resources:
+          limits:
+            memory: 16Gi # suggest tweak this down to 10 or 12Gi
+          requests:
+            cpu: 1000m
+      - name: filebrowser
+        image: filebrowser/filebrowser:v2
+        args: ["-d","/db/database.db"]
+        ports:
+        - containerPort: 80
+          name: fb-http
+          protocol: TCP
+        env:
+        - name: TZ
+          value: America/New_York
+        volumeMounts:
+        - name: project-zomboid-secondary-data
+          subPath: filebrowser
+          mountPath: /db
+        - name: project-zomboid-secondary-data
+          mountPath: /srv/server-data
+      - name: project-zomboid-secondary-files
+        image: nginx
+        volumeMounts:
+        - name: project-zomboid-secondary-data
+          readOnly: true
+          mountPath: /usr/share/nginx/html
+        - mountPath: /etc/nginx/conf.d/
+          name: project-zomboid-secondary-files-config
+        resources:
+          requests:
+            cpu: 50m
+          limits:
+            memory: 128Mi
+        ports:
+        - containerPort: 8080
+      volumes:
+        - name: project-zomboid-secondary-files-config
+          configMap:
+              name: project-zomboid-secondary-files-config
+        - name: project-zomboid-data
+          persistentVolumeClaim:
+            claimName: project-zomboid-secondary-data
+        - name: project-zomboid-secondary-files
+          persistentVolumeClaim:
+            claimName: project-zomboid-secondary-files
