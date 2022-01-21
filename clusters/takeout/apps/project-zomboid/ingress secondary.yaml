@@ -43,7 +43,7 @@ spec:
         - "*.projectzomboid.qtosw.com"
       secretName: projectzomboid.qtosw.com-tls
   rules:
-  - host: files-2.projectzomboid.qtosw.com
+  - host: files.projectzomboid-2.qtosw.com
     http:
       paths:
       - pathType: Prefix
