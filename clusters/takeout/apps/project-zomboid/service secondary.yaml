@@ -20,7 +20,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: project-zomboid-udp
+  name: project-zomboid-secondary-udp
   namespace: default
   annotations:
     metallb.universe.tf/allow-shared-ip: default-project-zomboid-server-secondary
@@ -29,7 +29,7 @@ spec:
   loadBalancerIP: 192.168.1.73
   externalTrafficPolicy: Local
   selector:
-    app: project-zomboid
+    app: project-zomboid-secondary
   ports:
   - port: 8766
     protocol: UDP
