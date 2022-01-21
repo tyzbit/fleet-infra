@@ -91,7 +91,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: project-zomboid-filebrowser-secondary
+  name: project-zomboid-secondary-filebrowser
   namespace: default
 spec:
   type: ClusterIP
