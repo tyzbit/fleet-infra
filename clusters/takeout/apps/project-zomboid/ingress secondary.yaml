@@ -40,7 +40,7 @@ metadata:
 spec:
   tls:
     - hosts:
-        - "*.projectzomboid.qtosw.com"
+        - "*.projectzomboid-2.qtosw.com"
       secretName: projectzomboid-2.qtosw.com-tls
   rules:
   - host: files.projectzomboid-2.qtosw.com
