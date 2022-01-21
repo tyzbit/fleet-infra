@@ -102,7 +102,7 @@ spec:
         - name: project-zomboid-secondary-files-config
           configMap:
               name: project-zomboid-secondary-files-config
-        - name: project-zomboid-data
+        - name: project-zomboid-secondary-data
           persistentVolumeClaim:
             claimName: project-zomboid-secondary-data
         - name: project-zomboid-secondary-files
