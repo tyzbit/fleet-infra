@@ -49,9 +49,7 @@ spec:
         storageClass: longhorn
       intermediate:
         enabled: true
-        size: 120Gi
-        accessMode: ReadWriteOnce
-        storageClass: longhorn
+        type: EmptyDir
       temp:
         enabled: true
         existingClaim: stash-temp
