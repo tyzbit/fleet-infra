@@ -47,6 +47,10 @@ spec:
         accessMode: ReadWriteMany
         size: 1Gi
         storageClass: temp-nfs-fast-volatile
+      intermediate:
+        enable: true
+        size: 120Gi
+        storageClass: longhorn
       temp:
         enabled: true
         existingClaim: stash-temp
