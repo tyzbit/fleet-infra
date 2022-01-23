@@ -44,9 +44,9 @@ spec:
         storageClass: longhorn
       downloads:
         enabled: true
-        size: 1Gi
+        size: 480Gi
         accessMode: ReadWriteMany
-        storageClass: temp-nfs-fast-volatile
+        storageClass: longhorn
       intermediate:
         enabled: true
         size: 120Gi
