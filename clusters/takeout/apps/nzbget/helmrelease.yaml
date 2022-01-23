@@ -42,11 +42,14 @@ spec:
         enabled: true
         size: 40Gi
         storageClass: longhorn
-      downloads:
+      # downloads:
+      #   enabled: true
+      #   size: 480Gi
+      #   accessMode: ReadWriteMany
+      #   storageClass: longhorn
+      media:
         enabled: true
-        size: 480Gi
-        accessMode: ReadWriteMany
-        storageClass: longhorn
+        existingClaim: warehouse-media
       intermediate:
         enabled: true
         type: emptyDir
