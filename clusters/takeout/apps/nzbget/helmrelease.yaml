@@ -44,12 +44,13 @@ spec:
         storageClass: longhorn
       downloads:
         enabled: true
-        accessMode: ReadWriteMany
         size: 1Gi
+        accessMode: ReadWriteMany
         storageClass: temp-nfs-fast-volatile
       intermediate:
         enable: true
         size: 120Gi
+        accessMode: ReadWriteOnce
         storageClass: longhorn
       temp:
         enabled: true
