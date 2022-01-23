@@ -48,7 +48,7 @@ spec:
         accessMode: ReadWriteMany
         storageClass: temp-nfs-fast-volatile
       intermediate:
-        enable: true
+        enabled: true
         size: 120Gi
         accessMode: ReadWriteOnce
         storageClass: longhorn
