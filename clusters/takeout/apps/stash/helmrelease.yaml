@@ -11,14 +11,14 @@ spec:
   chart:
     spec:
       chart: stash
-      version: "3.0.1"
+      version: "3.2.0"
       sourceRef:
         kind: HelmRepository
         name: k8s-at-home
         namespace: flux-system
   values:
     image:
-      tag: v0.11.0
+      tag: v0.12.0
     controller:
       replicas: 1 # active longhorn
     nodeSelector:
