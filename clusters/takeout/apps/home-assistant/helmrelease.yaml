@@ -33,7 +33,7 @@ spec:
       pullPolicy: Always
       tag: "2021.12"
     controller:
-      replicas: 1 # active nfs-client
+      replicas: 0 # active nfs-client
     env:
       TZ: America/New_York
     persistence:

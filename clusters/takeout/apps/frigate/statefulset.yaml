@@ -7,7 +7,7 @@ metadata:
   labels:
     app: frigate
 spec:
-  replicas: 1 # active nfs-client
+  replicas: 0 # active nfs-client
   serviceName: frigate
   selector:
     matchLabels:
