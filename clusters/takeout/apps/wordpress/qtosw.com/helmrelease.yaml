@@ -66,6 +66,7 @@ spec:
       valuesKey: smtpPassword
       targetPath: smtpPassword
   values:
+    replicaCount: 0 # active nfs-fast
     image:
       tag: "5.8.3" # {"$imagepolicy": "flux-system:wordpress-qtosw:tag"}
       pullPolicy: Always
@@ -102,7 +103,7 @@ spec:
     persistence:
       accessModes:
         - ReadWriteOnce
-      storageClass: nfs-fast
+      storageClass: temp-nfs-fast
       size: 1Gi
     # run a container to fix volume permissions at the start
     volumePermissions:
