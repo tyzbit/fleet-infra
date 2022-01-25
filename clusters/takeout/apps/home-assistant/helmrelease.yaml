@@ -39,7 +39,7 @@ spec:
     persistence:
       config:
         enabled: true
-        storageClass: temp-nfs-fast
+        storageClass: nfs-fast
     additionalContainers:
       - name: filebrowser
         image: filebrowser/filebrowser:v2
