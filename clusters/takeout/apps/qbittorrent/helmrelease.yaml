@@ -63,7 +63,7 @@ spec:
         storageClass: nfs-fast-volatile
       warehouse:
         enabled: true
-        existingClaim: warehouse-media
+        existingClaim: warehouse-volume1-media
       temp:
         enabled: true
         existingClaim: stash-temp

@@ -52,7 +52,7 @@ spec:
         #     claimName: braavos-media-pvc
         - name: warehouse
           persistentVolumeClaim:
-            claimName: warehouse-media
+            claimName: warehouse-volume1-media
         - name: dri
           persistentVolumeClaim:
             claimName: dri-pvc

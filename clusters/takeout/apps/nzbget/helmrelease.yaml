@@ -49,7 +49,7 @@ spec:
       #   storageClass: longhorn
       media:
         enabled: true
-        existingClaim: warehouse-media
+        existingClaim: warehouse-volume1-media
       intermediate:
         enabled: true
         type: emptyDir
