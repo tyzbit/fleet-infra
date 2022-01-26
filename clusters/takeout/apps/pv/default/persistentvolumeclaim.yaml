@@ -16,10 +16,10 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: warehouse-volume1-media
+  name: warehouse-volume1
   namespace: default
 spec:
-  volumeName: warehouse-volume1-media
+  volumeName: warehouse-volume1
   accessModes: 
     - ReadWriteMany
   volumeMode: Filesystem
@@ -31,10 +31,10 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: warehouse-volume1
+  name: warehouse-volume1-media
   namespace: default
 spec:
-  volumeName: warehouse-volume1
+  volumeName: warehouse-volume1-media
   accessModes: 
     - ReadWriteMany
   volumeMode: Filesystem

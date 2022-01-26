@@ -37,24 +37,6 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: warehouse-volume2
-  namespace: default
-spec:
-  accessModes:
-  - ReadWriteOnce
-  - ReadOnlyMany
-  - ReadWriteMany
-  capacity:
-    storage: 80Ti
-  nfs:
-    path: /volume2/
-    server: warehouse.jura
-  persistentVolumeReclaimPolicy: Retain
-  volumeMode: Filesystem
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
   name: warehouse-volume1
   namespace: default
 spec:
@@ -84,3 +66,22 @@ spec:
     path: /dev/dri
   persistentVolumeReclaimPolicy: Retain
   volumeMode: Filesystem
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: warehouse-volume2
+  namespace: default
+spec:
+  accessModes:
+  - ReadWriteOnce
+  - ReadOnlyMany
+  - ReadWriteMany
+  capacity:
+    storage: 80Ti
+  nfs:
+    path: /volume2/
+    server: warehouse.jura
+  persistentVolumeReclaimPolicy: Retain
+  volumeMode: Filesystem
+---
