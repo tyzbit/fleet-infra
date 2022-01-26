@@ -29,7 +29,7 @@ spec:
   capacity:
     storage: 80Ti
   nfs:
-    path: /volume1/media/
+    path: /volume1/media_2/
     server: warehouse.jura
   persistentVolumeReclaimPolicy: Retain
   volumeMode: Filesystem
