@@ -18,7 +18,7 @@ spec:
         namespace: flux-system
   values:
     controller:
-      replicas: 0 # active longhorn
+      replicas: 1 # active longhorn
     nodeSelector:
       longhorn: primary
     env:
