@@ -28,8 +28,8 @@ spec:
       volumes:
       - name: src
         persistentVolumeClaim:
-          claimName: plex-secondary-config-plex-secondary-0
+          claimName: stash-temp
       - name: dst
         persistentVolumeClaim:
-          claimName: plex-secondary-config
+          claimName: stash-temp-iscsi
   backoffLimit: 0
