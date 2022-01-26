@@ -8,6 +8,6 @@ spec:
     requests:
       storage: 1Gi
   volumeMode: Filesystem
-  storageClassName: temp-nfs-fast-volatile
+  storageClassName: nfs-fast-volatile
   accessModes:
     - ReadWriteMany

@@ -55,12 +55,12 @@ spec:
         enabled: true
         size: 1Gi
         accessMode: ReadWriteMany
-        storageClass: temp-nfs-fast
+        storageClass: nfs-fast
       downloads: 
         enabled: true
         size: 1Gi
         accessMode: ReadWriteMany
-        storageClass: temp-nfs-fast-volatile
+        storageClass: nfs-fast-volatile
       warehouse:
         enabled: true
         existingClaim: warehouse-media
