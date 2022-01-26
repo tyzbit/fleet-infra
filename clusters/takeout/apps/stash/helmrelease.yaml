@@ -49,11 +49,11 @@ spec:
       temp:
         enabled: true
         mountPath: /media/temp/
-        existingClaim: stash-temp
+        existingClaim: stash-temp-iscsi
       temp-previews:
         enabled: true
         mountPath: /media/temp_previews/
-        existingClaim: stash-temp-previews
+        existingClaim: stash-temp-previews-iscsi
     ingress:
       main:
         enabled: true

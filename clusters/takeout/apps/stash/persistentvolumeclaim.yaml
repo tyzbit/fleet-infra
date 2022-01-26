@@ -8,6 +8,20 @@ spec:
     requests:
       storage: 1Gi
   volumeMode: Filesystem
+  storageClassName: nfs-fast
+  accessModes:
+    - ReadWriteMany
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: stash-temp-iscsi
+  namespace: default
+spec:
+  resources:
+    requests:
+      storage: 500Gi
+  volumeMode: Filesystem
   storageClassName: synology-iscsi-storage
   accessModes:
     - ReadWriteMany
@@ -21,6 +35,20 @@ spec:
   resources:
     requests:
       storage: 1Gi
+  volumeMode: Filesystem
+  storageClassName: nfs-fast
+  accessModes:
+    - ReadWriteMany
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: stash-temp-previews-iscsi
+  namespace: default
+spec:
+  resources:
+    requests:
+      storage: 50Gi
   volumeMode: Filesystem
   storageClassName: synology-iscsi-storage
   accessModes:
