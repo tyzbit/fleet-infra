@@ -33,6 +33,8 @@ spec:
         - hosts:
           - "*.tyzbit.io"
           secretName: tyzbit.io-tls
+    podSecurityContext:
+      fsGroup: 568
     # initContainers:
     #   fixperms:
     #     name: fixperms

@@ -23,20 +23,22 @@ spec:
       longhorn: primary
     env:
       TZ: America/New_York
-    initContainers:
-      fixperms:
-        name: fixperms
-        image: busybox
-        command: 
-        - sh
-        - -c
-        - chown 568:568 /config -R
-        env:
-        - name: TZ
-          value: America/New_York
-        volumeMounts:
-        - name: config
-          mountPath: /config
+    podSecurityContext:
+      fsGroup: 568
+    # initContainers:
+    #   fixperms:
+    #     name: fixperms
+    #     image: busybox
+    #     command: 
+    #     - sh
+    #     - -c
+    #     - chown 568:568 /config -R
+    #     env:
+    #     - name: TZ
+    #       value: America/New_York
+    #     volumeMounts:
+    #     - name: config
+    #       mountPath: /config
     persistence:
       config:
         enabled: true
