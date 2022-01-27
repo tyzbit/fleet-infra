@@ -64,7 +64,7 @@ spec:
         existingClaim: nas-volume1-media
       temp:
         enabled: true
-        existingClaim: stash-temp
+        existingClaim: stash-temp-nas
     resources:
       requests:
         cpu: 200m
