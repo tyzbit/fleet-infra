@@ -18,6 +18,6 @@ spec:
     namespace: monitoring
     imagePullSecrets:
     - name: docker-hub
-    storageClassName: nfs-fast
+    storageClassName: nas
     # nodeSelector:
     #   faketag: fakevalue
