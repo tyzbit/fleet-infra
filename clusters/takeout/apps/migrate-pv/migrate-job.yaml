@@ -28,8 +28,8 @@ spec:
       volumes:
       - name: src
         persistentVolumeClaim:
-          claimName: bitcoin-blockchain
+          claimName: nextcloud-data
       - name: dst
         persistentVolumeClaim:
-          claimName: bitcoin-blockchain-iscsi
+          claimName: nextcloud-data-iscsi
   backoffLimit: 0
