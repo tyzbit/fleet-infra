@@ -37,3 +37,5 @@ spec:
             secretName: discord-amputator-config
       # nodeSelector:
       #   colo: aws
+      imagePullSecrets:
+        - name: docker-hub

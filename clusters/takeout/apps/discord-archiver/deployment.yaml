@@ -36,3 +36,5 @@ spec:
             secretName: discord-archiver-config
       # nodeSelector:
       #   colo: aws
+      imagePullSecrets:
+        - name: docker-hub
