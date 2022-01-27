@@ -54,6 +54,10 @@ spec:
         enabled: true
         mountPath: /media/temp_previews/
         existingClaim: stash-temp-previews-iscsi
+      dri:
+        enabled: true
+        mountPath: /dev/dri
+        existingClaim: dri-pvc
     ingress:
       main:
         enabled: true
