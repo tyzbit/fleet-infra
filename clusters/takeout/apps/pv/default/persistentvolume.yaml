@@ -96,7 +96,7 @@ spec:
   - ReadOnlyMany
   - ReadWriteMany
   capacity:
-    storage: 80Ti
+    storage: 100Ti
   nfs:
     path: /volume1/media/
     server: nas.jura
