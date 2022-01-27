@@ -25,3 +25,18 @@ spec:
   resources:
     requests:
       storage: 500Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nextcloud-data-nas
+  namespace: default
+spec:
+  accessModes: 
+    - ReadWriteMany
+  volumeMode: Filesystem
+  storageClassName: nas
+  resources:
+    requests:
+      storage: 1Gi
+---
