@@ -7,7 +7,7 @@ metadata:
   labels:
     app: frigate
 spec:
-  replicas: 0 # active nas
+  replicas: 1 # active nas
   serviceName: frigate
   selector:
     matchLabels:
