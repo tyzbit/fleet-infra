@@ -4,7 +4,7 @@ metadata:
   name: stash-temp-iscsi
   namespace: default
 spec:
-  snapshotClassName: synology-iscsi-storage
+  snapshotClassName: synology-snapshotclass
   persistentVolumeClaimName: stash-temp-iscsi
   snapshotFrequency: 1
   snapshotRetention: 3
