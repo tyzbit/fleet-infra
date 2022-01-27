@@ -81,10 +81,10 @@ spec:
       volumes:
         - name: valheim-config
           persistentVolumeClaim:
-            claimName: valheim-config
+            claimName: valheim-config-nas
         - name: valheim-data
           persistentVolumeClaim:
-            claimName: valheim-data
+            claimName: valheim-data-nas
         - name: dri
           persistentVolumeClaim:
             claimName: dri-pvc
