@@ -55,17 +55,13 @@ spec:
     persistence:
       config: 
         enabled: true
-        size: 1Gi
-        accessMode: ReadWriteMany
-        storageClass: nfs-fast
+        existingClaim: qbittorrent-config-nas
       downloads: 
         enabled: true
-        size: 1Gi
-        accessMode: ReadWriteMany
-        storageClass: nfs-fast-volatile
-      warehouse:
+        existingClaim: qbittorrent-downloads-nas
+      nas-volume1-media:
         enabled: true
-        existingClaim: warehouse-volume1-media
+        existingClaim: nas-volume1-media
       temp:
         enabled: true
         existingClaim: stash-temp

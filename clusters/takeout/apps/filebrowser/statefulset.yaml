@@ -49,22 +49,22 @@ spec:
       volumes:
         - name: filebrowser-config
           persistentVolumeClaim:
-            claimName: filebrowser-config
+            claimName: filebrowser-config-nas
         # - name: braavos
         #   persistentVolumeClaim:
         #     claimName: braavos-media-pvc
         - name: warehouse
           persistentVolumeClaim:
-            claimName: warehouse-volume1-media
+            claimName: nas-volume1-media
         - name: qbt-downloads
           persistentVolumeClaim:
-            claimName: qbittorrent-downloads
+            claimName: qbittorrent-downloads-nas
         - name: nzb-downloads
           persistentVolumeClaim:
-            claimName: nzbget-downloads
+            claimName: nzbget-downloads-nas
         - name: temp
           persistentVolumeClaim:
-            claimName: stash-temp
+            claimName: stash-temp-nas
       # nodeSelector:
       #   kubernetes.io/hostname: anchorman
   # volumeClaimTemplates:

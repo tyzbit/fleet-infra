@@ -51,13 +51,13 @@ spec:
       #   storageClass: longhorn
       media:
         enabled: true
-        existingClaim: warehouse-volume1-media
+        existingClaim: nas-volume1-media
       intermediate:
         enabled: true
         type: emptyDir
       temp:
         enabled: true
-        existingClaim: stash-temp
+        existingClaim: stash-temp-nas
     ingress:
       main:
         enabled: true
