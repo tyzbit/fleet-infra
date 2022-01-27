@@ -103,7 +103,7 @@ spec:
     persistence:
       accessModes:
         - ReadWriteOnce
-      storageClass: nfs-fast
+      storageClass: nas
       size: 1Gi
     # run a container to fix volume permissions at the start
     volumePermissions:
