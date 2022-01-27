@@ -28,8 +28,8 @@ spec:
       volumes:
       - name: src
         persistentVolumeClaim:
-          claimName: stash-temp
+          claimName: stash-temp-previews
       - name: dst
         persistentVolumeClaim:
-          claimName: stash-temp-iscsi
+          claimName: stash-temp-previews-iscsi
   backoffLimit: 0
