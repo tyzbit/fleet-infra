@@ -1,9 +1,0 @@
-apiVersion: source.toolkit.fluxcd.io/v1beta1
-kind: HelmRepository
-metadata:
-  name: ryanorth-scheduled-volume-snapshotter
-  namespace: flux-system
-spec:
-  interval: 10m
-  timeout: 1m0s
-  url: https://ryanorth.github.io/k8s-scheduled-volume-snapshotter/

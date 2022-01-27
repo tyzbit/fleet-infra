@@ -8,10 +8,10 @@ spec:
   releaseName: scheduled-volume-snapshotter
   chart:
     spec:
-      chart: scheduled-volume-snapshotter
-      version: "0.7.1"
+      chart: ./helm/charts/scheduled-volume-snapshotter
+      version: "0.7.1" # Set in the referenced GitRepository
       sourceRef:
-        kind: HelmRepository
+        kind: GitRepository
         name: ryanorth-scheduled-volume-snapshotter
         namespace: flux-system
   interval: 1m0s
