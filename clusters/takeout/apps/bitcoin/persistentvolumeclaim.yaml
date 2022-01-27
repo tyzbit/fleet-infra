@@ -11,3 +11,17 @@ spec:
   storageClassName: nfs-fast-volatile
   accessModes:
     - ReadWriteMany
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: bitcoin-blockchain-iscsi
+  namespace: default
+spec:
+  resources:
+    requests:
+      storage: 1Gi
+  volumeMode: Filesystem
+  storageClassName: synology-iscsi-storage
+  accessModes:
+    - ReadWriteOnce
