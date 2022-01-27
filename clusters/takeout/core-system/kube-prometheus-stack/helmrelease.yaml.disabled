@@ -45,5 +45,5 @@ spec:
         - marcusolsson-hexmap-panel
       persistence:
         enabled: true
-        storageClassName: nfs-fast
+        storageClassName: nas
     

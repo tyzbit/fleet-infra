@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: dizquetv-data
+  name: dizquetv-data-nas
   namespace: default
 spec:
   resources:
     requests:
       storage: 1Gi
   volumeMode: Filesystem
-  storageClassName: nfs-fast
+  storageClassName: nas
   accessModes:
     - ReadWriteMany
