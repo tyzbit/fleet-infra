@@ -12,7 +12,7 @@ spec:
       version: "0.7.1" # Set in the referenced GitRepository
       sourceRef:
         kind: GitRepository
-        name: ryanorth-scheduled-volume-snapshotter
+        name: ryaneorth-scheduled-volume-snapshotter
         namespace: flux-system
   interval: 1m0s
   values: {}
