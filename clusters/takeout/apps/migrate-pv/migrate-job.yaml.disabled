@@ -28,8 +28,8 @@ spec:
       volumes:
       - name: src
         persistentVolumeClaim:
-          claimName: nextcloud-data
+          claimName: warehouse-volume1-media
       - name: dst
         persistentVolumeClaim:
-          claimName: nextcloud-data-iscsi
+          claimName: nas-volume1-media
   backoffLimit: 0
