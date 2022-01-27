@@ -23,6 +23,7 @@ spec:
       replicas: 1 # active longhorn
     nodeSelector:
       longhorn: primary
+      graphics: dri
     env:
       TZ: America/New_York
     # podSecurityContext:
