@@ -21,7 +21,7 @@ spec:
             command: ["sh", "-c", "find '/media/recycling bin' -type d -mtime +30 -print -delete"]
             volumeMounts:
               - mountPath: "/media"
-                name: warehouse-media
+                name: media
             resources:
               requests:
                 cpu: 10m
@@ -29,8 +29,8 @@ spec:
                 memory: 64Mi
           restartPolicy: Never
           volumes:
-            - name: warehouse-media
+            - name: media
               persistentVolumeClaim:
-                claimName: warehouse-media
+                claimName: nas-volume1-media
           imagePullSecrets:
             - name: docker-hub
