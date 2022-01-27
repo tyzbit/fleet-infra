@@ -1,27 +1,27 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: frigate-database
+  name: frigate-database-nas
   namespace: default
 spec:
   resources:
     requests:
       storage: 1Gi
   volumeMode: Filesystem
-  storageClassName: nfs-fast
+  storageClassName: nas
   accessModes:
     - ReadWriteMany
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: frigate-media
+  name: frigate-media-nas
   namespace: default
 spec:
   resources:
     requests:
       storage: 1Gi
   volumeMode: Filesystem
-  storageClassName: nfs-fast
+  storageClassName: nas
   accessModes:
     - ReadWriteMany

@@ -78,10 +78,10 @@ spec:
       volumes:
         - name: frigate-database
           persistentVolumeClaim:
-            claimName: frigate-database
+            claimName: frigate-database-nas
         - name: frigate-media
           persistentVolumeClaim:
-            claimName: frigate-media
+            claimName: frigate-media-nas
         - name: frigate-config
           configMap:
             name: frigate-config
