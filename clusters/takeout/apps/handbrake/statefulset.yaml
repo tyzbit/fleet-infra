@@ -70,10 +70,10 @@ spec:
             claimName: handbrake-config-nas
         - name: warehouse
           persistentVolumeClaim:
-            claimName: warehouse-volume1-media
+            claimName: nas-volume1-media
         - name: temp
           persistentVolumeClaim:
-            claimName: stash-temp
+            claimName: stash-temp-nas
         - name: torrent-downloads
           persistentVolumeClaim:
             claimName: qbittorrent-downloads
