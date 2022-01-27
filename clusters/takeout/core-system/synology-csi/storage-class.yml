@@ -10,5 +10,5 @@ parameters:
   dsm: 'nas'
   location: '/volume1'
   fsType: 'ext4'
-reclaimPolicy: Retain
+reclaimPolicy: Delete
 allowVolumeExpansion: true
