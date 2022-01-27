@@ -13,19 +13,19 @@ spec:
         args:
           - tail -f /dev/null
         volumeMounts:
-        - mountPath: /src_vol
-          name: src
-          readOnly: true
-        # - mountPath: /dst_vol
-        #   name: dst
+        # - mountPath: /src_vol
+        #   name: src
+        #   readOnly: true
+        - mountPath: /dst_vol
+          name: dst
       restartPolicy: Never
       nodeSelector:
         kubernetes.io/hostname: cameraman
       volumes:
-      - name: src
+      # - name: src
+      #   persistentVolumeClaim:
+      #     claimName: nas-volume1-media
+      - name: dst
         persistentVolumeClaim:
           claimName: nas-volume1-media
-      # - name: dst
-      #   persistentVolumeClaim:
-      #     claimName: stash-temp-previews-iscsi
   backoffLimit: 0
