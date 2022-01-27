@@ -72,3 +72,18 @@ spec:
   resources:
     requests:
       storage: 256Mi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nas-volume1-media
+  namespace: default
+spec:
+  volumeName: nas-volume1-media
+  accessModes: 
+    - ReadWriteMany
+  volumeMode: Filesystem
+  storageClassName: ""
+  resources:
+    requests:
+      storage: 100Ti
