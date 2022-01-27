@@ -20,7 +20,7 @@ spec:
     image:
       tag: v0.12.0
     controller:
-      replicas: 0 # active longhorn
+      replicas: 1 # active longhorn
     nodeSelector:
       longhorn: primary
     env:
@@ -49,11 +49,11 @@ spec:
       temp:
         enabled: true
         mountPath: /media/temp/
-        existingClaim: stash-temp-iscsi
+        existingClaim: stash-temp #-iscsi
       temp-previews:
         enabled: true
         mountPath: /media/temp_previews/
-        existingClaim: stash-temp-previews-iscsi
+        existingClaim: stash-temp-previews #-iscsi
     ingress:
       main:
         enabled: true
