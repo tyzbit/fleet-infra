@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: electrumx-data-nas
+  name: electrumx-data-nas-volatile
   namespace: default
 spec:
   resources:
     requests:
       storage: 1Gi
   volumeMode: Filesystem
-  storageClassName: nas
+  storageClassName: nas-volatile
   accessModes:
     - ReadWriteMany

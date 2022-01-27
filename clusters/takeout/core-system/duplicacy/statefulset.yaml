@@ -8,7 +8,7 @@ spec:
     matchLabels:
       app: duplicacy
   serviceName: duplicacy
-  replicas: 0 # active nfs-client-volatile
+  replicas: 1 # active nfs-client-volatile
   template:
     metadata:
       labels:
@@ -30,11 +30,8 @@ spec:
           mountPath: /logs
         - name: duplicacy-cache
           mountPath: /cache
-        - name: warehouse-volume1
+        - name: nas-volume1
           mountPath: /volume1
-          readOnly: true
-        - name: warehouse-volume2
-          mountPath: /volume2
           readOnly: true
         resources:
           requests:
@@ -44,17 +41,14 @@ spec:
       volumes:
         - name: duplicacy-config
           persistentVolumeClaim:
-            claimName: duplicacy-config
+            claimName: duplicacy-config-nas-volatile
         - name: duplicacy-logs
           persistentVolumeClaim:
-            claimName: duplicacy-logs
+            claimName: duplicacy-logs-nas-volatile
         - name: duplicacy-cache
           emptyDir: {}
-        - name: warehouse-volume1
+        - name: nas-volume1
           persistentVolumeClaim:
-            claimName: warehouse-volume1
-        - name: warehouse-volume2
-          persistentVolumeClaim:
-            claimName: warehouse-volume2
+            claimName: nas-volume1
       # nodeSelector:
       #   kubernetes.io/hostname: propman

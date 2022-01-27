@@ -88,6 +88,24 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
+  name: nas-volume1
+  namespace: default
+spec:
+  accessModes:
+  - ReadWriteOnce
+  - ReadOnlyMany
+  - ReadWriteMany
+  capacity:
+    storage: 100Ti
+  nfs:
+    path: /volume1/
+    server: nas.jura
+  persistentVolumeReclaimPolicy: Retain
+  volumeMode: Filesystem
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
   name: nas-volume1-media
   namespace: default
 spec:
