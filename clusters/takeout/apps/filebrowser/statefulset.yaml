@@ -5,7 +5,7 @@ metadata:
   namespace: default
 spec:
   serviceName: filebrowser
-  replicas: 0 # active nfs-client-fast
+  replicas: 0 # active nas
   selector:
     matchLabels:
       app: filebrowser
@@ -50,9 +50,6 @@ spec:
         - name: filebrowser-config
           persistentVolumeClaim:
             claimName: filebrowser-config-nas
-        # - name: braavos
-        #   persistentVolumeClaim:
-        #     claimName: braavos-media-pvc
         - name: warehouse
           persistentVolumeClaim:
             claimName: nas-volume1-media
@@ -65,19 +62,3 @@ spec:
         - name: temp
           persistentVolumeClaim:
             claimName: stash-temp-nas
-      # nodeSelector:
-      #   kubernetes.io/hostname: anchorman
-  # volumeClaimTemplates:
-  #   - apiVersion: v1
-  #     kind: PersistentVolumeClaim
-  #     metadata:
-  #       name: filebrowser-config
-  #     spec:
-  #       resources:
-  #         requests:
-  #           storage: 512Mi
-  #       volumeMode: Filesystem
-  #       storageClassName: nfs-client
-  #       accessModes:
-  #         - ReadWriteMany
-

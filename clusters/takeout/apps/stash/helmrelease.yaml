@@ -20,7 +20,7 @@ spec:
     image:
       tag: v0.12.0
     controller:
-      replicas: 1 # active longhorn
+      replicas: 1 # active longhorn nas
     nodeSelector:
       longhorn: primary
       graphics: dri

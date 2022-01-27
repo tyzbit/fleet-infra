@@ -7,7 +7,7 @@ metadata:
   labels:
     app: youtube-dl
 spec:
-  replicas: 0 # active nfs-client-fast
+  replicas: 1 # active nas
   selector:
     matchLabels:
       app: youtube-dl
@@ -62,7 +62,7 @@ spec:
       volumes:
         - name: youtube-dl-data
           persistentVolumeClaim:
-            claimName: youtube-dl-data
+            claimName: youtube-dl-data-nas
       imagePullSecrets:
         - name: docker-hub
       # nodeSelector:

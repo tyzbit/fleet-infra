@@ -7,7 +7,7 @@ metadata:
   labels:
     app: electrumx
 spec:
-  replicas: 0 # inactive nfs-client-volatile
+  replicas: 0 # inactive nas
   selector:
     matchLabels:
       app: electrumx
@@ -62,4 +62,4 @@ spec:
       volumes:
         - name: electrumx-data
           persistentVolumeClaim:
-            claimName: electrumx-data
+            claimName: electrumx-data-nas

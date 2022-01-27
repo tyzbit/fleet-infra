@@ -7,7 +7,7 @@ metadata:
   labels:
     app: bitcoin
 spec:
-  replicas: 1 # active nfs-client-volatile
+  replicas: 1 # active nas
   selector:
     matchLabels:
       app: bitcoin

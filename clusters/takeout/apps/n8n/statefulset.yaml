@@ -6,7 +6,7 @@ metadata:
   labels:
     app: n8n
 spec:
-  replicas: 1 # active nfs-client-fast
+  replicas: 1 # active nas
   selector:
     matchLabels:
       app: n8n
@@ -40,7 +40,7 @@ spec:
       volumes:
         - name: n8n-data
           persistentVolumeClaim:
-            claimName: n8n-data
+            claimName: n8n-data-nas
       serviceAccount: n8n
       imagePullSecrets:
         - name: docker-hub

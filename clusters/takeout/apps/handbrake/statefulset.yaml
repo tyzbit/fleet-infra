@@ -10,7 +10,7 @@ spec:
   selector:
     matchLabels:
       app: handbrake
-  replicas: 0 # active nfs-client-fast
+  replicas: 0 # active nas
   template:
     metadata:
       labels:

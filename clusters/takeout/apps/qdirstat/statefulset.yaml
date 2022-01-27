@@ -10,7 +10,7 @@ spec:
   selector:
     matchLabels:
       app: qdirstat
-  replicas: 0 # active nfs-client-fast
+  replicas: 0 # active nas
   template:
     metadata:
       labels:
@@ -46,12 +46,12 @@ spec:
         #     claimName: braavos-media-pvc
         - name: warehouse
           persistentVolumeClaim:
-            claimName: warehouse-volume1-media
+            claimName: nas-volume1-media
         - name: downloads
           persistentVolumeClaim:
-            claimName: qbittorrent-downloads
+            claimName: qbittorrent-downloads-nas
         - name: temp
           persistentVolumeClaim:
-            claimName: stash-temp
+            claimName: stash-temp-nas
       imagePullSecrets:
         - name: docker-hub
