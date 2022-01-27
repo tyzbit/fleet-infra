@@ -59,7 +59,7 @@ spec:
       downloads: 
         enabled: true
         existingClaim: qbittorrent-downloads-nas
-      nas-volume1-media:
+      media:
         enabled: true
         existingClaim: nas-volume1-media
       temp:
