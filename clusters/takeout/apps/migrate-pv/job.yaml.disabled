@@ -15,7 +15,7 @@ spec:
             apt-get update && apt-get install -y rsync &&
             ls -lah /src_vol /dst_vol &&
             df -h &&
-            rsync -avPS --delete /src_vol/ /dst_vol/ &&
+            rsync -av --info=progress2 --delete /src_vol/ /dst_vol/ &&
             ls -lah /dst_vol/ &&
             du -shxc /src_vol/ /dst_vol/
         volumeMounts:
