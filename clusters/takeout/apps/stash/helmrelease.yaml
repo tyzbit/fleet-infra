@@ -50,11 +50,11 @@ spec:
       temp:
         enabled: true
         mountPath: /media/temp/
-        existingClaim: stash-temp-iscsi
+        existingClaim: stash-temp
       temp-previews:
         enabled: true
         mountPath: /media/temp_previews/
-        existingClaim: stash-temp-previews-iscsi
+        existingClaim: stash-temp-previews
       dri:
         enabled: true
         mountPath: /dev/dri
