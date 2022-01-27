@@ -23,7 +23,7 @@ spec:
     persistence:
       config:
         enabled: true
-        storageClass: nfs-fast
+        storageClass: nas
     ingress:
       main:
         enabled: true
