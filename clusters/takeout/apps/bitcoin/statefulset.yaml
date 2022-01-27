@@ -57,6 +57,6 @@ spec:
             secretName: bitcoin-config
         - name: bitcoin-blockchain
           persistentVolumeClaim:
-            claimName: bitcoin-blockchain-iscsi
+            claimName: bitcoin-blockchain-nas
       imagePullSecrets:
         - name: docker-hub
