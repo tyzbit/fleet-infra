@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: project-zomboid-secondary
-  namespace: media
+  namespace: games
 spec:
   selector:
     matchLabels:
