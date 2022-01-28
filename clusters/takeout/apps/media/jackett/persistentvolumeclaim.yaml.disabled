@@ -2,7 +2,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: jackett-config-nas
-  namespace: default
+  namespace: media
 spec:
   resources:
     requests:

@@ -5,7 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   releaseName: jackett
-  targetNamespace: default
+  targetNamespace: media
   interval: 1m0s
   chart:
     spec:
