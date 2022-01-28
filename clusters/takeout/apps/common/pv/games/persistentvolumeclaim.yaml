@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: dri-pvc
+  namespace: default
+spec:
+  volumeName: dri-pv
+  accessModes: 
+    - ReadWriteMany
+  volumeMode: Filesystem
+  storageClassName: ""
+  resources:
+    requests:
+      storage: 256Mi
