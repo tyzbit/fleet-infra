@@ -6,7 +6,7 @@ metadata:
 spec:
   releaseName: nzbget
   targetNamespace: media
-  timeout: 4m
+  timeout: 2m
   interval: 1m0s
   chart:
     spec:
