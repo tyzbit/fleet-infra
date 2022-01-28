@@ -2,7 +2,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: dri-pvc
-  namespace: games
+  namespace: home-automation
 spec:
   volumeName: dri-pvc-home-automation
   accessModes: 
