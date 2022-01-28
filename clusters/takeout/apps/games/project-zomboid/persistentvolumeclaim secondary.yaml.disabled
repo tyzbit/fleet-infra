@@ -2,7 +2,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: project-zomboid-secondary-data
-  namespace: default
+  namespace: media
 spec:
   accessModes: 
     - ReadWriteOnce
@@ -16,7 +16,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: project-zomboid-secondary-files
-  namespace: default
+  namespace: media
 spec:
   accessModes: 
     - ReadWriteOnce
