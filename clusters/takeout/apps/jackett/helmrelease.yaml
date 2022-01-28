@@ -23,7 +23,7 @@ spec:
     persistence:
       config:
         enabled: true
-        storageClass: nas
+        existingClaim: jacket-config-nas
     ingress:
       main:
         enabled: true
