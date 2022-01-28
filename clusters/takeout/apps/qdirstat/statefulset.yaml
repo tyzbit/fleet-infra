@@ -22,10 +22,8 @@ spec:
           imagePullPolicy: Always
           # command: ["sh","-c","tail -f /dev/null"]
           volumeMounts:
-            - name: qdirstat-config
+            - name: qdirstat-config-nas
               mountPath: /config
-            # - name: braavos
-            #   mountPath: /mount/braavos
             - name: nas-volume1-media
               mountPath: /mount/nas-volume1-media
             - name: temp
@@ -36,12 +34,9 @@ spec:
             limits:
               memory: 512Mi
       volumes:
-        - name: qdirstat-config
+        - name: qdirstat-config-nas
           persistentVolumeClaim:
-            claimName: qdirstat-config
-        # - name: braavos
-        #   persistentVolumeClaim:
-        #     claimName: braavos-media-pvc
+            claimName: qdirstat-config-nas
         - name: nas-volume1-media
           persistentVolumeClaim:
             claimName: nas-volume1-media
