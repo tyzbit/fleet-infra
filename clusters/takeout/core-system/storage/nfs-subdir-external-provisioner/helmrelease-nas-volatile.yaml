@@ -5,6 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   targetNamespace: kube-system
+  timeout: 2m
   chart:
     spec:
       chart: nfs-subdir-external-provisioner
