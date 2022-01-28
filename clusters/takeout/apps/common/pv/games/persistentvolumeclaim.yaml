@@ -2,7 +2,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: dri-pvc
-  namespace: default
+  namespace: games
 spec:
   volumeName: dri-pv
   accessModes: 
