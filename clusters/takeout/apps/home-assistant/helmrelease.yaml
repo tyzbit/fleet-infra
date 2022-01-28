@@ -40,7 +40,7 @@ spec:
     persistence:
       config:
         enabled: true
-        storageClass: nas
+        existingClaim: home-assistant-config-nas
     additionalContainers:
       - name: filebrowser
         image: filebrowser/filebrowser:v2
