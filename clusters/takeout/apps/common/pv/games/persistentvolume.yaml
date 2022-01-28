@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: dri-pv
+  name: dri-games
   namespace: games
 spec:
   accessModes:

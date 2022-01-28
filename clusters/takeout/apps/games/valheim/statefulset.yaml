@@ -87,7 +87,7 @@ spec:
             claimName: valheim-data-nas
         - name: dri
           persistentVolumeClaim:
-            claimName: dri-pvc
+            claimName: dri
         - name: valheim-files-config
           configMap:
             name: valheim-files-config
