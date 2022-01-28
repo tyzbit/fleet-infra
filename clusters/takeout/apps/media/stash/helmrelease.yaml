@@ -6,7 +6,7 @@ metadata:
 spec:
   releaseName: stash
   targetNamespace: media
-  timeout: 3m
+  timeout: 2m
   interval: 1m0s
   chart:
     spec:
