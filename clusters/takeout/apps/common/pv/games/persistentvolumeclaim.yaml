@@ -4,7 +4,7 @@ metadata:
   name: dri-pvc
   namespace: games
 spec:
-  volumeName: dri-games
+  volumeName: dri-pvc-games
   accessModes: 
     - ReadWriteMany
   volumeMode: Filesystem
