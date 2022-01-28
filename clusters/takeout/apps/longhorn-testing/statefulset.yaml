@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: longhorn-testing
+  namespace: media
+spec:
+  serviceName: longhorn-testing
+  replicas: 1 # active nas
+  selector:
+    matchLabels:
+      app: longhorn-testing
+  template:
+    metadata:
+      labels:
+        app: longhorn-testing
+    spec:
+      containers:
+      - name: longhorn-testing
+        image: ubuntu
+        command: ["sh","-c","tail -f /dev/null"]
+        volumeMounts:
+          - name: longhorn-testing-config
+            mountPath: /db
+      volumes:
+        - name: longhorn-testing-config
+          persistentVolumeClaim:
+            claimName: longhorn-testing-config
