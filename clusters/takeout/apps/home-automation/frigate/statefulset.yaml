@@ -2,12 +2,12 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: frigate
-  namespace: default
+  namespace: media
   annotations: {}
   labels:
     app: frigate
 spec:
-  replicas: 1 # active nas
+  replicas: 0 # active nas
   serviceName: frigate
   selector:
     matchLabels:
