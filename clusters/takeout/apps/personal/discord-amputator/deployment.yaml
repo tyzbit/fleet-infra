@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: discord-amputator
-  namespace: default
+  namespace: personal
 spec:
   replicas: 1
   selector:
