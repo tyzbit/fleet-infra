@@ -7,7 +7,7 @@ spec:
   selector:
     matchLabels:
       app: nextcloud
-  replicas: 0 # active nfs-client-fast
+  replicas: 1 # active nfs-client-fast
   template:
     metadata:
       labels:

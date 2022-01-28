@@ -7,7 +7,7 @@ metadata:
   labels:
     app: nextcloud-db
 spec:
-  replicas: 0 # active longhorn
+  replicas: 1 # active longhorn
   selector:
     matchLabels:
       app: nextcloud-db
@@ -59,12 +59,12 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: nextcloud-cache
-  namespace: default
+  namespace: personal
   annotations: {}
   labels:
     app: nextcloud-cache
 spec:
-  replicas: 0 # active longhorn
+  replicas: 1 # active longhorn
   selector:
     matchLabels:
       app: nextcloud-cache
