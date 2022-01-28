@@ -5,7 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   releaseName: wordpress-tylerphawkins
-  targetNamespace: default
+  targetNamespace: personal
   timeout: 10m
   chart:
     spec:

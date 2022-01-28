@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: wordpress-qtosw-htaccess
-  namespace: default
+  namespace: personal
 data:
   wordpress-htaccess.conf: |
     # BEGIN WordPress
