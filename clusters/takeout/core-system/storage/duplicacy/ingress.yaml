@@ -11,7 +11,7 @@ metadata:
 spec:
   tls:
     - hosts:
-        - "*.qtosw.com"
+        - "*.tyzbit.io"
       secretName: tyzbit.io-tls
   rules:
   - host: backup.tyzbit.io
