@@ -16,7 +16,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: nas-volume1-media
+  name: nas-volume1-media-media
   namespace: media
 spec:
   accessModes:
@@ -34,7 +34,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: nas-volume1-media-media
+  name: nas-volume1-media-media-media
   namespace: media
 spec:
   accessModes:

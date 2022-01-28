@@ -19,7 +19,7 @@ metadata:
   name: nas-volume1
   namespace: media
 spec:
-  volumeName: nas-volume1-media
+  volumeName: nas-volume1-media-media
   accessModes: 
     - ReadWriteMany
   volumeMode: Filesystem
@@ -34,7 +34,7 @@ metadata:
   name: nas-volume1-media
   namespace: media
 spec:
-  volumeName: nas-volume1-media-media
+  volumeName: nas-volume1-media-media-media
   accessModes: 
     - ReadWriteMany
   volumeMode: Filesystem
