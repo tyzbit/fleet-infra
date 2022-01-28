@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: dri
+  name: dri-pvc
   namespace: games
 spec:
   volumeName: dri-games

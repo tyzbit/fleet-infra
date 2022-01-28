@@ -52,7 +52,7 @@ spec:
         - name: valheim-data
           mountPath: /opt/valheim
         - mountPath: "/dev/dri"
-          name: dri
+          name: dri-pvc
         securityContext:
             privileged: true
         resources:
@@ -85,9 +85,9 @@ spec:
         - name: valheim-data
           persistentVolumeClaim:
             claimName: valheim-data-nas
-        - name: dri
+        - name: dri-pvc
           persistentVolumeClaim:
-            claimName: dri
+            claimName: dri-pvc
         - name: valheim-files-config
           configMap:
             name: valheim-files-config
