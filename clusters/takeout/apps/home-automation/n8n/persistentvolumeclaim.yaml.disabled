@@ -2,7 +2,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: n8n-data-nas
-  namespace: default
+  namespace: home-automation
 spec:
   accessModes: 
     - ReadWriteMany

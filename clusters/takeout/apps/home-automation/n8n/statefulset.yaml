@@ -2,11 +2,11 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: n8n
-  namespace: default
+  namespace: home-automation
   labels:
     app: n8n
 spec:
-  replicas: 1 # active nas
+  replicas: 0 # active nas
   selector:
     matchLabels:
       app: n8n
