@@ -10,7 +10,7 @@ spec:
   selector:
     matchLabels:
       app: handbrake
-  replicas: 0 # active nas
+  replicas: 1 # active nas
   template:
     metadata:
       labels:
@@ -38,20 +38,16 @@ spec:
           volumeMounts:
             - name: handbrake-config
               mountPath: /config
-            - name: torrent-downloads
+            - name: media
               subPath: watch
-              mountPath: /watch
-            - name: torrent-downloads
+              mountPath: /handbrake_watch
+            - name: media
               subPath: transcoded
-              mountPath: /output
+              mountPath: /handbrake_output
             - name: dri
               mountPath: /dev/dri
-            - name: warehouse
-              mountPath: /storage/warehouse
-            - name: torrent-downloads
-              mountPath: /storage/torrent_downloads
-            - name: usenet-downloads
-              mountPath: /storage/usenet_downloads
+            - name: media
+              mountPath: /storage/media
             - name: temp
               mountPath: /storage/temp
           securityContext:
@@ -68,18 +64,12 @@ spec:
         - name: handbrake-config
           persistentVolumeClaim:
             claimName: handbrake-config-nas
-        - name: warehouse
+        - name: media
           persistentVolumeClaim:
             claimName: nas-volume1-media
         - name: temp
           persistentVolumeClaim:
             claimName: stash-temp-nas
-        - name: torrent-downloads
-          persistentVolumeClaim:
-            claimName: qbittorrent-downloads
-        - name: usenet-downloads
-          persistentVolumeClaim:
-            claimName: nzbget-downloads
       imagePullSecrets:
         - name: docker-hub
       nodeSelector:
