@@ -2,7 +2,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: motioneye-config-nas
-  namespace: default
+  namespace: media
 spec:
   accessModes: 
     - ReadWriteMany
