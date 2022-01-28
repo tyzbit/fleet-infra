@@ -2,12 +2,12 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: youtube-dl
-  namespace: default
+  namespace: media
   annotations: {}
   labels:
     app: youtube-dl
 spec:
-  replicas: 1 # active nas
+  replicas: 0 # active nas
   selector:
     matchLabels:
       app: youtube-dl

@@ -5,7 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   releaseName: sonarr
-  targetNamespace: default
+  targetNamespace: media
   timeout: 2m
   interval: 1m0s
   chart:
