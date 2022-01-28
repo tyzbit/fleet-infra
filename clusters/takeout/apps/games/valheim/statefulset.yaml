@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: valheim-server
-  namespace: default
+  namespace: games
 spec:
   selector:
     matchLabels:

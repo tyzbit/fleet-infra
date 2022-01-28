@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: valheim-config
-  namespace: default
+  namespace: games
 data:
   SERVER_NAME: qtosw
   WORLD_NAME: CommunismWorks
