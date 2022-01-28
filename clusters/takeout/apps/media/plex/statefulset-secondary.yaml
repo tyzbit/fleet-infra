@@ -32,7 +32,7 @@ spec:
             # - mountPath: "/media"
             #   name: braavos
             - mountPath: "/media"
-              name: warehouse
+              name: nas-volume1-media
             - mountPath: "/dev/dri"
               name: dri
             - mountPath: "/config"
@@ -55,15 +55,9 @@ spec:
         - name: plex-secondary-config
           persistentVolumeClaim:
             claimName: plex-secondary-config
-        # - name: braavos
-        #   persistentVolumeClaim:
-        #     claimName: braavos-media-pvc
-        - name: warehouse
+        - name: nas-volume1-media
           persistentVolumeClaim:
-            claimName: warehouse-volume1-media
-        # - name: plex-secondary-config-nfs
-        #   persistentVolumeClaim:
-        #     claimName: plex-secondary-config
+            claimName: nas-volume1-media
         - name: dri
           persistentVolumeClaim:
             claimName: dri-pvc
