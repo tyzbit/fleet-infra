@@ -2,7 +2,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: filebrowser-config-nas
-  namespace: default
+  namespace: media
 spec:
   resources:
     requests:

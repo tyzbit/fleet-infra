@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: filebrowser
-  namespace: default
+  namespace: media
 spec:
   serviceName: filebrowser
   replicas: 1 # active nas
