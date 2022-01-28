@@ -10,7 +10,7 @@ spec:
   selector:
     matchLabels:
       app: qdirstat
-  replicas: 0 # active nas
+  replicas: 1 # active nas
   template:
     metadata:
       labels:
@@ -26,10 +26,8 @@ spec:
               mountPath: /config
             # - name: braavos
             #   mountPath: /mount/braavos
-            - name: warehouse
-              mountPath: /mount/warehouse
-            - name: downloads
-              mountPath: /mount/downloads
+            - name: nas-volume1-media
+              mountPath: /mount/nas-volume1-media
             - name: temp
               mountPath: /mount/temp
           resources:
@@ -44,12 +42,9 @@ spec:
         # - name: braavos
         #   persistentVolumeClaim:
         #     claimName: braavos-media-pvc
-        - name: warehouse
+        - name: nas-volume1-media
           persistentVolumeClaim:
             claimName: nas-volume1-media
-        - name: downloads
-          persistentVolumeClaim:
-            claimName: qbittorrent-downloads-nas
         - name: temp
           persistentVolumeClaim:
             claimName: stash-temp-nas
