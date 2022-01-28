@@ -2,7 +2,7 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: dri-pv-media
-  namespace: default
+  namespace: media
 spec:
   accessModes:
   - ReadWriteMany
@@ -17,7 +17,7 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: nas-volume1-media
-  namespace: default
+  namespace: media
 spec:
   accessModes:
   - ReadWriteOnce
@@ -35,7 +35,7 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: nas-volume1-media-media
-  namespace: default
+  namespace: media
 spec:
   accessModes:
   - ReadWriteOnce
