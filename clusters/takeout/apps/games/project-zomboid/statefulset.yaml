@@ -2,13 +2,13 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: project-zomboid
-  namespace: default
+  namespace: games
 spec:
   selector:
     matchLabels:
       app: project-zomboid
   serviceName: project-zomboid
-  replicas: 1 # active longhorn
+  replicas: 0 # active longhorn
   template:
     metadata:
       labels:
