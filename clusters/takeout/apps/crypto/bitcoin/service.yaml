@@ -2,9 +2,10 @@ apiVersion: v1
 kind: Service
 metadata:
   name: bitcoin
-  namespace: default
+  namespace: games
 spec:
   type: LoadBalancer
+  loadBalancerIP: 192.168.1.63
   externalTrafficPolicy: Local
   selector:
     app: bitcoin
