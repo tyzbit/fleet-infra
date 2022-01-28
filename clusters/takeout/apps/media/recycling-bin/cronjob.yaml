@@ -2,7 +2,7 @@ apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
   name: recycling-bin-cleanup
-  namespace: default
+  namespace: media
 spec:
   successfulJobsHistoryLimit: 1
   schedule: "33 19 * * *"
