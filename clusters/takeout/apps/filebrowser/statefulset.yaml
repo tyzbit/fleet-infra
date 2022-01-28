@@ -5,7 +5,7 @@ metadata:
   namespace: default
 spec:
   serviceName: filebrowser
-  replicas: 0 # active nas
+  replicas: 1 # active nas
   selector:
     matchLabels:
       app: filebrowser
@@ -31,12 +31,8 @@ spec:
             mountPath: /db
           # - name: braavos
           #   mountPath: /srv/braavos
-          - name: warehouse
-            mountPath: /srv/warehouse
-          - name: qbt-downloads
-            mountPath: /srv/torrent_downloads
-          - name: nzb-downloads
-            mountPath: /srv/usenet_downloads
+          - name: media
+            mountPath: /srv/media
           - name: temp
             mountPath: /srv/temp
         resources:
@@ -50,15 +46,9 @@ spec:
         - name: filebrowser-config
           persistentVolumeClaim:
             claimName: filebrowser-config-nas
-        - name: warehouse
+        - name: media
           persistentVolumeClaim:
             claimName: nas-volume1-media
-        - name: qbt-downloads
-          persistentVolumeClaim:
-            claimName: qbittorrent-downloads-nas
-        - name: nzb-downloads
-          persistentVolumeClaim:
-            claimName: nzbget-downloads-nas
         - name: temp
           persistentVolumeClaim:
             claimName: stash-temp-nas
