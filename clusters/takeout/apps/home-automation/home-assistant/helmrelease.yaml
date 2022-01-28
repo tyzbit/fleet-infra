@@ -5,7 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   releaseName: home-assistant
-  targetNamespace: media
+  targetNamespace: home-automation
   timeout: 5m
   interval: 1m0s
   chart:
@@ -92,7 +92,7 @@ spec:
         persistence:
           enabled: true
           size: 20Gi
-          storageClass: longhorn
+          storageClass: longhorn-static
     # influxdb:
     #   enabled: true
     #   persistence:
