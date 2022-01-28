@@ -60,7 +60,7 @@ spec:
       volumes:
         - name: dri
           persistentVolumeClaim:
-            claimName: dri
+            claimName: dri-pvc
         - name: handbrake-config
           persistentVolumeClaim:
             claimName: handbrake-config-nas
