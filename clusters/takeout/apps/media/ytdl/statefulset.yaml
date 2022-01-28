@@ -7,7 +7,7 @@ metadata:
   labels:
     app: youtube-dl
 spec:
-  replicas: 0 # active nas
+  replicas: 1 # active nas
   selector:
     matchLabels:
       app: youtube-dl
