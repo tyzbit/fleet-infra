@@ -30,7 +30,7 @@ spec:
             - containerPort: 32400
           volumeMounts:
             - mountPath: "/media"
-              name: warehouse
+              name: nas-volume1-media
             - mountPath: "/dev/dri"
               name: dri
             - mountPath: "/config"
@@ -50,9 +50,9 @@ spec:
         # - name: braavos
         #   persistentVolumeClaim:
         #     claimName: braavos-media-pvc
-        - name: warehouse
+        - name: nas-volume1-media
           persistentVolumeClaim:
-            claimName: warehouse-volume1-media
+            claimName: nas-volume1-media
         - name: dri
           persistentVolumeClaim:
             claimName: dri-pvc
