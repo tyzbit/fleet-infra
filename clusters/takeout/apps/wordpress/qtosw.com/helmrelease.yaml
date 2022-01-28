@@ -101,10 +101,7 @@ spec:
     service:
       type: NodePort
     persistence:
-      accessModes:
-        - ReadWriteOnce
-      storageClass: nas
-      size: 1Gi
+      existingClaim: wordpress-qtosw-nas
     # run a container to fix volume permissions at the start
     volumePermissions:
       enabled: true
