@@ -5,7 +5,7 @@ metadata:
   namespace: media
 spec:
   serviceName: longhorn-testing
-  replicas: 1 # active nas
+  replicas: 0 # active nas
   selector:
     matchLabels:
       app: longhorn-testing
