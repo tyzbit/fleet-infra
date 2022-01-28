@@ -23,7 +23,7 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: jacket-config-nas
+        existingClaim: jackett-config-nas
     ingress:
       main:
         enabled: true
