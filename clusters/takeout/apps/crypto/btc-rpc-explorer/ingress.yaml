@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: btc-rpc-explorer
-  namespace: default
+  namespace: crypto
   annotations:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/proxy-body-size: 256m
@@ -12,7 +12,7 @@ spec:
   tls:
     - hosts:
         - "*.qtosw.com"
-      secretName: letsencrypt
+      secretName: qtosw.com-tls
   rules:
   - host: btc.qtosw.com
     http:

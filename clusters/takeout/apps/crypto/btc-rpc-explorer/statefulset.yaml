@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: btc-rpc-explorer-cache
-  namespace: default
+  namespace: crypto
   annotations:
     keel.sh/policy: all
     keel.sh/trigger: poll
@@ -11,7 +11,7 @@ metadata:
   labels:
     app: btc-rpc-explorer-cache
 spec:
-  replicas: 0 # active longhorn
+  replicas: 1
   selector:
     matchLabels:
       app: btc-rpc-explorer-cache
