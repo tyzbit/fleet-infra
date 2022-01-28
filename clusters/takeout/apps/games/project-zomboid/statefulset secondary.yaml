@@ -2,13 +2,13 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: project-zomboid-secondary
-  namespace: default
+  namespace: media
 spec:
   selector:
     matchLabels:
       app: project-zomboid-secondary
   serviceName: project-zomboid-secondary
-  replicas: 0 # active longhorn
+  replicas: 1 # active longhorn
   template:
     metadata:
       labels:

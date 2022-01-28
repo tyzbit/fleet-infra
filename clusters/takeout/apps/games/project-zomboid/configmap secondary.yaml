@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: project-zomboid-secondary-files-config
-  namespace: default
+  namespace: media
 data:
   nginx.conf: |
     server {
