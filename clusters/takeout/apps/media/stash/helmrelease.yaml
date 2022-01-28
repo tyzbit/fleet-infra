@@ -46,7 +46,7 @@ spec:
       config:
         enabled: true
         size: 5Gi
-        storageClass: longhorn
+        storageClass: longhorn-static
       temp:
         enabled: true
         mountPath: /media/temp/
