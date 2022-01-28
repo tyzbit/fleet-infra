@@ -5,7 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   releaseName: nzbget
-  targetNamespace: default
+  targetNamespace: media
   timeout: 4m
   interval: 1m0s
   chart:
