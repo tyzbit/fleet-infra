@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: project-zomboid-secondary-filebrowser
-  namespace: default
+  namespace: media
   annotations:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
@@ -30,7 +30,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: project-zomboid-secondary-files
-  namespace: default
+  namespace: media
   annotations:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"

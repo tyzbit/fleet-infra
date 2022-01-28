@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: project-zomboid-secondary-tcp
-  namespace: default
+  namespace: media
   annotations:
     metallb.universe.tf/allow-shared-ip: default-project-zomboid-server-secondary
 spec:
@@ -21,7 +21,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: project-zomboid-secondary-udp
-  namespace: default
+  namespace: media
   annotations:
     metallb.universe.tf/allow-shared-ip: default-project-zomboid-server-secondary
 spec:
