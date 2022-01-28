@@ -2,13 +2,13 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: space-engineers
-  namespace: default
+  namespace: games
 spec:
   selector:
     matchLabels:
       app: space-engineers
   serviceName: space-engineers
-  replicas: 1 # active longhorn
+  replicas: 0 # active longhorn
   template:
     metadata:
       labels:

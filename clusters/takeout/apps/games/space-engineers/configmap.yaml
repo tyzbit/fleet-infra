@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: space-engineers-files-config
-  namespace: default
+  namespace: games
 data:
   nginx.conf: |
     server {

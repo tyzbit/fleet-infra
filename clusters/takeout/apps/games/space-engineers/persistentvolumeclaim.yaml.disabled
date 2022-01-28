@@ -2,7 +2,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: space-engineers-data
-  namespace: default
+  namespace: games
 spec:
   accessModes: 
     - ReadWriteOnce
@@ -16,7 +16,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: space-engineers-steam
-  namespace: default
+  namespace: games
 spec:
   accessModes: 
     - ReadWriteOnce

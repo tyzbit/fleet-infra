@@ -2,9 +2,10 @@ apiVersion: v1
 kind: Service
 metadata:
   name: space-engineers-udp
-  namespace: default
+  namespace: games
 spec:
   type: LoadBalancer
+  loadBalancerIP: 192.168.1.71
   externalTrafficPolicy: Local
   selector:
     app: space-engineers
@@ -18,7 +19,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: space-engineers-files
-  namespace: default
+  namespace: games
 spec:
   type: ClusterIP
   selector:
