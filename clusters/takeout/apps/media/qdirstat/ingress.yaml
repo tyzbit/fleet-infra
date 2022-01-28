@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: qdirstat
-  namespace: default
+  namespace: media
   annotations:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/auth-type: basic

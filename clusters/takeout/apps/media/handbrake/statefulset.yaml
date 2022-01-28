@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: handbrake
-  namespace: default
+  namespace: media
   labels:
     app: handbrake
 spec:
@@ -60,7 +60,7 @@ spec:
       volumes:
         - name: dri
           persistentVolumeClaim:
-            claimName: dri-pvc
+            claimName: dri
         - name: handbrake-config
           persistentVolumeClaim:
             claimName: handbrake-config-nas

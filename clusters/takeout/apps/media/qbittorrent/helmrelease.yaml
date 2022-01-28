@@ -4,7 +4,7 @@ metadata:
   name: qbittorrent
   namespace: flux-system
 spec:
-  targetNamespace: default
+  targetNamespace: media
   chart:
     spec:
       chart: qbittorrent

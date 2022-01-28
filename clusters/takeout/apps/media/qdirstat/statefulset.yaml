@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: qdirstat
-  namespace: default
+  namespace: media
   labels:
     app: qdirstat
 spec:
