@@ -2,7 +2,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: electrumx-data-nas-volatile
-  namespace: default
+  namespace: crypto
 spec:
   resources:
     requests:

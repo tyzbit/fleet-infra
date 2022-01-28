@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: electrumx
-  namespace: default
+  namespace: crypto
   annotations: {}
   labels:
     app: electrumx
