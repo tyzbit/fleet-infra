@@ -25,31 +25,3 @@ spec:
             name: project-zomboid-filebrowser
             port:
               number: 80
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: project-zomboid-files
-  namespace: default
-  annotations:
-    kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
-    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
-    cert-manager.io/cluster-issuer: letsencrypt
-    acme.cert-manager.io/http01-edit-in-place: "false"
-spec:
-  tls:
-    - hosts:
-        - "*.projectzomboid.qtosw.com"
-      secretName: projectzomboid.qtosw.com-tls
-  rules:
-  - host: files.projectzomboid.qtosw.com
-    http:
-      paths:
-      - pathType: Prefix
-        path: "/"
-        backend:
-          service:
-            name: project-zomboid-files
-            port:
-              number: 8080

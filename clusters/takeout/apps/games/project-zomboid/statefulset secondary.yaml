@@ -83,21 +83,6 @@ spec:
           mountPath: /db
         - name: project-zomboid-secondary-data
           mountPath: /srv/server-data
-      - name: project-zomboid-secondary-files
-        image: nginx
-        volumeMounts:
-        - name: project-zomboid-secondary-data
-          readOnly: true
-          mountPath: /usr/share/nginx/html
-        - mountPath: /etc/nginx/conf.d/
-          name: project-zomboid-secondary-files-config
-        resources:
-          requests:
-            cpu: 50m
-          limits:
-            memory: 128Mi
-        ports:
-        - containerPort: 8080
       volumes:
         - name: project-zomboid-secondary-files-config
           configMap:
