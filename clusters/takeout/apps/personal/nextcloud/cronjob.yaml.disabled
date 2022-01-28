@@ -2,7 +2,7 @@ apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
   name: nextcloud-cron
-  namespace: default
+  namespace: personal
 spec:
   successfulJobsHistoryLimit: 1
   schedule: "*/15 * * * *"

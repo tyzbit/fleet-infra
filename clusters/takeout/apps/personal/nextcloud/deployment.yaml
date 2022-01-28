@@ -2,12 +2,12 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nextcloud
-  namespace: default
+  namespace: personal
 spec:
   selector:
     matchLabels:
       app: nextcloud
-  replicas: 1 # active nfs-client-fast
+  replicas: 0 # active nfs-client-fast
   template:
     metadata:
       labels:
