@@ -2,11 +2,11 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: plex
-  namespace: default
+  namespace: media
   labels:
     app: plex
 spec:
-  replicas: 1 # active longhorn
+  replicas: 0 # active longhorn
   selector:
     matchLabels:
       app: plex
