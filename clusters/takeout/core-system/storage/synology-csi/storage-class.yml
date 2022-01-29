@@ -9,6 +9,6 @@ provisioner: csi.san.synology.com
 parameters:
   dsm: 'nas'
   location: '/volume1'
-  fsType: 'btrfs'
+  fsType: 'ext4'
 reclaimPolicy: Delete
 allowVolumeExpansion: true

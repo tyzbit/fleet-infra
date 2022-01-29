@@ -10,4 +10,4 @@ spec:
   storageClassName: synology-iscsi-storage
   resources:
     requests:
-      storage: 50Gi
+      storage: 4Gi
