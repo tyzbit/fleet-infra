@@ -1,9 +1,10 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: synology-testing
   namespace: personal
 spec:
+  serviceName: synology-testing
   selector:
     matchLabels:
       app: synology-testing
