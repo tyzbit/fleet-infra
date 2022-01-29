@@ -31,6 +31,8 @@ spec:
             mountPath: /db
           # - name: braavos
           #   mountPath: /srv/braavos
+          - name: qbittorrent-downloads
+            mountPath: /srv/torrent_downloads
           - name: media
             mountPath: /srv/media
           - name: temp
@@ -46,6 +48,9 @@ spec:
         - name: filebrowser-config
           persistentVolumeClaim:
             claimName: filebrowser-config-nas
+        - name: qbittorrent-downloads
+          persistentVolumeClaim:
+            claimName: qbittorrent-downloads-nas
         - name: media
           persistentVolumeClaim:
             claimName: nas-volume1-media
