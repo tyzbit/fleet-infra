@@ -4,7 +4,7 @@ metadata:
   name: project-zomboid-secondary-tcp
   namespace: games
   annotations:
-    metallb.universe.tf/allow-shared-ip: default-project-zomboid-server-secondary
+    metallb.universe.tf/allow-shared-ip: games-project-zomboid-server-secondary
 spec:
   type: LoadBalancer
   loadBalancerIP: 192.168.1.73
@@ -23,7 +23,7 @@ metadata:
   name: project-zomboid-secondary-udp
   namespace: games
   annotations:
-    metallb.universe.tf/allow-shared-ip: default-project-zomboid-server-secondary
+    metallb.universe.tf/allow-shared-ip: games-project-zomboid-server-secondary
 spec:
   type: LoadBalancer
   loadBalancerIP: 192.168.1.73

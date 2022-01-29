@@ -4,7 +4,7 @@ metadata:
   name: valheim-server-tcp
   namespace: games
   annotations:
-    metallb.universe.tf/allow-shared-ip: default-valheim-server
+    metallb.universe.tf/allow-shared-ip: games-valheim-server
 spec:
   type: LoadBalancer
   loadBalancerIP: 192.168.1.67
@@ -31,7 +31,7 @@ metadata:
   name: valheim-server-udp
   namespace: games
   annotations:
-    metallb.universe.tf/allow-shared-ip: default-valheim-server
+    metallb.universe.tf/allow-shared-ip: games-valheim-server
 spec:
   type: LoadBalancer
   loadBalancerIP: 192.168.1.67

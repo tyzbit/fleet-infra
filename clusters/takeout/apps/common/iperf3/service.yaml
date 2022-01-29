@@ -4,7 +4,7 @@ metadata:
   name: iperf3-server
   namespace: default
   annotations:
-    metallb.universe.tf/allow-shared-ip: iperf3-server
+    metallb.universe.tf/allow-shared-ip: default-iperf3-server
 spec:
   type: LoadBalancer
   selector:
@@ -21,7 +21,7 @@ metadata:
   name: iperf3-server-udp
   namespace: default
   annotations:
-    metallb.universe.tf/allow-shared-ip: iperf3-server
+    metallb.universe.tf/allow-shared-ip: default-iperf3-server
 spec:
   type: LoadBalancer
   selector:
