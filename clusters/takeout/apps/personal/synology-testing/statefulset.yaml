@@ -18,7 +18,7 @@ spec:
       - name: synology-testing
         image: ubuntu
         imagePullPolicy: Always
-        command: ["sg","-c","sha256sum /data/uniquefile; tail -f /dev/null"]
+        command: ["sh","-c","sha256sum /data/uniquefile; tail -f /dev/null"]
         volumeMounts:
           - mountPath: "/data"
             name: synology-testing-data
