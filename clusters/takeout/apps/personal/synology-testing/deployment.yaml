@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: synology-testing
+  namespace: personal
+spec:
+  selector:
+    matchLabels:
+      app: synology-testing
+  replicas: 1 # active nfs-client-fast
+  template:
+    metadata:
+      labels:
+        app: synology-testing
+    spec:
+      containers:
+      - name: synology-testing
+        image: ubuntu
+        imagePullPolicy: Always
+        command: ["tail","-f","/dev/null"]
+        volumeMounts:
+          - mountPath: "/data"
+            name: synology-testing-data
+        resources:
+          requests:
+            cpu: 100m
+          limits:
+            memory: 3Gi
+      volumes:
+        - name: synology-testing-data
+          persistentVolumeClaim:
+            claimName: synology-testing-data-iscsi
+      terminationGracePeriodSeconds: 1
+      imagePullSecrets:
+        - name: docker-hub
+
