@@ -6,7 +6,7 @@ metadata:
 spec:
   interval: 1m0s
   ref:
-    tag: v2.0.4
+    branch: 2.0.4-enhancements
   secretRef:
     name: flux-system
-  url: https://github.com/bonnefoa/kubectl-fzf
+  url: https://github.com/tyzbit/kubectl-fzf

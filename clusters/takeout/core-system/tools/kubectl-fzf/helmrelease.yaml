@@ -19,6 +19,8 @@ spec:
     image:
       cache_builder:
         tag: 2.0.4
+    service:
+      type: LoadBalancer
     resources:
       rsyncd:
         memory: 128M
