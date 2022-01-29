@@ -7,7 +7,7 @@ spec:
   selector:
     matchLabels:
       app: synology-testing
-  replicas: 1
+  replicas: 0
   template:
     metadata:
       labels:
