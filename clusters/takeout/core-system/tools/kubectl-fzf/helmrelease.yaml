@@ -16,6 +16,9 @@ spec:
         namespace: flux-system
   interval: 1m0s
   values:
+    image:
+      cache_builder:
+        tag: v2.0.4
     resources:
       rsyncd:
         memory: 128M
