@@ -23,7 +23,9 @@ spec:
       replicas: 1 # active longhorn nas
     nodeSelector:
       longhorn: primary
-      graphics: dri
+    #   graphics: dri
+    # securityContext:
+    #   privileged: true
     env:
       TZ: America/New_York
     # podSecurityContext:
@@ -55,10 +57,10 @@ spec:
         enabled: true
         mountPath: /media/temp_previews/
         existingClaim: stash-temp-previews-nas
-      dri:
-        enabled: true
-        mountPath: /dev/dri
-        existingClaim: dri-pvc
+      # dri:
+      #   enabled: true
+      #   mountPath: /dev/dri
+      #   existingClaim: dri-pvc
     ingress:
       main:
         enabled: true

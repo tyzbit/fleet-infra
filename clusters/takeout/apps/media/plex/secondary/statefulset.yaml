@@ -17,7 +17,6 @@ spec:
       labels:
         app: plex-secondary
     spec:
-      # hostNetwork: true
       containers:
         - name: plex-secondary
           image: plexinc/pms-docker:latest
@@ -29,17 +28,12 @@ spec:
           ports:
             - containerPort: 32400
           volumeMounts:
-            # - mountPath: "/media"
-            #   name: braavos
             - mountPath: "/media"
               name: nas-volume1-media
             - mountPath: "/dev/dri"
               name: dri
             - mountPath: "/config"
               name: plex-secondary-config
-              # name: plex-secondary-config-nfs
-            # - mountPath: "/config-old"
-            #   name: plex-secondary-config-old
             - mountPath: "/transcode"
               name: transcode
           # note to myself in the future: this is needed in order to use /dev/dri
