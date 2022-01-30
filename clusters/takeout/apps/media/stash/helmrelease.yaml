@@ -24,6 +24,8 @@ spec:
     nodeSelector:
       longhorn: primary
       graphics: dri
+    securityContext:
+      privileged: true
     env:
       TZ: America/New_York
     # podSecurityContext:

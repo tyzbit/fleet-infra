@@ -17,7 +17,6 @@ spec:
       labels:
         app: plex
     spec:
-      # hostNetwork: true
       containers:
         - name: plex
           image: plexinc/pms-docker:latest
@@ -47,9 +46,6 @@ spec:
             limits:
               memory: 8192Mi
       volumes:
-        # - name: braavos
-        #   persistentVolumeClaim:
-        #     claimName: braavos-media-pvc
         - name: nas-volume1-media
           persistentVolumeClaim:
             claimName: nas-volume1-media
