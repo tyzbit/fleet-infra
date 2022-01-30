@@ -57,7 +57,7 @@ spec:
           mountPath: /home/wine/.steam
         resources:
           limits:
-            memory: 10Gi
+            memory: 6Gi
           requests:
             cpu: 500m
       - name: filebrowser
