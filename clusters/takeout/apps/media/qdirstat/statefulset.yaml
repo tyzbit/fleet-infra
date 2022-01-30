@@ -30,7 +30,7 @@ spec:
               mountPath: /mount/temp
           resources:
             requests: 
-              cpu: 500m
+              cpu: 250m
             limits:
               memory: 512Mi
       volumes:
