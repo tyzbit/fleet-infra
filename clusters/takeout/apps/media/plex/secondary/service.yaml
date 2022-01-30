@@ -6,7 +6,7 @@ metadata:
 spec:
   type: LoadBalancer
   loadBalancerIP: 192.168.1.70
-  externalTrafficPolicy: Local
+  externalTrafficPolicy: Cluster
   selector:
     app: plex-secondary
   ports:
