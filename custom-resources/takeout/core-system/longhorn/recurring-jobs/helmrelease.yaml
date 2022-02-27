@@ -33,8 +33,8 @@ spec:
             retain: 6
             # concurrency: 10
         backup: 
-          - interval: 1h
-            retain: 1
+          - interval: 2h
+            retain: 4
       "Crypto":
         reclaimPolicy: Delete
         numberOfReplicas: "2"
@@ -48,8 +48,6 @@ spec:
         backup:
           - interval: 1h
             retain: 6
-          - interval: 6h
-            retain: 8
       "Gameserver":
         numberOfReplicas: "2"
         snapshot:
@@ -58,27 +56,27 @@ spec:
           - interval: 1h
             retain: 6
         backup:
-          - interval: 1h
-            retain: 6
+          - interval: 2h
+            retain: 4
       "Plex":
         snapshot:
           - interval: 10m
             retain: 6
         backup:
-          - interval: 1h
-            retain: 2
-          - interval: 6h
+          - interval: 2h
+            retain: 4
+          - interval: 12h
             retain: 4
       "Multimedia":
         backup:
-          - interval: 1h
-            retain: 6
+          - interval: 2h
+            retain: 4
       "Webapp":
         snapshot:
           - interval: 10m
             retain: 6
         backup:
-          - interval: 1h
-            retain: 6
+          - interval: 2h
+            retain: 4
           - interval: 12h
-            retain: 1
+            retain: 4

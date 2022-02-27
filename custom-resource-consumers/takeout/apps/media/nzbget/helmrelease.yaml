@@ -18,7 +18,7 @@ spec:
         namespace: flux-system
   values:
     controller:
-      replicas: 1 # active longhorn-multimedia nas
+      replicas: 1 # active longhorn-webapp nas
     nodeSelector:
       longhorn: primary
     env:
