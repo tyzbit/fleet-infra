@@ -47,10 +47,14 @@ data:
         - vaapi
         - -hwaccel_device
         - /dev/dri/renderD128
+        - -init_hw_device 
+        - vaapi=gpu 
+        - -filter_hw_device 
+        - gpu
         - -hwaccel_output_format
         - yuv420p
       output_args:
-        detect: "-vf 'format=nv12|fps=fps=5,vpp_qsv=w=1280:h=720:format=nv12,hwdownload,format=nv12,format=yuv420p' -c:v h264_vaapi -an -pix_fmt yuv420p -f rawvideo"
+        detect: "-vf 'format=nv12,hwupload' -c:v h264_vaapi -an -pix_fmt yuv420p -f rawvideo"
     cameras:
       frontdoor:
         motion:
