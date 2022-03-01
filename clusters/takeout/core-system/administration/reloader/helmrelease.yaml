@@ -4,7 +4,8 @@ metadata:
   name: reloader
   namespace: kube-system
 spec:
-  interval: 15m
+  interval: 10m
+  releaseName: reloader
   targetNamespace: kube-system
   chart:
     spec:
