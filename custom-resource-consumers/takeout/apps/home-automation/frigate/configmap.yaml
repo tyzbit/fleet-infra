@@ -39,14 +39,16 @@ data:
         type: edgetpu
         device: usb
     ffmpeg:
-      input_args:
-        - -c:v
-        - h264_qsv
+      # input_args:
+      #   - -c:v
+      #   - h264_qsv
       hwaccel_args:
         - -hwaccel
-        - qsv
-        - -qsv_device
+        - vaapi
+        - -hwaccel_device
         - /dev/dri/renderD128
+        - -hwaccel_output_format
+        - vaapi
     cameras:
       frontdoor:
         motion:
