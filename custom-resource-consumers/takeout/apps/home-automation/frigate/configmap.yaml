@@ -13,18 +13,8 @@ data:
       #   frigate.record: debug
     mqtt:
       host: mosquitto
-    # ffmpeg:
-    #   hwaccel_args:
-    #     - -hwaccel
-    #     - vaapi
-    #     - -hwaccel_device
-    #     - /dev/dri/renderD128
-    #     - -hwaccel_output_format
-    #     - yuv420p
     cameras:
       frontdoor:
-        snapshots:
-          timestamp: True
         motion:
           mask:
             - 0,390,190,281,413,219,612,181,842,131,1149,113,1138,0,0,0
@@ -41,8 +31,6 @@ data:
         mqtt:
           height: 540
       backdoor:
-        snapshots:
-          timestamp: True
         ffmpeg:
           inputs:
             - path: 'rtsp://{FRIGATE_BACKDOOR_CREDENTIALS}@backdoor:554/live'
@@ -56,8 +44,6 @@ data:
         mqtt:
           height: 540
       driveway:
-        snapshots:
-          timestamp: True
         motion:
           mask:
             - 1820,127,1775,335,1605,1080,1920,1080,1920,252,1920,0,1252,0,1443,45
@@ -65,7 +51,7 @@ data:
         objects:
           filters:
             person:
-              min_score: 0.72
+              # min_score: 0.72
               mask: 
               - 1820,127,1775,335,1605,1080,1920,1080,1920,252,1920,0,1252,0,1443,45
               - 595,687,218,948,172,865,103,718,373,553,538,627
@@ -82,8 +68,6 @@ data:
         mqtt:
           height: 540
       porch:
-        snapshots:
-          timestamp: True
         ffmpeg:
           inputs:
             - path: 'rtsp://{FRIGATE_PORCH_CREDENTIALS}@porch:554/live'
@@ -94,13 +78,15 @@ data:
           width: 2688
           height: 1520
           fps: 5
-        objects:
-          filters:
-            person:
-              min_score: 0.73
+        # objects:
+        #   filters:
+        #     person:
+        #       min_score: 0.73
         mqtt:
           height: 540
       court:
+        snapshots:
+          enabled: False
         ffmpeg:
           inputs:
             - path: 'rtsp://{FRIGATE_COURT_CREDENTIALS}@court:554/live'
@@ -114,17 +100,23 @@ data:
       enabled: True
       retain:
         days: 1
-      # retain_days: 1 # deprecated in 0.10
       events:
         retain:
           default: 30
           mode: active_objects
+    snapshots:
+      enabled: True
+      retain:
+        default: 30
+        objects:
+          person: 365
     objects:
       track:
         - person
     birdseye:
       enabled: True
-      mode: objects
+      mode: continuous
+      # mode: objects
     detectors:
       coral:
         type: edgetpu
