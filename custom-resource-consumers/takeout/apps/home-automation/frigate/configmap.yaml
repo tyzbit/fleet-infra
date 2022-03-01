@@ -49,6 +49,8 @@ data:
         - /dev/dri/renderD128
         - -hwaccel_output_format
         - yuv420p
+      output_args:
+        detect: "-vf 'format=nv12|vaapi,hwupload'"
     cameras:
       frontdoor:
         motion:
