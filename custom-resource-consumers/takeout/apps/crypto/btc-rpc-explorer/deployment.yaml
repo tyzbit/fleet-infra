@@ -3,6 +3,8 @@ kind: Deployment
 metadata:
   name: btc-rpc-explorer
   namespace: crypto
+  annotations:
+    reloader.stakater.com/auto: "true"
   labels:
     app: btc-rpc-explorer
 spec:

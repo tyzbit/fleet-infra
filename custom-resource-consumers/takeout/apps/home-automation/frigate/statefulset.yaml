@@ -3,6 +3,8 @@ kind: StatefulSet
 metadata:
   name: frigate
   namespace: home-automation
+  annotations:
+    reloader.stakater.com/auto: "true"
   labels:
     app: frigate
 spec:
