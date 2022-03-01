@@ -4,7 +4,7 @@ metadata:
   name: reloader
   namespace: flux-system
 spec:
-  interval: 10m
+  interval: 1m
   releaseName: reloader
   targetNamespace: kube-system
   chart:
