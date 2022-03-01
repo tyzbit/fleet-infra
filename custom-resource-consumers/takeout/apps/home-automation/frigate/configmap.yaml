@@ -38,16 +38,24 @@ data:
       coral:
         type: edgetpu
         device: usb
+    ffmpeg:
+      input_args:
+        -avoid_negative_ts make_zero
+        -fflags +genpts+discardcorrupt
+        -rtsp_transport tcp
+        -stimeout 5000000
+        -use_wallclock_as_timestamps 1
+        - -c:v
+        - h264_cuvid
+      hwaccel_args:
+        - -hwaccel
+        - vaapi
+        - -hwaccel_device
+        - /dev/dri/renderD128
+        - -hwaccel_output_format
+        - yuv420p
     cameras:
       frontdoor:
-        ffmpeg:
-          hwaccel_args:
-            - -hwaccel
-            - vaapi
-            - -hwaccel_device
-            - /dev/dri/renderD128
-            - -hwaccel_output_format
-            - yuv420p
           inputs:
             - path: 'rtsp://{FRIGATE_FRONTDOOR_CREDENTIALS}@frontdoor:554'
               roles:
@@ -63,14 +71,6 @@ data:
         mqtt:
           height: 540
       backdoor:
-        ffmpeg:
-          hwaccel_args:
-            - -hwaccel
-            - vaapi
-            - -hwaccel_device
-            - /dev/dri/renderD128
-            - -hwaccel_output_format
-            - yuv420p
           inputs:
             - path: 'rtsp://{FRIGATE_BACKDOOR_CREDENTIALS}@backdoor:554/live'
               roles:
@@ -83,14 +83,6 @@ data:
         mqtt:
           height: 540
       driveway:
-        ffmpeg:
-          hwaccel_args:
-            - -hwaccel
-            - vaapi
-            - -hwaccel_device
-            - /dev/dri/renderD128
-            - -hwaccel_output_format
-            - yuv420p
           inputs:
             - path: 'rtsp://{FRIGATE_DRIVEWAY_CREDENTIALS}@driveway:554/live'
               roles:
@@ -114,14 +106,6 @@ data:
         mqtt:
           height: 540
       porch:
-        ffmpeg:
-          hwaccel_args:
-            - -hwaccel
-            - vaapi
-            - -hwaccel_device
-            - /dev/dri/renderD128
-            - -hwaccel_output_format
-            - yuv420p
           inputs:
             - path: 'rtsp://{FRIGATE_PORCH_CREDENTIALS}@porch:554/live'
               roles:
