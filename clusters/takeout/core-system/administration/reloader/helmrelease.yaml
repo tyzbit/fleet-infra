@@ -5,13 +5,14 @@ metadata:
   namespace: kube-system
 spec:
   interval: 15m
+  targetNamespace: kube-system
   chart:
     spec:
       chart: reloader
       version: v0.0.108
       sourceRef:
         kind: HelmRepository
-        name: stakater-charts
+        name: stakater
         namespace: flux-system
 
   values:
