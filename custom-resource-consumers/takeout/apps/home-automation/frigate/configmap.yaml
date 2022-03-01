@@ -44,11 +44,9 @@ data:
         - h264_qsv
       hwaccel_args:
         - -hwaccel
-        - vaapi
-        - -hwaccel_device
+        - qsv
+        - -qsv_device
         - /dev/dri/renderD128
-        - -hwaccel_output_format
-        - yuv420p
     cameras:
       frontdoor:
         motion:
