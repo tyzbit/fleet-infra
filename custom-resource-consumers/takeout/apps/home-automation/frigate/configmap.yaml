@@ -5,14 +5,39 @@ metadata:
   namespace: home-automation
 data:
   config.yml: |
-    database:
-      path: /db/frigate.db
     logger:
       default: info
       # logs:
       #   frigate.record: debug
+    database:
+      path: /db/frigate.db
     mqtt:
       host: mosquitto
+    record:
+      enabled: True
+      retain:
+        days: 1
+      events:
+        retain:
+          default: 30
+          mode: active_objects
+    snapshots:
+      enabled: True
+      retain:
+        default: 30
+        objects:
+          person: 365
+    objects:
+      track:
+        - person
+    birdseye:
+      enabled: True
+      mode: continuous
+      # mode: objects
+    detectors:
+      coral:
+        type: edgetpu
+        device: usb
     cameras:
       frontdoor:
         motion:
@@ -96,28 +121,3 @@ data:
           width: 1920
           height: 1080
           fps: 5
-    record:
-      enabled: True
-      retain:
-        days: 1
-      events:
-        retain:
-          default: 30
-          mode: active_objects
-    snapshots:
-      enabled: True
-      retain:
-        default: 30
-        objects:
-          person: 365
-    objects:
-      track:
-        - person
-    birdseye:
-      enabled: True
-      mode: continuous
-      # mode: objects
-    detectors:
-      coral:
-        type: edgetpu
-        device: usb
