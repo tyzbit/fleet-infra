@@ -39,7 +39,19 @@ data:
         type: edgetpu
         device: usb
     ffmpeg:
-      input_args: "-avoid_negative_ts make_zero -fflags +genpts+discardcorrupt -rtsp_transport tcp -stimeout 5000000 -use_wallclock_as_timestamps 1 -c:v h264_cuvid"
+      input_args:
+        - -avoid_negative_ts
+        - make_zero
+        - -fflags
+        - +genpts+discardcorrupt
+        - -rtsp_transport
+        - tcp
+        - -stimeout
+        - 5000000
+        - -use_wallclock_as_timestamps
+        - 1
+        - -c:v
+        - h264_cuvid
       hwaccel_args:
         - -hwaccel
         - vaapi
@@ -49,14 +61,15 @@ data:
         - yuv420p
     cameras:
       frontdoor:
+        motion:
+          mask:
+            - 0,390,190,281,413,219,612,181,842,131,1149,113,1138,0,0,0
+        ffmpeg:
           inputs:
             - path: 'rtsp://{FRIGATE_FRONTDOOR_CREDENTIALS}@frontdoor:554'
               roles:
                 - detect
                 - rtmp
-        motion:
-          mask:
-            - 0,390,190,281,413,219,612,181,842,131,1149,113,1138,0,0,0
         detect:
           width: 1280
           height: 720
@@ -64,6 +77,7 @@ data:
         mqtt:
           height: 540
       backdoor:
+        ffmpeg:
           inputs:
             - path: 'rtsp://{FRIGATE_BACKDOOR_CREDENTIALS}@backdoor:554/live'
               roles:
@@ -76,11 +90,6 @@ data:
         mqtt:
           height: 540
       driveway:
-          inputs:
-            - path: 'rtsp://{FRIGATE_DRIVEWAY_CREDENTIALS}@driveway:554/live'
-              roles:
-                - detect
-                - rtmp
         motion:
           mask:
             - 1820,127,1775,335,1605,1080,1920,1080,1920,252,1920,0,1252,0,1443,45
@@ -92,6 +101,12 @@ data:
               mask: 
               - 1820,127,1775,335,1605,1080,1920,1080,1920,252,1920,0,1252,0,1443,45
               - 595,687,218,948,172,865,103,718,373,553,538,627
+        ffmpeg:
+          inputs:
+            - path: 'rtsp://{FRIGATE_DRIVEWAY_CREDENTIALS}@driveway:554/live'
+              roles:
+                - detect
+                - rtmp
         detect:
           width: 1920
           height: 1080
@@ -99,6 +114,7 @@ data:
         mqtt:
           height: 540
       porch:
+        ffmpeg:
           inputs:
             - path: 'rtsp://{FRIGATE_PORCH_CREDENTIALS}@porch:554/live'
               roles:
