@@ -48,7 +48,7 @@ data:
         - -hwaccel_device
         - /dev/dri/renderD128
         - -hwaccel_output_format
-        - vaapi
+        - yuv420p
     cameras:
       frontdoor:
         motion:
