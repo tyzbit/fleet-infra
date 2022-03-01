@@ -50,7 +50,7 @@ data:
         - -hwaccel_output_format
         - yuv420p
       output_args:
-        detect: "-vf 'format=nv12|vaapi,hwupload'"
+        detect: "-vf 'format=nv12|vaapi,hwupload' -c:v h264_vaapi -an -pix_fmt yuv420p -f rawvideo"
     cameras:
       frontdoor:
         motion:
