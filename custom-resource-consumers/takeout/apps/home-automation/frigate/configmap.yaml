@@ -38,29 +38,24 @@ data:
       coral:
         type: edgetpu
         device: usb
-    ffmpeg:
-      hwaccel_args:
-        # - -hwaccel
-        # - vaapi
-        # - -hwaccel_device
-        # - /dev/dri/renderD128
-        # - -hwaccel_output_format
-        # - yuv420p
-        - -hwaccel
-        - qsv
-        - -qsv_device
-        - /dev/dri/renderD128
     cameras:
       frontdoor:
-        motion:
-          mask:
-            - 0,390,190,281,413,219,612,181,842,131,1149,113,1138,0,0,0
         ffmpeg:
+          hwaccel_args:
+            - -hwaccel
+            - vaapi
+            - -hwaccel_device
+            - /dev/dri/renderD128
+            - -hwaccel_output_format
+            - yuv420p
           inputs:
             - path: 'rtsp://{FRIGATE_FRONTDOOR_CREDENTIALS}@frontdoor:554'
               roles:
                 - detect
                 - rtmp
+        motion:
+          mask:
+            - 0,390,190,281,413,219,612,181,842,131,1149,113,1138,0,0,0
         detect:
           width: 1280
           height: 720
@@ -69,6 +64,13 @@ data:
           height: 540
       backdoor:
         ffmpeg:
+          hwaccel_args:
+            - -hwaccel
+            - vaapi
+            - -hwaccel_device
+            - /dev/dri/renderD128
+            - -hwaccel_output_format
+            - yuv420p
           inputs:
             - path: 'rtsp://{FRIGATE_BACKDOOR_CREDENTIALS}@backdoor:554/live'
               roles:
@@ -81,6 +83,19 @@ data:
         mqtt:
           height: 540
       driveway:
+        ffmpeg:
+          hwaccel_args:
+            - -hwaccel
+            - vaapi
+            - -hwaccel_device
+            - /dev/dri/renderD128
+            - -hwaccel_output_format
+            - yuv420p
+          inputs:
+            - path: 'rtsp://{FRIGATE_DRIVEWAY_CREDENTIALS}@driveway:554/live'
+              roles:
+                - detect
+                - rtmp
         motion:
           mask:
             - 1820,127,1775,335,1605,1080,1920,1080,1920,252,1920,0,1252,0,1443,45
@@ -92,12 +107,6 @@ data:
               mask: 
               - 1820,127,1775,335,1605,1080,1920,1080,1920,252,1920,0,1252,0,1443,45
               - 595,687,218,948,172,865,103,718,373,553,538,627
-        ffmpeg:
-          inputs:
-            - path: 'rtsp://{FRIGATE_DRIVEWAY_CREDENTIALS}@driveway:554/live'
-              roles:
-                - detect
-                - rtmp
         detect:
           width: 1920
           height: 1080
@@ -106,6 +115,13 @@ data:
           height: 540
       porch:
         ffmpeg:
+          hwaccel_args:
+            - -hwaccel
+            - vaapi
+            - -hwaccel_device
+            - /dev/dri/renderD128
+            - -hwaccel_output_format
+            - yuv420p
           inputs:
             - path: 'rtsp://{FRIGATE_PORCH_CREDENTIALS}@porch:554/live'
               roles:
