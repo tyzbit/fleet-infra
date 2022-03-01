@@ -14,14 +14,14 @@ metadata:
     nginx.ingress.kubernetes.io/auth-url: "http://filebrowser-oauth2-proxy.media.svc.cluster.local/oauth2/auth"
     nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
     external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
-    external-dns.alpha.kubernetes.io/target: ${personal_domain_ddns}
+    external-dns.alpha.kubernetes.io/target: ${blog_domain_ddns}
 spec:
   tls:
     - hosts:
-        - "files.${personal_domain}"
-      secretName: files.${personal_domain}-tls
+        - "files.${blog_domain}"
+      secretName: files.${blog_domain}-tls
   rules:
-  - host: files.${personal_domain}
+  - host: files.${blog_domain}
     http:
       paths:
       - pathType: Prefix
@@ -43,10 +43,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - "files.${personal_domain}"
-      secretName: files.${personal_domain}-tls
+        - "files.${blog_domain}"
+      secretName: files.${blog_domain}-tls
   rules:
-  - host: files.${personal_domain}
+  - host: files.${blog_domain}
     http:
       paths:
       - path: /oauth2
