@@ -33,7 +33,7 @@ data:
     birdseye:
       enabled: True
       # objects, motion, continuous
-      mode: continuous
+      mode: objects
     detectors:
       coral:
         type: edgetpu
