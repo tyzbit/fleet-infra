@@ -32,7 +32,8 @@ data:
         - person
     birdseye:
       enabled: True
-      mode: continuous
+      mode: motion
+      # mode: continuous
       # mode: objects
     detectors:
       coral:
