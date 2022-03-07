@@ -7,8 +7,8 @@ data:
   config.yml: |
     logger:
       default: info
-      logs:
-        frigate.record: debug
+      # logs:
+      #   frigate.record: debug
     database:
       path: /db/frigate.db
     mqtt:
