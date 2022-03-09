@@ -40,7 +40,7 @@ spec:
             retain: 4
       "Crypto":
         parameters:
-          reclaimPolicy: Delete
+          # reclaimPolicy: Delete
           numberOfReplicas: "2"
         snapshot:
           - interval: 10m
