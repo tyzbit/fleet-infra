@@ -21,9 +21,7 @@ spec:
     hourStep: 2
     createStorageClasses: true
     allowVolumeExpansion: true
-    # commented out because this was broken when my StorageClasses were created
-    # reclaimPolicy: Retain
-    reclaimPolicy: ""
+    reclaimPolicy: Retain
     parameters:
       replicaAutoBalance: "ignored"
       dataLocality: "best-effort"
@@ -40,7 +38,7 @@ spec:
             retain: 4
       "Crypto":
         parameters:
-          # reclaimPolicy: Delete
+          reclaimPolicy: Delete
           numberOfReplicas: "2"
         snapshot:
           - interval: 10m
