@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: longhorn-recurring-jobs
-      version: "1.0.0"
+      version: "2.0.0"
       sourceRef:
         kind: HelmRepository
         name: tyzbit
@@ -22,10 +22,11 @@ spec:
     createStorageClasses: true
     allowVolumeExpansion: true
     reclaimPolicy: Retain
-    replicaAutoBalance: "ignored"
-    dataLocality: "best-effort"
-    numberOfReplicas: "3"
-    staleReplicaTimeout: "30"
+    parameters:
+      replicaAutoBalance: "ignored"
+      dataLocality: "best-effort"
+      numberOfReplicas: "3"
+      staleReplicaTimeout: "30"
     groups:
       "Blog":
         snapshot:
@@ -36,8 +37,9 @@ spec:
           - interval: 2h
             retain: 4
       "Crypto":
-        reclaimPolicy: Delete
-        numberOfReplicas: "2"
+        parameters:
+          reclaimPolicy: Delete
+          numberOfReplicas: "2"
         snapshot:
           - interval: 10m
             retain: 1
@@ -49,7 +51,8 @@ spec:
           - interval: 1h
             retain: 6
       "Gameserver":
-        numberOfReplicas: "2"
+        parameters:
+          numberOfReplicas: "2"
         snapshot:
           - interval: 10m
             retain: 6
