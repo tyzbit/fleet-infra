@@ -6,7 +6,7 @@ metadata:
 spec:
   targetNamespace: longhorn-system
   releaseName: longhorn-recurring-jobs
-  timeout: 2m
+  timeout: 1m
   chart:
     spec:
       chart: longhorn-recurring-jobs
@@ -21,7 +21,9 @@ spec:
     hourStep: 2
     createStorageClasses: true
     allowVolumeExpansion: true
-    reclaimPolicy: Retain
+    # commented out because this was broken when my StorageClasses were created
+    # reclaimPolicy: Retain
+    reclaimPolicy: ""
     parameters:
       replicaAutoBalance: "ignored"
       dataLocality: "best-effort"
