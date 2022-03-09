@@ -6,7 +6,7 @@ metadata:
 spec:
   targetNamespace: longhorn-system
   releaseName: longhorn-recurring-jobs
-  timeout: 1m
+  timeout: 2m
   chart:
     spec:
       chart: longhorn-recurring-jobs
