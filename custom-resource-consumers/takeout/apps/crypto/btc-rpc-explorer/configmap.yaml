@@ -20,7 +20,7 @@ data:
             # curl -s --retry 3 "$${HEALTHCHECK_API}/$${number}"
             curl -s -X POST \
               -H "Content-Type: application/json" \
-              -d "{\"message\": \"**$${address} balance changed**\n**previous balance**: $${previousbalance}\n**current balance**: $${balance}\"}" \
+              -d "{\"content\": \"**$${address} balance changed**\n**previous balance**: $${previousbalance}\n**current balance**: $${balance}\"}" \
               "$${DISCORD_WEBHOOK}"
           fi
         fi
