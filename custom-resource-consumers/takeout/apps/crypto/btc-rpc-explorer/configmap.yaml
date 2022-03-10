@@ -18,7 +18,7 @@ data:
           if [[ "$balance" -ne "$${previousbalance}" ]]; then
             echo "$${address} balance changed from $${previousbalance} to $${balance}"
             # curl -s --retry 3 "$${HEALTHCHECK_API}/$${number}"
-            curl -X POST -d '{"message": "**$${address} balance changed**\n**previous balance**: $${previousbalance}\n**current balance**: $${balance}"}' "$${DISCORD_WEBHOOK}"
+            curl -s -X POST -d "{\"message\": \"**$${address} balance changed**\n**previous balance**: $${previousbalance}\n**current balance**: $${balance}\"}" "$${DISCORD_WEBHOOK}"
           fi
         fi
         echo "$balance" > "$${address}"
