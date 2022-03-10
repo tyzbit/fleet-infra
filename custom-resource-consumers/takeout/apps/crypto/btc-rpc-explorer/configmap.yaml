@@ -19,7 +19,7 @@ data:
             echo "$${address} balance changed from $${previousbalance} to $${balance}"
             # curl -s --retry 3 "$${HEALTHCHECK_API}/$${number}"
             curl -s -X POST \
-              -H "Content-Type: application/json"
+              -H "Content-Type: application/json" \
               -d "{\"message\": \"**$${address} balance changed**\n**previous balance**: $${previousbalance}\n**current balance**: $${balance}\"}" \
               "$${DISCORD_WEBHOOK}"
           fi
