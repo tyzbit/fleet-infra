@@ -90,10 +90,10 @@ spec:
               mountPath: /tmp/script.sh
           resources:
             requests:
-              cpu: 10m
+              cpu: 50m
               memory: 64Mi
             limits:
-              cpu: 10m
+              cpu: 50m
               memory: 64Mi
       volumes:
         - name: btc-address-watcher-config
