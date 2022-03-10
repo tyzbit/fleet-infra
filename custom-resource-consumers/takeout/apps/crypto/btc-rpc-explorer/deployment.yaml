@@ -52,6 +52,8 @@ kind: Deployment
 metadata:
   name: btc-address-watcher
   namespace: crypto
+  annotations:
+    reloader.stakater.com/auto: "true"
   labels:
     app: btc-address-watcher
 spec:
@@ -77,7 +79,7 @@ spec:
             bash /script.sh
           env:
             - name: SLEEP
-              value: "3600"
+              value: "10"
           envFrom:
             - name: btc-address-watcher
               secretRef:
