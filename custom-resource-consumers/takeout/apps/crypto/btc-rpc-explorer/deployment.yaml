@@ -79,7 +79,7 @@ spec:
             bash /script.sh
           env:
             - name: SLEEP
-              value: "10"
+              value: "3600"
           envFrom:
             - name: btc-address-watcher
               secretRef:
