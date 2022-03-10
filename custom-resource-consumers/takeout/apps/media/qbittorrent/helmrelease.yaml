@@ -25,8 +25,11 @@ spec:
           kubernetes.io/ingress.class: nginx
           cert-manager.io/cluster-issuer: letsencrypt
           acme.cert-manager.io/http01-edit-in-place: "false"
-          nginx.ingress.kubernetes.io/auth-url: "http://qbittorrent-oauth2-proxy.media.svc.cluster.local/oauth2/auth"
-          nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
+          nginx.ingress.kubernetes.io/auth-type: basic
+          nginx.ingress.kubernetes.io/auth-secret: qbittorrent-credentials
+          nginx.ingress.kubernetes.io/auth-realm: 'Authentication Required'
+          # nginx.ingress.kubernetes.io/auth-url: "http://qbittorrent-oauth2-proxy.media.svc.cluster.local/oauth2/auth"
+          # nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
           external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
           external-dns.alpha.kubernetes.io/target: ${personal_domain_ddns}
         hosts:
@@ -37,25 +40,6 @@ spec:
         - hosts:
           - "torrent.${personal_domain}"
           secretName: torrent.${personal_domain}-tls
-      basic:
-        enabled: true
-        annotations: 
-          kubernetes.io/ingress.class: nginx
-          cert-manager.io/cluster-issuer: letsencrypt
-          acme.cert-manager.io/http01-edit-in-place: "false"
-          nginx.ingress.kubernetes.io/auth-type: basic
-          nginx.ingress.kubernetes.io/auth-secret: qbittorrent-credentials
-          nginx.ingress.kubernetes.io/auth-realm: 'Authentication Required'
-          external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
-          external-dns.alpha.kubernetes.io/target: ${personal_domain_ddns}
-        hosts:
-        - host: "torrent-basic.${personal_domain}"
-          paths:
-          - path: "/"
-        tls:
-        - hosts:
-          - "torrent-basic.${personal_domain}"
-          secretName: torrent-basic.${personal_domain}-tls
       oauth:
         enabled: true
         annotations:
@@ -95,30 +79,30 @@ spec:
         memory: 6Gi
     # nodeSelector:
     #   kubernetes.io/hostname: cameraman
----
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
-kind: HelmRelease
-metadata:
-  name: qbittorrent-oauth2-proxy
-  namespace: media
-spec:
-  targetNamespace: media
-  releaseName: qbittorrent-oauth2-proxy
-  chart:
-    spec:
-      chart: oauth2-proxy
-      version: "6.0.1"
-      sourceRef:
-        kind: HelmRepository
-        name: oauth2-proxy
-        namespace: flux-system
-  interval: 1m0s
-  values:
-    replicaCount: 1
-    extraArgs:
-      provider: github
-      github-org: "${blog_name}"
-      github-team: "super-admins,qbittorrent"
-      cookie-expire: 168h0m0s
-    config:
-      existingSecret: qbittorrent-oauth2-proxy
+# ---
+# apiVersion: helm.toolkit.fluxcd.io/v2beta1
+# kind: HelmRelease
+# metadata:
+#   name: qbittorrent-oauth2-proxy
+#   namespace: media
+# spec:
+#   targetNamespace: media
+#   releaseName: qbittorrent-oauth2-proxy
+#   chart:
+#     spec:
+#       chart: oauth2-proxy
+#       version: "6.0.1"
+#       sourceRef:
+#         kind: HelmRepository
+#         name: oauth2-proxy
+#         namespace: flux-system
+#   interval: 1m0s
+#   values:
+#     replicaCount: 1
+#     extraArgs:
+#       provider: github
+#       github-org: "${blog_name}"
+#       github-team: "super-admins,qbittorrent"
+#       cookie-expire: 168h0m0s
+#     config:
+#       existingSecret: qbittorrent-oauth2-proxy
