@@ -33,5 +33,5 @@ spec:
           claimName: stash-temp-data-nas
       - name: dst
         persistentVolumeClaim:
-          claimName: stash-iscsi-temp-data-nas
+          claimName: stash-iscsi-temp-data-iscsi
   backoffLimit: 0

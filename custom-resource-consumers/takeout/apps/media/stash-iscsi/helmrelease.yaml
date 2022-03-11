@@ -50,7 +50,7 @@ spec:
         existingClaim: stash-iscsi-config-longhorn-webapp
       data:
         enabled: true
-        existingClaim: stash-iscsi-temp-data-nas
+        existingClaim: stash-iscsi-temp-data-iscsi
         subPath: 
         - path: media
           mountPath: /media/temp/
