@@ -6,7 +6,7 @@ metadata:
 spec:
   resources:
     requests:
-      storage: 1Gi
+      storage: 200Gi
   volumeMode: Filesystem
   storageClassName: synology-iscsi-storage
   accessModes:
