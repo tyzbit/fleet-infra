@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: migrate-pv-stash-media
+  name: migrate-pv-stash-previews
   namespace: media
 spec:
   template:
@@ -22,10 +22,10 @@ spec:
         - mountPath: /src_vol
           name: src
           readOnly: true
-          subPath: media
+          subPath: previews
         - mountPath: /dst_vol
           name: dst
-          subPath: media
+          subPath: previews
       restartPolicy: Never
       volumes:
       - name: src
