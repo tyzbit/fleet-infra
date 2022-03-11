@@ -77,9 +77,9 @@ spec:
         nodes: true
         pods: true
         
-        persistentvolumeclaims: false
-        persistentvolumes: false
-        volumeattachments: false
+        persistentvolumeclaims: true
+        persistentvolumes: true
+        volumeattachments: true
 
         certificatesigningrequests: false
         configmaps: false
