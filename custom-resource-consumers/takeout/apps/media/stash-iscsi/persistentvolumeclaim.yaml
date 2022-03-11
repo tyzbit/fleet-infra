@@ -8,9 +8,9 @@ spec:
     requests:
       storage: 1Gi
   volumeMode: Filesystem
-  storageClassName: nas
+  storageClassName: synology-iscsi-storage
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
