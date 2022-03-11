@@ -39,10 +39,10 @@ spec:
           # note to myself in the future: this is needed in order to use /dev/dri
           # there is an alternative but it's more work
           securityContext:
-            # privileged: true
-            supplementalGroups:
-              - 44
-              - 109
+            privileged: true
+            # supplementalGroups:
+            #   - 44
+            #   - 109
           resources:
             requests:
               cpu: 100m
