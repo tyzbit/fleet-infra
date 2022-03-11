@@ -4,7 +4,7 @@ metadata:
   name: stash-iscsi
   namespace: flux-system
 spec:
-  releaseName: stash
+  releaseName: stash-iscsi
   targetNamespace: media
   timeout: 2m
   interval: 1m0s
