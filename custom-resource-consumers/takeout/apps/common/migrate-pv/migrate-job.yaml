@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: migrate-pv-stash-config
+  name: migrate-pv-stash-media
   namespace: media
 spec:
   template:
@@ -22,14 +22,16 @@ spec:
         - mountPath: /src_vol
           name: src
           readOnly: true
+          subPath: media
         - mountPath: /dst_vol
           name: dst
+          subPath: media
       restartPolicy: Never
       volumes:
       - name: src
         persistentVolumeClaim:
-          claimName: stash-config-longhorn-webapp
+          claimName: stash-temp-data-nas
       - name: dst
         persistentVolumeClaim:
-          claimName: stash-iscsi-config-longhorn-webapp
+          claimName: stash-iscsi-temp-data-nas
   backoffLimit: 0
