@@ -15,20 +15,6 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: stash-iscsi-temp-data-iscsi-test
-  namespace: media
-spec:
-  resources:
-    requests:
-      storage: 200Gi
-  volumeMode: Filesystem
-  storageClassName: synology-iscsi-storage
-  accessModes:
-    - ReadWriteOnce
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
   name: stash-iscsi-config-longhorn-webapp
   namespace: media
 spec:
