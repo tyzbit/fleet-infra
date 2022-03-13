@@ -13,7 +13,7 @@ metadata:
 spec:
   tls:
     - hosts:
-        - &host btc.${blog_domain}"
+        - &host "btc.${blog_domain}"
       secretName: *host
   rules:
   - host: *host
