@@ -64,10 +64,10 @@ spec:
           external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
           external-dns.alpha.kubernetes.io/target: ${personal_domain_ddns}
         hosts:
-        - host: "home.${personal_domain}"
+        - host: &host "home.${personal_domain}"
           paths:
           - path: "/"
-        - host: "home-fb.${personal_domain}"
+        - host: &hostfb "home-fb.${personal_domain}"
           paths:
           - path: "/"
             service: 
@@ -75,8 +75,8 @@ spec:
               port: 80
         tls:
         - hosts:
-          - "home.${personal_domain}"
-          - "home-fb.${personal_domain}"
+          - *host
+          - *hostfb
           secretName: home.${personal_domain}-multi-tls
     service:
       filebrowser:

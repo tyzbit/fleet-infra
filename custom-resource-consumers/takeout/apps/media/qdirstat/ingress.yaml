@@ -16,10 +16,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - "du.${personal_domain}"
-      secretName: du.${personal_domain}-tls
+        - &host "du.${personal_domain}"
+      secretName: *host
   rules:
-  - host: du.${personal_domain}
+  - host: *host
     http:
       paths:
       - pathType: Prefix
@@ -41,10 +41,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - "du.${personal_domain}"
-      secretName: du.${personal_domain}-tls
+        - &host "du.${personal_domain}"
+      secretName: *host
   rules:
-  - host: du.${personal_domain}
+  - host: *host
     http:
       paths:
       - path: /oauth2

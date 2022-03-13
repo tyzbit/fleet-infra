@@ -15,10 +15,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - "ytdl.${blog_domain}"
-      secretName: ytdl.${blog_domain}-tls
+        - &host "ytdl.${blog_domain}"
+      secretName: *host
   rules:
-  - host: ytdl.${blog_domain}
+  - host: *host
     http:
       paths:
       - pathType: Prefix
@@ -40,10 +40,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - "ytdl.${blog_domain}"
-      secretName: ytdl.${blog_domain}-tls
+        - &host "ytdl.${blog_domain}"
+      secretName: *host
   rules:
-  - host: ytdl.${blog_domain}
+  - host: *host
     http:
       paths:
       - path: /oauth2

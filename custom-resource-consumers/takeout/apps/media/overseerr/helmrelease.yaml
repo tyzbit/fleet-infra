@@ -28,13 +28,13 @@ spec:
           external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
           external-dns.alpha.kubernetes.io/target: ${personal_domain_ddns}
         hosts:
-        - host: "request.${blog_domain}"
+        - host: &host "request.${blog_domain}"
           paths:
           - path: "/"
         tls:
         - hosts:
-          - "request.${blog_domain}"
-          secretName: request.${blog_domain}-tls
+          - *host
+          secretName: *host
     podSecurityContext:
       fsGroup: 568
     persistence:

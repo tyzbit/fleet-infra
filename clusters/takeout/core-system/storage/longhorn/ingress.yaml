@@ -14,8 +14,8 @@ metadata:
 spec:
   tls:
     - hosts:
-        - "longhorn.${personal_domain}"
-      secretName: longhorn.${personal_domain}-tls
+        - &host "longhorn.${personal_domain}"
+      secretName: *host
   rules:
   - host: longhorn.jura
     http:
@@ -27,7 +27,7 @@ spec:
             name: longhorn-frontend
             port:
               number: 80
-  - host: longhorn.${personal_domain}
+  - host: *host
     http:
       paths:
       - pathType: Prefix
@@ -49,8 +49,8 @@ metadata:
 spec:
   tls:
     - hosts:
-        - "longhorn.${personal_domain}"
-      secretName: longhorn.${personal_domain}-tls
+        - &host "longhorn.${personal_domain}"
+      secretName: *host
   rules:
   - host: longhorn.jura
     http:
@@ -62,7 +62,7 @@ spec:
             name: longhorn-oauth2-proxy
             port:
               number: 80
-  - host: longhorn.${personal_domain}
+  - host: *host
     http:
       paths:
       - path: /oauth2

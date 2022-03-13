@@ -13,10 +13,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - "btc.${blog_domain}"
-      secretName: btc.${blog_domain}-tls
+        - &host btc.${blog_domain}"
+      secretName: *host
   rules:
-  - host: btc.${blog_domain}
+  - host: *host
     http:
       paths:
       - pathType: Prefix

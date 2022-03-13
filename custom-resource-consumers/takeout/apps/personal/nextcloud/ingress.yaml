@@ -13,10 +13,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - "cloud.${personal_domain}"
-      secretName: cloud.${personal_domain}-tls
+        - &host "cloud.${personal_domain}"
+      secretName: *host
   rules:
-  - host: cloud.${personal_domain}
+  - host: *host
     http:
       paths:
       - pathType: Prefix

@@ -12,10 +12,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - "bgp.${personal_domain}"
-      secretName: bgp.${personal_domain}-tls
+        - &host "bgp.${personal_domain}"
+      secretName: *host
   rules:
-  - host: bgp.${personal_domain}
+  - host: *host
     http:
       paths:
       - pathType: Prefix

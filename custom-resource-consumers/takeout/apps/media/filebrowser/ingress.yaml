@@ -18,10 +18,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - "files.${blog_domain}"
-      secretName: files.${blog_domain}-tls
+        - &host "files.${blog_domain}"
+      secretName: *host
   rules:
-  - host: files.${blog_domain}
+  - host: *host
     http:
       paths:
       - pathType: Prefix
@@ -43,10 +43,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - "files.${blog_domain}"
-      secretName: files.${blog_domain}-tls
+        - &host "files.${blog_domain}"
+      secretName: *host
   rules:
-  - host: files.${blog_domain}
+  - host: *host
     http:
       paths:
       - path: /oauth2

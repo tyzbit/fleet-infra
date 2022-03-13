@@ -37,10 +37,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - "unraid.${personal_domain}"
-      secretName: unraid.${personal_domain}-tls
+        - &host "unraid.${personal_domain}"
+      secretName: *host
   rules:
-  - host: unraid.${personal_domain}
+  - host: *host
     http:
       paths:
       - pathType: Prefix
@@ -69,10 +69,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - "architect.${personal_domain}"
-      secretName: architect.${personal_domain}-tls
+        - &host "architect.${personal_domain}"
+      secretName: *host
   rules:
-  - host: architect.${personal_domain}
+  - host: *host
     http:
       paths:
       - pathType: Prefix
@@ -126,10 +126,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - "takeout.${personal_domain}"
-      secretName: takeout.${personal_domain}-tls
+        - &host "takeout.${personal_domain}"
+      secretName: *host
   rules:
-  - host: takeout.${personal_domain}
+  - host: *host
     http:
       paths:
       - pathType: Prefix
@@ -154,10 +154,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - "*.${personal_domain}"
-      secretName: ${personal_domain}-tls
+        - &host "*.${personal_domain}"
+      secretName: *host
   rules:
-  - host: ${personal_domain}
+  - host: *host
     http:
       paths:
       - pathType: Prefix

@@ -14,10 +14,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - "nvr.${personal_domain}"
-      secretName: nvr.${personal_domain}-tls
+        - &host "nvr.${personal_domain}"
+      secretName: *host
   rules:
-  - host: nvr.${personal_domain}
+  - host: *host
     http:
       paths:
       - pathType: Prefix
@@ -39,10 +39,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - "nvr.${personal_domain}"
-      secretName: nvr.${personal_domain}-tls
+        - &host "nvr.${personal_domain}"
+      secretName: *host
   rules:
-  - host: nvr.${personal_domain}
+  - host: *host
     http:
       paths:
       - path: /oauth2

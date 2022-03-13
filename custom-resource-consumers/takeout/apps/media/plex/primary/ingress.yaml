@@ -13,10 +13,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - "plex.${blog_domain}"
-      secretName: plex.${blog_domain}-tls
+        - &host "plex.${blog_domain}"
+      secretName: *host
   rules:
-  - host: plex.${blog_domain}
+  - host: *host
     http:
       paths:
       - pathType: Prefix

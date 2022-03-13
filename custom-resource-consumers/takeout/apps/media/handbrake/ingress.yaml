@@ -16,10 +16,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - "transcode.${personal_domain}"
-      secretName: transcode.${personal_domain}-tls
+        - &host "transcode.${personal_domain}"
+      secretName: *host
   rules:
-  - host: transcode.${personal_domain}
+  - host: *host
     http:
       paths:
       - pathType: Prefix
@@ -41,10 +41,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - "transcode.${personal_domain}"
-      secretName: transcode.${personal_domain}-tls
+        - &host "transcode.${personal_domain}"
+      secretName: *host
   rules:
-  - host: transcode.${personal_domain}
+  - host: *host
     http:
       paths:
       - path: /oauth2

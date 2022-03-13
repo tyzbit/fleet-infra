@@ -16,10 +16,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - "se-fb.${personal_domain}"
-      secretName: se-fb.${personal_domain}-tls
+        - &host "se-fb.${personal_domain}"
+      secretName: *host
   rules:
-  - host: se-fb.${personal_domain}
+  - host: *host
     http:
       paths:
       - pathType: Prefix
@@ -41,10 +41,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - "se-fb.${personal_domain}"
-      secretName: se-fb.${personal_domain}-tls
+        - &host "se-fb.${personal_domain}"
+      secretName: *host
   rules:
-  - host: se-fb.${personal_domain}
+  - host: *host
     http:
       paths:
       - path: /oauth2

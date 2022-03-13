@@ -47,20 +47,20 @@ spec:
           external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
           external-dns.alpha.kubernetes.io/target: ${personal_domain_ddns}
         hosts:
-        - host: "3dmovies.${personal_domain}"
+        - host: &host "3dmovies.${personal_domain}"
           paths:
           - path: "/"
         tls:
         - hosts:
-          - "3dmovies.${personal_domain}"
-          secretName: 3dmovies.${personal_domain}-tls
+          - *host
+          secretName: *host
       oauth:
         enabled: true
         annotations:
           kubernetes.io/ingress.class: nginx
           cert-manager.io/cluster-issuer: letsencrypt
         hosts:
-        - host: "3dmovies.${personal_domain}"
+        - host: *host
           paths:
           - path: "/oauth2"
             service:
@@ -68,8 +68,8 @@ spec:
               port: 80
         tls:
         - hosts:
-          - "3dmovies.${personal_domain}"
-          secretName: 3dmovies.${personal_domain}-tls
+          - *host
+          secretName: *host
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease

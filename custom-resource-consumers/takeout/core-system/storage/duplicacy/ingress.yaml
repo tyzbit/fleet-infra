@@ -15,10 +15,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - "backup.${personal_domain}"
-      secretName: backup.${personal_domain}-tls
+        - &host "backup.${personal_domain}"
+      secretName: *host
   rules:
-  - host: backup.${personal_domain}
+  - host: *host
     http:
       paths:
       - pathType: Prefix
@@ -40,10 +40,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - "backup.${personal_domain}"
-      secretName: backup.${personal_domain}-tls
+        - &host "backup.${personal_domain}"
+      secretName: *host
   rules:
-  - host: backup.${personal_domain}
+  - host: *host
     http:
       paths:
       - path: /oauth2

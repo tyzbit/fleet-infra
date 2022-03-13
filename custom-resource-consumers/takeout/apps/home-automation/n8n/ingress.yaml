@@ -14,10 +14,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - "n8n.${blog_domain}"
-      secretName: n8n.${blog_domain}-tls
+        - &host "n8n.${blog_domain}"
+      secretName: *host
   rules:
-  - host: n8n.${blog_domain}
+  - host: *host
     http:
       paths:
       - pathType: Prefix
@@ -42,8 +42,8 @@ metadata:
 spec:
   tls:
     - hosts:
-        - "n8n.${blog_domain}"
-      secretName: n8n.${blog_domain}-tls
+        - &host "n8n.${blog_domain}"
+      secretName: *host
   rules:
   - host: n8n.${blog_domain}
     http:
@@ -74,10 +74,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - "n8n.${blog_domain}"
-      secretName: n8n.${blog_domain}-tls
+        - &host "n8n.${blog_domain}"
+      secretName: *host
   rules:
-  - host: n8n.${blog_domain}
+  - host: *host
     http:
       paths:
       - path: /oauth2
