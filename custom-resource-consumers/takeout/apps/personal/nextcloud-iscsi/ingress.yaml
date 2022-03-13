@@ -23,6 +23,6 @@ spec:
         path: "/"
         backend:
           service:
-            name: nextcloud
+            name: nextcloud-iscsi
             port:
               number: 80
