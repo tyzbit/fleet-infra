@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: migrate-pv-nextcloud-db
+  name: migrate-pv-nextcloud-data
   namespace: personal
 spec:
   template:
@@ -28,8 +28,8 @@ spec:
       volumes:
       - name: src
         persistentVolumeClaim:
-          claimName: nextcloud-mariadb-longhorn-database
+          claimName: nextcloud-data-nas
       - name: dst
         persistentVolumeClaim:
-          claimName: nextcloud-iscsi-mariadb-longhorn-database
+          claimName: nextcloud-iscsi-data-iscsi
   backoffLimit: 0
