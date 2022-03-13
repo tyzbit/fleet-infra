@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nextcloud-iscsi-data-iscsi
+  namespace: personal
+spec:
+  accessModes: 
+    - ReadWriteMany
+  volumeMode: Filesystem
+  storageClassName: synology-iscsi-storage
+  resources:
+    requests:
+      storage: 300Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nextcloud-iscsi-mariadb-longhorn-database
+  namespace: personal
+spec:
+  accessModes: 
+    - ReadWriteOnce
+  volumeMode: Filesystem
+  storageClassName: longhorn-database
+  resources:
+    requests:
+      storage: 10Gi

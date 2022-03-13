@@ -1,38 +1,38 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: nextcloud-db
+  name: nextcloud-iscsi-db
   namespace: personal
   annotations: {}
   labels:
-    app: nextcloud-db
+    app: nextcloud-iscsi-db
 spec:
   replicas: 0 # active longhorn-database
   selector:
     matchLabels:
-      app: nextcloud-db
-  serviceName: nextcloud-db
+      app: nextcloud-iscsi-db
+  serviceName: nextcloud-iscsi-db
   template:
     metadata:
       annotations: {}
       labels:
-        app: nextcloud-db
+        app: nextcloud-iscsi-db
     spec:
       containers:
-        - name: nextcloud-db
+        - name: nextcloud-iscsi-db
           image: mariadb:10.5
           imagePullPolicy: Always
           envFrom:
           - secretRef:
-              name: nextcloud-db
+              name: nextcloud-iscsi-db
           ports:
             - containerPort: 3306
               name: sql
               protocol: TCP
           volumeMounts:
-            - name: nextcloud-db
+            - name: nextcloud-iscsi-db
               mountPath: /var/lib/mysql
-            - name: nextcloud-extra-configs
+            - name: nextcloud-iscsi-extra-configs
               mountPath: /etc/mysql/conf.d
           resources:
             requests:
@@ -44,12 +44,12 @@ spec:
       imagePullSecrets:
         - name: docker-hub
       volumes:
-        - name: nextcloud-db
+        - name: nextcloud-iscsi-db
           persistentVolumeClaim:
-            claimName: nextcloud-mariadb-longhorn-database
-        - name: nextcloud-extra-configs
+            claimName: nextcloud-iscsi-mariadb-longhorn-database
+        - name: nextcloud-iscsi-extra-configs
           configMap:
-            name: nextcloud-db-config
+            name: nextcloud-iscsi-db-config
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -58,13 +58,13 @@ metadata:
   namespace: personal
   annotations: {}
   labels:
-    app: nextcloud-cache
+    app: nextcloud-iscsi-cache
 spec:
   replicas: 1 # active longhorn
   selector:
     matchLabels:
-      app: nextcloud-cache
-  serviceName: nextcloud-cache
+      app: nextcloud-iscsi-cache
+  serviceName: nextcloud-iscsi-cache
   template:
     metadata:
       annotations: {}
@@ -72,7 +72,7 @@ spec:
         app: nextcloud-cache
     spec:
       containers:
-        - name: nextcloud-cache
+        - name: nextcloud-iscsi-cache
           image: redis:6.2
           imagePullPolicy: Always
           ports:
@@ -80,7 +80,7 @@ spec:
               name: redis
               protocol: TCP
           volumeMounts:
-            - name: nextcloud-cache
+            - name: nextcloud-iscsi-cache
               mountPath: /data
           resources:
             requests:
@@ -92,5 +92,5 @@ spec:
       imagePullSecrets:
         - name: docker-hub
       volumes:
-        - name: nextcloud-cache
+        - name: nextcloud-iscsi-cache
           emptyDir: {}

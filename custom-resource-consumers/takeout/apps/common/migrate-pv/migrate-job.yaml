@@ -1,8 +1,8 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: migrate-pv-stash-previews
-  namespace: media
+  name: migrate-pv-nextcloud-db
+  namespace: personal
 spec:
   template:
     spec:
@@ -22,16 +22,14 @@ spec:
         - mountPath: /src_vol
           name: src
           readOnly: true
-          subPath: previews
         - mountPath: /dst_vol
           name: dst
-          subPath: previews
       restartPolicy: Never
       volumes:
       - name: src
         persistentVolumeClaim:
-          claimName: stash-temp-data-nas
+          claimName: nextcloud-mariadb-longhorn-database
       - name: dst
         persistentVolumeClaim:
-          claimName: stash-iscsi-temp-data-iscsi
+          claimName: nextcloud-iscsi-mariadb-longhorn-database
   backoffLimit: 0
