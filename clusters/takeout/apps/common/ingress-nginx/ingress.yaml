@@ -155,7 +155,7 @@ spec:
   tls:
     - hosts:
         - &host "*.${personal_domain}"
-      secretName: ${personal_domain}-tls
+      secretName: ${personal_domain}
   rules:
   - host: *host
     http:
