@@ -39,7 +39,7 @@ spec:
                 memory: 256Mi
           restartPolicy: Never
           volumes:
-            - name: nextcloud-data
+            - name: nextcloud-iscsi-data
               persistentVolumeClaim:
                 claimName: nextcloud-iscsi-data-nas
           imagePullSecrets:
