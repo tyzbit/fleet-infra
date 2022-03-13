@@ -7,7 +7,7 @@ spec:
   selector:
     matchLabels:
       app: nextcloud
-  replicas: 0 # active nas
+  replicas: 1 # active nas
   template:
     metadata:
       labels:
