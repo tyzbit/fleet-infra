@@ -19,17 +19,17 @@ spec:
         image: filebrowser/filebrowser:v2
         # commented out because alpine v 3.15 doesn't have packages built yet
         # util-linux has rename
-        command: # ["sh","-c","tail -f /dev/null"]
-        - sh
-        - -c
-        - >
-          apk add
-          mktorrent
-          unrar
-          util-linux
-          && 
-          /filebrowser -d /db/database.db
-        # command: ["/filebrowser","-d","/db/database.db"]
+        # command: # ["sh","-c","tail -f /dev/null"]
+        # - sh
+        # - -c
+        # - >
+        #   apk add
+        #   mktorrent
+        #   unrar
+        #   util-linux
+        #   && 
+        #   /filebrowser -d /db/database.db
+        command: ["/filebrowser","-d","/db/database.db"]
         env:
         - name: TZ
           value: America/New_York
