@@ -18,7 +18,7 @@ spec:
         namespace: flux-system
   values:
     image:
-      tag: v0.12.0 # {"$imagepolicy": "flux-system:stash:tag"}
+      tag: v0.13.0 # {"$imagepolicy": "flux-system:stash:tag"}
     controller:
       replicas: 1 # active longhorn-webapp nas
     nodeSelector:
@@ -51,19 +51,19 @@ spec:
       data:
         enabled: true
         existingClaim: stash-temp-data-nas
-        subPath: 
+        subPath:
         - path: media
           mountPath: /media/temp/
         - path: previews
           mountPath: /media/temp_previews/
-      # dri:
-      #   enabled: true
-      #   mountPath: /dev/dri
-      #   existingClaim: dri-pvc
+          # dri:
+          #   enabled: true
+          #   mountPath: /dev/dri
+          #   existingClaim: dri-pvc
     ingress:
       main:
         enabled: true
-        annotations: 
+        annotations:
           kubernetes.io/ingress.class: nginx
           cert-manager.io/cluster-issuer: letsencrypt
           acme.cert-manager.io/http01-edit-in-place: "false"
