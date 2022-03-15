@@ -10,6 +10,8 @@ parameters:
   dsm: 'nas'
   location: '/volume1'
   fsType: 'btrfs'
-  type: thin
+  # possible values:
+  # thin BLUN, BLUN_THICK, ADV, FILE
+  type: BLUN
 reclaimPolicy: Delete
 allowVolumeExpansion: true
