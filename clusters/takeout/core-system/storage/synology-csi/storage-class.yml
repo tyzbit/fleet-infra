@@ -11,7 +11,7 @@ parameters:
   location: '/volume1'
   fsType: 'btrfs'
   # possible values:
-  # thin BLUN, BLUN_THICK, ADV, FILE
-  type: ADV
+  # thin, BLUN, BLUN_THICK, ADV, FILE
+  type: thin
 reclaimPolicy: Delete
 allowVolumeExpansion: true
