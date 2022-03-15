@@ -18,7 +18,7 @@ spec:
         namespace: flux-system
   values:
     image:
-      tag: v0.12.0
+      tag: v0.12.0 # {"$imagepolicy": "flux-system:stash:tag"}
     controller:
       replicas: 1 # active longhorn-webapp nas
     nodeSelector:
