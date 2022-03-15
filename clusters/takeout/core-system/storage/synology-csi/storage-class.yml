@@ -12,6 +12,6 @@ parameters:
   fsType: 'btrfs'
   # possible values:
   # thin BLUN, BLUN_THICK, ADV, FILE
-  type: BLUN
+  type: ADV
 reclaimPolicy: Delete
 allowVolumeExpansion: true
