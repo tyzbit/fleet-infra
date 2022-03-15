@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: migrate-pv-nextcloud-data
+  name: migrate-pv-stash-media
   namespace: personal
 spec:
   template:
@@ -21,15 +21,17 @@ spec:
         volumeMounts:
         - mountPath: /src_vol
           name: src
+          subPath: media
           readOnly: true
         - mountPath: /dst_vol
+          subPath: media
           name: dst
       restartPolicy: Never
       volumes:
       - name: src
         persistentVolumeClaim:
-          claimName: nextcloud-data-nas
+          claimName: stash-temp-data-nas
       - name: dst
         persistentVolumeClaim:
-          claimName: nextcloud-iscsi-data-iscsi
+          claimName: stash-iscsi-temp-data-iscsi
   backoffLimit: 0
