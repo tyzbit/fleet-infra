@@ -13,11 +13,6 @@ spec:
       labels:
         app: discord-archiver
     spec:
-      # tolerations:
-      # - key: "colo"
-      #   operator: "Equal"
-      #   value: "aws"
-      #   effect: "NoSchedule"
       containers:
       - name: discord-archiver
         image: docker.io/tyzbit/discord-archiver:1.7.0 # {"$imagepolicy": "flux-system:discord-archiver"}
@@ -34,7 +29,5 @@ spec:
       - name: discord-archiver-config
         secret:
           secretName: discord-archiver-config
-      # nodeSelector:
-      #   colo: aws
       imagePullSecrets:
       - name: docker-hub

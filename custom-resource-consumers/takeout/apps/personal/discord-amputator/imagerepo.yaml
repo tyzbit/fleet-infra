@@ -1,6 +1,17 @@
 apiVersion: image.toolkit.fluxcd.io/v1alpha1
 kind: ImageRepository
 metadata:
+  name: go-discord-amputator
+  namespace: flux-system
+spec:
+  secretRef:
+    name: docker-hub
+  image: docker.io/tyzbit/go-discord-amputator
+  interval: 2m0s
+---
+apiVersion: image.toolkit.fluxcd.io/v1alpha1
+kind: ImageRepository
+metadata:
   name: discord-amputator
   namespace: flux-system
 spec:

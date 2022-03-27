@@ -1,41 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: discord-amputator
+  name: go-discord-amputator
   namespace: personal
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: discord-amputator
+      app: go-discord-amputator
   template:
     metadata:
       labels:
-        app: discord-amputator
-        colo: aws
+        app: go-discord-amputator
     spec:
-      # tolerations:
-      # - key: "colo"
-      #   operator: "Equal"
-      #   value: "aws"
-      #   effect: "NoSchedule"
       containers:
       - name: discord-amputator
-        image: docker.io/tyzbit/discord-amputator:2.2.1 # {"$imagepolicy": "flux-system:discord-amputator"}
-        volumeMounts:
-        - name: discord-amputator-config
-          subPath: config.json
-          mountPath: /config.json
+        image: docker.io/tyzbit/go-discord-amputator:0.1.0 # {"$imagepolicy": "flux-system:go-discord-amputator"}
+        envFrom:
+          - secretRef:
+              name: go-discord-amputator
         resources:
           requests:
             cpu: "50m"
           limits:
             memory: "128Mi"
-      volumes:
-      - name: discord-amputator-config
-        secret:
-          secretName: discord-amputator-config
-      # nodeSelector:
-      #   colo: aws
       imagePullSecrets:
       - name: docker-hub
