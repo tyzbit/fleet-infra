@@ -14,7 +14,7 @@ spec:
         app: go-discord-amputator
     spec:
       containers:
-      - name: discord-amputator
+      - name: go-discord-amputator
         image: docker.io/tyzbit/go-discord-amputator:0.2.1 # {"$imagepolicy": "flux-system:go-discord-amputator"}
         envFrom:
         - secretRef:
@@ -23,6 +23,6 @@ spec:
           requests:
             cpu: "50m"
           limits:
-            memory: "128Mi"
+            memory: "16Mi"
       imagePullSecrets:
       - name: docker-hub
