@@ -15,10 +15,10 @@ spec:
     spec:
       containers:
       - name: discord-amputator
-        image: docker.io/tyzbit/go-discord-amputator:0.1.0 # {"$imagepolicy": "flux-system:go-discord-amputator"}
+        image: docker.io/tyzbit/go-discord-amputator:0.2.0 # {"$imagepolicy": "flux-system:go-discord-amputator"}
         envFrom:
-          - secretRef:
-              name: go-discord-amputator
+        - secretRef:
+            name: go-discord-amputator
         resources:
           requests:
             cpu: "50m"
