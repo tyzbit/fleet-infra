@@ -1,7 +1,7 @@
 apiVersion: image.toolkit.fluxcd.io/v1alpha1
 kind: ImagePolicy
 metadata:
-  name: discord-amputator
+  name: go-discord-amputator
   namespace: flux-system
 spec:
   imageRepositoryRef:
