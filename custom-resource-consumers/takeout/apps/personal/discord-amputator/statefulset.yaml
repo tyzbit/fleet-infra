@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: go-discord-amputator-db
+  namespace: personal
+  annotations: {}
+  labels:
+    app: go-discord-amputator-db
+spec:
+  replicas: 1 # active longhorn-database
+  selector:
+    matchLabels:
+      app: go-discord-amputator-db
+  serviceName: go-discord-amputator-db
+  template:
+    metadata:
+      annotations: {}
+      labels:
+        app: go-discord-amputator-db
+    spec:
+      containers:
+        - name: go-discord-amputator-db
+          image: mariadb:10.5
+          imagePullPolicy: Always
+          envFrom:
+          - secretRef:
+              name: go-discord-amputator-db
+          ports:
+            - containerPort: 3306
+              name: sql
+              protocol: TCP
+          volumeMounts:
+            - name: go-discord-amputator-db
+              mountPath: /var/lib/mysql
+          resources:
+            requests:
+              cpu: 10m
+            limits:
+              memory: 128Mi
+      nodeSelector:
+        longhorn: primary
+      imagePullSecrets:
+        - name: docker-hub
+      volumes:
+        - name: go-discord-amputator-db
+          persistentVolumeClaim:
+            claimName: go-discord-amputator-mariadb-longhorn-database
