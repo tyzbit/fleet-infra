@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: go-discord-amputator
-        image: docker.io/tyzbit/go-discord-amputator:1.1.0 # {"$imagepolicy": "flux-system:go-discord-amputator"}
+        image: docker.io/tyzbit/go-discord-amputator:1.1.1 # {"$imagepolicy": "flux-system:go-discord-amputator"}
         envFrom:
         - secretRef:
             name: go-discord-amputator
