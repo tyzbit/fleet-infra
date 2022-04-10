@@ -27,14 +27,34 @@ spec:
               value: subdirectory
           ports:
             - containerPort: 80
+              name: grav-http
+              protocol: TCP
           volumeMounts:
             - mountPath: "/var/www/grav"
+              subPath: data
               name: grav-${tech_name}-data-nas
           resources:
             requests:
               cpu: 100m
             limits:
               memory: 256Mi
+        - name: filebrowser
+          image: filebrowser/filebrowser:v2
+          args: ["-p","8000","-d","/db/database.db"]
+          ports:
+          - containerPort: 8000
+            name: fb-http
+            protocol: TCP
+          env:
+          - name: TZ
+            value: America/New_York
+          volumeMounts:
+          - name: grav-${tech_name}-data-nas
+            subPath: filebrowser
+            mountPath: /db
+          - name: grav-${tech_name}-data-nas
+            subPath: data
+            mountPath: /srv/server-data
       volumes:
         - name: grav-${tech_name}-data-nas
           persistentVolumeClaim:

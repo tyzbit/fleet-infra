@@ -14,6 +14,7 @@ spec:
   tls:
     - hosts:
         - &host "${tech_domain}"
+        - "*.${tech_domain}"
       secretName: *host
   rules:
   - host: *host
@@ -26,3 +27,13 @@ spec:
             name: grav-${tech_name}
             port:
               number: 80
+  - host: "edit.${tech_domain}"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: grav-${tech_name}
+            port:
+              number: 8000
