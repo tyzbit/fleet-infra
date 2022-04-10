@@ -26,6 +26,16 @@ spec:
             name: grav-${family_name}
             port:
               number: 80
+  - host: "tyler.${family_domain}"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: grav-${family_name}
+            port:
+              number: 80
   - host: "edit.${family_domain}"
     http:
       paths:
