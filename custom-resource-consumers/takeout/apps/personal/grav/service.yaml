@@ -5,7 +5,6 @@ metadata:
   namespace: personal
 spec:
   type: ClusterIP
-  externalTrafficPolicy: Local
   selector:
     app: grav-${tech_name}
   ports:
