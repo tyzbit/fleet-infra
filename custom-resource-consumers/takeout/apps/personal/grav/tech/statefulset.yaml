@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: grav-${tech_name}
-          image: dsavell/grav
+          image: dsavell/grav:admin
           imagePullPolicy: Always
           # command: ["tail","-f","/dev/null"]
           env:
