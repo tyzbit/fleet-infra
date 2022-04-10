@@ -26,6 +26,8 @@ spec:
         external-dns.alpha.kubernetes.io/target: ${tech_domain_ddns}
       hosts:
       - &host "${tech_domain}"
+      paths:
+      - /
       tls:
       - hosts:
         - *host
