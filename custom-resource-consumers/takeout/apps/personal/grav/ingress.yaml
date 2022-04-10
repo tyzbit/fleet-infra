@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: grav-${tech_domain}
+  name: grav-${tech_name}
   namespace: personal
   annotations:
     kubernetes.io/ingress.class: nginx

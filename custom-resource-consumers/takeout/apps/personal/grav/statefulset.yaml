@@ -1,24 +1,24 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: grav-${tech_domain}
+  name: grav-${tech_name}
   namespace: personal
   labels:
-    app: grav-${tech_domain}
+    app: grav-${tech_name}
 spec:
   replicas: 1 # active nas
   selector:
     matchLabels:
-      app: grav-${tech_domain}
-  serviceName: grav-${tech_domain}
+      app: grav-${tech_name}
+  serviceName: grav-${tech_name}
   template:
     metadata:
       annotations: {}
       labels:
-        app: grav-${tech_domain}
+        app: grav-${tech_name}
     spec:
       containers:
-        - name: grav-${tech_domain}
+        - name: grav-${tech_name}
           image: dsavell/grav
           imagePullPolicy: Always
           # command: ["tail","-f","/dev/null"]
@@ -29,15 +29,15 @@ spec:
             - containerPort: 80
           volumeMounts:
             - mountPath: "/var/www/grav"
-              name: grav-${tech_domain}-data-nas
+              name: grav-${tech_name}-data-nas
           resources:
             requests:
               cpu: 100m
             limits:
               memory: 256Mi
       volumes:
-        - name: grav-${tech_domain}-data-nas
+        - name: grav-${tech_name}-data-nas
           persistentVolumeClaim:
-            claimName: grav-${tech_domain}-data-nas
+            claimName: grav-${tech_name}-data-nas
       imagePullSecrets:
         - name: docker-hub
