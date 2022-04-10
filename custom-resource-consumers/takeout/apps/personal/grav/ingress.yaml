@@ -23,6 +23,6 @@ spec:
         path: "/"
         backend:
           service:
-            name: grav-${tech_domain}
+            name: grav-${tech_name}
             port:
               number: 80
