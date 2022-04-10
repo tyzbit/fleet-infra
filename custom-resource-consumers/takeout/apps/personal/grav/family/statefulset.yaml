@@ -21,6 +21,7 @@ spec:
         fsGroup: 911
       containers:
         - name: grav-${family_name}
+          # image: dsavell/grav:admin
           image: tyzbit/grav:admin
           imagePullPolicy: Always
           # command: ["tail","-f","/dev/null"]
