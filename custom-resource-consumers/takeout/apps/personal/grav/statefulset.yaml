@@ -30,8 +30,14 @@ spec:
               name: grav-http
               protocol: TCP
           volumeMounts:
-            - mountPath: "/var/www/grav"
-              subPath: data
+            - mountPath: "/var/www/grav/backup"
+              subPath: backup
+              name: grav-${tech_name}-data-nas
+            - mountPath: "/var/www/grav/logs"
+              subPath: logs
+              name: grav-${tech_name}-data-nas
+            - mountPath: "/var/www/grav/user"
+              subPath: user
               name: grav-${tech_name}-data-nas
           resources:
             requests:
@@ -53,8 +59,14 @@ spec:
             subPath: filebrowser
             mountPath: /db
           - name: grav-${tech_name}-data-nas
-            subPath: data
-            mountPath: /srv/server-data
+            subPath: user
+            mountPath: /srv/user
+          - name: grav-${tech_name}-data-nas
+            subPath: backup
+            mountPath: /srv/backup
+          - name: grav-${tech_name}-data-nas
+            subPath: logs
+            mountPath: /srv/logs
       volumes:
         - name: grav-${tech_name}-data-nas
           persistentVolumeClaim:
