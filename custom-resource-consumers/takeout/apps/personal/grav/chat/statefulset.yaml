@@ -19,12 +19,12 @@ spec:
     spec:
       containers:
         - name: grav-${chat_name}
-          image: dsavell/grav:admin
+          image: tyzbit/grav:admin
           imagePullPolicy: Always
           # command: ["tail","-f","/dev/null"]
-          env:
-            - name: GRAV_MULTISITE
-              value: subdirectory
+          # env:
+          #   - name: GRAV_MULTISITE
+          #     value: subdirectory
           ports:
             - containerPort: 80
               name: grav-http
