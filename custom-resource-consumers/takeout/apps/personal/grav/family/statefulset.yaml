@@ -17,6 +17,8 @@ spec:
       labels:
         app: grav-${family_name}
     spec:
+      securityContext:
+        fsGroup: 911
       containers:
         - name: grav-${family_name}
           image: tyzbit/grav:admin
