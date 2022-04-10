@@ -24,7 +24,7 @@ spec:
           # command: ["tail","-f","/dev/null"]
           env:
             - name: GRAV_MULTISITE
-              value: subdirectory
+              value: subdomain
           ports:
             - containerPort: 80
               name: grav-http
