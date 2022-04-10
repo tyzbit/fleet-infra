@@ -1,0 +1,10 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: GitRepository
+metadata:
+  name: grav
+  namespace: flux-system
+spec:
+  interval: 2m0s
+  ref:
+    branch: master
+  url: https://github.com/getmedia-digital/grav-helm-charts.git
