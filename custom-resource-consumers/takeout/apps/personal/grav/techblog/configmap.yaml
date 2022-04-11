@@ -4,4 +4,4 @@ metadata:
   name: 
 data:
   99-custom.ini: |
-    upload_max_filesize = 10M
+    upload_max_filesize = 256M
