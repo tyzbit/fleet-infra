@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: grav-${tech_blog_name}-data-nas
+  namespace: personal
+spec:
+  resources:
+    requests:
+      storage: 1Gi
+  volumeMode: Filesystem
+  storageClassName: nas
+  accessModes:
+    - ReadWriteMany
