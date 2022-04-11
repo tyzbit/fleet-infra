@@ -40,6 +40,9 @@ spec:
             - mountPath: "/var/www/grav/user"
               subPath: user
               name: grav-${tech_blog_name}-data-nas
+            - mountPath: /etc/php/7.4/fpm/conf.d/99-custom.ini
+              subPath: 99-custom.ini
+              name: custom-ini
           resources:
             requests:
               cpu: 100m
@@ -72,5 +75,8 @@ spec:
         - name: grav-${tech_blog_name}-data-nas
           persistentVolumeClaim:
             claimName: grav-${tech_blog_name}-data-nas
+        - name: custom-ini
+          configMap:
+            name: grav-${tech_blog_name}-custom-ini
       imagePullSecrets:
         - name: docker-hub
