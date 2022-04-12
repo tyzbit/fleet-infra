@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grav-${anime_blog_2_name}-custom-ini
+  namespace: personal
+data:
+  99-custom.ini: |
+    upload_max_filesize = 256M
