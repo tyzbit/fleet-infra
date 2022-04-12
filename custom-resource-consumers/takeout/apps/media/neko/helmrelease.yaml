@@ -8,13 +8,15 @@ spec:
   chart:
     spec:
       chart: neko
-      version: "0.2.0"
+      version: "0.3.0"
       sourceRef:
         kind: HelmRepository
         name: tyzbit
         namespace: flux-system
   interval: 2m0s
   values:
+    deploymentAnnotations:
+      reloader.stakater.com/auto: "true"
     service:
       annotations:
         metallb.universe.tf/allow-shared-ip: media-neko
