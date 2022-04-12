@@ -5,6 +5,8 @@ metadata:
   namespace: personal
   labels:
     app: grav-${family_name}
+  annotations:
+    reloader.stakater.com/auto: "true"
 spec:
   replicas: 1 # active nas
   selector:
