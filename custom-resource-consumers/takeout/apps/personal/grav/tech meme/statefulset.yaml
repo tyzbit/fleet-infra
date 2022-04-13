@@ -28,6 +28,8 @@ spec:
           env:
             - name: GRAV_MULTISITE
               value: subdirectory
+            - name: NGINX_CLIENT_MAX_BODY_SIZE
+              value: 256m
           ports:
             - containerPort: 80
               name: grav-http
