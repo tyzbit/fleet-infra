@@ -11,3 +11,17 @@ spec:
   storageClassName: nas
   accessModes:
     - ReadWriteMany
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: grav-${anime_blog_name}-data-longhorn-webapp
+  namespace: personal
+spec:
+  resources:
+    requests:
+      storage: 40Gi
+  volumeMode: Filesystem
+  storageClassName: longhorn-webapp
+  accessModes:
+    - ReadWriteOnce
