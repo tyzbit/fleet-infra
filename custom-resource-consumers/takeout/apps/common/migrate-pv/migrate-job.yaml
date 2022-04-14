@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: migrate-pv-plex
+  name: migrate-pv-grav-anime-backup
   namespace: personal
 spec:
   backoffLimit: 0
@@ -22,13 +22,13 @@ spec:
         volumeMounts:
         - mountPath: /src_vol
           name: src
-          subPath: user
-          # subPath: backup
+          # subPath: user
+          subPath: backup
           # subPath: logs
           readOnly: true
         - mountPath: /dst_vol
-          subPath: user
-          # subPath: backup
+          # subPath: user
+          subPath: backup
           # subPath: logs
           name: dst
       restartPolicy: Never
