@@ -8,7 +8,7 @@ metadata:
   annotations:
     reloader.stakater.com/auto: "true"
 spec:
-  replicas: 0 # active longhorn-webapp
+  replicas: 1 # active longhorn-webapp
   selector:
     matchLabels:
       app: grav-${anime_blog_name}
