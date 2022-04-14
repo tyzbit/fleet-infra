@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: migrate-pv-grav-anime-logs
+  name: migrate-pv-grav-anime-filebrowser
   namespace: personal
 spec:
   backoffLimit: 0
@@ -24,12 +24,14 @@ spec:
           name: src
           # subPath: user
           # subPath: backup
-          subPath: logs
+          # subPath: logs
+          subPath: filebrowser
           readOnly: true
         - mountPath: /dst_vol
           # subPath: user
           # subPath: backup
-          subPath: logs
+          # subPath: logs
+          subPath: filebrowser
           name: dst
       restartPolicy: Never
       volumes:
