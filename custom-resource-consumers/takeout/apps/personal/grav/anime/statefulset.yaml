@@ -51,7 +51,7 @@ spec:
             requests:
               cpu: 100m
             limits:
-              memory: 256Mi
+              memory: 2Gi
         - name: filebrowser
           image: filebrowser/filebrowser:v2
           args: ["-p","8000","-d","/db/database.db"]
