@@ -13,7 +13,9 @@ metadata:
 spec:
   tls:
     - hosts:
+        - "${resume_domain}"
         - &host "grav.${resume_domain}"
+        - "edit.${resume_domain}"
       secretName: *host
   rules:
   - host: *host
