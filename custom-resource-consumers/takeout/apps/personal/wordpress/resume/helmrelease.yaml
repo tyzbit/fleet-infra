@@ -98,7 +98,7 @@ spec:
         nginx.ingress.kubernetes.io/proxy-body-size: 256m
         external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
         external-dns.alpha.kubernetes.io/target: ${blog_domain_ddns}
-      hostname: "${resume_domain}"
+      hostname: "wp.${resume_domain}"
       tls: true
     service:
       type: NodePort
