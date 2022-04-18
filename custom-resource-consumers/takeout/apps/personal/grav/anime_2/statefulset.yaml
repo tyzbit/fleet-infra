@@ -8,7 +8,7 @@ metadata:
   annotations:
     reloader.stakater.com/auto: "true"
 spec:
-  replicas: 1 # active nas
+  replicas: 0 # active nas
   selector:
     matchLabels:
       app: grav-${anime_blog_2_name}
