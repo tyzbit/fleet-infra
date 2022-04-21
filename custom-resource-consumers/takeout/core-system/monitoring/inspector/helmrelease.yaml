@@ -4,6 +4,7 @@ metadata:
   name: inspector
   namespace: flux-system
 spec:
+  targetNamespace: monitoring
   chart:
     spec:
       chart: inspector
