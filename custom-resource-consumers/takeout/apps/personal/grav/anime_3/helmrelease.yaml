@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: grav
-      version: "0.4.1"
+      version: "0.5.0"
       sourceRef:
         kind: HelmRepository
         name: tyzbit
@@ -20,10 +20,11 @@ spec:
       image:
         pullPolicy: Always
         tag: admin
-      # config:
+      config:
       #   DUID: "1000"
       #   DGID: "1000"
       #   GRAV_MULTISITE: subdirectory
+        NGINX_CLIENT_MAX_BODY_SIZE: 256m
     filebrowser:
       enabled: true
       image:
@@ -31,6 +32,10 @@ spec:
     persistence:
       enabled: true
       existingClaimName: grav-${anime_blog_3_name}-data-nas
+    deploymentAnnotations:
+      reloader.stakater.com/auto: "true"
+    statefulSetAnnotations:
+      reloader.stakater.com/auto: "true"
     imagePullSecrets:
       - name: docker-hub
     ingress:
