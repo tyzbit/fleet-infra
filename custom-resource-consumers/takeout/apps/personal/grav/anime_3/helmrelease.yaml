@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: grav
-      version: "0.4.0"
+      version: "0.4.1"
       sourceRef:
         kind: HelmRepository
         name: tyzbit
@@ -18,6 +18,7 @@ spec:
     fullnameOverride: grav-${anime_blog_3_name}
     grav:
       image:
+        pullPolicy: Always
         tag: admin
       # config:
       #   DUID: "1000"
@@ -25,8 +26,8 @@ spec:
       #   GRAV_MULTISITE: subdirectory
     filebrowser:
       enabled: true
-      probes:
-        enabled: false
+      image:
+        pullPolicy: Always
     persistence:
       enabled: true
       existingClaimName: grav-${anime_blog_3_name}-data-nas
