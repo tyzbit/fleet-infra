@@ -4,7 +4,7 @@ metadata:
   name: grav-${anime_blog_3_name}
   namespace: flux-system
 spec:
-  targetNamespace: media
+  targetNamespace: personal
   chart:
     spec:
       chart: grav
