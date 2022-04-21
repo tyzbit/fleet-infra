@@ -37,7 +37,7 @@ spec:
               - key: app.kubernetes.io/instance
                 operator: In
                 values:
-                - grav-${anime_blog_name}
+                - personal-grav-${anime_blog_name}
             topologyKey: kubernetes.io/hostname
     persistence:
       enabled: true
