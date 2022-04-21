@@ -15,7 +15,6 @@ spec:
         namespace: flux-system
   interval: 2m0s
   values:
-    fullnameOverride: ${anime_blog_3_name}
     grav:
       image:
         tag: admin
