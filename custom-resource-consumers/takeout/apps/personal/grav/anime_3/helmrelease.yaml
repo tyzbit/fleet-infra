@@ -21,6 +21,8 @@ spec:
         tag: admin
     filebrowser:
       enabled: true
+      probes:
+        enabled: false
     persistence:
       enabled: true
       storageClass: nas
