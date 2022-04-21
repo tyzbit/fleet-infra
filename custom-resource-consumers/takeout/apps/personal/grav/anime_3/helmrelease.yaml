@@ -32,9 +32,7 @@ spec:
     persistence:
       enabled: true
       existingClaimName: grav-${anime_blog_3_name}-data-nas
-    deploymentAnnotations:
-      reloader.stakater.com/auto: "true"
-    statefulSetAnnotations:
+    podAnnotations:
       reloader.stakater.com/auto: "true"
     imagePullSecrets:
       - name: docker-hub
