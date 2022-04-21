@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: grav
-      version: "0.3.5"
+      version: "0.4.0"
       sourceRef:
         kind: HelmRepository
         name: tyzbit
@@ -19,7 +19,10 @@ spec:
     grav:
       image:
         tag: admin
-      # multisite: subdirectory
+      # config:
+      #   DUID: "1000"
+      #   DGID: "1000"
+      #   GRAV_MULTISITE: subdirectory
     filebrowser:
       enabled: true
       probes:
