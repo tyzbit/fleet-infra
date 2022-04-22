@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: go-discord-amputator-db
+  name: go-discord-archiver-db
   namespace: personal
 spec:
   type: NodePort
   selector:
-    app: go-discord-amputator-db
+    app: go-discord-archiver-db
   ports:
     - name: tcp-mariadb
       protocol: TCP

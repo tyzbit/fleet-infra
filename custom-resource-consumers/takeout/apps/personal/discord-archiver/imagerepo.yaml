@@ -1,10 +1,10 @@
 apiVersion: image.toolkit.fluxcd.io/v1alpha1
 kind: ImageRepository
 metadata:
-  name: go-discord-amputator
+  name: go-discord-archiver
   namespace: flux-system
 spec:
   secretRef:
     name: docker-hub
-  image: docker.io/tyzbit/go-discord-amputator
+  image: docker.io/tyzbit/go-discord-archiver
   interval: 2m0s

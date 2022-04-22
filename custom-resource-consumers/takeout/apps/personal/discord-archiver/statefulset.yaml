@@ -1,36 +1,36 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: go-discord-amputator-db
+  name: go-discord-archiver-db
   namespace: personal
   annotations: {}
   labels:
-    app: go-discord-amputator-db
+    app: go-discord-archiver-db
 spec:
   replicas: 1 # active longhorn-database
   selector:
     matchLabels:
-      app: go-discord-amputator-db
-  serviceName: go-discord-amputator-db
+      app: go-discord-archiver-db
+  serviceName: go-discord-archiver-db
   template:
     metadata:
       annotations: {}
       labels:
-        app: go-discord-amputator-db
+        app: go-discord-archiver-db
     spec:
       containers:
-        - name: go-discord-amputator-db
+        - name: go-discord-archiver-db
           image: mariadb:10.5
           imagePullPolicy: Always
           envFrom:
           - secretRef:
-              name: go-discord-amputator-db
+              name: go-discord-archiver-db
           ports:
             - containerPort: 3306
               name: sql
               protocol: TCP
           volumeMounts:
-            - name: go-discord-amputator-db
+            - name: go-discord-archiver-db
               mountPath: /var/lib/mysql
           resources:
             requests:
@@ -42,6 +42,6 @@ spec:
       imagePullSecrets:
         - name: docker-hub
       volumes:
-        - name: go-discord-amputator-db
+        - name: go-discord-archiver-db
           persistentVolumeClaim:
-            claimName: go-discord-amputator-mariadb-longhorn-database
+            claimName: go-discord-archiver-mariadb-longhorn-database

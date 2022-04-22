@@ -1,11 +1,11 @@
 apiVersion: image.toolkit.fluxcd.io/v1alpha1
 kind: ImagePolicy
 metadata:
-  name: go-discord-amputator
+  name: go-discord-archiver
   namespace: flux-system
 spec:
   imageRepositoryRef:
-    name: go-discord-amputator
+    name: go-discord-archiver
   policy:
     semver:
       range: ">= 0.0.0"

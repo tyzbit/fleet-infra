@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: go-discord-amputator
+  name: go-discord-archiver
   namespace: personal
   annotations:
     reloader.stakater.com/auto: "true"
@@ -9,18 +9,18 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: go-discord-amputator
+      app: go-discord-archiver
   template:
     metadata:
       labels:
-        app: go-discord-amputator
+        app: go-discord-archiver
     spec:
       containers:
-      - name: go-discord-amputator
-        image: docker.io/tyzbit/go-discord-amputator:1.2.4 # {"$imagepolicy": "flux-system:go-discord-amputator"}
+      - name: go-discord-archiver
+        image: docker.io/tyzbit/go-discord-archiver:1.2.4 # {"$imagepolicy": "flux-system:go-discord-archiver"}
         envFrom:
         - secretRef:
-            name: go-discord-amputator
+            name: go-discord-archiver
         resources:
           requests:
             cpu: "50m"
