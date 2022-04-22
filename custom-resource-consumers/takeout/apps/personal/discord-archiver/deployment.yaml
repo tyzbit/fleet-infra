@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: go-discord-archiver
-        image: docker.io/tyzbit/go-discord-archiver:0.1.0 # {"$imagepolicy": "flux-system:go-discord-archiver"}
+        image: docker.io/tyzbit/go-discord-archiver:0.1.1 # {"$imagepolicy": "flux-system:go-discord-archiver"}
         envFrom:
         - secretRef:
             name: go-discord-archiver
