@@ -44,3 +44,6 @@ spec:
       - secretName: movienight.${hotboxfort_domain}-tls
         hosts:
           - movienight.${hotboxfort_domain}
+    resources:
+      requests:
+        cpu: 2500m
