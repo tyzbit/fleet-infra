@@ -102,6 +102,7 @@ spec:
       tls: true
     service:
       type: NodePort
+      externalTrafficPolicy: Local
     persistence:
       existingClaim: wordpress-${blog_name}-nas
     # run a container to fix volume permissions at the start
