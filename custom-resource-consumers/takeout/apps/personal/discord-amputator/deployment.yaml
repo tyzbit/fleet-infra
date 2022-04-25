@@ -21,6 +21,19 @@ spec:
         envFrom:
         - secretRef:
             name: go-discord-amputator
+        livenessProbe: &probe
+          failureThreshold: 3
+          periodSeconds: 2
+          successThreshold: 1
+          timeoutSeconds: 5
+          httpGet:
+            port: 8080
+            path: /healthcheck
+        readinessProbe: 
+          <<: *probe
+        startupProbe:
+          <<: *probe
+          failureThreshold: 15
         resources:
           requests:
             cpu: "50m"
