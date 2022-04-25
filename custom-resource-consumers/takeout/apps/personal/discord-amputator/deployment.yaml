@@ -29,11 +29,12 @@ spec:
           httpGet:
             port: 8080
             path: /healthcheck
-        readinessProbe: 
+        readinessProbe:
           <<: *probe
         startupProbe:
           <<: *probe
           failureThreshold: 15
+          initialDelaySeconds: 5 
         resources:
           requests:
             cpu: "50m"
