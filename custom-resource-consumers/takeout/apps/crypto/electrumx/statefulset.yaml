@@ -7,7 +7,7 @@ metadata:
   labels:
     app: electrumx
 spec:
-  replicas: 0 # active longhorn-crypto
+  replicas: 1 # active longhorn-crypto
   selector:
     matchLabels:
       app: electrumx
