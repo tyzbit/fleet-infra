@@ -1,0 +1,10 @@
+apiVersion: image.toolkit.fluxcd.io/v1alpha1
+kind: ImageRepository
+metadata:
+  name: bitcoin-address-notifier
+  namespace: flux-system
+spec:
+  secretRef:
+    name: docker-hub
+  image: docker.io/tyzbit/bitcoin-address-notifier
+  interval: 2m0s
