@@ -2,7 +2,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: bitcoin-address-notifier-data-longhorn-database
-  namespace: personal
+  namespace: crypto
 spec:
   accessModes: 
     - ReadWriteOnce
