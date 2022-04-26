@@ -19,29 +19,29 @@ spec:
         app: btc-balance-notifier
     spec:
       containers:
+      - name: btc-balance-notifier
+        image: docker.io/tyzbit/bitcoin-balance-notifier:0.1.0 # {"$imagepolicy": "flux-system:bitcoin-balance-notifier"}
+        imagePullPolicy: Always
+        env:
+        - name: INTERVAL
+          value: "3600"
+        envFrom:
         - name: btc-balance-notifier
-          image: tyzbit/bitcoin-balance-notifier:latest # {"$imagepolicy": "flux-system:bitcoin-balance-notifier"}
-          imagePullPolicy: Always
-          env:
-            - name: INTERVAL
-              value: "3600"
-          envFrom:
-            - name: btc-balance-notifier
-              secretRef:
-                name: btc-balance-notifier
-          volumeMounts:
-            - name: bitcoin-balance-notifier-data-longhorn-database
-              mountPath: /db
-          resources:
-            requests:
-              cpu: 50m
-              memory: 64Mi
-            limits:
-              cpu: 50m
-              memory: 64Mi
-      volumes:
+          secretRef:
+            name: btc-balance-notifier
+        volumeMounts:
         - name: bitcoin-balance-notifier-data-longhorn-database
-          persistentVolumeClaim:
-            claimName: bitcoin-balance-notifier-data-longhorn-database
+          mountPath: /db
+        resources:
+          requests:
+            cpu: 50m
+            memory: 64Mi
+          limits:
+            cpu: 50m
+            memory: 64Mi
+      volumes:
+      - name: bitcoin-balance-notifier-data-longhorn-database
+        persistentVolumeClaim:
+          claimName: bitcoin-balance-notifier-data-longhorn-database
       imagePullSecrets:
-        - name: docker-hub
+      - name: docker-hub
