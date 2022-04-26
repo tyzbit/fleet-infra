@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: bitcoin-address-notifier-data-longhorn-database
+  name: bitcoin-balance-notifier-data-longhorn-database
   namespace: crypto
 spec:
   accessModes: 

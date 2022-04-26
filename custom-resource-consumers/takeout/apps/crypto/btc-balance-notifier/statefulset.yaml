@@ -1,36 +1,36 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: btc-address-notifier
+  name: btc-balance-notifier
   namespace: crypto
   annotations:
     reloader.stakater.com/auto: "true"
   labels:
-    app: btc-address-notifier
+    app: btc-balance-notifier
 spec:
   replicas: 1
-  serviceName: btc-address-notifier
+  serviceName: btc-balance-notifier
   selector:
     matchLabels:
-      app: btc-address-notifier
+      app: btc-balance-notifier
   template:
     metadata:
       labels:
-        app: btc-address-notifier
+        app: btc-balance-notifier
     spec:
       containers:
-        - name: btc-address-notifier
-          image: tyzbit/bitcoin-address-notifier:latest # {"$imagepolicy": "flux-system:bitcoin-address-notifier"}
+        - name: btc-balance-notifier
+          image: tyzbit/bitcoin-balance-notifier:latest # {"$imagepolicy": "flux-system:bitcoin-balance-notifier"}
           imagePullPolicy: Always
           env:
             - name: INTERVAL
               value: "3600"
           envFrom:
-            - name: btc-address-notifier
+            - name: btc-balance-notifier
               secretRef:
-                name: btc-address-notifier
+                name: btc-balance-notifier
           volumeMounts:
-            - name: bitcoin-address-notifier-data-longhorn-database
+            - name: bitcoin-balance-notifier-data-longhorn-database
               mountPath: /db
           resources:
             requests:
@@ -40,8 +40,8 @@ spec:
               cpu: 50m
               memory: 64Mi
       volumes:
-        - name: bitcoin-address-notifier-data-longhorn-database
+        - name: bitcoin-balance-notifier-data-longhorn-database
           persistentVolumeClaim:
-            claimName: bitcoin-address-notifier-data-longhorn-database
+            claimName: bitcoin-balance-notifier-data-longhorn-database
       imagePullSecrets:
         - name: docker-hub
