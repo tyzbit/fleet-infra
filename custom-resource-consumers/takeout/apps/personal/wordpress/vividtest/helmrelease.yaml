@@ -68,7 +68,7 @@ spec:
   values:
     replicaCount: 1 # active longhorn-database nas
     image:
-      tag: "5.9.1" # {"$imagepolicy": "flux-system:wordpress-vivid:tag"}
+      tag: "5.9.3" # {"$imagepolicy": "flux-system:wordpress-vivid:tag"}
       pullPolicy: Always
       pullSecrets:
       - name: docker-hub
