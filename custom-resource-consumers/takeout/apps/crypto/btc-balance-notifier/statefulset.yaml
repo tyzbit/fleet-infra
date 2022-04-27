@@ -23,7 +23,11 @@ spec:
         image: docker.io/tyzbit/bitcoin-balance-notifier:0.1.0 # {"$imagepolicy": "flux-system:bitcoin-balance-notifier"}
         imagePullPolicy: Always
         env:
-        - name: INTERVAL
+        - name: LOOKAHEAD
+          value: "20"
+        - name: PAGE_SIZE
+          value: "100"
+        - name: SLEEP_INTERVAL
           value: "3600"
         envFrom:
         - name: btc-balance-notifier
