@@ -85,6 +85,8 @@ spec:
     smtpProtocol: tls
     livenessProbe:
       enabled: false
+    readinessProbe:
+      enabled: false
     resources:
       requests:
         cpu: 300m
