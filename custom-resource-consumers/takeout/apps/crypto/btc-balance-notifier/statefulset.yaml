@@ -38,10 +38,10 @@ spec:
           mountPath: /db
         resources:
           requests:
-            cpu: 50m
+            cpu: 200m
             memory: 64Mi
           limits:
-            cpu: 50m
+            cpu: 200m
             memory: 64Mi
       volumes:
       - name: bitcoin-balance-notifier-data-longhorn-database
