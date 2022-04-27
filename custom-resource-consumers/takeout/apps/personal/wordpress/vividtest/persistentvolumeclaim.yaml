@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: wordpress-${blog_name}-nas
+  name: wordpress-vivid-nas
   namespace: personal
 spec:
   resources:
@@ -15,7 +15,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: wordpress-${blog_name}-mariadb-longhorn-database
+  name: wordpress-vivid-mariadb-longhorn-database
   namespace: personal
 spec:
   resources:
