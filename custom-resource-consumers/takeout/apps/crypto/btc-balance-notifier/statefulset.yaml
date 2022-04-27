@@ -24,7 +24,7 @@ spec:
         imagePullPolicy: Always
         env:
         - name: LOOKAHEAD
-          value: "20"
+          value: "40"
         - name: PAGE_SIZE
           value: "100"
         - name: SLEEP_INTERVAL
