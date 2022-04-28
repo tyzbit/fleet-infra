@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: btc-balance-notifier
-        image: docker.io/tyzbit/bitcoin-balance-notifier:0.3.1 # {"$imagepolicy": "flux-system:bitcoin-balance-notifier"}
+        image: docker.io/tyzbit/bitcoin-balance-notifier:0.3.2 # {"$imagepolicy": "flux-system:bitcoin-balance-notifier"}
         imagePullPolicy: Always
         env:
         - name: LOOKAHEAD
