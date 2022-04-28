@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: go-discord-archiver
-        image: docker.io/tyzbit/go-discord-archiver:0.2.0 # {"$imagepolicy": "flux-system:go-discord-archiver"}
+        image: docker.io/tyzbit/go-discord-archiver:0.3.0 # {"$imagepolicy": "flux-system:go-discord-archiver"}
         envFrom:
         - secretRef:
             name: go-discord-archiver
@@ -30,11 +30,11 @@ spec:
             port: 8080
             path: /healthcheck
         readinessProbe:
-          <<: *probe
+          !!merge <<: *probe
         startupProbe:
-          <<: *probe
+          !!merge <<: *probe
           failureThreshold: 15
-          initialDelaySeconds: 5 
+          initialDelaySeconds: 5
         resources:
           requests:
             cpu: "50m"
