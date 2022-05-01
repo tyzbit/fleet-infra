@@ -1,0 +1,26 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: bitcoin-balance-notifier-oauth2-proxy
+  namespace: media
+spec:
+  targetNamespace: media
+  releaseName: bitcoin-balance-notifier-oauth2-proxy
+  chart:
+    spec:
+      chart: oauth2-proxy
+      version: "6.0.1"
+      sourceRef:
+        kind: HelmRepository
+        name: oauth2-proxy
+        namespace: flux-system
+  interval: 2m0s
+  values:
+    replicaCount: 1
+    extraArgs:
+      provider: github
+      github-org: "${blog_name}"
+      github-team: "super-admins,bitcoin-balance-notifier"
+      cookie-expire: 168h0m0s
+    config:
+      existingSecret: bitcoin-balance-notifier-oauth2-proxy
