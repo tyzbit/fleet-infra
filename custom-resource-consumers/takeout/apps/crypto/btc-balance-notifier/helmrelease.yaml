@@ -2,9 +2,9 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: bitcoin-balance-notifier-oauth2-proxy
-  namespace: personal
+  namespace: crypto
 spec:
-  targetNamespace: personal
+  targetNamespace: crypto
   releaseName: bitcoin-balance-notifier-oauth2-proxy
   chart:
     spec:
