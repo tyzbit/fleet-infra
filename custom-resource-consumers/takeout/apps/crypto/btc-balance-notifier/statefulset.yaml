@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: btc-balance-notifier
-        image: docker.io/tyzbit/bitcoin-balance-notifier:0.4.0 # {"$imagepolicy": "flux-system:bitcoin-balance-notifier"}
+        image: docker.io/tyzbit/bitcoin-balance-notifier:0.5.0 # {"$imagepolicy": "flux-system:bitcoin-balance-notifier"}
         # image: docker.io/tyzbit/bitcoin-balance-notifier:latest
         imagePullPolicy: Always
         env:
@@ -35,7 +35,7 @@ spec:
           secretRef:
             name: btc-balance-notifier
         ports:
-          - containerPort: 80
+        - containerPort: 80
         volumeMounts:
         - name: bitcoin-balance-notifier-data-longhorn-database
           mountPath: /db
