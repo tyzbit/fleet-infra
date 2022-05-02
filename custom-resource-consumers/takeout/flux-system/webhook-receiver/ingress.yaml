@@ -23,8 +23,8 @@ spec:
     - host: *host
       http:
         paths:
-          - pathType: Prefix
-            path: /webhook
+          - pathType: ImplementationSpecific
+            path: /
             backend:
               service:
                 name: webhook-receiver
