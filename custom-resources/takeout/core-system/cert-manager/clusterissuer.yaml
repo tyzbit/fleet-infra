@@ -10,12 +10,15 @@ spec:
     privateKeySecretRef:
       name: letsencrypt
     solvers:
-    - http01:
-        ingress:
-          class: nginx
-    - dns01:
-        cloudflare:
-          email: ${personal_email}
-          apiKeySecretRef:
-            name: cloudflare-global-apikey
-            key: apikey
+      - http01:
+          ingress:
+            class: nginx
+      - dns01:
+          cloudflare:
+            email: ${personal_email}
+            apiKeySecretRef:
+              name: cloudflare-global-apikey
+              key: apikey
+        selector:
+          matchLabels:
+            "use-cloudflare-dns-solver": "true"
