@@ -10,6 +10,8 @@ metadata:
     external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
     external-dns.alpha.kubernetes.io/target: ${personal_domain_ddns}
     nginx.ingress.kubernetes.io/limit-rpm: "60"
+  labels:
+    use-cloudflare-dns-solver: "true"
 spec:
   tls:
     - hosts:
