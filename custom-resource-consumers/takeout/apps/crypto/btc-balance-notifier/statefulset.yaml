@@ -19,36 +19,38 @@ spec:
         app: btc-balance-notifier
     spec:
       containers:
-      - name: btc-balance-notifier
-        image: docker.io/tyzbit/bitcoin-balance-notifier:0.7.0 # {"$imagepolicy": "flux-system:bitcoin-balance-notifier"}
-        # image: docker.io/tyzbit/bitcoin-balance-notifier:latest
-        imagePullPolicy: Always
-        env:
-        - name: LOOKAHEAD
-          value: "40"
-        - name: PAGE_SIZE
-          value: "1000"
-        - name: SLEEP_INTERVAL
-          value: "3600"
-        envFrom:
         - name: btc-balance-notifier
-          secretRef:
-            name: btc-balance-notifier
-        ports:
-        - containerPort: 80
-        volumeMounts:
-        - name: bitcoin-balance-notifier-data-longhorn-database
-          mountPath: /db
-        resources:
-          requests:
-            cpu: 200m
-            memory: 64Mi
-          limits:
-            cpu: 200m
-            memory: 64Mi
+          image: docker.io/tyzbit/bitcoin-balance-notifier:0.7.0 # {"$imagepolicy": "flux-system:bitcoin-balance-notifier"}
+          # image: docker.io/tyzbit/bitcoin-balance-notifier:latest
+          imagePullPolicy: Always
+          env:
+            - name: LOOKAHEAD
+              value: "40"
+            - name: PAGE_SIZE
+              value: "1000"
+            - name: SLEEP_INTERVAL
+              value: "3600"
+            - name: CHECK_ALL_PUBKEY_TYPES
+              value: "true"
+          envFrom:
+            - name: btc-balance-notifier
+              secretRef:
+                name: btc-balance-notifier
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: bitcoin-balance-notifier-data-longhorn-database
+              mountPath: /db
+          resources:
+            requests:
+              cpu: 200m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 64Mi
       volumes:
-      - name: bitcoin-balance-notifier-data-longhorn-database
-        persistentVolumeClaim:
-          claimName: bitcoin-balance-notifier-data-longhorn-database
+        - name: bitcoin-balance-notifier-data-longhorn-database
+          persistentVolumeClaim:
+            claimName: bitcoin-balance-notifier-data-longhorn-database
       imagePullSecrets:
-      - name: docker-hub
+        - name: docker-hub
