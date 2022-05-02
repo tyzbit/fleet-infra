@@ -11,6 +11,8 @@ metadata:
     external-dns.alpha.kubernetes.io/target: ${personal_domain_ddns}
     nginx.ingress.kubernetes.io/limit-rpm: "60"
   labels:
+    # This is necessary due to the flux Network Policy blocking any pods
+    # that aren't notification-controller
     use-cloudflare-dns-solver: "true"
 spec:
   tls:
