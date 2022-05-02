@@ -24,7 +24,7 @@ spec:
       http:
         paths:
           - pathType: Prefix
-            path: "/"
+            path: /webhook
             backend:
               service:
                 name: webhook-receiver
