@@ -76,7 +76,7 @@ spec:
         jobs: true
         nodes: true
         pods: true
-        
+
         persistentvolumeclaims: false
         persistentvolumes: false
         volumeattachments: false
@@ -108,7 +108,7 @@ spec:
           - description: "Exclude all but kasa metrics"
             ignore_metrics:
               - except:
-                - kasa_
+                  - kasa_
     logging:
       enabled: true
       image:
@@ -177,7 +177,7 @@ spec:
             [FILTER]
                 Name     grep
                 Match    *
-                Exclude  $kubernetes['container_name'] /(kube\\-events|calico\\-node|oauth2\\-proxy|kube\\-apiserver|mosquitto)/
+                Exclude  $kubernetes['container_name'] /(kube\\-events|calico\\-node|oauth2\\-proxy|kube\\-apiserver|mosquitto|longhorn\\-manager)/
 
             # Filter unwanted namespaces
             [FILTER]
