@@ -1,9 +1,0 @@
-apiVersion: snapshot.storage.k8s.io/v1
-kind: VolumeSnapshot
-metadata:
-  name: stash-iscsi-temp-data-iscsi-1
-  namespace: media
-spec:
-  volumeSnapshotClassName: synology-snapshotclass
-  source:
-    persistentVolumeClaimName: stash-iscsi-temp-data-iscsi
