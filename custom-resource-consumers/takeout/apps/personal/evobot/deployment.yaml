@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: evobot
+  namespace: personal
+  annotations:
+    reloader.stakater.com/auto: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: evobot
+  template:
+    metadata:
+      labels:
+        app: evobot
+    spec:
+      containers:
+        - name: evobot
+          image: eritislami/evobot:1.2.2
+          envFrom:
+            - secretRef:
+                name: evobot
+          resources:
+            requests:
+              cpu: "50m"
+            limits:
+              memory: "256Mi"
+      imagePullSecrets:
+        - name: docker-hub
