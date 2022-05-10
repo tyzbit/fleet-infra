@@ -16,29 +16,29 @@ spec:
         app: go-discord-archiver
     spec:
       containers:
-        - name: go-discord-archiver
-          image: docker.io/tyzbit/go-discord-archiver:0.4.0 # {"$imagepolicy": "flux-system:go-discord-archiver"}
-          envFrom:
-            - secretRef:
-                name: go-discord-archiver
-          livenessProbe: &probe
-            failureThreshold: 3
-            periodSeconds: 2
-            successThreshold: 1
-            timeoutSeconds: 5
-            httpGet:
-              port: 8080
-              path: /healthcheck
-          readinessProbe:
-            <<: *probe
-          startupProbe:
-            <<: *probe
-            failureThreshold: 15
-            initialDelaySeconds: 5
-          resources:
-            requests:
-              cpu: "50m"
-            limits:
-              memory: "256Mi"
+      - name: go-discord-archiver
+        image: docker.io/tyzbit/go-discord-archiver:0.4.1 # {"$imagepolicy": "flux-system:go-discord-archiver"}
+        envFrom:
+        - secretRef:
+            name: go-discord-archiver
+        livenessProbe: &probe
+          failureThreshold: 3
+          periodSeconds: 2
+          successThreshold: 1
+          timeoutSeconds: 5
+          httpGet:
+            port: 8080
+            path: /healthcheck
+        readinessProbe:
+          !!merge <<: *probe
+        startupProbe:
+          !!merge <<: *probe
+          failureThreshold: 15
+          initialDelaySeconds: 5
+        resources:
+          requests:
+            cpu: "50m"
+          limits:
+            memory: "256Mi"
       imagePullSecrets:
-        - name: docker-hub
+      - name: docker-hub
