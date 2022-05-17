@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: plex
-          image: plexinc/pms-docker:1.26.0.5715-8cf78dab3
+          image: plexinc/pms-docker:1.26.1.5798-99a4a6ac9
           imagePullPolicy: Always
           # command: ["tail","-f","/dev/null"]
           envFrom:
@@ -56,7 +56,8 @@ spec:
           persistentVolumeClaim:
             claimName: dri-pvc
         - name: transcode
-          emptyDir: {}
+          emptyDir:
+            {}
             # medium: Memory
       nodeSelector:
         graphics: dri
