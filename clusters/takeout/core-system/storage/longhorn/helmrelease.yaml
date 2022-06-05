@@ -20,6 +20,7 @@ spec:
       defaultReplicaCount: 3
       backupTarget: s3://${longhorn_backup_bucket}@us-east-1/
       backupTargetCredentialSecret: longhorn-takeout-backups
+      backupstorePollInterval: 0
       createDefaultDiskLabeledNodes: true
       storageOverProvisioningPercentage: 100
       storageMinimalAvailablePercentage: 10
