@@ -9,6 +9,7 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt
     acme.cert-manager.io/http01-edit-in-place: "false"
     external-dns.alpha.kubernetes.io/exclude: "true"
+  labels:
     use-cloudflare-dns-solver: "true"
 spec:
   defaultBackend:
@@ -152,6 +153,7 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt
     acme.cert-manager.io/http01-edit-in-place: "false"
     external-dns.alpha.kubernetes.io/exclude: "true"
+  labels:
     use-cloudflare-dns-solver: "true"
 spec:
   tls:
