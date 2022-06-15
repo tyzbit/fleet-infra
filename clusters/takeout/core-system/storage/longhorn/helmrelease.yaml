@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: longhorn
-      version: "1.2.4"
+      version: "1.3.0"
       sourceRef:
         kind: HelmRepository
         name: longhorn
@@ -29,6 +29,7 @@ spec:
       defaultDataPath: /mnt/external/longhorn
       concurrentAutomaticEngineUpgradePerNodeLimit: 3
       defaultLonghornStaticStorageClass: longhorn
+      nodeDownPodDeletionPolicy: delete-both-statefulset-and-deployment-pod
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
