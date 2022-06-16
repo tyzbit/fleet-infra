@@ -184,6 +184,13 @@ spec:
                 Name     grep
                 Match    *
                 Exclude  $kubernetes['namespace_name'] /(metallb\\-system)/
+
+            # Filter etcd status checks
+            [FILTER]
+                Name     grep
+                Match    kube.*
+                Exclude  log /debug/
+                Exclude  $kubernetes['namespace_name'] /(longhorn\\-system)/
     webhook:
       enabled: false
     # newrelic-pixie:
