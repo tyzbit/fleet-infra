@@ -189,7 +189,7 @@ spec:
             [FILTER]
                 Name     grep
                 Match    *
-                Exclude  $kubernetes['container_name'] /(kube\\-events|calico\\-node|oauth2\\-proxy|kube\\-apiserver|mosquitto|longhorn\\-manager)/
+                Exclude  $kubernetes['container_name'] /(kube\\-events|calico\\-node|oauth2\\-proxy|kube\\-apiserver|mosquitto|event\\-exporter)/
 
             # Filter unwanted namespaces
             [FILTER]
