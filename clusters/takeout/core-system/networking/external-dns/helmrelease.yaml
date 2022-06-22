@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: ./charts/external-dns
-      version: "v0.10.2" # Set in the referenced GitRepository
+      version: "v0.12.0" # Set in the referenced GitRepository
       sourceRef:
         kind: GitRepository
         name: external-dns
@@ -20,9 +20,9 @@ spec:
     triggerLoopOnEvent: true
     txtOwnerId: "takeout-automatic"
     sources:
-    - ingress
-    extraArgs: 
-    - --annotation-filter=external-dns.alpha.kubernetes.io/exclude notin (true)
+      - ingress
+    extraArgs:
+      - --annotation-filter=external-dns.alpha.kubernetes.io/exclude notin (true)
     env:
       - name: CF_API_KEY
         valueFrom:
@@ -31,4 +31,3 @@ spec:
             name: cloudflare-global-apikey
       - name: CF_API_EMAIL
         value: "tyzbit@gmail.com"
-    
