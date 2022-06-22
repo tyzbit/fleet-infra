@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: grav
-      version: "0.6.2"
+      version: "0.7.0"
       sourceRef:
         kind: HelmRepository
         name: tyzbit
@@ -21,9 +21,9 @@ spec:
         pullPolicy: Always
         tag: admin
       config:
-      #   DUID: "1000"
-      #   DGID: "1000"
-      #   GRAV_MULTISITE: subdirectory
+        #   DUID: "1000"
+        #   DGID: "1000"
+        #   GRAV_MULTISITE: subdirectory
         NGINX_CLIENT_MAX_BODY_SIZE: 256m
     filebrowser:
       enabled: true
@@ -47,12 +47,15 @@ spec:
         external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
         external-dns.alpha.kubernetes.io/target: ${anime_blog_2_domain_ddns}
         nginx.ingress.kubernetes.io/proxy-body-size: 256m
+      labels:
+        use-cloudflare-dns-solver: "true"
       hosts:
         - host: ${anime_blog_2_domain}
           paths:
             - path: /
               pathType: ImplementationSpecific
       tls:
-       - secretName: ${anime_blog_2_domain}-tls
-         hosts:
-           - ${anime_blog_2_domain}
+        - secretName: ${anime_blog_2_domain}-tls
+          hosts:
+            - ${anime_blog_2_domain}
+            - "*.${anime_blog_2_domain}"
