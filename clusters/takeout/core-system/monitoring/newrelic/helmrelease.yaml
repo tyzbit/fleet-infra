@@ -173,6 +173,12 @@ spec:
                 Match    kube.*
                 Exclude  log /etcdserver\\/api\\/etcdhttp: \\/health OK \\(status code 200\\)/
 
+            # Filter longhorn instance manager debug
+            [FILTER]
+                Name     grep
+                Match    kube.*
+                Exclude  log /longhorn\\-instance\\-manager.*debug/
+
             # Filter unwanted containers
             [FILTER]
                 Name     grep
