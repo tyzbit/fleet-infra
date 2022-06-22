@@ -137,6 +137,12 @@ spec:
                 Match    kube.*
                 Exclude  log GET \\- \\"/ping\\"
 
+            # Filter kube-probe
+            [FILTER]
+                Name     grep
+                Match    kube.*
+                Exclude  log kube\\-probe
+
             # Filter nzbget/ingress jsonrpc hits
             [FILTER]
                 Name     grep
