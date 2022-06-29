@@ -1,0 +1,72 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: vrising-primary
+  namespace: games
+spec:
+  selector:
+    matchLabels:
+      app: vrising-primary
+  serviceName: vrising-primary
+  replicas: 1 # active longhorn-gameserver
+  template:
+    metadata:
+      labels:
+        app: vrising-primary
+    spec:
+      containers:
+        - name: vrising-primary
+          image: trueosiris/vrising:1.9
+          # command: ["tail","-f","/dev/null"]
+          env:
+            - name: TZ
+              value: America/New_York
+            - name: SERVERNAME
+              value: Quick, Think of Something Witty
+          ports:
+            - containerPort: 9876
+              name: game1
+              protocol: UDP
+            - containerPort: 9877
+              name: game2
+              protocol: UDP
+          volumeMounts:
+            - name: vrising-primary-data
+              subPath: data
+              mountPath: /mnt/vrising/server
+            - name: vrising-primary-data
+              subPath: persistentdata
+              mountPath: /mnt/vrising/persistentdata
+          resources:
+            limits:
+              memory: 6Gi # was 16Gi
+            requests:
+              cpu: 250m
+          securityContext:
+            fsGroup: 1000
+        - name: filebrowser
+          image: filebrowser/filebrowser:v2
+          args: ["-d", "/db/database.db"]
+          ports:
+            - containerPort: 80
+              name: fb-http
+              protocol: TCP
+          env:
+            - name: TZ
+              value: America/New_York
+          volumeMounts:
+            - name: vrising-primary-data
+              subPath: filebrowser
+              mountPath: /db
+            - name: vrising-primary-data
+              subPath: data
+              mountPath: /srv/server
+            - name: vrising-primary-data
+              subPath: persistentdata
+              mountPath: /srv/persistentdata
+      imagePullSecrets:
+        - name: docker-hub
+      volumes:
+        - name: vrising-primary-data
+          persistentVolumeClaim:
+            claimName: vrising-primary-data-longhorn-gameserver

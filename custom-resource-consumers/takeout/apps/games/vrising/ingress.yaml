@@ -1,0 +1,56 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: vrising-primary-filebrowser
+  namespace: games
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt
+    acme.cert-manager.io/http01-edit-in-place: "false"
+    external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+    nginx.ingress.kubernetes.io/auth-url: "http://vrising-primary-fb-oauth2-proxy.games.svc.cluster.local/oauth2/auth"
+    nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
+    external-dns.alpha.kubernetes.io/target: ${personal_domain_ddns}
+spec:
+  tls:
+    - hosts:
+        - &host "vrising-fb.${personal_domain}"
+      secretName: *host
+  rules:
+    - host: *host
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: vrising-primary-filebrowser
+                port:
+                  number: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: vrising-primary-filebrowser-oauth2-proxy
+  namespace: games
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  tls:
+    - hosts:
+        - &host "vrising-fb.${personal_domain}"
+      secretName: *host
+  rules:
+    - host: *host
+      http:
+        paths:
+          - path: /oauth2
+            pathType: Prefix
+            backend:
+              service:
+                name: vrising-primary-fb-oauth2-proxy
+                port:
+                  number: 80
