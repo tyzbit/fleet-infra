@@ -8,7 +8,7 @@ spec:
     matchLabels:
       app: space-engineers
   serviceName: space-engineers
-  replicas: 1 # active longhorn-gameserver
+  replicas: 0 # inactive longhorn-gameserver
   template:
     metadata:
       labels:
@@ -21,17 +21,17 @@ spec:
             - bash
             - -c
             - >-
-                if [ ! -f /appdata/space-engineers/World/Sandbox.sbc ]; then
-                  apt-get update &&
-                  apt-get install curl unzip -y &&
-                  cd /tmp &&
-                  curl -LO https://github.com/mmmaxwwwell/space-engineers-dedicated-docker-linux/raw/main/star-system.zip &&
-                  unzip star-system.zip &&
-                  mv World /appdata/space-engineers/ &&
-                  mv /appdata/space-engineers/Sandbox_config.sbc /appdata/space-engineers/Sandbox_config.sbc.old;
-                fi; 
-                chmod 777 -R /appdata/space-engineers/ &&
-                chmod 777 -R /home/wine/.steam/
+              if [ ! -f /appdata/space-engineers/World/Sandbox.sbc ]; then
+                apt-get update &&
+                apt-get install curl unzip -y &&
+                cd /tmp &&
+                curl -LO https://github.com/mmmaxwwwell/space-engineers-dedicated-docker-linux/raw/main/star-system.zip &&
+                unzip star-system.zip &&
+                mv World /appdata/space-engineers/ &&
+                mv /appdata/space-engineers/Sandbox_config.sbc /appdata/space-engineers/Sandbox_config.sbc.old;
+              fi; 
+              chmod 777 -R /appdata/space-engineers/ &&
+              chmod 777 -R /home/wine/.steam/
           volumeMounts:
             - name: space-engineers-data
               subPath: data
@@ -40,50 +40,50 @@ spec:
               subPath: steam
               mountPath: /home/wine/.steam
       containers:
-      - name: space-engineers
-        image: mmmaxwwwell/space-engineers-dedicated-docker-linux:latest
-        # command: ["tail","-f","/dev/null"]
-        ports:
-        - containerPort: 27016
-          name: game-data
-          protocol: UDP
-        volumeMounts:
-        # - mountPath: "/dev/dri"
-        #   name: dri
-        - name: space-engineers-server-config
-          mountPath: /appdata/space-engineers/SpaceEngineersDedicated/SpaceEngineers-Dedicated.cfg
-          subPath: SpaceEngineers-Dedicated.cfg
-        - name: space-engineers-data
-          subPath: data
-          mountPath: /appdata/space-engineers
-        - name: space-engineers-data
-          subPath: steam
-          mountPath: /home/wine/.steam
-        resources:
-          limits:
-            memory: 6Gi
-          requests:
-            cpu: 500m
-      - name: filebrowser
-        image: filebrowser/filebrowser:v2
-        args: ["-d","/db/database.db"]
-        ports:
-        - containerPort: 80
-          name: fb-http
-          protocol: TCP
-        env:
-        - name: TZ
-          value: America/New_York
-        volumeMounts:
-        - name: space-engineers-data
-          subPath: filebrowser
-          mountPath: /db
-        - name: space-engineers-data
-          subPath: data
-          mountPath: /srv/space-engineers-data
-        - name: space-engineers-data
-          subPath: steam
-          mountPath: /srv/space-engineers-steam
+        - name: space-engineers
+          image: mmmaxwwwell/space-engineers-dedicated-docker-linux:latest
+          # command: ["tail","-f","/dev/null"]
+          ports:
+            - containerPort: 27016
+              name: game-data
+              protocol: UDP
+          volumeMounts:
+            # - mountPath: "/dev/dri"
+            #   name: dri
+            - name: space-engineers-server-config
+              mountPath: /appdata/space-engineers/SpaceEngineersDedicated/SpaceEngineers-Dedicated.cfg
+              subPath: SpaceEngineers-Dedicated.cfg
+            - name: space-engineers-data
+              subPath: data
+              mountPath: /appdata/space-engineers
+            - name: space-engineers-data
+              subPath: steam
+              mountPath: /home/wine/.steam
+          resources:
+            limits:
+              memory: 6Gi
+            requests:
+              cpu: 500m
+        - name: filebrowser
+          image: filebrowser/filebrowser:v2
+          args: ["-d", "/db/database.db"]
+          ports:
+            - containerPort: 80
+              name: fb-http
+              protocol: TCP
+          env:
+            - name: TZ
+              value: America/New_York
+          volumeMounts:
+            - name: space-engineers-data
+              subPath: filebrowser
+              mountPath: /db
+            - name: space-engineers-data
+              subPath: data
+              mountPath: /srv/space-engineers-data
+            - name: space-engineers-data
+              subPath: steam
+              mountPath: /srv/space-engineers-steam
       # nodeSelector:
       #   graphics: dri
       imagePullSecrets:
@@ -94,7 +94,7 @@ spec:
             claimName: dri-pvc
         - name: space-engineers-files-config
           configMap:
-              name: space-engineers-files-config
+            name: space-engineers-files-config
         - name: space-engineers-server-config
           secret:
             secretName: space-engineers-server-config
