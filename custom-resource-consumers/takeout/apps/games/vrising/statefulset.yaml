@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: vrising-primary
-          image: trueosiris/vrising:1.9
+          image: trueosiris/vrising:latest
           # command: ["tail","-f","/dev/null"]
           env:
             - name: TZ
