@@ -23,4 +23,4 @@ spec:
       github-team: "super-admins,vrising-primary"
       cookie-expire: 168h0m0s
     config:
-      existingSecret: oauth2-proxy-pz-fb
+      existingSecret: oauth2-proxy-vrising-fb
