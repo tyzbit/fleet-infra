@@ -10,7 +10,7 @@ metadata:
     external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
     nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
     nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
-    nginx.ingress.kubernetes.io/auth-url: "http://vrising-primary-fb-oauth2-proxy.games.svc.cluster.local/oauth2/auth"
+    nginx.ingress.kubernetes.io/auth-url: "http://vrising-fb-oauth2-proxy.games.svc.cluster.local/oauth2/auth"
     nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
     external-dns.alpha.kubernetes.io/target: ${personal_domain_ddns}
 spec:
