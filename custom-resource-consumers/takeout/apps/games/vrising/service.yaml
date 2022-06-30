@@ -10,7 +10,7 @@ spec:
   loadBalancerIP: 192.168.1.61
   externalTrafficPolicy: Local
   selector:
-    app: project-zomboid
+    app: vrising-primary
   ports:
     - port: 9876
       protocol: UDP
