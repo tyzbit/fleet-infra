@@ -21,8 +21,10 @@ spec:
           env:
             - name: TZ
               value: America/New_York
-            - name: SERVERNAME
-              value: Quick, Think of Something Witty
+            - name: UID
+              value: "1000"
+            - name: GID
+              value: "1000"
           ports:
             - containerPort: 9876
               name: game1
