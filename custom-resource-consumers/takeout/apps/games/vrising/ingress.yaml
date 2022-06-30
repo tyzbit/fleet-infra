@@ -53,6 +53,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: vrising-primary-fb-oauth2-proxy
+                name: vrising-fb-oauth2-proxy
                 port:
                   number: 80
