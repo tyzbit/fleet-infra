@@ -19,17 +19,16 @@ spec:
       containers:
         - name: valheim-server
           image: lloesche/valheim-server
-          command: ["sh", "-c", "tail -f /dev/null"]
-          # command:
-          #   - sh
-          #   - -c
-          #   - >-
-          #     apt update
-          #     &&
-          #     apt install -y
-          #     git
-          #     &
-          #     /usr/local/sbin/bootstrap
+          command:
+            - sh
+            - -c
+            - >-
+              apt update
+              &&
+              apt install -y
+              git
+              &
+              /usr/local/sbin/bootstrap
           envFrom:
             - name: valheim-config
               configMapRef:
