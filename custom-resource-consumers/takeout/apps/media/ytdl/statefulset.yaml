@@ -57,7 +57,7 @@ spec:
             limits:
               memory: 2Gi
           livenessProbe:
-            initialDelaySeconds: 60
+            initialDelaySeconds: 180
             httpGet:
               port: http-youtube-dl
       volumes:
