@@ -8,7 +8,7 @@ spec:
     matchLabels:
       app: vrising-primary
   serviceName: vrising-primary
-  replicas: 1 # active longhorn-gameserver
+  replicas: 0 # active longhorn-gameserver
   template:
     metadata:
       labels:

@@ -10,7 +10,7 @@ spec:
     matchLabels:
       app: valheim-server
   serviceName: valheim-server
-  replicas: 0 # inactive longhorn
+  replicas: 1 # inactive longhorn
   template:
     metadata:
       labels:
@@ -19,16 +19,17 @@ spec:
       containers:
         - name: valheim-server
           image: lloesche/valheim-server
-          command:
-            - sh
-            - -c
-            - >-
-              apt update
-              &&
-              apt install -y
-              git
-              &
-              /usr/local/sbin/bootstrap
+          command: ["sh", "-c", "tail -f /dev/null"]
+          # command:
+          #   - sh
+          #   - -c
+          #   - >-
+          #     apt update
+          #     &&
+          #     apt install -y
+          #     git
+          #     &
+          #     /usr/local/sbin/bootstrap
           envFrom:
             - name: valheim-config
               configMapRef:
