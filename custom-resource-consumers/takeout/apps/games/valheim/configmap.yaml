@@ -5,7 +5,7 @@ metadata:
   namespace: games
 data:
   SERVER_NAME: ${blog_name}
-  WORLD_NAME: CommunismWorks
+  WORLD_NAME: OdinForebodin
   SERVER_PUBLIC: "true"
 
   STATUS_HTTP: "false"
