@@ -13,7 +13,7 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-body-size: "40g"
     nginx.ingress.kubernetes.io/auth-url: "http://btc-balance-notifier-oauth2-proxy.crypto.svc.cluster.local/oauth2/auth"
     nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
-    external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
+    external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
     external-dns.alpha.kubernetes.io/target: ${personal_domain_ddns}
 spec:
   tls:
@@ -21,16 +21,16 @@ spec:
         - &host "balance.${personal_domain}"
       secretName: *host
   rules:
-  - host: *host
-    http:
-      paths:
-      - pathType: Prefix
-        path: "/"
-        backend:
-          service:
-            name: btc-balance-notifier
-            port:
-              number: 80
+    - host: *host
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: btc-balance-notifier
+                port:
+                  number: 80
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -46,13 +46,13 @@ spec:
         - &host "balance.${personal_domain}"
       secretName: *host
   rules:
-  - host: *host
-    http:
-      paths:
-      - path: /oauth2
-        pathType: Prefix
-        backend:
-          service:
-            name: btc-balance-notifier-oauth2-proxy
-            port:
-              number: 80
+    - host: *host
+      http:
+        paths:
+          - path: /oauth2
+            pathType: Prefix
+            backend:
+              service:
+                name: btc-balance-notifier-oauth2-proxy
+                port:
+                  number: 80
