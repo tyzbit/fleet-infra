@@ -12,16 +12,16 @@ spec:
   accessModes:
     - ReadWriteMany
 ---
-# apiVersion: v1
-# kind: PersistentVolumeClaim
-# metadata:
-#   name: home-assistant-mariadb-longhorn-database
-#   namespace: home-automation
-# spec:
-#   resources:
-#     requests:
-#       storage: 20Gi
-#   volumeMode: Filesystem
-#   storageClassName: longhorn-database
-#   accessModes:
-#     - ReadWriteOnce
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: home-assistant-mariadb-longhorn-database
+  namespace: home-automation
+spec:
+  resources:
+    requests:
+      storage: 20Gi
+  volumeMode: Filesystem
+  storageClassName: longhorn-database
+  accessModes:
+    - ReadWriteOnce
