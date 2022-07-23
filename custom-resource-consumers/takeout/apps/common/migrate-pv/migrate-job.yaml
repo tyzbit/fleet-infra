@@ -1,8 +1,8 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: migrate-pv-sonarr
-  namespace: media
+  name: migrate-pv-ha
+  namespace: home-automation
 spec:
   backoffLimit: 0
   template:
@@ -36,7 +36,7 @@ spec:
       volumes:
         - name: src
           persistentVolumeClaim:
-            claimName: sonarr-config-longhorn-webapp-old
+            claimName: home-assistant-mariadb-longhorn-database-old
         - name: dst
           persistentVolumeClaim:
-            claimName: sonarr-config-longhorn-webapp
+            claimName: home-assistant-mariadb-longhorn-database
