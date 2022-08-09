@@ -17,6 +17,10 @@ spec:
         name: k8s-at-home
         namespace: flux-system
   values:
+    image:
+      repository: haveagitgat/tdarr
+      tag: 2.00.18.2
+      pullPolicy: IfNotPresent
     controller:
       replicas: 1 # active longhorn-webapp nas
     nodeSelector:
@@ -52,6 +56,7 @@ spec:
     persistence:
       config:
         enabled: true
+        mountPath: /app/server
         existingClaim: tdarr-config-longhorn-webapp
       # nzb-downloads:
       #   enabled: true
