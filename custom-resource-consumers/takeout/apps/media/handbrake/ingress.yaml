@@ -16,19 +16,19 @@ metadata:
 spec:
   tls:
     - hosts:
-        - &host "transcode.${personal_domain}"
+        - &host "handbrake.${personal_domain}"
       secretName: *host
   rules:
-  - host: *host
-    http:
-      paths:
-      - pathType: Prefix
-        path: "/"
-        backend:
-          service:
-            name: handbrake
-            port:
-              number: 5800
+    - host: *host
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: handbrake
+                port:
+                  number: 5800
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -41,16 +41,16 @@ metadata:
 spec:
   tls:
     - hosts:
-        - &host "transcode.${personal_domain}"
+        - &host "handbrake.${personal_domain}"
       secretName: *host
   rules:
-  - host: *host
-    http:
-      paths:
-      - path: /oauth2
-        pathType: Prefix
-        backend:
-          service:
-            name: handbrake-oauth2-proxy
-            port:
-              number: 80
+    - host: *host
+      http:
+        paths:
+          - path: /oauth2
+            pathType: Prefix
+            backend:
+              service:
+                name: handbrake-oauth2-proxy
+                port:
+                  number: 80
