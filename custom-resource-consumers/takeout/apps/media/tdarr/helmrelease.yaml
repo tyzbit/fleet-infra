@@ -64,6 +64,10 @@ spec:
       media:
         enabled: true
         existingClaim: nas-volume1-media
+      dri:
+        enabled: true
+        mountPath: /dev/dri
+        existingClaim: dri-pv-media
     ingress:
       main:
         enabled: true
