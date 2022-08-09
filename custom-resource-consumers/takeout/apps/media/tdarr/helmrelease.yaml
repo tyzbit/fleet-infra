@@ -67,7 +67,7 @@ spec:
       dri:
         enabled: true
         mountPath: /dev/dri
-        existingClaim: dri-pv-media
+        existingClaim: dri-pvc
     ingress:
       main:
         enabled: true
