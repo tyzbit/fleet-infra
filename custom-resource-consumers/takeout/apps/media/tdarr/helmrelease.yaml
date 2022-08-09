@@ -25,6 +25,16 @@ spec:
       TZ: America/New_York
     podSecurityContext:
       fsGroup: 568
+      supplementalGroups:
+        - 44
+        - 109
+    node:
+      enabled: true
+      id: node
+      image:
+        repository: haveagitgat/tdarr_node
+        tag: 2.00.18.2
+        pullPolicy: IfNotPresent
     # initContainers:
     #   fixperms:
     #     name: fixperms
