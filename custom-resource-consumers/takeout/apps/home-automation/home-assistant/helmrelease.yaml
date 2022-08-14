@@ -32,7 +32,7 @@ spec:
   values:
     image:
       pullPolicy: Always
-      tag: "2022.5.2"
+      tag: "2022.8.4"
 
     controller:
       replicas: 1 # active longhorn-database nas
