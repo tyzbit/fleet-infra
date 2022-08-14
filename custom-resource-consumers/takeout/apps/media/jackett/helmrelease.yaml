@@ -29,7 +29,7 @@ spec:
     ingress:
       main:
         enabled: true
-        annotations: 
+        annotations:
           kubernetes.io/ingress.class: nginx
           cert-manager.io/cluster-issuer: letsencrypt
           acme.cert-manager.io/http01-edit-in-place: "false"
@@ -38,29 +38,29 @@ spec:
           external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
           external-dns.alpha.kubernetes.io/target: ${personal_domain_ddns}
         hosts:
-        - host: &host "jackett.${personal_domain}"
-          paths:
-          - path: "/"
+          - host: &host "jackett.${personal_domain}"
+            paths:
+              - path: "/"
         tls:
-        - hosts:
-          - *host
-          secretName: *host
+          - hosts:
+              - *host
+            secretName: *host
       oauth:
         enabled: true
         annotations:
           kubernetes.io/ingress.class: nginx
           cert-manager.io/cluster-issuer: letsencrypt
         hosts:
-        - host: *host
-          paths:
-          - path: "/oauth2"
-            service:
-              name: jackett-oauth2-proxy
-              port: 80
+          - host: *host
+            paths:
+              - path: "/oauth2"
+                service:
+                  name: jackett-oauth2-proxy
+                  port: 80
         tls:
-        - hosts:
-          - *host
-          secretName: *host
+          - hosts:
+              - *host
+            secretName: *host
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
@@ -86,5 +86,6 @@ spec:
       github-org: "${blog_name}"
       github-team: "super-admins,jackett"
       cookie-expire: 168h0m0s
+      scope: "user:email"
     config:
       existingSecret: jackett-oauth2-proxy

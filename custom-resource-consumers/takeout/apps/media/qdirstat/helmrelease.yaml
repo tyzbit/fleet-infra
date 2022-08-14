@@ -22,5 +22,6 @@ spec:
       github-org: "${blog_name}"
       github-team: "super-admins,qdirstat"
       cookie-expire: 168h0m0s
+      scope: "user:email"
     config:
       existingSecret: qdirstat-oauth2-proxy

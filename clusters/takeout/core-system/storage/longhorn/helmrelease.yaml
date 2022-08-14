@@ -55,5 +55,6 @@ spec:
       github-org: "${blog_name}"
       github-team: "super-admins,longhorn"
       cookie-expire: 168h0m0s
+      scope: "user:email"
     config:
       existingSecret: longhorn-oauth2-proxy

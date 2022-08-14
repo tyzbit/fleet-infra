@@ -22,5 +22,6 @@ spec:
       github-org: "${blog_name}"
       github-team: "super-admins,btc-balance-notifier"
       cookie-expire: 168h0m0s
+      scope: "user:email"
     config:
       existingSecret: btc-balance-notifier-oauth2-proxy

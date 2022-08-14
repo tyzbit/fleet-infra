@@ -22,5 +22,6 @@ spec:
       github-org: "${blog_name}"
       github-team: "super-admins,vrising-primary"
       cookie-expire: 168h0m0s
+      scope: "user:email"
     config:
       existingSecret: oauth2-proxy-vrising-fb

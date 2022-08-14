@@ -138,5 +138,6 @@ spec:
       github-org: "${blog_name}"
       github-team: "super-admins,tdarr"
       cookie-expire: 168h0m0s
+      scope: "user:email"
     config:
       existingSecret: tdarr-oauth2-proxy
