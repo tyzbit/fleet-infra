@@ -36,12 +36,12 @@
   // set up renovate managers
   flux: {
     fileMatch: [
-      "cluster/.+\\.ya?ml$"
+      "clusters/.+\\.ya?ml$"
     ]
   },
   helm-values: {
     fileMatch: [
-      "cluster/.+\\.ya?ml$"
+      "clusters/.+\\.ya?ml$"
     ]
   },
   helmv3: {
@@ -51,14 +51,14 @@
   },
   kubernetes: {
     fileMatch: [
-      "cluster/.+\\.ya?ml$"
+      "clusters/.+\\.ya?ml$"
     ]
   },
   regexManagers: [
     // Read and process GitHub Releases
     {
       fileMatch: [
-        "cluster/.+\\.ya?ml$"
+        "clusters/.+\\.ya?ml$"
       ],
       matchStrings: [
         "datasource=(?<datasource>.*?)\n *url: https:\/\/github\\.com\/(?<depName>.*?)\\.git\n *ref:\n *tag: (?<currentValue>.*)\n",
@@ -70,7 +70,7 @@
     // Read and process Custom Resource Definitions
     {
       fileMatch: [
-        "cluster/.+\\.ya?ml$"
+        "clusters/.+\\.ya?ml$"
       ],
       matchStrings: [
         "registryUrl=(?<registryUrl>.*?)\n *tag: (?<depName>[a-zA-Z-]+)-(?<currentValue>.*)\n",
@@ -81,7 +81,7 @@
     // Read and process Custom Resources
     {
       fileMatch: [
-        "cluster/.+\\.ya?ml$"
+        "clusters/.+\\.ya?ml$"
       ],
       matchStrings: [
         "datasource=(?<datasource>.*?) depName=(?<depName>.*?)\n .*: (?<currentValue>.*=?)"
