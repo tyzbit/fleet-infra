@@ -1,6 +1,0 @@
-{
-  "fileName": ".github/renovate.json5",
-  "config": {
-    "extends": ["config:base"]
-  }
-}
