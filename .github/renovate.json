@@ -1,5 +1,5 @@
 {
-  extends: [
+  "extends": [
     ":enableRenovate",
     "config:base",
     ":disableRateLimiting",
@@ -12,20 +12,15 @@
     "github>tyzbit/fleet-infra//.github/renovate/labels",
     "github>tyzbit/fleet-infra//.github/renovate/semanticCommits"
   ],
-  platform: "github",
-  username: "renovate[bot]",
-  repositories: ["tyzbit/fleet-infra"],
-  onboarding: false,
-  requireConfig: false,
-  gitAuthor: "rosey-bot <98030736+rosey-bot[bot]@users.noreply.github.com>",
-  dependencyDashboardTitle: "Renovate Dashboard 🤖",
-  // suppressNotifications: [
-  //   "prIgnoreNotification"
-  // ],
-  rebaseWhen: "conflicted",
-  commitBodyTable: true,
-  // set up ignored deps
-  ignoreDeps: [
+  "platform": "github",
+  "username": "renovate[bot]",
+  "repositories": ["tyzbit/fleet-infra"],
+  "onboarding": false,
+  "requireConfig": false,
+  "dependencyDashboardTitle": "Renovate Dashboard 🤖",
+  "rebaseWhen": "conflicted",
+  "commitBodyTable": true,
+  "ignoreDeps": [
     "ghcr.io/fluxcd/helm-controller",
     "ghcr.io/fluxcd/image-automation-controller",
     "ghcr.io/fluxcd/image-reflector-controller",
@@ -33,126 +28,101 @@
     "ghcr.io/fluxcd/notification-controller",
     "ghcr.io/fluxcd/source-controller"
   ],
-  // set up renovate managers
-  flux: {
-    fileMatch: [
+  "flux": {
+    "fileMatch": [
       "clusters/.+\\.ya?ml$",
       "custom\\-resources/.+\\.ya?ml$",
       "custom\\-resource\\-consumers/.+\\.ya?ml$"
     ]
   },
-  helm-values: {
-    fileMatch: [
+  "helm-values": {
+    "fileMatch": [
       "clusters/.+\\.ya?ml$",
       "custom\\-resources/.+\\.ya?ml$",
       "custom\\-resource\\-consumers/.+\\.ya?ml$"
     ]
   },
-  helmv3: {
-    fileMatch: [
+  "helmv3": {
+    "fileMatch": [
       "charts/.+/Chart\\.ya?ml$",
       "custom\\-resources/.+\\.ya?ml$",
       "custom\\-resource\\-consumers/.+\\.ya?ml$"
     ]
   },
-  kubernetes: {
-    fileMatch: [
+  "kubernetes": {
+    "fileMatch": [
       "clusters/.+\\.ya?ml$",
       "custom\\-resources/.+\\.ya?ml$",
       "custom\\-resource\\-consumers/.+\\.ya?ml$"
     ]
   },
-  regexManagers: [
-    // Read and process GitHub Releases
+  "regexManagers": [
     {
-      fileMatch: [
+      "fileMatch": [
         "clusters/.+\\.ya?ml$",
         "custom\\-resources/.+\\.ya?ml$",
         "custom\\-resource\\-consumers/.+\\.ya?ml$"
       ],
-      matchStrings: [
-        "datasource=(?<datasource>.*?)\n *url: https:\/\/github\\.com\/(?<depName>.*?)\\.git\n *ref:\n *tag: (?<currentValue>.*)\n",
+      "matchStrings": [
+        "datasource=(?<datasource>.*?)\n *url: https://github\\.com/(?<depName>.*?)\\.git\n *ref:\n *tag: (?<currentValue>.*)\n",
         "datasource=(?<datasource>.*?) depName=(?<depName>.*?)\n.*?_version: \"(?<currentValue>.*)\"\n",
         "datasource=(?<datasource>.*?) depName=(?<depName>.*?)\n.*?_VERSION=\"(?<currentValue>.*)\"\n"
       ],
-      datasourceTemplate: "github-releases"
+      "datasourceTemplate": "github-releases"
     },
-    // Read and process Custom Resource Definitions
     {
-      fileMatch: [
+      "fileMatch": [
         "clusters/.+\\.ya?ml$",
         "custom\\-resources/.+\\.ya?ml$",
         "custom\\-resource\\-consumers/.+\\.ya?ml$"
       ],
-      matchStrings: [
+      "matchStrings": [
         "registryUrl=(?<registryUrl>.*?)\n *tag: (?<depName>[a-zA-Z-]+)-(?<currentValue>.*)\n",
         "registryUrl=(?<registryUrl>.*?) chart=(?<depName>.*?)\n.*\\/(?<currentValue>.*?)\\/"
       ],
-      datasourceTemplate: "helm"
+      "datasourceTemplate": "helm"
     },
-    // Read and process Custom Resources
     {
-      fileMatch: [
+      "fileMatch": [
         "clusters/.+\\.ya?ml$",
         "custom\\-resources/.+\\.ya?ml$",
         "custom\\-resource\\-consumers/.+\\.ya?ml$"
       ],
-      matchStrings: [
+      "matchStrings": [
         "datasource=(?<datasource>.*?) depName=(?<depName>.*?)\n .*: (?<currentValue>.*=?)"
       ],
-      datasourceTemplate: "docker"
+      "datasourceTemplate": "docker"
     }
   ],
-  packageRules: [
-    // setup datasources
+  "packageRules": [
     {
-      matchDatasources: [
-        "helm"
-      ],
-      ignoreDeprecated: true
+      "matchDatasources": ["helm"],
+      "ignoreDeprecated": true
     },
     {
-      matchDatasources: [
-        "docker"
-      ],
-      commitMessageExtra: "to {{newVersion}}"
+      "matchDatasources": ["docker"],
+      "commitMessageExtra": "to {{newVersion}}"
     },
-    // packages with custom versioning
     {
-      matchDatasources: [
-        "docker"
-      ],
-      versioning: "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)-(?<compatibility>.*)$",
-      matchPackageNames: [
-        "docker.io/blakeblackshear/frigate"
-      ]
+      "matchDatasources": ["docker"],
+      "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)-(?<compatibility>.*)$",
+      "matchPackageNames": ["docker.io/blakeblackshear/frigate"]
     },
-    // packages with loose versioning
     {
-      matchDatasources: [
-        "docker",
-        "github-releases"
-      ],
-      versioning: "loose",
-      matchPackageNames: [
+      "matchDatasources": ["docker", "github-releases"],
+      "versioning": "loose",
+      "matchPackageNames": [
         "ghcr.io/k8s-at-home/plex",
         "ghcr.io/k8s-at-home/qbittorrent",
         "Hypfer/Valetudo"
       ]
     },
-    // group packages
     {
-      groupName: "external-snapshotter-suite",
-      matchDatasources: [
-        "docker",
-        "github-releases"
-      ],
-      matchPackagePatterns: [
-        "external-snapshotter",
-        "snapshot-controller"
-      ],
-      additionalBranchPrefix: "",
-      separateMinorPatch: true
+      "groupName": "external-snapshotter-suite",
+      "matchDatasources": ["docker", "github-releases"],
+      "matchPackagePatterns": ["external-snapshotter", "snapshot-controller"],
+      "additionalBranchPrefix": "",
+      "separateMinorPatch": true
     }
   ]
 }
