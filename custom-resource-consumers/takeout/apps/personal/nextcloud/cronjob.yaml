@@ -26,7 +26,7 @@ spec:
           #       topologyKey: kubernetes.io/hostname
           containers:
           - name: nextcloud-cron
-            image: nextcloud:21.0.8
+            image: nextcloud:21.0.9
             imagePullPolicy: Always
             command: ["su", "-p", "www-data", "-s", "/bin/sh", "-c", "php -f /var/www/html/cron.php"]
             volumeMounts:
