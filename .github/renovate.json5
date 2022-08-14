@@ -37,29 +37,29 @@
   flux: {
     fileMatch: [
       "clusters/.+\\.ya?ml$",
-      "custom-resources/.+\\.ya?ml$",
-      "custom-resource-consumers/.+\\.ya?ml$"
+      "custom\\-resources/.+\\.ya?ml$",
+      "custom\\-resource\\-consumers/.+\\.ya?ml$"
     ]
   },
   helm-values: {
     fileMatch: [
       "clusters/.+\\.ya?ml$",
-      "custom-resources/.+\\.ya?ml$",
-      "custom-resource-consumers/.+\\.ya?ml$"
+      "custom\\-resources/.+\\.ya?ml$",
+      "custom\\-resource\\-consumers/.+\\.ya?ml$"
     ]
   },
   helmv3: {
     fileMatch: [
       "charts/.+/Chart\\.ya?ml$",
-      "custom-resources/.+\\.ya?ml$",
-      "custom-resource-consumers/.+\\.ya?ml$"
+      "custom\\-resources/.+\\.ya?ml$",
+      "custom\\-resource\\-consumers/.+\\.ya?ml$"
     ]
   },
   kubernetes: {
     fileMatch: [
       "clusters/.+\\.ya?ml$",
-      "custom-resources/.+\\.ya?ml$",
-      "custom-resource-consumers/.+\\.ya?ml$"
+      "custom\\-resources/.+\\.ya?ml$",
+      "custom\\-resource\\-consumers/.+\\.ya?ml$"
     ]
   },
   regexManagers: [
@@ -67,8 +67,8 @@
     {
       fileMatch: [
         "clusters/.+\\.ya?ml$",
-        "custom-resources/.+\\.ya?ml$",
-        "custom-resource-consumers/.+\\.ya?ml$"
+        "custom\\-resources/.+\\.ya?ml$",
+        "custom\\-resource\\-consumers/.+\\.ya?ml$"
       ],
       matchStrings: [
         "datasource=(?<datasource>.*?)\n *url: https:\/\/github\\.com\/(?<depName>.*?)\\.git\n *ref:\n *tag: (?<currentValue>.*)\n",
@@ -81,8 +81,8 @@
     {
       fileMatch: [
         "clusters/.+\\.ya?ml$",
-        "custom-resources/.+\\.ya?ml$",
-        "custom-resource-consumers/.+\\.ya?ml$"
+        "custom\\-resources/.+\\.ya?ml$",
+        "custom\\-resource\\-consumers/.+\\.ya?ml$"
       ],
       matchStrings: [
         "registryUrl=(?<registryUrl>.*?)\n *tag: (?<depName>[a-zA-Z-]+)-(?<currentValue>.*)\n",
@@ -94,8 +94,8 @@
     {
       fileMatch: [
         "clusters/.+\\.ya?ml$",
-        "custom-resources/.+\\.ya?ml$",
-        "custom-resource-consumers/.+\\.ya?ml$"
+        "custom\\-resources/.+\\.ya?ml$",
+        "custom\\-resource\\-consumers/.+\\.ya?ml$"
       ],
       matchStrings: [
         "datasource=(?<datasource>.*?) depName=(?<depName>.*?)\n .*: (?<currentValue>.*=?)"
