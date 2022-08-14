@@ -36,29 +36,39 @@
   // set up renovate managers
   flux: {
     fileMatch: [
-      "clusters/.+\\.ya?ml$"
+      "clusters/.+\\.ya?ml$",
+      "custom-resources/.+\\.ya?ml$",
+      "custom-resource-consumers/.+\\.ya?ml$"
     ]
   },
   helm-values: {
     fileMatch: [
-      "clusters/.+\\.ya?ml$"
+      "clusters/.+\\.ya?ml$",
+      "custom-resources/.+\\.ya?ml$",
+      "custom-resource-consumers/.+\\.ya?ml$"
     ]
   },
   helmv3: {
     fileMatch: [
-      "charts/.+/Chart\\.ya?ml$"
+      "charts/.+/Chart\\.ya?ml$",
+      "custom-resources/.+\\.ya?ml$",
+      "custom-resource-consumers/.+\\.ya?ml$"
     ]
   },
   kubernetes: {
     fileMatch: [
-      "clusters/.+\\.ya?ml$"
+      "clusters/.+\\.ya?ml$",
+      "custom-resources/.+\\.ya?ml$",
+      "custom-resource-consumers/.+\\.ya?ml$"
     ]
   },
   regexManagers: [
     // Read and process GitHub Releases
     {
       fileMatch: [
-        "clusters/.+\\.ya?ml$"
+        "clusters/.+\\.ya?ml$",
+        "custom-resources/.+\\.ya?ml$",
+        "custom-resource-consumers/.+\\.ya?ml$"
       ],
       matchStrings: [
         "datasource=(?<datasource>.*?)\n *url: https:\/\/github\\.com\/(?<depName>.*?)\\.git\n *ref:\n *tag: (?<currentValue>.*)\n",
@@ -70,7 +80,9 @@
     // Read and process Custom Resource Definitions
     {
       fileMatch: [
-        "clusters/.+\\.ya?ml$"
+        "clusters/.+\\.ya?ml$",
+        "custom-resources/.+\\.ya?ml$",
+        "custom-resource-consumers/.+\\.ya?ml$"
       ],
       matchStrings: [
         "registryUrl=(?<registryUrl>.*?)\n *tag: (?<depName>[a-zA-Z-]+)-(?<currentValue>.*)\n",
@@ -81,7 +93,9 @@
     // Read and process Custom Resources
     {
       fileMatch: [
-        "clusters/.+\\.ya?ml$"
+        "clusters/.+\\.ya?ml$",
+        "custom-resources/.+\\.ya?ml$",
+        "custom-resource-consumers/.+\\.ya?ml$"
       ],
       matchStrings: [
         "datasource=(?<datasource>.*?) depName=(?<depName>.*?)\n .*: (?<currentValue>.*=?)"
