@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: duplicacy
-        image: saspus/duplicacy-web:v1.5.0
+        image: saspus/duplicacy-web:v1.6.2
         env:
         - name: TZ
           value: America/New_York
