@@ -104,6 +104,5 @@ spec:
       #       github-org: "${blog_name}"
       #       github-team: "super-admins,qbittorrent"
       #       cookie-expire: 168h0m0s
-      scope: "user:email"
 #     config:
 #       existingSecret: qbittorrent-oauth2-proxy
