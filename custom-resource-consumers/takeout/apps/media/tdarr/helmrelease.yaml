@@ -39,6 +39,16 @@ spec:
         repository: haveagitgat/tdarr_node
         tag: 2.00.18.2
         pullPolicy: IfNotPresent
+    affinity:
+      podAntiAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                    - frigate
+            topologyKey: "kubernetes.io/hostname"
     # initContainers:
     #   fixperms:
     #     name: fixperms
