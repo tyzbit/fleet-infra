@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: go-discord-archiver-db
-          image: mariadb:10.8
+          image: mariadb:10.9
           imagePullPolicy: Always
           envFrom:
           - secretRef:
