@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: the-forest-primary
-          image: jammsen/docker-the-forest-dedicated-server:latest # there is only the latest tag
+          image: jammsen/the-forest-dedicated-server:latest # there is only the latest tag
           # command: ["tail","-f","/dev/null"]
           envFrom:
             - name:
