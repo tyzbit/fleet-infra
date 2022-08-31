@@ -42,13 +42,13 @@ spec:
               name: data2-tcp
               protocol: TCP
           volumeMounts:
-            - name: the-forest-steamcmd
+            - name: the-forest-data
               subPath: steamcmd
               mountPath: /steamcmd
-            - name: the-forest-game
+            - name: the-forest-data
               subPath: game
               mountPath: /theforest
-            - name: the-forest-winedata
+            - name: the-forest-data
               subPath: winedata
               mountPath: /winedata
           resources:
