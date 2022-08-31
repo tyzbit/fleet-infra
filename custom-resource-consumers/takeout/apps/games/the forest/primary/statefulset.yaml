@@ -1,0 +1,88 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: the-forest
+  namespace: games
+spec:
+  selector:
+    matchLabels:
+      app: the-forest
+  serviceName: the-forest
+  replicas: 1 # active longhorn-gameserver
+  template:
+    metadata:
+      labels:
+        app: the-forest
+    spec:
+      containers:
+        - name: the-forest-primary
+          image: jammsen/docker-the-forest-dedicated-server:latest # there is only the latest tag
+          # command: ["tail","-f","/dev/null"]
+          envFrom:
+            - name:
+              secretRef:
+                name: the-forest-primary-config
+          ports:
+            - containerPort: 8766
+              name: steam1-udp
+              protocol: UDP
+            - containerPort: 8766
+              name: steam1-tcp
+              protocol: TCP
+            - containerPort: 27015
+              name: data1-udp
+              protocol: UDP
+            - containerPort: 27015
+              name: data1-tcp
+              protocol: TCP
+            - containerPort: 27016
+              name: data2-udp
+              protocol: UDP
+            - containerPort: 27016
+              name: data2-tcp
+              protocol: TCP
+          volumeMounts:
+            - name: the-forest-steamcmd
+              subPath: steamcmd
+              mountPath: /steamcmd
+            - name: the-forest-game
+              subPath: game
+              mountPath: /theforest
+            - name: the-forest-winedata
+              subPath: winedata
+              mountPath: /winedata
+          resources:
+            limits:
+              memory: 4Gi
+            requests:
+              cpu: 100m
+          # securityContext:
+          #   fsGroup: 1000
+          #   runAsGroup: 1000
+          #   runAsUser: 1000
+        - name: filebrowser
+          image: filebrowser/filebrowser:v2
+          args: ["-d", "/db/database.db"]
+          ports:
+            - containerPort: 80
+              name: fb-http
+              protocol: TCP
+          env:
+            - name: TZ
+              value: America/New_York
+          volumeMounts:
+            - name: the-forest-data
+              subPath: filebrowser
+              mountPath: /db
+            - name: the-forest-data
+              subPath: game
+              mountPath: /srv/the-forest-data
+      imagePullSecrets:
+        - name: docker-hub
+      volumes:
+        - name: the-forest-files-config
+          configMap:
+            name: the-forest-files-config
+        - name: the-forest-data
+          persistentVolumeClaim:
+            claimName: the-forest-data-longhorn-gameserver

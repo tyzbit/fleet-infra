@@ -1,0 +1,27 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: the-forest-fb-oauth2-proxy
+  namespace: games
+spec:
+  targetNamespace: games
+  releaseName: the-forest-fb-oauth2-proxy
+  chart:
+    spec:
+      chart: oauth2-proxy
+      version: "6.2.2"
+      sourceRef:
+        kind: HelmRepository
+        name: oauth2-proxy
+        namespace: flux-system
+  interval: 2m0s
+  values:
+    replicaCount: 1
+    extraArgs:
+      provider: github
+      github-org: "${blog_name}"
+      github-team: "super-admins,the-forest-primary"
+      cookie-expire: 168h0m0s
+      scope: "user:email"
+    config:
+      existingSecret: the-forest-oauth2-proxy-fb

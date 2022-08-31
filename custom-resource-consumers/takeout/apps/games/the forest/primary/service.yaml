@@ -1,0 +1,68 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: the-forest-tcp
+  namespace: games
+  annotations:
+    metallb.universe.tf/allow-shared-ip: games-the-forest-server
+spec:
+  type: LoadBalancer
+  loadBalancerIP: 192.168.1.76
+  externalTrafficPolicy: Local
+  selector:
+    app: the-forest
+  ports:
+    - port: 8766
+      protocol: TCP
+      name: steam1
+      targetPort: 8766
+    - port: 27015
+      protocol: TCP
+      name: data1
+      targetPort: 27015
+    - port: 27016
+      protocol: TCP
+      name: data2
+      targetPort: 27016
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: the-forest-udp
+  namespace: games
+  annotations:
+    metallb.universe.tf/allow-shared-ip: games-the-forest-server
+spec:
+  type: LoadBalancer
+  loadBalancerIP: 192.168.1.76
+  externalTrafficPolicy: Local
+  selector:
+    app: the-forest
+  ports:
+    - port: 8766
+      protocol: UDP
+      name: steam1
+      targetPort: 8766
+    - port: 27015
+      protocol: UDP
+      name: data1
+      targetPort: 27015
+    - port: 27016
+      protocol: UDP
+      name: data2
+      targetPort: 27016
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: the-forest-filebrowser
+  namespace: games
+spec:
+  type: ClusterIP
+  selector:
+    app: the-forest
+  ports:
+    - port: 80
+      protocol: TCP
+      name: fb-http
+      targetPort: 80
