@@ -53,7 +53,7 @@ spec:
               mountPath: /winedata
           resources:
             limits:
-              memory: 4Gi
+              memory: 6Gi
             requests:
               cpu: 100m
           # securityContext:
