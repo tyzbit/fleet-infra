@@ -4,8 +4,8 @@ metadata:
   name: dri-pvc
   namespace: hotboxfort
 spec:
-  volumeName: dri-pvc-games
-  accessModes: 
+  volumeName: dri-pvc-hotboxfort
+  accessModes:
     - ReadWriteMany
   volumeMode: Filesystem
   storageClassName: ""

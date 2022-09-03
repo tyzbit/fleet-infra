@@ -4,7 +4,7 @@ metadata:
   name: synology-testing-data-iscsi
   namespace: personal
 spec:
-  accessModes: 
+  accessModes:
     - ReadWriteOnce
   volumeMode: Filesystem
   storageClassName: synology-iscsi-storage
