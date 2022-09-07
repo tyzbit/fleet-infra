@@ -11,7 +11,6 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt
     acme.cert-manager.io/http01-edit-in-place: "false"
     external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
-    external-dns.alpha.kubernetes.io/hostname: &host "frigate.${personal_domain}"
     external-dns.alpha.kubernetes.io/target: ${personal_domain_ddns}
 spec:
   tls:
@@ -38,6 +37,8 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     cert-manager.io/cluster-issuer: letsencrypt
+    external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+    external-dns.alpha.kubernetes.io/target: ${personal_domain_ddns}
 spec:
   tls:
     - hosts:
