@@ -1,0 +1,39 @@
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: ten-dot
+  namespace: metallb-system
+spec:
+  addresses:
+    - 10.10.10.0/24
+---
+apiVersion: metallb.io/v1beta1
+kind: Community
+metadata:
+  name: communities
+  namespace: metallb-system
+spec:
+  communities:
+    - name: NO_ADVERTISE
+      value: 65535:65282
+---
+apiVersion: metallb.io/v1beta1
+kind: BGPAdvertisement
+metadata:
+  name: local
+spec:
+  ipAddressPools:
+    - ten-dot
+  aggregationLength: 32
+  localpref: 100
+  communities:
+    - NO_ADVERTISE
+---
+apiVersion: metallb.io/v1beta1
+kind: BGPAdvertisement
+metadata:
+  name: external
+spec:
+  ipAddressPools:
+    - ten-dot
+  aggregationLength: 24
