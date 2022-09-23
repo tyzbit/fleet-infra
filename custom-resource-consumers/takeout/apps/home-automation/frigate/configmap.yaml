@@ -38,6 +38,8 @@ data:
       coral:
         type: edgetpu
         device: usb
+    ffmpeg:
+      hwaccel_args: -c:v h264_qsv
     # ffmpeg:
       # input_args:
       #   - -c:v
