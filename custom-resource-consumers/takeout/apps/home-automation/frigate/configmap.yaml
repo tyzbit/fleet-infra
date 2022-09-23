@@ -63,7 +63,7 @@ data:
           input_args: -avoid_negative_ts make_zero -fflags +genpts+discardcorrupt -flags low_delay -strict experimental -analyzeduration 1000M -probesize 1000M -rw_timeout 5000000
           hwaccel_args: -hwaccel vaapi -hwaccel_device /dev/dri/renderD128 -hwaccel_output_format yuv420p
           output_args:
-            detect: -f rawvideo -pix_fmt yuv420p -filter:v fps=fps=5
+            detect: "-vf 'format=nv12,hwupload' -c:v h264_vaapi -an -pix_fmt yuv420p -f rawvideo"
             record: -f segment -segment_time 10 -segment_format mp4 -reset_timestamps 1 -strftime 1 -c:a copy -c:v copy
         motion:
           mask:
