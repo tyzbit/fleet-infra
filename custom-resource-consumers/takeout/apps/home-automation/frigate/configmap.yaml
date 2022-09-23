@@ -38,8 +38,7 @@ data:
       coral:
         type: edgetpu
         device: usb
-    ffmpeg:
-      hwaccel_args: -hwaccel vaapi -hwaccel_device /dev/dri/renderD128 -hwaccel_output_format yuv420p
+    # ffmpeg:
       # hwaccel_args: -c:v h264_qsv
     # ffmpeg:
       # input_args:
@@ -59,6 +58,9 @@ data:
       # output_args:
       #   detect: "-vf 'format=nv12,hwupload' -c:v h264_vaapi -an -pix_fmt yuv420p -f rawvideo"
     cameras:
+      ffmpeg:
+        input_args: -avoid_negative_ts make_zero -fflags +genpts+discardcorrupt -flags low_delay -strict experimental -analyzeduration 1000M -probesize 1000M -rw_timeout 5000000
+        hwaccel_args: -hwaccel vaapi -hwaccel_device /dev/dri/renderD128 -hwaccel_output_format yuv420p
       frontdoor:
         motion:
           mask:
