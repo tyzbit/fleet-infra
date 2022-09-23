@@ -60,7 +60,7 @@ data:
     cameras:
       frontdoor:
         ffmpeg:
-          input_args: -avoid_negative_ts make_zero -fflags +genpts+discardcorrupt -rtsp_transport udp -timeout 5000000 -use_wallclock_as_timestamps 1
+          input_args: -avoid_negative_ts make_zero -flags low_delay -strict experimental -fflags +genpts+discardcorrupt -rtsp_transport tcp -timeout 5000000 -use_wallclock_as_timestamps 1
           hwaccel_args: -hwaccel vaapi -hwaccel_device /dev/dri/renderD128 -hwaccel_output_format yuv420p
           output_args:
             detect: -f rawvideo -pix_fmt yuv420p -filter:v fps=fps=5
