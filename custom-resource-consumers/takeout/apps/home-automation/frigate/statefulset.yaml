@@ -8,7 +8,7 @@ metadata:
   labels:
     app: frigate
 spec:
-  replicas: 0 # active longhorn-database nas
+  replicas: 1 # active longhorn-database nas
   serviceName: frigate
   selector:
     matchLabels:
