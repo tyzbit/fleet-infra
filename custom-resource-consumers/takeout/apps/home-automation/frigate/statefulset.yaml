@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: frigate
-          image: docker.io/blakeblackshear/frigate:0.11.0 # {"$imagepolicy": "flux-system:frigate"}
+          image: docker.io/blakeblackshear/frigate:0.10.1-amd64 # {"$imagepolicy": "flux-system:frigate"}
           # command: ["tail","-f","/dev/null"]
           imagePullPolicy: Always
           env:
