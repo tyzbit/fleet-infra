@@ -8,7 +8,7 @@ metadata:
   labels:
     app: frigate
 spec:
-  replicas: 1 # active longhorn-database nas
+  replicas: 0 # active longhorn-database nas
   serviceName: frigate
   selector:
     matchLabels:
@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: frigate
-          image: docker.io/blakeblackshear/frigate:0.11.0 # {"$imagepolicy": "flux-system:frigate"}
+          image: docker.io/blakeblackshear/frigate:0.10.1-amd64 # {"$imagepolicy": "flux-system:frigate"}
           # command: ["tail","-f","/dev/null"]
           imagePullPolicy: Always
           env:
