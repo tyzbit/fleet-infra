@@ -49,7 +49,7 @@ spec:
             retain: 6
         backup:
           - interval: 12h
-            retain: 4
+            retain: 2
       "Gameserver":
         parameters:
           numberOfReplicas: "2"
@@ -60,7 +60,7 @@ spec:
             retain: 6
         backup:
           - interval: 12h
-            retain: 2
+            retain: 4
       "Plex":
         snapshot:
           - interval: 10m
@@ -78,4 +78,4 @@ spec:
             retain: 6
         backup:
           - interval: 24h
-            retain: 2
+            retain: 7
