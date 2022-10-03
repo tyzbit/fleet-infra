@@ -36,6 +36,7 @@ spec:
         backup:
           - interval: 24h
             retain: 2
+
       "Crypto":
         reclaimPolicy: Delete
         parameters:
@@ -43,6 +44,7 @@ spec:
         snapshot:
           - interval: 10m
             retain: 1
+
       "Database":
         snapshot:
           - interval: 10m
@@ -50,6 +52,7 @@ spec:
         backup:
           - interval: 12h
             retain: 2
+
       "Gameserver":
         parameters:
           numberOfReplicas: "2"
@@ -61,6 +64,7 @@ spec:
         backup:
           - interval: 12h
             retain: 4
+
       "Plex":
         snapshot:
           - interval: 10m
@@ -68,10 +72,12 @@ spec:
         backup:
           - interval: 24h
             retain: 2
+
       "Multimedia":
         backup:
           - interval: 24h
             retain: 2
+
       "Webapp":
         snapshot:
           - interval: 10m
