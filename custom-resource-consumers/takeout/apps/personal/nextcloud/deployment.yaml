@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: nextcloud
-          image: nextcloud:24.0.5
+          image: nextcloud:24.0.6
           imagePullPolicy: Always
           # command: ["tail","-f","/dev/null"]
           envFrom:
