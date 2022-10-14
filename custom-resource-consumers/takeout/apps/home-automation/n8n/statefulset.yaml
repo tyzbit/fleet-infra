@@ -8,7 +8,7 @@ metadata:
   labels:
     app: n8n
 spec:
-  replicas: 0 # active longhorn-database
+  replicas: 1 # active longhorn-database
   selector:
     matchLabels:
       app: n8n
