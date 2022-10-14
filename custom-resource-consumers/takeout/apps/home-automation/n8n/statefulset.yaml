@@ -8,7 +8,7 @@ metadata:
   labels:
     app: n8n
 spec:
-  replicas: 1 # active longhorn-database
+  replicas: 0 # active longhorn-database
   selector:
     matchLabels:
       app: n8n
@@ -20,31 +20,15 @@ spec:
         app: n8n
     spec:
       containers:
-        # - name: n8n
-        #   image: n8nio/n8n:0.198.1
-        #   imagePullPolicy: Always
-        #   # command: ["tail","-f","/dev/null"]
-        #   envFrom:
-        #     - secretRef:
-        #         name: n8n-config
-        #   ports:
-        #     - containerPort: 5678
-        #       name: http
-        #       protocol: TCP
-        #   volumeMounts:
-        #     - name: n8n-data
-        #       mountPath: /home/node/.n8n
-        #   resources:
-        #     requests:
-        #       cpu: 10m
-        #     limits:
-        #       memory: 512Mi
-        - name: sqlite
-          image: linuxserver/sqlitebrowser:3.12.2
+        - name: n8n
+          image: n8nio/n8n:0.198.1
           imagePullPolicy: Always
           # command: ["tail","-f","/dev/null"]
+          envFrom:
+            - secretRef:
+                name: n8n-config
           ports:
-            - containerPort: 3000
+            - containerPort: 5678
               name: http
               protocol: TCP
           volumeMounts:
@@ -55,6 +39,22 @@ spec:
               cpu: 10m
             limits:
               memory: 512Mi
+        # - name: sqlite
+        #   image: linuxserver/sqlitebrowser:3.12.2
+        #   imagePullPolicy: Always
+        #   # command: ["tail","-f","/dev/null"]
+        #   ports:
+        #     - containerPort: 3000
+        #       name: http
+        #       protocol: TCP
+        #   volumeMounts:
+        #     - name: n8n-data
+        #       mountPath: /home/node/.n8n
+        #   resources:
+        #     requests:
+        #       cpu: 10m
+        #     limits:
+        #       memory: 512Mi
       volumes:
         - name: n8n-data
           persistentVolumeClaim:
