@@ -3,6 +3,8 @@ kind: StatefulSet
 metadata:
   name: n8n
   namespace: home-automation
+  annotations:
+    reloader.stakater.com/auto: "true"
   labels:
     app: n8n
 spec:
@@ -23,8 +25,8 @@ spec:
           imagePullPolicy: Always
           # command: ["tail","-f","/dev/null"]
           envFrom:
-          - secretRef:
-              name: n8n-config
+            - secretRef:
+                name: n8n-config
           ports:
             - containerPort: 5678
               name: http
