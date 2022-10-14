@@ -39,6 +39,22 @@ spec:
               cpu: 10m
             limits:
               memory: 512Mi
+        - name: sqlite
+          image: linuxserver/sqlitebrowser:3.12.2
+          imagePullPolicy: Always
+          # command: ["tail","-f","/dev/null"]
+          ports:
+            - containerPort: 3000
+              name: http
+              protocol: TCP
+          volumeMounts:
+            - name: n8n-data
+              mountPath: /home/node/.n8n
+          resources:
+            requests:
+              cpu: 10m
+            limits:
+              memory: 512Mi
       volumes:
         - name: n8n-data
           persistentVolumeClaim:

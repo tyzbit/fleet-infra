@@ -12,3 +12,7 @@ spec:
       protocol: TCP
       port: 80
       targetPort: 5678
+    - name: sqlite
+      protocol: TCP
+      port: 3000
+      targetPort: 3000
