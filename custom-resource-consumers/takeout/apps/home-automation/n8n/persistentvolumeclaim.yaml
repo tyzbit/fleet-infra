@@ -4,10 +4,10 @@ metadata:
   name: n8n-data-longhorn-database
   namespace: home-automation
 spec:
-  accessModes: 
+  accessModes:
     - ReadWriteOnce
   volumeMode: Filesystem
   storageClassName: longhorn-database
   resources:
     requests:
-      storage: 4Gi
+      storage: 20Gi
