@@ -70,10 +70,6 @@ spec:
       media:
         enabled: true
         existingClaim: nas-volume1-media
-      temp:
-        enabled: true
-        existingClaim: stash-temp-data-nas
-        subPath: media
     resources:
       requests:
         cpu: 200m

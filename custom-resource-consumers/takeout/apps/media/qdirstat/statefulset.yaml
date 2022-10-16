@@ -26,11 +26,8 @@ spec:
               mountPath: /config
             - name: nas-volume1-media
               mountPath: /mount/nas-volume1-media
-            - name: temp
-              subPath: media
-              mountPath: /mount/temp
           resources:
-            requests: 
+            requests:
               cpu: 250m
             limits:
               memory: 512Mi
@@ -41,8 +38,5 @@ spec:
         - name: nas-volume1-media
           persistentVolumeClaim:
             claimName: nas-volume1-media
-        - name: temp
-          persistentVolumeClaim:
-            claimName: stash-temp-data-nas
       imagePullSecrets:
         - name: docker-hub

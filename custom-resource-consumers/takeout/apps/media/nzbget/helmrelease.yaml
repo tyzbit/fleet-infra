@@ -35,10 +35,6 @@ spec:
       intermediate:
         enabled: true
         type: emptyDir
-      temp:
-        enabled: true
-        existingClaim: stash-temp-data-nas
-        subPath: media
     ingress:
       main:
         enabled: true

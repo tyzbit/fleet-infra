@@ -21,11 +21,11 @@ spec:
           image: jlesage/handbrake:v1.25.1
           imagePullPolicy: Always
           command: # ["sh","-c","tail -f /dev/null"]
-          - sh
-          - -c
-          - |
-            apk add curl &&
-            /init
+            - sh
+            - -c
+            - |
+              apk add curl &&
+              /init
           env:
             - name: USER_ID
               value: "568"
@@ -48,13 +48,10 @@ spec:
               mountPath: /dev/dri
             - name: media
               mountPath: /storage/media
-            - name: temp
-              subPath: media
-              mountPath: /storage/temp
           securityContext:
             privileged: true
           resources:
-            requests: 
+            requests:
               cpu: 100m
             limits:
               memory: 3Gi
@@ -68,9 +65,6 @@ spec:
         - name: media
           persistentVolumeClaim:
             claimName: nas-volume1-media
-        - name: temp
-          persistentVolumeClaim:
-            claimName: stash-temp-data-nas
       imagePullSecrets:
         - name: docker-hub
       nodeSelector:
