@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: plex-secondary
-        image: plexinc/pms-docker:1.29.0.6244-819d3678c # {"$imagepolicy": "flux-system:plex-secondary"}
+        image: plexinc/pms-docker:1.29.1.6313-f4cdfea9c # {"$imagepolicy": "flux-system:plex-secondary"}
         imagePullPolicy: Always
         # command: ["tail","-f","/dev/null"]
         envFrom:
