@@ -19,7 +19,7 @@ spec:
     path: ./custom-resources/takeout
     strategy: Setters
 ---
-# apiVersion: image.toolkit.fluxcd.io/v1alpha1
+# apiVersion: image.toolkit.fluxcd.io/v1beta1
 # kind: ImageUpdateAutomation
 # metadata:
 #   name: flux-system
