@@ -26,7 +26,8 @@
     "ghcr.io/fluxcd/image-reflector-controller",
     "ghcr.io/fluxcd/kustomize-controller",
     "ghcr.io/fluxcd/notification-controller",
-    "ghcr.io/fluxcd/source-controller"
+    "ghcr.io/fluxcd/source-controller",
+    "mariadb"
   ],
   "flux": {
     "fileMatch": [
