@@ -19,3 +19,4 @@ data:
   redis.conf: |
     unixsocket /tmp/redis/redis.sock
     unixsocketperm 777
+    port 0
