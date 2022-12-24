@@ -23,8 +23,8 @@ spec:
           image: mariadb:10.8
           imagePullPolicy: Always
           envFrom:
-          - secretRef:
-              name: nextcloud-db
+            - secretRef:
+                name: nextcloud-db
           ports:
             - containerPort: 3306
               name: sql
@@ -54,43 +54,73 @@ spec:
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: nextcloud-cache
+  name: nextcloud
   namespace: personal
   annotations: {}
   labels:
-    app: nextcloud-cache
+    app: nextcloud
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: nextcloud-cache
-  serviceName: nextcloud-cache
+      app: nextcloud
+  serviceName: nextcloud
   template:
     metadata:
       annotations: {}
       labels:
-        app: nextcloud-cache
+        app: nextcloud
     spec:
       containers:
         - name: nextcloud-cache
           image: redis:7.0
           imagePullPolicy: Always
-          ports:
-            - containerPort: 6379
-              name: redis
-              protocol: TCP
           volumeMounts:
             - name: nextcloud-cache
               mountPath: /data
+            - name: nextcloud-cache-config
+              mountPath: /etc/redis.conf
+              subPath: redis.conf
+            - name: nextcloud-socket
+              mountPath: /tmp/redis/
           resources:
             requests:
               cpu: 10m
             limits:
               memory: 32Mi
-      # nodeSelector:
-      #   node.longhorn.io/create-default-disk: "true"
+        # nodeSelector:
+        #   node.longhorn.io/create-default-disk: "true"
+        - name: nextcloud
+          image: nextcloud:25.0.2
+          imagePullPolicy: Always
+          # command: ["tail","-f","/dev/null"]
+          envFrom:
+            - secretRef:
+                name: nextcloud-config
+          ports:
+            - containerPort: 80
+              name: http
+              protocol: TCP
+          volumeMounts:
+            - mountPath: "/var/www/html"
+              name: nextcloud-data
+            - name: nextcloud-socket
+              mountPath: /tmp/redis/
+          resources:
+            requests:
+              cpu: 100m
+            limits:
+              memory: 3Gi
       imagePullSecrets:
         - name: docker-hub
       volumes:
         - name: nextcloud-cache
           emptyDir: {}
+        - name: nextcloud-socket
+          emptyDir: {}
+        - name: nextcloud-cache-config
+          configMap:
+            name: nextcloud-cache-config
+        - name: nextcloud-data
+          persistentVolumeClaim:
+            claimName: nextcloud-data-nas

@@ -9,3 +9,13 @@ data:
     [mysqld]
     innodb_buffer_pool_size = 512M
     innodb_log_buffer_size = 32M
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nextcloud-cache-config
+  namespace: personal
+data:
+  redis.conf: |
+    unixsocket /tmp/redis/redis.sock
+    unixsocketperm 777
