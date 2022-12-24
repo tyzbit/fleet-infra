@@ -98,7 +98,7 @@ spec:
           command: ["/bin/bash", "-c"]
           args:
             - |
-              while :; do /cron.sh;  done &
+              while :; do /cron.sh; done &
               /entrypoint.sh apache2-foreground
           # command: ["tail","-f","/dev/null"]
           envFrom:
