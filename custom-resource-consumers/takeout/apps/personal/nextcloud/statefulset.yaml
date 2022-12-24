@@ -75,11 +75,12 @@ spec:
         - name: nextcloud-cache
           image: redis:7.0
           imagePullPolicy: Always
+          command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
           volumeMounts:
             - name: nextcloud-cache
               mountPath: /data
             - name: nextcloud-cache-config
-              mountPath: /etc/redis.conf
+              mountPath: /usr/local/etc/redis/redis.conf
               subPath: redis.conf
             - name: nextcloud-socket
               mountPath: /tmp/redis/
