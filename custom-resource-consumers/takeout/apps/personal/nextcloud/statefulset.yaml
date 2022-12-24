@@ -56,7 +56,8 @@ kind: StatefulSet
 metadata:
   name: nextcloud
   namespace: personal
-  annotations: {}
+  annotations:
+    reloader.stakater.com/auto: "true"
   labels:
     app: nextcloud
 spec:
