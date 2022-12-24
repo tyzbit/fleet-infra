@@ -83,7 +83,7 @@ spec:
               mountPath: /usr/local/etc/redis/redis.conf
               subPath: redis.conf
             - name: nextcloud-socket
-              mountPath: /var/run/redis
+              mountPath: /var/run/redis/
           resources:
             requests:
               cpu: 10m
