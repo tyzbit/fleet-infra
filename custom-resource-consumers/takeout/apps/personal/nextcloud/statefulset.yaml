@@ -95,6 +95,13 @@ spec:
         - name: nextcloud
           image: nextcloud:25.0.2
           imagePullPolicy: Always
+          command: ["/bin/bash", "-c"]
+          args:
+            - |
+              while :; do
+              su -p www-data -s /bin/sh -c /cron.sh
+              done &
+              /entrypoint.sh apache2-foreground
           # command: ["tail","-f","/dev/null"]
           envFrom:
             - secretRef:
