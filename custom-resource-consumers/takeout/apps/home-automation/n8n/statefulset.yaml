@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: n8n
-          image: n8nio/n8n:0.209.2
+          image: n8nio/n8n:0.209.4
           imagePullPolicy: Always
           # command: ["tail","-f","/dev/null"]
           envFrom:
