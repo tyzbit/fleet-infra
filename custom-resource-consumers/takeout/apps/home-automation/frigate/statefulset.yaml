@@ -37,6 +37,9 @@ spec:
             - containerPort: 1935
               name: rtmp-frigate
               protocol: TCP
+            - containerPort: 8554
+              name: rtsp-frigate
+              protocol: TCP
           volumeMounts:
             - mountPath: /db
               name: frigate-database

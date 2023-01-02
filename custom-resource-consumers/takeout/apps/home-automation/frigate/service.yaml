@@ -17,3 +17,7 @@ spec:
       protocol: TCP
       port: 1935
       targetPort: 1935
+    - name: rtsp-frigate
+      protocol: TCP
+      port: 8554
+      targetPort: 8554
