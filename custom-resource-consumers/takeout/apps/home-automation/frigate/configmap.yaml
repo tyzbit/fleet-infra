@@ -69,15 +69,15 @@ data:
           mask:
             - 0,390,190,281,413,219,612,181,842,131,1149,113,1138,0,0,0
         ffmpeg:
-          detect_args:
-            - preset-rtsp-generic
           input_args:
             - preset-rtsp-generic
+          output_args:
+            detect: preset-rtsp-generic
           inputs:
             - path: 'rtsp://{FRIGATE_FRONTDOOR_CREDENTIALS}@frontdoor:554'
               roles:
                 - detect
-                - rtsp
+                - restream # enabled by default
         detect:
           width: 1280
           height: 720
@@ -90,7 +90,7 @@ data:
             - path: 'rtsp://{FRIGATE_BACKDOOR_CREDENTIALS}@backdoor:554/live'
               roles:
                 - detect
-                - rtsp
+                - restream # enabled by default
         detect:
           width: 1920
           height: 1080
@@ -114,7 +114,7 @@ data:
             - path: 'rtsp://{FRIGATE_DRIVEWAY_CREDENTIALS}@driveway:554/live'
               roles:
                 - detect
-                - rtsp
+                - restream # enabled by default
         detect:
           width: 1920
           height: 1080
@@ -127,7 +127,7 @@ data:
             - path: 'rtsp://{FRIGATE_PORCH_CREDENTIALS}@porch:554/live'
               roles:
                 - detect
-                - rtsp
+                - restream # enabled by default
         detect:
           width: 2688
           height: 1520
