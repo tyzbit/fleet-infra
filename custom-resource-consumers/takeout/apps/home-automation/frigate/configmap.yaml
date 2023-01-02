@@ -71,8 +71,8 @@ data:
         ffmpeg:
           input_args:
             - preset-rtsp-generic
-          output_args:
-            detect: preset-rtsp-generic
+          hwaccel_args:
+            - preset-intel-vaapi
           inputs:
             - path: 'rtsp://{FRIGATE_FRONTDOOR_CREDENTIALS}@frontdoor:554'
               roles:
