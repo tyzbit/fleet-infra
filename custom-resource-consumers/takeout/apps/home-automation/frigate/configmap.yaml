@@ -70,7 +70,7 @@ data:
             - 0,390,190,281,413,219,612,181,842,131,1149,113,1138,0,0,0
         ffmpeg:
           input_args:
-            - preset-intel-vaapi
+            - preset-rtsp-generic
           inputs:
             - path: 'rtsp://{FRIGATE_FRONTDOOR_CREDENTIALS}@frontdoor:554'
               roles:
