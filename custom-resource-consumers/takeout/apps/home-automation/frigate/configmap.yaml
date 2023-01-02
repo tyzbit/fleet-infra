@@ -38,33 +38,14 @@ data:
       coral:
         type: edgetpu
         device: usb
-    # ffmpeg:
-      # hwaccel_args: -c:v h264_qsv
-    # ffmpeg:
-      # input_args:
-      #   - -c:v
-      #   - h264_qsv
-      # hwaccel_args:
-      #   - -hwaccel
-      #   - vaapi
-      #   - -hwaccel_device
-      #   - /dev/dri/renderD128
-      #   - -init_hw_device 
-      #   - vaapi=gpu 
-      #   - -filter_hw_device 
-      #   - gpu
-      #   - -hwaccel_output_format
-      #   - yuv420p
-      # output_args:
-      #   detect: "-vf 'format=nv12,hwupload' -c:v h264_vaapi -an -pix_fmt yuv420p -f rawvideo"
+    webrtc:
+      listen: ":8555"
+      candidates:
+        - 0.0.0.0:8555
+        - stun:8555
+
     cameras:
       frontdoor:
-        # ffmpeg:
-        #   input_args: -avoid_negative_ts make_zero -flags low_delay -strict experimental -fflags +genpts+discardcorrupt -rtsp_transport tcp -timeout 5000000 -use_wallclock_as_timestamps 1
-        #   hwaccel_args: -hwaccel vaapi -hwaccel_device /dev/dri/renderD128 -hwaccel_output_format yuv420p
-        #   output_args:
-        #     detect: -f rawvideo -pix_fmt yuv420p -filter:v fps=fps=5
-        #     record: -f segment -segment_time 10 -segment_format mp4 -reset_timestamps 1 -strftime 1 -c:a copy -c:v copy
         motion:
           mask:
             - 0,390,190,281,413,219,612,181,842,131,1149,113,1138,0,0,0
@@ -81,6 +62,7 @@ data:
           fps: 5
         mqtt:
           height: 540
+
       backdoor:
         ffmpeg:
           hwaccel_args: preset-intel-vaapi
@@ -89,24 +71,23 @@ data:
               roles:
                 - detect
                 - restream # enabled by default
+        motion:
+          mask:
+            - 480,176,791,187,1104,210,1567,289,1810,345,1920,356,1920,0,0,0,0,254
+        objects:
+          filters:
+            person:
+              # min_score: 0.72
+              mask: 
+              - 480,176,791,187,1104,210,1567,289,1810,345,1920,356,1920,0,0,0,0,254
         detect:
           width: 1920
           height: 1080
           fps: 5
         mqtt:
           height: 540
+
       driveway:
-        motion:
-          mask:
-            - 1820,127,1775,335,1605,1080,1920,1080,1920,252,1920,0,1252,0,1443,45
-            - 595,687,218,948,172,865,103,718,373,553,538,627
-        objects:
-          filters:
-            person:
-              # min_score: 0.72
-              mask: 
-              - 1820,127,1775,335,1605,1080,1920,1080,1920,252,1920,0,1252,0,1443,45
-              - 595,687,218,948,172,865,103,718,373,553,538,627
         ffmpeg:
           hwaccel_args: preset-intel-vaapi
           inputs:
@@ -114,12 +95,24 @@ data:
               roles:
                 - detect
                 - restream # enabled by default
+        motion:
+          mask:
+            - 1848,337,1605,1080,1920,1080,1920,252,1920,0,1885,0
+            - 720,430,318,742,282,696,251,595,403,493,615,339
+        objects:
+          filters:
+            person:
+              # min_score: 0.72
+              mask: 
+              - 1848,337,1605,1080,1920,1080,1920,252,1920,0,1885,0
+              - 720,430,318,742,282,696,251,595,403,493,615,339
         detect:
           width: 1920
           height: 1080
           fps: 5
         mqtt:
           height: 540
+
       porch:
         ffmpeg:
           hwaccel_args: preset-intel-vaapi
@@ -128,24 +121,30 @@ data:
               roles:
                 - detect
                 - restream # enabled by default
+        motion:
+          mask:
+            - 2688,1520,1950,1520,2168,751,2688,738
+        objects:
+          filters:
+            person:
+              # min_score: 0.73
+              mask:
+                - 2688,1520,1950,1520,2168,751,2688,738
         detect:
           width: 2688
           height: 1520
           fps: 5
-        # objects:
-        #   filters:
-        #     person:
-        #       min_score: 0.73
         mqtt:
           height: 540
+
       court:
-        snapshots:
-          enabled: False
         ffmpeg:
           inputs:
             - path: 'rtsp://{FRIGATE_COURT_CREDENTIALS}@court:554/live'
               roles:
                 - detect
+        snapshots:
+          enabled: False
         detect:
           width: 1920
           height: 1080
