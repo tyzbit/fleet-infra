@@ -96,7 +96,6 @@ data:
         mqtt:
           height: 540
       driveway:
-        hwaccel_args: preset-intel-vaapi
         motion:
           mask:
             - 1820,127,1775,335,1605,1080,1920,1080,1920,252,1920,0,1252,0,1443,45
@@ -109,6 +108,7 @@ data:
               - 1820,127,1775,335,1605,1080,1920,1080,1920,252,1920,0,1252,0,1443,45
               - 595,687,218,948,172,865,103,718,373,553,538,627
         ffmpeg:
+          hwaccel_args: preset-intel-vaapi
           inputs:
             - path: 'rtsp://{FRIGATE_DRIVEWAY_CREDENTIALS}@driveway:554/live'
               roles:
