@@ -34,6 +34,12 @@ data:
       enabled: True
       # objects, motion, continuous
       mode: continuous
+    restream:
+      enabled: True
+      birdseye: True
+      # jsmpeg:
+        # height: 720
+        # quality: 8
     detectors:
       coral:
         type: edgetpu
