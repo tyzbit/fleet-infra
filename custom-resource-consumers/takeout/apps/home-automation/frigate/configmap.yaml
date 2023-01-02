@@ -38,11 +38,6 @@ data:
       coral:
         type: edgetpu
         device: usb
-    webrtc:
-      listen: ":8555"
-      candidates:
-        - 0.0.0.0:8555
-        - stun:8555
 
     cameras:
       frontdoor:
@@ -149,3 +144,8 @@ data:
           width: 1920
           height: 1080
           fps: 5
+  frigate-go2rtc.yml: |
+    webrtc:
+      listen: ":8555"
+      candidates:
+        - stun:8555
