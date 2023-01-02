@@ -69,8 +69,6 @@ data:
           mask:
             - 0,390,190,281,413,219,612,181,842,131,1149,113,1138,0,0,0
         ffmpeg:
-          # input_args:
-          #   - preset-rtsp-generic
           hwaccel_args: preset-intel-vaapi
           inputs:
             - path: 'rtsp://{FRIGATE_FRONTDOOR_CREDENTIALS}@frontdoor:554'
@@ -85,6 +83,7 @@ data:
           height: 540
       backdoor:
         ffmpeg:
+          hwaccel_args: preset-intel-vaapi
           inputs:
             - path: 'rtsp://{FRIGATE_BACKDOOR_CREDENTIALS}@backdoor:554/live'
               roles:
@@ -97,6 +96,7 @@ data:
         mqtt:
           height: 540
       driveway:
+        hwaccel_args: preset-intel-vaapi
         motion:
           mask:
             - 1820,127,1775,335,1605,1080,1920,1080,1920,252,1920,0,1252,0,1443,45
@@ -122,6 +122,7 @@ data:
           height: 540
       porch:
         ffmpeg:
+          hwaccel_args: preset-intel-vaapi
           inputs:
             - path: 'rtsp://{FRIGATE_PORCH_CREDENTIALS}@porch:554/live'
               roles:
