@@ -65,13 +65,12 @@ data:
         #   output_args:
         #     detect: -f rawvideo -pix_fmt yuv420p -filter:v fps=fps=5
         #     record: -f segment -segment_time 10 -segment_format mp4 -reset_timestamps 1 -strftime 1 -c:a copy -c:v copy
-        ffmpeg:
-          input_args: 
-            record: preset-intel-vaapi
         motion:
           mask:
             - 0,390,190,281,413,219,612,181,842,131,1149,113,1138,0,0,0
         ffmpeg:
+          input_args: 
+            record: preset-intel-vaapi
           inputs:
             - path: 'rtsp://{FRIGATE_FRONTDOOR_CREDENTIALS}@frontdoor:554'
               roles:
