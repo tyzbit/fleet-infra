@@ -21,13 +21,28 @@ spec:
       tag: 2.0.14
     env:
       TZ: America/New_York
+    configMaps:
+      config:
+        enabled: true
+        data:
+          mosquitto.conf: |
+            listener 1883
+            allow_anonymous true
+            persistence true
+            persistence_location /mosquitto/data
+            connection_messages false
+    persistence:
+      config:
+        enabled: true
+        type: configMap
+        name: mosquitto-config
+        mountPath: /mosquitto/config/mosquitto.conf
+        subPath: mosquitto.conf
     service:
       main:
         type: LoadBalancer
         loadBalancerIP: 192.168.1.68
         ports:
-          http:
-            enabled: false
           mqtt:
             enabled: true
             port: 1883
