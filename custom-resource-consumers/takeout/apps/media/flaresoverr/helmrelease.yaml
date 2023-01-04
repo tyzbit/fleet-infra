@@ -17,11 +17,20 @@ spec:
         namespace: flux-system
   values:
     image:
+      repository: ghcr.io/flaresolverr/flaresolverr
       tag: v2.2.4
     controller:
       replicas: 1 # active nas
     env:
       TZ: America/New_York
+    service:
+      main:
+        enabled: true
+        type: ClusterIP
+        ports:
+          http:
+            port: 8191
+            targetPort: 8191
     # ingress:
     #   main:
     #     enabled: true
