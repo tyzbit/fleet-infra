@@ -9,14 +9,15 @@ spec:
   interval: 2m0s
   chart:
     spec:
-      chart: jackett
-      version: "11.7.2"
+      chart: app-template
+      version: "1.2.1"
       sourceRef:
         kind: HelmRepository
-        name: k8s-at-home
+        name: bjw-s-helm-charts
         namespace: flux-system
   values:
     image:
+      repository: ghcr.io/k8s-at-home/jackett
       tag: v0.20.470
     controller:
       replicas: 1 # active nas
@@ -26,6 +27,14 @@ spec:
       config:
         enabled: true
         existingClaim: jackett-config-nas
+    service:
+      main:
+        enabled: true
+        type: ClusterIP
+        ports:
+          http:
+            port: 9117
+            targetPort: 9117
     ingress:
       main:
         enabled: true
