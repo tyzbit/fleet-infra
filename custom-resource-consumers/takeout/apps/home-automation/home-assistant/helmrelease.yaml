@@ -10,11 +10,11 @@ spec:
   interval: 2m0s
   chart:
     spec:
-      chart: home-assistant
-      version: "13.4.2"
+      chart: app-template
+      version: "1.2.1"
       sourceRef:
         kind: HelmRepository
-        name: k8s-at-home
+        name: bjw-s-helm-charts
         namespace: flux-system
   valuesFrom:
     - kind: Secret
@@ -32,6 +32,7 @@ spec:
   values:
     image:
       pullPolicy: Always
+      repository: ghcr.io/home-assistant/home-assistant
       tag: "2022.8.4"
 
     controller:
@@ -89,6 +90,14 @@ spec:
             secretName: home.${personal_domain}-multi-tls
 
     service:
+      main:
+        enabled: true
+        type: ClusterIP
+        ports:
+          http:
+            port: 8123
+            targetPort: 8123
+
       filebrowser:
         enabled: true
         primary: false
