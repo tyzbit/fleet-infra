@@ -10,15 +10,18 @@ spec:
   interval: 2m0s
   chart:
     spec:
-      chart: radarr
-      version: "16.3.2"
+      chart: app-template
+      version: "1.2.1"
       sourceRef:
         kind: HelmRepository
-        name: k8s-at-home
+        name: bjw-s-helm-charts
         namespace: flux-system
   values:
     controller:
       replicas: 1 # active longhorn-webapp nas
+    image:
+      repository: ghcr.io/k8s-at-home/radarr
+      tag: v4.2.4.6635
     nodeSelector:
       longhorn: primary
     env:
@@ -35,6 +38,14 @@ spec:
         enabled: false
     podSecurityContext:
       fsGroup: 568
+    service:
+      main:
+        enabled: true
+        type: ClusterIP
+        ports:
+          http:
+            port: 7878
+            targetPort: 7878
     ingress:
       main:
         enabled: true
