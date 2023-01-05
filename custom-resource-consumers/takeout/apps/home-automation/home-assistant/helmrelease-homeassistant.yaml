@@ -16,19 +16,6 @@ spec:
         kind: HelmRepository
         name: bjw-s-helm-charts
         namespace: flux-system
-  valuesFrom:
-    - kind: Secret
-      name: home-assistant-values
-      valuesKey: username
-      targetPath: mariadb.auth.username
-    - kind: Secret
-      name: home-assistant-values
-      valuesKey: password
-      targetPath: mariadb.auth.password
-    - kind: Secret
-      name: home-assistant-values
-      valuesKey: rootPassword
-      targetPath: mariadb.auth.rootPassword
   values:
     image:
       pullPolicy: Always
