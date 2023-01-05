@@ -106,25 +106,3 @@ spec:
           fbhttp:
             enabled: true
             port: 80
-
-    mariadb:
-      enabled: true
-      primary:
-        existingConfigmap: home-assistant-db-config
-        nodeSelector:
-          longhorn: primary
-        persistence:
-          enabled: true
-          existingClaim: home-assistant-mariadb-longhorn-database
-        resources:
-          requests:
-            cpu: 100m
-          limits:
-            memory: 14Gi
-
-    # influxdb:
-    #   enabled: true
-    #   persistence:
-    #     enabled: true
-    #     storageClass: longhorn
-    #     size: 8Gi

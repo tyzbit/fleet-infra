@@ -16,13 +16,17 @@ spec:
   interval: 2m0s
   values:
     fullnameOverride: qbittorrent
+
     image:
       repository: ghcr.io/k8s-at-home/qbittorrent
       tag: v4.4.3.1
+
     controller:
       replicas: 1 # active nas
+
     podSecurityContext:
       fsGroup: 568
+
     service:
       main:
         enabled: true
@@ -31,6 +35,7 @@ spec:
           http:
             port: 8080
             targetPort: 8080
+
       qbittorrent-incoming-tcp:
         enabled: true
         annotations:
@@ -42,6 +47,7 @@ spec:
           torrent-tcp:
             port: 32123
             targetPort: 32123
+
       qbittorrent-incoming-udp:
         enabled: true
         annotations:
@@ -54,6 +60,7 @@ spec:
             port: 32123
             targetPort: 32123
             protocol: UDP
+
       qbittorrent-tracker:
         enabled: true
         annotations:
@@ -65,6 +72,7 @@ spec:
           tracker:
             port: 34543
             targetPort: 34543
+
     ingress:
       main:
         enabled: true
@@ -87,6 +95,7 @@ spec:
           - hosts:
               - "torrent.${personal_domain}"
             secretName: torrent.${personal_domain}-tls
+
     persistence:
       data:
         enabled: true
@@ -94,9 +103,11 @@ spec:
         subPath:
           - path: config
             mountPath: /config
+
       media:
         enabled: true
         existingClaim: nas-volume1-media
+
     resources:
       requests:
         cpu: 200m

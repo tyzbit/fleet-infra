@@ -20,14 +20,19 @@ spec:
     image:
       repository: ghcr.io/k8s-at-home/nzbget
       tag: v21.1
+
     controller:
       replicas: 1 # active longhorn-webapp nas
+
     nodeSelector:
       longhorn: primary
+
     env:
       TZ: America/New_York
+
     podSecurityContext:
       fsGroup: 568
+
     persistence:
       config:
         enabled: true
@@ -38,6 +43,7 @@ spec:
       intermediate:
         enabled: true
         type: emptyDir
+
     service:
       main:
         enabled: true
@@ -46,6 +52,7 @@ spec:
           http:
             port: 6789
             targetPort: 6789
+
     ingress:
       main:
         enabled: true

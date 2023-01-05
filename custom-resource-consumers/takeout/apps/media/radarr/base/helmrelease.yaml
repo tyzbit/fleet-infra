@@ -17,30 +17,39 @@ spec:
         name: bjw-s-helm-charts
         namespace: flux-system
   values:
-    controller:
-      replicas: 1 # active longhorn-webapp nas
     image:
       repository: ghcr.io/k8s-at-home/radarr
       tag: v4.2.4.6635
+
+    controller:
+      replicas: 1 # active longhorn-webapp nas
+
     nodeSelector:
       longhorn: primary
+
     env:
       TZ: America/New_York
+
     persistence:
       config:
         enabled: true
         existingClaim: radarr-config-longhorn-webapp
+
       # nzb-downloads:
       #   enabled: true
       #   existingClaim: radarr-downloads
+
       media:
         enabled: true
         existingClaim: nas-volume1-media
+
     probes:
       liveness:
         enabled: false
+
     podSecurityContext:
       fsGroup: 568
+
     # initContainers:
     #   fixperms:
     #     name: fixperms
@@ -55,6 +64,7 @@ spec:
     #     volumeMounts:
     #     - name: config
     #       mountPath: /config
+
     service:
       main:
         enabled: true
@@ -63,6 +73,7 @@ spec:
           http:
             port: 7878
             targetPort: 7878
+
     ingress:
       main:
         enabled: true
@@ -82,6 +93,7 @@ spec:
           - hosts:
               - "movies.${personal_domain}"
             secretName: movies.${personal_domain}-tls
+
       oauth:
         enabled: true
         annotations:

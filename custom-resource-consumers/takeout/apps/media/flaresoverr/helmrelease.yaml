@@ -21,8 +21,10 @@ spec:
       tag: v3.0.0
     controller:
       replicas: 1 # active nas
+
     env:
       TZ: America/New_York
+
     service:
       main:
         enabled: true
@@ -31,6 +33,7 @@ spec:
           http:
             port: 8191
             targetPort: 8191
+
     # ingress:
     #   main:
     #     enabled: true

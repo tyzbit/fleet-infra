@@ -17,17 +17,22 @@ spec:
         name: bjw-s-helm-charts
         namespace: flux-system
   values:
-    controller:
-      replicas: 1 # active longhorn-webapp nas
     image:
       repository: ghcr.io/k8s-at-home/sonarr
       tag: v3.0.9.1549
+
+    controller:
+      replicas: 1 # active longhorn-webapp nas
+
     nodeSelector:
       longhorn: primary
+
     env:
       TZ: America/New_York
+
     podSecurityContext:
       fsGroup: 568
+
     # initContainers:
     #   fixperms:
     #     name: fixperms
@@ -42,16 +47,20 @@ spec:
     #     volumeMounts:
     #     - name: config
     #       mountPath: /config
+
     persistence:
       config:
         enabled: true
         existingClaim: sonarr-config-longhorn-webapp
+
       # nzb-downloads:
       #   enabled: true
       #   existingClaim: nzbget-downloads
+
       media:
         enabled: true
         existingClaim: nas-volume1-media
+
     service:
       main:
         enabled: true
@@ -60,6 +69,7 @@ spec:
           http:
             port: 8989
             targetPort: 8989
+
     ingress:
       main:
         enabled: true
@@ -79,6 +89,7 @@ spec:
           - hosts:
               - "shows.${personal_domain}"
             secretName: shows.${personal_domain}-tls
+
       oauth:
         enabled: true
         annotations:

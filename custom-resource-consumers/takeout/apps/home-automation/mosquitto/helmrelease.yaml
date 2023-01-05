@@ -21,6 +21,7 @@ spec:
       tag: 2.0.15
     env:
       TZ: America/New_York
+
     configMaps:
       config:
         enabled: true
@@ -31,6 +32,7 @@ spec:
             persistence true
             persistence_location /mosquitto/data
             connection_messages false
+
     persistence:
       config:
         enabled: true
@@ -38,6 +40,7 @@ spec:
         name: mosquitto-config
         mountPath: /mosquitto/config/mosquitto.conf
         subPath: mosquitto.conf
+
     service:
       main:
         type: LoadBalancer

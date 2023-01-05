@@ -19,14 +19,18 @@ spec:
     image:
       repository: ghcr.io/k8s-at-home/jackett
       tag: v0.20.470
+
     controller:
       replicas: 1 # active nas
+
     env:
       TZ: America/New_York
+
     persistence:
       config:
         enabled: true
         existingClaim: jackett-config-nas
+
     service:
       main:
         enabled: true
@@ -35,6 +39,7 @@ spec:
           http:
             port: 9117
             targetPort: 9117
+
     ingress:
       main:
         enabled: true
@@ -54,6 +59,7 @@ spec:
           - hosts:
               - *host
             secretName: *host
+
       oauth:
         enabled: true
         annotations:
