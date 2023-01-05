@@ -10,15 +10,18 @@ spec:
   interval: 2m0s
   chart:
     spec:
-      chart: sonarr
-      version: "16.3.2"
+      chart: app-template
+      version: "1.2.1"
       sourceRef:
         kind: HelmRepository
-        name: k8s-at-home
+        name: bjw-s-helm-charts
         namespace: flux-system
   values:
     controller:
       replicas: 1 # active longhorn-webapp nas
+    image:
+      repository: ghcr.io/k8s-at-home/sonarr
+      tag: v3.0.8.1549
     nodeSelector:
       longhorn: primary
     env:
@@ -49,6 +52,14 @@ spec:
       media:
         enabled: true
         existingClaim: nas-volume1-media
+    service:
+      main:
+        enabled: true
+        type: ClusterIP
+        ports:
+          http:
+            port: 8989
+            targetPort: 8989
     ingress:
       main:
         enabled: true
