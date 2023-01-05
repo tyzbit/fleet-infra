@@ -33,7 +33,7 @@ spec:
     image:
       pullPolicy: Always
       repository: ghcr.io/home-assistant/home-assistant
-      tag: "2022.8.7"
+      tag: "2022.12.9"
 
     controller:
       replicas: 1 # active longhorn-database nas
