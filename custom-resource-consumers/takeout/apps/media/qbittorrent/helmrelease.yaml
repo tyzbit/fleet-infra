@@ -39,7 +39,7 @@ spec:
         externalTrafficPolicy: Local
         loadBalancerIP: 192.168.1.66
         ports:
-          torrent:
+          torrent-tcp:
             port: 32123
             targetPort: 32123
       qbittorrent-incoming-udp:
@@ -50,7 +50,7 @@ spec:
         externalTrafficPolicy: Local
         loadBalancerIP: 192.168.1.66
         ports:
-          torrent:
+          torrent-udp:
             port: 32123
             targetPort: 32123
             protocol: UDP
