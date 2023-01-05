@@ -53,6 +53,7 @@ spec:
           torrent:
             port: 32123
             targetPort: 32123
+            protocol: UDP
       qbittorrent-tracker:
         enabled: true
         annotations:
