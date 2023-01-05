@@ -52,6 +52,7 @@ spec:
       config:
         enabled: true
         existingClaim: overseerr-config-longhorn-webapp
+        mountPath: /app/config
     # resources:
     #   requests:
     #     cpu: 200m
