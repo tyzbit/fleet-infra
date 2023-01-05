@@ -10,13 +10,16 @@ spec:
   interval: 2m0s
   chart:
     spec:
-      chart: nzbget
-      version: "12.4.2"
+      chart: app-template
+      version: "1.2.1"
       sourceRef:
         kind: HelmRepository
-        name: k8s-at-home
+        name: bjw-s-helm-charts
         namespace: flux-system
   values:
+    image:
+      repository: ghcr.io/k8s-at-home/nzbget
+      tag: v21.1
     controller:
       replicas: 1 # active longhorn-webapp nas
     nodeSelector:
@@ -35,6 +38,14 @@ spec:
       intermediate:
         enabled: true
         type: emptyDir
+    service:
+      main:
+        enabled: true
+        type: ClusterIP
+        ports:
+          http:
+            port: 6789
+            targetPort: 6789
     ingress:
       main:
         enabled: true
