@@ -7,17 +7,30 @@ spec:
   targetNamespace: media
   chart:
     spec:
-      chart: overseerr
-      version: "5.4.2"
+      chart: app-template
+      version: "1.2.1"
       sourceRef:
         kind: HelmRepository
-        name: k8s-at-home
+        name: bjw-s-helm-charts
         namespace: flux-system
   interval: 2m0s
   values:
+    image:
+      repository: ghcr.io/sct/overseerr
+      tag: 1.26.1
     fullnameOverride: overseerr
     controller:
       replicas: 1 # active longhorn-webapp
+    podSecurityContext:
+      fsGroup: 568
+    service:
+      main:
+        enabled: true
+        type: ClusterIP
+        ports:
+          http:
+            port: 5055
+            targetPort: 5055
     ingress:
       main:
         enabled: true
@@ -35,8 +48,6 @@ spec:
           - hosts:
               - *host
             secretName: *host
-    podSecurityContext:
-      fsGroup: 568
     persistence:
       config:
         enabled: true
