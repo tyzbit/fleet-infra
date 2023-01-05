@@ -7,17 +7,63 @@ spec:
   targetNamespace: media
   chart:
     spec:
-      chart: qbittorrent
-      version: "13.5.2"
+      chart: app-template
+      version: "1.2.1"
       sourceRef:
         kind: HelmRepository
-        name: k8s-at-home
+        name: bjw-s-helm-charts
         namespace: flux-system
   interval: 2m0s
   values:
     fullnameOverride: qbittorrent
+    image:
+      repository: ghcr.io/k8s-at-home/qbittorrent
+      tag: 13.5.2
     controller:
       replicas: 1 # active nas
+    podSecurityContext:
+      fsGroup: 568
+    service:
+      main:
+        enabled: true
+        type: ClusterIP
+        ports:
+          http:
+            port: 8080
+            targetPort: 8080
+      qbittorrent-incoming-tcp:
+        enabled: true
+        annotations:
+          metallb.universe.tf/allow-shared-ip: media-qbittorrent
+        type: LoadBalancer
+        externalTrafficPolicy: Local
+        loadBalancerIP: 192.168.1.66
+        ports:
+          torrent:
+            port: 32123
+            targetPort: 32123
+      qbittorrent-incoming-udp:
+        enabled: true
+        annotations:
+          metallb.universe.tf/allow-shared-ip: media-qbittorrent
+        type: LoadBalancer
+        externalTrafficPolicy: Local
+        loadBalancerIP: 192.168.1.66
+        ports:
+          torrent:
+            port: 32123
+            targetPort: 32123
+      qbittorrent-tracker:
+        enabled: true
+        annotations:
+          metallb.universe.tf/allow-shared-ip: media-qbittorrent
+        type: LoadBalancer
+        externalTrafficPolicy: Local
+        loadBalancerIP: 192.168.1.66
+        ports:
+          tracker:
+            port: 34543
+            targetPort: 34543
     ingress:
       main:
         enabled: true
@@ -40,6 +86,22 @@ spec:
           - hosts:
               - "torrent.${personal_domain}"
             secretName: torrent.${personal_domain}-tls
+      # qbittorrent-tracker:
+      #   enabled: true
+      #   annotations:
+      #     kubernetes.io/ingress.class: nginx
+      #     cert-manager.io/cluster-issuer: letsencrypt
+      #     acme.cert-manager.io/http01-edit-in-place: "false"
+      #     external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
+      #     external-dns.alpha.kubernetes.io/target: ${personal_domain_ddns}
+      #   hosts:
+      #     - host: &host "bgp.${personal_domain}"
+      #       paths:
+      #         - path: "/"
+      #   tls:
+      #     - hosts:
+      #         - *host
+      #       secretName: *host
       # oauth:
       #   enabled: true
       #   annotations:
@@ -58,8 +120,6 @@ spec:
       #     - hosts:
       #         - "qbt.${personal_domain}"
       #       secretName: qbt.${personal_domain}-tls
-    podSecurityContext:
-      fsGroup: 568
     persistence:
       data:
         enabled: true
