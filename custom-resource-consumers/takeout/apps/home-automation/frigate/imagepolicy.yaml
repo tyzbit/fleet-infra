@@ -7,7 +7,7 @@ spec:
   imageRepositoryRef:
     name: frigate
   filterTags:
-    pattern: '^(?P<semver>[0-9]+\.[0-9]+\.[0-9]+(?:-beta)[0-9]+)?)$'
+    pattern: '^(?P<semver>[0-9]+\.[0-9]+\.[0-9]+((?:-beta)[0-9]+)?)$'
     extract: "$semver"
   policy:
     semver:
