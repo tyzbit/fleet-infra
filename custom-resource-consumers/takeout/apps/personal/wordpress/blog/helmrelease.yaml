@@ -17,61 +17,61 @@ spec:
         namespace: flux-system
   interval: 2m0s
   valuesFrom:
-  - kind: Secret
-    name: wordpress-${blog_name}-values
-    valuesKey: wordpressUsername
-    targetPath: wordpressUsername
-  - kind: Secret
-    name: wordpress-${blog_name}-values
-    valuesKey: wordpressPassword
-    targetPath: wordpressPassword
-  - kind: Secret
-    name: wordpress-${blog_name}-values
-    valuesKey: wordpressEmail
-    targetPath: wordpressEmail
-  - kind: Secret
-    name: wordpress-${blog_name}-values
-    valuesKey: wordpressTablePrefix
-    targetPath: wordpressTablePrefix
-  - kind: Secret
-    name: wordpress-${blog_name}-values
-    valuesKey: mariadbAuthRootPassword
-    targetPath: mariadb.auth.rootPassword
-  - kind: Secret
-    name: wordpress-${blog_name}-values
-    valuesKey: mariadbAuthUsername
-    targetPath: mariadb.auth.username
-  - kind: Secret
-    name: wordpress-${blog_name}-values
-    valuesKey: mariadbAuthPassword
-    targetPath: mariadb.auth.password
-  - kind: Secret
-    name: wordpress-${blog_name}-values
-    valuesKey: mariadbAuthDatabase
-    targetPath: mariadb.auth.database
-  - kind: Secret
-    name: wordpress-${blog_name}-values
-    valuesKey: smtpHost
-    targetPath: smtpHost
-  - kind: Secret
-    name: wordpress-${blog_name}-values
-    valuesKey: smtpPort
-    targetPath: smtpPort
-  - kind: Secret
-    name: wordpress-${blog_name}-values
-    valuesKey: smtpUser
-    targetPath: smtpUser
-  - kind: Secret
-    name: wordpress-${blog_name}-values
-    valuesKey: smtpPassword
-    targetPath: smtpPassword
+    - kind: Secret
+      name: wordpress-${blog_name}-values
+      valuesKey: wordpressUsername
+      targetPath: wordpressUsername
+    - kind: Secret
+      name: wordpress-${blog_name}-values
+      valuesKey: wordpressPassword
+      targetPath: wordpressPassword
+    - kind: Secret
+      name: wordpress-${blog_name}-values
+      valuesKey: wordpressEmail
+      targetPath: wordpressEmail
+    - kind: Secret
+      name: wordpress-${blog_name}-values
+      valuesKey: wordpressTablePrefix
+      targetPath: wordpressTablePrefix
+    - kind: Secret
+      name: wordpress-${blog_name}-values
+      valuesKey: mariadbAuthRootPassword
+      targetPath: mariadb.auth.rootPassword
+    - kind: Secret
+      name: wordpress-${blog_name}-values
+      valuesKey: mariadbAuthUsername
+      targetPath: mariadb.auth.username
+    - kind: Secret
+      name: wordpress-${blog_name}-values
+      valuesKey: mariadbAuthPassword
+      targetPath: mariadb.auth.password
+    - kind: Secret
+      name: wordpress-${blog_name}-values
+      valuesKey: mariadbAuthDatabase
+      targetPath: mariadb.auth.database
+    - kind: Secret
+      name: wordpress-${blog_name}-values
+      valuesKey: smtpHost
+      targetPath: smtpHost
+    - kind: Secret
+      name: wordpress-${blog_name}-values
+      valuesKey: smtpPort
+      targetPath: smtpPort
+    - kind: Secret
+      name: wordpress-${blog_name}-values
+      valuesKey: smtpUser
+      targetPath: smtpUser
+    - kind: Secret
+      name: wordpress-${blog_name}-values
+      valuesKey: smtpPassword
+      targetPath: smtpPassword
   values:
     replicaCount: 1 # active longhorn-database nas
     image:
-      tag: "5.9.1" # {"$imagepolicy": "flux-system:wordpress-${blog_name}:tag"}
+      tag: "5.9.1" # {"$imagepolicy": "flux-system:wordpress-$${blog_name}:tag"}
       pullPolicy: Always
       pullSecrets:
-      - name: docker-hub
+        - name: docker-hub
     wordpressBlogName: ${blog_pretty_name}
     wordpressConfigureCache: true
     wordpressScheme: https
@@ -117,12 +117,12 @@ spec:
     affinity:
       podAffinity:
         preferredDuringSchedulingIgnoredDuringExecution:
-        - podAffinityTerm:
-            labelSelector:
-              matchExpressions:
-              - key: app.kubernetes.io/instance
-                operator: In
-                values:
-                - wordpress-${blog_name}
-            topologyKey: kubernetes.io/hostname
-          weight: 100
+          - podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                  - key: app.kubernetes.io/instance
+                    operator: In
+                    values:
+                      - wordpress-${blog_name}
+              topologyKey: kubernetes.io/hostname
+            weight: 100
