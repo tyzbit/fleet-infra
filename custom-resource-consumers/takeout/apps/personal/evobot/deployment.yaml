@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: evobot
-          image: eritislami/evobot:2.3.1
+          image: eritislami/evobot:2.4.0
           envFrom:
             - secretRef:
                 name: evobot
