@@ -50,6 +50,11 @@ data:
         motion:
           mask:
             - 0,390,193,302,416,250,613,202,707,193,1021,155,1149,113,1138,0,0,0
+        objects:
+          filters:
+            person:
+              mask:
+                - 0,390,193,302,416,250,613,202,707,193,1021,155,1149,113,1138,0,0,0
         ffmpeg:
           hwaccel_args: preset-vaapi
           inputs:
