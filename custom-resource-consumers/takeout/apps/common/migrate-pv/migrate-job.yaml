@@ -36,7 +36,7 @@ spec:
       volumes:
         - name: src
           persistentVolumeClaim:
-            claimName: home-assistant-mariadb-longhorn-database-old
+            claimName: frigate-database-longhorn-database-old
         - name: dst
           persistentVolumeClaim:
-            claimName: home-assistant-mariadb-longhorn-database
+            claimName: frigate-database-longhorn-database
