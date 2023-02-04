@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: qdirstat
-          image: jlesage/qdirstat:v23.01.1
+          image: jlesage/qdirstat:v23.02.1
           imagePullPolicy: Always
           # command: ["sh","-c","tail -f /dev/null"]
           volumeMounts:
