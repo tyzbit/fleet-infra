@@ -38,7 +38,8 @@ spec:
         existingClaim: home-assistant-config-nas
 
     additionalContainers:
-      - name: filebrowser
+      filebrowser:
+        name: filebrowser
         image: filebrowser/filebrowser:v2
         args: ["-d", "/db/database.db"]
         env:
