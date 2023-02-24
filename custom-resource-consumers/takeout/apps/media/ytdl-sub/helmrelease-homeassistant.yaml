@@ -26,7 +26,7 @@ spec:
       type: cronjob
       cronjob:
         # schedule: "0 0 5 31 2" # Disable cronjob by giving it a schedule that will never run # active nas
-        schedule: "0/15 * * * *"
+        schedule: "*/15 * * * *"
 
     env:
       TZ: America/New_York
