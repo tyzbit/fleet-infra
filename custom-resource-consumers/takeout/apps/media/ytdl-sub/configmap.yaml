@@ -25,7 +25,7 @@ data:
           after: "{download_after}"
         output_options:
           maintain_download_archive: True
-          output_directory: "/media/youtube"
+          output_directory: "/media/youtub/movies"
           file_name: "{video_path}.{ext}"
           thumbnail_name: "{video_path}-thumb.{thumbnail_ext}"
           keep_files_after: "{download_after}"
@@ -47,7 +47,7 @@ data:
       yt_playlist:
         preset: "yt_video"
         output_options:
-          output_directory: "/media/youtube/{tv_show_name_sanitized}"
+          output_directory: "/media/youtube/tv/{tv_show_name_sanitized}"
           file_name: "{episode_path}.{ext}"
           thumbnail_name: "{episode_path}-thumb.{thumbnail_ext}"
         overrides:
