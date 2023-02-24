@@ -64,6 +64,8 @@ data:
       # Now let us create a preset that downloads videos and formats
       # as TV shows.
       movie:
+        download:
+          download_strategy: "url"
 
         # Set override variables that will be applicable to all downloads
         # in main presets.
