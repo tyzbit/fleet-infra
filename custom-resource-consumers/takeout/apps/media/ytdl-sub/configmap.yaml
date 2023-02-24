@@ -40,8 +40,6 @@ data:
           nfo_root: "episodedetails"
           tags:
             title: "{title}"
-            season: "{season}"
-            episode: "{episode}"
             year: "{upload_year}"
             aired: "{upload_date_standardized}"
       yt_playlist:
