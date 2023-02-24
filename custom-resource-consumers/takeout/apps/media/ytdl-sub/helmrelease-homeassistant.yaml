@@ -46,16 +46,7 @@ spec:
         enabled: true
         name: ytdl-sub-config
         type: configMap
-        mountPath: /config/config.yaml
-        subPath: config.yaml
-        readOnly: true
-        defaultMode: 0755
-      subscriptions:
-        enabled: true
-        name: ytdl-sub-subscriptions
-        type: configMap
-        mountPath: /config/subscriptions.yaml
-        subPath: subscriptions.yaml
+        mountPath: /config
         readOnly: true
         defaultMode: 0755
       media:

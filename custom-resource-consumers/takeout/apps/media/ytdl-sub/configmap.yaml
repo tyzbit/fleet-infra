@@ -86,13 +86,6 @@ data:
           filters:
             - "original_url!*=/shorts/"
             - "!is_live"
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: ytdl-sub-subscriptions
-  namespace: media
-data:
   subscriptions.yaml: |
     music_box_tunes:
       preset: "yt_playlist_one_season"
