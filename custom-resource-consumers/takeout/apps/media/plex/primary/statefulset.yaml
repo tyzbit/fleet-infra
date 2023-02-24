@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: plex
-          image: plexinc/pms-docker:1.30.2.6563-3d4dc0cce
+          image: plexinc/pms-docker:1.31.0.6654-02189b09f
           imagePullPolicy: Always
           # command: ["tail","-f","/dev/null"]
           envFrom:
