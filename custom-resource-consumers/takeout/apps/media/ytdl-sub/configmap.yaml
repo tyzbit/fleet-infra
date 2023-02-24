@@ -30,7 +30,7 @@ data:
           thumbnail_name: "{video_path}-thumb.{thumbnail_ext}"
           keep_files_after: "{download_after}"
         overrides:
-          video_name: "{upload_date} {title_sanitized}"
+          video_name: "{title_sanitized}-{upload_date}"
           video_type: "{channel}"
           video_path: "{video_type_sanitized}/{video_name}"
           download_before: "now"
@@ -95,20 +95,26 @@ metadata:
 data:
   subscriptions.yaml: |
     music_box_tunes:
-      preset: "yt_playlist"
-      download:
-        url: "https://youtube.com/playlist?list=PLWh_Fb1QWWg2URlJiYFOAnkczWz7sT_Me"
+      preset: "yt_playlist_one_season"
       overrides:
         tv_show_name: Music Box Tunes
-    music_box_tunes_one_season:
+      download:
+        url: "https://youtube.com/playlist?list=PLWh_Fb1QWWg2URlJiYFOAnkczWz7sT_Me"
+    music_box_mega_list:
       preset: "yt_playlist_one_season"
-      download:
-        url: "https://youtube.com/playlist?list=PLWh_Fb1QWWg2URlJiYFOAnkczWz7sT_Me"
       overrides:
-        tv_show_name: Music Box Tunes One Season
-    music_box_tunes_video:
+        tv_show_name: Music Box Mega List
+      download:
+        url: "https://www.youtube.com/playlist?list=PLyF3UPcbp4IMmtsHNI-KOM9CuDodrOFzA"
+    youtubehaiku:
       preset: "yt_video"
-      download:
-        url: "https://youtube.com/playlist?list=PLWh_Fb1QWWg2URlJiYFOAnkczWz7sT_Me"
       overrides:
-        tv_show_name: Music Box Tunes Videos
+        tv_show_name: Youtubehaiku
+      download:
+        url: "https://www.youtube.com/playlist?list=PLWh_Fb1QWWg24ofE1yYA-CNHHpyTER9P9"
+    youtubesyllable:
+      preset: "yt_video"
+      overrides:
+        tv_show_name: Youtubesyllable
+      download:
+        url: "https://www.youtube.com/playlist?list=PLWh_Fb1QWWg0IbWj4X_xd3Q2JuHq-dpFt"
