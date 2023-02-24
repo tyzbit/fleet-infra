@@ -67,6 +67,10 @@ data:
         download:
           download_strategy: "url"
           url: "{url}"
+        
+        output_options:
+          output_directory: "{output_directory}/{playlist_name}"
+          file_name: "{playlist_name}.{title}.{ext}"
 
         # Set override variables that will be applicable to all downloads
         # in main presets.
@@ -88,4 +92,5 @@ data:
       # name we want to give the TV show.
       overrides:
         download:
+          playlist_name: "Reol"
           url: "https://www.youtube.com/playlist?list=PLWh_Fb1QWWg1BuddtCQt9XsziVUjtr1ui"
