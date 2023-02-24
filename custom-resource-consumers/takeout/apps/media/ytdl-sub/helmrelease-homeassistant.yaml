@@ -52,6 +52,4 @@ spec:
 
     service:
       main:
-        ports:
-          http:
-            enabled: false
+        enabled: false
