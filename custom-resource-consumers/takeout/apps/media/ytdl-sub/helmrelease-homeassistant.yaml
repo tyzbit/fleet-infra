@@ -49,3 +49,9 @@ spec:
       media:
         enabled: true
         existingClaim: nas-volume1-media
+
+    service:
+      main:
+        ports:
+          http:
+            enabled: false
