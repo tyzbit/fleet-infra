@@ -47,12 +47,16 @@ spec:
         type: configMap
         mountPath: /config/config.yaml
         subPath: config.yaml
+        readOnly: true
+        defaultMode: 0755
       subscriptions:
         enabled: true
         name: ytdl-sub-subscriptions
         type: configMap
         mountPath: /config/subscriptions.yaml
         subPath: subscriptions.yaml
+        readOnly: true
+        defaultMode: 0755
       media:
         enabled: true
         existingClaim: nas-volume1-media
