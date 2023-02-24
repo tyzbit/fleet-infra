@@ -24,6 +24,7 @@ spec:
 
     controller:
       type: cronjob
+      restartPolicy: OnFailure
       cronjob:
         # schedule: "0 0 5 31 2" # Disable cronjob by giving it a schedule that will never run # active nas
         schedule: "*/15 * * * *"
@@ -59,3 +60,14 @@ spec:
     service:
       main:
         enabled: false
+
+    ingress:
+      main:
+        enabled: false
+
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128M
+      limits:
+        memory: 8G
