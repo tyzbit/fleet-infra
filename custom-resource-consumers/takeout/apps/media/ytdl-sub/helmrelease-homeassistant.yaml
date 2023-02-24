@@ -30,9 +30,9 @@ spec:
 
     command:
       - "ytdl-sub"
-      - "--config=/config/first_config/config.yaml"
+      - "--config=/config/config.yaml"
       - "sub"
-      - "/config/first_config/subscriptions.yaml"
+      - "/config/subscriptions.yaml"
 
     env:
       TZ: America/New_York
