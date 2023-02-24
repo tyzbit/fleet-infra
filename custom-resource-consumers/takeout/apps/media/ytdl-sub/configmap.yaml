@@ -86,5 +86,6 @@ data:
       # Set override variables to set the channel URL and the
       # name we want to give the TV show.
       overrides:
-        playlist_name: "Reol"
-        url: "https://www.youtube.com/playlist?list=PLWh_Fb1QWWg1BuddtCQt9XsziVUjtr1ui"
+        download:
+          playlist_name: "Reol"
+          url: "https://www.youtube.com/playlist?list=PLWh_Fb1QWWg1BuddtCQt9XsziVUjtr1ui"
