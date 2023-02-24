@@ -72,7 +72,7 @@ data:
       yt_playlist_one_season:
         preset: "yt_playlist"
         overrides:
-          season: "Season 00"
+          season: "00"
       yt_channel:
         preset: "yt_playlist"
         download:
