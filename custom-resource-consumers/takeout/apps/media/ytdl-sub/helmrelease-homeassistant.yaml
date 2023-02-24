@@ -27,11 +27,12 @@ spec:
       cronjob:
         # schedule: "0 0 5 31 2" # Disable cronjob by giving it a schedule that will never run # active nas
         schedule: "*/15 * * * *"
-        command:
-          - "ytdl-sub"
-          - "--config=/config/first_config/config.yaml"
-          - "sub"
-          - "/config/first_config/subscriptions.yaml"
+
+    command:
+      - "ytdl-sub"
+      - "--config=/config/first_config/config.yaml"
+      - "sub"
+      - "/config/first_config/subscriptions.yaml"
 
     env:
       TZ: America/New_York
