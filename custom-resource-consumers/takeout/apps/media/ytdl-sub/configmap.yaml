@@ -69,6 +69,10 @@ data:
             episode: "{episode}"
             year: "{upload_year}"
             aired: "{upload_date_standardized}"
+      yt_playlist_one_season:
+        preset: "yt_playlist"
+        overrides:
+          season: "Season 00"
       yt_channel:
         preset: "yt_playlist"
         download:
@@ -96,6 +100,12 @@ data:
         url: "https://youtube.com/playlist?list=PLWh_Fb1QWWg2URlJiYFOAnkczWz7sT_Me"
       overrides:
         tv_show_name: Music Box Tunes
+    music_box_tunes_one_season:
+      preset: "yt_playlist_one_season"
+      download:
+        url: "https://youtube.com/playlist?list=PLWh_Fb1QWWg2URlJiYFOAnkczWz7sT_Me"
+      overrides:
+        tv_show_name: Music Box Tunes One Season
     music_box_tunes_video:
       preset: "yt_video"
       download:
