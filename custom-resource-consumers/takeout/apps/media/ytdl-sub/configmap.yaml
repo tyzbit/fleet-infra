@@ -92,9 +92,9 @@ metadata:
   namespace: media
 data:
   subscriptions.yaml: |
-    reol:
+    music_box_tunes:
       preset: "yt_playlist"
       download:
-        url: "https://www.youtube.com/playlist?list=PLWh_Fb1QWWg1BuddtCQt9XsziVUjtr1ui"
+        url: "https://youtube.com/playlist?list=PLWh_Fb1QWWg2URlJiYFOAnkczWz7sT_Me"
       overrides:
-        tv_show_name: Reol
+        tv_show_name: Music Box Tunes
