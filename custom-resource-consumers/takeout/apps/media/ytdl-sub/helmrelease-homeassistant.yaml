@@ -60,6 +60,10 @@ spec:
       media:
         enabled: true
         existingClaim: nas-volume1-media
+      tmp:
+        enabled: true
+        type: emptyDir
+        mountPath: /tmp/ytdl-sub
 
     service:
       main:
