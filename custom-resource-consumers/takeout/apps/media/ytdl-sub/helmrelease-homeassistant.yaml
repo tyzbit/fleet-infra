@@ -5,7 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   releaseName: ytdl-sub
-  targetNamespace: home-automation
+  targetNamespace: media
   timeout: 15m
   interval: 2m0s
   chart:
