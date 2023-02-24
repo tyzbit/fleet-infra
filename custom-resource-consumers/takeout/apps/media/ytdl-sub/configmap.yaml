@@ -1,0 +1,88 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ytdl-sub-config
+  namespace: media
+data:
+  config.yaml: |
+    # Set the working directory which will be used to stage downloads
+    # before placing them in your desired output directory.
+    configuration:
+      working_directory: '.ytdl-sub-downloads'
+
+    # Presets are where you create 'sub-configs' that can can be
+    # merged together to dictate what is downloaded, how to format it,
+    # and what metadata to generate.
+    presets:
+
+      # Let us create a preset called `only_recent_videos` that will
+      # only download recent videos in the last 2 months.
+      only_recent_videos:
+
+        # Use the `date_range` plugin to specify ytdl-sub to only
+        # download videos after today MINUS {download_range}, which
+        # is an override variable that we can alter per channel.
+        date_range:
+          after: "today-{download_range}"
+
+        # Any yt-dlp argument can be passed via ytdl-sub. Let us set
+        # yt-dlp's `break_on_reject` to True to stop downloading after
+        # any video is rejected. Videos will be rejected if they are
+        # uploaded after our {download_range}.
+        ytdl_options:
+          break_on_reject: True
+
+        # Deletes any videos uploaded after {download_range}.
+        output_options:
+          keep_files_after: "today-{download_range}"
+
+        # Set the override variable {download_range} to 2months.
+        # This will serve as our default value. We can override
+        # this per channel or in a child preset.
+        overrides:
+          download_range: "2months"
+
+      ####################################################################
+
+      # Now let us create a preset that downloads videos and formats
+      # as TV shows.
+      tv_show:
+
+        # Presets can inherit all attributes from other presets. Our
+        # `tv_show` preset will inherit these presets built into ytdl-sub.
+        preset:
+          - "plex_tv_show_by_date"
+          - "season_by_year__episode_by_month_day"
+
+        # Set override variables that will be applicable to all downloads
+        # in main presets.
+        overrides:
+          tv_show_directory: "/media/youtube/tv_shows"  # Replace with desired directory
+
+      ####################################################################
+
+      # Now let us create a preset that downloads videos and formats
+      # as TV shows.
+      movie:
+
+        # Set override variables that will be applicable to all downloads
+        # in main presets.
+        overrides:
+          output_directory: "/media/youtube/movies"  # Replace with desired directory
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ytdl-sub-subscriptions
+  namespace: media
+data:
+  subscriptions.yaml: |
+    reol:
+      preset:
+        - "movie"
+      
+      # Set override variables to set the channel URL and the
+      # name we want to give the TV show.
+      overrides:
+        playlist_name: "Reol""
+        url: "https://www.youtube.com/playlist?list=PLWh_Fb1QWWg1BuddtCQt9XsziVUjtr1ui"

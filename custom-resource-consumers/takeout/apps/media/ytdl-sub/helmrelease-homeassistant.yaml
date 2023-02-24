@@ -1,0 +1,51 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: ytdl-sub
+  namespace: flux-system
+spec:
+  releaseName: ytdl-sub
+  targetNamespace: home-automation
+  timeout: 15m
+  interval: 2m0s
+  chart:
+    spec:
+      chart: app-template
+      version: "1.3.2"
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s-helm-charts
+        namespace: flux-system
+  values:
+    image:
+      pullPolicy: Always
+      repository: ghcr.io/jmbannon/ytdl-sub
+      tag: "sha256:4b41e03210a79f9f1631e9f9c4d1ff4211ce3e3814db77c4a5e3dc8eaa87c2c6" # 2023-02-23 15:00 -0400
+
+    controller:
+      type: cronjob
+      cronjob:
+        # schedule: "0 0 5 31 2" # Disable cronjob by giving it a schedule that will never run # active nas
+        schedule: "0/15 * * * *"
+
+    env:
+      TZ: America/New_York
+      PUID: "568"
+      PGID: "568"
+
+    persistence:
+      config:
+        enabled: true
+        name: ytdl-sub-config
+        type: configMap
+        mountPath: /config/config.yaml
+        subPath: config.yaml
+      subscriptions:
+        enabled: true
+        name: ytdl-sub-subscriptions
+        type: configMap
+        mountPath: /config/subscriptions.yaml
+        subPath: subscriptions.yaml
+      media:
+        enabled: true
+        existingClaim: nas-volume1-media
