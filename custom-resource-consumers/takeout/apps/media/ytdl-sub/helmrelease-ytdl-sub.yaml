@@ -34,7 +34,8 @@ spec:
       - "ytdl-sub"
       - "--log-level=debug"
       - "--config=/config/config.yaml"
-      - "--subscription=/config/subscriptions.yaml"
+      - "-sub"
+      - "/config/subscriptions.yaml"
 
     env:
       TZ: America/New_York
