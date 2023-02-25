@@ -100,13 +100,13 @@ data:
       download:
         url: "https://www.youtube.com/playlist?list=PLyF3UPcbp4IMmtsHNI-KOM9CuDodrOFzA"
     youtubehaiku:
-      preset: "yt_video"
+      preset: "yt_playlist_one_season"
       overrides:
         tv_show_name: Youtubehaiku
       download:
         url: "https://www.youtube.com/playlist?list=PLWh_Fb1QWWg24ofE1yYA-CNHHpyTER9P9"
     youtubesyllable:
-      preset: "yt_video"
+      preset: "yt_playlist_one_season"
       overrides:
         tv_show_name: Youtubesyllable
       download:
