@@ -43,7 +43,9 @@ data:
             year: "{upload_year}"
             aired: "{upload_date_standardized}"
       yt_playlist:
-        preset: "yt_video"
+        preset:
+          - yt_video
+          - season_by_year__episode_by_download_index
         output_options:
           output_directory: "/media/youtube/playlists/{tv_show_name_sanitized}"
           file_name: "{episode_path}.{ext}"
@@ -51,9 +53,9 @@ data:
         overrides:
           tv_show_name: "OVERRIDE IN SUBSCRIPTION"
           season: "{upload_year}"
-          episode: "{upload_month}{upload_day_padded}"
-          episode_padded: "{upload_month_padded}{upload_day_padded}"
-          episode_file_name: "S{season}E{episode_padded} {title_sanitized}"
+          episode: "{download_index}"
+          episode_padded: "{download_index_padded6}"
+          episode_file_name: "S{season}E{episode_padded} - {title_sanitized}"
           episode_path: "Season {season}/{episode_file_name}"
         output_directory_nfo_tags:
           nfo_name: "tvshow.nfo"
@@ -70,11 +72,11 @@ data:
             year: "{upload_year}"
             aired: "{upload_date_standardized}"
       yt_playlist_one_season:
-        preset: "yt_playlist"
+        preset: yt_playlist
         overrides:
           season: "00"
       yt_channel:
-        preset: "yt_playlist"
+        preset: yt_playlist
         download:
           download_strategy: "url"
           playlist_thumbnails:
@@ -88,25 +90,25 @@ data:
             - "!is_live"
   subscriptions.yaml: |
     music_box_tunes:
-      preset: "yt_playlist_one_season"
+      preset: yt_playlist_one_season
       overrides:
         tv_show_name: Music Box Tunes
       download:
         url: "https://youtube.com/playlist?list=PLWh_Fb1QWWg2URlJiYFOAnkczWz7sT_Me"
     music_box_mega_list:
-      preset: "yt_playlist_one_season"
+      preset: yt_playlist_one_season
       overrides:
         tv_show_name: Music Box Mega List
       download:
         url: "https://www.youtube.com/playlist?list=PLyF3UPcbp4IMmtsHNI-KOM9CuDodrOFzA"
     youtubehaiku:
-      preset: "yt_playlist_one_season"
+      preset: yt_playlist_one_season
       overrides:
         tv_show_name: Youtubehaiku
       download:
         url: "https://www.youtube.com/playlist?list=PLWh_Fb1QWWg24ofE1yYA-CNHHpyTER9P9"
     youtubesyllable:
-      preset: "yt_playlist_one_season"
+      preset: yt_playlist_one_season
       overrides:
         tv_show_name: Youtubesyllable
       download:
