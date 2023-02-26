@@ -7,10 +7,12 @@ data:
   config.yaml: |
     configuration:
       working_directory: "/tmp/ytdl-sub"
+
     presets:
       yt_video:
         download:
           download_strategy: "url"
+
         ytdl_options:
           format: "bestvideo[ext=webm][height<=1440]+bestaudio[ext=webm]/best[ext=webm]/best"
           ignoreerrors: True
@@ -18,23 +20,28 @@ data:
           break_on_reject: True
           final_ext: mkv
           cachedir: "/tmp/ytdl-sub"
+
         file_convert:
           convert_to: "mkv"
+
         date_range:
           before: "{download_before}"
           after: "{download_after}"
+
         output_options:
           maintain_download_archive: True
           output_directory: "/media/youtube/videos"
           file_name: "{video_path}.{ext}"
           thumbnail_name: "{video_path}-thumb.{thumbnail_ext}"
           keep_files_after: "{download_after}"
+
         overrides:
           video_name: "{title_sanitized}-{upload_date}"
           video_type: "{channel}"
           video_path: "{video_type_sanitized}/{video_name}"
           download_before: "now"
           download_after: "19000101"
+
         nfo_tags:
           nfo_name: "{video_path}.nfo"
           nfo_root: "episodedetails"
@@ -42,14 +49,17 @@ data:
             title: "{title}"
             year: "{upload_year}"
             aired: "{upload_date_standardized}"
+
       yt_playlist:
         preset:
           - yt_video
           - season_by_year__episode_by_download_index
+
         output_options:
           output_directory: "/media/youtube/playlists/{tv_show_name_sanitized}"
           file_name: "{episode_path}.{ext}"
           thumbnail_name: "{episode_path}-thumb.{thumbnail_ext}"
+
         overrides:
           tv_show_name: "OVERRIDE IN SUBSCRIPTION"
           season: "{upload_year}"
@@ -57,11 +67,13 @@ data:
           episode_padded: "{download_index_padded6}"
           episode_file_name: "S{season}E{episode_padded} - {title_sanitized}"
           episode_path: "Season {season}/{episode_file_name}"
+
         output_directory_nfo_tags:
           nfo_name: "tvshow.nfo"
           nfo_root: "tvshow"
           tags:
             title: "{tv_show_name}"
+
         nfo_tags:
           nfo_name: "{episode_path}.nfo"
           nfo_root: "episodedetails"
@@ -71,12 +83,15 @@ data:
             episode: "{episode}"
             year: "{upload_year}"
             aired: "{upload_date_standardized}"
+
       yt_playlist_one_season:
         preset: yt_playlist
         overrides:
           season: "00"
+
       yt_channel:
         preset: yt_playlist
+
         download:
           download_strategy: "url"
           playlist_thumbnails:
@@ -84,6 +99,7 @@ data:
               uid: "avatar_uncropped"
             - name: "official-banner.jpg"
               uid: "banner_uncropped"
+              
         match_filters:
           filters:
             - "original_url!*=/shorts/"
@@ -95,18 +111,21 @@ data:
         tv_show_name: Music Box Tunes
       download:
         url: "https://youtube.com/playlist?list=PLWh_Fb1QWWg2URlJiYFOAnkczWz7sT_Me"
+
     music_box_mega_list:
       preset: yt_playlist_one_season
       overrides:
         tv_show_name: Music Box Mega List
       download:
         url: "https://www.youtube.com/playlist?list=PLyF3UPcbp4IMmtsHNI-KOM9CuDodrOFzA"
+
     youtubehaiku:
       preset: yt_playlist_one_season
       overrides:
         tv_show_name: Youtubehaiku
       download:
         url: "https://www.youtube.com/playlist?list=PLWh_Fb1QWWg24ofE1yYA-CNHHpyTER9P9"
+        
     youtubesyllable:
       preset: yt_playlist_one_season
       overrides:
