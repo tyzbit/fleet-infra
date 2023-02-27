@@ -15,15 +15,18 @@ data:
 
         ytdl_options:
           # Graciously stolen from https://github.com/npawelek/k8s-gitops/blob/4e92f498939b2b956455f9185cf58ed8d8c7726a/cluster/apps/ytdl-sub/cm.yaml#L18
-          format: "bestvideo[ext=webm][height<=1440]+bestaudio[ext=webm]/best[ext=webm]/best"
+          # format: "bestvideo[ext=webm][height<=1440]+bestaudio[ext=webm]/best[ext=webm]/best"
+          format: "bv*[ext=mp4]+ba[ext=m4a]/b[ext=mp4] / bv*+ba/b"
           ignoreerrors: True
           break_on_existing: False
           break_on_reject: False
           final_ext: mp4
           cachedir: "/tmp/ytdl-sub"
+          postprocessor_args:
+            chown: "-R 568:568 {}"
 
-        file_convert:
-          convert_to: "mkv"
+        # file_convert:
+        #   convert_to: "mp4"
 
         date_range:
           before: "{download_before}"
@@ -77,17 +80,6 @@ data:
         overrides:
           season: "00"
 
-      yt_playlist_one_season_testing:
-        preset: yt_playlist_one_season
-        ytdl_options:
-          format: "bv*[ext=mp4]+ba[ext=m4a]/b[ext=mp4] / bv*+ba/b"
-          postprocessor_args:
-            chown: "-R 568:568 \"{file_name}\""
-        file_convert:
-          convert_to: "mp4"
-        overrides:
-          season: "00"
-
       yt_channel:
         preset: yt_playlist
 
@@ -105,29 +97,29 @@ data:
             - "!is_live"
   subscriptions.yaml: |
     music_box_tunes:
-      preset: yt_playlist_one_season_testing
+      preset: yt_playlist_one_season
       overrides:
         tv_show_name: Music Box Tunes
       download:
         url: "https://youtube.com/playlist?list=PLWh_Fb1QWWg2URlJiYFOAnkczWz7sT_Me"
 
-    music_box_mega_list:
-      preset: yt_playlist_one_season
-      overrides:
-        tv_show_name: Music Box Mega List
-      download:
-        url: "https://www.youtube.com/playlist?list=PLyF3UPcbp4IMmtsHNI-KOM9CuDodrOFzA"
+    # music_box_mega_list:
+    #   preset: yt_playlist_one_season
+    #   overrides:
+    #     tv_show_name: Music Box Mega List
+    #   download:
+    #     url: "https://www.youtube.com/playlist?list=PLyF3UPcbp4IMmtsHNI-KOM9CuDodrOFzA"
 
-    youtubehaiku:
-      preset: yt_playlist_one_season
-      overrides:
-        tv_show_name: Youtubehaiku
-      download:
-        url: "https://www.youtube.com/playlist?list=PLWh_Fb1QWWg24ofE1yYA-CNHHpyTER9P9"
+    # youtubehaiku:
+    #   preset: yt_playlist_one_season
+    #   overrides:
+    #     tv_show_name: Youtubehaiku
+    #   download:
+    #     url: "https://www.youtube.com/playlist?list=PLWh_Fb1QWWg24ofE1yYA-CNHHpyTER9P9"
         
-    youtubesyllable:
-      preset: yt_playlist_one_season
-      overrides:
-        tv_show_name: Youtubesyllable
-      download:
-        url: "https://www.youtube.com/playlist?list=PLWh_Fb1QWWg0IbWj4X_xd3Q2JuHq-dpFt"
+    # youtubesyllable:
+    #   preset: yt_playlist_one_season
+    #   overrides:
+    #     tv_show_name: Youtubesyllable
+    #   download:
+    #     url: "https://www.youtube.com/playlist?list=PLWh_Fb1QWWg0IbWj4X_xd3Q2JuHq-dpFt"
