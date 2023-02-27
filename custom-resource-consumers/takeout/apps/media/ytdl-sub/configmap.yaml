@@ -47,7 +47,7 @@ data:
           tags:
             title: "{title}"
             date: "{upload_date}"
-            summary: "{description}"
+            description: "{description}"
 
       yt_playlist:
         preset:
