@@ -16,8 +16,8 @@ data:
         ytdl_options:
           format: "bestvideo[ext=webm][height<=1440]+bestaudio[ext=webm]/best[ext=webm]/best"
           ignoreerrors: True
-          break_on_existing: True
-          break_on_reject: True
+          break_on_existing: False
+          break_on_reject: False
           final_ext: mkv
           cachedir: "/tmp/ytdl-sub"
 
