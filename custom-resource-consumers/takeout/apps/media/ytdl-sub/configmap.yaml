@@ -46,7 +46,7 @@ data:
         video_tags:
           tags:
             title: "{title}"
-            # date: "{upload_date}"
+            date: "{upload_date}"
             summary: "{description}"
 
       yt_playlist:
@@ -69,8 +69,8 @@ data:
         
         video_tags:
           tags:
-            season: "{season}"
             episode: "{episode}"
+            season: "{season}"
 
       yt_playlist_one_season:
         preset: yt_playlist
