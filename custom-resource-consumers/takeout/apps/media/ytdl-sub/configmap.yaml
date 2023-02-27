@@ -80,7 +80,7 @@ data:
         preset: yt_playlist_one_season
         overrides:
           video_tags:
-            TITLE: "${title}"
+            TITLE: "{title}"
 
       yt_channel:
         preset: yt_playlist
