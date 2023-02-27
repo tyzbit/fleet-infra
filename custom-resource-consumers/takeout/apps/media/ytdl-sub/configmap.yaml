@@ -23,7 +23,8 @@ data:
           final_ext: mp4
           cachedir: "/tmp/ytdl-sub"
           postprocessor_args:
-            chown: "-R 568:568 {}"
+            chown: 
+              - "-R 568:568 {}"
 
         date_range:
           before: "{download_before}"
