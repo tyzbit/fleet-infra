@@ -45,7 +45,7 @@ data:
         video_tags:
           tags:
             title: "{title}"
-            date: "{upload_date}"
+            # date: "{upload_date}"
             description: "{description}"
 
       yt_playlist:
@@ -76,11 +76,6 @@ data:
         overrides:
           season: "00"
 
-      yt_playlist_mp4_testing:
-        preset: yt_playlist_one_season
-        ytdl_options:
-          final_ext: mp4
-
       yt_channel:
         preset: yt_playlist
 
@@ -98,7 +93,7 @@ data:
             - "!is_live"
   subscriptions.yaml: |
     music_box_tunes:
-      preset: yt_playlist_mp4_testing
+      preset: yt_playlist_one_season
       overrides:
         tv_show_name: Music Box Tunes
       download:
