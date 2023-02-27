@@ -25,9 +25,6 @@ data:
           postprocessor_args:
             chown: "-R 568:568 {}"
 
-        # file_convert:
-        #   convert_to: "mp4"
-
         date_range:
           before: "{download_before}"
           after: "{download_after}"
@@ -50,7 +47,7 @@ data:
           tags:
             title: "{title}"
             # date: "{upload_date}"
-            description: "{description}"
+            summary: "{description}"
 
       yt_playlist:
         preset:
@@ -64,11 +61,11 @@ data:
 
         overrides:
           tv_show_name: "OVERRIDE IN SUBSCRIPTION"
-          season: "{upload_year}"
+          date: "{upload_date}"
           episode: "{download_index}"
           episode_padded: "{download_index_padded6}"
-          episode_file_name: "S{season}E{episode_padded} - {title_sanitized}"
-          episode_path: "Season {season}/{episode_file_name}"
+          episode_file_name: "{title_sanitized}"
+          episode_path: "{episode_file_name}"
         
         video_tags:
           tags:
