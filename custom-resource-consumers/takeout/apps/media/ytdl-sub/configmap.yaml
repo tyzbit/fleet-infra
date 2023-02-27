@@ -68,6 +68,7 @@ data:
           episode_path: "{episode_file_name}"
         
         download:
+          download_strategy: "url"
           playlist_thumbnails:
             - name: "official-poster.jpg"
               uid: "avatar_uncropped"
