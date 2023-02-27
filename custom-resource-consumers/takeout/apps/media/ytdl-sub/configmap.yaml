@@ -67,6 +67,13 @@ data:
           episode_file_name: "S{season}E{episode_padded} - {title_sanitized}"
           episode_path: "{episode_file_name}"
         
+        download:
+          playlist_thumbnails:
+            - name: "official-poster.jpg"
+              uid: "avatar_uncropped"
+            - name: "official-banner.jpg"
+              uid: "banner_uncropped"
+        
         video_tags:
           tags:
             episode: "{episode}"
@@ -80,14 +87,6 @@ data:
       yt_channel:
         preset: yt_playlist
 
-        download:
-          download_strategy: "url"
-          playlist_thumbnails:
-            - name: "official-poster.jpg"
-              uid: "avatar_uncropped"
-            - name: "official-banner.jpg"
-              uid: "banner_uncropped"
-              
         match_filters:
           filters:
             - "original_url!*=/shorts/"
