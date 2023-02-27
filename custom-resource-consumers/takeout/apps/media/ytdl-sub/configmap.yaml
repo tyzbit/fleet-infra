@@ -70,7 +70,7 @@ data:
         video_tags:
           tags:
             episode: "{episode}"
-            season: "{season}"
+            season: "{season_number}"
 
       yt_playlist_one_season:
         preset: yt_playlist
