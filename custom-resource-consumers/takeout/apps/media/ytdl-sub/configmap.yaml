@@ -76,12 +76,6 @@ data:
         overrides:
           season: "00"
 
-      yt_playlist_one_season_caps_title:
-        preset: yt_playlist_one_season
-        overrides:
-          video_tags:
-            TITLE: "{title}"
-
       yt_channel:
         preset: yt_playlist
 
@@ -99,7 +93,7 @@ data:
             - "!is_live"
   subscriptions.yaml: |
     music_box_tunes:
-      preset: yt_playlist_one_season_caps_title
+      preset: yt_playlist_one_season
       overrides:
         tv_show_name: Music Box Tunes
       download:
