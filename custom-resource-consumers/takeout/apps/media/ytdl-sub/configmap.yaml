@@ -64,7 +64,7 @@ data:
           date: "{upload_date}"
           episode: "{download_index}"
           episode_padded: "{download_index_padded6}"
-          episode_file_name: "{title_sanitized}"
+          episode_file_name: "S{season}E{episode_padded} - {title_sanitized}"
           episode_path: "{episode_file_name}"
         
         video_tags:
