@@ -82,7 +82,9 @@ data:
         ytdl_options:
           format: "bv*[ext=mp4]+ba[ext=m4a]/b[ext=mp4] / bv*+ba/b"
           postprocessor_args:
-            chown: "-R 568:568"
+            chown: "-R 568:568 \"{file_name}\""
+        file_convert:
+          convert_to: "mp4"
         overrides:
           season: "00"
 
