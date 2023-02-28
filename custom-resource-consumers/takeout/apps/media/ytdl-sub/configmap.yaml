@@ -54,6 +54,14 @@ data:
         preset:
           - yt_video
           - season_by_year__episode_by_download_index
+        
+        download:
+          download_strategy: "url"
+          playlist_thumbnails:
+            - name: "poster.jpg"
+              uid: "avatar_uncropped"
+            - name: "banner.jpg"
+              uid: "banner_uncropped"
 
         output_options:
           output_directory: "/media/youtube/playlists/{tv_show_name_sanitized}"
@@ -80,14 +88,6 @@ data:
 
       yt_channel:
         preset: yt_playlist
-        download:
-          download_strategy: "url"
-          playlist_thumbnails:
-            - name: "official-poster.jpg"
-              uid: "avatar_uncropped"
-            - name: "official-banner.jpg"
-              uid: "banner_uncropped"
-
         match_filters:
           filters:
             - "original_url!*=/shorts/"

@@ -31,11 +31,13 @@ spec:
         ttlSecondsAfterFinished: 86400
 
     command:
-      - "ytdl-sub"
-      - "--log-level=debug"
-      - "--config=/config/config.yaml"
-      - "sub"
-      - "/config/subscriptions.yaml"
+      - bash
+      - -c
+      - |
+        ytdl-sub --log-level=debug --config=/config/config.yaml sub /config/subscriptions.yaml
+        export media_folder=/media/youtube
+        chown -R 568:568 $${media_folder}
+        chmod -R 777 $${media_folder}
 
     env:
       TZ: America/New_York
