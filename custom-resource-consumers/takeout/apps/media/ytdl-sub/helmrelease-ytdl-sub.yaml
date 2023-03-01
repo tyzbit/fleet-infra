@@ -35,14 +35,14 @@ spec:
       - -c
       - |
         ytdl-sub --log-level=debug --config=/config/config.yaml sub /config/subscriptions.yaml
-        export media_folder=/media/youtube
-        chown -R 568:568 $${media_folder}
-        chmod -R 777 $${media_folder}
+        chown -R 568:568 $${MEDIA_FOLDER}
+        chmod -R 777 $${MEDIA_FOLDER}
 
     env:
       TZ: America/New_York
       PUID: 568
       PGID: 568
+      MEDIA_FOLDER: /media/youtube
 
     persistence:
       config:
