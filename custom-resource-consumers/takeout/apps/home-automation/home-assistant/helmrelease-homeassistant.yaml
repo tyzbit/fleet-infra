@@ -20,7 +20,7 @@ spec:
     image:
       pullPolicy: Always
       repository: ghcr.io/home-assistant/home-assistant
-      tag: "2023.3.0"
+      tag: "2023.3.1"
 
     controller:
       replicas: 1 # active longhorn-database nas
