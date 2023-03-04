@@ -73,33 +73,33 @@ spec:
     # https://github.com/kubernetes/kube-state-metrics/blob/848354c3c7aae95d809bee7811b6cdfd4a305867/charts/kube-state-metrics/values.yaml
     kube-state-metrics:
       collectors:
-        deployments: true
-        jobs: true
-        nodes: true
-        pods: true
+        - deployments
+        - jobs
+        - nodes
+        - pods
 
-        persistentvolumeclaims: false
-        persistentvolumes: false
-        volumeattachments: false
+        # - persistentvolumeclaims
+        # - persistentvolumes
+        # - volumeattachments
 
-        certificatesigningrequests: false
-        configmaps: false
-        cronjobs: false
-        endpoints: false
-        horizontalpodautoscalers: false
-        ingresses: false
-        limitranges: false
-        mutatingwebhookconfigurations: false
-        namespaces: false
-        networkpolicies: false
-        poddisruptionbudgets: false
-        replicasets: false
-        replicationcontrollers: false
-        resourcequotas: false
-        secrets: false
-        services: false
-        storageclasses: false
-        validatingwebhookconfigurations: false
+        # - certificatesigningrequests
+        # - configmaps
+        # - cronjobs
+        # - endpoints
+        # - horizontalpodautoscalers
+        # - ingresses
+        # - limitranges
+        # - mutatingwebhookconfigurations
+        # - namespaces
+        # - networkpolicies
+        # - poddisruptionbudgets
+        # - replicasets
+        # - replicationcontrollers
+        # - resourcequotas
+        # - secrets
+        # - services
+        # - storageclasses
+        # - validatingwebhookconfigurations
     prometheus:
       enabled: true
     nri-prometheus:
