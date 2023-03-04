@@ -16,3 +16,4 @@ spec:
   interval: 2m0s
   values:
     enableCustomMetricsApi: true
+    enableExternalMetricsApi: true
