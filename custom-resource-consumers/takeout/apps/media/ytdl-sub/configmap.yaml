@@ -22,9 +22,6 @@ data:
           break_on_reject: False
           final_ext: mp4
           cachedir: "/tmp/ytdl-sub"
-          postprocessor_args:
-            chown: 
-              - "-R 568:568 {}"
 
         date_range:
           before: "{download_before}"
@@ -93,6 +90,13 @@ data:
             - "original_url!*=/shorts/"
             - "!is_live"
   subscriptions.yaml: |
+    # Videos
+    cat_breakdancing_but_the_girl_breakdances_too_and_the_drop_is_synced_1_hour:
+      preset: yt_video
+      download:
+        url: "https://www.youtube.com/watch?v=0Rg_ZOgebqc"
+
+    # Playlists
     music_box_tunes:
       preset: yt_playlist_one_season
       overrides:
