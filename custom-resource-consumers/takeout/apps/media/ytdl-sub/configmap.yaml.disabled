@@ -1,3 +1,7 @@
+# Disabled because I now store the configs with the media files (backed up)
+# for easier modification (I use FileBrowser to edit the YAMLs with syntax highlighting).
+# Left here for future reference by me or others learning ytdl-sub's config
+# (which is admittedly quite complex).
 apiVersion: v1
 kind: ConfigMap
 metadata:
