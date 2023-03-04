@@ -7,7 +7,7 @@ spec:
   targetNamespace: kube-system
   chart:
     spec:
-      chart: charts/kube-metrics-adapter
+      chart: kube-metrics-adapter
       version: "0.1.11"
       sourceRef:
         kind: HelmRepository
