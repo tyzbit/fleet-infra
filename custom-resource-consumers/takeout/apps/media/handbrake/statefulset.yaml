@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: handbrake
-          image: jlesage/handbrake:v23.02.1
+          image: jlesage/handbrake:v23.03.1
           imagePullPolicy: Always
           command: # ["sh","-c","tail -f /dev/null"]
             - sh
