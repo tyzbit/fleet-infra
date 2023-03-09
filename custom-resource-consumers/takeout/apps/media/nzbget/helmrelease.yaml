@@ -46,7 +46,7 @@ spec:
       intermediate:
         enabled: true
         type: emptyDir
-        medium: memory
+        medium: Memory
         sizeLimit: 12Gi
 
     service:
