@@ -16,6 +16,8 @@ spec:
   interval: 2m0s
   values:
     fullnameOverride: nfs-provisioner-nas
+    image: # Remove me when > 4.0.17 releases
+      repository: registry.k8s.io/sig-storage/nfs-subdir-external-provisioner # Remove me when > 4.0.17 releases
     storageClass:
       name: nas
       pathPattern: "$${.PVC.namespace}-$${.PVC.name}"
