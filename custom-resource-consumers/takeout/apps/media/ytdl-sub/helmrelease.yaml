@@ -65,6 +65,8 @@ spec:
       tmp:
         enabled: true
         type: emptyDir
+        medium: memory
+        sizeLimit: 2Gi
         mountPath: /tmp/ytdl-sub
 
     service:
