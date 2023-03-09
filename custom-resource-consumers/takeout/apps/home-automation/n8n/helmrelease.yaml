@@ -23,7 +23,7 @@ spec:
       tag: 0.219.0
 
     controller:
-      type: StatefulSet
+      type: statefulset
       replicas: 1
 
     imagePullSecrets:
