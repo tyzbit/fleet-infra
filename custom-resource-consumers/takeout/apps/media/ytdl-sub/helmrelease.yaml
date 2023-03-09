@@ -22,6 +22,9 @@ spec:
       repository: ghcr.io/jmbannon/ytdl-sub
       tag: "latest@sha256:b3bd00902827b4be9dcf3e2d727b35a1b86595cbebae088cc346e56e6c7bf988" # 2023-02-24 03:00 -0400
 
+    imagePullSecrets:
+      - name: docker-hub
+
     controller:
       type: cronjob
       restartPolicy: OnFailure

@@ -20,6 +20,9 @@ spec:
       repository: linuxserver/jackett
       tag: 0.20.2489
 
+    imagePullSecrets:
+      - name: docker-hub
+
     controller:
       replicas: 1 # active nas
 

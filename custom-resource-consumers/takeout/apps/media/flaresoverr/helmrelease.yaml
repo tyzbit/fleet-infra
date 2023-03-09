@@ -19,6 +19,10 @@ spec:
     image:
       repository: ghcr.io/flaresolverr/flaresolverr
       tag: v3.0.4
+
+    imagePullSecrets:
+      - name: docker-hub
+
     controller:
       replicas: 1 # active nas
 
