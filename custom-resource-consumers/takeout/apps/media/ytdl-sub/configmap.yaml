@@ -99,4 +99,4 @@ data:
         match_filters:
           filters:
             - "original_url!*=/shorts/"
-            - "!is_live"/srv/media/youtube
+            - "!is_live"
