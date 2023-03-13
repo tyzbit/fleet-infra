@@ -32,6 +32,12 @@ spec:
     persistence:
       enabled: true
       existingClaimName: grav-${tech_name}-data-nas
+    probes:
+      liveness: &probes
+        periodSeconds: 10
+        timeoutSeconds: 10
+      readiness: *probes
+      startup: *probes
     deploymentAnnotations:
       reloader.stakater.com/auto: "true"
     statefulSetAnnotations:
