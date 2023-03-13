@@ -49,13 +49,20 @@ data:
           tags:
             title: "{title}"
             date: "{upload_date}"
-            description: "{description}"
+            description: |
+              Original URL: {webpage_url}
+              Original Channel: {channel_sanitized}
+              Downloaded from playlist: {playlist_title_sanitized}
+              Playlist URL: {playlist_webpage_url}
+
+              Video Description:
+              {description}
 
       yt_playlist:
         preset:
           - yt_video
           - season_by_year__episode_by_download_index
-        
+
         download:
           download_strategy: "url"
           playlist_thumbnails:
@@ -76,7 +83,7 @@ data:
           episode_padded: "{download_index_padded6}"
           episode_file_name: "S{season}E{episode_padded} - {title_sanitized}"
           episode_path: "{episode_file_name}"
-        
+
         video_tags:
           tags:
             episode: "{episode}"
@@ -92,39 +99,4 @@ data:
         match_filters:
           filters:
             - "original_url!*=/shorts/"
-            - "!is_live"
-  subscriptions.yaml: |
-    # Videos
-    cat_breakdancing_but_the_girl_breakdances_too_and_the_drop_is_synced_1_hour:
-      preset: yt_video
-      download:
-        url: "https://www.youtube.com/watch?v=0Rg_ZOgebqc"
-
-    # Playlists
-    music_box_tunes:
-      preset: yt_playlist_one_season
-      overrides:
-        tv_show_name: Music Box Tunes
-      download:
-        url: "https://youtube.com/playlist?list=PLWh_Fb1QWWg2URlJiYFOAnkczWz7sT_Me"
-
-    music_box_mega_list:
-      preset: yt_playlist_one_season
-      overrides:
-        tv_show_name: Music Box Mega List
-      download:
-        url: "https://www.youtube.com/playlist?list=PLyF3UPcbp4IMmtsHNI-KOM9CuDodrOFzA"
-
-    youtubehaiku:
-      preset: yt_playlist_one_season
-      overrides:
-        tv_show_name: Youtubehaiku
-      download:
-        url: "https://www.youtube.com/playlist?list=PLWh_Fb1QWWg24ofE1yYA-CNHHpyTER9P9"
-        
-    youtubesyllable:
-      preset: yt_playlist_one_season
-      overrides:
-        tv_show_name: Youtubesyllable
-      download:
-        url: "https://www.youtube.com/playlist?list=PLWh_Fb1QWWg0IbWj4X_xd3Q2JuHq-dpFt"
+            - "!is_live"/srv/media/youtube
