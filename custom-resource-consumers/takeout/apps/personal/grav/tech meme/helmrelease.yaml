@@ -21,6 +21,12 @@ spec:
         repository: dsavell/grav
         tag: admin-1.7.39.4-20230311 # {"$imagepolicy": "flux-system:grav-${tech_name}:tag"}
         pullPolicy: Always
+      probes:
+        liveness: &probes
+          periodSeconds: 10
+          timeoutSeconds: 10
+        readiness: *probes
+        startup: *probes
       config:
         #   DUID: "1000"
         #   DGID: "1000"
@@ -33,13 +39,6 @@ spec:
     persistence:
       enabled: true
       existingClaimName: grav-${tech_name}-data-nas
-    probes:
-      enabled: false
-      liveness: &probes
-        periodSeconds: 10
-        timeoutSeconds: 10
-      readiness: *probes
-      startup: *probes
     deploymentAnnotations:
       reloader.stakater.com/auto: "true"
     statefulSetAnnotations:
