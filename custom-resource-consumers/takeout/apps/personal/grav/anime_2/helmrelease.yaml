@@ -21,6 +21,12 @@ spec:
         repository: dsavell/grav
         tag: admin-1.7.39.4-20230311 # {"$imagepolicy": "flux-system:grav-${anime_blog_2_name}:tag"}
         pullPolicy: Always
+      probes:
+        liveness: &probes
+          periodSeconds: 10
+          timeoutSeconds: 10
+        readiness: *probes
+        startup: *probes
       config:
         #   DUID: "1000"
         #   DGID: "1000"
