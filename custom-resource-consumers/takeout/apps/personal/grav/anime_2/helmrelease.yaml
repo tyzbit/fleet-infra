@@ -18,8 +18,9 @@ spec:
     fullnameOverride: grav-${anime_blog_2_name}
     grav:
       image:
+        repository: dsavell/inspector
+        tag: admin-1.7.39.4-20230311 # {"$imagepolicy": "flux-system:grav-${anime_blog_2_name}:tag"}
         pullPolicy: Always
-        tag: admin
       config:
         #   DUID: "1000"
         #   DGID: "1000"

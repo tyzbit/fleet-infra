@@ -18,8 +18,9 @@ spec:
     fullnameOverride: grav-${tech_name}
     grav:
       image:
+        repository: dsavell/inspector
+        tag: admin-1.7.39.4-20230311 # {"$imagepolicy": "flux-system:grav-${tech_name}:tag"}
         pullPolicy: Always
-        tag: admin
       config:
         #   DUID: "1000"
         #   DGID: "1000"
@@ -33,6 +34,7 @@ spec:
       enabled: true
       existingClaimName: grav-${tech_name}-data-nas
     probes:
+      enabled: false
       liveness: &probes
         periodSeconds: 10
         timeoutSeconds: 10
