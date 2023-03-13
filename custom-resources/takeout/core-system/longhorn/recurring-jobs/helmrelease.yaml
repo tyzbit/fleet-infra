@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: longhorn-recurring-jobs
-      version: "2.1.0"
+      version: "5.0.1"
       sourceRef:
         kind: HelmRepository
         name: tyzbit
