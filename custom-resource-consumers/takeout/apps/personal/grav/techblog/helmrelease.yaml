@@ -18,7 +18,7 @@ spec:
     fullnameOverride: grav-${tech_blog_name}
     grav:
       image:
-        repository: dsavell/inspector
+        repository: dsavell/grav
         tag: admin-1.7.39.4-20230311 # {"$imagepolicy": "flux-system:grav-${tech_blog_name}:tag"}
         pullPolicy: Always
       config:
