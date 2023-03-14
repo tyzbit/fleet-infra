@@ -37,6 +37,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
+  storageClassName: fake
   persistentVolumeReclaimPolicy: Retain
   mountOptions:
     - hard
@@ -56,7 +57,7 @@ spec:
     - ReadWriteOnce
   volumeMode: Filesystem
   volumeName: nas-test
-  storageClassName: nas
+  storageClassName: fake
   resources:
     requests:
       storage: 1Gi
