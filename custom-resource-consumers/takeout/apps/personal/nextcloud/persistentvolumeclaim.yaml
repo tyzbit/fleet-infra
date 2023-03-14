@@ -25,39 +25,3 @@ spec:
   resources:
     requests:
       storage: 10Gi
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: nas-test
-  namespace: personal
-spec:
-  capacity:
-    storage: 1Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: fake
-  persistentVolumeReclaimPolicy: Retain
-  mountOptions:
-    - hard
-    - nfsvers=4.1
-    - proto=udp
-  nfs:
-    path: /volume1/volatile_cluster_storage
-    server: nas.jura
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: nas-test
-  namespace: personal
-spec:
-  accessModes:
-    - ReadWriteOnce
-  volumeMode: Filesystem
-  volumeName: nas-test
-  storageClassName: fake
-  resources:
-    requests:
-      storage: 1Gi
