@@ -18,8 +18,6 @@ spec:
   interval: 2m0s
   values:
     fullnameOverride: nfs-ext-prov-nas-volatile
-    image: # Remove me when > 4.0.17 releases
-      repository: registry.k8s.io/sig-storage/nfs-subdir-external-provisioner # Remove me when > 4.0.17 releases
     storageClass:
       name: nas-volatile
       pathPattern: "$${.PVC.namespace}-$${.PVC.name}"
