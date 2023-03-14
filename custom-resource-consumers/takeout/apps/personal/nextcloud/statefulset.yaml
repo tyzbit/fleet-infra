@@ -85,6 +85,8 @@ spec:
               subPath: redis.conf
             - name: nextcloud-socket
               mountPath: /var/run/redis/
+            - name: nas-test
+              mountPath: /nastest
           resources:
             requests:
               cpu: 10m
@@ -131,3 +133,6 @@ spec:
         - name: nextcloud-data
           persistentVolumeClaim:
             claimName: nextcloud-data-nas
+        - name: nas-test
+          persistentVolumeClaim:
+            claimName: nas-test
