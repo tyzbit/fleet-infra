@@ -63,7 +63,7 @@ spec:
         type: secret
         mountPath: /config/cookies.txt
         subPath: cookies.txt
-        readOnly: true
+        readOnly: false
         defaultMode: 0755
       media:
         enabled: true
