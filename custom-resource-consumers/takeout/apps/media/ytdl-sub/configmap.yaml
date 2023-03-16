@@ -26,6 +26,7 @@ data:
           break_on_reject: False
           final_ext: mp4
           cachedir: "/tmp/ytdl-sub"
+          cookiefile: "/config/cookies.txt"
 
         date_range:
           before: "{download_before}"
