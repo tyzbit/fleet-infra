@@ -57,14 +57,16 @@ spec:
         subPath: config.yaml
         readOnly: true
         defaultMode: 0755
-      cookies:
-        enabled: true
-        name: ytdl-sub-cookies
-        type: secret
-        mountPath: /config/cookies.txt
-        subPath: cookies.txt
-        readOnly: false
-        defaultMode: 0755
+      ## yt-dlp doesn't like a readonly cookies file. Changing readOnly has no
+      ## effect.
+      # cookies:
+      #   enabled: true
+      #   name: ytdl-sub-cookies
+      #   type: secret
+      #   mountPath: /config/cookies.txt
+      #   subPath: cookies.txt
+      #   readOnly: false
+      #   defaultMode: 0755
       media:
         enabled: true
         existingClaim: nas-volume1-media
