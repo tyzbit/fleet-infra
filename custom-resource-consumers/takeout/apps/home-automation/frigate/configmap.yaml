@@ -63,10 +63,10 @@ data:
                 - 0,390,193,302,416,250,613,202,707,193,1021,155,1149,113,1138,0,0,0
         ffmpeg:
           hwaccel_args: preset-vaapi
+          input_args: 
+            - "preset-rtsp-restream"
           inputs:
             - path: 'rtsp://127.0.0.1:8554/frondoor'
-              input_args: 
-                - "preset-rtsp-restream"
               roles:
                 - detect
                 - restream # enabled by default
@@ -80,10 +80,10 @@ data:
       backdoor:
         ffmpeg:
           hwaccel_args: preset-vaapi
+          input_args: 
+            - "preset-rtsp-restream"
           inputs:
             - path: 'rtsp://127.0.0.1:8554/backdoor'
-              input_args: 
-                - "preset-rtsp-restream"
               roles:
                 - detect
                 - restream # enabled by default
@@ -106,10 +106,10 @@ data:
       driveway:
         ffmpeg:
           hwaccel_args: preset-vaapi
+          input_args: 
+            - "preset-rtsp-restream"
           inputs:
             - path:'rtsp://127.0.0.1:8554/driveway'
-              input_args: 
-                - "preset-rtsp-restream"
               roles:
                 - detect
                 - restream # enabled by default
@@ -134,10 +134,10 @@ data:
       porch:
         ffmpeg:
           hwaccel_args: preset-vaapi
+          input_args: 
+            - "preset-rtsp-restream"
           inputs:
             - path: 'rtsp://127.0.0.1:8554/porch'
-              input_args: 
-                - "preset-rtsp-restream"
               roles:
                 - detect
                 - restream # enabled by default
@@ -159,10 +159,10 @@ data:
 
       court:
         ffmpeg:
+          input_args: 
+            - "preset-rtsp-restream"
           inputs:
             - path: 'rtsp://127.0.0.1:8554/court'
-              input_args: 
-                - "preset-rtsp-restream"
               roles:
                 - detect
         snapshots:
