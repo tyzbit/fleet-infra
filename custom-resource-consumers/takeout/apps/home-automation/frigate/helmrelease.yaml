@@ -135,7 +135,7 @@ spec:
       requests:
         cpu: 1000m
       limits:
-        memory: 4Gi
+        memory: 8Gi
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
