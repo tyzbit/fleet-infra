@@ -31,15 +31,13 @@ spec:
           image: networkstatic/iperf3:latest
           args: ["-s"]
           resources:
-            requests: 
+            requests:
               cpu: 100m
             limits:
               memory: 128Mi
-      imagePullSecrets:
-        - name: docker-hub
       # nodeSelector:
       #   kubernetes.io/hostname: weatherman
-        # colo: aws
+      # colo: aws
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -67,24 +65,22 @@ spec:
       affinity:
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
-          - labelSelector:
-              matchExpressions:
-              - key: app
-                operator: In
-                values:
-                - iperf3-server
-            topologyKey: "kubernetes.io/hostname"
+            - labelSelector:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - iperf3-server
+              topologyKey: "kubernetes.io/hostname"
       containers:
         - name: iperf3-client
           image: networkstatic/iperf3:latest
-          command: ["tail","-f","/dev/null"]
+          command: ["tail", "-f", "/dev/null"]
           #args: ["-c","iperf3-server","-t","0"]
           resources:
-            requests: 
+            requests:
               cpu: 100m
             limits:
               memory: 128Mi
-      imagePullSecrets:
-        - name: docker-hub
       nodeSelector:
         kubernetes.io/hostname: cameraman

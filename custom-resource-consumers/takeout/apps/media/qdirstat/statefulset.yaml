@@ -38,5 +38,3 @@ spec:
         - name: nas-volume1-media
           persistentVolumeClaim:
             claimName: nas-volume1-media
-      imagePullSecrets:
-        - name: docker-hub

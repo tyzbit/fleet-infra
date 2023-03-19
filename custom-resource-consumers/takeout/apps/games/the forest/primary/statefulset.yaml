@@ -77,8 +77,6 @@ spec:
             - name: the-forest-data
               subPath: game
               mountPath: /srv/the-forest-data
-      imagePullSecrets:
-        - name: docker-hub
       volumes:
         - name: the-forest-files-config
           configMap:

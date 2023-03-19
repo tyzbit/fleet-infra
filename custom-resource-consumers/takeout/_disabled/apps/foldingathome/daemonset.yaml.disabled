@@ -87,8 +87,6 @@ spec:
               name: fahclient
       # nodeSelector:
       #   graphics: dri
-      imagePullSecrets:
-        - name: docker-hub
       # We make an emptyDir to mount on the work directory /var/lib/fahclient
       # so we can make the rest of the container's root filesystem read-only
       volumes:

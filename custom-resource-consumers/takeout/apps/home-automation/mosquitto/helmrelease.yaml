@@ -20,9 +20,6 @@ spec:
       repository: eclipse-mosquitto
       tag: 2.0.15
 
-    imagePullSecrets:
-      - name: docker-hub
-
     env:
       TZ: America/New_York
 

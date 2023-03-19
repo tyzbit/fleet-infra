@@ -40,8 +40,6 @@ spec:
         resources:
           limits:
             memory: 1G
-      imagePullSecrets:
-        - name: docker-hub
   volumeClaimTemplates:
   - apiVersion: v1
     kind: PersistentVolume

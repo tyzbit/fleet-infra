@@ -19,8 +19,6 @@ spec:
     image:
       tag: 1.0.4 # {"$imagepolicy": "flux-system:inspector:tag"}
     namespace: monitoring
-    imagePullSecrets:
-      - name: docker-hub
     storageClassName: nas
     securityContext:
       privileged: true
@@ -28,12 +26,12 @@ spec:
     tolerations:
       - effect: NoSchedule
         operator: Exists
-    additionalMounts: 
+    additionalMounts:
       - name: dev
         mountPath: /host_dev/
     additionalVolumes:
-    - name: dev
-      hostPath:
-        path: /dev/
+      - name: dev
+        hostPath:
+          path: /dev/
     # nodeSelector:
     #   faketag: fakevalue

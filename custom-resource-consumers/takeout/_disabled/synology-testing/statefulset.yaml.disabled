@@ -32,6 +32,4 @@ spec:
           persistentVolumeClaim:
             claimName: synology-testing-data-iscsi
       terminationGracePeriodSeconds: 1
-      imagePullSecrets:
-        - name: docker-hub
 

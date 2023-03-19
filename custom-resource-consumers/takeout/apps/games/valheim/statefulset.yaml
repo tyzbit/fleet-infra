@@ -80,8 +80,6 @@ spec:
       nodeSelector:
         graphics: dri
         # longhorn: primary
-      imagePullSecrets:
-        - name: docker-hub
       volumes:
         - name: valheim-data
           persistentVolumeClaim:

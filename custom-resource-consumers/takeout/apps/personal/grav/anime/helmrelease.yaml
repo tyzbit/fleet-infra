@@ -53,8 +53,6 @@ spec:
       reloader.stakater.com/auto: "true"
     statefulSetAnnotations:
       reloader.stakater.com/auto: "true"
-    imagePullSecrets:
-      - name: docker-hub
     ingress:
       enabled: true
       className: nginx

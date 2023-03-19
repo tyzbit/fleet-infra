@@ -23,8 +23,8 @@ spec:
           image: mariadb:10.8
           imagePullPolicy: Always
           envFrom:
-          - secretRef:
-              name: go-discord-amputator-db
+            - secretRef:
+                name: go-discord-amputator-db
           ports:
             - containerPort: 3306
               name: sql
@@ -39,8 +39,6 @@ spec:
               memory: 512Mi
       nodeSelector:
         longhorn: primary
-      imagePullSecrets:
-        - name: docker-hub
       volumes:
         - name: go-discord-amputator-db
           persistentVolumeClaim:

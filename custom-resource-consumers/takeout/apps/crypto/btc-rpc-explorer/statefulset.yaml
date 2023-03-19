@@ -32,8 +32,6 @@ spec:
               cpu: 50m
             limits:
               memory: 128Mi
-      imagePullSecrets:
-        - name: docker-hub
       volumes:
         - name: btc-rpc-explorer-cache
           emptyDir: {}

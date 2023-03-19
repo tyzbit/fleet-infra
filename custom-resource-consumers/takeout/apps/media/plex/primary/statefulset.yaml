@@ -62,5 +62,3 @@ spec:
       nodeSelector:
         graphics: dri
         longhorn: primary
-      imagePullSecrets:
-        - name: docker-hub

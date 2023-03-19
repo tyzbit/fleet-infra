@@ -64,7 +64,5 @@ spec:
         - name: youtube-dl-data
           persistentVolumeClaim:
             claimName: youtube-dl-data-nas
-      imagePullSecrets:
-        - name: docker-hub
       # nodeSelector:
       #   longhorn: primary

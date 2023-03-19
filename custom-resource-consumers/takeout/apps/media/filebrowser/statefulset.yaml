@@ -48,8 +48,6 @@ spec:
               memory: "2Gi" # keep this high so fb can accommodate larger files
           ports:
             - containerPort: 80
-      imagePullSecrets:
-        - name: docker-hub
       volumes:
         - name: filebrowser-config
           persistentVolumeClaim:

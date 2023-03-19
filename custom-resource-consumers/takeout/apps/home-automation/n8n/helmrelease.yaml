@@ -26,9 +26,6 @@ spec:
       type: statefulset
       replicas: 1
 
-    imagePullSecrets:
-      - name: docker-hub
-
     envFrom:
       - secretRef:
           name: n8n-config

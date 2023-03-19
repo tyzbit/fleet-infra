@@ -40,5 +40,3 @@ spec:
               cpu: "50m"
             limits:
               memory: "256Mi"
-      imagePullSecrets:
-        - name: docker-hub

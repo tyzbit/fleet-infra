@@ -14,56 +14,54 @@ spec:
         app: openvpn-web-ui
     spec:
       containers:
-      - name: openvpn-web-ui
-        image: tyzbit/openvpn-web-ui
-        volumeMounts:
-          - mountPath: /etc/openvpn
-            subPath: openvpn
-            name: openvpn-web-ui
-          - mountPath: /opt/openvpn-gui/db
-            subPath: db
-            name: openvpn-web-ui
-        resources:
-          requests:
-            cpu: 100m
-          limits:
-            memory: 128Mi
-        ports:
-        - containerPort: 8080
-      - name: openvpn
-        image: tyzbit/openvpn
-        command: 
-        - "sh"
-        - "-c"
-        - |
-          iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE &&
-          ovpn_run_simple
-        volumeMounts:
-          - mountPath: /etc/openvpn
-            subPath: openvpn
-            name: openvpn-web-ui
-        resources:
-          requests:
-            cpu: 100m
-          limits:
-            memory: 128Mi
-        ports:
-        - containerPort: 31194
-          protocol: UDP
-        securityContext:
-          capabilities:
-            add: ["NET_ADMIN"]
-      imagePullSecrets:
-        - name: docker-hub
+        - name: openvpn-web-ui
+          image: tyzbit/openvpn-web-ui
+          volumeMounts:
+            - mountPath: /etc/openvpn
+              subPath: openvpn
+              name: openvpn-web-ui
+            - mountPath: /opt/openvpn-gui/db
+              subPath: db
+              name: openvpn-web-ui
+          resources:
+            requests:
+              cpu: 100m
+            limits:
+              memory: 128Mi
+          ports:
+            - containerPort: 8080
+        - name: openvpn
+          image: tyzbit/openvpn
+          command:
+            - "sh"
+            - "-c"
+            - |
+              iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE &&
+              ovpn_run_simple
+          volumeMounts:
+            - mountPath: /etc/openvpn
+              subPath: openvpn
+              name: openvpn-web-ui
+          resources:
+            requests:
+              cpu: 100m
+            limits:
+              memory: 128Mi
+          ports:
+            - containerPort: 31194
+              protocol: UDP
+          securityContext:
+            capabilities:
+              add: ["NET_ADMIN"]
   volumeClaimTemplates:
-  - apiVersion: v1
-    kind: PersistentVolume
-    metadata:
-      name: openvpn-web-ui
-    spec:
-      accessModes: 
-        - ReadWriteOnce
-      volumeMode: Filesystem
-      resources:
-        requests:
-          storage: 1Gi
+    - apiVersion: v1
+      kind: PersistentVolume
+      metadata:
+        name: openvpn-web-ui
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        volumeMode: Filesystem
+        resources:
+          requests:
+            storage: 1Gi

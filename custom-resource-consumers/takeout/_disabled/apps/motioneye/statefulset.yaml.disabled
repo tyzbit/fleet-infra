@@ -72,5 +72,3 @@ spec:
       #       claimName: braavos-camera-pvc
       nodeSelector:
         graphics: dri
-      imagePullSecrets:
-        - name: docker-hub

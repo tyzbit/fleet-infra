@@ -66,8 +66,6 @@ spec:
             - name: vrising-primary-data
               subPath: persistentdata
               mountPath: /srv/persistentdata
-      imagePullSecrets:
-        - name: docker-hub
       volumes:
         - name: vrising-primary-data
           persistentVolumeClaim:

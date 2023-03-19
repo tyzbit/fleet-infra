@@ -16,12 +16,10 @@ spec:
         app: pasta
     spec:
       containers:
-      - name: pasta
-        image: cglatot/pasta:latest
-        resources:
-          requests:
-            cpu: "10m"
-          limits:
-            memory: "64Mi"
-      imagePullSecrets:
-      - name: docker-hub
+        - name: pasta
+          image: cglatot/pasta:latest
+          resources:
+            requests:
+              cpu: "10m"
+            limits:
+              memory: "64Mi"

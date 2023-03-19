@@ -11,8 +11,6 @@ spec:
         value: 3D movies
   entrypoint: transcode-movies
   serviceAccountName: argo-worker
-  imagePullSecrets:
-    - name: docker-hub
   parallelism: 10
   volumes:
     - name: braavos

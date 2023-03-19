@@ -86,8 +86,6 @@ spec:
               mountPath: /srv/space-engineers-steam
       # nodeSelector:
       #   graphics: dri
-      imagePullSecrets:
-        - name: docker-hub
       volumes:
         - name: dri
           persistentVolumeClaim:

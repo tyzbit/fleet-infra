@@ -21,9 +21,6 @@ spec:
       repository: ghcr.io/k8s-at-home/radarr
       tag: v4.2.4.6635
 
-    imagePullSecrets:
-      - name: docker-hub
-
     controller:
       replicas: 1 # active longhorn-webapp nas
 

@@ -58,5 +58,3 @@ spec:
         - name: bitcoin-blockchain
           persistentVolumeClaim:
             claimName: bitcoin-blockchain-longhorn-crypto
-      imagePullSecrets:
-        - name: docker-hub

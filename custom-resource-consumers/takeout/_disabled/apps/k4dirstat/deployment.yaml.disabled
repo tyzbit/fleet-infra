@@ -58,5 +58,3 @@ spec:
         - name: amazon-kubernetes-storage
           persistentVolumeClaim:
             claimName: amazon-kubernetes-storage
-      imagePullSecrets:
-        - name: docker-hub

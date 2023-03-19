@@ -60,7 +60,5 @@ spec:
           persistentVolumeClaim:
             claimName: n8n-data-longhorn-database
       serviceAccount: n8n
-      imagePullSecrets:
-        - name: docker-hub
       # nodeSelector:
       #   kubernetes.io/hostname: trainman

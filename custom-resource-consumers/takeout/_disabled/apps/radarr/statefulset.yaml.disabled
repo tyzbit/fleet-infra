@@ -44,8 +44,6 @@ spec:
             cpu: 500m
           limits:
             memory: 512Mi
-      imagePullSecrets:
-        - name: docker-hub
       volumes:
         - name: data
           persistentVolumeClaim:

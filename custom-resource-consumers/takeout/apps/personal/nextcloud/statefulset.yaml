@@ -41,8 +41,6 @@ spec:
               memory: 1Gi
       nodeSelector:
         longhorn: primary
-      imagePullSecrets:
-        - name: docker-hub
       volumes:
         - name: nextcloud-db
           persistentVolumeClaim:
@@ -118,8 +116,6 @@ spec:
               cpu: 100m
             limits:
               memory: 3Gi
-      imagePullSecrets:
-        - name: docker-hub
       volumes:
         - name: nextcloud-cache
           emptyDir: {}
