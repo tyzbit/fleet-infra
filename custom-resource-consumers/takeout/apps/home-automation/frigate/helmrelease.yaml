@@ -19,8 +19,8 @@ spec:
   values:
     image:
       pullPolicy: Always
-      repository: ghcr.io/blakeblackshear
-      tag: frigate:0.12.0-beta10
+      repository: ghcr.io/blakeblackshear/frigate
+      tag: 0.12.0-beta10
 
     imagePullSecrets:
       - name: docker-hub
