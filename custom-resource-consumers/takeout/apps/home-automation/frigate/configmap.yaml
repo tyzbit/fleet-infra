@@ -106,7 +106,7 @@ data:
           hwaccel_args: preset-vaapi
           input_args: preset-rtsp-restream
           inputs:
-            - path:'rtsp://127.0.0.1:8554/driveway'
+            - path: 'rtsp://127.0.0.1:8554/driveway'
               roles:
                 - detect
                 - restream # enabled by default
