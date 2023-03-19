@@ -1,6 +1,146 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
+  name: frigate
+  namespace: flux-system
+spec:
+  releaseName: frigate
+  targetNamespace: home-automation
+  timeout: 15m
+  interval: 2m0s
+  chart:
+    spec:
+      chart: app-template
+      version: "1.3.2"
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s-helm-charts
+        namespace: flux-system
+  values:
+    image:
+      pullPolicy: Always
+      repository: ghcr.io/blakeblackshear
+      tag: frigate:0.12.0-beta10
+
+    imagePullSecrets:
+      - name: docker-hub
+
+    controller:
+      type: statefulset
+      replicas: 1
+
+    env:
+      - name: TZ
+        value: America/New_York
+    envFrom:
+      - secretRef:
+          name: frigate
+
+    persistence:
+      db:
+        enabled: true
+        existingClaim: frigate-database-longhorn-database
+      data:
+        enabled: true
+        existingClaim: frigate-data-nas
+        mountPath: /media/frigate
+        subPath: media
+      config:
+        enabled: true
+        name: frigate-config
+        type: configMap
+        mountPath: /config
+        readOnly: true
+        defaultMode: 0755
+      usb:
+        enabled: true
+        type: hostPath
+        hostPath: &usb /dev/bus/usb
+        mountPath: *usb
+      dri:
+        enabled: true
+        type: hostPath
+        hostPath: &dri /dev/dri
+        mountPath: *dri
+      cache:
+        enabled: true
+        type: emptyDir
+        mountPath: /tmp/cache
+        medium: Memory
+        sizeLimit: 2Gi
+      shm:
+        enabled: true
+        type: emptyDir
+        mountPath: /dev/shm
+        medium: Memory
+        sizeLimit: 1Gi
+
+    nodeSelector:
+      coral: attached
+
+    service:
+      main:
+        enabled: true
+        # annotations:
+        #   metallb.universe.tf/allow-shared-ip: home-automation-frigate
+        loadBalancerIP: 192.168.1.69
+        ports:
+          http:
+            port: 80
+            targetPort: 5000
+          rtmp:
+            port: 1935
+            targetPort: 1935
+
+    ingress:
+      main:
+        enabled: true
+        annotations:
+          kubernetes.io/ingress.class: nginx
+          nginx.ingress.kubernetes.io/proxy-body-size: 256m
+          nginx.ingress.kubernetes.io/auth-url: "http://frigate-oauth2-proxy.home-automation.svc.cluster.local/oauth2/auth"
+          nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
+          cert-manager.io/cluster-issuer: letsencrypt
+          acme.cert-manager.io/http01-edit-in-place: "false"
+          external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+          external-dns.alpha.kubernetes.io/target: ${personal_domain_ddns}
+        hosts:
+          - host: &host "frigate.${personal_domain}"
+            paths:
+              - path: "/"
+        tls:
+          - hosts:
+              - *host
+            secretName: *host
+
+      oauth:
+        enabled: true
+        annotations:
+          kubernetes.io/ingress.class: nginx
+          cert-manager.io/cluster-issuer: letsencrypt
+          external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
+          external-dns.alpha.kubernetes.io/target: ${personal_domain_ddns}
+        hosts:
+          - host: *host
+            paths:
+              - path: "/oauth2"
+                service:
+                  name: frigate-oauth2-proxy
+                  port: 80
+        tls:
+          - hosts:
+              - *host
+            secretName: *host
+
+    resources:
+      requests:
+        cpu: 1000m
+      limits:
+        memory: 4Gi
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
   name: frigate-oauth2-proxy
   namespace: home-automation
 spec:

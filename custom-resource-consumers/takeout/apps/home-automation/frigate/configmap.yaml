@@ -34,12 +34,18 @@ data:
       enabled: True
       # objects, motion, continuous
       mode: continuous
-    restream:
-      enabled: True
-    #   birdseye: True
-    #   jsmpeg:
-    #     height: 720
-    #     quality: 8
+    go2rtc:
+      streams:
+        frontdoor:
+          - 'rtsp://{FRIGATE_FRONTDOOR_CREDENTIALS}@frontdoor:554'
+        backdoor:
+          - 'rtsp://{FRIGATE_BACKDOOR_CREDENTIALS}@backdoor:554/live'
+        driveway:
+          - 'rtsp://{FRIGATE_DRIVEWAY_CREDENTIALS}@driveway:554/live'
+        porch:
+          - 'rtsp://{FRIGATE_PORCH_CREDENTIALS}@porch:554/live'
+        court:
+          - 'rtsp://{FRIGATE_COURT_CREDENTIALS}@court:554/live'
     detectors:
       coral:
         type: edgetpu
@@ -58,7 +64,8 @@ data:
         ffmpeg:
           hwaccel_args: preset-vaapi
           inputs:
-            - path: 'rtsp://{FRIGATE_FRONTDOOR_CREDENTIALS}@frontdoor:554'
+            - path: 'rtsp://127.0.0.1:8554/frondoor'
+              input_args: preset-rtsp-restream
               roles:
                 - detect
                 - restream # enabled by default
@@ -73,7 +80,8 @@ data:
         ffmpeg:
           hwaccel_args: preset-vaapi
           inputs:
-            - path: 'rtsp://{FRIGATE_BACKDOOR_CREDENTIALS}@backdoor:554/live'
+            - path: 'rtsp://127.0.0.1:8554/backdoor'
+              input_args: preset-rtsp-restream
               roles:
                 - detect
                 - restream # enabled by default
@@ -97,7 +105,8 @@ data:
         ffmpeg:
           hwaccel_args: preset-vaapi
           inputs:
-            - path: 'rtsp://{FRIGATE_DRIVEWAY_CREDENTIALS}@driveway:554/live'
+            - path:'rtsp://127.0.0.1:8554/driveway'
+              input_args: preset-rtsp-restream
               roles:
                 - detect
                 - restream # enabled by default
@@ -123,7 +132,8 @@ data:
         ffmpeg:
           hwaccel_args: preset-vaapi
           inputs:
-            - path: 'rtsp://{FRIGATE_PORCH_CREDENTIALS}@porch:554/live'
+            - path: 'rtsp://127.0.0.1:8554/porch'
+              input_args: preset-rtsp-restream
               roles:
                 - detect
                 - restream # enabled by default
@@ -146,7 +156,8 @@ data:
       court:
         ffmpeg:
           inputs:
-            - path: 'rtsp://{FRIGATE_COURT_CREDENTIALS}@court:554/live'
+            - path: 'rtsp://127.0.0.1:8554/court'
+              input_args: preset-rtsp-restream
               roles:
                 - detect
         snapshots:
@@ -155,9 +166,3 @@ data:
           width: 1920
           height: 1080
           fps: 5
-
-  frigate-go2rtc.yml: |
-    webrtc:
-      listen: ":8555"
-      candidates:
-        - stun:8555
