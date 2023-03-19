@@ -313,7 +313,7 @@ spec:
                 secretKeyRef:
                   name: memberlist
                   key: secretkey
-          image: quay.io/metallb/speaker:v0.9.6
+          image: quay.io/metallb/speaker:v0.13.9
           imagePullPolicy: Always
           name: speaker
           ports:
