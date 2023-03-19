@@ -65,7 +65,8 @@ data:
           hwaccel_args: preset-vaapi
           inputs:
             - path: 'rtsp://127.0.0.1:8554/frondoor'
-              input_args: "preset-rtsp-restream"
+              input_args: 
+                - "preset-rtsp-restream"
               roles:
                 - detect
                 - restream # enabled by default
@@ -81,7 +82,8 @@ data:
           hwaccel_args: preset-vaapi
           inputs:
             - path: 'rtsp://127.0.0.1:8554/backdoor'
-              input_args: "preset-rtsp-restream"
+              input_args: 
+                - "preset-rtsp-restream"
               roles:
                 - detect
                 - restream # enabled by default
@@ -106,7 +108,8 @@ data:
           hwaccel_args: preset-vaapi
           inputs:
             - path:'rtsp://127.0.0.1:8554/driveway'
-              input_args: "preset-rtsp-restream"
+              input_args: 
+                - "preset-rtsp-restream"
               roles:
                 - detect
                 - restream # enabled by default
@@ -133,7 +136,8 @@ data:
           hwaccel_args: preset-vaapi
           inputs:
             - path: 'rtsp://127.0.0.1:8554/porch'
-              input_args: "preset-rtsp-restream"
+              input_args: 
+                - "preset-rtsp-restream"
               roles:
                 - detect
                 - restream # enabled by default
@@ -157,7 +161,8 @@ data:
         ffmpeg:
           inputs:
             - path: 'rtsp://127.0.0.1:8554/court'
-              input_args: "preset-rtsp-restream"
+              input_args: 
+                - "preset-rtsp-restream"
               roles:
                 - detect
         snapshots:
