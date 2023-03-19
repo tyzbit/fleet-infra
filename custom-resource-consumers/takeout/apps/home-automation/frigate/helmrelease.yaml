@@ -75,6 +75,9 @@ spec:
     nodeSelector:
       coral: attached
 
+    securityContext:
+      privileged: true
+
     service:
       main:
         enabled: true
