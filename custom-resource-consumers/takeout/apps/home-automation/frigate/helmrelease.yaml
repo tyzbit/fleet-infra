@@ -52,11 +52,13 @@ spec:
       usb:
         enabled: true
         type: hostPath
+        hostPathType: BlockDevice
         hostPath: &usb /dev/bus/usb
         mountPath: *usb
       dri:
         enabled: true
         type: hostPath
+        hostPathType: BlockDevice
         hostPath: &dri /dev/dri
         mountPath: *dri
       cache:
