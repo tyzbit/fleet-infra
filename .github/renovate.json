@@ -27,6 +27,8 @@
     "ghcr.io/fluxcd/kustomize-controller",
     "ghcr.io/fluxcd/notification-controller",
     "ghcr.io/fluxcd/source-controller",
+    "quay.io/metallb/controller",
+    "quay.io/metallb/speaker",
     "mariadb"
   ],
   "flux": {
