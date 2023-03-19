@@ -59,18 +59,17 @@ spec:
         type: hostPath
         hostPath: &dri /dev/dri
         mountPath: *dri
+      shm:
+        enabled: true
+        type: hostPath
+        hostPath: &shm /dev/shm
+        mountPath: *shm
       cache:
         enabled: true
         type: emptyDir
         mountPath: /tmp/cache
-        medium: Memory
-        sizeLimit: 2Gi
-      shm:
-        enabled: true
-        type: emptyDir
-        mountPath: /dev/shm
-        medium: Memory
-        sizeLimit: 1Gi
+        # medium: Memory
+        # sizeLimit: 2Gi
 
     nodeSelector:
       coral: attached
@@ -135,7 +134,7 @@ spec:
       requests:
         cpu: 1000m
       limits:
-        memory: 8Gi
+        memory: 4Gi
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
