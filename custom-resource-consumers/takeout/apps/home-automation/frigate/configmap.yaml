@@ -34,18 +34,18 @@ data:
       enabled: True
       # objects, motion, continuous
       mode: continuous
-    go2rtc:
-      streams:
-        frontdoor:
-          - 'ffmpeg:rtsp://{FRIGATE_FRONTDOOR_CREDENTIALS}@frontdoor:554'
-        backdoor:
-          - 'ffmpeg:rtsp://{FRIGATE_BACKDOOR_CREDENTIALS}@backdoor:554/live'
-        driveway:
-          - 'ffmpeg:rtsp://{FRIGATE_DRIVEWAY_CREDENTIALS}@driveway:554/live'
-        porch:
-          - 'ffmpeg:rtsp://{FRIGATE_PORCH_CREDENTIALS}@porch:554/live'
-        court:
-          - 'ffmpeg:rtsp://{FRIGATE_COURT_CREDENTIALS}@court:554/live'
+    # go2rtc:
+    #   streams:
+    #     frontdoor:
+    #       - 'rtsp://{FRIGATE_FRONTDOOR_CREDENTIALS}@frontdoor:554'
+    #     backdoor:
+    #       - 'rtsp://{FRIGATE_BACKDOOR_CREDENTIALS}@backdoor:554/live'
+    #     driveway:
+    #       - 'rtsp://{FRIGATE_DRIVEWAY_CREDENTIALS}@driveway:554/live'
+    #     porch:
+    #       - 'rtsp://{FRIGATE_PORCH_CREDENTIALS}@porch:554/live'
+    #     court:
+    #       - 'rtsp://{FRIGATE_COURT_CREDENTIALS}@court:554/live'
     detectors:
       coral:
         type: edgetpu
@@ -65,7 +65,8 @@ data:
           hwaccel_args: preset-vaapi
           input_args: preset-rtsp-restream
           inputs:
-            - path: 'rtsp://127.0.0.1:8554/frontdoor'
+            # - path: 'rtsp://127.0.0.1:8554/frontdoor'
+            - path: 'rtsp://{FRIGATE_FRONTDOOR_CREDENTIALS}@frontdoor:554'
               roles:
                 - detect
                 - restream # enabled by default
@@ -81,7 +82,8 @@ data:
           hwaccel_args: preset-vaapi
           input_args: preset-rtsp-restream
           inputs:
-            - path: 'rtsp://127.0.0.1:8554/backdoor'
+            # - path: 'rtsp://127.0.0.1:8554/backdoor'
+            - path: 'rtsp://{FRIGATE_BACKDOOR_CREDENTIALS}@backdoor:554/live'
               roles:
                 - detect
                 - restream # enabled by default
@@ -106,7 +108,8 @@ data:
           hwaccel_args: preset-vaapi
           input_args: preset-rtsp-restream
           inputs:
-            - path: 'rtsp://127.0.0.1:8554/driveway'
+            # - path: 'rtsp://127.0.0.1:8554/driveway'
+            - path: 'rtsp://{FRIGATE_DRIVEWAY_CREDENTIALS}@driveway:554/live'
               roles:
                 - detect
                 - restream # enabled by default
@@ -133,7 +136,8 @@ data:
           hwaccel_args: preset-vaapi
           input_args: preset-rtsp-restream
           inputs:
-            - path: 'rtsp://127.0.0.1:8554/porch'
+            # - path: 'rtsp://127.0.0.1:8554/porch'
+            - path: 'rtsp://{FRIGATE_PORCH_CREDENTIALS}@porch:554/live'
               roles:
                 - detect
                 - restream # enabled by default
@@ -157,7 +161,8 @@ data:
         ffmpeg:
           input_args: preset-rtsp-restream
           inputs:
-            - path: 'rtsp://127.0.0.1:8554/court'
+            # - path: 'rtsp://127.0.0.1:8554/court'
+            - path: 'rtsp://{FRIGATE_COURT_CREDENTIALS}@court:554/live'
               roles:
                 - detect
         snapshots:
