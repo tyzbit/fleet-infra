@@ -37,15 +37,15 @@ data:
     go2rtc:
       streams:
         frontdoor:
-          - 'rtsp://{FRIGATE_FRONTDOOR_CREDENTIALS}@frontdoor:554'
+          - 'ffmpeg:rtsp://{FRIGATE_FRONTDOOR_CREDENTIALS}@frontdoor:554'
         backdoor:
-          - 'rtsp://{FRIGATE_BACKDOOR_CREDENTIALS}@backdoor:554/live'
+          - 'ffmpeg:rtsp://{FRIGATE_BACKDOOR_CREDENTIALS}@backdoor:554/live'
         driveway:
-          - 'rtsp://{FRIGATE_DRIVEWAY_CREDENTIALS}@driveway:554/live'
+          - 'ffmpeg:rtsp://{FRIGATE_DRIVEWAY_CREDENTIALS}@driveway:554/live'
         porch:
-          - 'rtsp://{FRIGATE_PORCH_CREDENTIALS}@porch:554/live'
+          - 'ffmpeg:rtsp://{FRIGATE_PORCH_CREDENTIALS}@porch:554/live'
         court:
-          - 'rtsp://{FRIGATE_COURT_CREDENTIALS}@court:554/live'
+          - 'ffmpeg:rtsp://{FRIGATE_COURT_CREDENTIALS}@court:554/live'
     detectors:
       coral:
         type: edgetpu
