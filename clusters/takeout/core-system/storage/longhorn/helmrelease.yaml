@@ -26,6 +26,7 @@ spec:
       storageMinimalAvailablePercentage: 10
       guaranteedEngineManagerCPU: 20
       guaranteedReplicaManagerCPU: 20
+      orphanAutoDeletion: true
       defaultDataPath: /mnt/external/longhorn
       concurrentAutomaticEngineUpgradePerNodeLimit: 3
       defaultLonghornStaticStorageClass: longhorn
