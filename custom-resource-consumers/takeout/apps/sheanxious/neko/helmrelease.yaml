@@ -44,4 +44,4 @@ spec:
             - movienight.${sheanxious_domain}
     resources:
       requests:
-        cpu: 2500m
+        cpu: 1000m

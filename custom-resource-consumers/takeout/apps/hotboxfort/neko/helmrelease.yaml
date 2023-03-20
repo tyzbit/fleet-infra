@@ -44,4 +44,4 @@ spec:
             - movienight.${hotboxfort_domain}
     resources:
       requests:
-        cpu: 2500m
+        cpu: 1000m

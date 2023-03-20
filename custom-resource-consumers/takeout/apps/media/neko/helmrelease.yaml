@@ -62,3 +62,6 @@ spec:
         - secretName: ${neko_domain}-tls
           hosts:
             - ${neko_domain}
+    resources:
+      requests:
+        cpu: 1000m
