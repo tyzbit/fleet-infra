@@ -104,7 +104,7 @@ spec:
       type: NodePort
       externalTrafficPolicy: Local
     persistence:
-      existingClaim: wordpress-${blog_name}-nas
+      existingClaim: wordpress-${blog_name}-longhorn-blog
     updateStrategy:
       type: Recreate
     # # run a container to fix volume permissions at the start
