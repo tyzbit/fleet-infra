@@ -15,6 +15,20 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
+  name: wordpress-hotboxfort-longhorn-blog
+  namespace: hotboxfort
+spec:
+  resources:
+    requests:
+      storage: 2Gi
+  volumeMode: Filesystem
+  storageClassName: longhorn-blog
+  accessModes:
+    - ReadWriteOnce
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
   name: wordpress-hotboxfort-mariadb-longhorn-database
   namespace: hotboxfort
 spec:

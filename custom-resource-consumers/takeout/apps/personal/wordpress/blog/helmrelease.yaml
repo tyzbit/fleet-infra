@@ -105,9 +105,11 @@ spec:
       externalTrafficPolicy: Local
     persistence:
       existingClaim: wordpress-${blog_name}-nas
-    # run a container to fix volume permissions at the start
-    volumePermissions:
-      enabled: true
+    updateStrategy:
+      type: Recreate
+    # # run a container to fix volume permissions at the start
+    # volumePermissions:
+    #   enabled: true
     memcached:
       enabled: true
     mariadb:

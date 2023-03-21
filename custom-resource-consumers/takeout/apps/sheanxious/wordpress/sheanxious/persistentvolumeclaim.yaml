@@ -15,6 +15,20 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
+  name: wordpress-sheanxious-longhorn-blog
+  namespace: sheanxious
+spec:
+  resources:
+    requests:
+      storage: 2Gi
+  volumeMode: Filesystem
+  storageClassName: longhorn-blog
+  accessModes:
+    - ReadWriteOnce
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
   name: wordpress-sheanxious-mariadb-longhorn-database
   namespace: sheanxious
 spec:

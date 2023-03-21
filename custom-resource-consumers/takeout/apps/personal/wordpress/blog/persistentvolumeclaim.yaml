@@ -15,6 +15,20 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
+  name: wordpress-${blog_name}-longhorn-blog
+  namespace: personal
+spec:
+  resources:
+    requests:
+      storage: 10Gi
+  volumeMode: Filesystem
+  storageClassName: longhorn-blog
+  accessModes:
+    - ReadWriteOnce
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
   name: wordpress-${blog_name}-mariadb-longhorn-database
   namespace: personal
 spec:

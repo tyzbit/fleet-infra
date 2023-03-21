@@ -104,6 +104,8 @@ spec:
       type: NodePort
     persistence:
       existingClaim: wordpress-sheanxious-nas
+    updateStrategy:
+      type: Recreate
     # run a container to fix volume permissions at the start
     # volumePermissions:
     #   enabled: true

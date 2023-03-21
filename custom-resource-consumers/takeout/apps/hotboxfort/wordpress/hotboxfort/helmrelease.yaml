@@ -17,61 +17,61 @@ spec:
         namespace: flux-system
   interval: 2m0s
   valuesFrom:
-  - kind: Secret
-    name: wordpress-hotboxfort-values
-    valuesKey: wordpressUsername
-    targetPath: wordpressUsername
-  - kind: Secret
-    name: wordpress-hotboxfort-values
-    valuesKey: wordpressPassword
-    targetPath: wordpressPassword
-  - kind: Secret
-    name: wordpress-hotboxfort-values
-    valuesKey: wordpressEmail
-    targetPath: wordpressEmail
-  - kind: Secret
-    name: wordpress-hotboxfort-values
-    valuesKey: wordpressTablePrefix
-    targetPath: wordpressTablePrefix
-  - kind: Secret
-    name: wordpress-hotboxfort-values
-    valuesKey: mariadbAuthRootPassword
-    targetPath: mariadb.auth.rootPassword
-  - kind: Secret
-    name: wordpress-hotboxfort-values
-    valuesKey: mariadbAuthUsername
-    targetPath: mariadb.auth.username
-  - kind: Secret
-    name: wordpress-hotboxfort-values
-    valuesKey: mariadbAuthPassword
-    targetPath: mariadb.auth.password
-  - kind: Secret
-    name: wordpress-hotboxfort-values
-    valuesKey: mariadbAuthDatabase
-    targetPath: mariadb.auth.database
-  - kind: Secret
-    name: wordpress-hotboxfort-values
-    valuesKey: smtpHost
-    targetPath: smtpHost
-  - kind: Secret
-    name: wordpress-hotboxfort-values
-    valuesKey: smtpPort
-    targetPath: smtpPort
-  - kind: Secret
-    name: wordpress-hotboxfort-values
-    valuesKey: smtpUser
-    targetPath: smtpUser
-  - kind: Secret
-    name: wordpress-hotboxfort-values
-    valuesKey: smtpPassword
-    targetPath: smtpPassword
+    - kind: Secret
+      name: wordpress-hotboxfort-values
+      valuesKey: wordpressUsername
+      targetPath: wordpressUsername
+    - kind: Secret
+      name: wordpress-hotboxfort-values
+      valuesKey: wordpressPassword
+      targetPath: wordpressPassword
+    - kind: Secret
+      name: wordpress-hotboxfort-values
+      valuesKey: wordpressEmail
+      targetPath: wordpressEmail
+    - kind: Secret
+      name: wordpress-hotboxfort-values
+      valuesKey: wordpressTablePrefix
+      targetPath: wordpressTablePrefix
+    - kind: Secret
+      name: wordpress-hotboxfort-values
+      valuesKey: mariadbAuthRootPassword
+      targetPath: mariadb.auth.rootPassword
+    - kind: Secret
+      name: wordpress-hotboxfort-values
+      valuesKey: mariadbAuthUsername
+      targetPath: mariadb.auth.username
+    - kind: Secret
+      name: wordpress-hotboxfort-values
+      valuesKey: mariadbAuthPassword
+      targetPath: mariadb.auth.password
+    - kind: Secret
+      name: wordpress-hotboxfort-values
+      valuesKey: mariadbAuthDatabase
+      targetPath: mariadb.auth.database
+    - kind: Secret
+      name: wordpress-hotboxfort-values
+      valuesKey: smtpHost
+      targetPath: smtpHost
+    - kind: Secret
+      name: wordpress-hotboxfort-values
+      valuesKey: smtpPort
+      targetPath: smtpPort
+    - kind: Secret
+      name: wordpress-hotboxfort-values
+      valuesKey: smtpUser
+      targetPath: smtpUser
+    - kind: Secret
+      name: wordpress-hotboxfort-values
+      valuesKey: smtpPassword
+      targetPath: smtpPassword
   values:
     replicaCount: 1 # active longhorn-database nas
     image:
       tag: "5.9.3" # {"$imagepolicy": "flux-system:wordpress-hotboxfort:tag"}
       pullPolicy: Always
       pullSecrets:
-      - name: docker-hub
+        - name: docker-hub
     wordpressBlogName: hotboxfort
     wordpressConfigureCache: true
     wordpressScheme: https
@@ -104,6 +104,8 @@ spec:
       type: NodePort
     persistence:
       existingClaim: wordpress-hotboxfort-nas
+    updateStrategy:
+      type: Recreate
     # run a container to fix volume permissions at the start
     # volumePermissions:
     #   enabled: true
@@ -116,12 +118,12 @@ spec:
     affinity:
       podAffinity:
         preferredDuringSchedulingIgnoredDuringExecution:
-        - podAffinityTerm:
-            labelSelector:
-              matchExpressions:
-              - key: app.kubernetes.io/instance
-                operator: In
-                values:
-                - wordpress-hotboxfort
-            topologyKey: kubernetes.io/hostname
-          weight: 100
+          - podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                  - key: app.kubernetes.io/instance
+                    operator: In
+                    values:
+                      - wordpress-hotboxfort
+              topologyKey: kubernetes.io/hostname
+            weight: 100
