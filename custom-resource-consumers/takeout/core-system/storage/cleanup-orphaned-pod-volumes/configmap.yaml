@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pod-volume-cleanup-script
+  namespace: kube-system
+data:
+  cleanup.sh: |
+    tail -n 0 -f /host/var/log/syslog | 
+    grep 'orphaned pod' | 
+    grep -Eow '\w{8}-\w{4}-\w{4}-\w{4}-\w{12}' | 
+    while read p; do
+      podvolumes="/host/var/lib/kubelet/pods/$p/volumes/"
+      findvolumes="find "${podvolumes}" -type d -maxdepth 1 -mindepth 1"
+      if [[ $(${findvolumes} | wc -l) -gt 0 ]]; then 
+        echo "removing ${podvolumes}"
+        ${findvolumes} -ls
+      fi;
+    done

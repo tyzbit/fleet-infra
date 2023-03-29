@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    app: pod-volume-cleanup
+    component: pod-volume-cleanup
+  name: pod-volume-cleanup
+  namespace: kube-system
+spec:
+  selector:
+    matchLabels:
+      app: pod-cleanup
+      component: speaker
+  template:
+    metadata:
+      labels:
+        app: pod-cleanup
+        component: speaker
+    spec:
+      containers:
+        - name: pod-volume-cleanup
+          image: bash:latest
+          command: ["bash", "/bin/cleanup.sh"]
+          imagePullPolicy: Always
+          securityContext:
+            privileged: true
+          volumeMounts:
+            - name: cleanup
+              mountPath: /bin/cleanup.sh
+              subPath: cleanup.sh
+              readOnly: true
+            - mountPath: /host/var
+              name: host-var
+              readOnly: true
+      volumes:
+        - name: cleanup
+          configMap:
+            name: pod-volume-cleanup-script
+            defaultMode: 493
+        - name: host-var
+          hostPath:
+            path: /var/
+            type: Directory
+      hostNetwork: true
+      nodeSelector:
+        kubernetes.io/os: linux
+      terminationGracePeriodSeconds: 1
