@@ -11,8 +11,8 @@ data:
     while read p; do
       podvolumes="/host/var/lib/kubelet/pods/$p/volumes/"
       findvolumes="find "${podvolumes}" -type d -maxdepth 1 -mindepth 1"
-      if [[ $(${findvolumes} | wc -l) -gt 0 ]]; then 
-        echo "removing ${podvolumes}"
-        ${findvolumes} -ls
+      if [[ $$($${findvolumes} | wc -l) -gt 0 ]]; then 
+        echo "removing $${podvolumes}"
+        $${findvolumes} -ls
       fi;
     done
