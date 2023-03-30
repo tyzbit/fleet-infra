@@ -5,6 +5,7 @@ metadata:
   namespace: kube-system
 data:
   # double dollar signs is because flux does variable substitution
+  # backslashes also need to be escaped, but I think that's usual
   cleanup.sh: |
     tail -n 0 -f /host/var/log/syslog | 
     grep 'orphaned pod' | 
