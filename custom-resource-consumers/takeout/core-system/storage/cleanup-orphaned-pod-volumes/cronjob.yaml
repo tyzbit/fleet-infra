@@ -9,6 +9,8 @@ metadata:
     component: pod-volume-cleanup
   name: pod-volume-cleanup
   namespace: kube-system
+  annotations:
+    reloader.stakater.com/auto: "true"
 spec:
   selector:
     matchLabels:
