@@ -93,7 +93,7 @@ data:
         objects:
           filters:
             person:
-              # min_score: 0.72
+              min_score: 0.80
               mask: 
               - 480,176,791,187,1104,210,1567,289,1810,345,1920,356,1920,0,0,0,0,254
         detect:
