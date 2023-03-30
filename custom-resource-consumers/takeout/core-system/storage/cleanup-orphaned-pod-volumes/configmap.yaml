@@ -14,9 +14,9 @@ data:
       podvolumes="/host/var/lib/kubelet/pods/$$pod/volumes/"
       foundvolumes=$$(find "$${podvolumes}" -type d -maxdepth 1 -mindepth 1)
       if [[ $$(echo "$${foundvolumes}" | wc -l) -gt 0 ]]; then
-        echo "removing folders:\\n$${foundvolumes}"
+        echo -e "removing folders:\\n$${foundvolumes}"
         echo "$${foundvolumes}" | while read dir; do
-          echo "rm -rf $${dir}"
+          rm -rf "$${dir}"
         done
       fi
     done
