@@ -36,7 +36,8 @@ spec:
               readOnly: true
             - mountPath: /host/var
               name: host-var
-              readOnly: true
+              # uncomment this to really, really do it live
+              # readOnly: true
       volumes:
         - name: cleanup
           configMap:
