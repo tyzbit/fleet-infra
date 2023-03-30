@@ -12,7 +12,7 @@ data:
     grep -Eow '\\w{8}-\\w{4}-\\w{4}-\\w{4}-\\w{12}' | 
     while read pod; do
       podvolumes="/host/var/lib/kubelet/pods/$$pod/volumes/"
-      foundvolumes=$$("find "$${podvolumes}" -type d -maxdepth 1 -mindepth 1")
+      foundvolumes=$$(find "$${podvolumes}" -type d -maxdepth 1 -mindepth 1)
       if [[ $$(echo "$${foundvolumes}" | wc -l) -gt 0 ]]; then
         echo "removing folders:\\n$${foundvolumes}"
         echo "$${foundvolumes}" | while read dir; do
