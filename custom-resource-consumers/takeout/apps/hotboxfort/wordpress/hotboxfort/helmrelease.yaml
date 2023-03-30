@@ -70,8 +70,6 @@ spec:
     image:
       tag: "5.9.3" # {"$imagepolicy": "flux-system:wordpress-hotboxfort:tag"}
       pullPolicy: Always
-      pullSecrets:
-        - name: docker-hub
     wordpressBlogName: hotboxfort
     wordpressConfigureCache: true
     wordpressScheme: https

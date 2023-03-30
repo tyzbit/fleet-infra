@@ -70,8 +70,6 @@ spec:
     image:
       tag: "6.1.1" # {"$imagepolicy": "flux-system:wordpress-${blog_name}:tag"}
       pullPolicy: Always
-      pullSecrets:
-        - name: docker-hub
     wordpressBlogName: ${blog_pretty_name}
     wordpressConfigureCache: true
     wordpressScheme: https

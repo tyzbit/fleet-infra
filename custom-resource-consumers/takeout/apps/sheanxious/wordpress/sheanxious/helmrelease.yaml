@@ -70,8 +70,6 @@ spec:
     image:
       tag: "5.9.3" # {"$imagepolicy": "flux-system:wordpress-sheanxious:tag"}
       pullPolicy: Always
-      pullSecrets:
-        - name: docker-hub
     wordpressBlogName: sheanxious
     wordpressConfigureCache: true
     wordpressScheme: https
