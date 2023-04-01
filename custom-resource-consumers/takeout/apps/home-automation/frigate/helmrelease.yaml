@@ -23,8 +23,10 @@ spec:
       tag: 0.12.0-beta10
 
     controller:
-      type: statefulset
+      annotations:
+        reloader.stakater.com/auto: "true"
       replicas: 1
+      type: statefulset
 
     env:
       - name: TZ
