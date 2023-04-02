@@ -49,3 +49,9 @@ spec:
         memory: 128Mi
     podAnnotations:
       reloader.stakater.com/auto: "true"
+    service:
+      main:
+        enabled: false
+    ingress:
+      main:
+        enabled: false
