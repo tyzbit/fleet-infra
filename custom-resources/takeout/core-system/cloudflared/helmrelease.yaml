@@ -16,8 +16,6 @@ spec:
         kind: HelmRepository
         name: bjw-s-helm-charts
         namespace: flux-system
-  install:
-    createNamespace: true
   values:
     global:
       nameOverride: *app
