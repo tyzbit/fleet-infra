@@ -16,7 +16,7 @@ metadata:
 spec:
   tls:
     - hosts:
-        - &host "vrising-fb.${personal_domain}"
+        - &host "vrising-fb.${blog_domain}"
       secretName: *host
   rules:
     - host: *host
@@ -42,7 +42,7 @@ metadata:
 spec:
   tls:
     - hosts:
-        - &host "vrising-fb.${personal_domain}"
+        - &host "vrising-fb.${blog_domain}"
       secretName: *host
   rules:
     - host: *host

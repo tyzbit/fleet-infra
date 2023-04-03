@@ -16,7 +16,7 @@ metadata:
 spec:
   tls:
     - hosts:
-        - &host "tf-fb.${personal_domain}"
+        - &host "tf-fb.${blog_domain}"
       secretName: *host
   rules:
     - host: *host
@@ -42,7 +42,7 @@ metadata:
 spec:
   tls:
     - hosts:
-        - &host "tf-fb.${personal_domain}"
+        - &host "tf-fb.${blog_domain}"
       secretName: *host
   rules:
     - host: *host
