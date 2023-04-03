@@ -4,8 +4,8 @@ metadata:
   name: project-zomboid-tcp
   namespace: games
   annotations:
-    external-dns.alpha.kubernetes.io/hostname: projectzomboid.${blog_domain}
-    external-dns.alpha.kubernetes.io/target: ${blog_domain_ddns}
+    # external-dns.alpha.kubernetes.io/hostname: projectzomboid.${blog_domain}
+    # external-dns.alpha.kubernetes.io/target: ${blog_domain_ddns}
     metallb.universe.tf/allow-shared-ip: games-project-zomboid-server
 spec:
   type: LoadBalancer

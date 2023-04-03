@@ -4,8 +4,8 @@ metadata:
   name: vrising-primary
   namespace: games
   annotations:
-    external-dns.alpha.kubernetes.io/hostname: vrising.${blog_domain}
-    external-dns.alpha.kubernetes.io/target: ${blog_domain_ddns}
+    # external-dns.alpha.kubernetes.io/hostname: vrising.${blog_domain}
+    # external-dns.alpha.kubernetes.io/target: ${blog_domain_ddns}
     metallb.universe.tf/allow-shared-ip: games-vrising-primary
 spec:
   type: LoadBalancer
