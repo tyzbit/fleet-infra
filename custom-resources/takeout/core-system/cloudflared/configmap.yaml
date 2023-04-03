@@ -5,7 +5,7 @@ metadata:
   namespace: cloudflared
 data:
   config.yaml: |
-    tunnel: ${cloudflare_tunnel_uuid}
+    tunnel: ${cloudflared_tunnel_uuid}
     credentials-file: /etc/cloudflared/cred.json
     originRequest:
       connectTimeout: 30s
