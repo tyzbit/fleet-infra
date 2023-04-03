@@ -24,6 +24,7 @@ spec:
     extraArgs:
       - --annotation-filter=external-dns.alpha.kubernetes.io/exclude notin (true)
       - --txt-wildcard-replacement=dummy
+      - --ignore-ingress-tls-spec
     env:
       - name: CF_API_KEY
         valueFrom:
