@@ -32,8 +32,6 @@ spec:
       - &configpath /etc/cloudflared/config.yaml
       - --no-autoupdate
       - run
-      - --token
-      - ${cloudflared_token}
     persistence:
       config: &config
         enabled: true
