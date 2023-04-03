@@ -31,8 +31,10 @@ spec:
         cert-manager.io/cluster-issuer: letsencrypt
         nginx.ingress.kubernetes.io/proxy-read-timeout: "14400"
         nginx.ingress.kubernetes.io/proxy-send-timeout: "14400"
-        external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
-        external-dns.alpha.kubernetes.io/target: ${sheanxious_domain_ddns}
+        nignx.ingress.kubernetes.io/force-ssl-redirect: "true"
+        acme.cert-manager.io/http01-edit-in-place: "false"
+        external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+        external-dns.alpha.kubernetes.io/target: ${cloudflared_tunnel_uuid}.cfargotunnel.com
       hosts:
         - host: movienight.${sheanxious_domain}
           paths:
