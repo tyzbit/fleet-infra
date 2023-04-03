@@ -32,7 +32,6 @@ spec:
     #   dri:
     #     existingClaim: dri-pvc
     #     path: /dev/dri
-    existingSecret: neko
     ingress:
       enabled: true
       annotations:
