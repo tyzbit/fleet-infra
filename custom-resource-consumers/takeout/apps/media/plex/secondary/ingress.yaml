@@ -9,20 +9,20 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt
     acme.cert-manager.io/http01-edit-in-place: "false"
     external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
-    external-dns.alpha.kubernetes.io/target: ${personal_domain_ddns}
+    external-dns.alpha.kubernetes.io/target: ${cloudflared_tunnel_uuid}.cfargotunnel.com
 spec:
   tls:
     - hosts:
         - &host "plex-backup.${blog_domain}"
       secretName: *host
   rules:
-  - host: *host
-    http:
-      paths:
-      - pathType: Prefix
-        path: "/"
-        backend:
-          service:
-            name: plex-secondary
-            port:
-              number: 32400
+    - host: *host
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: plex-secondary
+                port:
+                  number: 32400

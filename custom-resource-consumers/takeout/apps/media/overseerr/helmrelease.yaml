@@ -44,7 +44,7 @@ spec:
           cert-manager.io/cluster-issuer: letsencrypt
           acme.cert-manager.io/http01-edit-in-place: "false"
           external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
-          external-dns.alpha.kubernetes.io/target: ${blog_domain_ddns}
+          external-dns.alpha.kubernetes.io/target: ${cloudflared_tunnel_uuid}.cfargotunnel.com
         hosts:
           - host: &host "request.${blog_domain}"
             paths:
