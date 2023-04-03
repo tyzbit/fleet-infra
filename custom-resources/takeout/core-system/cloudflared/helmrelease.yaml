@@ -35,7 +35,7 @@ spec:
       - --token
       - ${cloudflared_token}
     persistence:
-      config:
+      config: &config
         enabled: true
         name: cloudflared-config
         type: configMap
@@ -43,6 +43,11 @@ spec:
         subPath: config.yaml
         readOnly: true
         defaultMode: 0755
+      credentials:
+        <<: *config
+        name: cloudflared-creds
+        mountPath: /etc/cloudflared/cred.json
+        subPath: cred.json
     resources:
       requests:
         memory: 64Mi

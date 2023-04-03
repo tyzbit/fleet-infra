@@ -6,8 +6,12 @@ metadata:
 data:
   config.yaml: |
     tunnel: ${cloudflare_tunnel_uuid}
+    credentials-file: /etc/cloudflared/cred.json
     originRequest:
+      connectTimeout: 30s
       noTLSVerify: true
+    warp-routing:
+      enabled: false
 
     ingress:
       - service: https://kube-system-ingress-nginx-controller.kube-system
