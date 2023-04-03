@@ -40,6 +40,7 @@ spec:
         acme.cert-manager.io/http01-edit-in-place: "false"
         external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
         external-dns.alpha.kubernetes.io/target: ${cloudflared_tunnel_uuid}.cfargotunnel.com
+        nignx.ingress.kubernetes.io/force-ssl-redirect: "true"
         nginx.ingress.kubernetes.io/server-snippets: |
           location / {
               proxy_http_version 1.1;
