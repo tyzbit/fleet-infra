@@ -62,7 +62,7 @@ spec:
           nginx.ingress.kubernetes.io/auth-url: "http://n8n-oauth2-proxy.home-automation.svc.cluster.local/oauth2/auth"
           nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
           external-dns.alpha.kubernetes.io/cloudflare-proxied: "false" # CF breaks n8n sessions
-          external-dns.alpha.kubernetes.io/target: ${cloudflared_tunnel_uuid}.cfargotunnel.com
+          external-dns.alpha.kubernetes.io/target: ${blog_domain_ddns}
         hosts:
           - host: &host "n8n.${blog_domain}"
             paths:
