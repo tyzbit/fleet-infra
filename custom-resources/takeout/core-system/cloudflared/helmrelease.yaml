@@ -32,6 +32,7 @@ spec:
       - &configpath /etc/cloudflared/config.yaml
       - --no-autoupdate
       - run
+      - takeout
     persistence:
       config: &config
         enabled: true
