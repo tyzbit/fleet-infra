@@ -15,8 +15,8 @@ data:
 
     ingress:
       # Origins that use A records
-      - hostname: ${neko_domain}
-        service: http://neko.media
+      # - hostname: ${neko_domain}
+      #   service: http://neko.media
       - hostname: pz-fb.${personal_domain}
         service: http://project-zomboid-filebrowser.games
       - hostname: pz-fb-2.${personal_domain}
