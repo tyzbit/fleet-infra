@@ -15,8 +15,6 @@ data:
 
     ingress:
       # Origins that use A records
-      # Search: 
-      # external-dns.alpha.kubernetes.io/target: \$\{[^c][^l]
       - hostname: ${neko_domain}
         service: http://neko.media
       - hostname: pz-fb.${personal_domain}
