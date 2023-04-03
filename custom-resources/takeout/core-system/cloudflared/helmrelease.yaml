@@ -21,34 +21,34 @@ spec:
       nameOverride: *app
     controller:
       type: daemonset
+      annotations:
+        reloader.stakater.com/auto: "true"
     image:
       repository: cloudflare/cloudflared
       tag: 2023.3.1-amd64
     args:
       - tunnel
+      - --config
+      - &configpath /etc/cloudflared/config.yaml
       - --no-autoupdate
       - run
       - --token
       - ${cloudflared_token}
     persistence:
-      # config:
-      #   enabled: true
-      #   type: custom
-      #   volumeSpec:
-      #     configMap:
-      #       name: &config cloudflare-tunnel
-      #   subPath:
-      #     - path: config.yaml
-      #       mountPath: /etc/cloudflared/config.yaml
-      #       readOnly: true
+      config:
+        enabled: true
+        name: cloudflared-config
+        type: configMap
+        mountPath: *configpath
+        subPath: config.yaml
+        readOnly: true
+        defaultMode: 0755
     resources:
       requests:
         memory: 64Mi
         cpu: 10m
       limits:
         memory: 128Mi
-    podAnnotations:
-      reloader.stakater.com/auto: "true"
     service:
       main:
         enabled: false
