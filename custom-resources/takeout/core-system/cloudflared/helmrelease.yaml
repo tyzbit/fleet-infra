@@ -44,7 +44,7 @@ spec:
       credentials:
         <<: *config
         type: secret
-        name: cloudflared-creds
+        name: cloudflared-cred
         mountPath: /etc/cloudflared/cred.json
         subPath: cred.json
     resources:
