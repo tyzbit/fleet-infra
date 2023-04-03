@@ -4,6 +4,8 @@ metadata:
   name: the-forest-tcp
   namespace: games
   annotations:
+    external-dns.alpha.kubernetes.io/hostname: theforest.${blog_domain}
+    external-dns.alpha.kubernetes.io/target: ${blog_domain_ddns}
     metallb.universe.tf/allow-shared-ip: games-the-forest-server
 spec:
   type: LoadBalancer

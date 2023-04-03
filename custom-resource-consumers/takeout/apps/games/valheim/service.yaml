@@ -4,6 +4,8 @@ metadata:
   name: valheim-server-tcp
   namespace: games
   annotations:
+    external-dns.alpha.kubernetes.io/hostname: valheim.${blog_domain}
+    external-dns.alpha.kubernetes.io/target: ${blog_domain_ddns}
     metallb.universe.tf/allow-shared-ip: games-valheim-server
 spec:
   type: LoadBalancer
@@ -12,18 +14,18 @@ spec:
   selector:
     app: valheim-server
   ports:
-  - port: 80
-    protocol: TCP
-    name: files
-    targetPort: 80
-  - port: 3000
-    protocol: TCP
-    name: map
-    targetPort: 3000
-  - port: 9001
-    protocol: TCP
-    name: supervisor
-    targetPort: 9001
+    - port: 80
+      protocol: TCP
+      name: files
+      targetPort: 80
+    - port: 3000
+      protocol: TCP
+      name: map
+      targetPort: 3000
+    - port: 9001
+      protocol: TCP
+      name: supervisor
+      targetPort: 9001
 ---
 apiVersion: v1
 kind: Service
@@ -39,14 +41,14 @@ spec:
   selector:
     app: valheim-server
   ports:
-  - port: 2456
-    protocol: UDP
-    name: server-one
-    targetPort: 2456
-  - port: 2457
-    protocol: UDP
-    name: server-two
-    targetPort: 2457
+    - port: 2456
+      protocol: UDP
+      name: server-one
+      targetPort: 2456
+    - port: 2457
+      protocol: UDP
+      name: server-two
+      targetPort: 2457
 ---
 apiVersion: v1
 kind: Service
@@ -58,7 +60,7 @@ spec:
   selector:
     app: valheim-files
   ports:
-  - port: 80
-    protocol: TCP
-    name: files
-    targetPort: 80
+    - port: 80
+      protocol: TCP
+      name: files
+      targetPort: 80
