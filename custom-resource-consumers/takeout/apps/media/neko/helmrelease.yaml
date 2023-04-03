@@ -15,8 +15,6 @@ spec:
         namespace: flux-system
   interval: 2m0s
   values:
-    env:
-      NEKO_PROXY: "true"
     deploymentAnnotations:
       reloader.stakater.com/auto: "true"
     service:
