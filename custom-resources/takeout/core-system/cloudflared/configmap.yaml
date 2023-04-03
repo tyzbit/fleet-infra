@@ -14,4 +14,22 @@ data:
       enabled: false
 
     ingress:
+      # Origins that use A records
+      # Search: 
+      # external-dns.alpha.kubernetes.io/target: \$\{[^c][^l]
+      - hostname: ${neko_domain}
+        service: http://neko.media
+      - hostname: pz-fb.${personal_domain}
+        service: http://project-zomboid-filebrowser.games
+      - hostname: pz-fb-2.${personal_domain}
+        service: http://project-zomboid-secondary-filebrowser.games
+      - hostname: tf-fb.${personal_domain}
+        service: http://the-forest-filebrowser.games
+      - hostname: vrising-fb.${personal_domain}
+        service: http://vrising-primary-filebrowser.games
+      - hostname: movienight.${hotboxfort_domain}
+        service: http://neko.hotboxfort
+      - hostname: movienight.${sheanxious_domain}
+        service: http://neko.sheanxious
+      # Catchall for everything else
       - service: https://kube-system-ingress-nginx-controller.kube-system
