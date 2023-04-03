@@ -43,6 +43,7 @@ spec:
         defaultMode: 0755
       credentials:
         <<: *config
+        type: secret
         name: cloudflared-creds
         mountPath: /etc/cloudflared/cred.json
         subPath: cred.json
