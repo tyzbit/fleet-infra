@@ -9,8 +9,8 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt
     acme.cert-manager.io/http01-edit-in-place: "false"
     nignx.ingress.kubernetes.io/force-ssl-redirect: "true"
-    external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
-    external-dns.alpha.kubernetes.io/target: ${cloudflared_tunnel_uuid}.cfargotunnel.com
+    external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
+    external-dns.alpha.kubernetes.io/target: ${blog_domain_ddns}
   labels:
     use-cloudflare-dns-solver: "true"
 spec:
@@ -100,23 +100,17 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt
     acme.cert-manager.io/http01-edit-in-place: "false"
     nignx.ingress.kubernetes.io/force-ssl-redirect: "true"
-    external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
-    external-dns.alpha.kubernetes.io/target: ${cloudflared_tunnel_uuid}.cfargotunnel.com
+    external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
+    external-dns.alpha.kubernetes.io/target: ${personal_domain_ddns}
   labels:
     use-cloudflare-dns-solver: "true"
 spec:
+  defaultBackend:
+    service:
+      name: default-backend
+      port:
+        number: 80
   tls:
     - hosts:
-        - &host "*.${personal_domain}"
+        - "*.${personal_domain}"
       secretName: ${personal_domain}
-  rules:
-    - host: *host
-      http:
-        paths:
-          - pathType: Prefix
-            path: "/"
-            backend:
-              service:
-                name: default-backend
-                port:
-                  number: 80
