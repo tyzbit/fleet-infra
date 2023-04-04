@@ -71,6 +71,10 @@ data:
             "install_url": "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi",
             "installation_mode": "force_installed"
           }
+          "{cf485034-0bda-470d-a027-794f3214359c}": {
+            "install_url": "https://addons.mozilla.org/firefox/downloads/latest/youtube-shorts-redirect/latest.xpi",
+            "installation_mode": "force_installed"
+          }
         },
         "ExtensionUpdate": false,
         "FirefoxHome": {
