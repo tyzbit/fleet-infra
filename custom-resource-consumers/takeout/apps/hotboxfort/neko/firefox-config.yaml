@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: neko-firefox-config
+  name: hotboxfort-neko-firefox-config
   namespace: hotboxfort
 data:
   policies.json: |

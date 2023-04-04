@@ -31,7 +31,7 @@ spec:
     persistence:
       config:
         enabled: true
-        name: neko-firefox-config
+        name: hotboxfort-neko-firefox-config
         type: configMap
         mountPath: /usr/lib/firefox/distribution/policies.json
         subPath: policies.json
@@ -39,7 +39,7 @@ spec:
         defaultMode: 0755
       profile:
         enabled: true
-        existingClaim: neko-firefox-profile-nas
+        existingClaim: hotboxfort-neko-firefox-profile-nas
         mountPath: /home/neko/.mozilla/firefox/profile.default
       dri:
         enabled: true

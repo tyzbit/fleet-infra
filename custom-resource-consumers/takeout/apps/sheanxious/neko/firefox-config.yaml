@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: neko-firefox-config
+  name: sheanxious-neko-firefox-config
   namespace: sheanxious
 data:
   policies.json: |
