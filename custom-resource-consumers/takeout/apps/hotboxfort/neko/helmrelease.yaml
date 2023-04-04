@@ -65,8 +65,8 @@ spec:
             port: 80
             targetPort: 8080
           tcpmux:
-            port: 5100
-            targetPort: 5100
+            port: 5101
+            targetPort: 5101
       udpmux:
         enabled: true
         annotations:
@@ -75,8 +75,8 @@ spec:
         loadBalancerIP: 192.168.1.74
         ports:
           udpmux:
-            port: 5100
-            targetPort: 5100
+            port: 5101
+            targetPort: 5101
             protocol: UDP
     ingress:
       main:
