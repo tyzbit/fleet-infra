@@ -24,7 +24,22 @@ spec:
       tag: 2.8.1
     podAnnotations:
       reloader.stakater.com/auto: "true"
+    controller:
+      type: statefulset
+      replicas: 1
     persistence:
+      config:
+        enabled: true
+        name: neko-firefox-config
+        type: configMap
+        mountPath: /usr/lib/firefox/distribution/policies.json
+        subPath: policies.json
+        readOnly: true
+        defaultMode: 0755
+      profile:
+        enabled: true
+        existingClaim: neko-firefox-profile-nas
+        mountPath: /home/neko/.mozilla/firefox/profile.default
       dri:
         enabled: true
         type: hostPath
