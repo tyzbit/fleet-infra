@@ -19,17 +19,17 @@ spec:
       name: media-neko
   values:
     image:
-      # repository: ghcr.io/m1k1o/neko/intel-firefox
-      repository: ghcr.io/m1k1o/neko/firefox
+      repository: ghcr.io/m1k1o/neko/intel-firefox
+      # repository: ghcr.io/m1k1o/neko/firefox
       tag: 2.8.1
     podAnnotations:
       reloader.stakater.com/auto: "true"
-    # persistence:
-    #   dri:
-    #     existingClaim: dri-pvc
-    #     path: /dev/dri
-    # securityContext:
-    #   privileged: true
+    persistence:
+      dri:
+        existingClaim: dri-pvc
+        path: /dev/dri
+    securityContext:
+      privileged: true
     service:
       annotations:
         metallb.universe.tf/allow-shared-ip: media-neko
