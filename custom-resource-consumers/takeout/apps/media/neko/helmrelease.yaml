@@ -4,6 +4,7 @@ metadata:
   name: neko
   namespace: flux-system
 spec:
+  releaseName: ${neko_name}-neko
   targetNamespace: media
   chart:
     spec:
