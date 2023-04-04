@@ -91,14 +91,14 @@ spec:
           external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
           external-dns.alpha.kubernetes.io/target: ${sheanxious_domain_ddns}
         hosts:
-          - host: ${sheanxious_domain}
+          - host: movienight.${sheanxious_domain}
             paths:
               - path: /
                 pathType: Prefix
         tls:
-          - secretName: ${sheanxious_domain}-tls
+          - secretName: movienight.${sheanxious_domain}-tls
             hosts:
-              - ${sheanxious_domain}
+              - movienight.${sheanxious_domain}
       resources:
         requests:
           cpu: 1000m

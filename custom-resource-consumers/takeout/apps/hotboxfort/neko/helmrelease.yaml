@@ -91,14 +91,14 @@ spec:
           external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
           external-dns.alpha.kubernetes.io/target: ${hotboxfort_domain_ddns}
         hosts:
-          - host: ${hotboxfort_domain}
+          - host: movienight.${hotboxfort_domain}
             paths:
               - path: /
                 pathType: Prefix
         tls:
-          - secretName: ${hotboxfort_domain}-tls
+          - secretName: movienight.${hotboxfort_domain}-tls
             hosts:
-              - ${hotboxfort_domain}
+              - movienight.${hotboxfort_domain}
       resources:
         requests:
           cpu: 1000m
