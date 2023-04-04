@@ -24,7 +24,7 @@ spec:
       annotations:
         metallb.universe.tf/allow-shared-ip: hotboxfort-neko
       type: LoadBalancer
-      loadBalancerIP: 192.168.1.75
+      loadBalancerIP: 192.168.1.74
       port: 80
     ingress:
       enabled: true
