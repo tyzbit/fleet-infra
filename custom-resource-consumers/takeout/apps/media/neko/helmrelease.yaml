@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: neko
-      version: "0.6.3"
+      version: "0.4.1"
       sourceRef:
         kind: HelmRepository
         name: tyzbit
@@ -20,6 +20,12 @@ spec:
   values:
     podAnnotations:
       reloader.stakater.com/auto: "true"
+    service:
+      annotations:
+        metallb.universe.tf/allow-shared-ip: media-neko
+      type: LoadBalancer
+      loadBalancerIP: 192.168.1.74
+      port: 80
     ingress:
       enabled: true
       annotations:
@@ -29,16 +35,12 @@ spec:
         nginx.ingress.kubernetes.io/proxy-send-timeout: "14400"
         nignx.ingress.kubernetes.io/force-ssl-redirect: "true"
         acme.cert-manager.io/http01-edit-in-place: "false"
-        external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
-        external-dns.alpha.kubernetes.io/target: ${cloudflared_tunnel_uuid}.cfargotunnel.com
+        external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
+        external-dns.alpha.kubernetes.io/target: ${blog_domain_ddns}
       hosts:
         - host: ${neko_domain}
           paths:
             - path: /
-              pathType: Prefix
-        - host: mux.${neko_domain}
-          paths:
-            - path: /mux
               pathType: Prefix
       tls:
         - secretName: ${neko_domain}-tls
