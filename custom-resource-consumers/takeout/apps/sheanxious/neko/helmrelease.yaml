@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: neko
-      version: "0.4.1"
+      version: "0.5.0"
       sourceRef:
         kind: HelmRepository
         name: tyzbit
@@ -18,12 +18,8 @@ spec:
     - kind: Secret
       name: sheanxious-neko
   values:
-    service:
-      annotations:
-        metallb.universe.tf/allow-shared-ip: sheanxious-neko
-      type: LoadBalancer
-      loadBalancerIP: 192.168.1.77
-      port: 80
+    deploymentAnnotations:
+      reloader.stakater.com/auto: "true"
     ingress:
       enabled: true
       annotations:
