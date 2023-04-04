@@ -19,7 +19,7 @@ spec:
       name: sheanxious-neko
   values:
     image:
-      repository: ghcr.io/m1k1o/neko/intel-chromium
+      repository: ghcr.io/m1k1o/neko/intel-ungoogled-chromium
       tag: 2.8.1
     podAnnotations:
       reloader.stakater.com/auto: "true"
