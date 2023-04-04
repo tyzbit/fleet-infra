@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: sheanxious-neko-firefox-profile-nas
+  name: neko-firefox-profile-nas
   namespace: sheanxious
 spec:
   resources:

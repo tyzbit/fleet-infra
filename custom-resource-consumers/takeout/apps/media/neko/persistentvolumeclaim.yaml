@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: ${neko_name}-neko-firefox-profile-nas
+  name: neko-firefox-profile-nas
   namespace: media
 spec:
   resources:
