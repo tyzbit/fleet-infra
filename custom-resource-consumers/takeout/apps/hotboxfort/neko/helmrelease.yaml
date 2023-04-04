@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: neko
-      version: "0.6.7"
+      version: "0.7.0"
       sourceRef:
         kind: HelmRepository
         name: tyzbit
@@ -18,8 +18,17 @@ spec:
     - kind: Secret
       name: hotboxfort-neko
   values:
+    image:
+      repository: ghcr.io/m1k1o/neko/intel-chromium
+      tag: 2.8.1
     podAnnotations:
       reloader.stakater.com/auto: "true"
+    persistence:
+      dri:
+        existingClaim: dri-pvc
+        path: /dev/dri
+    securityContext:
+      privileged: true
     service:
       annotations:
         metallb.universe.tf/allow-shared-ip: hotboxfort-neko
