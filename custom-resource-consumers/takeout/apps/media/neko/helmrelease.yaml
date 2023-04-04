@@ -16,7 +16,7 @@ spec:
   interval: 2m0s
   valuesFrom:
     - kind: Secret
-      name: neko
+      name: media-neko
   values:
     image:
       # repository: ghcr.io/m1k1o/neko/intel-firefox
