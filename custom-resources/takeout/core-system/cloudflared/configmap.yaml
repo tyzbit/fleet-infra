@@ -14,4 +14,10 @@ data:
       enabled: false
 
     ingress:
+      - hostname: mux.${neko_domain}
+        service: tcp://neko.media:5100
+      - hostname: mux.${hotboxfort_domain}
+        service: tcp://neko.hotboxfort:5100
+      - hostname: mux.${sheanxious_domain}
+        service: tcp://neko.sheanxious:5100
       - service: https://kube-system-ingress-nginx-controller.kube-system
