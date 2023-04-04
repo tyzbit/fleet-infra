@@ -4,14 +4,15 @@ metadata:
   name: sheanxious-neko
   namespace: flux-system
 spec:
+  releaseName: sheanxious-neko
   targetNamespace: sheanxious
   chart:
     spec:
-      chart: neko
-      version: "0.7.0"
+      chart: app-template
+      version: "1.3.2"
       sourceRef:
         kind: HelmRepository
-        name: tyzbit
+        name: bjw-s-helm-charts
         namespace: flux-system
   interval: 2m0s
   valuesFrom:
@@ -24,38 +25,80 @@ spec:
       tag: 2.8.1
     podAnnotations:
       reloader.stakater.com/auto: "true"
-    # persistence:
-    #   dri:
-    #     existingClaim: dri-pvc
-    #     path: /dev/dri
-    # securityContext:
-    #   privileged: true
+    controller:
+      type: statefulset
+      replicas: 1
+    persistence:
+      config:
+        enabled: true
+        name: neko-firefox-config
+        type: configMap
+        mountPath: /usr/lib/firefox/distribution/policies.json
+        subPath: policies.json
+        readOnly: true
+        defaultMode: 0755
+      profile:
+        enabled: true
+        existingClaim: neko-firefox-profile-nas
+        mountPath: /home/neko/.mozilla/firefox/profile.default
+      dri:
+        enabled: true
+        type: hostPath
+        hostPath: &dri /dev/dri
+        mountPath: *dri
+      shm:
+        enabled: true
+        type: hostPath
+        hostPath: &shm /dev/shm
+        mountPath: *shm
+    securityContext:
+      privileged: true
     service:
-      annotations:
-        metallb.universe.tf/allow-shared-ip: sheanxious-neko
-      type: LoadBalancer
-      loadBalancerIP: 192.168.1.75
-      port: 80
+      main:
+        enabled: true
+        annotations:
+          metallb.universe.tf/allow-shared-ip: sheanxious-neko
+        type: LoadBalancer
+        loadBalancerIP: 192.168.1.74
+        ports:
+          http:
+            port: 80
+            targetPort: 8080
+          tcpmux:
+            port: 5100
+            targetPort: 5100
+      udpmux:
+        enabled: true
+        annotations:
+          metallb.universe.tf/allow-shared-ip: sheanxious-neko
+        type: LoadBalancer
+        loadBalancerIP: 192.168.1.74
+        ports:
+          udpmux:
+            port: 5100
+            targetPort: 5100
+            protocol: UDP
     ingress:
-      enabled: true
-      annotations:
-        kubernetes.io/ingress.class: nginx
-        cert-manager.io/cluster-issuer: letsencrypt
-        nginx.ingress.kubernetes.io/proxy-read-timeout: "14400"
-        nginx.ingress.kubernetes.io/proxy-send-timeout: "14400"
-        nignx.ingress.kubernetes.io/force-ssl-redirect: "true"
-        acme.cert-manager.io/http01-edit-in-place: "false"
-        external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
-        external-dns.alpha.kubernetes.io/target: ${sheanxious_domain_ddns}
-      hosts:
-        - host: movienight.${sheanxious_domain}
-          paths:
-            - path: /
-              pathType: Prefix
-      tls:
-        - secretName: movienight.${sheanxious_domain}-tls
-          hosts:
-            - movienight.${sheanxious_domain}
-    resources:
-      requests:
-        cpu: 1000m
+      main:
+        enabled: true
+        annotations:
+          kubernetes.io/ingress.class: nginx
+          cert-manager.io/cluster-issuer: letsencrypt
+          nginx.ingress.kubernetes.io/proxy-read-timeout: "14400"
+          nginx.ingress.kubernetes.io/proxy-send-timeout: "14400"
+          nignx.ingress.kubernetes.io/force-ssl-redirect: "true"
+          acme.cert-manager.io/http01-edit-in-place: "false"
+          external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
+          external-dns.alpha.kubernetes.io/target: ${sheanxious_domain_ddns}
+        hosts:
+          - host: ${sheanxious_domain}
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - secretName: ${sheanxious_domain}-tls
+            hosts:
+              - ${sheanxious_domain}
+      resources:
+        requests:
+          cpu: 1000m
