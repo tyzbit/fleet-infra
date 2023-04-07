@@ -70,6 +70,19 @@ spec:
               - path: "/webhook"
               - path: "/webhook-test"
 
+      webhooks:
+        enabled: true
+        annotations:
+          kubernetes.io/ingress.class: nginx
+          cert-manager.io/cluster-issuer: letsencrypt
+          acme.cert-manager.io/http01-edit-in-place: "false"
+          nignx.ingress.kubernetes.io/force-ssl-redirect: "true"
+        hosts:
+          - host: *host
+            paths:
+              - path: "/webhook"
+              - path: "/webhook-test"
+
         tls:
           - hosts:
               - *host
