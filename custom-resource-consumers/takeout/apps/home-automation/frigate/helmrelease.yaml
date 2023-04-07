@@ -76,8 +76,8 @@ spec:
     nodeSelector:
       coral: attached
 
-    podSecurityContext:
-      supplementalGroups: [44, 109, 10000]
+    securityContext:
+      privileged: true
 
     service:
       main:
