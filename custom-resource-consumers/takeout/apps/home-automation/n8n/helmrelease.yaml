@@ -67,8 +67,6 @@ spec:
           - host: &host "n8n.${blog_domain}"
             paths:
               - path: "/"
-              - path: "/webhook"
-              - path: "/webhook-test"
 
       webhooks:
         enabled: true
