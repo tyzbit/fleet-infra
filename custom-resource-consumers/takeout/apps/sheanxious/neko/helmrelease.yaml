@@ -25,9 +25,11 @@ spec:
       tag: 2.8.2
     podAnnotations:
       reloader.stakater.com/auto: "true"
+
     controller:
       type: statefulset
       replicas: 1
+
     persistence:
       config:
         enabled: true
@@ -51,8 +53,10 @@ spec:
         type: hostPath
         hostPath: &shm /dev/shm
         mountPath: *shm
+
     securityContext:
       privileged: true
+
     service:
       main:
         enabled: true
@@ -78,6 +82,11 @@ spec:
             port: 5102
             targetPort: 5102
             protocol: UDP
+
+    resources:
+      requests:
+        cpu: 1000m
+
     ingress:
       main:
         enabled: true
@@ -99,6 +108,3 @@ spec:
           - secretName: movienight.${sheanxious_domain}-tls
             hosts:
               - movienight.${sheanxious_domain}
-      resources:
-        requests:
-          cpu: 1000m
