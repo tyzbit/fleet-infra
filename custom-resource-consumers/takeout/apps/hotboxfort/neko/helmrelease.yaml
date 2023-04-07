@@ -54,8 +54,8 @@ spec:
         hostPath: &shm /dev/shm
         mountPath: *shm
 
-    securityContext:
-      privileged: true
+    podSecurityContext:
+      supplementalGroups: [44, 109, 10000]
 
     resources:
       requests:
