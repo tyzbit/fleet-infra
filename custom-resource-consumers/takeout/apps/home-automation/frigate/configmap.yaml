@@ -34,19 +34,23 @@ data:
       enabled: True
       # objects, motion, continuous
       mode: continuous
-    # go2rtc is enabled because frigate kept running out of memory
-    # go2rtc:
-    #   streams:
-    #     frontdoor:
-    #       - 'rtsp://{FRIGATE_FRONTDOOR_CREDENTIALS}@frontdoor:554'
-    #     backdoor:
-    #       - 'rtsp://{FRIGATE_BACKDOOR_CREDENTIALS}@backdoor:554/live'
-    #     driveway:
-    #       - 'rtsp://{FRIGATE_DRIVEWAY_CREDENTIALS}@driveway:554/live'
-    #     porch:
-    #       - 'rtsp://{FRIGATE_PORCH_CREDENTIALS}@porch:554/live'
-    #     court:
-    #       - 'rtsp://{FRIGATE_COURT_CREDENTIALS}@court:554/live'
+    ffmpeg:
+      hwaccel_args: ["-hwaccel", "vaapi", "-hwaccel_device", "/dev/dri/renderD128", "-hwaccel_output_format", "yuv420p"]
+      input_args: preset-rtsp-restream
+    # go2rtc is disabled because frigate kept running out of memory
+    go2rtc:
+      streams:
+        frontdoor:
+          - 'rtsp://{FRIGATE_FRONTDOOR_CREDENTIALS}@frontdoor:554'
+        backdoor:
+          - 'rtsp://{FRIGATE_BACKDOOR_CREDENTIALS}@backdoor:554/live'
+        driveway:
+          - 'rtsp://{FRIGATE_DRIVEWAY_CREDENTIALS}@driveway:554/live'
+        porch:
+          - 'rtsp://{FRIGATE_PORCH_CREDENTIALS}@porch:554/live'
+        court:
+          - 'rtsp://{FRIGATE_COURT_CREDENTIALS}@court:554/live'
+
     detectors:
       coral:
         type: edgetpu
@@ -63,8 +67,6 @@ data:
               mask:
                 - 0,390,193,302,416,250,613,202,707,193,1021,155,1149,113,1138,0,0,0
         ffmpeg:
-          hwaccel_args: preset-vaapi
-          input_args: preset-rtsp-restream
           inputs:
             # - path: 'rtsp://127.0.0.1:8554/frontdoor'
             - path: 'rtsp://{FRIGATE_FRONTDOOR_CREDENTIALS}@frontdoor:554'
@@ -80,11 +82,9 @@ data:
 
       backdoor:
         ffmpeg:
-          hwaccel_args: preset-vaapi
-          input_args: preset-rtsp-restream
           inputs:
-            # - path: 'rtsp://127.0.0.1:8554/backdoor'
-            - path: 'rtsp://{FRIGATE_BACKDOOR_CREDENTIALS}@backdoor:554/live'
+            - path: 'rtsp://127.0.0.1:8554/backdoor'
+            # - path: 'rtsp://{FRIGATE_BACKDOOR_CREDENTIALS}@backdoor:554/live'
               roles:
                 - detect
                 - restream # enabled by default
@@ -110,8 +110,8 @@ data:
           hwaccel_args: preset-vaapi
           input_args: preset-rtsp-restream
           inputs:
-            # - path: 'rtsp://127.0.0.1:8554/driveway'
-            - path: 'rtsp://{FRIGATE_DRIVEWAY_CREDENTIALS}@driveway:554/live'
+            - path: 'rtsp://127.0.0.1:8554/driveway'
+            # - path: 'rtsp://{FRIGATE_DRIVEWAY_CREDENTIALS}@driveway:554/live'
               roles:
                 - detect
                 - restream # enabled by default
@@ -138,8 +138,8 @@ data:
           hwaccel_args: preset-vaapi
           input_args: preset-rtsp-restream
           inputs:
-            # - path: 'rtsp://127.0.0.1:8554/porch'
-            - path: 'rtsp://{FRIGATE_PORCH_CREDENTIALS}@porch:554/live'
+            - path: 'rtsp://127.0.0.1:8554/porch'
+            # - path: 'rtsp://{FRIGATE_PORCH_CREDENTIALS}@porch:554/live'
               roles:
                 - detect
                 - restream # enabled by default
@@ -163,8 +163,8 @@ data:
         ffmpeg:
           input_args: preset-rtsp-restream
           inputs:
-            # - path: 'rtsp://127.0.0.1:8554/court'
-            - path: 'rtsp://{FRIGATE_COURT_CREDENTIALS}@court:554/live'
+            - path: 'rtsp://127.0.0.1:8554/court'
+            # - path: 'rtsp://{FRIGATE_COURT_CREDENTIALS}@court:554/live'
               roles:
                 - detect
         snapshots:
