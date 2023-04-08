@@ -71,7 +71,7 @@ spec:
         cpu: 1000m
 
     service:
-      main: &main
+      main: &mainsvc
         enabled: true
         annotations:
           metallb.universe.tf/allow-shared-ip: media-neko
@@ -81,14 +81,15 @@ spec:
           http:
             port: 80
             targetPort: 8080
-          mux:
-            port: &mux 5100
-            targetPort: *mux
+          mux: &mux
+            port: &muxport 5100
+            targetPort: *muxport
       udpmux:
-        <<: *main
+        <<: *mainsvc
         ports:
           http: null
           mux:
+            <<: *mux
             protocol: UDP
 
     ingress:

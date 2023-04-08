@@ -79,14 +79,15 @@ spec:
           http:
             port: 80
             targetPort: 8080
-          mux:
-            port: 5101
-            targetPort: 5101
+          mux: &mux
+            port: &muxport 5100
+            targetPort: *muxport
       udpmux:
-        <<: *main
+        <<: *mainsvc
         ports:
           http: null
           mux:
+            <<: *mux
             protocol: UDP
 
     ingress:
