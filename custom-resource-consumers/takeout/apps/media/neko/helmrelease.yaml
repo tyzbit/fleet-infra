@@ -88,6 +88,8 @@ spec:
         ports:
           http: null
           mux:
+            port: &mux 5100
+            targetPort: *mux
             protocol: UDP
 
     ingress:
