@@ -65,7 +65,7 @@ spec:
       reloader.stakater.com/auto: "true"
 
     service:
-      main: &main
+      main: &mainsvc
         enabled: true
         annotations:
           metallb.universe.tf/allow-shared-ip: sheanxious-neko
