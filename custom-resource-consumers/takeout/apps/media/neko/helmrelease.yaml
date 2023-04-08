@@ -23,8 +23,13 @@ spec:
       repository: ghcr.io/m1k1o/neko/intel-firefox
       # repository: ghcr.io/m1k1o/neko/firefox
       tag: 2.8.3
-    podAnnotations:
-      reloader.stakater.com/auto: "true"
+
+    env:
+      NEKO_SCREEN: 1280x720@30
+      NEKO_PROXY: "true"
+      NEKO_TCPMUX: &mux "5100"
+      NEKO_UDPMUX: *mux
+      NEKO_ICELITE: "true"
 
     controller:
       type: statefulset
@@ -57,12 +62,15 @@ spec:
     securityContext:
       privileged: true
 
+    podAnnotations:
+      reloader.stakater.com/auto: "true"
+
     resources:
       requests:
         cpu: 1000m
 
     service:
-      main:
+      main: &main
         enabled: true
         annotations:
           metallb.universe.tf/allow-shared-ip: media-neko
@@ -72,19 +80,14 @@ spec:
           http:
             port: 80
             targetPort: 8080
-          tcpmux:
-            port: 5100
-            targetPort: 5100
+          mux:
+            port: &mux 5100
+            targetPort: *mux
       udpmux:
-        enabled: true
-        annotations:
-          metallb.universe.tf/allow-shared-ip: media-neko
-        type: LoadBalancer
-        loadBalancerIP: 192.168.1.77
+        <<: *main
         ports:
-          udpmux:
-            port: 5100
-            targetPort: 5100
+          http: null
+          mux:
             protocol: UDP
 
     ingress:
