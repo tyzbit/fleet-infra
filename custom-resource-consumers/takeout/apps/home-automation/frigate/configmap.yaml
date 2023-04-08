@@ -38,7 +38,7 @@ data:
       # hwaccel_args: ["-hwaccel", "vaapi", "-hwaccel_device", "/dev/dri/renderD128", "-hwaccel_output_format", "yuv420p"]
       hwaccel_args: preset-vaapi
       input_args: preset-rtsp-restream
-    # go2rtc is disabled because frigate kept running out of memory
+    # go2rtc is disabled because frigate kept running out of memory and also 404ing
     # go2rtc:
     #   streams:
     #     frontdoor: 'rtsp://{FRIGATE_FRONTDOOR_CREDENTIALS}@frontdoor:554'
