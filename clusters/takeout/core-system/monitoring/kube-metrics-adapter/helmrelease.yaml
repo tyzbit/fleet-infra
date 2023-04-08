@@ -15,5 +15,8 @@ spec:
         namespace: flux-system
   interval: 2m0s
   values:
+    registry:
+      image: registry.opensource.zalan.do/teapot/kube-metrics-adapter
+      imageTag: v0.1.17
     enableCustomMetricsApi: true
     enableExternalMetricsApi: true
