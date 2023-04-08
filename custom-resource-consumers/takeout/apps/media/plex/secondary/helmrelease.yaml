@@ -46,8 +46,10 @@ spec:
     envFrom:
       - configMapRef:
           name: plex-secondary-config
-    podSecurityContext:
-      supplementalGroups: [8, 13, 44, 100, 109, 10000]
+    # podSecurityContext:
+    #   supplementalGroups: [8, 13, 44, 100, 109, 10000]
+    securityContext:
+      privileged: true
     service:
       main:
         enabled: true
