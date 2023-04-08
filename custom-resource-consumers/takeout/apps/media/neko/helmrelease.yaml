@@ -82,15 +82,15 @@ spec:
             port: 80
             targetPort: 8080
           mux:
-            port: &muxport 5100
-            targetPort: *muxport
+            port: 5100
+            targetPort: 5100
       udpmux:
         <<: *mainsvc
         ports:
           http: null
           mux:
-            port: *muxport
-            targetPort: *muxport
+            port: 5100
+            targetPort: 5100
             protocol: UDP
 
     ingress:
