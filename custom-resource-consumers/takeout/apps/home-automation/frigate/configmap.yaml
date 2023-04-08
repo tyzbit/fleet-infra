@@ -37,7 +37,7 @@ data:
     ffmpeg:
       hwaccel_args: ["-hwaccel", "vaapi", "-hwaccel_device", "/dev/dri/renderD128", "-hwaccel_output_format", "yuv420p"]
       # hwaccel_args: preset-vaapi
-      input_args: preset-rtsp-restream
+      # input_args: preset-rtsp-restream
     # go2rtc is disabled because frigate kept running out of memory
     go2rtc:
       streams:
@@ -103,8 +103,6 @@ data:
 
       driveway:
         ffmpeg:
-          hwaccel_args: preset-vaapi
-          input_args: preset-rtsp-restream
           inputs:
             - path: 'rtsp://localhost:8554/driveway'
             # - path: 'rtsp://{FRIGATE_DRIVEWAY_CREDENTIALS}@driveway:554/live'
@@ -131,8 +129,6 @@ data:
 
       porch:
         ffmpeg:
-          hwaccel_args: preset-vaapi
-          input_args: preset-rtsp-restream
           inputs:
             - path: 'rtsp://localhost:8554/porch'
             # - path: 'rtsp://{FRIGATE_PORCH_CREDENTIALS}@porch:554/live'
@@ -157,7 +153,6 @@ data:
 
       court:
         ffmpeg:
-          input_args: preset-rtsp-restream
           inputs:
             - path: 'rtsp://localhost:8554/court'
             # - path: 'rtsp://{FRIGATE_COURT_CREDENTIALS}@court:554/live'
