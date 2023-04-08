@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: &app plex-secondary
+  name: &app plex
   namespace: flux-system
 spec:
   releaseName: *app
@@ -18,7 +18,7 @@ spec:
   values:
     image:
       repository: plexinc/pms-docker
-      tag: 1.31.3.6868-28fc46b27 # {"$imagepolicy": "flux-system:plex-secondary:tag"}
+      tag: 1.31.3.6868-28fc46b27
     podAnnotations:
       reloader.stakater.com/auto: "true"
     controller:
@@ -30,7 +30,7 @@ spec:
         existingClaim: nas-volume1-media
       config:
         enabled: true
-        existingClaim: plex-secondary-config-longhorn-plex
+        existingClaim: plex-config-longhorn-plex
       transcode:
         enabled: true
         type: hostPath
@@ -44,7 +44,7 @@ spec:
         mountPath: *dri
     envFrom:
       - configMapRef:
-          name: plex-secondary-config
+          name: plex-config
     # podSecurityContext:
     #   supplementalGroups: [8, 13, 44, 100, 109, 10000]
     securityContext:
@@ -54,7 +54,7 @@ spec:
         enabled: true
         type: LoadBalancer
         externalTrafficPolicy: Local
-        loadBalancerIP: 192.168.1.70
+        loadBalancerIP: 192.168.1.64
         ports:
           http:
             port: 32400
@@ -70,7 +70,7 @@ spec:
           external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
           external-dns.alpha.kubernetes.io/target: ${blog_domain_ddns}
         hosts:
-          - host: &host "plex.${blog_domain}"
+          - host: &host "plex-backup.${blog_domain}"
             paths:
               - path: /
                 pathType: Prefix
