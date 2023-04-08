@@ -35,8 +35,8 @@ data:
       # objects, motion, continuous
       mode: continuous
     ffmpeg:
-      # hwaccel_args: ["-hwaccel", "vaapi", "-hwaccel_device", "/dev/dri/renderD128", "-hwaccel_output_format", "yuv420p"]
-      hwaccel_args: preset-vaapi
+      hwaccel_args: ["-hwaccel", "vaapi", "-hwaccel_device", "/dev/dri/renderD128", "-hwaccel_output_format", "yuv420p"]
+      # hwaccel_args: preset-vaapi
       input_args: preset-rtsp-restream
     # go2rtc is disabled because frigate kept running out of memory
     go2rtc:
