@@ -70,7 +70,7 @@ spec:
           external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
           external-dns.alpha.kubernetes.io/target: ${blog_domain_ddns}
         hosts:
-          - host: &host "plex.${blog_domain}"
+          - host: &host "plex-secondary.${blog_domain}"
             paths:
               - path: /
                 pathType: Prefix
