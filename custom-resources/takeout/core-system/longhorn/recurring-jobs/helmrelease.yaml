@@ -89,3 +89,11 @@ spec:
         backup:
           - interval: 24h
             retain: 7
+
+      "ContainerImageCache":
+        options:
+          parameters:
+            numberOfReplicas: "2"
+        snapshot:
+          - interval: 10m
+            retain: 1
