@@ -90,7 +90,6 @@ spec:
                             elif [[ $smart_output_line =~ "Data" ]]; then
                               measurement=$(echo "$smart_output_line" | awk '{print $4}' | tr -d ',')
                             fi
-                            echo no more if
                             ssd_bytes_written=$(( measurement * lba_size_bytes * multiplier ))
                             mfr_tbw=${tbw["$model"]}
                             percent_tbw_used=$(echo "scale=2; ( $ssd_bytes_written / 1000 / 1000 / 1000 / 1000) / $mfr_tbw" | bc -l)
@@ -102,7 +101,6 @@ spec:
                         split_by: ','
                         set_header:
                           [ device, model, manufacturerTbw, ssdBytesWritten, percentTbwUsed]
-                        # set_header: [device, model, ssdBytesWritten]
             - name: nri-flex
               config:
                 name: linuxDiskTemperatureIntegration
@@ -142,7 +140,7 @@ spec:
                             echo "$(echo $sensor|sed -E 's/.*(th.*[0-9]).*/\\1/g'),$(( $(cat $sensor) / 1000 ))" 
                           done
                         split: horizontal
-                        split_by: ","
+                        split_by: ','
                         set_header: [thermalSensor, temperatureC]
       config:
         enable_process_metrics: false
