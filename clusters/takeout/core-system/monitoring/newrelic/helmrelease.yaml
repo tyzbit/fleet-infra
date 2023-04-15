@@ -118,17 +118,20 @@ spec:
                             if [[ $model =~ "Samsung SSD 860" ]]; then
                               sensor=$(echo $smart_output_line | cut -f 2 -d' ')
                               value=$(echo $smart_output_line | sed 's/ Celsius//g' | awk '{print $NF}')
+                            elif [[ $model =~ "WDC WDS400T1R0A" ]]; then
+                              sensor=$(echo $smart_output_line | cut -f 2 -d' ')
+                              value=$(echo $smart_output_line | sed 's/ Celsius//g' | awk '{print $10}')
                             elif [[ $model =~ "Samsung SSD 970 EVO Plus 2TB" ]]; then
                               sensor=$(echo $smart_output_line | sed 's/:.*//g')
                               value=$(echo $smart_output_line | sed -E 's/.*\:\s+([0-9]+).*/\1/g')
                             fi
-                            echo "$sensor,$value"
+                            echo "$sensor,$model,$value"
                           done
                           EOF
                           chroot /host bash /dev/shm/smart_temp_monitor.sh
                         split: horizontal
                         split_by: ','
-                        set_header: [thermalSensor, temperatureC]
+                        set_header: [thermalSensor, model, temperatureC]
             - name: nri-flex
               config:
                 name: linuxSensorTemperatureIntegration
@@ -137,11 +140,11 @@ spec:
                     commands:
                       - run: |
                           for sensor in /sys/class/thermal/thermal_zone*/temp; do 
-                            echo "$(echo $sensor|sed -E 's/.*(th.*[0-9]).*/\\1/g'),$(( $(cat $sensor) / 1000 ))" 
+                            echo "$(echo $sensor|sed -E 's/.*(th.*[0-9]).*/\\1/g'),$(echo $sensor|sed -E 's/.*(th.*[0-9]).*/\\1/g'),$(( $(cat $sensor) / 1000 ))" 
                           done
                         split: horizontal
                         split_by: ','
-                        set_header: [thermalSensor, temperatureC]
+                        set_header: [thermalSensor, model, temperatureC]
       config:
         enable_process_metrics: false
         network_interface_filters:
