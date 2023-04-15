@@ -57,7 +57,8 @@ spec:
                   - name: SMART
                     commands:
                       - run: |
-                          cat <<EOF > /tmp/smartmonitor.sh
+                          cat <<\EOF > /tmp/smartmonitor.sh
+                            #!/bin/bash
                             set -m
                             devices=$(lsblk | grep -E 'sda\\s+|nvme0n1\\s+' | awk '{print $1}')
                             for device in $${devices[@]}; do
@@ -72,7 +73,7 @@ spec:
                               echo "$device $metric"
                             done
                           EOF
-                          chroot /host bash /tmp/smartmonitor.sh
+                          chroot /host "bash /tmp/smartmonitor.sh"
                         split: horizontal
                         split_by: \s+
                         set_header: [device, ssdBytesWritten]
