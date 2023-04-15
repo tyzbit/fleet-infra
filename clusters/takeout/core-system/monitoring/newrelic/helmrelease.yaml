@@ -59,7 +59,7 @@ spec:
                       - run: |
                           host_script="/host/tmp/smartmonitor.sh"
                           if [[ ! -f $host_script ]]; then
-                            cat <<\EOF > $host_script
+                            cat <<\\EOF > $host_script
                               #!/bin/bash
                               set -m
                               devices=$(lsblk | grep -E 'sda\\s+|nvme0n1\\s+' | awk '{print $1}')
