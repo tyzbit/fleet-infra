@@ -47,6 +47,14 @@ spec:
       #   config:
       #     interval: 15s
       # lowDataMode: true
+      kubelet:
+        extraVolumes:
+          - name: host-tmp
+            hostPath:
+              path: /tmp
+        extraVolumeMounts:
+          - name: host-tmp
+            mountPath: /hosttemp
       integrations:
         nri-flex:
           integrations:
@@ -57,7 +65,7 @@ spec:
                   - name: SMART
                     commands:
                       - run: |
-                          host_script="/host/tmp/smartmonitor.sh"
+                          host_script="/hosttemp/smartmonitor.sh"
                           cat <<"EOF" > $host_script
                             #!/bin/bash
                             set -m
