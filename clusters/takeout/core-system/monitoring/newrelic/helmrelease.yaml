@@ -47,6 +47,42 @@ spec:
       #   config:
       #     interval: 15s
       # lowDataMode: true
+      integrations:
+        - name: nri-flex
+          config:
+            name: linuxSMARTIntegration
+            apis:
+              - name: SMART
+                commands:
+                  - run: |
+                      devices=$(lsblk | grep -E 'sda\\s+|nvme0n1\\s+' | awk '{print $1}')
+                      for device in $${devices[@]}; do
+                        smart_output_line=$(smartctl -A /dev/$device | grep Written)
+                        lba_size_bytes=$(fdisk /dev/$device -l | grep 'Sector size' | awk '{print $4}')
+                        if [[ $smart_output_line =~ "LBA" ]]; then
+                          measurement=$(echo "$smart_output_line" | awk '{print $10}')
+                        elif [[ $smart_output_line =~ "Data" ]]; then
+                          measurement=$(echo "$smart_output_line" | awk '{print $4}' | tr -d ',')
+                        fi
+                        metric=$(( measurement * lba_size_bytes ))
+                        echo "$device $metric"
+                      done
+                    split: horizontal
+                    split_by: \s+
+                    set_header: [device, ssdBytesWritten]
+        - name: nri-flex
+          config:
+            name: linuxTemperatureIntegration
+            apis:
+              - name: Temperature
+                commands:
+                  - run: |
+                      for sensor in /sys/class/thermal/thermal_zone*/temp; do 
+                        echo "$(echo $sensor|sed -E 's/.*(th.*[0-9]).*/\\1/g') $(( $(cat $sensor) / 1000 ))" 
+                      done
+                    split: horizontal
+                    split_by: \s+
+                    set_header: [thermalSensor, temperatureC]
       config:
         enable_process_metrics: false
         network_interface_filters:
@@ -63,42 +99,6 @@ spec:
         metrics_storage_sample_rate: 120
         metrics_system_sample_rate: 30
         strip_command_line: true
-        integrations:
-          - name: nri-flex
-            config:
-              name: linuxSMARTIntegration
-              apis:
-                - name: SMART
-                  commands:
-                    - run: |
-                        devices=$(lsblk | grep -E 'sda\\s+|nvme0n1\\s+' | awk '{print $1}')
-                        for device in $${devices[@]}; do
-                          smart_output_line=$(smartctl -A /dev/$device | grep Written)
-                          lba_size_bytes=$(fdisk /dev/$device -l | grep 'Sector size' | awk '{print $4}')
-                          if [[ $smart_output_line =~ "LBA" ]]; then
-                            measurement=$(echo "$smart_output_line" | awk '{print $10}')
-                          elif [[ $smart_output_line =~ "Data" ]]; then
-                            measurement=$(echo "$smart_output_line" | awk '{print $4}' | tr -d ',')
-                          fi
-                          metric=$(( measurement * lba_size_bytes ))
-                          echo "$device $metric"
-                        done
-                      split: horizontal
-                      split_by: \s+
-                      set_header: [device, ssdBytesWritten]
-          - name: nri-flex
-            config:
-              name: linuxTemperatureIntegration
-              apis:
-                - name: Temperature
-                  commands:
-                    - run: |
-                        for sensor in /sys/class/thermal/thermal_zone*/temp; do 
-                          echo "$(echo $sensor|sed -E 's/.*(th.*[0-9]).*/\\1/g') $(( $(cat $sensor) / 1000 ))" 
-                        done
-                      split: horizontal
-                      split_by: \s+
-                      set_header: [thermalSensor, temperatureC]
     kubeEvents:
       enabled: true
     ksm:
