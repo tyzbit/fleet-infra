@@ -78,7 +78,7 @@ spec:
                             elif [[ $smart_output_line =~ "Data" ]]; then
                               measurement=$(echo "$smart_output_line" | awk '{print $4}' | tr -d ',')
                             fi
-                            metric=$(( measurement * lba_size_bytes ))
+                            metric=$(( measurement * lba_size_bytes * 1000 ))
                             echo "$device $metric"
                           done
                           EOF
