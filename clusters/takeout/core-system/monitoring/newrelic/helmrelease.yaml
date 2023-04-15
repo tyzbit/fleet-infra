@@ -65,30 +65,61 @@ spec:
                   - name: SMART
                     commands:
                       - run: |
-                          host_script="/hosttemp/smartmonitor.sh"
+                          host_script="/hosttemp/smart_tbw_monitor.sh"
                           cat <<"EOF" > $host_script
                           #!/bin/bash
                           set -m
                           devices=$(lsblk | grep -E 'sda\\s+|nvme0n1\\s+' | awk '{print $1}')
                           for device in $${devices[@]}; do
                             smart_output_line=$(smartctl -A /dev/$device | grep Written)
-                            lba_size_bytes=$(fdisk /dev/$device -l | grep 'Sector size' | awk '{print $4}')
+                            lba_size_bytes=$(fdisk /dev/$device -l | grep 'Units' | awk '{print $8}')
+                            model=$(fdisk /dev/$device -l | grep model | sed -E 's/.*: //g')
                             if [[ $smart_output_line =~ "LBA" ]]; then
+                              multiplier=1
                               measurement=$(echo "$smart_output_line" | awk '{print $10}')
                             elif [[ $smart_output_line =~ "Data" ]]; then
+                              multiplier=1000
                               measurement=$(echo "$smart_output_line" | awk '{print $4}' | tr -d ',')
                             fi
-                            metric=$(( measurement * lba_size_bytes * 1000 ))
-                            echo "$device $metric"
+                            metric=$(( measurement * lba_size_bytes * multiplier ))
+                            echo "$device $model $metric"
                           done
                           EOF
-                          chroot /host bash /tmp/smartmonitor.sh
+                          chroot /host bash /tmp/smart_tbw_monitor.sh
                         split: horizontal
                         split_by: \s+
-                        set_header: [device, ssdBytesWritten]
+                        set_header: [device, model, ssdBytesWritten]
             - name: nri-flex
               config:
-                name: linuxTemperatureIntegration
+                name: linuxDiskTemperatureIntegration
+                apis:
+                  - name: Temperature
+                    commands:
+                      - run: |
+                          host_script="/hosttemp/smart_temp_monitor.sh"
+                          cat <<"EOF" > $host_script
+                          #!/bin/bash
+                          set -m
+                          devices=$(lsblk | grep -E 'sda\\s+|nvme0n1\\s+' | awk '{print $1}')
+                          for device in $${devices[@]}; do
+                            smart_output_line=$(smartctl -A /dev/$device | grep Cel)
+                            model=$(fdisk /dev/$device -l | grep model | sed -E 's/.*: //g')
+                            if [[ $model =~ "Samsung SSD 860" ]]; then
+                              sensor=$(echo $smart_output_line | cut -f 2 -d' ')
+                              value=$(echo $smart_output_line | sed 's/ Celsius//g' | awk '{print $NF}')
+                            elif [[ $model =~ "Samsung SSD 970 EVO Plus 2TB" ]]; then
+                              sensor=$(echo $smart_output_line | sed 's/:.*//g')
+                              value=$(echo $smart_output_line | sed -E 's/.*\:\s+([0-9]+).*/\1/g')
+                            echo "$sensor $value"
+                          done
+                          EOF
+                          chroot /host bash /tmp/smart_temp_monitor.sh
+                        split: horizontal
+                        split_by: \s+
+                        set_header: [thermalSensor, temperatureC]
+            - name: nri-flex
+              config:
+                name: linuxSensorTemperatureIntegration
                 apis:
                   - name: Temperature
                     commands:
