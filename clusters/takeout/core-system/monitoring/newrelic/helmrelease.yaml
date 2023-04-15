@@ -110,6 +110,7 @@ spec:
                             elif [[ $model =~ "Samsung SSD 970 EVO Plus 2TB" ]]; then
                               sensor=$(echo $smart_output_line | sed 's/:.*//g')
                               value=$(echo $smart_output_line | sed -E 's/.*\:\s+([0-9]+).*/\1/g')
+                            fi
                             echo "$sensor $value"
                           done
                           EOF
