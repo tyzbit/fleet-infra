@@ -73,7 +73,7 @@ spec:
                               echo "$device $metric"
                             done
                           EOF
-                          chroot /host "bash /tmp/smartmonitor.sh"
+                          chroot /host bash /tmp/smartmonitor.sh
                         split: horizontal
                         split_by: \s+
                         set_header: [device, ssdBytesWritten]
