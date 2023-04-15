@@ -68,6 +68,12 @@ spec:
                           host_script="/hosttemp/smart_tbw_monitor.sh"
                           cat <<"EOF" > $host_script
                           #!/bin/bash
+                          declare -A tbw
+                          tbw=( 
+                            ["Samsung SSD 860"]="2400"
+                            ["Samsung SSD 970 EVO Plus 2TB"]="1200"
+                            ["WDC  WDS400T1R0A"]="2500"
+                          )
                           set -m
                           devices=$(lsblk | grep -E 'sda\\s+|nvme0n1\\s+' | awk '{print $1}')
                           for device in $${devices[@]}; do
@@ -81,14 +87,18 @@ spec:
                               multiplier=1000
                               measurement=$(echo "$smart_output_line" | awk '{print $4}' | tr -d ',')
                             fi
-                            metric=$(( measurement * lba_size_bytes * multiplier ))
-                            echo "$device $model $metric"
+                            ssd_bytes_written=$(( measurement * lba_size_bytes * multiplier ))
+                            mfr_tbw=$${tbw["$model"]}
+                            percent_tbw_used=$(( ssd_bytes_written / tbw))
+                            echo "$device $model $mfr_tbw $ssd_bytes_written $percent_tbw_used"
                           done
                           EOF
                           chroot /host bash /tmp/smart_tbw_monitor.sh
                         split: horizontal
                         split_by: \s+
-                        set_header: [device, model, ssdBytesWritten]
+                        set_header:
+                          [ device, model, manufacturerTbw, ssdBytesWritten, percentTbwUsed]
+                        # set_header: [device, model, ssdBytesWritten]
             - name: nri-flex
               config:
                 name: linuxDiskTemperatureIntegration
