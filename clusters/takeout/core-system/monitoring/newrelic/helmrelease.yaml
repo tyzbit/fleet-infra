@@ -67,34 +67,39 @@ spec:
                       - run: |
                           host_script="/hostshm/smart_tbw_monitor.sh"
                           cat <<"EOF" > $host_script
-                          declare -A tbw
-                          tbw=( 
+                          declare -A tbw multipliers
+                          tbw=(
                             ["Samsung SSD 860"]="2400"
                             ["Samsung SSD 970 EVO Plus 2TB"]="1200"
-                            ["WDC  WDS400T1R0A"]="2500"
+                            ["WDC WDS400T1R0A"]="2500"
+                          )
+                          multipliers=(
+                            ["Samsung SSD 860"]="1"
+                            ["Samsung SSD 970 EVO Plus 2TB"]="10000"
+                            ["WDC WDS400T1R0A"]="1000000"
                           )
                           set -m
-                          devices=$(lsblk | grep -E 'sda\\s+|nvme0n1\\s+' | awk '{print $1}')
-                          for device in $${devices[@]}; do
+                          devices=$(lsblk | grep -E 'sda\s+|nvme0n1\s+' | awk '{print $1}')
+                          for device in ${devices[@]}; do
                             smart_output_line=$(smartctl -A /dev/$device | grep Written)
                             lba_size_bytes=$(fdisk /dev/$device -l | grep 'Units' | awk '{print $8}')
-                            model=$(fdisk /dev/$device -l | grep model | sed -E 's/.*: //g')
+                            model=$(fdisk /dev/$device -l | grep model | sed -E 's/.*: //g' | awk '{$1=$1};1')
+                            multiplier=${multipliers["$model"]}
                             if [[ $smart_output_line =~ "LBA" ]]; then
-                              multiplier=1
                               measurement=$(echo "$smart_output_line" | awk '{print $10}')
                             elif [[ $smart_output_line =~ "Data" ]]; then
-                              multiplier=1000
                               measurement=$(echo "$smart_output_line" | awk '{print $4}' | tr -d ',')
                             fi
+                            echo no more if
                             ssd_bytes_written=$(( measurement * lba_size_bytes * multiplier ))
-                            mfr_tbw=$${tbw["$model"]}
-                            percent_tbw_used=$(( ( ssd_bytes_written / 1000000 ) / mfr_tbw ))
-                            echo "$device $model $mfr_tbw $ssd_bytes_written $percent_tbw_used"
+                            mfr_tbw=${tbw["$model"]}
+                            percent_tbw_used=$(echo "scale=2; ( $ssd_bytes_written / 1000 / 1000 / 1000 / 1000) / $mfr_tbw" | bc -l)
+                            echo "$device,$model,$mfr_tbw,$ssd_bytes_written,$percent_tbw_used"
                           done
                           EOF
                           chroot /host bash /dev/shm/smart_tbw_monitor.sh
                         split: horizontal
-                        split_by: \s+
+                        split_by: ','
                         set_header:
                           [ device, model, manufacturerTbw, ssdBytesWritten, percentTbwUsed]
                         # set_header: [device, model, ssdBytesWritten]
@@ -119,12 +124,12 @@ spec:
                               sensor=$(echo $smart_output_line | sed 's/:.*//g')
                               value=$(echo $smart_output_line | sed -E 's/.*\:\s+([0-9]+).*/\1/g')
                             fi
-                            echo "$sensor $value"
+                            echo "$sensor,$value"
                           done
                           EOF
                           chroot /host bash /dev/shm/smart_temp_monitor.sh
                         split: horizontal
-                        split_by: \s+
+                        split_by: ','
                         set_header: [thermalSensor, temperatureC]
             - name: nri-flex
               config:
@@ -134,10 +139,10 @@ spec:
                     commands:
                       - run: |
                           for sensor in /sys/class/thermal/thermal_zone*/temp; do 
-                            echo "$(echo $sensor|sed -E 's/.*(th.*[0-9]).*/\\1/g') $(( $(cat $sensor) / 1000 ))" 
+                            echo "$(echo $sensor|sed -E 's/.*(th.*[0-9]).*/\\1/g'),$(( $(cat $sensor) / 1000 ))" 
                           done
                         split: horizontal
-                        split_by: \s+
+                        split_by: ","
                         set_header: [thermalSensor, temperatureC]
       config:
         enable_process_metrics: false
