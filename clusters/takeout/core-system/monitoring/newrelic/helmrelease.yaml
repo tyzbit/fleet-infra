@@ -68,7 +68,7 @@ spec:
                           host_script="/hostshm/smart_tbw_monitor.sh"
                           cat <<"EOF" > $host_script
                           #!/bin/bash
-                          declare -A tbw
+                            declare -A tbw
                           tbw=( 
                             ["Samsung SSD 860"]="2400"
                             ["Samsung SSD 970 EVO Plus 2TB"]="1200"
@@ -89,7 +89,7 @@ spec:
                             fi
                             ssd_bytes_written=$(( measurement * lba_size_bytes * multiplier ))
                             mfr_tbw=$${tbw["$model"]}
-                            percent_tbw_used=$(( ssd_bytes_written / tbw))
+                            percent_tbw_used=$(( ssd_bytes_written / tbw ))
                             echo "$device $model $mfr_tbw $ssd_bytes_written $percent_tbw_used"
                           done
                           EOF
