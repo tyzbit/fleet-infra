@@ -88,7 +88,7 @@ spec:
                             fi
                             ssd_bytes_written=$(( measurement * lba_size_bytes * multiplier ))
                             mfr_tbw=$${tbw["$model"]}
-                            percent_tbw_used=$(( ssd_bytes_written / percent_tbw_used ))
+                            percent_tbw_used=$(( ( ssd_bytes_written / 1000000 ) / mfr_tbw ))
                             echo "$device $model $mfr_tbw $ssd_bytes_written $percent_tbw_used"
                           done
                           EOF
