@@ -57,6 +57,7 @@ spec:
                   - name: SMART
                     commands:
                       - run: |
+                          chroot /host
                           devices=$(lsblk | grep -E 'sda\\s+|nvme0n1\\s+' | awk '{print $1}')
                           for device in $${devices[@]}; do
                             smart_output_line=$(smartctl -A /dev/$device | grep Written)
