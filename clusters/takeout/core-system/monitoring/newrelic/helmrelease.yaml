@@ -67,20 +67,20 @@ spec:
                       - run: |
                           host_script="/hosttemp/smartmonitor.sh"
                           cat <<"EOF" > $host_script
-                            #!/bin/bash
-                            set -m
-                            devices=$(lsblk | grep -E 'sda\\s+|nvme0n1\\s+' | awk '{print $1}')
-                            for device in $${devices[@]}; do
-                              smart_output_line=$(smartctl -A /dev/$device | grep Written)
-                              lba_size_bytes=$(fdisk /dev/$device -l | grep 'Sector size' | awk '{print $4}')
-                              if [[ $smart_output_line =~ "LBA" ]]; then
-                                measurement=$(echo "$smart_output_line" | awk '{print $10}')
-                              elif [[ $smart_output_line =~ "Data" ]]; then
-                                measurement=$(echo "$smart_output_line" | awk '{print $4}' | tr -d ',')
-                              fi
-                              metric=$(( measurement * lba_size_bytes ))
-                              echo "$device $metric"
-                            done
+                          #!/bin/bash
+                          set -m
+                          devices=$(lsblk | grep -E 'sda\\s+|nvme0n1\\s+' | awk '{print $1}')
+                          for device in $${devices[@]}; do
+                            smart_output_line=$(smartctl -A /dev/$device | grep Written)
+                            lba_size_bytes=$(fdisk /dev/$device -l | grep 'Sector size' | awk '{print $4}')
+                            if [[ $smart_output_line =~ "LBA" ]]; then
+                              measurement=$(echo "$smart_output_line" | awk '{print $10}')
+                            elif [[ $smart_output_line =~ "Data" ]]; then
+                              measurement=$(echo "$smart_output_line" | awk '{print $4}' | tr -d ',')
+                            fi
+                            metric=$(( measurement * lba_size_bytes ))
+                            echo "$device $metric"
+                          done
                           EOF
                           chroot /host bash /tmp/smartmonitor.sh
                         split: horizontal
