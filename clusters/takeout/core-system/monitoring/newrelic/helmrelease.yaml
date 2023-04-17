@@ -65,8 +65,8 @@ spec:
                   - name: SMART
                     commands:
                       - run: |
-                          host_script="/hostshm/smart_tbw_monitor.sh"
-                          cat <<"EOF" > $host_script
+                          host_script="smart_tbw_monitor.sh"
+                          cat <<"EOF" > "/hostshm/$host_script"
                           declare -A tbw multipliers
                           tbw=(
                             ["Samsung SSD 860"]="2400"
@@ -80,7 +80,7 @@ spec:
                           )
                           set -m
                           devices=$(lsblk | grep -E 'sda\s+|nvme0n1\s+' | awk '{print $1}')
-                          for device in $${devices[@]}; do
+                          for device in "$${devices[@]}"; do
                             smart_output_line=$(smartctl -A /dev/$device | grep Written)
                             lba_size_bytes=$(fdisk /dev/$device -l | grep 'Units' | awk '{print $8}')
                             model=$(fdisk /dev/$device -l | grep model | sed -E 's/.*: //g' | awk '{$1=$1};1')
@@ -96,7 +96,7 @@ spec:
                             echo "$device,$model,$mfr_tbw,$ssd_bytes_written,$percent_tbw_used"
                           done
                           EOF
-                          chroot /host bash /dev/shm/smart_tbw_monitor.sh
+                          chroot /host bash "/dev/shm/$host_script"
                         split: horizontal
                         split_by: ','
                         set_header:
@@ -108,11 +108,11 @@ spec:
                   - name: Temperature
                     commands:
                       - run: |
-                          host_script="/hostshm/smart_temp_monitor.sh"
-                          cat <<"EOF" > $host_script
+                          host_script="smart_temp_monitor.sh"
+                          cat <<"EOF" > "/hostshm/$host_script"
                           set -m
                           devices=$(lsblk | grep -E 'sda\\s+|nvme0n1\\s+' | awk '{print $1}')
-                          for device in $${devices[@]}; do
+                          for device in "$${devices[@]}"; do
                             smart_output_line=$(smartctl -A /dev/$device | grep Cel)
                             model=$(fdisk /dev/$device -l | grep model | sed -E 's/.*: //g')
                             if [[ $model =~ "Samsung SSD 860" ]]; then
@@ -128,7 +128,7 @@ spec:
                             echo "$sensor,$model,$value"
                           done
                           EOF
-                          chroot /host bash /dev/shm/smart_temp_monitor.sh
+                          chroot /host bash "/dev/shm/$host_script"
                         split: horizontal
                         split_by: ','
                         set_header: [thermalSensor, model, temperatureC]
@@ -140,7 +140,8 @@ spec:
                     commands:
                       - run: |
                           for sensor in /sys/class/thermal/thermal_zone*/temp; do 
-                            echo "$(echo $sensor|sed -E 's/.*(th.*[0-9]).*/\\1/g'),$(echo $sensor|sed -E 's/.*(th.*[0-9]).*/\\1/g'),$(( $(cat $sensor) / 1000 ))" 
+                            sensor_pretty=$(echo $sensor|sed -E 's/.*(th.*[0-9]).*/\\1/g')
+                            echo "$sensor_pretty,$sensor_pretty,$(( $(cat $sensor) / 1000 ))" 
                           done
                         split: horizontal
                         split_by: ','
