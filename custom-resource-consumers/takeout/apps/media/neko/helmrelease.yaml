@@ -85,12 +85,10 @@ spec:
             port: 5100
             targetPort: 5100
       udpmux:
-        <<: *mainsvc
+        !!merge <<: *mainsvc
         ports:
           http: null
           mux:
-            port: 5100
-            targetPort: 5100
             protocol: UDP
 
     ingress:
