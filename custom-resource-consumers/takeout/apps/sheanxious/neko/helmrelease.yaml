@@ -24,12 +24,10 @@ spec:
       repository: ghcr.io/m1k1o/neko/firefox
       tag: 2.8.5
 
-    port: &port 5102
-
     env:
       NEKO_SCREEN: 1280x720@30
       NEKO_PROXY: "true"
-      NEKO_UDPMUX: !!str &port
+      NEKO_UDPMUX: "5102"
       NEKO_ICELITE: "true"
 
     controller:
@@ -78,7 +76,7 @@ spec:
             port: 80
             targetPort: 8080
           mux:
-            port: *port
+            port: &port 5102
             targetPort: *port
       udpmux:
         <<: *mainsvc
