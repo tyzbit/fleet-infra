@@ -68,10 +68,6 @@ spec:
     podAnnotations:
       reloader.stakater.com/auto: "true"
 
-    resources:
-      requests:
-        cpu: 1000m
-
     service:
       main: &mainsvc
         enabled: true
@@ -94,6 +90,10 @@ spec:
             port: *port
             targetPort: *port
             protocol: UDP
+
+    resources:
+      requests:
+        cpu: 1000m
 
     ingress:
       main:
