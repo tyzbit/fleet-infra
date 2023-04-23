@@ -27,7 +27,7 @@ spec:
     env:
       NEKO_SCREEN: 1280x720@30
       NEKO_PROXY: "true"
-      NEKO_UDPMUX: "5101"
+      NEKO_UDPMUX: !!str &port 5101
       NEKO_ICELITE: "true"
 
     controller:
@@ -80,15 +80,15 @@ spec:
             port: 80
             targetPort: 8080
           mux:
-            port: 5100
-            targetPort: 5100
+            port: *port
+            targetPort: *port
       udpmux:
         <<: *mainsvc
         ports:
           http: null
           mux:
-            port: 5100
-            targetPort: 5100
+            port: *port
+            targetPort: *port
             protocol: UDP
 
     ingress:
