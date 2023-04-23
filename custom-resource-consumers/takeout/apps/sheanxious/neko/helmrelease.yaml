@@ -27,7 +27,8 @@ spec:
     env:
       NEKO_SCREEN: 1280x720@30
       NEKO_PROXY: "true"
-      NEKO_UDPMUX: "5102"
+      NEKO_TCPMUX: &mux "5102"
+      NEKO_UDPMUX: *mux
       NEKO_ICELITE: "true"
 
     controller:
@@ -58,8 +59,11 @@ spec:
         hostPath: &shm /dev/shm
         mountPath: *shm
 
-    podSecurityContext:
-      supplementalGroups: [44, 109, 10000]
+    # podSecurityContext:
+    #   supplementalGroups: [44, 109, 10000]
+
+    # securityContext:
+    #   privileged: true
 
     podAnnotations:
       reloader.stakater.com/auto: "true"

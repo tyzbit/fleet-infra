@@ -60,8 +60,11 @@ spec:
         hostPath: &shm /dev/shm
         mountPath: *shm
 
-    securityContext:
-      privileged: true
+    # podSecurityContext:
+    #   supplementalGroups: [44, 109, 10000]
+
+    # securityContext:
+    #   privileged: true
 
     podAnnotations:
       reloader.stakater.com/auto: "true"
@@ -82,15 +85,15 @@ spec:
             port: 80
             targetPort: 8080
           mux:
-            port: 5100
-            targetPort: 5100
+            port: &port 5100
+            targetPort: *port
       udpmux:
         <<: *mainsvc
         ports:
           http: null
           mux:
-            port: 5100
-            targetPort: 5100
+            port: *port
+            targetPort: *port
             protocol: UDP
 
     ingress:
