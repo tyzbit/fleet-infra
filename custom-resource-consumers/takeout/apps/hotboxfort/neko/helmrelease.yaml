@@ -22,7 +22,7 @@ spec:
     image:
       # repository: ghcr.io/m1k1o/neko/intel-firefox
       repository: ghcr.io/m1k1o/neko/firefox
-      tag: 2.8.6
+      tag: 2.8.7
 
     env:
       NEKO_SCREEN: 1280x720@30
