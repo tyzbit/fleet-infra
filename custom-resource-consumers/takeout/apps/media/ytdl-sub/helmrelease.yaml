@@ -34,6 +34,7 @@ spec:
       - bash
       - -c
       - |
+        cp /config/cookies.txt /config/cookies-rw.txt
         ytdl-sub --log-level=debug --config=/config/config.yaml sub /media/youtube/subscriptions.yaml
         echo "[cronjob:command] Fixing permissions, started at $$(date --rfc-2822)"
         find $${MEDIA_FOLDER} -user root -exec chown 568:568 "{}" \; -exec chmod 777 "{}" \;
@@ -56,14 +57,14 @@ spec:
         defaultMode: 0755
       ## yt-dlp doesn't like a readonly cookies file. Changing readOnly has no
       ## effect.
-      # cookies:
-      #   enabled: true
-      #   name: ytdl-sub-cookies
-      #   type: secret
-      #   mountPath: /config/cookies.txt
-      #   subPath: cookies.txt
-      #   readOnly: false
-      #   defaultMode: 0755
+      cookies:
+        enabled: true
+        name: ytdl-sub-cookies
+        type: secret
+        mountPath: /config/cookies.txt
+        subPath: cookies.txt
+        readOnly: false
+        defaultMode: 0755
       media:
         enabled: true
         existingClaim: nas-volume1-media
