@@ -43,3 +43,61 @@ spec:
         - name: go-discord-archiver-db
           persistentVolumeClaim:
             claimName: go-discord-archiver-mariadb-longhorn-database
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: go-discord-archiver-dev-db
+  namespace: personal
+  annotations: {}
+  labels:
+    app: go-discord-archiver-dev-db
+spec:
+  replicas: 1 # active longhorn-database
+  selector:
+    matchLabels:
+      app: go-discord-archiver-dev-db
+  serviceName: go-discord-archiver-dev-db
+  template:
+    metadata:
+      annotations: {}
+      labels:
+        app: go-discord-archiver-dev-db
+    spec:
+      containers:
+        - name: go-discord-archiver-dev-db
+          image: mariadb:10.8
+          imagePullPolicy: Always
+          # Copy from prod on start
+          command:
+            - bash
+            - -c
+            - |
+              mariadb-dump -h go-discord-archiver-db --password="$(MARIADB_PROD_ROOT_PASSWORD)" --all-databases > /backup/dump.sql && \
+              mariadb-import --password="$(MARIADB_ROOT_PASSWORD)" < /backup/dump.sql && \
+              docker-entrypoint.sh mariadbd
+          envFrom:
+            - secretRef:
+                name: go-discord-archiver-dev-db
+          ports:
+            - containerPort: 3306
+              name: sql
+              protocol: TCP
+          volumeMounts:
+            - name: go-discord-archiver-dev-db
+              mountPath: /var/lib/mysql
+            - name: backup
+              mountPath: /backup
+          resources:
+            requests:
+              cpu: 10m
+            limits:
+              memory: 512Mi
+      nodeSelector:
+        longhorn: primary
+      volumes:
+        - name: backup
+          emptyDir: {}
+        # The DB should be reloaded on start, so we don't use persistence
+        - name: go-discord-archiver-dev-db
+          emptyDir: {}
