@@ -74,7 +74,7 @@ spec:
             - -c
             - |
               mariadb-dump -h go-discord-archiver-db --password="$(MARIADB_PROD_ROOT_PASSWORD)" go_archiver > /backup/dump.sql && \
-              while [[ $(mariadb --password="$(MARIADB_ROOT_PASSWORD)" < <(echo "show databases like '$(MARIADB_DATABASE)'") | wc -l) == 0 ]]; do
+              while [[ $(mariadb --password="${MARIADB_ROOT_PASSWORD}" < <(echo "show databases like '$(MARIADB_DATABASE)'") | wc -l) == 0 ]]; do
                 sleep 1
               done && \
               mariadb -uroot --password="$(MARIADB_ROOT_PASSWORD)" "$(MARIADB_DATABASE)" < /backup/dump.sql &
