@@ -73,13 +73,12 @@ spec:
             - bash
             - -c
             - |
-              mariadb-dump -h go-discord-archiver-db --password="$(MARIADB_PROD_ROOT_PASSWORD)" go_archiver > /backup/dump.sql && \
-              docker-entrypoint.sh mariadbd & \
-              while [[ $(mysqladmin ping --password="$${MARIADB_ROOT_PASSWORD}" > /dev/null; echo $?) != 0 ]];
-                do sleep 1;
+              mariadb-dump -h go-discord-archiver-db --password="${MARIADB_PROD_ROOT_PASSWORD}" go_archiver > /backup/dump.sql && \
+              while [[ $(mariadb --password=${MARIADB_ROOT_PASSWORD} < <(echo "show databases like 'go_archiver_dev'") | wc -l) == 0 ]]; do
+                sleep 1
               done && \
-              mariadb --password="$(MARIADB_ROOT_PASSWORD)" "$(MARIADB_DATABASE)" < /backup/dump.sql && \
-              tail -f /dev/null
+              mariadb -uroot --password="${MARIADB_ROOT_PASSWORD}" "${MARIADB_DATABASE}" < /backup/dump.sql &
+              exec docker-entrypoint.sh mariadbd
           envFrom:
             - secretRef:
                 name: go-discord-archiver-dev-db
