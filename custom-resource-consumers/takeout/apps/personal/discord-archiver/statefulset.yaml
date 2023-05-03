@@ -74,7 +74,7 @@ spec:
             - -c
             - |
               mariadb-dump -h go-discord-archiver-db --password="$(MARIADB_PROD_ROOT_PASSWORD)" go_archiver > /backup/dump.sql && \
-              mariadb-import --password="$(MARIADB_ROOT_PASSWORD)" "$(MARIADB_DATABASE)" /backup/dump.sql && \
+              mariadb-import -h localhost --password="$(MARIADB_ROOT_PASSWORD)" "$(MARIADB_DATABASE)" /backup/dump.sql && \
               docker-entrypoint.sh mariadbd
           envFrom:
             - secretRef:
