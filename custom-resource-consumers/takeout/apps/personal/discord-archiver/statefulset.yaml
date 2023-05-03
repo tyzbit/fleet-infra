@@ -79,7 +79,7 @@ spec:
                 do sleep 1;
               done && \
               mariadb --password="$(MARIADB_ROOT_PASSWORD)" "$(MARIADB_DATABASE)" < /backup/dump.sql && \
-              fg
+              tail -f /dev/null
           envFrom:
             - secretRef:
                 name: go-discord-archiver-dev-db
