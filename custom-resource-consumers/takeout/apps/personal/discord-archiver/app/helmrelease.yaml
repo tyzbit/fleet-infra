@@ -23,9 +23,10 @@ spec:
       - secretRef:
           name: go-discord-archiver
     probes:
-      custom: true
-      spec:
-        livenessProbe: &probe
+      liveness: &probe
+        enabled: true
+        custom: true
+        spec:
           failureThreshold: 3
           periodSeconds: 2
           successThreshold: 1
@@ -33,10 +34,11 @@ spec:
           httpGet:
             port: 8080
             path: /healthcheck
-        readinessProbe:
-          !!merge <<: *probe
-        startupProbe:
-          !!merge <<: *probe
+      readiness:
+        !!merge <<: *probe
+      startup:
+        !!merge <<: *probe
+        spec:
           failureThreshold: 15
           initialDelaySeconds: 5
     podAnnotations:
