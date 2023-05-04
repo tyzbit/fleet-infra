@@ -23,7 +23,7 @@ spec:
     envFrom:
       - secretRef:
           name: go-discord-archiver
-    
+
     probes:
       custom: true
       spec:
@@ -40,7 +40,7 @@ spec:
         startupProbe:
           !!merge <<: *probe
           failureThreshold: 15
-            initialDelaySeconds: 5
+          initialDelaySeconds: 5
 
     podAnnotations:
       reloader.stakater.com/auto: "true"
