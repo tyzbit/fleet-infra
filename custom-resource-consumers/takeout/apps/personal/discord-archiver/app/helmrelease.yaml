@@ -23,7 +23,7 @@ spec:
       - secretRef:
           name: go-discord-archiver
     probes:
-      liveness: &probe
+      liveness:
         enabled: true
         custom: true
         spec:
@@ -46,6 +46,8 @@ spec:
             port: 8080
             path: /healthcheck
       startup:
+        enabled: true
+        custom: true
         spec:
           failureThreshold: 15
           initialDelaySeconds: 5
