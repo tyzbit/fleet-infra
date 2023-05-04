@@ -43,9 +43,6 @@ spec:
         custom: true
         spec:
           !!merge <<: *spec
-          httpGet:
-            port: 8080
-            path: /healthcheck
           failureThreshold: 15
           initialDelaySeconds: 5
     podAnnotations:
