@@ -1,0 +1,57 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: go-discord-archiver-db
+  namespace: flux-system
+spec:
+  releaseName: go-discord-archiver-db
+  targetNamespace: personal
+  chart:
+    spec:
+      chart: app-template
+      version: "1.4.0"
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s-helm-charts
+        namespace: flux-system
+  interval: 2m0s
+  values:
+    image:
+      repository: mariadb
+      tag: 10.8
+
+    envFrom:
+      - secretRef:
+          name: go-discord-archiver-db
+
+    controller:
+      type: statefulset
+      replicas: 1
+
+    persistence:
+      data:
+        enabled: true
+        existingClaim: go-discord-archiver-mariadb-longhorn-database
+        mountPath: /var/lib/mysql
+
+    podAnnotations:
+      reloader.stakater.com/auto: "true"
+
+    service:
+      main:
+        enabled: true
+        type: NodePort
+        ports:
+          sql:
+            port: 3306
+            targetPort: 3306
+            nodePort: 31135
+
+    nodeSelector:
+      longhorn: primary
+
+    resources:
+      requests:
+        cpu: 10m
+      limits:
+        memory: 512Mi
