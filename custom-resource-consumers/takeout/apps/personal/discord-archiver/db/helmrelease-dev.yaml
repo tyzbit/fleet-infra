@@ -1,10 +1,10 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: go-discord-archiver-db-dev
+  name: go-discord-archiver-dev-db
   namespace: flux-system
 spec:
-  releaseName: go-discord-archiver-db-dev
+  releaseName: go-discord-archiver-dev-db
   targetNamespace: personal
   chart:
     spec:
@@ -32,7 +32,7 @@ spec:
 
     envFrom:
       - secretRef:
-          name: go-discord-archiver-db-dev
+          name: go-discord-archiver-dev-db
 
     controller:
       type: statefulset
