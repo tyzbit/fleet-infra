@@ -18,12 +18,10 @@ spec:
   values:
     image:
       repository: docker.io/tyzbit/go-discord-archiver
-      tag: 2.5.1 # {"$imagepolicy": "flux-system:go-discord-archiver:tag"}
-
+      tag: 2.5.2 # {"$imagepolicy": "flux-system:go-discord-archiver:tag"}
     envFrom:
       - secretRef:
           name: go-discord-archiver
-
     probes:
       custom: true
       spec:
@@ -41,10 +39,8 @@ spec:
           !!merge <<: *probe
           failureThreshold: 15
           initialDelaySeconds: 5
-
     podAnnotations:
       reloader.stakater.com/auto: "true"
-
     resources:
       requests:
         cpu: "50m"
