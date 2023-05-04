@@ -50,7 +50,9 @@ spec:
 
     service:
       main:
-        enabled: false
+        ports:
+          http:
+            enabled: false
 
     podAnnotations:
       reloader.stakater.com/auto: "true"
