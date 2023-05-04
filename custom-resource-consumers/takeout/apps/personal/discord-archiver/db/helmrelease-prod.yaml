@@ -42,9 +42,10 @@ spec:
         enabled: true
         type: NodePort
         ports:
+          http:
+            enabled: false
           sql:
             port: 3306
-            targetPort: 3306
             nodePort: 31135
 
     nodeSelector:

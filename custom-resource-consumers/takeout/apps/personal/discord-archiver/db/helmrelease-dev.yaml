@@ -41,7 +41,7 @@ spec:
     persistence:
       data:
         enabled: true
-        type: emptyDIr
+        type: emptyDir
         mountPath: /var/lib/mysql
       backup:
         enabled: true
@@ -55,9 +55,10 @@ spec:
         enabled: true
         type: NodePort
         ports:
+          http:
+            enabled: false
           sql:
             port: 3306
-            targetPort: 3306
             nodePort: 30306
 
     resources:
