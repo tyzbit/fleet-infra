@@ -78,21 +78,21 @@ spec:
           - secretName: *host
             hosts:
               - *host
-      nodeSelector:
-        graphics: dri
-        longhorn: primary
-      resources:
-        requests:
-          cpu: 100m
-        limits:
-          memory: 8192Mi
-      affinity:
-        podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            - topologyKey: "kubernetes.io/hostname"
-              labelSelector:
-                matchExpressions:
-                  - key: app.kubernetes.io/name
-                    operator: In
-                    values:
-                      - "plex"
+    nodeSelector:
+      graphics: dri
+      longhorn: primary
+    resources:
+      requests:
+        cpu: 100m
+      limits:
+        memory: 8192Mi
+    affinity:
+      podAntiAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          - topologyKey: "kubernetes.io/hostname"
+            labelSelector:
+              matchExpressions:
+                - key: app.kubernetes.io/name
+                  operator: In
+                  values:
+                    - "plex"
