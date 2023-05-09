@@ -95,4 +95,4 @@ spec:
                   - key: app.kubernetes.io/name
                     operator: In
                     values:
-                      - "plex"
+                      - "plex-secondary"
