@@ -63,7 +63,7 @@ spec:
             enabled: true
             port: 5514
           discovery:
-            !!merge <<: *port
+            !!merge <<: *udp
             port: 10001
 
     ingress:
