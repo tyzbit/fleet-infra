@@ -1,0 +1,8 @@
+apiVersion: projectcalico.org/v3
+kind: BGPPeer
+metadata:
+  name: my-global-peer
+spec:
+  peerIP: 192.168.1.1
+  asNumber: 64512
+  maxRestartTime: 15m
