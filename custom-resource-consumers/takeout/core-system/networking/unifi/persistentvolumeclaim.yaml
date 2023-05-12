@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: unifi-config-longhorn-webapp
+  namespace: networking
+spec:
+  resources:
+    requests:
+      storage: 2Gi
+  volumeMode: Filesystem
+  storageClassName: longhorn-webapp
+  accessModes:
+    - ReadWriteOnce
