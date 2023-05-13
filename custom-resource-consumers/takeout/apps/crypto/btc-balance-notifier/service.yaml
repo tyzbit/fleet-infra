@@ -5,6 +5,7 @@ metadata:
   namespace: crypto
 spec:
   type: ClusterIP
+  externalTrafficPolicy: Local
   selector:
     app: btc-balance-notifier
   ports:
