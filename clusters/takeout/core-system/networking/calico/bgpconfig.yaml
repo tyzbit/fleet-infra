@@ -1,7 +1,7 @@
 apiVersion: projectcalico.org/v3
 kind: BGPConfiguration
 metadata:
-  name: onair
+  name: default
 spec:
   asNumber: 64513
   nodeToNodeMeshEnabled: true
