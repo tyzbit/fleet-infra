@@ -9,7 +9,7 @@ spec:
   # - cidr 172.18.0.0/18
   serviceClusterIPs:
     - cidr: 172.18.64.0/18
-  # serviceExternalIPs:
-  #   - cdir: 172.18.128.0/18
-  # serviceLoadBalancerIPs:
-  #   - cdir: 172.18.192.0/18
+  serviceExternalIPs:
+    - cidr: 172.18.128.0/18
+  serviceLoadBalancerIPs:
+    - cdir: 172.18.192.0/18
