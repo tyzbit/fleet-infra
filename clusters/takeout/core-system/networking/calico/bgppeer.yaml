@@ -1,7 +1,7 @@
 apiVersion: projectcalico.org/v3
 kind: BGPPeer
 metadata:
-  name: my-global-peer
+  name: architect
 spec:
   peerIP: 192.168.1.1
   asNumber: 64512
