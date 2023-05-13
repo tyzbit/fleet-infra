@@ -4,7 +4,7 @@ metadata:
   name: btc-balance-notifier
   namespace: crypto
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: btc-balance-notifier
   ports:
@@ -12,4 +12,3 @@ spec:
       protocol: TCP
       port: 80
       targetPort: 80
-
