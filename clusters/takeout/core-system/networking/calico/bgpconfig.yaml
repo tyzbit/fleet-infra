@@ -1,0 +1,15 @@
+apiVersion: projectcalico.org/v3
+kind: BGPConfiguration
+metadata:
+  name: default
+spec:
+  asNumber: 64513
+  nodeToNodeMeshEnabled: true
+  # Pods:
+  # - cidr 172.18.0.0/18
+  serviceClusterIPs:
+    - cidr: 172.18.64.0/18
+  serviceExternalIPs:
+    - cdir: 172.18.128.0/18
+  serviceLoadBalancerIPs:
+    - cdir: 172.18.192.0/18

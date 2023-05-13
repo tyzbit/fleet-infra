@@ -1,0 +1,9 @@
+apiVersion: projectcalico.org/v3
+kind: IPPool
+metadata:
+  name: onair-pods
+spec:
+  disabled: false
+  cidr: 172.18.0.0/18
+  ipipMode: Always
+  natOutgoing: true
