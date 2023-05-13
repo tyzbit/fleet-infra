@@ -86,6 +86,59 @@ spec:
             !!merge <<: *udp
             port: 10001
 
+      mgmt:
+        type: LoadBalancer
+        loadBalancerIP: 192.168.2.101
+        # ipFamilyPolicy: RequireDualStack
+        externalTrafficPolicy: Local
+        annotations:
+          metallb.universe.tf/allow-shared-ip: networking-unifi
+        ports:
+          http:
+            enabled: true
+            port: 8443
+            protocol: HTTPS
+      mgmt-tcp:
+        type: LoadBalancer
+        loadBalancerIP: 192.168.2.101
+        # ipFamilyPolicy: RequireDualStack
+        externalTrafficPolicy: Local
+        annotations:
+          metallb.universe.tf/allow-shared-ip: networking-unifi
+        ports:
+          controller: &tcp
+            enabled: true
+            protocol: TCP
+            port: 8080
+          # portal-http:
+          #   !!merge <<: *tcp
+          #   port: 8880
+          # portal-https:
+          #   !!merge <<: *tcp
+          #   port: 8843
+          speedtest:
+            !!merge <<: *tcp
+            port: 6789
+      mgmt-udp:
+        type: LoadBalancer
+        loadBalancerIP: 192.168.2.101
+        # ipFamilyPolicy: RequireDualStack
+        externalTrafficPolicy: Local
+        annotations:
+          metallb.universe.tf/allow-shared-ip: networking-unifi
+        ports:
+          stun: &udp
+            enabled: true
+            port: 3478
+            protocol: UDP
+          syslog:
+            !!merge <<: *udp
+            enabled: true
+            port: 5514
+          discovery:
+            !!merge <<: *udp
+            port: 10001
+
     ingress:
       main:
         enabled: true
