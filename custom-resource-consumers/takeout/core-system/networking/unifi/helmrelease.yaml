@@ -91,6 +91,7 @@ spec:
         enabled: true
         annotations:
           nginx.ingress.kubernetes.io/proxy-body-size: 256m
+          nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
           cert-manager.io/cluster-issuer: letsencrypt
           acme.cert-manager.io/http01-edit-in-place: "false"
           nignx.ingress.kubernetes.io/force-ssl-redirect: "true"
