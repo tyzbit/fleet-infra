@@ -70,4 +70,40 @@ spec:
   node: weatherman
   updatePeriodSeconds: 10
 ---
+apiVersion: projectcalico.org/v3
+kind: CalicoNodeStatus
+metadata:
+  name: gravemind
+spec:
+  classes:
+    - Agent
+    - BGP
+    - Routes
+  node: gravemind
+  updatePeriodSeconds: 10
+---
+apiVersion: projectcalico.org/v3
+kind: CalicoNodeStatus
+metadata:
+  name: hivemind
+spec:
+  classes:
+    - Agent
+    - BGP
+    - Routes
+  node: hivemind
+  updatePeriodSeconds: 10
+---
+apiVersion: projectcalico.org/v3
+kind: CalicoNodeStatus
+metadata:
+  name: mastermind
+spec:
+  classes:
+    - Agent
+    - BGP
+    - Routes
+  node: mastermind
+  updatePeriodSeconds: 10
+---
 
