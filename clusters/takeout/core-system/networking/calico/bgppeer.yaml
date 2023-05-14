@@ -3,6 +3,6 @@ kind: BGPPeer
 metadata:
   name: architect
 spec:
-  peerIP: 192.168.1.1
+  peerIP: 172.16.0.1
   asNumber: 64512
   maxRestartTime: 15m
