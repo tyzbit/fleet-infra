@@ -5,5 +5,5 @@ metadata:
 spec:
   disabled: false
   cidr: 172.18.0.0/18
-  ipipMode: Always
+  ipipMode: Never
   natOutgoing: true
