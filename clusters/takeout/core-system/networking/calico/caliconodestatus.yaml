@@ -1,0 +1,73 @@
+apiVersion: projectcalico.org/v3
+kind: CalicoNodeStatus
+metadata:
+  name: anchorman
+spec:
+  classes:
+    - Agent
+    - BGP
+    - Routes
+  node: anchorman
+  updatePeriodSeconds: 10
+---
+apiVersion: projectcalico.org/v3
+kind: CalicoNodeStatus
+metadata:
+  name: cameraman
+spec:
+  classes:
+    - Agent
+    - BGP
+    - Routes
+  node: cameraman
+  updatePeriodSeconds: 10
+---
+apiVersion: projectcalico.org/v3
+kind: CalicoNodeStatus
+metadata:
+  name: crewman
+spec:
+  classes:
+    - Agent
+    - BGP
+    - Routes
+  node: crewman
+  updatePeriodSeconds: 10
+---
+apiVersion: projectcalico.org/v3
+kind: CalicoNodeStatus
+metadata:
+  name: doorman
+spec:
+  classes:
+    - Agent
+    - BGP
+    - Routes
+  node: doorman
+  updatePeriodSeconds: 10
+---
+apiVersion: projectcalico.org/v3
+kind: CalicoNodeStatus
+metadata:
+  name: stuntman
+spec:
+  classes:
+    - Agent
+    - BGP
+    - Routes
+  node: stuntman
+  updatePeriodSeconds: 10
+---
+apiVersion: projectcalico.org/v3
+kind: CalicoNodeStatus
+metadata:
+  name: weatherman
+spec:
+  classes:
+    - Agent
+    - BGP
+    - Routes
+  node: weatherman
+  updatePeriodSeconds: 10
+---
+
