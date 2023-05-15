@@ -80,7 +80,7 @@ data:
         ffmpeg:
           inputs:
             # - path: 'rtsp://localhost:8554/backdoor'
-            - path: 'rtsp://{FRIGATE_BACKDOOR_CREDENTIALS}@172.21.114.3:554/live'
+            - path: 'rtsp://{FRIGATE_BACKDOOR_CREDENTIALS}@backdoor:554/live'
               roles:
                 - detect
                 - restream # enabled by default
