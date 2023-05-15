@@ -3,7 +3,7 @@ kind: BGPPeer
 metadata:
   name: architect
 spec:
-  peerIP: 172.18.0.1
+  peerIP: 192.168.1.1
   asNumber: 64512
   keepOriginalNextHop: true
   maxRestartTime: 15m
