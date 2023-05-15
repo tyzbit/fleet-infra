@@ -131,7 +131,7 @@ data:
         ffmpeg:
           inputs:
             # - path: 'rtsp://localhost:8554/porch'
-            - path: 'rtsp://{FRIGATE_PORCH_CREDENTIALS}@AMC057A3_C3DED9:554/live'
+            - path: 'rtsp://{FRIGATE_PORCH_CREDENTIALS}@AMC047AD_C51725:554/live'
               roles:
                 - detect
                 - restream # enabled by default
@@ -155,7 +155,7 @@ data:
         ffmpeg:
           inputs:
             # - path: 'rtsp://localhost:8554/court'
-            - path: 'rtsp://{FRIGATE_COURT_CREDENTIALS}@AMC047AD_C51725:554/live'
+            - path: 'rtsp://{FRIGATE_COURT_CREDENTIALS}@AMC057A3_C3DED9:554/live'
               roles:
                 - detect
         snapshots:
