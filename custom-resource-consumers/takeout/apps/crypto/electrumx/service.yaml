@@ -4,8 +4,7 @@ metadata:
   name: electrumx
   namespace: crypto
 spec:
-  type: LoadBalancer
-  loadBalancerIP: 192.168.1.60
+  type: NodePort
   selector:
     app: electrumx
   ports:
