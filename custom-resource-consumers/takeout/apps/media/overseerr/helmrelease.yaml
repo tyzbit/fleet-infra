@@ -22,7 +22,7 @@ spec:
     fullnameOverride: overseerr
 
     controller:
-      replicas: 1 # active longhorn-webapp
+      replicas: 0 # active longhorn-webapp
 
     podSecurityContext:
       fsGroup: 568
