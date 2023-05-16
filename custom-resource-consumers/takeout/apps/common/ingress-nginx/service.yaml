@@ -14,24 +14,6 @@ spec:
   type: ClusterIP
 ---
 apiVersion: v1
-kind: Service
-metadata:
-  name: simulacrum
-  namespace: default
-spec:
-  ports:
-    - name: default
-      port: 8080
-      protocol: TCP
-      targetPort: 8080
-    - name: unraid
-      port: 80
-      protocol: TCP
-      targetPort: 80
-  clusterIP: None
-  type: ClusterIP
----
-apiVersion: v1
 kind: Endpoints
 metadata:
   name: simulacrum
