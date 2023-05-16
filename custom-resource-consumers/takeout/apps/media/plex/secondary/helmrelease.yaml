@@ -52,9 +52,8 @@ spec:
     service:
       main:
         enabled: true
-        type: LoadBalancer
+        type: NodePort
         externalTrafficPolicy: Local
-        loadBalancerIP: 192.168.1.70
         ports:
           http:
             port: 32400
