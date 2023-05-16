@@ -68,7 +68,7 @@ spec:
   values:
     replicaCount: 1 # active longhorn-database nas
     image:
-      tag: "5.9.3" # {"$imagepolicy": "flux-system:wordpress-sheanxious:tag"}
+      tag: "6.1.1" # {"$imagepolicy": "flux-system:wordpress-sheanxious:tag"}
       pullPolicy: Always
     wordpressBlogName: sheanxious
     wordpressConfigureCache: true
