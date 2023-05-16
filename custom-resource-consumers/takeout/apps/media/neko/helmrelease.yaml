@@ -74,26 +74,18 @@ spec:
         cpu: 1000m
 
     service:
-      main: &mainsvc
+      main:
         enabled: true
-        annotations:
-          metallb.universe.tf/allow-shared-ip: media-neko
-        type: LoadBalancer
-        loadBalancerIP: 192.168.1.77
+        type: NodePort
         ports:
           http:
             port: 80
             targetPort: 8080
-          mux:
-            port: &port 5100
+          mux: &mux
+            port: &port 5101
             targetPort: *port
-      udpmux:
-        <<: *mainsvc
-        ports:
-          http: null
-          mux:
-            port: *port
-            targetPort: *port
+          muxudp:
+            !!merge <<: *mux
             protocol: UDP
 
     ingress:
