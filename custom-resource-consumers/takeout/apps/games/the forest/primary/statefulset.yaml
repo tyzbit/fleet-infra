@@ -22,25 +22,6 @@ spec:
             - name:
               secretRef:
                 name: the-forest-primary-config
-          ports:
-            - containerPort: 9766
-              name: steam1-udp
-              protocol: UDP
-            - containerPort: 9766
-              name: steam1-tcp
-              protocol: TCP
-            - containerPort: 47015
-              name: data1-udp
-              protocol: UDP
-            - containerPort: 47015
-              name: data1-tcp
-              protocol: TCP
-            - containerPort: 47016
-              name: data2-udp
-              protocol: UDP
-            - containerPort: 47016
-              name: data2-tcp
-              protocol: TCP
           volumeMounts:
             - name: the-forest-data
               subPath: steamcmd
