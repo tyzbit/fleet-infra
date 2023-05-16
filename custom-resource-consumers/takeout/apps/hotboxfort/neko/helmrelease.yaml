@@ -69,26 +69,18 @@ spec:
       reloader.stakater.com/auto: "true"
 
     service:
-      main: &mainsvc
+      main:
         enabled: true
-        annotations:
-          metallb.universe.tf/allow-shared-ip: hotboxfort-neko
-        type: LoadBalancer
-        loadBalancerIP: 192.168.1.74
+        type: NodePort
         ports:
           http:
             port: 80
             targetPort: 8080
-          mux:
+          mux: &mux
             port: &port 5101
             targetPort: *port
-      udpmux:
-        <<: *mainsvc
-        ports:
-          http: null
-          mux:
-            port: *port
-            targetPort: *port
+          muxudp:
+            !!merge <<: *mux
             protocol: UDP
 
     resources:
