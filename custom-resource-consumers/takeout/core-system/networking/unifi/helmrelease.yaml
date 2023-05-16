@@ -32,6 +32,8 @@ spec:
       JVM_INIT_HEAP_SIZE:
       JVM_MAX_HEAP_SIZE: 1024M
 
+    terminationGracePeriodSeconds: 1
+
     service:
       main:
         type: NodePort
