@@ -83,7 +83,6 @@ spec:
       main:
         enabled: true
         type: NodePort
-        # loadBalancerIP: 192.168.1.69
         ports:
           http:
             port: 80
