@@ -19,6 +19,9 @@ spec:
       capabilities:
         add: ["NET_BIND_SERVICE"]
 
+    controller:
+      replicas: 0
+
     image:
       repository: jacobalberty/unifi
       tag: v7.3.83
