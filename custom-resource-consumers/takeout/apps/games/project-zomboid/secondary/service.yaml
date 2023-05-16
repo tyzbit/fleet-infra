@@ -3,36 +3,20 @@ kind: Service
 metadata:
   name: project-zomboid-secondary-tcp
   namespace: games
-  annotations:
-    # external-dns.alpha.kubernetes.io/hostname: projectzomboid-2.${blog_domain}
-    # external-dns.alpha.kubernetes.io/target: ${blog_domain_ddns}
-    metallb.universe.tf/allow-shared-ip: games-project-zomboid-server-secondary
 spec:
-  type: LoadBalancer
-  loadBalancerIP: 192.168.1.73
+  type: NodePort
   externalTrafficPolicy: Local
   selector:
     app: project-zomboid-secondary
   ports:
+    - port: 80
+      protocol: TCP
+      name: fb-http
+      targetPort: 80
     - port: 27015
       protocol: TCP
       name: data1
       targetPort: 27015
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: project-zomboid-secondary-udp
-  namespace: games
-  annotations:
-    metallb.universe.tf/allow-shared-ip: games-project-zomboid-server-secondary
-spec:
-  type: LoadBalancer
-  loadBalancerIP: 192.168.1.73
-  externalTrafficPolicy: Local
-  selector:
-    app: project-zomboid-secondary
-  ports:
     - port: 8766
       protocol: UDP
       name: data2
@@ -49,18 +33,3 @@ spec:
       protocol: UDP
       name: data5
       targetPort: 16262
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: project-zomboid-secondary-filebrowser
-  namespace: games
-spec:
-  type: ClusterIP
-  selector:
-    app: project-zomboid-secondary
-  ports:
-    - port: 80
-      protocol: TCP
-      name: fb-http
-      targetPort: 80
