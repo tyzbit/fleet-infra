@@ -30,45 +30,18 @@ spec:
     service:
       main:
         enabled: true
-        type: ClusterIP
+        type: NodePort
         ports:
           http:
             port: 8080
             targetPort: 8080
-
-      qbittorrent-incoming-tcp:
-        enabled: true
-        annotations:
-          metallb.universe.tf/allow-shared-ip: media-qbittorrent
-        type: LoadBalancer
-        externalTrafficPolicy: Local
-        loadBalancerIP: 192.168.1.66
-        ports:
           torrent-tcp:
             port: 32123
             targetPort: 32123
-
-      qbittorrent-incoming-udp:
-        enabled: true
-        annotations:
-          metallb.universe.tf/allow-shared-ip: media-qbittorrent
-        type: LoadBalancer
-        externalTrafficPolicy: Local
-        loadBalancerIP: 192.168.1.66
-        ports:
           torrent-udp:
             port: 32123
             targetPort: 32123
             protocol: UDP
-
-      qbittorrent-tracker:
-        enabled: true
-        annotations:
-          metallb.universe.tf/allow-shared-ip: media-qbittorrent
-        type: LoadBalancer
-        externalTrafficPolicy: Local
-        loadBalancerIP: 192.168.1.66
-        ports:
           tracker:
             port: 34543
             targetPort: 34543
