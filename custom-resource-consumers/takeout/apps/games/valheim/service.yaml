@@ -3,13 +3,8 @@ kind: Service
 metadata:
   name: valheim-server-tcp
   namespace: games
-  annotations:
-    # external-dns.alpha.kubernetes.io/hostname: valheim.${blog_domain}
-    # external-dns.alpha.kubernetes.io/target: ${blog_domain_ddns}
-    metallb.universe.tf/allow-shared-ip: games-valheim-server
 spec:
-  type: LoadBalancer
-  loadBalancerIP: 192.168.1.67
+  type: NodePort
   externalTrafficPolicy: Local
   selector:
     app: valheim-server
@@ -26,21 +21,6 @@ spec:
       protocol: TCP
       name: supervisor
       targetPort: 9001
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: valheim-server-udp
-  namespace: games
-  annotations:
-    metallb.universe.tf/allow-shared-ip: games-valheim-server
-spec:
-  type: LoadBalancer
-  loadBalancerIP: 192.168.1.67
-  externalTrafficPolicy: Local
-  selector:
-    app: valheim-server
-  ports:
     - port: 2456
       protocol: UDP
       name: server-one
