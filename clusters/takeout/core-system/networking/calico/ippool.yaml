@@ -4,6 +4,9 @@ metadata:
   name: onair-pods
 spec:
   disabled: false
+  blockSize: 0
   cidr: 172.18.0.0/18
   ipipMode: Never
   natOutgoing: true
+  nodeSelector: all()
+  vxlanMode: CrossSubnet
