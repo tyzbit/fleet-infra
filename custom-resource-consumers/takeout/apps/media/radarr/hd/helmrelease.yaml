@@ -22,7 +22,7 @@ spec:
       tag: v4.2.4.6635
 
     controller:
-      replicas: 0 # active longhorn-webapp nas
+      replicas: 1 # active longhorn-webapp nas
 
     nodeSelector:
       longhorn: primary

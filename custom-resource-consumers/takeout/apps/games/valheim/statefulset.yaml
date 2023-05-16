@@ -10,7 +10,7 @@ spec:
     matchLabels:
       app: valheim-server
   serviceName: valheim-server
-  replicas: 0 # active longhorn
+  replicas: 1 # active longhorn
   template:
     metadata:
       labels:

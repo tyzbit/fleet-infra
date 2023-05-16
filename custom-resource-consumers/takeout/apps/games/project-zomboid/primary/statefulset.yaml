@@ -8,7 +8,7 @@ spec:
     matchLabels:
       app: project-zomboid
   serviceName: project-zomboid
-  replicas: 0 # active longhorn-gameserver
+  replicas: 1 # active longhorn-gameserver
   template:
     metadata:
       labels:

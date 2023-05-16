@@ -23,7 +23,7 @@ spec:
       tag: "2023.5.3"
 
     controller:
-      replicas: 0 # active longhorn-database nas
+      replicas: 1 # active longhorn-database nas
 
     hostNetwork: true
 

@@ -24,7 +24,7 @@ spec:
 
     controller:
       type: statefulset
-      replicas: 0 # active longhorn
+      replicas: 1 # active longhorn
 
     envFrom:
       - secretRef:
