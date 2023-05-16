@@ -4,8 +4,7 @@ metadata:
   name: bitcoin
   namespace: crypto
 spec:
-  type: LoadBalancer
-  loadBalancerIP: 192.168.1.63
+  type: NodePort
   externalTrafficPolicy: Local
   selector:
     app: bitcoin
