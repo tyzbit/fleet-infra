@@ -8,7 +8,7 @@ metadata:
   labels:
     app: btc-balance-notifier
 spec:
-  replicas: 1
+  replicas: 0 # active longhorn
   serviceName: btc-balance-notifier
   selector:
     matchLabels:
