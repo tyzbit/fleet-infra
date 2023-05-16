@@ -23,7 +23,7 @@ spec:
       reloader.stakater.com/auto: "true"
     controller:
       type: statefulset
-      replicas: 1
+      replicas: 0 # active longhorn
     persistence:
       media:
         enabled: true
