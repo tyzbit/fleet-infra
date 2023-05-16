@@ -34,46 +34,20 @@ spec:
 
     service:
       main:
-        type: LoadBalancer
-        loadBalancerIP: 192.168.1.78
-        # ipFamilyPolicy: RequireDualStack
+        type: NodePort
         externalTrafficPolicy: Local
-        annotations:
-          metallb.universe.tf/allow-shared-ip: networking-unifi
         ports:
           http:
             enabled: true
             port: 8443
             protocol: HTTPS
-      tcp:
-        type: LoadBalancer
-        loadBalancerIP: 192.168.1.78
-        # ipFamilyPolicy: RequireDualStack
-        externalTrafficPolicy: Local
-        annotations:
-          metallb.universe.tf/allow-shared-ip: networking-unifi
-        ports:
           controller: &tcp
             enabled: true
             protocol: TCP
             port: 8080
-          # portal-http:
-          #   !!merge <<: *tcp
-          #   port: 8880
-          # portal-https:
-          #   !!merge <<: *tcp
-          #   port: 8843
           speedtest:
             !!merge <<: *tcp
             port: 6789
-      udp:
-        type: LoadBalancer
-        loadBalancerIP: 192.168.1.78
-        # ipFamilyPolicy: RequireDualStack
-        externalTrafficPolicy: Local
-        annotations:
-          metallb.universe.tf/allow-shared-ip: networking-unifi
-        ports:
           stun: &udp
             enabled: true
             port: 3478
