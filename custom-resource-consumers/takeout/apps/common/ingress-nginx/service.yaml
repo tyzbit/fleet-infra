@@ -14,23 +14,6 @@ spec:
   type: ClusterIP
 ---
 apiVersion: v1
-kind: Endpoints
-metadata:
-  name: simulacrum
-  namespace: default
-subsets:
-  - addresses:
-      # list all external ips for this service
-      - ip: 192.168.1.50
-    ports:
-      - name: default
-        port: 8080
-        protocol: TCP
-      - name: unraid
-        port: 80
-        protocol: TCP
----
-apiVersion: v1
 kind: Service
 metadata:
   name: architect
