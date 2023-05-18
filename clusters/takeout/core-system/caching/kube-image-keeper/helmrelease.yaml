@@ -22,12 +22,18 @@ spec:
     controllers:
       image:
         repository: quay.io/enix/kube-image-keeper
-      # webhook:
-      #   objectSelector:
-      #     matchExpressions:
-      #       - key: kube-image-keeper.enix.io/image-cache
-      #         operator: In
-      #         values: ["enabled"]
+      webhook:
+        #   objectSelector:
+        #     matchExpressions:
+        #       - key: kube-image-keeper.enix.io/image-cache
+        #         operator: In
+        #         values: ["enabled"]
+        ignoredNamespaces:
+          - kube-system
+          - calico-apiserver
+          - calico-system
+          - longhorn-system
+          - tigera-operator
     proxy:
       image:
         repository: quay.io/enix/kube-image-keeper
