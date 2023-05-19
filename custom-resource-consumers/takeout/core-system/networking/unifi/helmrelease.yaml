@@ -41,7 +41,7 @@ spec:
       main:
         type: ClusterIP
         clusterIP: 172.18.96.28
-        externalTrafficPolicy: Local
+        # externalTrafficPolicy: Local
         ports:
           http:
             enabled: true

@@ -5,7 +5,7 @@ metadata:
   namespace: crypto
 spec:
   type: ClusterIP
-  externalTrafficPolicy: Local
+  # externalTrafficPolicy: Local
   selector:
     app: bitcoin
   ports:

@@ -101,7 +101,7 @@ spec:
       tls: true
     service:
       type: ClusterIP
-      externalTrafficPolicy: Local
+      # externalTrafficPolicy: Local
     persistence:
       existingClaim: wordpress-${blog_name}-longhorn-blog
     updateStrategy:

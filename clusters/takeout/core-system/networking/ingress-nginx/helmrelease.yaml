@@ -21,7 +21,7 @@ spec:
     controller:
       service:
         type: ClusterIP
-        externalTrafficPolicy: Local
+        # externalTrafficPolicy: Local
       metrics:
         service:
           annotations:
