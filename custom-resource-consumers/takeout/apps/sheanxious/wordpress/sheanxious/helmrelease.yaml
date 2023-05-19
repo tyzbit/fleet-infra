@@ -100,7 +100,7 @@ spec:
       hostname: ${sheanxious_domain}
       tls: true
     service:
-      type: NodePort
+      type: ClusterIP
     persistence:
       existingClaim: wordpress-sheanxious-longhorn-blog
     updateStrategy:

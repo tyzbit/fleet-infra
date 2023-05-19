@@ -4,7 +4,7 @@ metadata:
   name: btc-rpc-explorer
   namespace: crypto
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: btc-rpc-explorer
   ports:
@@ -19,7 +19,7 @@ metadata:
   name: btc-rpc-explorer-cache
   namespace: crypto
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: btc-rpc-explorer-cache
   ports:

@@ -4,7 +4,7 @@ metadata:
   name: iperf3-server
   namespace: media
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: iperf3-server
   ports:

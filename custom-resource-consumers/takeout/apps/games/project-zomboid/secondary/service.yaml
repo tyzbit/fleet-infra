@@ -4,7 +4,7 @@ metadata:
   name: project-zomboid-secondary
   namespace: games
 spec:
-  type: NodePort
+  type: ClusterIP
   externalTrafficPolicy: Local
   selector:
     app: project-zomboid-secondary

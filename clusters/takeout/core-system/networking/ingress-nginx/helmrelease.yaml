@@ -20,7 +20,7 @@ spec:
   values:
     controller:
       service:
-        type: NodePort
+        type: ClusterIP
         externalTrafficPolicy: Local
       metrics:
         service:

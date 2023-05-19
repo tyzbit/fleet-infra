@@ -4,7 +4,7 @@ metadata:
   name: the-forest
   namespace: games
 spec:
-  type: NodePort
+  type: ClusterIP
   externalTrafficPolicy: Local
   selector:
     app: the-forest

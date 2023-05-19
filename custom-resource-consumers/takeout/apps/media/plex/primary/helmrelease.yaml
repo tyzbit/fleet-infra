@@ -52,7 +52,7 @@ spec:
     service:
       main:
         enabled: true
-        type: NodePort
+        type: ClusterIP
         externalTrafficPolicy: Local
         ports:
           http:

@@ -100,7 +100,7 @@ spec:
       hostname: "${blog_domain}"
       tls: true
     service:
-      type: NodePort
+      type: ClusterIP
       externalTrafficPolicy: Local
     persistence:
       existingClaim: wordpress-${blog_name}-longhorn-blog

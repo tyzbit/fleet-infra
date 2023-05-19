@@ -4,7 +4,7 @@ metadata:
   name: btc-balance-notifier
   namespace: crypto
 spec:
-  type: NodePort
+  type: ClusterIP
   externalTrafficPolicy: Local
   selector:
     app: btc-balance-notifier

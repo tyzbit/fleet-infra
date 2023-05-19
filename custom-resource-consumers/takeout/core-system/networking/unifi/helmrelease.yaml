@@ -39,7 +39,8 @@ spec:
 
     service:
       main:
-        type: NodePort
+        type: ClusterIP
+        clusterIP: 172.18.96.28
         externalTrafficPolicy: Local
         ports:
           http:

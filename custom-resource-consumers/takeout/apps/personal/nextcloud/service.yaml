@@ -4,7 +4,7 @@ metadata:
   name: nextcloud
   namespace: personal
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: nextcloud
   ports:
@@ -19,7 +19,7 @@ metadata:
   name: nextcloud-db
   namespace: personal
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: nextcloud-db
   ports:

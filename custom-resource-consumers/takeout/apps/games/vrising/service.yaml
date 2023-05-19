@@ -4,7 +4,7 @@ metadata:
   name: vrising-primary
   namespace: games
 spec:
-  type: NodePort
+  type: ClusterIP
   externalTrafficPolicy: Local
   selector:
     app: vrising-primary

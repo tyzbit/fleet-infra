@@ -4,7 +4,7 @@ metadata:
   name: qdirstat
   namespace: media
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: qdirstat
   ports:

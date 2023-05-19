@@ -100,7 +100,7 @@ spec:
       hostname: ${hotboxfort_domain}
       tls: true
     service:
-      type: NodePort
+      type: ClusterIP
     persistence:
       existingClaim: wordpress-hotboxfort-longhorn-blog
     updateStrategy:
