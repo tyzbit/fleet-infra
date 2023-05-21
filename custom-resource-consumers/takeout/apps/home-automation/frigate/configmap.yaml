@@ -54,6 +54,8 @@ data:
 
     cameras:
       frontdoor:
+        birdseye:
+          order: 2
         motion:
           mask:
             - 0,390,193,302,416,250,613,202,707,193,1021,155,1149,113,1138,0,0,0
@@ -77,6 +79,8 @@ data:
           height: 540
 
       backdoor:
+        birdseye:
+          order: 4
         ffmpeg:
           inputs:
             # - path: 'rtsp://localhost:8554/backdoor'
@@ -102,6 +106,8 @@ data:
           height: 540
 
       driveway:
+        birdseye:
+          order: 3
         ffmpeg:
           inputs:
             # - path: 'rtsp://localhost:8554/driveway'
@@ -128,6 +134,8 @@ data:
           height: 540
 
       porch:
+        birdseye:
+          order: 1
         ffmpeg:
           inputs:
             # - path: 'rtsp://localhost:8554/porch'
@@ -152,6 +160,8 @@ data:
           height: 540
 
       court:
+        birdseye:
+          order: 5
         ffmpeg:
           inputs:
             # - path: 'rtsp://localhost:8554/court'

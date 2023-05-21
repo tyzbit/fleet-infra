@@ -20,7 +20,8 @@ spec:
     image:
       pullPolicy: Always
       repository: ghcr.io/blakeblackshear/frigate
-      tag: 0.12.0
+      # tag: 0.12.0
+      tag: ghcr.io/blakeblackshear/frigate:dev-83006ee@sha256:833933c837d76d3fafe1fbbcaafddf58059990b06ab8ab11dfd2bc0ed0e070a2
 
     controller:
       annotations:
