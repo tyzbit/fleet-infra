@@ -8,4 +8,4 @@ spec:
     name: wordpress
   policy:
     semver:
-      range: "~ 6.1"
+      range: "~ 6.2"
