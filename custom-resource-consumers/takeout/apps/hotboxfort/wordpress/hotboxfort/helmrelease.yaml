@@ -68,7 +68,7 @@ spec:
   values:
     replicaCount: 1 # active longhorn-database nas
     image:
-      tag: "6.1.1" # {"$imagepolicy": "flux-system:wordpress-hotboxfort:tag"}
+      tag: "6.2.2" # {"$imagepolicy": "flux-system:wordpress-hotboxfort:tag"}
       pullPolicy: Always
     wordpressBlogName: hotboxfort
     wordpressConfigureCache: true
