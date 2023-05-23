@@ -26,7 +26,8 @@ spec:
             - name: default-backend-html
               subPath: index.html
               mountPath: /usr/share/nginx/html/index.html
-            ${additional_default_backend_mounts}
+            - name: media
+              mountPath: ${default_backend_nas_mount_path}
           resources:
             requests:
               cpu: "10m"
@@ -36,4 +37,6 @@ spec:
         - name: default-backend-html
           configMap:
             name: default-backend-html
-        ${additional_default_backend_volumes}
+        - name: media
+          persistentVolumeClaim:
+            claimName: nas-volume1-media
