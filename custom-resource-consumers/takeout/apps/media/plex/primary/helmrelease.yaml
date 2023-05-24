@@ -18,7 +18,7 @@ spec:
   values:
     image:
       repository: plexinc/pms-docker
-      tag: 1.32.0.6973-a787c5a8e
+      tag: 1.32.2.7100-248a2daf0
     podAnnotations:
       reloader.stakater.com/auto: "true"
     controller:
@@ -53,7 +53,6 @@ spec:
       main:
         enabled: true
         type: ClusterIP
-        # externalTrafficPolicy: Local
         ports:
           http:
             port: 32400

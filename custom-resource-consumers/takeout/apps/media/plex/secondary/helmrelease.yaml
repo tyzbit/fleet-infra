@@ -53,7 +53,6 @@ spec:
       main:
         enabled: true
         type: ClusterIP
-        # externalTrafficPolicy: Local
         ports:
           http:
             port: 32400
