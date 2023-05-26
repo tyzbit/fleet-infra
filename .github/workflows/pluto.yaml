@@ -6,7 +6,7 @@ on:
       - "main"
 
 jobs:
-  releases-matrix:
+  lint:
     name: Check for deprecated Kubernetes APIs
     runs-on: ubuntu-latest
     steps:
@@ -14,4 +14,4 @@ jobs:
         uses: FairwindsOps/pluto/github-action@master
       - name: Use pluto
         run: |
-          pluto detect-files -d ../../
+          pluto detect-files -d "${{ github.workspace }}"
