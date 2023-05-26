@@ -1,0 +1,17 @@
+# .github/workflows/release.yaml
+
+on:
+  push:
+    branches:
+      - "main"
+
+jobs:
+  releases-matrix:
+    name: Check for deprecated Kubernetes APIs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Pluto
+        uses: FairwindsOps/pluto/github-action@master
+      - name: Use pluto
+        run: |
+          pluto detect-files -d pkg/finder/testdata
