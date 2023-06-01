@@ -82,7 +82,7 @@ spec:
             port: 80
             targetPort: 8080
           mux: &mux
-            port: &port 5101
+            port: &port 5100
             targetPort: *port
           muxudp:
             !!merge <<: *mux
