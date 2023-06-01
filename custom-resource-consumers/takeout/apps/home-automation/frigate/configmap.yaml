@@ -41,11 +41,14 @@ data:
     # go2rtc is disabled because frigate kept running out of memory and also 404ing
     # go2rtc:
     #   streams:
-    #     frontdoor: 'rtsp://{FRIGATE_FRONTDOOR_CREDENTIALS}@frontdoor:554'
+    #     frontdoor: 'rtsp://{FRIGATE_FRONTDOOR_CREDENTIALS}@TV-IP302PI:554'
+    #     # frontdoor_low: 'rtsp://{FRIGATE_FRONTDOOR_CREDENTIALS}@TV-IP302PI:554/low'
     #     backdoor: 'rtsp://{FRIGATE_BACKDOOR_CREDENTIALS}@backdoor:554/live'
     #     driveway: 'rtsp://{FRIGATE_DRIVEWAY_CREDENTIALS}@driveway:554/live'
-    #     porch: 'rtsp://{FRIGATE_PORCH_CREDENTIALS}@porch:554/live'
-    #     court: 'rtsp://{FRIGATE_COURT_CREDENTIALS}@court:554/live'
+    #     porch: 'rtsp://{FRIGATE_PORCH_CREDENTIALS}@porch:554//cam/realmonitor?channel=1&subtype=0'
+    #     # porch_low: 'rtsp://{FRIGATE_PORCH_CREDENTIALS}@porch:554/cam/realmonitor?channel=1&subtype=1'
+    #     court: 'rtsp://{FRIGATE_COURT_CREDENTIALS}@court:554/cam/realmonitor?channel=1&subtype=0'
+    #     # court_low: 'rtsp://{FRIGATE_COURT_CREDENTIALS}@court:554/cam/realmonitor?channel=1&subtype=1'
 
     detectors:
       coral:
@@ -66,11 +69,11 @@ data:
                 - 0,390,193,302,416,250,613,202,707,193,1021,155,1149,113,1138,0,0,0
         ffmpeg:
           inputs:
-            # - path: 'rtsp://localhost:8554/frontdoor'
+            # - path: 'rtsp://localhost:8554/frontdoor_low'
             - path: 'rtsp://{FRIGATE_FRONTDOOR_CREDENTIALS}@TV-IP302PI:554'
               roles:
                 - detect
-                - restream # enabled by default
+                - record
         detect:
           width: 1280
           height: 720
@@ -87,7 +90,7 @@ data:
             - path: 'rtsp://{FRIGATE_BACKDOOR_CREDENTIALS}@backdoor:554/live'
               roles:
                 - detect
-                - restream # enabled by default
+                - record
         motion:
           mask:
             - 480,176,791,187,1104,210,1567,289,1810,345,1920,356,1920,0,0,0,0,254
@@ -114,7 +117,7 @@ data:
             - path: 'rtsp://{FRIGATE_DRIVEWAY_CREDENTIALS}@driveway:554/live'
               roles:
                 - detect
-                - restream # enabled by default
+                - record
         motion:
           mask:
             - 1920,0,1920,356,1920,1080,1539,1080,1697,838,1789,460,1788,248,1715,151,1510,38,1394,22,1198,119,1104,88,1176,0
@@ -142,7 +145,7 @@ data:
             - path: 'rtsp://{FRIGATE_PORCH_CREDENTIALS}@AMC047AD_C51725:554/live'
               roles:
                 - detect
-                - restream # enabled by default
+                - record
         motion:
           mask:
             - 2688,1520,1950,1520,2168,751,2688,738
