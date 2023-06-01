@@ -81,11 +81,12 @@ spec:
           http:
             port: 80
             targetPort: 8080
-          mux: &mux
+          mux:
             port: &port 5100
             targetPort: *port
           muxudp:
-            !!merge <<: *mux
+            port: &port 5100
+            targetPort: *port
             protocol: UDP
 
     ingress:
