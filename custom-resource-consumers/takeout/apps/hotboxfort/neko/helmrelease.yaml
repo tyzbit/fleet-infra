@@ -80,7 +80,7 @@ spec:
             port: &port 5101
             targetPort: *port
           muxudp:
-            port: &port 5101
+            port: *port
             targetPort: *port
             protocol: UDP
 
