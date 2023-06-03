@@ -177,3 +177,19 @@ data:
           width: 1920
           height: 1080
           fps: 5
+      
+      garage:
+        birdseye:
+          order: 6
+        ffmpeg:
+          inputs:
+            - path: 'rtsp://{FRIGATE_GARAGE_CREDENTIALS}@garage:554/1'
+              roles:
+                - detect
+                - record
+        detect:
+          width: 2560
+          height: 1440
+          fps: 5
+        mqtt:
+          height: 540
