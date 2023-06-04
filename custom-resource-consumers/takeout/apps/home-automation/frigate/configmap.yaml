@@ -43,7 +43,7 @@ data:
     #   streams:
     #     frontdoor: 'rtsp://{FRIGATE_FRONTDOOR_CREDENTIALS}@frontdoor:554'
     #     # frontdoor_low: 'rtsp://{FRIGATE_FRONTDOOR_CREDENTIALS}@frontdoor:554/low'
-    #     backyard: 'rtsp://{FRIGATE_GARAGE_CREDENTIALS}@backyard:554/1'
+    #     backyard: 'rtsp://{FRIGATE_BACKYARD_CREDENTIALS}@backyard:554/1'
     #     driveway: 'rtsp://{FRIGATE_DRIVEWAY_CREDENTIALS}@driveway:554/live'
     #     porch: 'rtsp://{FRIGATE_PORCH_CREDENTIALS}@porch:554//cam/realmonitor?channel=1&subtype=0'
     #     # porch_low: 'rtsp://{FRIGATE_PORCH_CREDENTIALS}@porch:554/cam/realmonitor?channel=1&subtype=1'
@@ -141,7 +141,7 @@ data:
         ffmpeg:
           inputs:
             # - path: 'rtsp://localhost:8554/backyard'
-            - path: 'rtsp://{FRIGATE_GARAGE_CREDENTIALS}@backyard:554/1'
+            - path: 'rtsp://{FRIGATE_BACKYARD_CREDENTIALS}@backyard:554/1'
               roles:
                 - detect
                 - record
