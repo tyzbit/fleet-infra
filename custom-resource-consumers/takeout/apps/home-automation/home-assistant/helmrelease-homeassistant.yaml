@@ -23,6 +23,7 @@ spec:
       tag: "2023.6.1"
 
     controller:
+      type: statefulset
       replicas: 1 # active longhorn-database nas
 
     hostNetwork: true
