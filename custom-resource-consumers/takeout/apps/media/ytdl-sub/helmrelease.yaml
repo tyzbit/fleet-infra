@@ -20,7 +20,7 @@ spec:
     image:
       pullPolicy: Always
       repository: ghcr.io/jmbannon/ytdl-sub
-      tag: "latest@sha256:056295ac9a0ea206434a4124412aa6bebb2f91b03f7f60617449dbe7dafbfa27" # 2023-02-24 03:00 -0400
+      tag: "latest@sha256:c87e5650f9a65740d246ed9b4551220158fe1e0dcd202ca7206e0f3e9a53ebbf" # 2023-02-24 03:00 -0400
 
     controller:
       type: cronjob
