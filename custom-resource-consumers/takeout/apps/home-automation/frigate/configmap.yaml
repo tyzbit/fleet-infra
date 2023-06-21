@@ -124,7 +124,7 @@ data:
         objects:
           filters:
             person:
-              # min_score: 0.72
+              min_score: 0.78
               mask: 
                 - 710,0,655,161,1280,218,1280,0
                 - 90,720,0,720,0,699,207,567,257,615
