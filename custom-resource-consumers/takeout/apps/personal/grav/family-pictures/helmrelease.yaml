@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: grav-${family_name}
+  name: grav-${family_pictures_name}
   namespace: flux-system
 spec:
   targetNamespace: personal
@@ -15,7 +15,7 @@ spec:
         namespace: flux-system
   interval: 2m0s
   values:
-    fullnameOverride: grav-${family_name}
+    fullnameOverride: grav-${family_pictures_name}
     grav:
       image:
         repository: dsavell/grav
@@ -38,7 +38,7 @@ spec:
         pullPolicy: Always
     persistence:
       enabled: true
-      existingClaimName: grav-${family_name}-data-nas
+      existingClaimName: grav-${family_pictures_name}-data-nas
     deploymentAnnotations:
       reloader.stakater.com/auto: "true"
     statefulSetAnnotations:
@@ -56,12 +56,12 @@ spec:
       labels:
         use-cloudflare-dns-solver: "true"
       hosts:
-        - host: ${family_domain}
+        - host: ${family_pictures_domain}
           paths:
             - path: /
               pathType: ImplementationSpecific
       tls:
-        - secretName: ${family_domain}-tls
+        - secretName: ${family_pictures_domain}-tls
           hosts:
-            - ${family_domain}
-            - "*.${family_domain}"
+            - ${family_pictures_domain}
+            - "*.${family_pictures_domain}"
