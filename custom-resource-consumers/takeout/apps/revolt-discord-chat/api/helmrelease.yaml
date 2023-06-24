@@ -38,16 +38,11 @@ spec:
         command: ["sh", "-c"]
         args:
           - |
-            migrated=$(mongosh -u $(MONGO_INITDB_ROOT_USERNAME) -p $(MONGO_INITDB_ROOT_PASSWORD) <<EOF
-              use revolt
-              db.getCollection('user_settings')
-              EOF)
-            while ! migrated; do
+            while ! mongosh -u $(MONGO_INITDB_ROOT_USERNAME) -p $(MONGO_INITDB_ROOT_PASSWORD) < /test-connection.js; do
               echo 'Waiting for Revolt to migrate MongoDB...' && sleep 0.1
             done && \
             mongosh -u $(MONGO_INITDB_ROOT_USERNAME) -p $(MONGO_INITDB_ROOT_PASSWORD) < /create-invite.js && \
-            sleep infinity || \
-            echo "There was a problem creating the initial invite."
+            sleep infinity
         envFrom:
           - secretRef:
               name: revolt-${chat_name}-chat-mongodb
@@ -55,6 +50,9 @@ spec:
           - name: create-invite
             subPath: create-invite.js
             mountPath: /create-invite.js
+          - name: test-connection
+            subPath: test-connection.js
+            mountPath: /test-connection.js
         resources:
           requests:
             cpu: 10m

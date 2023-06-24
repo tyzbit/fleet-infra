@@ -7,3 +7,6 @@ data:
   create-invite.js: |
     use revolt
     db.invites.insertOne({ _id: "${revolt_chat_invite}" })
+  test-connection.js: |
+    use revolt
+    db.getCollection('user_settings')
