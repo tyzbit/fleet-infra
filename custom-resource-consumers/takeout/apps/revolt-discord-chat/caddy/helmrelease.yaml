@@ -31,7 +31,7 @@ spec:
     persistence:
       caddyfile:
         enabled: true
-        name: writefreely-${discord_cool_name}-chat-caddyfile
+        name: revolt-${discord_cool_name}-chat-caddyfile
         type: configMap
         mountPath: /etc/caddy/Caddyfile
         subPath: Caddyfile

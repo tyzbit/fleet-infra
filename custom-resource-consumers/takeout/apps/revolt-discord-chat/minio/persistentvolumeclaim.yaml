@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: writefreely-${chat_name}-chat-minio-longhorn-static
+  name: revolt-${chat_name}-chat-minio-longhorn-static
   namespace: revolt-${chat_name}-chat
 spec:
   accessModes:
