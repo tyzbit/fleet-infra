@@ -37,14 +37,6 @@ spec:
     podAnnotations:
       reloader.stakater.com/auto: "true"
 
-    probes:
-      liveness:
-        enabled: false
-      readiness:
-        enabled: false
-      startup:
-        enabled: false
-
     service:
       main:
         enabled: true
