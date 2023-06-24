@@ -1,0 +1,33 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: revolt-$(chat_name}-chat-createbuckets
+  namespace: revolt-$(chat_name)-chat
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      containers:
+        - name: revolt-$(chat_name)-chat-createbuckets
+          image: minio/mc:RELEASE.2023-06-23T18-12-07Z
+          command: ["/bin/sh", "-c"]
+          args:
+            - while ! curl -s --output /dev/null --connect-timeout 1 http://revolt-${chat_name}-minio:9000; do
+              echo 'Waiting for minio to be ready...' && sleep 0.1;
+              done;
+              /usr/bin/mc alias set minio http://revolt-${chat_name}-minio:9000 $(MINIO_ROOT_USER) $(MINIO_ROOT_PASSWORD);
+              /usr/bin/mc mb minio/attachments;
+              /usr/bin/mc mb minio/avatars;
+              /usr/bin/mc mb minio/backgrounds;
+              /usr/bin/mc mb minio/icons;
+              /usr/bin/mc mb minio/banners;
+              /usr/bin/mc mb minio/emojis;
+              exit 0
+          envFrom:
+            - secretRef:
+                name: revolt-${chat_name}-chat-env
+          resources:
+            requests:
+              cpu: 10m
+            limits:
+              memory: 64Mi
