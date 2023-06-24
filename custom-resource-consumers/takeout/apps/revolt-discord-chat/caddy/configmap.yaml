@@ -11,13 +11,13 @@ data:
         reverse_proxy http://revolt-${chat_name}-chat-api:8000
       }
 
-      route /ws {
+      route /wss {
         @upgrade {
           header Connection *Upgrade*
           header Upgrade websocket
         }
 
-        uri strip_prefix /ws
+        uri strip_prefix /wss
         reverse_proxy @upgrade http://revolt-${chat_name}-chat-events:9000
       }
 
