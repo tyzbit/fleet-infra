@@ -1,8 +1,40 @@
 ## Additional steps to deploy Revolt
 
+### Set up hCAPTCHA
+
+Create a free account on hCaptcha and save the sitekey and key
+
+#### vapid
+
+Run the steps here: https://gitlab.insrt.uk/revolt/delta/-/wikis/vapid
+
+The output of the second command is the value for `REVOLT_VAPID_PRIVATE_KEY`
+
+Copied below as retrieved on `2023-06-24`
+
+---
+
+VAPID keys are used to ensure that nobody else can communicate with your clients.
+
+You can generate a private VAPID key by running:
+
+    openssl ecparam -name prime256v1 -genkey -noout -out vapid_private.pem
+
+This creates a PEM private key. In order to use this with the server, you must first base64 encode it, then you can pass it in using an environment variable. (Make sure to remove any newlines)
+
+    base64 vapid_private.pem
+
+To convert this to a public key, we run:
+
+    openssl ec -in vapid_private.pem -outform DER|tail -c 65|base64|tr '/+' '_-'|tr -d '\n'
+
+The output of this command is what the clients will be receiving.
+
+---
+
 ### Secrets
 
-Create these secrets:
+Create these secrets the `REVOLT_HCAPTCHA.*` values come from the previous step:
 
 ```yaml
 apiVersion: v1
@@ -50,28 +82,3 @@ stringData:
   MONGO_INITDB_ROOT_USERNAME: ${chat_name}_chat
   MONGO_INITDB_ROOT_PASSWORD: password
 ```
-
-#### vapid
-
-Run the steps here: https://gitlab.insrt.uk/revolt/delta/-/wikis/vapid
-Copied below as retrieved on `2023-06-24`
-
----
-
-VAPID keys are used to ensure that nobody else can communicate with your clients.
-
-You can generate a private VAPID key by running:
-
-    openssl ecparam -name prime256v1 -genkey -noout -out vapid_private.pem
-
-This creates a PEM private key. In order to use this with the server, you must first base64 encode it, then you can pass it in using an environment variable. (Make sure to remove any newlines)
-
-    base64 vapid_private.pem
-
-To convert this to a public key, we run:
-
-    openssl ec -in vapid_private.pem -outform DER|tail -c 65|base64|tr '/+' '_-'|tr -d '\n'
-
-The output of this command is what the clients will be receiving.
-
----
