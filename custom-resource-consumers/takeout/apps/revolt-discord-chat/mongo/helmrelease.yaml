@@ -38,7 +38,7 @@ spec:
             while ! mongosh --file /create-invite.js; do
               echo 'Waiting for mongo to be ready...' && sleep 0.1
             done
-            exit 0
+            sleep infinity
         envFrom:
           - secretRef:
               name: revolt-${chat_name}-chat-mongodb
