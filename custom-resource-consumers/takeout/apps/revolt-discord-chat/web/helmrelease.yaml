@@ -18,7 +18,7 @@ spec:
   values:
     image:
       repository: ghcr.io/revoltchat/client
-      tag: 20230615-1
+      tag: 1.0.1
 
     envFrom:
       - secretRef:
