@@ -70,9 +70,8 @@ spec:
               - path: "/"
         tls:
           - hosts:
-              - ${chat_domain}
-              - "*.${chat_domain}"
-            secretName: ${chat_domain}-tls
+              - minio.${chat_domain}
+            secretName: minio.${chat_domain}-tls
 
     nodeSelector:
       longhorn: primary

@@ -76,7 +76,6 @@ spec:
         tls:
           - hosts:
               - ${chat_domain}
-              - "*.${chat_domain}"
             secretName: ${chat_domain}-tls
 
     nodeSelector:
