@@ -46,7 +46,7 @@ type: Opaque
 stringData:
   MONGODB: mongodb://${chat_name}_chat:password@revolt-${chat_name}-chat-mongodb
   REDIS_URI: redis://revolt-${chat_name}-chat-redis/
-  HOSTNAME: https://${chat_name}.chat
+  HOSTNAME: http://${chat_name}.chat # http:// makes caddy only listen on 80 so it plays nice with ingresses
   REVOLT_APP_URL: https://${chat_name}.chat
   REVOLT_PUBLIC_URL: https://${chat_name}.chat/api
   VITE_API_URL: https://${chat_name}.chat/api
