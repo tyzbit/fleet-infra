@@ -41,7 +41,7 @@ spec:
         ports:
           http:
             enabled: true
-            port: 8000
+            port: 9000
 
     nodeSelector:
       longhorn: primary
