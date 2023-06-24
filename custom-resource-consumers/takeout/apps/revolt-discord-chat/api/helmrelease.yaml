@@ -38,10 +38,11 @@ spec:
         command: ["sh", "-c"]
         args:
           - |
-            while ! mongosh -u $(MONGO_INITDB_ROOT_USERNAME) -p $(MONGO_INITDB_ROOT_PASSWORD) < /test-connection.js; do
+            revolt_mongo=$(mongosh --host revolt-${chat_name}-chat-mongodb -u $${MONGO_INITDB_ROOT_USERNAME} -p $${MONGO_INITDB_ROOT_PASSWORD})
+            while ! revolt_mongo < /test-connection.js; do
               echo 'Waiting for Revolt to migrate MongoDB...' && sleep 0.1
             done && \
-            mongosh -u $(MONGO_INITDB_ROOT_USERNAME) -p $(MONGO_INITDB_ROOT_PASSWORD) < /create-invite.js && \
+            revolt_mongo < /create-invite.js && \
             sleep infinity
         envFrom:
           - secretRef:
