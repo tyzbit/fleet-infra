@@ -31,7 +31,7 @@ spec:
     persistence:
       data:
         enabled: true
-        existingClaim: revolt-${chat_name}-mongo-longhorn-database
+        existingClaim: revolt-${chat_name}-mongo-longhorn-static
         mountPath: /data/minio
 
     podAnnotations:
