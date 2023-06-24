@@ -22,7 +22,7 @@ spec:
 
     envFrom:
       - secretRef:
-          name: revolt-${chat_name}-chat-minio
+          name: revolt-${chat_name}-chat-env
 
     controller:
       type: statefulset
