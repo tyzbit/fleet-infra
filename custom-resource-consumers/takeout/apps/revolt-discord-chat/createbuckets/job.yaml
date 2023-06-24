@@ -1,8 +1,8 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: revolt-$(chat_name}-chat-createbuckets
-  namespace: revolt-$(chat_name)-chat
+  name: revolt-${chat_name}-chat-createbuckets
+  namespace: revolt-${chat_name}-chat
 spec:
   backoffLimit: 0
   template:
