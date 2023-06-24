@@ -35,7 +35,7 @@ spec:
         command: ["sh", "-c"]
         args:
           - |
-            while ! mongosh --file /create-invite.js; do
+            while ! mongosh -u $(MONGO_INITDB_ROOT_USERNAME) -p $(MONGO_INITDB_ROOT_PASSWORD) --file /create-invite.js; do
               echo 'Waiting for mongo to be ready...' && sleep 0.1
             done
             sleep infinity
