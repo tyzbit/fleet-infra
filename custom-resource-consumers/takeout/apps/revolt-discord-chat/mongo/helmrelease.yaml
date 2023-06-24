@@ -45,8 +45,7 @@ spec:
           http:
             enabled: false
           mongo:
-            port:
-            nodePort: 27017
+            port: 27017
 
     nodeSelector:
       longhorn: primary
