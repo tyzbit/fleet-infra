@@ -23,7 +23,8 @@ spec:
     args:
       - server
       - /data
-      - --console-address ":9001"
+      - --console-address
+      - ":9001"
 
     envFrom:
       - secretRef:
