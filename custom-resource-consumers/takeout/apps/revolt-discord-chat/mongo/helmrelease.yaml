@@ -28,6 +28,24 @@ spec:
       type: statefulset
       replicas: 1 # active longhorn
 
+    initContainers:
+      invite:
+        name: revolt-${chat_name}-chat-invite
+        image: mongo:6.0.6
+        command: ["mongosh"]
+        args:
+          - |
+            use revolt
+            db.invites.insertOne({ _id: "${revolt_chat_invite}" })
+        envFrom:
+          - secretRef:
+              name: revolt-${chat_name}-chat-env
+        resources:
+          requests:
+            cpu: 10m
+          limits:
+            memory: 64Mi
+
     persistence:
       data:
         enabled: true
