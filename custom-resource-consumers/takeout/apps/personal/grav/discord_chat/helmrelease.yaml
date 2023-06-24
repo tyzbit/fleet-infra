@@ -56,7 +56,7 @@ spec:
       labels:
         use-cloudflare-dns-solver: "true"
       hosts:
-        - host: ${chat_domain}
+        - host: old.${chat_domain}
           paths:
             - path: /
               pathType: ImplementationSpecific

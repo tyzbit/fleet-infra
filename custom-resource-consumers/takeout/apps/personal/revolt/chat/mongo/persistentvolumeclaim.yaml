@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: revolt-${chat_name}-chat-mongodb-longhorn-database
+  namespace: revolt-${chat_name}-chat
+spec:
+  accessModes:
+    - ReadWriteOnce
+  volumeMode: Filesystem
+  storageClassName: longhorn-database
+  resources:
+    requests:
+      storage: 10Gi

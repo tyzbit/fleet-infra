@@ -1,0 +1,78 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: revolt-${chat_name}-minio
+  namespace: flux-system
+spec:
+  releaseName: revolt-${chat_name}-minio
+  targetNamespace: revolt-${chat_name}-chat
+  chart:
+    spec:
+      chart: app-template
+      version: "1.5.1"
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s-helm-charts
+        namespace: flux-system
+  interval: 2m0s
+  values:
+    image:
+      repository: minio/minio
+      tag: RELEASE.2023-06-23T20-26-00Z
+
+    envFrom:
+      - secretRef:
+          name: revolt-${chat_name}-minio
+
+    controller:
+      type: statefulset
+      replicas: 1 # active longhorn
+
+    persistence:
+      data:
+        enabled: true
+        existingClaim: revolt-${chat_name}-mongo-longhorn-database
+        mountPath: /data/minio
+
+    podAnnotations:
+      reloader.stakater.com/auto: "true"
+
+    service:
+      main:
+        enabled: true
+        type: ClusterIP
+        ports:
+          http:
+            enabled: true
+            port: 9001
+          minio:
+            port: 9000
+
+    ingress:
+      main:
+        enabled: true
+        annotations:
+          kubernetes.io/ingress.class: nginx
+          cert-manager.io/cluster-issuer: letsencrypt
+          acme.cert-manager.io/http01-edit-in-place: "false"
+          nignx.ingress.kubernetes.io/force-ssl-redirect: "true"
+          external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+          external-dns.alpha.kubernetes.io/target: ${cloudflared_tunnel_uuid}.cfargotunnel.com
+        hosts:
+          - host: &host "minio.${discord_cool_domain}"
+            paths:
+              - path: "/"
+        tls:
+          - hosts:
+              - ${chat_domain}
+              - "*.${chat_domain}"
+            secretName: ${chat_domain}-tls
+
+    nodeSelector:
+      longhorn: primary
+
+    resources:
+      requests:
+        cpu: 10m
+      limits:
+        memory: 256Mi

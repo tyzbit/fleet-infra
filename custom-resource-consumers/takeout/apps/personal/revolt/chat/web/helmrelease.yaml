@@ -1,0 +1,46 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: revolt-${chat_name}-chat-web
+  namespace: flux-system
+spec:
+  releaseName: revolt-${chat_name}-chat-web
+  targetNamespace: revolt-${chat_name}-chat
+  chart:
+    spec:
+      chart: app-template
+      version: "1.5.1"
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s-helm-charts
+        namespace: flux-system
+  interval: 2m0s
+  values:
+    image:
+      repository: ghcr.io/revoltchat/client
+      tag: 20230615-1
+
+    envFrom:
+      - secretRef:
+          name: revolt-${chat_name}-chat-env
+
+    podAnnotations:
+      reloader.stakater.com/auto: "true"
+
+    service:
+      main:
+        enabled: true
+        type: ClusterIP
+        ports:
+          http:
+            enabled: true
+            port: 5000
+
+    nodeSelector:
+      longhorn: primary
+
+    resources:
+      requests:
+        cpu: 10m
+      limits:
+        memory: 256Mi
