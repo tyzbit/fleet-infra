@@ -1,10 +1,10 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: revolt-${chat_name}-mongo
+  name: revolt-${chat_name}-chat-mongo
   namespace: flux-system
 spec:
-  releaseName: revolt-${chat_name}-mongo
+  releaseName: revolt-${chat_name}-chat-mongo
   targetNamespace: revolt-${chat_name}-chat
   chart:
     spec:
