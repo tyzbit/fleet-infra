@@ -41,8 +41,7 @@ spec:
             migrated=$(mongosh -u $(MONGO_INITDB_ROOT_USERNAME) -p $(MONGO_INITDB_ROOT_PASSWORD) <<EOF
               use revolt
               db.getCollection('user_settings')
-              EOF
-            )
+              EOF)
             while ! migrated; do
               echo 'Waiting for Revolt to migrate MongoDB...' && sleep 0.1
             done && \
