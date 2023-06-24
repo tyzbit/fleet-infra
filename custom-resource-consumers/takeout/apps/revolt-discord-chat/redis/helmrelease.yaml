@@ -38,8 +38,7 @@ spec:
           http:
             enabled: false
           redis:
-            port:
-            nodePort: 6379
+            port: 6379
 
     nodeSelector:
       longhorn: primary
