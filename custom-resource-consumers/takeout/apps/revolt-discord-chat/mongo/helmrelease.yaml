@@ -34,12 +34,15 @@ spec:
         image: mongo:6.0.6
         command: ["mongosh"]
         args:
-          - |
-            use revolt
-            db.invites.insertOne({ _id: "${revolt_chat_invite}" })
+          - --file
+          - /create-invite.js
         envFrom:
           - secretRef:
               name: revolt-${chat_name}-chat-env
+        volumeMounts:
+          - name: create-invite
+            subPath: create-invite.js
+            mountPath: /create-invite.js
         resources:
           requests:
             cpu: 10m
@@ -47,6 +50,14 @@ spec:
             memory: 64Mi
 
     persistence:
+      create-invite:
+        enabled: true
+        type: configmap
+        configMap: revolt-${chat_name}-chat-mongo-create-invite
+        mountPath: /create-invite.js
+        subPath: create-invite.js
+        readOnly: true
+        defaultMode: 0755
       data:
         enabled: true
         existingClaim: revolt-${chat_name}-chat-mongo-longhorn-database

@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: revolt-${chat_name}-chat-mongo-create-invite
+  namespace: revolt-${chat_name}-chat
+data:
+  create-invite.js: |
+    use revolt
+    db.invites.insertOne({ _id: "${revolt_chat_invite}" })
