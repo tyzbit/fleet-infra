@@ -28,14 +28,17 @@ spec:
       type: statefulset
       replicas: 1 # active longhorn
 
-    initContainers:
+    additionalContainers:
       invite:
         name: revolt-${chat_name}-chat-invite
         image: mongo:6.0.6
-        command: ["mongosh"]
+        command: ["sh", "-c"]
         args:
-          - --file
-          - /create-invite.js
+          - |
+            while ! mongosh --file /create-invite.js; do
+              echo 'Waiting for mongo to be ready...' && sleep 0.1
+            done
+            exit 0
         envFrom:
           - secretRef:
               name: revolt-${chat_name}-chat-mongodb
