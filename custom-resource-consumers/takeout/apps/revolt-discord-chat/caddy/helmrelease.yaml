@@ -44,7 +44,7 @@ spec:
             mountPath: /data
           - path: config
             mountPath: /config
-        existingClaim: revolt-${chat_name}-chat-caddy-longhorn-database
+        existingClaim: revolt-${chat_name}-chat-caddy-longhorn-webapp
 
     podAnnotations:
       reloader.stakater.com/auto: "true"
