@@ -17,8 +17,8 @@ spec:
   interval: 2m0s
   values:
     image:
-      repository: mongo
-      tag: 7.0.0
+      repository: caddy
+      tag: 2.7
 
     envFrom:
       - secretRef:
