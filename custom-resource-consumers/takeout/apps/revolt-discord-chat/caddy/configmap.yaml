@@ -5,7 +5,7 @@ metadata:
   namespace: revolt-${chat_name}-chat
 data:
   Caddyfile: |
-    {$HOSTNAME} {
+    http://{$HOSTNAME} {
       route /api* {
         uri strip_prefix /api
         reverse_proxy http://revolt-${earthlings_name}-chat-api:8000

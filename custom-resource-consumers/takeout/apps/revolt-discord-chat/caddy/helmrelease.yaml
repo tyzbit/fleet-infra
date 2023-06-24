@@ -56,7 +56,6 @@ spec:
         ports:
           http:
             enabled: true
-            port: 443
 
     ingress:
       main:
