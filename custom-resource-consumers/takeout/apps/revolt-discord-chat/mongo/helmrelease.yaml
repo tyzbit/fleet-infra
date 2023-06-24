@@ -38,7 +38,7 @@ spec:
           - /create-invite.js
         envFrom:
           - secretRef:
-              name: revolt-${chat_name}-chat-env
+              name: revolt-${chat_name}-chat-mongodb
         volumeMounts:
           - name: create-invite
             subPath: create-invite.js
