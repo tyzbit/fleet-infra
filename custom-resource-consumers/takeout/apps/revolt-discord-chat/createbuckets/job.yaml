@@ -26,6 +26,7 @@ spec:
           envFrom:
             - secretRef:
                 name: revolt-${chat_name}-chat-env
+          restartPolicy: Never
           resources:
             requests:
               cpu: 10m
