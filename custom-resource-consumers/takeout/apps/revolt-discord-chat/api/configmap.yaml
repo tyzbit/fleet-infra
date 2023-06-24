@@ -7,6 +7,7 @@ data:
   create-invite.js: |
     use revolt
     db.invites.insertOne({ _id: "${revolt_chat_invite}" })
+  # user_settings is the last schema to be created as of 2023-06-24
   test-connection.js: |
     use revolt
     db.getCollection('user_settings')
