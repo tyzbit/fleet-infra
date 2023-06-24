@@ -49,10 +49,9 @@ spec:
         type: ClusterIP
         ports:
           http:
-            enabled: false
-          minio:
+            enabled: true
             port: 9001
-          minio-ui:
+          minio:
             port: 9000
 
     ingress:
