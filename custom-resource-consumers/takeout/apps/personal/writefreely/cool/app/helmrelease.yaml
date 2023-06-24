@@ -24,6 +24,7 @@ spec:
       - -c
       - |
         /go/cmd/writefreely/writefreely -c /config/config.ini db init && \
+        /go/cmd/writefreely/writefreely -c /config/config.ini user add --admin "$${discord_cool_admin_username}:$${discord_cool_admin_password}"
         cmd/writefreely/writefreely -c /config/config.ini
 
     controller:
@@ -44,7 +45,6 @@ spec:
           - |
             /go/cmd/writefreely/writefreely config gen && \
             /go/cmd/writefreely/writefreely keys gen && \
-            /go/cmd/writefreely/writefreely user add --admin "$${discord_cool_admin_username}:$${discord_cool_admin_password}" && \
             for folder in templates static pages keys; do
               cp -an /go/$${folder}/* /config/$${folder}/
             done
