@@ -31,10 +31,6 @@ spec:
       - secretRef:
           name: revolt-${chat_name}-chat-env
 
-    controller:
-      type: statefulset
-      replicas: 1 # active longhorn
-
     podAnnotations:
       reloader.stakater.com/auto: "true"
 
