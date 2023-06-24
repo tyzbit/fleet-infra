@@ -35,9 +35,10 @@ spec:
         command: ["sh", "-c"]
         args:
           - |
-            while ! mongosh -u $(MONGO_INITDB_ROOT_USERNAME) -p $(MONGO_INITDB_ROOT_PASSWORD) < /create-invite.js; do
+            while ! mongosh -u $(MONGO_INITDB_ROOT_USERNAME) -p $(MONGO_INITDB_ROOT_PASSWORD) --eval 'ping: 1'; do
               echo 'Waiting for mongo to be ready...' && sleep 0.1
-            done
+            done && \
+            mongosh -u $(MONGO_INITDB_ROOT_USERNAME) -p $(MONGO_INITDB_ROOT_PASSWORD) < /create-invite.js && \
             sleep infinity
         envFrom:
           - secretRef:
