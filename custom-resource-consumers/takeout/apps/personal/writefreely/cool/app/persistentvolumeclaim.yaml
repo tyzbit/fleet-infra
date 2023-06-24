@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: writefreely-${discord_cool_name}-longhorn-webapp
+  namespace: personal
+spec:
+  accessModes:
+    - ReadWriteOnce
+  volumeMode: Filesystem
+  storageClassName: longhorn-webapp
+  resources:
+    requests:
+      storage: 20Gi
