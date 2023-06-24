@@ -52,7 +52,7 @@ spec:
     persistence:
       create-invite:
         enabled: true
-        type: configmap
+        type: configMap
         configMap: revolt-${chat_name}-chat-mongo-create-invite
         mountPath: /create-invite.js
         subPath: create-invite.js
