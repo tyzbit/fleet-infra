@@ -68,6 +68,14 @@ spec:
         subPath: create-invite.js
         readOnly: true
         defaultMode: 0755
+      test-connection:
+        enabled: true
+        name: revolt-${chat_name}-chat-mongo-create-invite
+        type: configMap
+        mountPath: /test-connection.js
+        subPath: test-connection.js
+        readOnly: true
+        defaultMode: 0755
 
     podAnnotations:
       reloader.stakater.com/auto: "true"
