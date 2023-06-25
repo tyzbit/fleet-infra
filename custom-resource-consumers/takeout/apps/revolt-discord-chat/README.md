@@ -68,7 +68,7 @@ stringData:
   AUTUMN_S3_ENDPOINT: http://revolt-chat-minio:9000
   MINIO_ROOT_USER: revolt${chat_name}minio
   MINIO_ROOT_PASSWORD: password
-  VOSO_PUBLIC_URL: https://${chat_domain}
+  VOSO_PUBLIC_URL: wss://${chat_domain}/voice
   VOSO_MANAGE_TOKEN: generate-a-secure-token-like-maybe-a-uuid
   AUTUMN_MONGO_URI: mongodb://${chat_name}_chat:password@revolt-${chat_name}-chat-mongo"
   WS_URL: wss://${chat_domain}/voice
