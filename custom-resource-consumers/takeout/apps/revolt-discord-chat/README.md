@@ -77,7 +77,7 @@ stringData:
   AUTUMN_MONGO_URI: mongodb://${chat_name}_chat:password@revolt-${chat_name}-chat-mongo"
   WS_URL: wss://${chat_domain}/voice
   VOSO_WS_HOST: wss://${chat_domain}/voice
-  RTC_IPS: your-public-ip-here
+  RTC_IPS: 0.0.0.0,your-public-ip-here
   RTC_MIN_PORT: "10000"
   RTC_MAX_PORT: "11000"
 ```
