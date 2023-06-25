@@ -1,5 +1,9 @@
 ## Additional steps to deploy Revolt
 
+### Cloudflare
+
+If you use CloudFlare, Bot Fight Mode must be turned off in order for voice to work.
+
 ### Set up hCAPTCHA
 
 Create a free account on hCaptcha and save the sitekey and key
