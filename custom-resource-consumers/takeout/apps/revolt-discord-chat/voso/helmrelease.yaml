@@ -6,9 +6,6 @@ metadata:
 spec:
   releaseName: revolt-${chat_name}-chat-voso
   targetNamespace: revolt-${chat_name}-chat
-  dependsOn:
-    - name: revolt-${chat_name}-chat-caddy
-      namespace: flux-system
   chart:
     spec:
       chart: app-template

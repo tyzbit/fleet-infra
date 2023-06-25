@@ -9,8 +9,6 @@ spec:
   dependsOn:
     - name: revolt-${chat_name}-chat-mongodb
       namespace: flux-system
-    - name: revolt-${chat_name}-chat-caddy
-      namespace: flux-system
   chart:
     spec:
       chart: app-template
