@@ -46,13 +46,13 @@ type: Opaque
 stringData:
   MONGODB: mongodb://${chat_name}_chat:password@revolt-${chat_name}-chat-mongodb
   REDIS_URI: redis://revolt-${chat_name}-chat-redis/
-  HOSTNAME: http://${chat_name}.chat # http:// makes caddy only listen on 80 so it plays nice with ingresses
-  REVOLT_APP_URL: https://${chat_name}.chat
-  REVOLT_PUBLIC_URL: https://${chat_name}.chat/api
-  VITE_API_URL: https://${chat_name}.chat/api
-  REVOLT_EXTERNAL_WS_URL: ws://${chat_name}.chat/ws
-  AUTUMN_PUBLIC_URL: http://${chat_name}.chat/autumn
-  JANUARY_PUBLIC_URL: http://${chat_name}.chat/january
+  HOSTNAME: http://${chat_domain} # http:// makes caddy only listen on 80 so it plays nice with ingresses
+  REVOLT_APP_URL: https://${chat_domain}
+  REVOLT_PUBLIC_URL: https://${chat_domain}/api
+  VITE_API_URL: https://${chat_domain}/api
+  REVOLT_EXTERNAL_WS_URL: ws://${chat_domain}/ws
+  AUTUMN_PUBLIC_URL: http://${chat_domain}/autumn
+  JANUARY_PUBLIC_URL: http://${chat_domain}/january
   REVOLT_UNSAFE_NO_CAPTCHA: "0"
   REVOLT_HCAPTCHA_KEY: 0x12345
   REVOLT_HCAPTCHA_SITEKEY: your-site-key-here
@@ -60,7 +60,7 @@ stringData:
   REVOLT_SMTP_HOST: email-smtp.us-east-1.amazonaws.com
   REVOLT_SMTP_USERNAME: SMTP_USERNAME_HERE
   REVOLT_SMTP_PASSWORD: SMTP_PASSWORD_HERE
-  REVOLT_SMTP_FROM: Revolt <noreply@${chat_name}.chat>
+  REVOLT_SMTP_FROM: Revolt <noreply@${chat_domain}>
   REVOLT_INVITE_ONLY: "1"
   REVOLT_MAX_GROUP_SIZE: "1000"
   REVOLT_VAPID_PRIVATE_KEY: See steps below
@@ -68,7 +68,11 @@ stringData:
   AUTUMN_S3_ENDPOINT: http://revolt-chat-minio:9000
   MINIO_ROOT_USER: revolt${chat_name}minio
   MINIO_ROOT_PASSWORD: password
+  VOSO_PUBLIC_URL: https://${chat_domain}
+  VOSO_MANAGE_TOKEN: generate-a-secure-token-like-maybe-a-uuid
   AUTUMN_MONGO_URI: mongodb://${chat_name}_chat:password@revolt-${chat_name}-chat-mongo"
+  WS_URL: wss://${chat_domain}/voice
+  VOSO_WS_HOST: wss://${chat_domain}/voice
 ```
 
 ```yaml
