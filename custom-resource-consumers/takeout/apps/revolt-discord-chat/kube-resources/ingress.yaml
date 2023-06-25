@@ -37,6 +37,8 @@ spec:
             backend:
               service:
                 name: revolt-${chat_name}-chat-events
+                port:
+                  number: 9000
           - pathType: Prefix
             path: "/voice(/|$)(.*)"
             backend:
