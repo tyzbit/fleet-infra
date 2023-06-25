@@ -60,13 +60,6 @@ spec:
                 name: revolt-${chat_name}-chat-january
                 port:
                   number: 7000
-          - pathType: Prefix
-            path: "/"
-            backend:
-              service:
-                name: revolt-${chat_name}-chat-web
-                port:
-                  number: 5000
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -94,7 +87,7 @@ spec:
       http:
         paths:
           - pathType: Prefix
-            path: "/"
+            path: /
             backend:
               service:
                 name: revolt-${chat_name}-chat-web
