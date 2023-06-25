@@ -61,7 +61,7 @@ spec:
                 port:
                   number: 7000
           - pathType: Prefix
-            path: (/)(.*)
+            path: "(/)(.*)"
             backend:
               service:
                 name: revolt-${chat_name}-chat-web
