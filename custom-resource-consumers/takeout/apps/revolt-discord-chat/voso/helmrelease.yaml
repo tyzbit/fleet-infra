@@ -38,606 +38,146 @@ spec:
             enabled: true
             port: 8080
           # I wish I didn't have to do this
-          voice-10000-tcp: &port0
+          voice-10000-tcp:
             enabled: true
             port: 10000
           voice-10000-udp:
-            !!merge <<: *port0
+            enabled: true
+            port: 10000
             protocol: UDP
-          voice-10001-tcp: &port1
+          voice-10001-tcp:
             enabled: true
             port: 10001
           voice-10001-udp:
-            !!merge <<: *port1
+            enabled: true
+            port: 10001
             protocol: UDP
-          voice-10002-tcp: &port2
+          voice-10002-tcp:
             enabled: true
             port: 10002
           voice-10002-udp:
-            !!merge <<: *port2
+            enabled: true
+            port: 10002
             protocol: UDP
-          voice-10003-tcp: &port3
+          voice-10003-tcp:
             enabled: true
             port: 10003
           voice-10003-udp:
-            !!merge <<: *port3
+            enabled: true
+            port: 10003
             protocol: UDP
-          voice-10004-tcp: &port4
+          voice-10004-tcp:
             enabled: true
             port: 10004
           voice-10004-udp:
-            !!merge <<: *port4
+            enabled: true
+            port: 10004
             protocol: UDP
-          voice-10005-tcp: &port5
+          voice-10005-tcp:
             enabled: true
             port: 10005
           voice-10005-udp:
-            !!merge <<: *port5
+            enabled: true
+            port: 10005
             protocol: UDP
-          voice-10006-tcp: &port6
+          voice-10006-tcp:
             enabled: true
             port: 10006
           voice-10006-udp:
-            !!merge <<: *port6
+            enabled: true
+            port: 10006
             protocol: UDP
-          voice-10007-tcp: &port7
+          voice-10007-tcp:
             enabled: true
             port: 10007
           voice-10007-udp:
-            !!merge <<: *port7
+            enabled: true
+            port: 10007
             protocol: UDP
-          voice-10008-tcp: &port8
+          voice-10008-tcp:
             enabled: true
             port: 10008
           voice-10008-udp:
-            !!merge <<: *port8
+            enabled: true
+            port: 10008
             protocol: UDP
-          voice-10009-tcp: &port9
+          voice-10009-tcp:
             enabled: true
             port: 10009
           voice-10009-udp:
-            !!merge <<: *port9
+            enabled: true
+            port: 10009
             protocol: UDP
-          voice-10010-tcp: &port10
+          voice-10010-tcp:
             enabled: true
             port: 10010
           voice-10010-udp:
-            !!merge <<: *port10
+            enabled: true
+            port: 10010
             protocol: UDP
-          voice-10011-tcp: &port11
+          voice-10011-tcp:
             enabled: true
             port: 10011
           voice-10011-udp:
-            !!merge <<: *port11
+            enabled: true
+            port: 10011
             protocol: UDP
-          voice-10012-tcp: &port12
+          voice-10012-tcp:
             enabled: true
             port: 10012
           voice-10012-udp:
-            !!merge <<: *port12
+            enabled: true
+            port: 10012
             protocol: UDP
-          voice-10013-tcp: &port13
+          voice-10013-tcp:
             enabled: true
             port: 10013
           voice-10013-udp:
-            !!merge <<: *port13
+            enabled: true
+            port: 10013
             protocol: UDP
-          voice-10014-tcp: &port14
+          voice-10014-tcp:
             enabled: true
             port: 10014
           voice-10014-udp:
-            !!merge <<: *port14
+            enabled: true
+            port: 10014
             protocol: UDP
-          voice-10015-tcp: &port15
+          voice-10015-tcp:
             enabled: true
             port: 10015
           voice-10015-udp:
-            !!merge <<: *port15
+            enabled: true
+            port: 10015
             protocol: UDP
-          voice-10016-tcp: &port16
+          voice-10016-tcp:
             enabled: true
             port: 10016
           voice-10016-udp:
-            !!merge <<: *port16
+            enabled: true
+            port: 10016
             protocol: UDP
-          voice-10017-tcp: &port17
+          voice-10017-tcp:
             enabled: true
             port: 10017
           voice-10017-udp:
-            !!merge <<: *port17
+            enabled: true
+            port: 10017
             protocol: UDP
-          voice-10018-tcp: &port18
+          voice-10018-tcp:
             enabled: true
             port: 10018
           voice-10018-udp:
-            !!merge <<: *port18
+            enabled: true
+            port: 10018
             protocol: UDP
-          voice-10019-tcp: &port19
+          voice-10019-tcp:
             enabled: true
             port: 10019
           voice-10019-udp:
-            !!merge <<: *port19
+            enabled: true
+            port: 10019
             protocol: UDP
-          # voice-10020-tcp: &port20
-          #   enabled: true
-          #   port: 10020
-          # voice-10020-udp:
-          #   !!merge <<: *port20
-          #   protocol: UDP
-          # voice-10021-tcp: &port21
-          #   enabled: true
-          #   port: 10021
-          # voice-10021-udp:
-          #   !!merge <<: *port21
-          #   protocol: UDP
-          # voice-10022-tcp: &port22
-          #   enabled: true
-          #   port: 10022
-          # voice-10022-udp:
-          #   !!merge <<: *port22
-          #   protocol: UDP
-          # voice-10023-tcp: &port23
-          #   enabled: true
-          #   port: 10023
-          # voice-10023-udp:
-          #   !!merge <<: *port23
-          #   protocol: UDP
-          # voice-10024-tcp: &port24
-          #   enabled: true
-          #   port: 10024
-          # voice-10024-udp:
-          #   !!merge <<: *port24
-          #   protocol: UDP
-          # voice-10025-tcp: &port25
-          #   enabled: true
-          #   port: 10025
-          # voice-10025-udp:
-          #   !!merge <<: *port25
-          #   protocol: UDP
-          # voice-10026-tcp: &port26
-          #   enabled: true
-          #   port: 10026
-          # voice-10026-udp:
-          #   !!merge <<: *port26
-          #   protocol: UDP
-          # voice-10027-tcp: &port27
-          #   enabled: true
-          #   port: 10027
-          # voice-10027-udp:
-          #   !!merge <<: *port27
-          #   protocol: UDP
-          # voice-10028-tcp: &port28
-          #   enabled: true
-          #   port: 10028
-          # voice-10028-udp:
-          #   !!merge <<: *port28
-          #   protocol: UDP
-          # voice-10029-tcp: &port29
-          #   enabled: true
-          #   port: 10029
-          # voice-10029-udp:
-          #   !!merge <<: *port29
-          #   protocol: UDP
-          # voice-10030-tcp: &port30
-          #   enabled: true
-          #   port: 10030
-          # voice-10030-udp:
-          #   !!merge <<: *port30
-          #   protocol: UDP
-          # voice-10031-tcp: &port31
-          #   enabled: true
-          #   port: 10031
-          # voice-10031-udp:
-          #   !!merge <<: *port31
-          #   protocol: UDP
-          # voice-10032-tcp: &port32
-          #   enabled: true
-          #   port: 10032
-          # voice-10032-udp:
-          #   !!merge <<: *port32
-          #   protocol: UDP
-          # voice-10033-tcp: &port33
-          #   enabled: true
-          #   port: 10033
-          # voice-10033-udp:
-          #   !!merge <<: *port33
-          #   protocol: UDP
-          # voice-10034-tcp: &port34
-          #   enabled: true
-          #   port: 10034
-          # voice-10034-udp:
-          #   !!merge <<: *port34
-          #   protocol: UDP
-          # voice-10035-tcp: &port35
-          #   enabled: true
-          #   port: 10035
-          # voice-10035-udp:
-          #   !!merge <<: *port35
-          #   protocol: UDP
-          # voice-10036-tcp: &port36
-          #   enabled: true
-          #   port: 10036
-          # voice-10036-udp:
-          #   !!merge <<: *port36
-          #   protocol: UDP
-          # voice-10037-tcp: &port37
-          #   enabled: true
-          #   port: 10037
-          # voice-10037-udp:
-          #   !!merge <<: *port37
-          #   protocol: UDP
-          # voice-10038-tcp: &port38
-          #   enabled: true
-          #   port: 10038
-          # voice-10038-udp:
-          #   !!merge <<: *port38
-          #   protocol: UDP
-          # voice-10039-tcp: &port39
-          #   enabled: true
-          #   port: 10039
-          # voice-10039-udp:
-          #   !!merge <<: *port39
-          #   protocol: UDP
-          # voice-10040-tcp: &port40
-          #   enabled: true
-          #   port: 10040
-          # voice-10040-udp:
-          #   !!merge <<: *port40
-          #   protocol: UDP
-          # voice-10041-tcp: &port41
-          #   enabled: true
-          #   port: 10041
-          # voice-10041-udp:
-          #   !!merge <<: *port41
-          #   protocol: UDP
-          # voice-10042-tcp: &port42
-          #   enabled: true
-          #   port: 10042
-          # voice-10042-udp:
-          #   !!merge <<: *port42
-          #   protocol: UDP
-          # voice-10043-tcp: &port43
-          #   enabled: true
-          #   port: 10043
-          # voice-10043-udp:
-          #   !!merge <<: *port43
-          #   protocol: UDP
-          # voice-10044-tcp: &port44
-          #   enabled: true
-          #   port: 10044
-          # voice-10044-udp:
-          #   !!merge <<: *port44
-          #   protocol: UDP
-          # voice-10045-tcp: &port45
-          #   enabled: true
-          #   port: 10045
-          # voice-10045-udp:
-          #   !!merge <<: *port45
-          #   protocol: UDP
-          # voice-10046-tcp: &port46
-          #   enabled: true
-          #   port: 10046
-          # voice-10046-udp:
-          #   !!merge <<: *port46
-          #   protocol: UDP
-          # voice-10047-tcp: &port47
-          #   enabled: true
-          #   port: 10047
-          # voice-10047-udp:
-          #   !!merge <<: *port47
-          #   protocol: UDP
-          # voice-10048-tcp: &port48
-          #   enabled: true
-          #   port: 10048
-          # voice-10048-udp:
-          #   !!merge <<: *port48
-          #   protocol: UDP
-          # voice-10049-tcp: &port49
-          #   enabled: true
-          #   port: 10049
-          # voice-10049-udp:
-          #   !!merge <<: *port49
-          #   protocol: UDP
-          # voice-10050-tcp: &port50
-          #   enabled: true
-          #   port: 10050
-          # voice-10050-udp:
-          #   !!merge <<: *port50
-          #   protocol: UDP
-          # voice-10051-tcp: &port51
-          #   enabled: true
-          #   port: 10051
-          # voice-10051-udp:
-          #   !!merge <<: *port51
-          #   protocol: UDP
-          # voice-10052-tcp: &port52
-          #   enabled: true
-          #   port: 10052
-          # voice-10052-udp:
-          #   !!merge <<: *port52
-          #   protocol: UDP
-          # voice-10053-tcp: &port53
-          #   enabled: true
-          #   port: 10053
-          # voice-10053-udp:
-          #   !!merge <<: *port53
-          #   protocol: UDP
-          # voice-10054-tcp: &port54
-          #   enabled: true
-          #   port: 10054
-          # voice-10054-udp:
-          #   !!merge <<: *port54
-          #   protocol: UDP
-          # voice-10055-tcp: &port55
-          #   enabled: true
-          #   port: 10055
-          # voice-10055-udp:
-          #   !!merge <<: *port55
-          #   protocol: UDP
-          # voice-10056-tcp: &port56
-          #   enabled: true
-          #   port: 10056
-          # voice-10056-udp:
-          #   !!merge <<: *port56
-          #   protocol: UDP
-          # voice-10057-tcp: &port57
-          #   enabled: true
-          #   port: 10057
-          # voice-10057-udp:
-          #   !!merge <<: *port57
-          #   protocol: UDP
-          # voice-10058-tcp: &port58
-          #   enabled: true
-          #   port: 10058
-          # voice-10058-udp:
-          #   !!merge <<: *port58
-          #   protocol: UDP
-          # voice-10059-tcp: &port59
-          #   enabled: true
-          #   port: 10059
-          # voice-10059-udp:
-          #   !!merge <<: *port59
-          #   protocol: UDP
-          # voice-10060-tcp: &port60
-          #   enabled: true
-          #   port: 10060
-          # voice-10060-udp:
-          #   !!merge <<: *port60
-          #   protocol: UDP
-          # voice-10061-tcp: &port61
-          #   enabled: true
-          #   port: 10061
-          # voice-10061-udp:
-          #   !!merge <<: *port61
-          #   protocol: UDP
-          # voice-10062-tcp: &port62
-          #   enabled: true
-          #   port: 10062
-          # voice-10062-udp:
-          #   !!merge <<: *port62
-          #   protocol: UDP
-          # voice-10063-tcp: &port63
-          #   enabled: true
-          #   port: 10063
-          # voice-10063-udp:
-          #   !!merge <<: *port63
-          #   protocol: UDP
-          # voice-10064-tcp: &port64
-          #   enabled: true
-          #   port: 10064
-          # voice-10064-udp:
-          #   !!merge <<: *port64
-          #   protocol: UDP
-          # voice-10065-tcp: &port65
-          #   enabled: true
-          #   port: 10065
-          # voice-10065-udp:
-          #   !!merge <<: *port65
-          #   protocol: UDP
-          # voice-10066-tcp: &port66
-          #   enabled: true
-          #   port: 10066
-          # voice-10066-udp:
-          #   !!merge <<: *port66
-          #   protocol: UDP
-          # voice-10067-tcp: &port67
-          #   enabled: true
-          #   port: 10067
-          # voice-10067-udp:
-          #   !!merge <<: *port67
-          #   protocol: UDP
-          # voice-10068-tcp: &port68
-          #   enabled: true
-          #   port: 10068
-          # voice-10068-udp:
-          #   !!merge <<: *port68
-          #   protocol: UDP
-          # voice-10069-tcp: &port69
-          #   enabled: true
-          #   port: 10069
-          # voice-10069-udp:
-          #   !!merge <<: *port69
-          #   protocol: UDP
-          # voice-10070-tcp: &port70
-          #   enabled: true
-          #   port: 10070
-          # voice-10070-udp:
-          #   !!merge <<: *port70
-          #   protocol: UDP
-          # voice-10071-tcp: &port71
-          #   enabled: true
-          #   port: 10071
-          # voice-10071-udp:
-          #   !!merge <<: *port71
-          #   protocol: UDP
-          # voice-10072-tcp: &port72
-          #   enabled: true
-          #   port: 10072
-          # voice-10072-udp:
-          #   !!merge <<: *port72
-          #   protocol: UDP
-          # voice-10073-tcp: &port73
-          #   enabled: true
-          #   port: 10073
-          # voice-10073-udp:
-          #   !!merge <<: *port73
-          #   protocol: UDP
-          # voice-10074-tcp: &port74
-          #   enabled: true
-          #   port: 10074
-          # voice-10074-udp:
-          #   !!merge <<: *port74
-          #   protocol: UDP
-          # voice-10075-tcp: &port75
-          #   enabled: true
-          #   port: 10075
-          # voice-10075-udp:
-          #   !!merge <<: *port75
-          #   protocol: UDP
-          # voice-10076-tcp: &port76
-          #   enabled: true
-          #   port: 10076
-          # voice-10076-udp:
-          #   !!merge <<: *port76
-          #   protocol: UDP
-          # voice-10077-tcp: &port77
-          #   enabled: true
-          #   port: 10077
-          # voice-10077-udp:
-          #   !!merge <<: *port77
-          #   protocol: UDP
-          # voice-10078-tcp: &port78
-          #   enabled: true
-          #   port: 10078
-          # voice-10078-udp:
-          #   !!merge <<: *port78
-          #   protocol: UDP
-          # voice-10079-tcp: &port79
-          #   enabled: true
-          #   port: 10079
-          # voice-10079-udp:
-          #   !!merge <<: *port79
-          #   protocol: UDP
-          # voice-10080-tcp: &port80
-          #   enabled: true
-          #   port: 10080
-          # voice-10080-udp:
-          #   !!merge <<: *port80
-          #   protocol: UDP
-          # voice-10081-tcp: &port81
-          #   enabled: true
-          #   port: 10081
-          # voice-10081-udp:
-          #   !!merge <<: *port81
-          #   protocol: UDP
-          # voice-10082-tcp: &port82
-          #   enabled: true
-          #   port: 10082
-          # voice-10082-udp:
-          #   !!merge <<: *port82
-          #   protocol: UDP
-          # voice-10083-tcp: &port83
-          #   enabled: true
-          #   port: 10083
-          # voice-10083-udp:
-          #   !!merge <<: *port83
-          #   protocol: UDP
-          # voice-10084-tcp: &port84
-          #   enabled: true
-          #   port: 10084
-          # voice-10084-udp:
-          #   !!merge <<: *port84
-          #   protocol: UDP
-          # voice-10085-tcp: &port85
-          #   enabled: true
-          #   port: 10085
-          # voice-10085-udp:
-          #   !!merge <<: *port85
-          #   protocol: UDP
-          # voice-10086-tcp: &port86
-          #   enabled: true
-          #   port: 10086
-          # voice-10086-udp:
-          #   !!merge <<: *port86
-          #   protocol: UDP
-          # voice-10087-tcp: &port87
-          #   enabled: true
-          #   port: 10087
-          # voice-10087-udp:
-          #   !!merge <<: *port87
-          #   protocol: UDP
-          # voice-10088-tcp: &port88
-          #   enabled: true
-          #   port: 10088
-          # voice-10088-udp:
-          #   !!merge <<: *port88
-          #   protocol: UDP
-          # voice-10089-tcp: &port89
-          #   enabled: true
-          #   port: 10089
-          # voice-10089-udp:
-          #   !!merge <<: *port89
-          #   protocol: UDP
-          # voice-10090-tcp: &port90
-          #   enabled: true
-          #   port: 10090
-          # voice-10090-udp:
-          #   !!merge <<: *port90
-          #   protocol: UDP
-          # voice-10091-tcp: &port91
-          #   enabled: true
-          #   port: 10091
-          # voice-10091-udp:
-          #   !!merge <<: *port91
-          #   protocol: UDP
-          # voice-10092-tcp: &port92
-          #   enabled: true
-          #   port: 10092
-          # voice-10092-udp:
-          #   !!merge <<: *port92
-          #   protocol: UDP
-          # voice-10093-tcp: &port93
-          #   enabled: true
-          #   port: 10093
-          # voice-10093-udp:
-          #   !!merge <<: *port93
-          #   protocol: UDP
-          # voice-10094-tcp: &port94
-          #   enabled: true
-          #   port: 10094
-          # voice-10094-udp:
-          #   !!merge <<: *port94
-          #   protocol: UDP
-          # voice-10095-tcp: &port95
-          #   enabled: true
-          #   port: 10095
-          # voice-10095-udp:
-          #   !!merge <<: *port95
-          #   protocol: UDP
-          # voice-10096-tcp: &port96
-          #   enabled: true
-          #   port: 10096
-          # voice-10096-udp:
-          #   !!merge <<: *port96
-          #   protocol: UDP
-          # voice-10097-tcp: &port97
-          #   enabled: true
-          #   port: 10097
-          # voice-10097-udp:
-          #   !!merge <<: *port97
-          #   protocol: UDP
-          # voice-10098-tcp: &port98
-          #   enabled: true
-          #   port: 10098
-          # voice-10098-udp:
-          #   !!merge <<: *port98
-          #   protocol: UDP
-          # voice-10099-tcp: &port99
-          #   enabled: true
-          #   port: 10099
-          # voice-10099-udp:
-          #   !!merge <<: *port99
-          #   protocol: UDP
 
     nodeSelector:
       longhorn: primary
