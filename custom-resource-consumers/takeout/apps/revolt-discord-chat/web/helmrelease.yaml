@@ -18,7 +18,10 @@ spec:
   values:
     image:
       repository: ghcr.io/revoltchat/client
-      tag: 1.0.1
+      # switch back to versioned images once a new one is cut
+      # 1.0.1 was released Jun 21, 2022
+      # tag: 1.0.1
+      tag: master
 
     envFrom:
       - secretRef:
