@@ -21,8 +21,9 @@ spec:
     controller:
       service:
         type: ClusterIP
-      metrics:
-        service:
-          annotations:
-            prometheus.io/scrape: "true"
-            prometheus.io/port: "10254"
+      replicaCount: 3
+      # metrics:
+      #   service:
+      #     annotations:
+      #       prometheus.io/scrape: "true"
+      #       prometheus.io/port: "10254"
