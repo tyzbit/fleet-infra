@@ -34,9 +34,17 @@ spec:
       TZ: America/New_York
 
     persistence:
+      dbus: # needed for Bluetooth
+        enabled: true
+        type: hostPath
+        hostPath: &dri /run/dbus
+        mountPath: *dri
       config:
         enabled: true
         existingClaim: home-assistant-config-nas
+
+    nodeSelector:
+      bluetooth: "true"
 
     additionalContainers:
       filebrowser:
