@@ -37,8 +37,8 @@ spec:
       dbus: # needed for Bluetooth
         enabled: true
         type: hostPath
-        hostPath: &dri /run/dbus
-        mountPath: *dri
+        hostPath: &dbus /run/dbus
+        mountPath: *dbus
       config:
         enabled: true
         existingClaim: home-assistant-config-nas
