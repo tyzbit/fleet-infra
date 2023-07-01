@@ -18,7 +18,7 @@ spec:
   values:
     image:
       repository: mongo
-      tag: 6.0.6
+      tag: 6.0.7
 
     envFrom:
       - secretRef:
