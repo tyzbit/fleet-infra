@@ -11,3 +11,17 @@ spec:
   resources:
     requests:
       storage: 50Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: revolt-${chat_name}-chat-minio-objectstorage
+  namespace: revolt-${chat_name}-chat
+spec:
+  accessModes:
+    - ReadWriteOnce
+  volumeMode: Filesystem
+  storageClassName: longhorn-objectstorage
+  resources:
+    requests:
+      storage: 50Gi

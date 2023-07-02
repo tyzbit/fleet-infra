@@ -1,8 +1,8 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: migrate-pv-wordpress-${blog_name}
-  namespace: personal
+  name: migrate-pv
+  namespace: revolt-${chat_name}-chat
 spec:
   backoffLimit: 0
   template:
@@ -36,7 +36,9 @@ spec:
       volumes:
         - name: src
           persistentVolumeClaim:
-            claimName: wordpress-${blog_name}-nas
+            claimName: revolt-${chat_name}-chat-minio-longhorn-static
         - name: dst
           persistentVolumeClaim:
-            claimName: wordpress-${blog_name}-longhorn-blog
+            claimName: revolt-${chat_name}-chat-minio-objectstorage
+      nodeSelector:
+        kubernetes.io/hostname: doorman
