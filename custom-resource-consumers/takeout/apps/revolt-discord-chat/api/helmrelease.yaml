@@ -23,7 +23,7 @@ spec:
   values:
     image:
       repository: ghcr.io/revoltchat/server
-      tag: 20230615-1
+      tag: 20230702-1
 
     envFrom:
       - secretRef:
