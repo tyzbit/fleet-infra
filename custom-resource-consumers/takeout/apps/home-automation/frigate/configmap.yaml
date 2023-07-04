@@ -145,6 +145,10 @@ data:
               roles:
                 - detect
                 - record
+        objects:
+          filters:
+            person:
+              min_score: 0.82
         detect:
           width: 1920
           height: 1080
