@@ -8,10 +8,10 @@ data:
     [server]
     port = 8080
     bind = 0.0.0.0
-    templates_parent_dir = /config/
-    static_parent_dir = /config/
-    pages_parent_dir = /config/
-    keys_parent_dir = /config/
+    templates_parent_dir = /go/
+    static_parent_dir = /go/
+    pages_parent_dir = /go/
+    keys_parent_dir = /go/
 
     [database]
     type = mysql
