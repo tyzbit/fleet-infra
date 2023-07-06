@@ -141,13 +141,13 @@ spec:
           - path: filebrowser-db
             mountPath: /db
           - path: templates
-            mountPath: /config/templates
+            mountPath: /go/templates
           - path: static
-            mountPath: /config/static
+            mountPath: /go/static
           - path: pages
-            mountPath: /config/pages
+            mountPath: /go/pages
           - path: keys
-            mountPath: /config/keys
+            mountPath: /go/keys
         existingClaim: writefreely-${discord_cool_name}-longhorn-webapp
 
     service:
