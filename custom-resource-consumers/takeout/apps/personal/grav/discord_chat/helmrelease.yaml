@@ -64,4 +64,4 @@ spec:
         - secretName: ${chat_domain}-tls
           hosts:
             - ${chat_domain}
-            - "*.${chat_domain}"
+            - "files.${chat_domain}"

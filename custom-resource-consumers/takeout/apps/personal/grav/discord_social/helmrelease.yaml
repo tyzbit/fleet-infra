@@ -64,4 +64,4 @@ spec:
         - secretName: ${social_domain}-tls
           hosts:
             - ${social_domain}
-            - "*.${social_domain}"
+            - "files.${social_domain}"

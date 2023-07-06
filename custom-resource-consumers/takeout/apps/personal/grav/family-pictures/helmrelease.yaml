@@ -64,4 +64,4 @@ spec:
         - secretName: ${family_pictures_domain}-tls
           hosts:
             - ${family_pictures_domain}
-            - "*.${family_pictures_domain}"
+            - "files.${family_pictures_domain}"

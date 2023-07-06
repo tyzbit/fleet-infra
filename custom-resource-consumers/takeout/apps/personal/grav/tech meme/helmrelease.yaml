@@ -64,4 +64,4 @@ spec:
         - secretName: ${tech_domain}-tls
           hosts:
             - ${tech_domain}
-            - "*.${tech_domain}"
+            - "files.${tech_domain}"

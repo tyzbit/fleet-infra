@@ -64,4 +64,4 @@ spec:
         - secretName: ${anime_blog_3_domain}-tls
           hosts:
             - ${anime_blog_3_domain}
-            - "*.${anime_blog_3_domain}"
+            - "files.${anime_blog_3_domain}"
