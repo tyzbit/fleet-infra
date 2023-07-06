@@ -76,16 +76,16 @@ spec:
             mountPath: /db
           - name: folders
             subPath: templates
-            mountPath: /srv/config/templates
+            mountPath: /srv/templates
           - name: folders
             subPath: static
-            mountPath: /srv/config/static
+            mountPath: /srv/static
           - name: folders
             subPath: pages
-            mountPath: /srv/config/pages
+            mountPath: /srv/pages
           - name: folders
             subPath: keys
-            mountPath: /srv/config/keys
+            mountPath: /srv/keys
 
     probes:
       liveness:
