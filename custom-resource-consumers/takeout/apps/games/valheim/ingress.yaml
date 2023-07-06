@@ -16,7 +16,9 @@ spec:
   tls:
     - hosts:
         - "valheim.${blog_domain}"
-        - "*.valheim.${blog_domain}"
+        - "map.valheim.${blog_domain}"
+        - "supervisor.valheim.${blog_domain}"
+        - "files.valheim.${blog_domain}"
       secretName: valheim.${blog_domain}-multi-tls
   rules:
     - host: valheim.${blog_domain}
