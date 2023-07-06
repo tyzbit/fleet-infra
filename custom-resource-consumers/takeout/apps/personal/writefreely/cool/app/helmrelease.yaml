@@ -71,6 +71,9 @@ spec:
           - name: TZ
             value: America/New_York
         volumeMounts:
+          - name: filebrowser-db
+            subPath: filebrowser-db
+            mountPath: /db
           - name: folders
             subPath: templates
             mountPath: /srv/config/templates
@@ -135,6 +138,8 @@ spec:
       folders:
         enabled: true
         subPath:
+          - path: filebrowser-db
+            mountPath: /db
           - path: templates
             mountPath: /config/templates
           - path: static
