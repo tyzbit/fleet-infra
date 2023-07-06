@@ -71,7 +71,7 @@ spec:
           - name: TZ
             value: America/New_York
         volumeMounts:
-          - name: filebrowser-db
+          - name: folders
             subPath: filebrowser-db
             mountPath: /db
           - name: folders
