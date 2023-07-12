@@ -52,7 +52,7 @@ spec:
     service:
       main:
         enabled: true
-        type: LoadBalancer
+        type: NodePort
         externalTrafficPolicy: Local
         ports:
           http:
