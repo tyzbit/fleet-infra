@@ -52,8 +52,7 @@ spec:
     service:
       main:
         enabled: true
-        type: NodePort
-        externalTrafficPolicy: Local
+        type: ClusterIP
         ports:
           http:
             port: 32400
