@@ -32,7 +32,7 @@ spec:
     additionalContainers:
       invite:
         name: revolt-${chat_name}-chat-invite
-        image: mongo:6.0.7
+        image: mongo:6.0.8
         command: ["sh", "-c"]
         args:
           - |
