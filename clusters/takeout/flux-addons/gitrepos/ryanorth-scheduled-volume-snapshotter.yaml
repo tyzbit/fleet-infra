@@ -6,7 +6,7 @@ metadata:
 spec:
   interval: 2m0s
   ref:
-    tag: v0.13.0
+    tag: v0.14.0
   secretRef:
     name: flux-system
   url: https://github.com/ryaneorth/k8s-scheduled-volume-snapshotter.git
