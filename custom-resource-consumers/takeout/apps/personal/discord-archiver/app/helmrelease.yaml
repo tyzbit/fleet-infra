@@ -18,7 +18,7 @@ spec:
   values:
     image:
       repository: docker.io/tyzbit/go-discord-archiver
-      tag: 2.6.2 # {"$imagepolicy": "flux-system:go-discord-archiver:tag"}
+      tag: 2.7.0 # {"$imagepolicy": "flux-system:go-discord-archiver:tag"}
     envFrom:
       - secretRef:
           name: go-discord-archiver
