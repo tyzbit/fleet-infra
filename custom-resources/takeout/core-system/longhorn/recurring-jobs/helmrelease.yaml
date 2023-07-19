@@ -62,7 +62,7 @@ spec:
             retain: 6
         backup:
           - interval: 12h
-            retain: 2
+            retain: 14
 
       "Gameserver":
         options:
