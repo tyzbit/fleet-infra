@@ -6,7 +6,7 @@ metadata:
 spec:
   resources:
     requests:
-      storage: 650Gi
+      storage: 720Gi
   volumeMode: Filesystem
   storageClassName: longhorn-crypto
   accessModes:
