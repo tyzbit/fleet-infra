@@ -47,7 +47,6 @@ data:
           download_after: "19000101"
 
         video_tags:
-          tags:
             title: "{title}"
             date: "{upload_date}"
             description: |
