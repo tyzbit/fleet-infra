@@ -29,6 +29,7 @@ spec:
 
     env:
       TZ: America/New_York
+      SONARR__AUTHENTICATION_METHOD: External
 
     podSecurityContext:
       fsGroup: 568
