@@ -30,7 +30,7 @@ spec:
       NEKO_PROXY: "true"
       NEKO_TCPMUX: &mux "5100"
       NEKO_UDPMUX: *mux
-      NEKO_ICELITE: "false"
+      NEKO_ICELITE: "true"
 
     controller:
       type: statefulset
