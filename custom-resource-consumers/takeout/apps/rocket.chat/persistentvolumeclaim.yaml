@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: rocketchat-longhorn-objectstorage
+  namespace: rocketchat-${chat_name}-chat
+spec:
+  resources:
+    requests:
+      storage: 10Gi
+  volumeMode: Filesystem
+  storageClassName: longhorn-objectstorage
+  accessModes:
+    - ReadWriteOnce
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mongo-longhorn-database
+  namespace: rocketchat-${chat_name}-chat
+spec:
+  accessModes:
+    - ReadWriteOnce
+  volumeMode: Filesystem
+  storageClassName: longhorn-database
+  resources:
+    requests:
+      storage: 10Gi
