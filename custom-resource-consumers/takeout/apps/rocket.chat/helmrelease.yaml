@@ -19,6 +19,8 @@ spec:
     - kind: Secret
       name: rocketchat-${chat_name}-chat
   values:
+    microservices:
+      enabled: true
     persistence:
       enabled: true
       existingClaim: rocketchat-longhorn-objectstorage
