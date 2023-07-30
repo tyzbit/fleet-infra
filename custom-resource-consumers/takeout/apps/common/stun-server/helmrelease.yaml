@@ -33,3 +33,8 @@ spec:
             port: &port 3478
             targetPort: *port
             protocol: UDP
+    probes:
+      readiness: &disabled
+        enabled: false
+      liveness: *disabled
+      startup: *disabled
