@@ -70,8 +70,8 @@ spec:
               - path: "/"
         tls:
           - hosts:
-              - minio.${chat_domain}
-            secretName: minio.${chat_domain}-tls
+              - minio.revolt.${chat_domain}
+            secretName: minio.revolt.${chat_domain}-tls
 
     nodeSelector:
       longhorn: primary

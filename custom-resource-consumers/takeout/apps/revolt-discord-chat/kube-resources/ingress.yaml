@@ -19,10 +19,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - ${chat_domain}
-      secretName: ${chat_domain}-tls
+        - revolt.${chat_domain}
+      secretName: revolt.${chat_domain}-tls
   rules:
-    - host: ${chat_domain}
+    - host: revolt.${chat_domain}
       http:
         paths:
           - pathType: Prefix
