@@ -173,3 +173,42 @@ data:
           fps: 5
         mqtt:
           height: 540
+
+      backyard:
+        birdseye:
+          order: 6
+        ffmpeg:
+          inputs:
+            # - path: 'rtsp://localhost:8554/backyard'
+            - path: 'rtsp://{FRIGATE_BUNNIES_CREDENTIALS}@bunnies:554/1'
+              roles:
+                - detect
+                - record
+        objects:  
+          track:
+            - cat
+            - dog
+            - horse
+            - sheep
+            - cow
+            - elephant
+            - bear
+            - zebra
+            - giraffe
+          filters:
+            cat: &bunnythreshold
+              threshold: 0.5
+            dog: *bunnythreshold
+            horse: *bunnythreshold
+            sheep: *bunnythreshold
+            cow: *bunnythreshold
+            elephant: *bunnythreshold
+            bear: *bunnythreshold
+            zebra: *bunnythreshold
+            giraffe: *bunnythreshold
+        detect:
+          width: 1920
+          height: 1080
+          fps: 5
+        mqtt:
+          height: 540
