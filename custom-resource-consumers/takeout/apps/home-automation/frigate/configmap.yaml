@@ -174,7 +174,7 @@ data:
         mqtt:
           height: 540
 
-      backyard:
+      bunnies:
         birdseye:
           order: 6
         ffmpeg:
