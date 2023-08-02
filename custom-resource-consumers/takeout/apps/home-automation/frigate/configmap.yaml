@@ -197,7 +197,7 @@ data:
             - giraffe
           filters:
             cat: &bunnythreshold
-              threshold: 0.5
+              threshold: 0.6
             dog: *bunnythreshold
             horse: *bunnythreshold
             sheep: *bunnythreshold
@@ -209,6 +209,6 @@ data:
         detect:
           width: 1920
           height: 1080
-          fps: 5
+          fps: 30
         mqtt:
           height: 540
