@@ -24,12 +24,12 @@ spec:
       http:
         paths:
           - pathType: Prefix
-            path: "/(cameras/bunnies)?"
+            path: "/assets"
             backend: &backend
               service:
                 name: frigate
                 port:
                   number: 80
           - pathType: Prefix
-            path: "/assets"
+            path: "/(cameras/bunnies)?"
             backend: *backend
