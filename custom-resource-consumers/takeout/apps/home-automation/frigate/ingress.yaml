@@ -29,4 +29,4 @@ spec:
               service:
                 name: frigate
                 port:
-                  number: 5800
+                  number: 80
