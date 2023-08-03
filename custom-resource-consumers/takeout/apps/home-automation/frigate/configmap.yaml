@@ -174,7 +174,7 @@ data:
         mqtt:
           height: 540
 
-      bunnies:
+      flowerbed:
         birdseye:
           order: 6
         ffmpeg:
@@ -196,16 +196,16 @@ data:
             - zebra
             - giraffe
           filters:
-            cat: &bunnythreshold
+            cat: &animalthreshold
               threshold: 0.6
-            dog: *bunnythreshold
-            horse: *bunnythreshold
-            sheep: *bunnythreshold
-            cow: *bunnythreshold
-            elephant: *bunnythreshold
-            bear: *bunnythreshold
-            zebra: *bunnythreshold
-            giraffe: *bunnythreshold
+            # dog: *animalthreshold
+            # horse: *animalthreshold
+            # sheep: *animalthreshold
+            # cow: *animalthreshold
+            # elephant: *animalthreshold
+            # bear: *animalthreshold
+            # zebra: *animalthreshold
+            # giraffe: *animalthreshold
         detect:
           width: 1920
           height: 1080
