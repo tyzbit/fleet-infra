@@ -187,17 +187,17 @@ data:
         objects:  
           track:
             - cat
-            - dog
-            - horse
-            - sheep
-            - cow
-            - elephant
-            - bear
-            - zebra
-            - giraffe
+            # - dog
+            # - horse
+            # - sheep
+            # - cow
+            # - elephant
+            # - bear
+            # - zebra
+            # - giraffe
           filters:
             cat: &animalthreshold
-              threshold: 0.6
+              threshold: 0.5
             # dog: *animalthreshold
             # horse: *animalthreshold
             # sheep: *animalthreshold
