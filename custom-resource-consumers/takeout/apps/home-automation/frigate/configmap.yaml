@@ -187,25 +187,25 @@ data:
         objects:  
           track:
             - cat
-            # - dog
-            # - horse
-            # - sheep
-            # - cow
+            - dog
+            - horse
+            - sheep
+            - cow
             # - elephant
-            # - bear
             # - zebra
             # - giraffe
+            # - bear
           filters:
             cat: &animalthreshold
               threshold: 0.5
-            # dog: *animalthreshold
-            # horse: *animalthreshold
-            # sheep: *animalthreshold
-            # cow: *animalthreshold
+            dog: *animalthreshold
+            horse: *animalthreshold
+            sheep: *animalthreshold
+            cow: *animalthreshold
             # elephant: *animalthreshold
-            # bear: *animalthreshold
             # zebra: *animalthreshold
             # giraffe: *animalthreshold
+            # bear: *animalthreshold
         detect:
           width: 1920
           height: 1080
