@@ -100,7 +100,7 @@ spec:
           nignx.ingress.kubernetes.io/force-ssl-redirect: "true"
           acme.cert-manager.io/http01-edit-in-place: "false"
           external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
-          external-dns.alpha.kubernetes.io/target: ${blog_domain_ddns}
+          external-dns.alpha.kubernetes.io/target: ${home_domain_ddns}
         hosts:
           - host: ${neko_domain}
             paths:
