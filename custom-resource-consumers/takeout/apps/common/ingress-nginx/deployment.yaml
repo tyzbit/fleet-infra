@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: default-backend
-          image: docker.io/nginx:1.25.1 # {"$imagepolicy": "flux-system:default-backend"}
+          image: docker.io/nginx:1.25.2 # {"$imagepolicy": "flux-system:default-backend"}
           ports:
             - containerPort: 80
               name: http
