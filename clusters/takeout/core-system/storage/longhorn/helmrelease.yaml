@@ -17,20 +17,44 @@ spec:
   interval: 2m0s
   values:
     defaultSettings:
-      defaultReplicaCount: 3
+      allowRecurringJobWhileVolumeDetached: false # default
+      autoCleanupSystemGeneratedSnapshot: true # default
+      autoDeletePodWhenVolumeDetachedUnexpectedly: true # default
+      autoSalvage: true # default
       backupTarget: s3://${longhorn_backup_bucket}@us-east-1/
       backupTargetCredentialSecret: longhorn-takeout-backups
-      backupstorePollInterval: 0
-      createDefaultDiskLabeledNodes: true
-      storageOverProvisioningPercentage: 100
-      storageMinimalAvailablePercentage: 10
-      guaranteedEngineManagerCPU: 20
-      guaranteedReplicaManagerCPU: 20
-      orphanAutoDeletion: true
-      defaultDataPath: /mnt/external/longhorn
+      backupstorePollInterval: 0 # seconds
       concurrentAutomaticEngineUpgradePerNodeLimit: 3
+      concurrentReplicaRebuildPerNodeLimit: 10 # double the default, 5
+      concurrentVolumeBackupRestorePerNodeLimit: 5 # default
+      createDefaultDiskLabeledNodes: true
+      # This is tempting to set to true, but I am not okay with trading
+      # confidence about which volume is the best in a rebuild for more
+      # performance. Picking the biggest replica is naiive, my cluster performs
+      # well enough. See: https://longhorn.io/docs/1.4.0/advanced-resources/deploy/revision_counter/
+      disableRevisionCounter: false
+      disableSchedulingOnCordonedNode: true # default
+      defaultDataPath: /mnt/external/longhorn
       defaultLonghornStaticStorageClass: longhorn
+      defaultReplicaCount: 3 # default
+      engineReplicaTimeout: 8 # default
+      failedBackupTTL: 1440 # default
+      fastReplicaRebuildEnabled: true # relies on snapshotDataIntegrity to be enable or fast-check
+      guaranteedEngineManagerCPU: 20 # percent
+      guaranteedReplicaManagerCPU: 20 # percent
       nodeDownPodDeletionPolicy: delete-both-statefulset-and-deployment-pod
+      offlineReplicaRebuilding: true # default
+      orphanAutoDeletion: true # This deletes anything not Longhorn in the data directory. Be careful.
+      replicaReplenishmentWaitInterval: 90 # 15% of default (600), in seconds
+      removeSnapshotsDuringFilesystemTrim: false # default
+      restoreVolumeRecurringJobs: false # default - I use my longhorn-recurring-jobs chart instead
+      snapshotDataIntegrity: fast-check # default
+      snapshotDataIntegrityCronjob: 0 8 */7 * * # 4AM for EST
+      snapshotDataIntegrityImmediateCheckAfterSnapshotCreation: false # default
+      storageMinimalAvailablePercentage: 10
+      storageOverProvisioningPercentage: 100
+      upgradeChecker: false # I watch for Longhorn releases
+      v2DataEngine: false # default, disabled
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
