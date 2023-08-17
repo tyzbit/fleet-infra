@@ -72,7 +72,7 @@ spec:
     spec:
       containers:
         - name: nextcloud-cache
-          image: redis:7.2
+          image: redis:7.0
           imagePullPolicy: Always
           command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
           volumeMounts:
