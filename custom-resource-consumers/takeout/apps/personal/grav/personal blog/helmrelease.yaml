@@ -1,0 +1,67 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: grav-${blog_name}
+  namespace: flux-system
+spec:
+  targetNamespace: personal
+  chart:
+    spec:
+      chart: grav
+      version: "0.8.0"
+      sourceRef:
+        kind: HelmRepository
+        name: tyzbit
+        namespace: flux-system
+  interval: 2m0s
+  values:
+    fullnameOverride: grav-${blog_name}
+    grav:
+      image:
+        repository: dsavell/grav
+        tag: admin-1.7.42.1 # {"$imagepolicy": "flux-system:grav-${blog_name}:tag"}
+        pullPolicy: Always
+      probes:
+        liveness: &probes
+          periodSeconds: 10
+          timeoutSeconds: 10
+        readiness: *probes
+        startup: *probes
+      config:
+        #   DUID: "1000"
+        #   DGID: "1000"
+        #   GRAV_MULTISITE: subdirectory
+        NGINX_CLIENT_MAX_BODY_SIZE: 256m
+    filebrowser:
+      enabled: true
+      image:
+        pullPolicy: Always
+    persistence:
+      enabled: true
+      existingClaimName: grav-${blog_name}-data-nas
+    deploymentAnnotations:
+      reloader.stakater.com/auto: "true"
+    statefulSetAnnotations:
+      reloader.stakater.com/auto: "true"
+    ingress:
+      enabled: true
+      className: nginx
+      annotations:
+        acme.cert-manager.io/http01-edit-in-place: "false"
+        nignx.ingress.kubernetes.io/force-ssl-redirect: "true"
+        cert-manager.io/cluster-issuer: letsencrypt
+        external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+        external-dns.alpha.kubernetes.io/target: ${cloudflared_tunnel_uuid}.cfargotunnel.com
+        nginx.ingress.kubernetes.io/proxy-body-size: 256m
+      labels:
+        use-cloudflare-dns-solver: "true"
+      hosts:
+        - host: ${blog_domain}
+          paths:
+            - path: /
+              pathType: ImplementationSpecific
+      tls:
+        - secretName: ${blog_domain}-tls
+          hosts:
+            - ${blog_domain}
+            - "files.${blog_domain}"
