@@ -64,4 +64,4 @@ spec:
         - secretName: ${blog_domain}-tls
           hosts:
             - ${blog_domain}
-            - "files.${blog_domain}"
+            - "grav-files.${blog_domain}"
