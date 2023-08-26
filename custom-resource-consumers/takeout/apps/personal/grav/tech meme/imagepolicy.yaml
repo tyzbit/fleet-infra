@@ -11,4 +11,4 @@ spec:
     extract: "$semver"
   policy:
     semver:
-      range: "~ 1.7"
+      range: 1.x.x.x
