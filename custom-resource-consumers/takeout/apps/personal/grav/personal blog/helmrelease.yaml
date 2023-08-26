@@ -34,6 +34,7 @@ spec:
         NGINX_CLIENT_MAX_BODY_SIZE: 256m
     filebrowser:
       enabled: true
+      subdomain: grav-files
       image:
         pullPolicy: Always
     persistence:
