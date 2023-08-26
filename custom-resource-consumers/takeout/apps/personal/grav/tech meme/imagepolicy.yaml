@@ -5,7 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   imageRepositoryRef:
-    name: grav
+    name: dsavell-grav
   policy:
     semver:
       range: "~ 1.7"
