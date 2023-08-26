@@ -1,7 +1,7 @@
 apiVersion: image.toolkit.fluxcd.io/v1beta2
 kind: ImagePolicy
 metadata:
-  name: grav-${tech_meme}
+  name: grav-${tech_name}
   namespace: flux-system
 spec:
   imageRepositoryRef:
