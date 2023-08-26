@@ -8,4 +8,4 @@ spec:
     name: grav
   policy:
     semver:
-      range: "~ 1"
+      range: "~ 1.7"
