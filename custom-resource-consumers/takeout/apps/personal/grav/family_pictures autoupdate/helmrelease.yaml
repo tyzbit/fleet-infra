@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: grav-${resume_name}
+  name: grav-${family_pictures_name}
   namespace: flux-system
 spec:
   targetNamespace: personal
@@ -15,11 +15,11 @@ spec:
         namespace: flux-system
   interval: 2m0s
   values:
-    fullnameOverride: grav-${resume_name}
+    fullnameOverride: grav-${family_pictures_name}
     grav:
       image:
         repository: dsavell/grav
-        tag: admin-1.7.42.1 # {"$imagepolicy": "flux-system:grav-${resume_name}:tag"}
+        tag: admin-1.7.42.3 # {"$imagepolicy": "flux-system:grav:tag"}
         pullPolicy: Always
       probes:
         liveness: &probes
@@ -30,7 +30,7 @@ spec:
       config:
         #   DUID: "1000"
         #   DGID: "1000"
-        #   GRAV_MULTISITE: subdirectory
+        GRAV_MULTISITE: subdomain
         NGINX_CLIENT_MAX_BODY_SIZE: 256m
     filebrowser:
       enabled: true
@@ -38,7 +38,7 @@ spec:
         pullPolicy: Always
     persistence:
       enabled: true
-      existingClaimName: grav-${resume_name}-data-nas
+      existingClaimName: grav-${family_pictures_name}-data-nas
     deploymentAnnotations:
       reloader.stakater.com/auto: "true"
     statefulSetAnnotations:
@@ -56,12 +56,12 @@ spec:
       labels:
         use-cloudflare-dns-solver: "true"
       hosts:
-        - host: ${resume_domain}
+        - host: ${family_pictures_domain}
           paths:
             - path: /
               pathType: ImplementationSpecific
       tls:
-        - secretName: ${resume_domain}-tls
+        - secretName: ${family_pictures_domain}-tls
           hosts:
-            - ${resume_domain}
-            - "files.${resume_domain}"
+            - ${family_pictures_domain}
+            - "files.${family_pictures_domain}"

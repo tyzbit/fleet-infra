@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: grav-${anime_blog_3_name}
+  name: grav-${resume_name}
   namespace: flux-system
 spec:
   targetNamespace: personal
@@ -15,11 +15,11 @@ spec:
         namespace: flux-system
   interval: 2m0s
   values:
-    fullnameOverride: grav-${anime_blog_3_name}
+    fullnameOverride: grav-${resume_name}
     grav:
       image:
         repository: dsavell/grav
-        tag: admin-1.7.42.1 # {"$imagepolicy": "flux-system:grav-${anime_blog_3_name}:tag"}
+        tag: admin-1.7.42.3 # {"$imagepolicy": "flux-system:grav:tag"}
         pullPolicy: Always
       probes:
         liveness: &probes
@@ -38,7 +38,7 @@ spec:
         pullPolicy: Always
     persistence:
       enabled: true
-      existingClaimName: grav-${anime_blog_3_name}-data-nas
+      existingClaimName: grav-${resume_name}-data-nas
     deploymentAnnotations:
       reloader.stakater.com/auto: "true"
     statefulSetAnnotations:
@@ -56,12 +56,12 @@ spec:
       labels:
         use-cloudflare-dns-solver: "true"
       hosts:
-        - host: ${anime_blog_3_domain}
+        - host: ${resume_domain}
           paths:
             - path: /
               pathType: ImplementationSpecific
       tls:
-        - secretName: ${anime_blog_3_domain}-tls
+        - secretName: ${resume_domain}-tls
           hosts:
-            - ${anime_blog_3_domain}
-            - "files.${anime_blog_3_domain}"
+            - ${resume_domain}
+            - "files.${resume_domain}"
