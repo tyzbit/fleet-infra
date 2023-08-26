@@ -7,8 +7,8 @@ spec:
   imageRepositoryRef:
     name: dsavell-grav
   filterTags:
-    pattern: "admin-(?P<semver>.*)"
+    pattern: "admin-(?P<semver>[^\\-]+)"
     extract: "$semver"
   policy:
-    numerical:
-      order: asc
+    semver:
+      range: ">= 0.0.0.0"
