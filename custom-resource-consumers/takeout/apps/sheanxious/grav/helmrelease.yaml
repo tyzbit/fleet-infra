@@ -62,5 +62,4 @@ spec:
         - secretName: ${sheanxious_domain}-tls
           hosts:
             - ${sheanxious_domain}
-            - new.
             - "files.${sheanxious_domain}"

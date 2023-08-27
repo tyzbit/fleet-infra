@@ -62,5 +62,4 @@ spec:
         - secretName: ${hotboxfort_domain}-tls
           hosts:
             - ${hotboxfort_domain}
-            - new.${hotboxfort_domain}
             - "files.${hotboxfort_domain}"
