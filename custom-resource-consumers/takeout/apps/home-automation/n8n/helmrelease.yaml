@@ -20,7 +20,7 @@ spec:
     image:
       pullPolicy: Always
       repository: n8nio/n8n
-      tag: 0.219.0
+      tag: 0.219.1
 
     controller:
       type: statefulset
