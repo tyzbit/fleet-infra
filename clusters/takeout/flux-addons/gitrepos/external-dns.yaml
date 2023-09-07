@@ -6,7 +6,7 @@ metadata:
 spec:
   interval: 2m0s
   ref:
-    tag: v0.13.5
+    tag: v0.13.6
   secretRef:
     name: flux-system
   url: https://github.com/kubernetes-sigs/external-dns.git
