@@ -29,6 +29,7 @@ spec:
 
     env:
       TZ: America/New_York
+      RADARR__AUTHENTICATION_METHOD: External
 
     persistence:
       config:
