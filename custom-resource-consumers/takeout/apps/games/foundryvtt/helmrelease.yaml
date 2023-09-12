@@ -48,10 +48,6 @@ spec:
       #FOUNDRY_VERSION: "11.292"
       #NODE_DEBUG: "*"
 
-    envFrom:
-      - secretRef:
-          name: foundryvtt
-
     service:
       main:
         ports:
