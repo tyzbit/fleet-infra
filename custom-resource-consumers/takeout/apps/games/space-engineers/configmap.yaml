@@ -7,7 +7,7 @@ data:
   nginx.conf: |
     server {
       listen 8080 default;
-      server_name files.spaceengineers.${blog_domain};
+      server_name files.spaceengineers.${game_domain};
       location / {
         root /usr/share/nginx/html;
         index index.html index.htm;

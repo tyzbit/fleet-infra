@@ -15,13 +15,13 @@ metadata:
 spec:
   tls:
     - hosts:
-        - "valheim.${blog_domain}"
-        - "map.valheim.${blog_domain}"
-        - "supervisor.valheim.${blog_domain}"
-        - "files.valheim.${blog_domain}"
-      secretName: valheim.${blog_domain}-multi-tls
+        - "valheim.${game_domain}"
+        - "map.valheim.${game_domain}"
+        - "supervisor.valheim.${game_domain}"
+        - "files.valheim.${game_domain}"
+      secretName: valheim.${game_domain}-multi-tls
   rules:
-    - host: valheim.${blog_domain}
+    - host: valheim.${game_domain}
       http:
         paths:
           - pathType: Prefix
@@ -31,7 +31,7 @@ spec:
                 name: valheim-server-tcp
                 port:
                   number: 80
-    - host: map.valheim.${blog_domain}
+    - host: map.valheim.${game_domain}
       http:
         paths:
           - pathType: Prefix
@@ -41,7 +41,7 @@ spec:
                 name: valheim-server-tcp
                 port:
                   number: 3000
-    - host: supervisor.valheim.${blog_domain}
+    - host: supervisor.valheim.${game_domain}
       http:
         paths:
           - pathType: Prefix
@@ -51,7 +51,7 @@ spec:
                 name: valheim-server-tcp
                 port:
                   number: 9001
-    - host: files.valheim.${blog_domain}
+    - host: files.valheim.${game_domain}
       http:
         paths:
           - pathType: Prefix

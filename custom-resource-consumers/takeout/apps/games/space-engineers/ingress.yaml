@@ -17,7 +17,7 @@ metadata:
 spec:
   tls:
     - hosts:
-        - &host "se-fb.${blog_domain}"
+        - &host "se-fb.${game_domain}"
       secretName: *host
   rules:
     - host: *host
@@ -43,7 +43,7 @@ metadata:
 spec:
   tls:
     - hosts:
-        - &host "se-fb.${blog_domain}"
+        - &host "se-fb.${game_domain}"
       secretName: *host
   rules:
     - host: *host

@@ -31,7 +31,7 @@ data:
   nginx.conf: |
     server {
       listen 80 default;
-      server_name files.valheim.${blog_domain};
+      server_name files.valheim.${game_domain};
       location / {
         root /usr/share/nginx/html/worlds;
         index index.html index.htm;

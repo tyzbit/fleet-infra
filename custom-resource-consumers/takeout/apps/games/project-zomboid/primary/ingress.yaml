@@ -17,7 +17,7 @@ metadata:
 spec:
   tls:
     - hosts:
-        - &host "pz-fb.${blog_domain}"
+        - &host "pz-fb.${game_domain}"
       secretName: *host
   rules:
     - host: *host
@@ -43,7 +43,7 @@ metadata:
 spec:
   tls:
     - hosts:
-        - &host "pz-fb.${blog_domain}"
+        - &host "pz-fb.${game_domain}"
       secretName: *host
   rules:
     - host: *host

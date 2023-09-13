@@ -34,7 +34,7 @@ spec:
       CONTAINER_URL_FETCH_RETRY: "50"
       #CONTAINER_PRESERVE_CONFIG: "true"
       CONTAINER_VERBOSE: "true"
-      FOUNDRY_HOSTNAME: &host "tabletop.${blog_domain}"
+      FOUNDRY_HOSTNAME: &host "tabletop.${game_domain}"
       FOUNDRY_LOCAL_HOSTNAME: *host
       FOUNDRY_MINIFY_STATIC_FILES: "true"
       FOUNDRY_PROTOCOL: "4"
@@ -95,7 +95,7 @@ spec:
           - host: *host
             paths:
               - path: "/"
-          - host: &hostfb "tabletop-files.${blog_domain}"
+          - host: &hostfb "tabletop-files.${game_domain}"
             paths:
               - path: "/"
                 service:
