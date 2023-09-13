@@ -17,9 +17,6 @@ spec:
         kind: HelmRepository
         name: bjw-s-helm-charts
         namespace: flux-system
-  valuesFrom:
-    - kind: Secret
-      name: foundryvtt
   values:
     controller:
       type: statefulset
@@ -36,7 +33,7 @@ spec:
       CONTAINER_PATCHES: /data/container_patches
       #CONTAINER_PRESERVE_CONFIG: "true"
       CONTAINER_VERBOSE: "true"
-      FOUNDRY_HOSTNAME: &host "tabletop.${blog_domain}"
+      FOUNDRY_HOSTNAME: &host "tabletop.${personal_domain}"
       FOUNDRY_LOCAL_HOSTNAME: *host
       FOUNDRY_MINIFY_STATIC_FILES: "true"
       FOUNDRY_PROTOCOL: "4"
@@ -47,6 +44,10 @@ spec:
       FOUNDRY_TELEMETRY: "false"
       #FOUNDRY_VERSION: "11.292"
       #NODE_DEBUG: "*"
+
+    envFrom:
+      - secretRef:
+          name: foundryvtt
 
     service:
       main:
