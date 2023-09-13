@@ -98,7 +98,7 @@ spec:
             paths:
               - path: "/"
                 service:
-                  name: home-assistant-filebrowser
+                  name: foundryvtt-filebrowser
                   port: 80
         tls:
           - hosts:
