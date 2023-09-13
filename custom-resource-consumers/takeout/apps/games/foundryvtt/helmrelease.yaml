@@ -31,6 +31,7 @@ spec:
       TIMEZONE: America/New_York
       CONTAINER_CACHE: /data/container_cache
       CONTAINER_PATCHES: /data/container_patches
+      CONTAINER_URL_FETCH_RETRY: "50"
       #CONTAINER_PRESERVE_CONFIG: "true"
       CONTAINER_VERBOSE: "true"
       FOUNDRY_HOSTNAME: &host "tabletop.${personal_domain}"
