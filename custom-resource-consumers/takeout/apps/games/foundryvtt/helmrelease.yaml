@@ -78,7 +78,7 @@ spec:
             subPath: filebrowser
             mountPath: /db
           - name: data
-            mountPath: /srv/homeassistant
+            mountPath: /srv/
 
     ingress:
       main:
