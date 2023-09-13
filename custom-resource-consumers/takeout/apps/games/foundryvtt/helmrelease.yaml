@@ -56,6 +56,30 @@ spec:
           http:
             port: 30000
 
+      filebrowser:
+        enabled: true
+        primary: false
+        name: foundryvtt-filebrowser
+        ports:
+          fbhttp:
+            enabled: true
+            port: 80
+
+    additionalContainers:
+      filebrowser:
+        name: filebrowser
+        image: filebrowser/filebrowser:v2
+        args: ["-d", "/db/database.db"]
+        env:
+          - name: TZ
+            value: America/New_York
+        volumeMounts:
+          - name: data
+            subPath: filebrowser
+            mountPath: /db
+          - name: data
+            mountPath: /srv/homeassistant
+
     ingress:
       main:
         enabled: true
@@ -70,9 +94,16 @@ spec:
           - host: *host
             paths:
               - path: "/"
+          - host: &hostfb "tabletop-files.${blog_domain}"
+            paths:
+              - path: "/"
+                service:
+                  name: home-assistant-filebrowser
+                  port: 80
         tls:
           - hosts:
               - *host
+              - *hostfb
             secretName: *host
 
     persistence:
