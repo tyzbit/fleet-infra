@@ -85,7 +85,7 @@ spec:
             path: "/"
             backend:
               service:
-                name: router
+                name: takeout-lb
                 port:
                   number: 6443
 ---

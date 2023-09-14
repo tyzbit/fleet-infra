@@ -24,6 +24,16 @@ spec:
       port: 443
       protocol: TCP
       targetPort: 443
+  clusterIP: None
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: takeout-lb
+  namespace: default
+spec:
+  ports:
     - name: k8s
       port: 6443
       protocol: TCP
@@ -44,6 +54,17 @@ subsets:
       - name: http
         port: 443
         protocol: TCP
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: takeout-lb
+  namespace: default
+subsets:
+  - addresses:
+      # list all external ips for this service
+      - ip: 192.168.1.1
+    ports:
       - name: k8s
         port: 6443
         protocol: TCP
