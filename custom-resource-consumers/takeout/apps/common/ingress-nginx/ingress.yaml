@@ -85,7 +85,7 @@ spec:
             path: "/"
             backend:
               service:
-                name: architect
+                name: router
                 port:
                   number: 6443
 ---
