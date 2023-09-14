@@ -72,6 +72,8 @@ metadata:
     nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
     external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
     external-dns.alpha.kubernetes.io/target: ${personal_domain_ddns}
+  labels:
+    use-cloudflare-dns-solver: "true"
 spec:
   tls:
     - hosts:
