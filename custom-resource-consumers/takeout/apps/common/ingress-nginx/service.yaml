@@ -16,7 +16,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: architect
+  name: router
   namespace: default
 spec:
   ports:
@@ -34,7 +34,7 @@ spec:
 apiVersion: v1
 kind: Endpoints
 metadata:
-  name: architect
+  name: router
   namespace: default
 subsets:
   - addresses:
