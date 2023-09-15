@@ -22,7 +22,6 @@ spec:
   tls:
     - hosts:
         - "${home_domain_ddns}"
-        - "*.${home_domain_ddns}"
       secretName: ${home_domain_ddns}
 ---
 apiVersion: networking.k8s.io/v1
