@@ -167,10 +167,10 @@ data:
               #   - record
         snapshots:
           enabled: False
-        detect:
-          width: 1920
-          height: 1080
-          fps: 5
+        # detect:
+        #   width: 1920
+        #   height: 1080
+        #   fps: 5
         mqtt:
           height: 540
 
