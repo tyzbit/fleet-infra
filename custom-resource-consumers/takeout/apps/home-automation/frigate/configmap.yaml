@@ -188,9 +188,9 @@ data:
           track:
             - cat
             - dog
-            - horse
-            - sheep
-            - cow
+            # - horse
+            # - sheep
+            # - cow
             # - elephant
             # - zebra
             # - giraffe
@@ -199,9 +199,9 @@ data:
             cat: &animalthreshold
               threshold: 0.5
             dog: *animalthreshold
-            horse: *animalthreshold
-            sheep: *animalthreshold
-            cow: *animalthreshold
+            # horse: *animalthreshold
+            # sheep: *animalthreshold
+            # cow: *animalthreshold
             # elephant: *animalthreshold
             # zebra: *animalthreshold
             # giraffe: *animalthreshold
