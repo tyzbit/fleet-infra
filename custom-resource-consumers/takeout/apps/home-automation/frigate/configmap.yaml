@@ -164,7 +164,7 @@ data:
             # - path: 'rtsp://localhost:8554/court'
             - path: 'rtsp://{FRIGATE_COURT_CREDENTIALS}@court:554/live'
               roles:
-                - detect
+                - record
         snapshots:
           enabled: False
         detect:
