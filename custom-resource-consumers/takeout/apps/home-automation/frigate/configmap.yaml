@@ -16,7 +16,7 @@ data:
     record:
       enabled: True
       retain:
-        days: 1
+        days: 3
       events:
         retain:
           default: 30
@@ -26,7 +26,7 @@ data:
       retain:
         default: 30
         objects:
-          person: 365
+          person: 30
     objects:
       track:
         - person
