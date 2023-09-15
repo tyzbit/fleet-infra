@@ -163,11 +163,12 @@ data:
           inputs:
             # - path: 'rtsp://localhost:8554/court'
             - path: 'rtsp://{FRIGATE_COURT_CREDENTIALS}@court:554/live'
-              roles: []
-              #   - record
+              roles:
+                - record
         snapshots:
           enabled: False
-        detect: {}
+        detect:
+          enabled: False
         #   width: 1920
         #   height: 1080
         #   fps: 5
