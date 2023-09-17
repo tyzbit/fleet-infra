@@ -59,7 +59,7 @@ spec:
         - host: ${family_pictures_domain}
           paths:
             - path: /
-              pathType: ImplementationSpecific
+              pathType: Prefix
       tls:
         - secretName: ${family_pictures_domain}-tls
           hosts:
