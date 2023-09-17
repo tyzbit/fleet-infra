@@ -33,6 +33,7 @@ spec:
         #   DUID: "1000"
         #   DGID: "1000"
         GRAV_MULTISITE: subdomain
+        GRAV_PLUGINS: devtools,precache
         NGINX_CLIENT_MAX_BODY_SIZE: 256m
     filebrowser:
       enabled: true
