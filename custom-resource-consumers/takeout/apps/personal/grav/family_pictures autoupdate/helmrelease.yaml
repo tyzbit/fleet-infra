@@ -20,7 +20,7 @@ spec:
       image:
         repository: tyzbit/grav
         # repository: dsavell/grav
-        tag: admin-1.7.42.3 # {"$imagepolicy": "flux-system:grav:tag"}
+        tag: install-plugins-automatically
         # tag: admin-1.7.42.3 # {"$imagepolicy": "flux-system:grav:tag"}
         pullPolicy: Always
       probes:
