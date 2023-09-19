@@ -34,7 +34,7 @@ spec:
             port: 4002
 
     ingress:
-      main:
+      main: &ingress
         enabled: true
         annotations:
           kubernetes.io/ingress.class: nginx
@@ -54,6 +54,24 @@ spec:
               - goto.tyz.social
               - *host
             secretName: tyz-social-gotosocial-tls
+      nodeinfo:
+        <<: *ingress
+        annotations:
+          nginx.ingress.kubernetes.io/permanent-redirect: https://goto.tyz.social/.well-known/nodeinfo
+        hosts:
+          - host: *host
+            paths:
+              - path: .well-known/nodeinfo
+                pathType: Exact
+      webfinger:
+        <<: *ingress
+        annotations:
+          nginx.ingress.kubernetes.io/permanent-redirect: https://goto.tyz.social/.well-known/webfinger
+        hosts:
+          - host: *host
+            paths:
+              - path: .well-known/webfinger
+                pathType: Exact
 
     resources:
       requests:
