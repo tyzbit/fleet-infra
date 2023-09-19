@@ -79,15 +79,12 @@ spec:
       fsGroup: 568
 
     persistence:
-      db: &data
+      db:
         enabled: true
         existingClaim: tyz-gotosocial-longhorn-webapp
         subPath:
           - path: db
             mountPath: *dbpath
-      storage:
-        <<: *data
-        subPath:
           - path: storage
             mountPath: *storagepath
       tls-fullchain: &cert
