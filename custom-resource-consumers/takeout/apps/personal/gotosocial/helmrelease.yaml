@@ -36,7 +36,7 @@ spec:
       - /bin/sh
       - -c
       - |
-        sed -i -E 's/semaphore.social/web.tyz.social/g' /gotosocial/web/index.tmpl && \
+        sed -i -E 's/semaphore.social/web.tyz.social/g' /gotosocial/web/templates/index.tmpl && \
         /gotosocial/gotosocial server start
 
     env:
