@@ -35,7 +35,8 @@ spec:
     env:
       TZ: America/New_York
       GTS_APPLICATION_NAME: "tyz social"
-      GTS_HOST: &host "tyz.social"
+      GTS_HOST: &host "goto.tyz.social"
+      GTS_ACCOUNT_DOMAIN: &domain "tyz.social"
       GTS_PROTOCOL: "https"
       GTS_PORT: "8080"
       GTS_TRUSTED_PROXIES: 172.18.0.0/18
@@ -73,7 +74,8 @@ spec:
         tls:
           - hosts:
               - *host
-            secretName: &secret tyz-gotosocial-tls
+              - *domain
+            secretName: &secret tyz-social-gotosocial-tls
 
     podSecurityContext:
       fsGroup: 568
@@ -81,7 +83,7 @@ spec:
     persistence:
       db:
         enabled: true
-        existingClaim: tyz-gotosocial-longhorn-webapp
+        existingClaim: tyz-social-gotosocial-longhorn-webapp
         subPath:
           - path: db
             mountPath: /gotosocial/db

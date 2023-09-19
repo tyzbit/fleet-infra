@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: tyz-gotosocial-longhorn-webapp
+  name: tyz-social-gotosocial-longhorn-webapp
   namespace: personal
 spec:
   resources:
