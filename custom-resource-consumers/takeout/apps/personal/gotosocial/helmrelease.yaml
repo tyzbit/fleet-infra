@@ -29,17 +29,15 @@ spec:
       replicas: 1
 
     image:
-      #repository: docker.io/superseriousbusiness/gotosocial
-      #tag: 0.11.1
-      repository: docker.io/tyzbit/gotosocial
-      tag: custom-semaphore-url-3
+      repository: docker.io/superseriousbusiness/gotosocial
+      tag: 0.11.1
 
-    # command:
-    #   - /bin/sh
-    #   - -c
-    #   - |
-    #     sed -i -E 's/semaphore.social/web.tyz.social/g' /gotosocial/web/template/index.tmpl && \
-    #     /gotosocial/gotosocial server start
+    command:
+      - /bin/sh
+      - -c
+      - |
+        sed -i -E 's/semaphore.social/web.tyz.social/g' /gotosocial/web/template/index.tmpl && \
+        /gotosocial/gotosocial server start
 
     env:
       TZ: America/New_York
