@@ -61,7 +61,7 @@ spec:
         hosts:
           - host: *host
             paths:
-              - path: .well-known/nodeinfo
+              - path: /.well-known/nodeinfo
                 pathType: Exact
       webfinger:
         <<: *ingress
@@ -70,7 +70,7 @@ spec:
         hosts:
           - host: *host
             paths:
-              - path: .well-known/webfinger
+              - path: /.well-known/webfinger
                 pathType: Exact
 
     resources:
