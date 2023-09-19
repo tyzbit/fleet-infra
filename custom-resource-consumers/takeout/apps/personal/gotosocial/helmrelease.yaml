@@ -44,7 +44,7 @@ spec:
       GTS_TLS_CERTIFICATE_KEY: &key "/tls/privkey.pem"
       GTS_DB_TYPE: sqlite
       GTS_DB_ADDRESS: &dbpath /gotosocial/db
-      GTS_STORAGE_LOCAL_BASE_PATH: &storage "/gotosocial/storage"
+      GTS_STORAGE_LOCAL_BASE_PATH: &storagepath "/gotosocial/storage"
       GTS_LANDING_PAGE_USER: "tyzbit"
 
     service:
@@ -82,13 +82,13 @@ spec:
       db: &data
         enabled: true
         existingClaim: tyz-gotosocial-longhorn-webapp
-        subPath: 
+        subPath:
           - path: db
             mountPath: *dbpath
         mountPath: *dbpath
       storage:
         <<: *data
-        subPath: 
+        subPath:
           - path: storage
             mountPath: *storagepath
       tls-fullchain: &cert
