@@ -82,12 +82,15 @@ spec:
       db: &data
         enabled: true
         existingClaim: tyz-gotosocial-longhorn-webapp
-        subPath: db
+        subPath: 
+          - path: db
+            mountPath: *dbpath
         mountPath: *dbpath
       storage:
         <<: *data
-        subPath: storage
-        mountPath: *storage
+        subPath: 
+          - path: storage
+            mountPath: *storagepath
       tls-fullchain: &cert
         enabled: true
         type: secret
