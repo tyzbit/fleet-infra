@@ -20,7 +20,7 @@ spec:
   valuesFrom:
     # SMTP settings
     - kind: Secret
-      name: tyz-gotosocial-values
+      name: tyz-social-gotosocial-values
   values:
     controller:
       annotations:
