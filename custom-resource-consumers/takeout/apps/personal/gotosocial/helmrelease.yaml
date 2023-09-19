@@ -32,11 +32,19 @@ spec:
       repository: docker.io/superseriousbusiness/gotosocial
       tag: 0.11.1
 
+    command:
+      - bash
+      - -c
+      - |
+        index=/gotosocial/web/index.tmpl \
+        sed -i -E 's/semaphore.social/web.tyz.social/g' "$index" && \
+        /gotosocial/gotosocial server start
+
     env:
       TZ: America/New_York
       GTS_APPLICATION_NAME: "tyz social"
-      GTS_HOST: &host "goto.tyz.social"
-      GTS_ACCOUNT_DOMAIN: &domain "tyz.social"
+      GTS_HOST: &host "tyz.social"
+      GTS_ACCOUNT_DOMAIN: *host
       GTS_PROTOCOL: "https"
       GTS_PORT: "8080"
       GTS_TRUSTED_PROXIES: 172.18.0.0/18
@@ -67,14 +75,14 @@ spec:
           nginx.ingress.kubernetes.io/proxy-body-size: 4096m
           nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
         hosts:
-          - host: *host
+          - host: tyz.social
             paths:
               - path: /
                 pathType: Prefix
         tls:
           - hosts:
-              - *host
-              - *domain
+              - tyz.social
+              - web.tyz.social
             secretName: &secret tyz-social-gotosocial-tls
 
     podSecurityContext:
