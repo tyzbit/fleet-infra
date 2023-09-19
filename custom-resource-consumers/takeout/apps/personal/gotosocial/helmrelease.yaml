@@ -1,0 +1,126 @@
+# https://github.com/JJGadgets/Biohazard/blob/a7de80b5bdc5cfda9745681fcce2f7e0e5110d4b/kube/deploy/apps/gotosocial/app/hr.yaml
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app tyz-gotosocial
+  namespace: flux-system
+spec:
+  releaseName: *app
+  targetNamespace: personal
+  timeout: 5m
+  interval: 2m0s
+  chart:
+    spec:
+      chart: app-template
+      version: 1.5.1
+      sourceRef:
+        name: bjw-s
+        kind: HelmRepository
+        namespace: flux-system
+  valuesFrom:
+    # SMTP settings
+    - kind: Secret
+      name: tyz-gotosocial-values
+  values:
+    controller:
+      annotations:
+        reloader.stakater.com/auto: "true"
+      type: deployment
+      replicas: 1
+
+    image:
+      repository: docker.io/superseriousbusiness/gotosocial
+      tag: 0.11.1
+
+    env:
+      TZ: America/New_York
+      GTS_APPLICATION_NAME: "tyz social"
+      GTS_HOST: &host "tyz.social"
+      GTS_PROTOCOL: "https"
+      GTS_PORT: "8080"
+      GTS_TRUSTED_PROXIES: '["172.18.0.0/18"]'
+      GTS_ACCOUNTS_REGISTRATION_OPEN: "false"
+      GTS_TLS_CERTIFICATE_CHAIN: &chain "/tls/fullchain.pem"
+      GTS_TLS_CERTIFICATE_KEY: &key "/tls/privkey.pem"
+      GTS_DB_TYPE: sqlite
+      GTS_DB_ADDRESS: &dbpath /gotosocial/db
+      GTS_STORAGE_LOCAL_BASE_PATH: &storage "/gotosocial/storage"
+      GTS_LANDING_PAGE_USER: "tyzbit"
+
+    service:
+      main:
+        ports:
+          http:
+            port: &http 8080
+            protocol: HTTPS
+
+    ingress:
+      main:
+        enabled: true
+        annotations:
+          acme.cert-manager.io/http01-edit-in-place: "false"
+          nignx.ingress.kubernetes.io/force-ssl-redirect: "true"
+          cert-manager.io/cluster-issuer: letsencrypt
+          external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+          external-dns.alpha.kubernetes.io/target: ${cloudflared_tunnel_uuid}.cfargotunnel.com
+          nginx.ingress.kubernetes.io/proxy-body-size: 4096m
+          nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+        hosts:
+          - host: *host
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host
+            secretName: &secret tyz-gotosocial-tls
+
+    podSecurityContext:
+      runAsUser: &uid 568
+      runAsGroup: *uid
+      fsGroup: *uid
+      fsGroupChangePolicy: Always
+
+    persistence:
+      db: &data
+        enabled: true
+        existingClaim: tyz-gotosocial-longhorn-webapp
+        subPath: db
+        mountPath: *dbpath
+      storage:
+        <<: *data
+        subPath: storage
+        mountPath: *storage
+      tls-fullchain: &cert
+        enabled: true
+        type: secret
+        name: *secret
+        subPath: tls.crt
+        mountPath: *chain
+        readOnly: true
+      tls-privkey:
+        <<: *cert
+        subPath: tls.key
+        mountPath: *key
+
+    resources:
+      requests:
+        cpu: 10m
+      limits:
+        memory: 1024Mi
+
+    probes:
+      # this is mostly to get rid of the "TLS handshake error: EOF" logs, more than getting more precise healthchecks lol
+      readiness: &probe
+        custom: true
+        spec:
+          periodSeconds: 60
+          httpGet:
+            path: "/api/v2/instance"
+            port: *http
+            scheme: HTTPS
+            httpHeaders:
+              - name: Host
+                value: *host
+      liveness: *probe
+      startup: *probe
