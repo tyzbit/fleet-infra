@@ -66,6 +66,7 @@ spec:
                 pathType: Exact
         tls: *tls
       webfinger:
+        enabled: true
         annotations:
           <<: *annotations
           nginx.ingress.kubernetes.io/permanent-redirect: https://goto.tyz.social/.well-known/webfinger
