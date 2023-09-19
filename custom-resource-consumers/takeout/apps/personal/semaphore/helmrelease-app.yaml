@@ -31,7 +31,7 @@ spec:
     env:
       TZ: America/New_York
       SEMAPHORE_BOLT_HOST: /data/semaphore.bolt
-      SEMAPHORE_DIALECT: bolt
+      SEMAPHORE_DB_DIALECT: bolt
       SEMAPHORE_PLAYBOOK_PATH: /tmp/semaphore/
       SEMAPHORE_LDAP_ACTIVATED: "no"
 
