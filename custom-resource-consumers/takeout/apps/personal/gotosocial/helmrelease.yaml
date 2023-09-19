@@ -38,7 +38,7 @@ spec:
       GTS_HOST: &host "tyz.social"
       GTS_PROTOCOL: "https"
       GTS_PORT: "8080"
-      GTS_TRUSTED_PROXIES: '["172.18.0.0/18"]'
+      GTS_TRUSTED_PROXIES: 172.18.0.0/18
       GTS_ACCOUNTS_REGISTRATION_OPEN: "false"
       GTS_TLS_CERTIFICATE_CHAIN: &chain "/tls/fullchain.pem"
       GTS_TLS_CERTIFICATE_KEY: &key "/tls/privkey.pem"
