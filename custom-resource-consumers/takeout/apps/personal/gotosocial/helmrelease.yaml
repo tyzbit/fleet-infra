@@ -33,7 +33,7 @@ spec:
       tag: 0.11.1
 
     command:
-      - /bin/bash
+      - /bin/sh
       - -c
       - |
         index=/gotosocial/web/index.tmpl \
