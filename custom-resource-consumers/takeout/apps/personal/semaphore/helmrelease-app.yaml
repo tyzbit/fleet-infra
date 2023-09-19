@@ -36,9 +36,8 @@ spec:
       SEMAPHORE_LDAP_ACTIVATED: "no"
 
     envFrom:
-      - name: &secret tyz-social-semaphore-config
-        secretRef:
-          name: *secret
+      - secretRef:
+          name: tyz-social-semaphore-config
 
     persistence:
       data:
