@@ -85,7 +85,6 @@ spec:
         subPath:
           - path: db
             mountPath: *dbpath
-        mountPath: *dbpath
       storage:
         <<: *data
         subPath:
