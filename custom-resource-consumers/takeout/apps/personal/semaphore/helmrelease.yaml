@@ -48,7 +48,7 @@ spec:
           - host: &host tyz.social
             paths:
               - path: /
-                pathType: Prefix
+                pathType: &pathtype Prefix
         tls: &tls
           - hosts:
               - goto.tyz.social
@@ -63,7 +63,7 @@ spec:
           - host: *host
             paths:
               - path: /.well-known/nodeinfo
-                pathType: Exact
+                pathType: *pathtype
         tls: *tls
       webfinger:
         enabled: true
@@ -74,7 +74,7 @@ spec:
           - host: *host
             paths:
               - path: /.well-known/webfinger
-                pathType: Exact
+                pathType: *pathtype
         tls: *tls
 
     resources:
