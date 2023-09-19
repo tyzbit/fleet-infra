@@ -44,6 +44,7 @@ spec:
           external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
           external-dns.alpha.kubernetes.io/target: ${cloudflared_tunnel_uuid}.cfargotunnel.com
           nginx.ingress.kubernetes.io/proxy-body-size: 4096m
+          nginx.ingress.kubernetes.io/use-regex: "true"
         hosts:
           - host: &host tyz.social
             paths:
@@ -56,24 +57,23 @@ spec:
             secretName: tyz-social-gotosocial-tls
       nodeinfo:
         enabled: true
-        annotations:
+        annotations: &rewrite
           <<: *annotations
-          nginx.ingress.kubernetes.io/permanent-redirect: https://goto.tyz.social/.well-known/nodeinfo
+          nginx.ingress.kubernetes.io/rewrite-target: "https://goto.tyz.social/$1"
         hosts:
           - host: *host
             paths:
-              - path: /.well-known/nodeinfo
+              - path: (/.well-known/nodeinfo.*)
                 pathType: *pathtype
         tls: *tls
       webfinger:
         enabled: true
         annotations:
-          <<: *annotations
-          nginx.ingress.kubernetes.io/permanent-redirect: https://goto.tyz.social/.well-known/webfinger
+          <<: [*annotations, *rewrite]
         hosts:
           - host: *host
             paths:
-              - path: /.well-known/webfinger
+              - path: (/.well-known/webfinger.*)
                 pathType: *pathtype
         tls: *tls
 
