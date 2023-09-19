@@ -76,10 +76,7 @@ spec:
             secretName: &secret tyz-gotosocial-tls
 
     podSecurityContext:
-      runAsUser: &uid 568
-      runAsGroup: *uid
-      fsGroup: *uid
-      fsGroupChangePolicy: Always
+      fsGroup: 568
 
     persistence:
       db: &data
