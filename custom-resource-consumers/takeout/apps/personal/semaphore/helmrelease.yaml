@@ -63,7 +63,7 @@ spec:
         hosts:
           - host: *host
             paths:
-              - path: (/.well-known/nodeinfo.*)
+              - path: /(.well-known/nodeinfo.*)
                 pathType: *pathtype
         tls: *tls
       webfinger:
@@ -73,7 +73,7 @@ spec:
         hosts:
           - host: *host
             paths:
-              - path: (/.well-known/webfinger.*)
+              - path: /(.well-known/webfinger.*)
                 pathType: *pathtype
         tls: *tls
 
