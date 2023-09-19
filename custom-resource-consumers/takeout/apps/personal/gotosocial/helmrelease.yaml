@@ -32,7 +32,7 @@ spec:
       #repository: docker.io/superseriousbusiness/gotosocial
       #tag: 0.11.1
       repository: docker.io/tyzbit/gotosocial
-      tag: custom-semaphore-url-2
+      tag: custom-semaphore-url-3
 
     # command:
     #   - /bin/sh
