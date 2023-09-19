@@ -112,7 +112,7 @@ spec:
       readiness: &probe
         custom: true
         spec:
-          periodSeconds: 60
+          periodSeconds: 10
           httpGet:
             path: "/api/v2/instance"
             port: *http
