@@ -69,7 +69,7 @@ spec:
       webfinger:
         enabled: true
         annotations:
-          <<: [*annotations, *rewrite]
+          <<: *rewrite
         hosts:
           - host: *host
             paths:
