@@ -46,7 +46,7 @@ spec:
       GTS_DB_TYPE: sqlite
       GTS_DB_ADDRESS: /gotosocial/db/database.sqlite
       GTS_STORAGE_LOCAL_BASE_PATH: &storagepath "/gotosocial/storage"
-      GTS_LANDING_PAGE_USER: "tyzbit"
+      # GTS_LANDING_PAGE_USER: "tyzbit"
 
     service:
       main:
