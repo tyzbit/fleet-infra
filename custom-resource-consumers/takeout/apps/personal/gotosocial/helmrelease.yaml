@@ -29,15 +29,17 @@ spec:
       replicas: 1
 
     image:
-      repository: docker.io/superseriousbusiness/gotosocial
-      tag: 0.11.1
+      #repository: docker.io/superseriousbusiness/gotosocial
+      #tag: 0.11.1
+      repository: docker.io/tyzbit/gotosocial
+      tag: custom-semaphore-url
 
-    command:
-      - /bin/sh
-      - -c
-      - |
-        sed -i -E 's/semaphore.social/web.tyz.social/g' /gotosocial/web/template/index.tmpl && \
-        /gotosocial/gotosocial server start
+    # command:
+    #   - /bin/sh
+    #   - -c
+    #   - |
+    #     sed -i -E 's/semaphore.social/web.tyz.social/g' /gotosocial/web/template/index.tmpl && \
+    #     /gotosocial/gotosocial server start
 
     env:
       TZ: America/New_York
@@ -53,6 +55,7 @@ spec:
       GTS_DB_TYPE: sqlite
       GTS_DB_ADDRESS: /gotosocial/db/database.sqlite
       GTS_STORAGE_LOCAL_BASE_PATH: &storagepath "/gotosocial/storage"
+      GTS_SEMAPHORE_URL: https://web.tyz.social
       # GTS_LANDING_PAGE_USER: "tyzbit"
 
     service:
