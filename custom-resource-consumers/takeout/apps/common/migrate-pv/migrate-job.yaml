@@ -2,7 +2,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: migrate-pv
-  namespace: revolt-${chat_name}-chat
+  namespace: rocketchat-${chat_name}-chat
 spec:
   backoffLimit: 0
   template:
@@ -36,9 +36,9 @@ spec:
       volumes:
         - name: src
           persistentVolumeClaim:
-            claimName: revolt-${chat_name}-chat-minio-longhorn-static
+            claimName: rocketchat-longhorn-objectstorage
         - name: dst
           persistentVolumeClaim:
-            claimName: revolt-${chat_name}-chat-minio-objectstorage
+            claimName: rocketchat-longhorn-webapp
       nodeSelector:
         kubernetes.io/hostname: doorman
