@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: tyz-social-web-templates
   namespace: personal
-stringData:
+data:
   # ripped from the app, if this changes in the build it must be manually updated
   index.tmpl: |
     {{- /*
