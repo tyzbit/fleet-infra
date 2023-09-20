@@ -1,0 +1,57 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app tyz-social-phanpy
+  namespace: flux-system
+spec:
+  releaseName: *app
+  targetNamespace: personal
+  timeout: 5m
+  interval: 2m
+  chart:
+    spec:
+      chart: app-template
+      version: 1.5.1
+      sourceRef:
+        name: bjw-s
+        kind: HelmRepository
+        namespace: flux-system
+  values:
+    controller:
+      type: deployment
+      replicas: 1
+
+    image:
+      repository: "ghcr.io/jjgadgets/phanpy"
+      tag: "production"
+
+    service:
+      main:
+        ports:
+          http:
+            port: 8080
+
+    ingress:
+      main:
+        enabled: true
+        annotations:
+          kubernetes.io/ingress.class: nginx
+          acme.cert-manager.io/http01-edit-in-place: "false"
+          nignx.ingress.kubernetes.io/force-ssl-redirect: "true"
+          cert-manager.io/cluster-issuer: letsencrypt
+          external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+          external-dns.alpha.kubernetes.io/target: ${cloudflared_tunnel_uuid}.cfargotunnel.com
+          nginx.ingress.kubernetes.io/proxy-body-size: 4096m
+        hosts:
+          - host: &host "phanpy.tyz.social"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host
+    resources:
+      requests:
+        cpu: 10m
+      limits:
+        memory: 512Mi
