@@ -32,12 +32,12 @@ spec:
       repository: docker.io/superseriousbusiness/gotosocial
       tag: 0.11.1
 
-    command:
-      - /bin/sh
-      - -c
-      - |
-        sed -i -E 's/semaphore.social/web.tyz.social/g' /gotosocial/web/template/index.tmpl && \
-        /gotosocial/gotosocial server start
+    # command:
+    #   - /bin/sh
+    #   - -c
+    #   - |
+    #     sed -i -E 's/semaphore.social/web.tyz.social/g' /gotosocial/web/template/index.tmpl && \
+    #     /gotosocial/gotosocial server start
 
     env:
       TZ: America/New_York
@@ -108,6 +108,13 @@ spec:
         <<: *cert
         subPath: tls.key
         mountPath: *key
+      web-template-overrides:
+        enabled: true
+        type: configmap
+        name: tyz-social-web-templates
+        subPath:
+          - name: index.tmpl
+            mountPath: /gotosocial/web/template/index.tmpl
 
     resources:
       requests:
