@@ -36,9 +36,9 @@ spec:
       volumes:
         - name: src
           persistentVolumeClaim:
-            claimName: rocketchat-longhorn-objectstorage
+            claimName: datadir-earthlings-chat-mongodb-0
         - name: dst
           persistentVolumeClaim:
-            claimName: rocketchat-longhorn-webapp
+            claimName: mongo-longhorn-database
       nodeSelector:
         kubernetes.io/hostname: doorman
