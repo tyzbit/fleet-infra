@@ -23,10 +23,11 @@ spec:
       enabled: true
     persistence:
       enabled: true
-      existingClaim: rocketchat-longhorn-objectstorage
+      existingClaim: rocketchat-longhorn-webapp
     mongodb:
+      architecture: standalone
       persistence:
-        existingClaim: mongo-longhorn-database
+        exisringClaim: mongo-longhorn-database
     ingress:
       enabled: true
       annotations:
