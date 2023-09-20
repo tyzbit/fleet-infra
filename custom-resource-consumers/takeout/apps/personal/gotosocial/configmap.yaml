@@ -44,7 +44,7 @@ data:
         </p>
         <div class="applist">
           <div class="entry">
-            <svg role="img" aria-labelledby="phanpyTitle phanpyDesc" class="logo redraw" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 146 120">
+            <svg role="img" aria-labelledby="phanpyTitle phanpyDesc" class="logo redraw" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
               <title id="phanpyTitle">The Phanpy logo</title>
               <desc id="phanpyDesc">A waving flag</desc>
               <path fill="#a4bff7" d="M37.774 11.471c14.639 3.752 19.034 16.557 15.889 31.304-.696 3.261-2.563 6.661-6.356 8.693-3.204 1.717-8.07 2.537-15.338.55l-9.634-2.404C11.651 46.992 8.378 38.733 10.027 31.823c3.627-15.201 15.543-23.48 27.747-20.352Z"/>
