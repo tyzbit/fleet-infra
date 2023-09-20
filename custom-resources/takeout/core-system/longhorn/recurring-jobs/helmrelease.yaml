@@ -121,5 +121,8 @@ spec:
             retain: 4
           - interval: 24h
             retain: 2
+        backup:
+          - interval: 24h
+            retain: 7
         filesystem-trim:
           - interval: 20m
