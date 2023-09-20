@@ -2,7 +2,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: migrate-pv
-  namespace: rocketchat-${chat_name}-chat
+  namespace: rocketchat-${chat_name}-mongo
 spec:
   backoffLimit: 0
   template:
