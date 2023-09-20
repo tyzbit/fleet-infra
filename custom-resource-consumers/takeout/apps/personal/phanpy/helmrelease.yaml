@@ -43,13 +43,15 @@ spec:
           external-dns.alpha.kubernetes.io/target: ${cloudflared_tunnel_uuid}.cfargotunnel.com
           nginx.ingress.kubernetes.io/proxy-body-size: 4096m
         hosts:
-          - host: &host "phanpy.tyz.social"
+          - host: web.tyz.social
             paths:
               - path: /
                 pathType: Prefix
         tls:
           - hosts:
-              - *host
+              - tyz.social
+              - web.tyz.social
+            secretName: tyz-social-gotosocial-tls
     resources:
       requests:
         cpu: 10m
