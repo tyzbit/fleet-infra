@@ -26,6 +26,7 @@ spec:
       existingClaim: rocketchat-longhorn-webapp
     mongodb:
       architecture: standalone
+      useStatefulSet: true
       persistence:
         exisringClaim: mongo-longhorn-database
     ingress:
