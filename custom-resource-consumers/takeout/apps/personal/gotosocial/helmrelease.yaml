@@ -120,7 +120,7 @@ spec:
       requests:
         cpu: 10m
       limits:
-        memory: 256Mi
+        memory: 1024Mi
 
     probes:
       # this is mostly to get rid of the "TLS handshake error: EOF" logs, more than getting more precise healthchecks lol

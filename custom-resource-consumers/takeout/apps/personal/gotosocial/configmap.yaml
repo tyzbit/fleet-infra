@@ -53,7 +53,7 @@ data:
             </svg>
             <div>
               <h2>Phanpy</h2>
-              <p>Phanpy is a web client for tyz.social</p>
+              <p>Phanpy is a web client you can use for tyz.social and other Mastodon-compatible servers.</p>
               <a href="https://web.tyz.social/" target="_blank" rel="noopener">Use Phanpy</a>
             </div>
           </div>
