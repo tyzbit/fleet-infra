@@ -2,6 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: tyz-social-web-templates
+  namespace: personal
 stringData:
   # ripped from the app, if this changes in the build it must be manually updated
   index.tmpl: |
