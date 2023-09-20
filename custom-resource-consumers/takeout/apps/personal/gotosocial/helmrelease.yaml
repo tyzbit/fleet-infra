@@ -113,7 +113,7 @@ spec:
         type: configmap
         name: tyz-social-web-templates
         subPath:
-          - name: index.tmpl
+          - path: index.tmpl
             mountPath: /gotosocial/web/template/index.tmpl
 
     resources:
