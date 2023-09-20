@@ -110,7 +110,7 @@ spec:
         mountPath: *key
       web-template-overrides:
         enabled: true
-        type: configmap
+        type: configMap
         name: tyz-social-web-templates
         subPath:
           - path: index.tmpl
