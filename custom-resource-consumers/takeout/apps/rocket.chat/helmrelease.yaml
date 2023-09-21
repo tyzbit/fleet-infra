@@ -25,13 +25,8 @@ spec:
       enabled: true
       existingClaim: rocketchat-longhorn-webapp
     mongodb:
-      architecture: standalone
-      useStatefulSet: true
-      mongodb:
-        service:
-          nameOverride: ${chat_name}-chat-mongodb-headless
       persistence:
-        exisringClaim: mongo-longhorn-database
+        storageClassName: longhorn-objectstorage
     ingress:
       enabled: true
       annotations:
