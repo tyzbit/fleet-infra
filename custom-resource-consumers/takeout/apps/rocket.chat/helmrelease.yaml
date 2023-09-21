@@ -27,6 +27,8 @@ spec:
     mongodb:
       architecture: standalone
       useStatefulSet: true
+      service:
+        nameOverride: ${chat_name}-chat-mongodb-headless
       persistence:
         exisringClaim: mongo-longhorn-database
     ingress:
