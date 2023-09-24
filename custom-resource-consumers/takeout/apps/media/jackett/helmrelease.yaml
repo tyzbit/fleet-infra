@@ -18,7 +18,7 @@ spec:
   values:
     image:
       repository: linuxserver/jackett
-      tag: 0.21.867
+      tag: 0.21.887
 
     controller:
       replicas: 1 # active nas
