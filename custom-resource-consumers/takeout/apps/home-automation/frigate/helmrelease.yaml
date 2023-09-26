@@ -26,6 +26,8 @@ spec:
     controller:
       annotations:
         reloader.stakater.com/auto: "true"
+      labels:
+        kube-image-keeper.enix.io/image-cache: disabled
       replicas: 1 # active longhorn
       type: statefulset
 

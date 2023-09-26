@@ -23,11 +23,14 @@ spec:
       image:
         repository: quay.io/enix/kube-image-keeper
       webhook:
-        #   objectSelector:
-        #     matchExpressions:
-        #       - key: kube-image-keeper.enix.io/image-cache
-        #         operator: In
-        #         values: ["enabled"]
+        objectSelector:
+          matchExpressions:
+            - key: kube-image-keeper.enix.io/image-cache
+              operator: NotIn
+              values: ["disabled"]
+            # - key: kube-image-keeper.enix.io/image-cache
+            #   operator: In
+            #   values: ["enabled"]
         ignoredNamespaces:
           - kube-system
           - calico-apiserver
