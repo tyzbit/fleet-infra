@@ -24,12 +24,13 @@ spec:
       tag: dev-83006ee@sha256:833933c837d76d3fafe1fbbcaafddf58059990b06ab8ab11dfd2bc0ed0e070a2
 
     controller:
-      annotations:
-        reloader.stakater.com/auto: "true"
-      labels:
-        kube-image-keeper.enix.io/image-cache: disabled
       replicas: 1 # active longhorn
       type: statefulset
+
+    podAnnotations:
+      reloader.stakater.com/auto: "true"
+    podLabels:
+      kube-image-keeper.enix.io/image-cache: disabled
 
     env:
       - name: TZ

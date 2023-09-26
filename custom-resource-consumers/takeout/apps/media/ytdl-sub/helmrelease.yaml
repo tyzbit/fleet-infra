@@ -23,14 +23,15 @@ spec:
       tag: "latest@sha256:5f5e892d4b05ec6364cf6cd8c7d313b4a234895c90c7f6a38d354b9f385f94ec" # 2023-02-24 03:00 -0400
 
     controller:
-      labels:
-        kube-image-keeper.enix.io/image-cache: disabled
       type: cronjob
       restartPolicy: OnFailure
       cronjob:
         # schedule: "0 0 5 31 2" # Disable cronjob by giving it a schedule that will never run # active nas
         schedule: "*/15 * * * *"
         ttlSecondsAfterFinished: 86400
+
+    podLabels:
+      kube-image-keeper.enix.io/image-cache: disabled
 
     command:
       - bash
