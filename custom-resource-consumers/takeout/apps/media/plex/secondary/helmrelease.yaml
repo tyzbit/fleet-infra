@@ -18,7 +18,7 @@ spec:
   values:
     image:
       repository: plexinc/pms-docker
-      tag: 1.32.6.7468-07e0d4a7e # {"$imagepolicy": "flux-system:plex-secondary:tag"}
+      tag: 1.32.6.7557-1cf77d501 # {"$imagepolicy": "flux-system:plex-secondary:tag"}
     podAnnotations:
       reloader.stakater.com/auto: "true"
     controller:
