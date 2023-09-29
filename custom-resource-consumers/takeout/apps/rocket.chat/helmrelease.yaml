@@ -25,6 +25,8 @@ spec:
       enabled: true
       existingClaim: rocketchat-longhorn-webapp
     mongodb:
+      service:
+        clusterIP: ""
       persistence:
         storageClassName: longhorn-objectstorage
     ingress:
