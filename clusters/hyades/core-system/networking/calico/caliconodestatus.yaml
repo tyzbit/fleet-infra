@@ -1,0 +1,11 @@
+apiVersion: projectcalico.org/v3
+kind: CalicoNodeStatus
+metadata:
+  name: hyades
+spec:
+  classes:
+    - Agent
+    - BGP
+    - Routes
+  node: hyades
+  updatePeriodSeconds: 10
