@@ -1,0 +1,128 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: longhorn-recurring-jobs
+  namespace: flux-system
+spec:
+  targetNamespace: longhorn-system
+  releaseName: longhorn-recurring-jobs
+  timeout: 120s
+  chart:
+    spec:
+      chart: longhorn-recurring-jobs
+      version: "5.0.2"
+      sourceRef:
+        kind: HelmRepository
+        name: tyzbit
+        namespace: flux-system
+  interval: 2m0s
+  values:
+    minuteStep: 5
+    hourStep: 2
+    createStorageClasses: true
+    storageclass:
+      allowVolumeExpansion: true
+      reclaimPolicy: Retain
+    parameters:
+      replicaAutoBalance: "ignored"
+      dataLocality: "best-effort"
+      numberOfReplicas: "3"
+      staleReplicaTimeout: "30"
+    groups:
+      "Blog":
+        snapshot:
+          - interval: 10m
+            retain: 6
+            # concurrency: 10
+        # backup:
+        #   - interval: 24h
+        #     retain: 2
+        filesystem-trim:
+          - interval: 20m
+
+      "ContainerImageCache":
+        options:
+          parameters:
+            numberOfReplicas: "2"
+        snapshot:
+          - interval: 10m
+            retain: 1
+        filesystem-trim:
+          - interval: 20m
+
+      "Crypto":
+        options:
+          storageclass:
+            reclaimPolicy: Delete
+          parameters:
+            numberOfReplicas: "2"
+        snapshot:
+          - interval: 10m
+            retain: 1
+        filesystem-trim:
+          - interval: 20m
+
+      "Database":
+        snapshot:
+          - interval: 10m
+            retain: 6
+        # backup:
+        #   - interval: 12h
+        #     retain: 14
+        filesystem-trim:
+          - interval: 20m
+
+      "Gameserver":
+        options:
+          parameters:
+            numberOfReplicas: "2"
+        snapshot:
+          - interval: 10m
+            retain: 6
+          - interval: 1h
+            retain: 6
+        # backup:
+        #   - interval: 12h
+        #     retain: 4
+        filesystem-trim:
+          - interval: 20m
+
+      "Plex":
+        snapshot:
+          - interval: 10m
+            retain: 6
+        # backup:
+        #   - interval: 24h
+        #     retain: 2
+
+      "Multimedia":
+        # backup:
+        #   - interval: 24h
+        #     retain: 2
+        filesystem-trim:
+          - interval: 20m
+
+      "Webapp":
+        snapshot:
+          - interval: 10m
+            retain: 6
+        # backup:
+        #   - interval: 24h
+        #     retain: 7
+        filesystem-trim:
+          - interval: 20m
+
+      "ObjectStorage":
+        options:
+          parameters:
+            numberOfReplicas: "2"
+        snapshot:
+          - interval: 6h
+            retain: 4
+          - interval: 24h
+            retain: 2
+        # backup:
+        #   - interval: 24h
+        #     retain: 7
+        filesystem-trim:
+          - interval: 20m

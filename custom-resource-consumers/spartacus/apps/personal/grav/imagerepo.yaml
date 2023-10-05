@@ -1,0 +1,10 @@
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImageRepository
+metadata:
+  name: dsavell-grav
+  namespace: flux-system
+spec:
+  secretRef:
+    name: docker-hub
+  image: docker.io/dsavell/grav
+  interval: 5m0s

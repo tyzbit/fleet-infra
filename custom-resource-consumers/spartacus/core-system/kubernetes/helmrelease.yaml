@@ -1,0 +1,69 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: imagepullsecret-patcher
+  namespace: flux-system
+spec:
+  releaseName: imagepullsecret-patcher
+  targetNamespace: kube-system
+  timeout: 2m
+  interval: 2m0s
+  chart:
+    spec:
+      chart: app-template
+      version: "1.5.1"
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  values:
+    image:
+      repository: quay.io/titansoft/imagepullsecret-patcher
+      tag: v0.14
+
+    controller:
+      replicas: 1
+
+    env:
+      TZ: America/New_York
+      ## https://github.com/titansoft-pte-ltd/imagepullsecret-patcher#installation-and-configuration
+      # CONFIG_ALLSERVICEACCOUNT: "true"
+      # CONFIG_DEBUG: "true"
+      # CONFIG_EXCLUDED_NAMESPACES: default,kube-system
+      # CONFIG_FORCE: "true"
+      CONFIG_DOCKERCONFIGJSONPATH: /.dockerconfigjson
+      CONFIG_LOOP_DURATION: 1m0s
+      CONFIG_MANAGEDONLY: "true"
+      CONFIG_SECRETNAME: universal-image-pull-secret
+      CONFIG_SERVICEACCOUNTS: default
+      ## Exit after updating secrets
+      # CONFIG_RUNONCE: "true"
+
+    serviceAccount:
+      name: imagepullsecret-patcher
+
+    persistence:
+      secret:
+        enabled: true
+        name: universal-docker-auth
+        type: secret
+        mountPath: /.dockerconfigjson
+        subPath: .dockerconfigjson
+        readOnly: true
+        defaultMode: 0755
+
+    probes:
+      startup:
+        enabled: false
+      liveness:
+        enabled: false
+      readiness:
+        enabled: false
+
+    service:
+      main:
+        enabled: false
+
+    ingress:
+      main:
+        enabled: false

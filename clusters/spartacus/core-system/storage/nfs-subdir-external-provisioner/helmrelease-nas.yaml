@@ -21,4 +21,4 @@ spec:
       pathPattern: "$${.PVC.namespace}-$${.PVC.name}"
     nfs:
       server: nas.jura
-      path: /volume1/hyades_cluster_storage
+      path: /volume1/cluster_storage

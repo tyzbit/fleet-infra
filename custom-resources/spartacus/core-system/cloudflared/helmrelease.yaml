@@ -1,0 +1,61 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app cloudflared
+  namespace: *app
+spec:
+  releaseName: *app
+  targetNamespace: *app
+  interval: 2m0s
+  chart:
+    spec:
+      chart: app-template
+      version: "1.5.1"
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  values:
+    global:
+      nameOverride: *app
+    controller:
+      type: daemonset
+      annotations:
+        reloader.stakater.com/auto: "true"
+    image:
+      repository: cloudflare/cloudflared
+      tag: 2023.8.2-amd64
+    args:
+      - tunnel
+      - --config
+      - &configpath /etc/cloudflared/config.yaml
+      - --no-autoupdate
+      - run
+    persistence:
+      config: &config
+        enabled: true
+        name: cloudflared-config
+        type: configMap
+        mountPath: *configpath
+        subPath: config.yaml
+        readOnly: true
+        defaultMode: 0755
+      credentials:
+        <<: *config
+        type: secret
+        name: cloudflared-cred
+        mountPath: /etc/cloudflared/cred.json
+        subPath: cred.json
+    resources:
+      requests:
+        memory: 64Mi
+        cpu: 10m
+      limits:
+        memory: 128Mi
+    service:
+      main:
+        enabled: false
+    ingress:
+      main:
+        enabled: false
