@@ -18,24 +18,3 @@ spec:
   update:
     path: ./custom-resources/takeout
     strategy: Setters
----
-# apiVersion: image.toolkit.fluxcd.io/v1beta1
-# kind: ImageUpdateAutomation
-# metadata:
-#   name: flux-system
-#   namespace: flux-system
-# spec:
-#   checkout:
-#     branch: main
-#     gitRepositoryRef:
-#       name: flux-system
-#   commit:
-#     authorEmail: fluxcdbot@users.noreply.github.com
-#     authorName: fluxcdbot
-#     messageTemplate: '{{range .Updated.Images}}{{println .}}{{end}}'
-#   interval: 2m0s
-#   push:
-#     branch: main
-#   update:
-#     path: ./clusters/takeout
-#     strategy: Setters
