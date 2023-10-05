@@ -19,7 +19,7 @@ spec:
     grav:
       image:
         repository: dsavell/grav
-        tag: admin-1.7.43-20231004 # {"$imagepolicy": "flux-system:grav:tag"}
+        tag: admin-1.7.43-20231005 # {"$imagepolicy": "flux-system:grav:tag"}
         pullPolicy: Always
       probes:
         liveness: &probes
