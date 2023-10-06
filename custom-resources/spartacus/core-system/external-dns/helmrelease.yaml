@@ -18,7 +18,7 @@ spec:
   values:
     provider: cloudflare
     triggerLoopOnEvent: true
-    txtOwnerId: "takeout-automatic"
+    txtOwnerId: "spartacus-automatic"
     sources:
       - ingress
     extraArgs:
@@ -32,4 +32,4 @@ spec:
             key: apikey
             name: cloudflare-global-apikey
       - name: CF_API_EMAIL
-        value: "tyzbit@gmail.com"
+        value: ${personal_email}
