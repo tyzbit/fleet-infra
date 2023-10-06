@@ -6,6 +6,9 @@ metadata:
 spec:
   targetNamespace: longhorn-system
   releaseName: longhorn-recurring-jobs
+  dependsOn:
+    - name: longhorn
+      namespace: flux-system
   timeout: 120s
   chart:
     spec:
