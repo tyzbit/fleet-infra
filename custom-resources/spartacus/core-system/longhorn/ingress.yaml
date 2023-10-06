@@ -17,7 +17,7 @@ metadata:
 spec:
   tls:
     - hosts:
-        - &host "longhorn.spartacus.${personal_domain}"
+        - &host "longhorn-spartacus.${personal_domain}"
       secretName: *host
   rules:
     - host: longhorn.spartacus.jura
@@ -55,7 +55,7 @@ metadata:
 spec:
   tls:
     - hosts:
-        - &host "longhorn.spartacus.${personal_domain}"
+        - &host "longhorn-spartacus.${personal_domain}"
       secretName: *host
   rules:
     - host: longhorn.spartacus.jura
