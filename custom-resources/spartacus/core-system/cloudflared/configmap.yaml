@@ -14,5 +14,4 @@ data:
       enabled: false
 
     ingress:
-      - hostname: ${social_domain}
-        service: https://kube-system-ingress-nginx-controller.kube-system.svc.cluster.local
+      - service: https://kube-system-ingress-nginx-controller.kube-system
