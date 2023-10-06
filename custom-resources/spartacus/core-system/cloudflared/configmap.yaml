@@ -12,6 +12,5 @@ data:
       noTLSVerify: true
     warp-routing:
       enabled: false
-
     ingress:
       - service: https://kube-system-ingress-nginx-controller.kube-system
