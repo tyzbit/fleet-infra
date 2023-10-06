@@ -18,7 +18,7 @@ spec:
         - &host "longhorn.spartacus.${personal_domain}"
       secretName: *host
   rules:
-    - host: longhorn.jura
+    - host: longhorn.spartacus.jura
       http:
         paths:
           - pathType: Prefix
@@ -54,7 +54,7 @@ spec:
         - &host "longhorn.spartacus.${personal_domain}"
       secretName: *host
   rules:
-    - host: longhorn.jura
+    - host: longhorn.spartacus.jura
       http:
         paths:
           - path: /oauth2
