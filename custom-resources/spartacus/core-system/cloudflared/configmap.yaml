@@ -14,5 +14,5 @@ data:
       enabled: false
 
     ingress:
-      - hostname: *
+      - hostname: "*"
         service: https://kube-system-ingress-nginx-controller.kube-system.svc.cluster.local
