@@ -18,7 +18,7 @@ spec:
     fullnameOverride: nfs-provisioner-nas
     storageClass:
       name: nas
-      pathPattern: "$${.PVC.namespace}-$${.PVC.name}"
+      pathPattern: "${.PVC.namespace}-${.PVC.name}"
     nfs:
       server: nas.jura
       path: /volume1/cluster_storage
