@@ -8,7 +8,7 @@ metadata:
     nginx.ingress.kubernetes.io/auth-url: "http://longhorn-oauth2-proxy.longhorn-system.svc.cluster.local/oauth2/auth"
     nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
     cert-manager.io/cluster-issuer: letsencrypt
-    acme.cert-manager.io/http01-edit-in-place: "false"
+    acme.cert-manager.io/http01-edit-in-place: "true"
     nignx.ingress.kubernetes.io/force-ssl-redirect: "true"
     external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
     external-dns.alpha.kubernetes.io/target: ${cloudflared_tunnel_uuid}.cfargotunnel.com
