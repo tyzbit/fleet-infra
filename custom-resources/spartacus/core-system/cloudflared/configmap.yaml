@@ -7,7 +7,6 @@ data:
   config.yaml: |
     tunnel: ${cloudflared_tunnel_uuid}
     credentials-file: /etc/cloudflared/cred.json
-    config_src: local
     originRequest:
       connectTimeout: 30s
       noTLSVerify: true
@@ -15,4 +14,4 @@ data:
       enabled: false
 
     ingress:
-      - service: http://kube-system-ingress-nginx-controller.kube-system
+      - service: https://kube-system-ingress-nginx-controller.kube-system
