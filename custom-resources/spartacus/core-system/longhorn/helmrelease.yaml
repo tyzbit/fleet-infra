@@ -34,7 +34,8 @@ spec:
       # well enough. See: https://longhorn.io/docs/1.4.0/advanced-resources/deploy/revision_counter/
       disableRevisionCounter: false
       disableSchedulingOnCordonedNode: true # default
-      defaultDataPath: /var/lib/longhorn
+      defaultDataPath: /mnt/longhorn
+      defaultDataLocality: best-effort
       defaultLonghornStaticStorageClass: longhorn
       defaultReplicaCount: 3 # default
       engineReplicaTimeout: 8 # default
@@ -53,6 +54,7 @@ spec:
       snapshotDataIntegrityImmediateCheckAfterSnapshotCreation: false # default
       storageMinimalAvailablePercentage: 10
       storageOverProvisioningPercentage: 100
+      storageReservedPercentageForDefaultDisk: 0
       upgradeChecker: false # I watch for Longhorn releases
       v2DataEngine: false # default, disabled
 ---

@@ -35,6 +35,7 @@ spec:
       disableRevisionCounter: false
       disableSchedulingOnCordonedNode: true # default
       defaultDataPath: /mnt/external/longhorn
+      defaultDataLocality: best-effort
       defaultLonghornStaticStorageClass: longhorn
       defaultReplicaCount: 3 # default
       engineReplicaTimeout: 8 # default
@@ -53,6 +54,7 @@ spec:
       snapshotDataIntegrityImmediateCheckAfterSnapshotCreation: false # default
       storageMinimalAvailablePercentage: 10
       storageOverProvisioningPercentage: 100
+      storageReservedPercentageForDefaultDisk: 0
       upgradeChecker: false # I watch for Longhorn releases
       v2DataEngine: false # default, disabled
 ---
