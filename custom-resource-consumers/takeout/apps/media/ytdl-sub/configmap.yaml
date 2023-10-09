@@ -85,9 +85,8 @@ data:
           episode_path: "{episode_file_name}"
 
         video_tags:
-          tags:
-            episode: "{episode}"
-            season: "{season_number}"
+          episode: "{episode}"
+          season: "{season_number}"
 
       yt_playlist_one_season:
         preset: yt_playlist
