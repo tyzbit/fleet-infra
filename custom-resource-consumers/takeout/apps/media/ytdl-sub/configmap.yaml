@@ -13,6 +13,10 @@ data:
       working_directory: "/tmp/ytdl-sub"
 
     presets:
+      overrides:
+        tv_show_name: "{subscription_name}"
+        url: "{subscription_value}"
+        
       yt_video:
         download:
           download_strategy: "url"
@@ -46,8 +50,6 @@ data:
           video_path: "{video_type_sanitized}/{video_name}"
           download_before: "now"
           download_after: "19000101"
-          tv_show_name: "{subscription_name}"
-          download: "{subscription_value}"
 
         video_tags:
             title: "{title}"
