@@ -46,8 +46,6 @@ data:
           video_path: "{video_type_sanitized}/{video_name}"
           download_before: "now"
           download_after: "19000101"
-          tv_show_name: "{subscription_name}"
-          download: "{subscription_value}"
 
         video_tags:
             title: "{title}"
@@ -78,6 +76,7 @@ data:
           output_directory: "/media/youtube/playlists/{tv_show_name_sanitized}"
           file_name: "{episode_path}.{ext}"
           thumbnail_name: "{episode_path}-thumb.{thumbnail_ext}"
+          download: "{subscription_value}"
 
         overrides:
           tv_show_name: "OVERRIDE IN SUBSCRIPTION"
@@ -96,9 +95,14 @@ data:
         preset: yt_playlist
         overrides:
           season: "00"
+          tv_show_name: "{subscription_name}"
+          download: "{subscription_value}"
 
       yt_channel:
         preset: yt_playlist
+        overrides:
+          tv_show_name: "{subscription_name}"
+          download: "{subscription_value}"
         match_filters:
           filters:
             - "original_url!*=/shorts/"
