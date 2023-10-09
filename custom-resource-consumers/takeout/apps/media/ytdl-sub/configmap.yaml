@@ -76,7 +76,6 @@ data:
           output_directory: "/media/youtube/playlists/{tv_show_name_sanitized}"
           file_name: "{episode_path}.{ext}"
           thumbnail_name: "{episode_path}-thumb.{thumbnail_ext}"
-          download: "{subscription_value}"
 
         overrides:
           tv_show_name: "OVERRIDE IN SUBSCRIPTION"
