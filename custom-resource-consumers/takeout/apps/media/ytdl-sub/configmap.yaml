@@ -64,13 +64,13 @@ data:
           - yt_video
           - season_by_year__episode_by_download_index
 
-        # download:
-        #   download_strategy: "url"
-        #   playlist_thumbnails:
-        #     - name: "poster.jpg"
-        #       uid: "avatar_uncropped"
-        #     - name: "banner.jpg"
-        #       uid: "banner_uncropped"
+        download:
+          download_strategy: "url"
+          playlist_thumbnails:
+            - name: "poster.jpg"
+              uid: "avatar_uncropped"
+            - name: "banner.jpg"
+              uid: "banner_uncropped"
 
         output_options:
           output_directory: "/media/youtube/playlists/{tv_show_name_sanitized}"
@@ -78,7 +78,8 @@ data:
           thumbnail_name: "{episode_path}-thumb.{thumbnail_ext}"
 
         overrides:
-          tv_show_name: "OVERRIDE IN SUBSCRIPTION"
+          tv_show_name: "{subscription_name}"
+          download: "{subscription_value}"
           date: "{upload_date}"
           episode: "{download_index}"
           episode_padded: "{download_index_padded6}"
