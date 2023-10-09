@@ -38,7 +38,7 @@ data:
           file_name: "{video_path}.{ext}"
           thumbnail_name: "{video_path}-thumb.{thumbnail_ext}"
           keep_files_after: "{download_after}"
-          migrated_download_archive_name: ".{tv_show_name_sanitized}-download-archive.json"
+          download_archive_name: ".{tv_show_name_sanitized}-download-archive.json"
 
         overrides:
           video_name: "{title_sanitized}-{upload_date}"
@@ -46,6 +46,8 @@ data:
           video_path: "{video_type_sanitized}/{video_name}"
           download_before: "now"
           download_after: "19000101"
+          tv_show_name: "{subscription_name}"
+          url: "{subscription_value}"
 
         video_tags:
             title: "{title}"
