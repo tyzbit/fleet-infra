@@ -47,7 +47,8 @@ data:
           download_before: "now"
           download_after: "19000101"
           tv_show_name: "{subscription_name}"
-          download: "{subscription_value}"
+          download:
+            - "{subscription_value}"
 
         video_tags:
             title: "{title}"
