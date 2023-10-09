@@ -94,13 +94,11 @@ data:
         overrides:
           season: "00"
           tv_show_name: "{subscription_name}"
-          download: "{subscription_value}"
 
       yt_channel:
         preset: yt_playlist
         overrides:
           tv_show_name: "{subscription_name}"
-          download: "{subscription_value}"
         match_filters:
           filters:
             - "original_url!*=/shorts/"
