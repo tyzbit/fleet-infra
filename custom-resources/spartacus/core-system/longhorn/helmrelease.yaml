@@ -17,23 +17,14 @@ spec:
   interval: 2m0s
   values:
     defaultSettings:
-      # see longhorn-metrics.yaml in this repo for an example
-      # how to disable collecting usage metrics
       allowRecurringJobWhileVolumeDetached: false # default
       autoCleanupSystemGeneratedSnapshot: true # default
       autoDeletePodWhenVolumeDetachedUnexpectedly: true # default
       autoSalvage: true # default
-      # backupTarget: s3://${longhorn_backup_bucket}@us-east-1/
-      # backupTargetCredentialSecret: longhorn-takeout-backups
-      # backupstorePollInterval: 0 # seconds
       concurrentAutomaticEngineUpgradePerNodeLimit: 3
       concurrentReplicaRebuildPerNodeLimit: 10 # double the default, 5
       concurrentVolumeBackupRestorePerNodeLimit: 5 # default
       createDefaultDiskLabeledNodes: true
-      # This is tempting to set to true, but I am not okay with trading
-      # confidence about which volume is the best in a rebuild for more
-      # performance. Picking the biggest replica is naiive, my cluster performs
-      # well enough. See: https://longhorn.io/docs/1.4.0/advanced-resources/deploy/revision_counter/
       disableRevisionCounter: false
       disableSchedulingOnCordonedNode: true # default
       defaultDataPath: /mnt/longhorn
