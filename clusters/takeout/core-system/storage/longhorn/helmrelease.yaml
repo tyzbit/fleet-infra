@@ -45,7 +45,7 @@ spec:
       fastReplicaRebuildEnabled: true # relies on snapshotDataIntegrity to be enable or fast-check
       guaranteedInstaceManagerCPU: 20 # percent
       nodeDownPodDeletionPolicy: delete-both-statefulset-and-deployment-pod
-      offlineReplicaRebuilding: true # default
+      offlineReplicaRebuilding: enabled # default
       orphanAutoDeletion: true # This deletes anything not Longhorn in the data directory. Be careful.
       replicaReplenishmentWaitInterval: 90 # 15% of default (600), in seconds
       removeSnapshotsDuringFilesystemTrim: false # default
