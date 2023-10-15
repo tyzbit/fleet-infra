@@ -17,6 +17,8 @@ spec:
   interval: 2m0s
   values:
     defaultSettings:
+      # see longhorn-metrics.yaml in this repo for an example
+      # how to disable collecting usage metrics
       allowRecurringJobWhileVolumeDetached: false # default
       autoCleanupSystemGeneratedSnapshot: true # default
       autoDeletePodWhenVolumeDetachedUnexpectedly: true # default
