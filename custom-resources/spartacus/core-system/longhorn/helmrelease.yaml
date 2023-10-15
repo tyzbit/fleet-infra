@@ -41,8 +41,7 @@ spec:
       engineReplicaTimeout: 8 # default
       failedBackupTTL: 1440 # default
       fastReplicaRebuildEnabled: true # relies on snapshotDataIntegrity to be enable or fast-check
-      guaranteedEngineManagerCPU: 20 # percent
-      guaranteedReplicaManagerCPU: 20 # percent
+      guaranteedInstanceManagerCPU: 20 # percent
       nodeDownPodDeletionPolicy: delete-both-statefulset-and-deployment-pod
       offlineReplicaRebuilding: true # default
       orphanAutoDeletion: true # This deletes anything not Longhorn in the data directory. Be careful.
