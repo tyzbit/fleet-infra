@@ -46,10 +46,23 @@ spec:
       snapshotDataIntegrityImmediateCheckAfterSnapshotCreation: false # default
       storageMinimalAvailablePercentage: 10
       storageOverProvisioningPercentage: 100
-      # # this doesn't work on 1.5.1, look for 'storage-reserved-percentage-for-default-disk'
-      # storageReservedPercentageForDefaultDisk: 30
-      upgradeChecker: false # I watch for Longhorn releases
+      # storageReservedPercentageForDefaultDisk: 0 # This doesn't work on 1.5.1, I use a postRenderer workaround
+      upgradeChecker: false # I watch for Longhorn releases elsewhere
       v2DataEngine: false # default, disabled
+  postRenderers:
+    - kustomize:
+        patchesStrategicMerge:
+          - &setting
+            apiVersion: longhorn.io/v1beta2
+            kind: Setting
+            metadata:
+              name: allow-collecting-longhorn-usage-metrics
+              namespace: longhorn-system
+            value: "false"
+          - <<: *setting
+            metadata:
+              name: storage-reserved-percentage-for-default-disk
+            value: 0
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
