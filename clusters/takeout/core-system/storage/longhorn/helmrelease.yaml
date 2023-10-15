@@ -55,7 +55,8 @@ spec:
       snapshotDataIntegrityImmediateCheckAfterSnapshotCreation: false # default
       storageMinimalAvailablePercentage: 10
       storageOverProvisioningPercentage: 100
-      storageReservedPercentageForDefaultDisk: "30" # this doesn't work, look for 'storage-reserved-percentage-for-default-disk'
+      # # this doesn't work on 1.5.1, look for 'storage-reserved-percentage-for-default-disk'
+      # storageReservedPercentageForDefaultDisk: "30"
       upgradeChecker: false # I watch for Longhorn releases
       v2DataEngine: false # default, disabled
 ---

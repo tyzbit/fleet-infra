@@ -1,0 +1,15 @@
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata:
+  name: allow-collecting-longhorn-usage-metrics
+  namespace: longhorn-system
+value: "false"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata:
+  name: storage-reserved-percentage-for-default-disk
+  namespace: longhorn-system
+value: "0"
+---
+
