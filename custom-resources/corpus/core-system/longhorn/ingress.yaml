@@ -17,10 +17,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - &host "longhorn-spartacus.${personal_domain}"
+        - &host "longhorn-corpus.${personal_domain}"
       secretName: *host
   rules:
-    - host: longhorn.spartacus.jura
+    - host: longhorn.corpus.jura
       http:
         paths:
           - pathType: Prefix
@@ -55,10 +55,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - &host "longhorn-spartacus.${personal_domain}"
+        - &host "longhorn-corpus.${personal_domain}"
       secretName: *host
   rules:
-    - host: longhorn.spartacus.jura
+    - host: longhorn.corpus.jura
       http:
         paths:
           - path: /oauth2

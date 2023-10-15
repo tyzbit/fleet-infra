@@ -72,7 +72,7 @@ spec:
     extraArgs:
       provider: github
       github-org: "${blog_name}"
-      github-team: "super-admins,spartacus-longhorn"
+      github-team: "super-admins,corpus-longhorn"
       cookie-expire: 168h0m0s
       scope: "user:email"
     config:

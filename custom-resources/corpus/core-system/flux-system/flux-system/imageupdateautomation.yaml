@@ -16,5 +16,5 @@ spec:
       messageTemplate: "{{range .Updated.Images}}{{println .}}{{end}}"
   interval: 2m0s
   update:
-    path: ./custom-resources/spartacus
+    path: ./custom-resources/corpus
     strategy: Setters
