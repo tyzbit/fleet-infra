@@ -37,11 +37,11 @@ spec:
       # disableRevisionCounter: false
       # disableSchedulingOnCordonedNode: true # default
       defaultDataPath: /mnt/longhorn
-      defaultDataLocality: best-effort
-      defaultLonghornStaticStorageClass: longhorn
-      defaultReplicaCount: 3 # default
-      engineReplicaTimeout: 8 # default
-      failedBackupTTL: 1440 # default
+      # defaultDataLocality: best-effort
+      # defaultLonghornStaticStorageClass: longhorn
+      # defaultReplicaCount: 3 # default
+      # engineReplicaTimeout: 8 # default
+      # failedBackupTTL: 1440 # default
       # fastReplicaRebuildEnabled: true # relies on snapshotDataIntegrity to be enable or fast-check
       # guaranteedInstanceManagerCPU: 20 # percent
       # nodeDownPodDeletionPolicy: delete-both-statefulset-and-deployment-pod
