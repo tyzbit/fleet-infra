@@ -36,7 +36,7 @@ spec:
       # # well enough. See: https://longhorn.io/docs/1.4.0/advanced-resources/deploy/revision_counter/
       # disableRevisionCounter: false
       # disableSchedulingOnCordonedNode: true # default
-      defaultDataPath: /mnt/longhorn
+      # defaultDataPath: /mnt/longhorn
       # defaultDataLocality: best-effort
       # defaultLonghornStaticStorageClass: longhorn
       # defaultReplicaCount: 3 # default
