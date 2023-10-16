@@ -4,7 +4,7 @@ metadata:
   name: longhorn
   namespace: flux-system
 spec:
-  targetNamespace: longhorn-system
+  targetNamespace: &ns longhorn-system
   releaseName: longhorn
   chart:
     spec:
@@ -15,54 +15,109 @@ spec:
         name: longhorn
         namespace: flux-system
   interval: 2m0s
-  values:
-    defaultSettings:
-      allowRecurringJobWhileVolumeDetached: false # default
-      autoCleanupSystemGeneratedSnapshot: true # default
-      autoDeletePodWhenVolumeDetachedUnexpectedly: true # default
-      autoSalvage: true # default
-      concurrentAutomaticEngineUpgradePerNodeLimit: 3
-      concurrentReplicaRebuildPerNodeLimit: 10 # double the default, 5
-      concurrentVolumeBackupRestorePerNodeLimit: 5 # default
-      createDefaultDiskLabeledNodes: true
-      disableRevisionCounter: false
-      disableSchedulingOnCordonedNode: true # default
-      defaultDataPath: /mnt/longhorn
-      defaultDataLocality: best-effort
-      defaultLonghornStaticStorageClass: longhorn
-      defaultReplicaCount: 3 # default
-      engineReplicaTimeout: 8 # default
-      failedBackupTTL: 1440 # default
-      fastReplicaRebuildEnabled: true # relies on snapshotDataIntegrity to be enable or fast-check
-      guaranteedInstanceManagerCPU: 20 # percent
-      nodeDownPodDeletionPolicy: delete-both-statefulset-and-deployment-pod
-      offlineReplicaRebuilding: enabled # default
-      orphanAutoDeletion: true # This deletes anything not Longhorn in the data directory. Be careful.
-      replicaReplenishmentWaitInterval: 90 # 15% of default (600), in seconds
-      removeSnapshotsDuringFilesystemTrim: false # default
-      restoreVolumeRecurringJobs: false # default - I use my longhorn-recurring-jobs chart instead
-      snapshotDataIntegrity: fast-check # default
-      snapshotDataIntegrityCronjob: 0 8 */7 * * # 4AM for EST
-      snapshotDataIntegrityImmediateCheckAfterSnapshotCreation: false # default
-      storageMinimalAvailablePercentage: 10
-      storageOverProvisioningPercentage: 100
-      # storageReservedPercentageForDefaultDisk: 0 # This doesn't work on 1.5.1, I use a postRenderer workaround
-      upgradeChecker: false # I watch for Longhorn releases elsewhere
-      v2DataEngine: false # default, disabled
+  # # Some values aren't available in the chart, so I just set them directly in
+  # # the configmap. This only sets the default values, they can be overridden
+  # # at runtime.
+  # values:
+  #   defaultSettings:
+  #     allowRecurringJobWhileVolumeDetached: false # default
+  #     autoCleanupSystemGeneratedSnapshot: true # default
+  #     autoDeletePodWhenVolumeDetachedUnexpectedly: true # default
+  #     autoSalvage: true # default
+  #     concurrentAutomaticEngineUpgradePerNodeLimit: 3
+  #     concurrentReplicaRebuildPerNodeLimit: 10 # double the default, 5
+  #     concurrentVolumeBackupRestorePerNodeLimit: 5 # default
+  #     createDefaultDiskLabeledNodes: true
+  #     disableRevisionCounter: false
+  #     disableSchedulingOnCordonedNode: true # default
+  #     defaultDataPath: /mnt/longhorn
+  #     defaultDataLocality: best-effort
+  #     defaultLonghornStaticStorageClass: longhorn
+  #     defaultReplicaCount: 3 # default
+  #     engineReplicaTimeout: 8 # default
+  #     failedBackupTTL: 1440 # default
+  #     fastReplicaRebuildEnabled: true # relies on snapshotDataIntegrity to be enable or fast-check
+  #     guaranteedInstanceManagerCPU: 20 # percent
+  #     nodeDownPodDeletionPolicy: delete-both-statefulset-and-deployment-pod
+  #     offlineReplicaRebuilding: enabled # default
+  #     orphanAutoDeletion: true # This deletes anything not Longhorn in the data directory. Be careful.
+  #     replicaReplenishmentWaitInterval: 90 # 15% of default (600), in seconds
+  #     removeSnapshotsDuringFilesystemTrim: false # default
+  #     restoreVolumeRecurringJobs: false # default - I use my longhorn-recurring-jobs chart instead
+  #     snapshotDataIntegrity: fast-check # default
+  #     snapshotDataIntegrityCronjob: 0 8 */7 * * # 4AM for EST
+  #     snapshotDataIntegrityImmediateCheckAfterSnapshotCreation: false # default
+  #     storageMinimalAvailablePercentage: 10
+  #     storageOverProvisioningPercentage: 100
+  #     # storageReservedPercentageForDefaultDisk: 0 # This doesn't work on 1.5.1, I use a postRenderer workaround
+  #     upgradeChecker: false # I watch for Longhorn releases elsewhere
+  #     v2DataEngine: false # default, disabled
   postRenderers:
     - kustomize:
         patchesStrategicMerge:
-          - &setting
-            apiVersion: longhorn.io/v1beta2
-            kind: Setting
+          - apiVersion: v1
+            kind: ConfigMap
             metadata:
-              name: allow-collecting-longhorn-usage-metrics
-              namespace: longhorn-system
-            value: "false"
-          - <<: *setting
-            metadata:
-              name: storage-reserved-percentage-for-default-disk
-            value: 0
+              name: longhorn-default-setting
+              namespace: *ns
+            data:
+              default-setting.yaml: |
+                allow-collecting-longhorn-usage-metrics: false
+                allow-recurring-job-while-volume-detached: false
+                allow-volume-creation-with-degraded-availability: true
+                auto-cleanup-system-generated-snapshot: true
+                auto-delete-pod-when-volume-detached-unexpectedly: true
+                auto-salvage: true
+                backing-image-cleanup-wait-interval: 60
+                backing-image-recovery-wait-interval: 300
+                backup-compression-method: lz4
+                backup-concurrent-limit: 2
+                backup-target: ""
+                backupstore-poll-interval: 0
+                concurrent-automatic-engine-upgrade-per-node-limit: 3
+                concurrent-replica-rebuild-per-node-limit: 10
+                concurrent-volume-backup-restore-per-node-limit: 5
+                crd-api-version: longhorn.io/v1beta2
+                create-default-disk-labeled-nodes: true
+                default-data-locality: best-effort
+                default-data-path: /mnt/longhorn
+                default-longhorn-static-storage-class: longhorn
+                default-replica-count: 3
+                deleting-confirmation-flag: false
+                disable-revision-counter: false
+                disable-scheduling-on-cordoned-node: true
+                engine-replica-timeout: 8
+                failed-backup-ttl: 1440
+                fast-replica-rebuild-enabled: true
+                guaranteed-instance-manager-cpu: 12
+                kubernetes-cluster-autoscaler-enabled: false
+                log-level: Info
+                node-down-pod-deletion-policy: delete-both-statefulset-and-deployment-pod
+                node-drain-policy: block-if-contains-last-replica
+                offline-replica-rebuilding: enabled
+                orphan-auto-deletion: true
+                recurring-failed-jobs-history-limit: 1
+                recurring-successful-jobs-history-limit: 1
+                remove-snapshots-during-filesystem-trim: false
+                replica-auto-balance: best-effort
+                replica-file-sync-http-client-timeout: 30
+                replica-replenishment-wait-interval: 90
+                replica-soft-anti-affinity: false
+                replica-zone-soft-anti-affinity: true
+                restore-concurrent-limit: 2
+                restore-volume-recurring-jobs: false
+                snapshot-data-integrity-cronjob: 0 8 */7 * *
+                snapshot-data-integrity-immediate-check-after-snapshot-creation: false
+                snapshot-data-integrity: fast-check
+                storage-minimal-available-percentage: 10
+                storage-over-provisioning-percentage: 100
+                storage-reserved-percentage-for-default-disk: 0
+                support-bundle-failed-history-limit: 1
+                system-managed-components-node-selector:
+                system-managed-pods-image-pull-policy: if-not-present
+                upgrade-checker: false
+                v2-data-engine-hugepage-limit: 1024
+                v2-data-engine: false
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
