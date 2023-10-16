@@ -38,7 +38,7 @@ spec:
         pullPolicy: Always
     persistence:
       enabled: true
-      existingClaimName: grav-${social_name}-data-nas
+      existingClaimName: grav-${social_name}-data-longhorn-webapp
     deploymentAnnotations:
       reloader.stakater.com/auto: "true"
     statefulSetAnnotations:
