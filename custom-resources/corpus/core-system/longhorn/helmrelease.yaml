@@ -111,7 +111,6 @@ spec:
                 storage-over-provisioning-percentage: 100
                 storage-reserved-percentage-for-default-disk: 0
                 support-bundle-failed-history-limit: 1
-                system-managed-components-node-selector:
                 system-managed-pods-image-pull-policy: if-not-present
                 upgrade-checker: false
                 v2-data-engine-hugepage-limit: 1024
