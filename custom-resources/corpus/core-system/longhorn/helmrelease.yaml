@@ -78,7 +78,7 @@ spec:
                 concurrent-volume-backup-restore-per-node-limit: 5
                 create-default-disk-labeled-nodes: true
                 default-data-locality: best-effort
-                default-data-path: /mnt/longhorn
+                default-data-path: /var/lib/longhorn
                 default-longhorn-static-storage-class: longhorn
                 default-replica-count: 3
                 deleting-confirmation-flag: false
