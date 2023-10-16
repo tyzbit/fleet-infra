@@ -55,8 +55,14 @@ spec:
         ports:
           http:
             port: 30000
+
     probes:
       startup:
+        enabled: true
+      liveness:
+        enabled: true
+      readiness:
+        enabled: true
         spec:
           failureThreshold: 48
 
