@@ -57,7 +57,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: longhorn-default-setting
-  namespace: *ns
+  namespace: longhorn-system
 data:
   default-setting.yaml: |
     allow-collecting-longhorn-usage-metrics: false
