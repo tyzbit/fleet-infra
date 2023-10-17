@@ -1,19 +1,33 @@
 {
   "packageRules": [
     {
-      "matchDatasources": [
-        "github-tags"
-      ],
+      "matchDatasources": ["github-tags"],
       "automerge": true,
       "automergeType": "branch",
       "requiredStatusChecks": null,
-      "matchUpdateTypes": [
-        "minor",
-        "patch"
-      ],
-      "matchPackageNames": [
-        "renovatebot/github-action"
+      "matchUpdateTypes": ["minor", "patch"],
+      "matchPackageNames": ["renovatebot/github-action"]
+    },
+    {
+      "description": "Auto merge container digests",
+      "matchDatasources": ["docker"],
+      "automerge": true,
+      "automergeType": "branch",
+      "matchUpdateTypes": ["minor", "patch"],
+      "matchPackagePatterns": [
+        "eritislami/evobot",
+        "ghcr.io/onedr0p/radarr-develop",
+        "ghcr.io/onedr0p/sonarr-develop",
+        "linuxserver/jackett"
       ]
+    },
+    {
+      "description": "Auto merge helm charts",
+      "matchDatasources": ["helm"],
+      "automerge": true,
+      "automergeType": "branch",
+      "matchUpdateTypes": ["minor", "patch"],
+      "matchPackagePatterns": ["reloader"]
     }
   ]
 }
