@@ -10,7 +10,7 @@ metadata:
 data:
   config.yaml: |
     configuration:
-      working_directory: "/tmp/ytdl-sub"
+      working_directory: "/tmp/ytdl-sub/"
 
     presets:
       yt_video:
