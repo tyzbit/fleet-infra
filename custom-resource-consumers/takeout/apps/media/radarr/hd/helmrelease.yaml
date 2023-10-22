@@ -19,7 +19,7 @@ spec:
   values:
     image:
       repository: ghcr.io/onedr0p/radarr-develop
-      tag: 5.0.3.8127
+      tag: 5.1.1.8195
 
     controller:
       replicas: 1 # active longhorn-webapp nas
