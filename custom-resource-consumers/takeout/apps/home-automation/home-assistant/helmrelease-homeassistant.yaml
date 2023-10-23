@@ -46,8 +46,8 @@ spec:
         enabled: true
         type: emptyDir
 
-    nodeSelector:
-      bluetooth: "true"
+    # nodeSelector:
+    #   bluetooth: "true"
 
     additionalContainers:
       filebrowser:
