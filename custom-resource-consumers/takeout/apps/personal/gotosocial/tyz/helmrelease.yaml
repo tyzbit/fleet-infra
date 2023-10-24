@@ -32,13 +32,6 @@ spec:
       repository: docker.io/superseriousbusiness/gotosocial
       tag: 0.12.0
 
-    # command:
-    #   - /bin/sh
-    #   - -c
-    #   - |
-    #     sed -i -E 's/semaphore.social/web.tyz.social/g' /gotosocial/web/template/index.tmpl && \
-    #     /gotosocial/gotosocial server start
-
     env:
       TZ: America/New_York
       GTS_APPLICATION_NAME: "tyz social"
