@@ -41,6 +41,8 @@ spec:
       GTS_PORT: "8080"
       GTS_TRUSTED_PROXIES: 172.18.0.0/16
       GTS_ACCOUNTS_REGISTRATION_OPEN: "false"
+      GTS_ACCOUNTS_ALLOW_CUSTOM_CSS: "true" # FIXME
+      GTS_ACCOUNTS_CUSTOM_CSS_LENGTH: 10000
       GTS_TLS_CERTIFICATE_CHAIN: &chain "/tls/fullchain.pem"
       GTS_TLS_CERTIFICATE_KEY: &key "/tls/privkey.pem"
       GTS_DB_TYPE: sqlite
