@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: grav-${social_name}-data-nas
+  name: grav-${game_name}-data-nas
   namespace: personal
 spec:
   resources:
@@ -15,12 +15,12 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: grav-${social_name}-data-longhorn-webapp
+  name: grav-${game_name}-data-longhorn-webapp
   namespace: personal
 spec:
   resources:
     requests:
-      storage: 10Gi
+      storage: 2Gi
   volumeMode: Filesystem
   storageClassName: longhorn-webapp
   accessModes:
