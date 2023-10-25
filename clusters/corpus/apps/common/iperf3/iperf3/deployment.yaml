@@ -62,16 +62,16 @@ spec:
       labels:
         app: iperf3-client
     spec:
-      # affinity:
-      #   podAntiAffinity:
-      #     requiredDuringSchedulingIgnoredDuringExecution:
-      #       - labelSelector:
-      #           matchExpressions:
-      #             - key: app
-      #               operator: In
-      #               values:
-      #                 - iperf3-server
-      #         topologyKey: "kubernetes.io/hostname"
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - iperf3-server
+              topologyKey: "kubernetes.io/hostname"
       containers:
         - name: iperf3-client
           image: networkstatic/iperf3:latest
@@ -82,5 +82,6 @@ spec:
               cpu: 100m
             limits:
               memory: 128Mi
-      nodeSelector:
-        kubernetes.io/hostname: cameraman
+      # nodeSelector:
+      #   kubernetes.io/hostname: weatherman
+      # colo: aws
