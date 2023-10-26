@@ -40,5 +40,5 @@ spec:
         - name: dst
           persistentVolumeClaim:
             claimName: grav-${game_name}-data-longhorn-webapp
-      nodeSelector:
-        kubernetes.io/hostname: doorman
+      # nodeSelector:
+      #   kubernetes.io/hostname: doorman
