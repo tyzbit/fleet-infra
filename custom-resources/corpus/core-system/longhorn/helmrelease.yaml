@@ -38,6 +38,8 @@ spec:
                 backing-image-recovery-wait-interval: 300
                 backup-compression-method: lz4
                 backup-concurrent-limit: 2
+                backupTarget: s3://${longhorn_backup_bucket}@us-east-1/
+                backupTargetCredentialSecret: longhorn-corpus-backups
                 backupstore-poll-interval: 0
                 concurrent-automatic-engine-upgrade-per-node-limit: 3
                 concurrent-replica-rebuild-per-node-limit: 10
