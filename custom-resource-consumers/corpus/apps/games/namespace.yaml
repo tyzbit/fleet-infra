@@ -1,0 +1,4 @@
+apiVersion: batch/v1
+kind: Namespace
+metadata:
+  name: games
