@@ -11,7 +11,7 @@ spec:
   wait: false
   prune: true
 
-  path: "./apps/personal/grav/gaming"
+  path: "./clusters/corpus/apps/personal/grav/gaming"
   sourceRef:
     kind: GitRepository
     name: flux-system

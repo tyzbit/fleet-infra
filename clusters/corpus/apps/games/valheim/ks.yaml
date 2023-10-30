@@ -11,7 +11,7 @@ spec:
   wait: false
   prune: true
 
-  path: "./apps/games/valheim"
+  path: "./clusters/corpus/apps/games/valheim"
   sourceRef:
     kind: GitRepository
     name: flux-system

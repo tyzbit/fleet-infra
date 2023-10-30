@@ -11,7 +11,7 @@ spec:
   wait: false
   prune: true
 
-  path: "./core-system/networking/external-dns"
+  path: "./clusters/corpus/core-system/networking/external-dns"
   sourceRef:
     kind: GitRepository
     name: flux-system

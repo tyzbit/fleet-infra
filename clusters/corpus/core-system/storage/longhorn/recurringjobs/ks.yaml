@@ -11,7 +11,7 @@ spec:
   wait: false
   prune: true
 
-  path: "./core-system/storage/longhorn/recurringjobs"
+  path: "./clusters/corpus/core-system/storage/longhorn/recurringjobs"
   sourceRef:
     kind: GitRepository
     name: flux-system

@@ -11,7 +11,7 @@ spec:
   wait: false
   prune: true
 
-  path: "./apps/crypto/electrumx"
+  path: "./clusters/corpus/apps/crypto/electrumx"
   sourceRef:
     kind: GitRepository
     name: flux-system

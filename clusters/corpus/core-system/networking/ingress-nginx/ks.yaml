@@ -11,7 +11,7 @@ spec:
   wait: false
   prune: true
 
-  path: "./core-system/networking/ingress-nginx"
+  path: "./clusters/corpus/core-system/networking/ingress-nginx"
   sourceRef:
     kind: GitRepository
     name: flux-system

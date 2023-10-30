@@ -11,7 +11,7 @@ spec:
   wait: false
   prune: true
 
-  path: "./apps/crypto/btc-balance-notifier"
+  path: "./clusters/corpus/apps/crypto/btc-balance-notifier"
   sourceRef:
     kind: GitRepository
     name: flux-system

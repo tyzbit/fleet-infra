@@ -11,7 +11,7 @@ spec:
   wait: false
   prune: true
 
-  path: "./apps/crypto/bitcoin"
+  path: "./clusters/corpus/apps/crypto/bitcoin"
   sourceRef:
     kind: GitRepository
     name: flux-system

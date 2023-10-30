@@ -11,7 +11,7 @@ spec:
   wait: false
   prune: true
 
-  path: "./apps/crypto/btc-rpc-explorer"
+  path: "./clusters/corpus/apps/crypto/btc-rpc-explorer"
   sourceRef:
     kind: GitRepository
     name: flux-system
