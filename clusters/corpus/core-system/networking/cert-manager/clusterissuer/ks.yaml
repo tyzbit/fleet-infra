@@ -5,14 +5,14 @@ metadata:
   namespace: flux-system
 spec:
   interval: 5m
+  timeout: 3m
+  retryInterval: 2m
   wait: false
   prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
-  resources:
-    - clusterissuer.yaml
   dependsOn:
     - name: cert-manager
       kind: Kustomization
