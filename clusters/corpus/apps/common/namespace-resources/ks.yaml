@@ -11,7 +11,7 @@ spec:
   wait: false
   prune: true
 
-  path: "./clusters/corpus/apps/common/namespaces"
+  path: "./clusters/corpus/apps/common/namespace-resources"
   sourceRef:
     kind: GitRepository
     name: flux-system
