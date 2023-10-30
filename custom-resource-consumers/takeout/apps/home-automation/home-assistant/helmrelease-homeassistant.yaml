@@ -98,10 +98,7 @@ spec:
           http:
             port: 8123
             targetPort: 8123
-      matter:
-        <<: *svc
-        ports:
-          http:
+          matter:
             port: 5580
             targetPort: 5580
 
