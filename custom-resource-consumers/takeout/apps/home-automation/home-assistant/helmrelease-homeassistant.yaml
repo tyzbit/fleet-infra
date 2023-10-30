@@ -91,13 +91,19 @@ spec:
             secretName: home.${personal_domain}-multi-tls
 
     service:
-      main:
+      main: &svc
         enabled: true
         type: ClusterIP
         ports:
           http:
             port: 8123
             targetPort: 8123
+      matter:
+        <<: *svc
+        ports:
+          http:
+            port: 5580
+            targetPort: 5580
 
       filebrowser:
         enabled: true
