@@ -47,7 +47,7 @@ spec:
       enabled: true
       className: nginx
       annotations:
-        acme.cert-manager.io/http01-edit-in-place: "false"
+        acme.cert-manager.io/http01-edit-in-place: "true"
         nignx.ingress.kubernetes.io/force-ssl-redirect: "true"
         cert-manager.io/cluster-issuer: letsencrypt
         external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
