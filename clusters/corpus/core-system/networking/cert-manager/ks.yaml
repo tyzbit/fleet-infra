@@ -5,10 +5,13 @@ metadata:
   namespace: flux-system
 spec:
   interval: 5m
-  timeout: 3m
-  retryInterval: 2m
+  retryInterval: 1m
+  timeout: 5m
+
   wait: false
   prune: true
+
+  path: "./clusters/corpus/core-system/networking/cert-manager"
   sourceRef:
     kind: GitRepository
     name: flux-system
