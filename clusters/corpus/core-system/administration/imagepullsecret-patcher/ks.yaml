@@ -11,7 +11,7 @@ spec:
   wait: false
   prune: true
 
-  path: "./clusters/corpus/core-system/administration/imagepullsecret-patcher"
+  path: "./core-system/administration/imagepullsecret-patcher"
   sourceRef:
     kind: GitRepository
     name: flux-system

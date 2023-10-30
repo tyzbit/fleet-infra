@@ -11,7 +11,7 @@ spec:
   wait: false
   prune: true
 
-  path: "./clusters/corpus/apps/media/plex/secondary"
+  path: "./apps/media/plex/secondary"
   sourceRef:
     kind: GitRepository
     name: flux-system

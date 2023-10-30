@@ -11,7 +11,7 @@ spec:
   wait: false
   prune: true
 
-  path: "./clusters/corpus/core-system/networking/cert-manager"
+  path: "./core-system/networking/cert-manager"
   sourceRef:
     kind: GitRepository
     name: flux-system

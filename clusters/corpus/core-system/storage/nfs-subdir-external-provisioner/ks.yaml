@@ -11,7 +11,7 @@ spec:
   wait: false
   prune: true
 
-  path: "./clusters/corpus/core-system/storage/nfs-subdir-external-provisioner"
+  path: "./core-system/storage/nfs-subdir-external-provisioner"
   sourceRef:
     kind: GitRepository
     name: flux-system

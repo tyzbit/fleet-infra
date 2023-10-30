@@ -11,7 +11,7 @@ spec:
   wait: false
   prune: true
 
-  path: "./clusters/corpus/core-system/networking/cloudflared"
+  path: "./core-system/networking/cloudflared"
   sourceRef:
     kind: GitRepository
     name: flux-system
