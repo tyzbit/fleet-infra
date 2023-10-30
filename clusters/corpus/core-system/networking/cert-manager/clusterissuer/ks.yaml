@@ -13,8 +13,4 @@ spec:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
-  dependsOn:
-    - name: cert-manager
-      kind: Kustomization
-      version: v1
-      fieldName: metadata.name
+  dependsOn: [{ name: cert-manager }]
