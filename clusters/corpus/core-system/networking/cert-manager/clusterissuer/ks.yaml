@@ -5,7 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 5m
-  retryInterval: 1m
+  retryInterval: 10s
   timeout: 5m
 
   wait: false
