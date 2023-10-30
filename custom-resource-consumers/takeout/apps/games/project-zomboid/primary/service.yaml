@@ -6,7 +6,7 @@ metadata:
 spec:
   type: ClusterIP
   selector:
-    app: project-zomboid-secondary
+    app: project-zomboid
   ports:
     - port: 80
       protocol: TCP
