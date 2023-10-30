@@ -1,7 +1,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cert-manager
+  name: longhorn-recurringjobs
   namespace: flux-system
 spec:
   interval: 5m
@@ -11,9 +11,9 @@ spec:
   wait: false
   prune: true
 
-  path: "./clusters/corpus/core-system/networking/cert-manager"
+  path: "./clusters/corpus/core-system/storage/longhorn/recurringjobs"
   sourceRef:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
-  dependsOn: [{ name: kubernetes-secrets }]
+  dependsOn: [{ name: longhorn }]

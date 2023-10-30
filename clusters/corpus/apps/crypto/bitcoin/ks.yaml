@@ -11,9 +11,9 @@ spec:
   wait: false
   prune: true
 
-  path: "./clusters/corpus/core-system/networking/cert-manager"
+  path: "./clusters/corpus/apps/crypto/bitcoin"
   sourceRef:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
-  dependsOn: [{ name: kubernetes-secrets }]
+  dependsOn: [{ name: kubernetes-secrets }, { name: longhorn-recurring-jobs }]
