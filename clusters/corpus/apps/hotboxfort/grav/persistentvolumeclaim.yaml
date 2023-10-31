@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: grav-hotboxfort-data-nas
+  namespace: hotboxfort
+spec:
+  resources:
+    requests:
+      storage: 1Gi
+  volumeMode: Filesystem
+  storageClassName: nas
+  accessModes:
+    - ReadWriteMany
