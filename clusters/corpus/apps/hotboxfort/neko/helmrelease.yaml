@@ -71,7 +71,6 @@ spec:
     service:
       main:
         enabled: true
-        ingressClassName: nginx
         type: ClusterIP
         ports:
           http:
@@ -92,6 +91,7 @@ spec:
     ingress:
       main:
         enabled: true
+        ingressClassName: nginx
         annotations:
           kubernetes.io/ingress.class: nginx
           cert-manager.io/cluster-issuer: letsencrypt
