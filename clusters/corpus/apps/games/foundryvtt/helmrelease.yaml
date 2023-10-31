@@ -58,13 +58,11 @@ spec:
 
     probes:
       startup:
-        enabled: true
+        enabled: false
       liveness:
-        enabled: true
+        enabled: false
       readiness:
-        enabled: true
-        spec:
-          failureThreshold: 48
+        enabled: false
 
       filebrowser:
         enabled: true
