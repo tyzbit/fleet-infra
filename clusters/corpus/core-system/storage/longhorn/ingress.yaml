@@ -15,6 +15,7 @@ metadata:
   labels:
     use-cloudflare-dns-solver: "true"
 spec:
+  ingressClassName: nginx
   tls:
     - hosts:
         - &host "longhorn-corpus.${personal_domain}"
@@ -53,6 +54,7 @@ metadata:
   labels:
     use-cloudflare-dns-solver: "true"
 spec:
+  ingressClassName: nginx
   tls:
     - hosts:
         - &host "longhorn-corpus.${personal_domain}"

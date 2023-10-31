@@ -16,6 +16,7 @@ metadata:
     # that aren't notification-controller
     use-cloudflare-dns-solver: "true"
 spec:
+  ingressClassName: nginx
   tls:
     - hosts:
         - &host "flux-receiver.${personal_domain}"

@@ -13,6 +13,7 @@ metadata:
   labels:
     use-cloudflare-dns-solver: "true"
 spec:
+  ingressClassName: nginx
   tls:
     - hosts:
         - "valheim.${game_domain}"

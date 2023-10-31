@@ -71,6 +71,7 @@ spec:
     service:
       main:
         enabled: true
+        className: nginx
         type: ClusterIP
         ports:
           http:
