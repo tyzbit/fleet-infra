@@ -29,10 +29,9 @@ spec:
             httpGet:
               port: 8080
               path: /healthcheck
-          readinessProbe:
-            !!merge <<: *probe
+          readinessProbe: *probe
           startupProbe:
-            !!merge <<: *probe
+            <<: *probe
             failureThreshold: 15
             initialDelaySeconds: 5
           resources:
