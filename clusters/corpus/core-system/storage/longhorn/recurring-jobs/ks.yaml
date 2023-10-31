@@ -8,7 +8,7 @@ spec:
   retryInterval: 10s
   timeout: 5m
   healthChecks:
-    - kind: HelmRelease
+    - kind: Kustomization
       name: longhorn
 
   wait: false
