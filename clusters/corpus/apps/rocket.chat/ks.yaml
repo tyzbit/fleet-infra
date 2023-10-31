@@ -1,0 +1,23 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: rocket-chat
+  namespace: flux-system
+spec:
+  interval: 30m
+  retryInterval: 1m
+  timeout: 5m
+
+  wait: false
+  prune: true
+
+  path: "./clusters/corpus/apps/rocket.chat"
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  dependsOn: [{ name: kubernetes-secrets }, { name: longhorn-recurring-jobs }]
+  postBuild:
+    substituteFrom:
+      - kind: Secret
+        name: sensitive-values
