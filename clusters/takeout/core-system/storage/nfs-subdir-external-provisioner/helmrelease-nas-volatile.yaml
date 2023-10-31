@@ -21,6 +21,7 @@ spec:
     storageClass:
       name: nas-volatile
       pathPattern: "$${.PVC.namespace}-$${.PVC.name}"
+      onDelete: retain
     nfs:
       server: nas.jura
       path: /volume1/volatile_cluster_storage
