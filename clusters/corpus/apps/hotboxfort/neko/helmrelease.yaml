@@ -71,7 +71,7 @@ spec:
     service:
       main:
         enabled: true
-        className: nginx
+        ingressClassName: nginx
         type: ClusterIP
         ports:
           http:

@@ -45,7 +45,7 @@ spec:
       reloader.stakater.com/auto: "true"
     ingress:
       enabled: true
-      className: nginx
+      ingressClassName: nginx
       annotations:
         acme.cert-manager.io/http01-edit-in-place: "true"
         nignx.ingress.kubernetes.io/force-ssl-redirect: "true"
