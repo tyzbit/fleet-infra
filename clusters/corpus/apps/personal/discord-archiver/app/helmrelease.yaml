@@ -42,7 +42,7 @@ spec:
         enabled: true
         custom: true
         spec:
-          !!merge <<: *spec
+          <<: *spec
           failureThreshold: 15
           initialDelaySeconds: 5
     service:
