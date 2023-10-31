@@ -67,16 +67,3 @@ spec:
             claimName: nas-volume1-media
       nodeSelector:
         graphics: dri
-  # volumeClaimTemplates:
-  #   - apiVersion: v1
-  #     kind: PersistentVolumeClaim
-  #     metadata:
-  #       name: handbrake-config
-  #     spec:
-  #       accessModes:
-  #         - ReadWriteMany
-  #       volumeMode: Filesystem
-  #       storageClassName: nfs-client
-  #       resources:
-  #         requests:
-  #           storage: 1Gi
