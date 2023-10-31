@@ -19,8 +19,6 @@ spec:
       namespace: flux-system
     - name: longhorn
       <<: *resource
-    - name: longhorn-recurring-jobs
-      <<: *resource
 ---
 apiVersion: notification.toolkit.fluxcd.io/v1
 kind: Receiver

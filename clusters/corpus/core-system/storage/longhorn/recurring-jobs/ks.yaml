@@ -7,6 +7,9 @@ spec:
   interval: 5m
   retryInterval: 10s
   timeout: 5m
+  healthChecks:
+    - kind: Kustomization
+      name: longhorn
 
   wait: false
   prune: true
