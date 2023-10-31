@@ -16,10 +16,10 @@ spec:
       kind: GitRepository
       name: flux-system
       namespace: flux-system
-    - <<: *resource
-      name: longhorn
-    - <<: *resource
-      name: longhorn-recurring-jobs
+    - name: longhorn
+      <<: *resource
+    - name: longhorn-recurring-jobs
+      <<: *resource
 ---
 apiVersion: notification.toolkit.fluxcd.io/v1
 kind: Receiver
