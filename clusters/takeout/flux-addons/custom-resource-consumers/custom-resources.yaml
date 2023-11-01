@@ -6,7 +6,7 @@ metadata:
 spec:
   interval: 2m0s
   dependsOn:
-    - name: flux-system-custom-resources
+    - name: flux-system
   path: ./custom-resource-consumers/takeout
   prune: true
   sourceRef:
