@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cloudflared-config
+  namespace: cloudflared
+data:
+  config.yaml: |
+    tunnel: ${cloudflared_tunnel_uuid}
+    credentials-file: /etc/cloudflared/cred.json
+    originRequest:
+      connectTimeout: 30s
+      noTLSVerify: true
+    warp-routing:
+      enabled: false
+
+    ingress:
+      - service: https://kube-system-ingress-nginx-controller.kube-system
