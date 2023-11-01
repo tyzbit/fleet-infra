@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: plex-config
+  namespace: media
+data:
+  ADVERTISE_IP: "http://172.18.126.107:32400,https://plex.${blog_domain}"
