@@ -14,6 +14,7 @@ metadata:
     nginx.ingress.kubernetes.io/auth-url: "http://duplicacy-oauth2-proxy.storage.svc.cluster.local/oauth2/auth"
     nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
 spec:
+  ingressClassName: nginx
   tls:
     - hosts:
         - &host "backup.${personal_domain}"
@@ -40,6 +41,7 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt
     external-dns.alpha.kubernetes.io/exclude: "true"
 spec:
+  ingressClassName: nginx
   tls:
     - hosts:
         - &host "backup.${personal_domain}"
