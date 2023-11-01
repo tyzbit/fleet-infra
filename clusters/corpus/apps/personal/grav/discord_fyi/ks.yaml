@@ -1,7 +1,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: discord_fyi
+  name: discord-fyi
   namespace: flux-system
 spec:
   interval: 30m
