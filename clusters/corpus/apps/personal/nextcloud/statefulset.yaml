@@ -1,0 +1,129 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: nextcloud-db
+  namespace: personal
+  annotations: {}
+  labels:
+    app: nextcloud-db
+spec:
+  replicas: 1 # active longhorn-database
+  selector:
+    matchLabels:
+      app: nextcloud-db
+  serviceName: nextcloud-db
+  template:
+    metadata:
+      annotations: {}
+      labels:
+        app: nextcloud-db
+    spec:
+      containers:
+        - name: nextcloud-db
+          image: mariadb:10.8
+          imagePullPolicy: Always
+          envFrom:
+            - secretRef:
+                name: nextcloud-db
+          ports:
+            - containerPort: 3306
+              name: sql
+              protocol: TCP
+          volumeMounts:
+            - name: nextcloud-db
+              mountPath: /var/lib/mysql
+            - name: nextcloud-extra-configs
+              mountPath: /etc/mysql/conf.d
+          resources:
+            requests:
+              cpu: 10m
+            limits:
+              memory: 1Gi
+      nodeSelector:
+        longhorn: primary
+      volumes:
+        - name: nextcloud-db
+          persistentVolumeClaim:
+            claimName: nextcloud-mariadb-longhorn-database
+        - name: nextcloud-extra-configs
+          configMap:
+            name: nextcloud-db-config
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: nextcloud
+  namespace: personal
+  annotations:
+    reloader.stakater.com/auto: "true"
+  labels:
+    app: nextcloud
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nextcloud
+  serviceName: nextcloud
+  template:
+    metadata:
+      annotations: {}
+      labels:
+        app: nextcloud
+    spec:
+      containers:
+        - name: nextcloud-cache
+          image: redis:7.2
+          imagePullPolicy: Always
+          command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
+          volumeMounts:
+            - name: nextcloud-cache
+              mountPath: /data
+            - name: nextcloud-cache-config
+              mountPath: /usr/local/etc/redis/redis.conf
+              subPath: redis.conf
+            - name: nextcloud-socket
+              mountPath: /var/run/redis/
+          resources:
+            requests:
+              cpu: 10m
+            limits:
+              memory: 32Mi
+        # nodeSelector:
+        #   node.longhorn.io/create-default-disk: "true"
+        - name: nextcloud
+          image: nextcloud:27.1.3
+          imagePullPolicy: Always
+          command: ["/bin/bash", "-c"]
+          args:
+            - |
+              while :; do /cron.sh; done &
+              /entrypoint.sh apache2-foreground
+          # command: ["tail","-f","/dev/null"]
+          envFrom:
+            - secretRef:
+                name: nextcloud-config
+          ports:
+            - containerPort: 80
+              name: http
+              protocol: TCP
+          volumeMounts:
+            - mountPath: "/var/www/html"
+              name: nextcloud-data
+            - name: nextcloud-socket
+              mountPath: /var/run/redis/
+          resources:
+            requests:
+              cpu: 100m
+            limits:
+              memory: 3Gi
+      volumes:
+        - name: nextcloud-cache
+          emptyDir: {}
+        - name: nextcloud-socket
+          emptyDir: {}
+        - name: nextcloud-cache-config
+          configMap:
+            name: nextcloud-cache-config
+        - name: nextcloud-data
+          persistentVolumeClaim:
+            claimName: nextcloud-data-nas
