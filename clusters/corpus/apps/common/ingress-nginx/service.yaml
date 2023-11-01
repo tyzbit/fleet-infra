@@ -64,7 +64,7 @@ metadata:
   namespace: default
 addressType: IPv4
 ports:
-  - name: http
+  - name: k8s
     appProtocol: http
     port: 6443
     protocol: TCP
