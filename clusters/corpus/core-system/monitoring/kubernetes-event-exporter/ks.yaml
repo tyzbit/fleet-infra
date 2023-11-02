@@ -11,7 +11,7 @@ spec:
   wait: false
   prune: true
 
-  path: "./clusters/corpus/apps/core-sustem/monitoring/kubernetes-event-exporter"
+  path: "./clusters/corpus/apps/core-system/monitoring/kubernetes-event-exporter"
   sourceRef:
     kind: GitRepository
     name: flux-system
