@@ -51,7 +51,6 @@ metadata:
 addressType: IPv4
 ports:
   - name: http
-    appProtocol: http
     port: 443
     protocol: TCP
 endpoints:
@@ -69,7 +68,6 @@ metadata:
 addressType: IPv4
 ports:
   - name: k8s
-    appProtocol: http
     port: 6443
     protocol: TCP
 endpoints:
