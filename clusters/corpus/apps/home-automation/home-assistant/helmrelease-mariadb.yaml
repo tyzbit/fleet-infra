@@ -42,4 +42,5 @@ spec:
         requests:
           cpu: 100m
         limits:
-          memory: 14Gi
+          # memory: 14Gi
+          memory: 10Gi # FIXME
