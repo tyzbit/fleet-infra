@@ -27,20 +27,6 @@ spec:
   clusterIP: None
   type: ClusterIP
 ---
-apiVersion: v1
-kind: Service
-metadata:
-  name: takeout-lb
-  namespace: default
-spec:
-  ports:
-    - name: k8s
-      port: 6443
-      protocol: TCP
-      targetPort: 6443
-  clusterIP: None
-  type: ClusterIP
----
 apiVersion: discovery.k8s.io/v1
 kind: EndpointSlice
 metadata:
@@ -52,23 +38,6 @@ addressType: IPv4
 ports:
   - name: http
     port: 443
-    protocol: TCP
-endpoints:
-  - addresses:
-      # list all external ips for this service
-      - 192.168.1.1
----
-apiVersion: discovery.k8s.io/v1
-kind: EndpointSlice
-metadata:
-  name: takeout-lb
-  namespace: default
-  labels:
-    kubernetes.io/service-name: takeout-lb
-addressType: IPv4
-ports:
-  - name: k8s
-    port: 6443
     protocol: TCP
 endpoints:
   - addresses:
