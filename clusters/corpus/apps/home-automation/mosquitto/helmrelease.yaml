@@ -1,0 +1,54 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: mosquitto
+  namespace: flux-system
+spec:
+  releaseName: mosquitto
+  targetNamespace: home-automation
+  interval: 2m0s
+  chart:
+    spec:
+      chart: app-template
+      version: "1.5.1"
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  values:
+    image:
+      repository: eclipse-mosquitto
+      tag: 2.0.18
+
+    env:
+      TZ: America/New_York
+
+    configMaps:
+      config:
+        enabled: true
+        data:
+          mosquitto.conf: |
+            listener 1883
+            allow_anonymous true
+            persistence true
+            persistence_location /mosquitto/data
+            connection_messages false
+
+    persistence:
+      config:
+        enabled: true
+        type: configMap
+        name: mosquitto-config
+        mountPath: /mosquitto/config/mosquitto.conf
+        subPath: mosquitto.conf
+
+    service:
+      main:
+        type: ClusterIP
+        ports:
+          http:
+            enabled: false
+          mqtt:
+            enabled: true
+            port: 1883
+            targetPort: 1883
