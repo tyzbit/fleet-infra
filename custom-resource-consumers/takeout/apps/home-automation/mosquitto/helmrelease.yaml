@@ -20,6 +20,9 @@ spec:
       repository: eclipse-mosquitto
       tag: 2.0.18
 
+    contoller:
+      replicas: 0
+
     env:
       TZ: America/New_York
 
