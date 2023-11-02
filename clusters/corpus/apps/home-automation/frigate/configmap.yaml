@@ -41,14 +41,14 @@ data:
     # go2rtc is disabled because frigate kept running out of memory and also 404ing
     # go2rtc:
     #   streams:
-    #     frontdoor: 'rtsp://{FRIGATE_FRONTDOOR_CREDENTIALS}@frontdoor:554'
-    #     # frontdoor_low: 'rtsp://{FRIGATE_FRONTDOOR_CREDENTIALS}@frontdoor:554/low'
-    #     backyard: 'rtsp://{FRIGATE_BACKYARD_CREDENTIALS}@backyard:554/1'
-    #     driveway: 'rtsp://{FRIGATE_DRIVEWAY_CREDENTIALS}@driveway:554/1'
-    #     porch: 'rtsp://{FRIGATE_PORCH_CREDENTIALS}@porch:554//cam/realmonitor?channel=1&subtype=0'
-    #     # porch_low: 'rtsp://{FRIGATE_PORCH_CREDENTIALS}@porch:554/cam/realmonitor?channel=1&subtype=1'
-    #     court: 'rtsp://{FRIGATE_COURT_CREDENTIALS}@court:554/cam/realmonitor?channel=1&subtype=0'
-    #     # court_low: 'rtsp://{FRIGATE_COURT_CREDENTIALS}@court:554/cam/realmonitor?channel=1&subtype=1'
+    #     frontdoor: 'rtsp://{FRIGATE_FRONTDOOR_CREDENTIALS}@frontdoor.onair:554'
+    #     # frontdoor_low: 'rtsp://{FRIGATE_FRONTDOOR_CREDENTIALS}@frontdoor.onair:554/low'
+    #     backyard: 'rtsp://{FRIGATE_BACKYARD_CREDENTIALS}@backyard.onair:554/1'
+    #     driveway: 'rtsp://{FRIGATE_DRIVEWAY_CREDENTIALS}@driveway.onair:554/1'
+    #     porch: 'rtsp://{FRIGATE_PORCH_CREDENTIALS}@porch.onair:554//cam/realmonitor?channel=1&subtype=0'
+    #     # porch_low: 'rtsp://{FRIGATE_PORCH_CREDENTIALS}@porch.onair:554/cam/realmonitor?channel=1&subtype=1'
+    #     court: 'rtsp://{FRIGATE_COURT_CREDENTIALS}@court.onair:554/cam/realmonitor?channel=1&subtype=0'
+    #     # court_low: 'rtsp://{FRIGATE_COURT_CREDENTIALS}@court.onair:554/cam/realmonitor?channel=1&subtype=1'
 
     detectors:
       coral:
@@ -62,7 +62,7 @@ data:
         ffmpeg:
           inputs:
             # - path: 'rtsp://localhost:8554/porch'
-            - path: 'rtsp://{FRIGATE_PORCH_CREDENTIALS}@porch:554/live'
+            - path: 'rtsp://{FRIGATE_PORCH_CREDENTIALS}@porch.onair:554/live'
               roles:
                 - detect
                 - record
@@ -96,7 +96,7 @@ data:
         ffmpeg:
           inputs:
             # - path: 'rtsp://localhost:8554/frontdoor_low'
-            - path: 'rtsp://{FRIGATE_FRONTDOOR_CREDENTIALS}@frontdoor:554'
+            - path: 'rtsp://{FRIGATE_FRONTDOOR_CREDENTIALS}@frontdoor.onair:554'
               roles:
                 - detect
                 - record
@@ -113,7 +113,7 @@ data:
         ffmpeg:
           inputs:
             # - path: 'rtsp://localhost:8554/driveway'
-            - path: 'rtsp://{FRIGATE_DRIVEWAY_CREDENTIALS}@driveway:554/1'
+            - path: 'rtsp://{FRIGATE_DRIVEWAY_CREDENTIALS}@driveway.onair:554/1'
               roles:
                 - detect
                 - record
@@ -141,7 +141,7 @@ data:
         ffmpeg:
           inputs:
             # - path: 'rtsp://localhost:8554/backyard'
-            - path: 'rtsp://{FRIGATE_BACKYARD_CREDENTIALS}@backyard:554/1'
+            - path: 'rtsp://{FRIGATE_BACKYARD_CREDENTIALS}@backyard.onair:554/1'
               roles:
                 - detect
                 - record
@@ -162,7 +162,7 @@ data:
         ffmpeg:
           inputs:
             # - path: 'rtsp://localhost:8554/court'
-            - path: 'rtsp://{FRIGATE_COURT_CREDENTIALS}@court:554/live'
+            - path: 'rtsp://{FRIGATE_COURT_CREDENTIALS}@court.onair:554/live'
               roles:
                 - record
         snapshots:
@@ -181,7 +181,7 @@ data:
         ffmpeg:
           inputs:
             # - path: 'rtsp://localhost:8554/backyard'
-            - path: 'rtsp://{FRIGATE_BUNNIES_CREDENTIALS}@bunnies:554/1'
+            - path: 'rtsp://{FRIGATE_BUNNIES_CREDENTIALS}@bunnies.onair:554/1'
               roles:
                 - detect
                 - record
