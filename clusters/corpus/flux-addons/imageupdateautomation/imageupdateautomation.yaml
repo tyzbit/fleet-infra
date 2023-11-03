@@ -2,7 +2,7 @@
 apiVersion: image.toolkit.fluxcd.io/v1beta1
 kind: ImageUpdateAutomation
 metadata:
-  name: flux-system-custom-resources
+  name: flux-system
   namespace: flux-system
 spec:
   sourceRef:
@@ -16,5 +16,5 @@ spec:
       messageTemplate: "{{range .Updated.Images}}{{println .}}{{end}}"
   interval: 2m0s
   update:
-    path: ./custom-resources/corpus
+    path: ./clusters/corpus
     strategy: Setters
