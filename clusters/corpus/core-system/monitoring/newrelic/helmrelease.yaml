@@ -72,11 +72,13 @@ spec:
                             ["Samsung SSD 860"]="2400"
                             ["Samsung SSD 970 EVO Plus 2TB"]="1200"
                             ["WDC WDS400T1R0A"]="2500"
+                            ["ADATA LEGEND 700 GOLD"]="480"
                           )
                           multipliers=(
                             ["Samsung SSD 860"]="1"
                             ["Samsung SSD 970 EVO Plus 2TB"]="10000"
                             ["WDC WDS400T1R0A"]="1000000"
+                            ["ADATA LEGEND 700 GOLD"]="1"
                           )
                           set -m
                           devices=$(lsblk | grep -E 'sda\s+|nvme0n1\s+' | awk '{print $1}')
