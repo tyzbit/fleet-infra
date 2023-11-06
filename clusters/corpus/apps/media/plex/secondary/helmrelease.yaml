@@ -42,6 +42,11 @@ spec:
         type: hostPath
         hostPath: &dri /dev/dri
         mountPath: *dri
+      vfio:
+        enabled: true
+        type: hostPath
+        hostPath: &dri /dev/vfio
+        mountPath: *dri
     envFrom:
       - configMapRef:
           name: plex-secondary-config
