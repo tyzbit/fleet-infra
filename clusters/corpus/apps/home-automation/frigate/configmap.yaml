@@ -11,8 +11,8 @@ data:
       #   frigate.record: debug
     database:
       path: /db/frigate.db
-    model:
-      path: plus://e97db27d57660165e7c6ddb27a747213
+    # model:
+    #   path: plus://e97db27d57660165e7c6ddb27a747213
     mqtt:
       host: mosquitto
     record:
