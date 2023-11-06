@@ -47,7 +47,7 @@ spec:
         existingClaim: frigate-data-nas
         mountPath: /media/frigate
         subPath: media
-      model_cache:
+      model-cache:
         enabled: true
         existingClaim: frigate-data-nas
         mountPath: /config/model_cache
