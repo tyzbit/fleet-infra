@@ -56,8 +56,8 @@ spec:
         enabled: true
         name: frigate-config
         type: configMap
-        mountPath: /config
-        subPath: /config/config.yml
+        mountPath: /config/config.yml
+        subPath: config.yml
         readOnly: true
         defaultMode: 0755
       usb:
