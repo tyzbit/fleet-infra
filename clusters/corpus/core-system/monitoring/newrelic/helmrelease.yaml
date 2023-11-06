@@ -126,6 +126,9 @@ spec:
                             elif [[ $model =~ "Samsung SSD 970 EVO Plus 2TB" ]]; then
                               sensor=$(echo $smart_output_line | sed 's/:.*//g')
                               value=$(echo $smart_output_line | sed -E 's/.*\:\s+([0-9]+).*/\1/g')
+                            elif [[ $model =~ "ADATA LEGEND 700 GOLD" ]]; then
+                              sensor=$(echo $smart_output_line | cut -f 2 -d' ')
+                              value=$(echo $smart_output_line | sed 's/ Celsius//g' | awk '{print $10}')
                             fi
                             echo "$sensor,$model,$value"
                           done
