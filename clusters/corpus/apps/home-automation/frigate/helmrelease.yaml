@@ -47,11 +47,17 @@ spec:
         existingClaim: frigate-data-nas
         mountPath: /media/frigate
         subPath: media
+      model_cache:
+        enabled: true
+        existingClaim: frigate-data-nas
+        mountPath: /config/model_cache
+        subPath: model_cache
       config:
         enabled: true
         name: frigate-config
         type: configMap
         mountPath: /config
+        subPath: /config/config.yml
         readOnly: true
         defaultMode: 0755
       usb:
