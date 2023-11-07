@@ -6,6 +6,8 @@ metadata:
 spec:
   targetNamespace: kube-system
   releaseName: nfs-subdir-extr-prov-nas-volatile
+  upgrade:
+    force: true
   timeout: 2m
   chart:
     spec:

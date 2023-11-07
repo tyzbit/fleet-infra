@@ -5,6 +5,8 @@ metadata:
   namespace: flux-system
 spec:
   targetNamespace: kube-system
+  upgrade:
+    force: true
   chart:
     spec:
       chart: nfs-subdir-external-provisioner

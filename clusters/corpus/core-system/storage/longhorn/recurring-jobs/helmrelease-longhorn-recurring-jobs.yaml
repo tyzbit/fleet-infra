@@ -6,6 +6,9 @@ metadata:
 spec:
   targetNamespace: longhorn-system
   releaseName: longhorn-recurring-jobs
+  upgrade:
+    # In case a StorageClass needs updating
+    force: true
   dependsOn:
     - name: longhorn
       namespace: flux-system
