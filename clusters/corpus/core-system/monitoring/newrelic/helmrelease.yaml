@@ -272,7 +272,7 @@ spec:
             [FILTER]
                 Name     grep
                 Match    kube.*
-                Exclude  log /([Rr]econcili?ation finished in|All dependencies are ready, proceeding with reconciliation|^artifact up-to-date with remote revision|^Latest image tag for|^no new tags found, next scan|^Discarding event, no alerts found for the involved object)/
+                Exclude  log /([Rr]econcili?ation finished in|All dependencies are ready, proceeding with reconciliation|^artifact up\\-to\\-date with remote revision|^Latest image tag for|^no new tags found, next scan|^Discarding event, no alerts found for the involved object|^no changes made in working directory|^no changes since last reconciliation)/
 
             # Filter etcd status checks
             [FILTER]
