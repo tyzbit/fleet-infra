@@ -117,16 +117,16 @@ spec:
                           for device in $${devices[@]}; do
                             smart_output_line=$(smartctl -A /dev/$device | grep Cel)
                             model=$(fdisk /dev/$device -l | grep model | sed -E 's/.*: //g')
-                            if [[ $model =~ "Samsung SSD 860" ]]; then
+                            if [[ "$model" =~ "Samsung SSD 860" ]]; then
                               sensor=$(echo $smart_output_line | cut -f 2 -d' ')
                               value=$(echo $smart_output_line | sed 's/ Celsius//g' | awk '{print $NF}')
-                            elif [[ $model =~ "WDC WDS400T1R0A" ]]; then
+                            elif [[ "$model" =~ "WDC  WDS400T1R0A" ]]; then
                               sensor=$(echo $smart_output_line | cut -f 2 -d' ')
                               value=$(echo $smart_output_line | sed 's/ Celsius//g' | awk '{print $10}')
-                            elif [[ $model =~ "Samsung SSD 970 EVO Plus 2TB" ]]; then
+                            elif [[ "$model" =~ "Samsung SSD 970 EVO Plus 2TB" ]]; then
                               sensor=$(echo $smart_output_line | sed 's/:.*//g')
                               value=$(echo $smart_output_line | sed -E 's/.*\:\s+([0-9]+).*/\1/g')
-                            elif [[ $model =~ "ADATA LEGEND 700 GOLD" ]]; then
+                            elif [[ "$model" =~ "ADATA LEGEND 700 GOLD" ]]; then
                               sensor=$(echo $smart_output_line | cut -f 1 -d':')
                               value=$(echo $smart_output_line | cut -f 2 -d' ')
                             fi
