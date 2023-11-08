@@ -28,7 +28,7 @@ spec:
             path: "/"
             backend:
               service:
-                name: project-zomboid-filebrowser
+                name: project-zomboid
                 port:
                   number: 80
 ---
