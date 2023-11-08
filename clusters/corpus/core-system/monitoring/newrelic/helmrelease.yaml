@@ -308,7 +308,7 @@ spec:
             [FILTER]
                 Name     grep
                 Match    *
-                Exclude  $kubernetes['namespace_name'] /(metallb\\-system)/
+                Exclude  $kubernetes['namespace_name'] /(kuik\\-system)/
     webhook:
       enabled: false
     # newrelic-pixie:
