@@ -31,9 +31,9 @@ spec:
       # CONFIG_DEBUG: "true"
       # CONFIG_EXCLUDED_NAMESPACES: default,kube-system
       # CONFIG_FORCE: "true"
+      # CONFIG_MANAGEDONLY: "true"
       CONFIG_DOCKERCONFIGJSONPATH: /.dockerconfigjson
       CONFIG_LOOP_DURATION: 1m0s
-      CONFIG_MANAGEDONLY: "true"
       CONFIG_SECRETNAME: universal-image-pull-secret
       CONFIG_SERVICEACCOUNTS: default
       ## Exit after updating secrets
