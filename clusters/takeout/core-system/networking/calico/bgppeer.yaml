@@ -1,9 +1,0 @@
-apiVersion: projectcalico.org/v3
-kind: BGPPeer
-metadata:
-  name: router
-spec:
-  peerIP: 192.168.1.1
-  asNumber: 64512
-  keepOriginalNextHop: true
-  maxRestartTime: 15m
