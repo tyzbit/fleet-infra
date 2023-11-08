@@ -25,7 +25,7 @@ spec:
 
     image:
       repository: felddy/foundryvtt
-      tag: 11.314.0
+      tag: 11.315.0
 
     env:
       TIMEZONE: America/New_York
