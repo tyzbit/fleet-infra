@@ -21,7 +21,7 @@ spec:
     controller:
       service:
         type: ClusterIP
-      replicaCount: 3
+      replicaCount: 1
       # metrics:
       #   service:
       #     annotations:
