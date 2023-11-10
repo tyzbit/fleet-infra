@@ -4,7 +4,6 @@ metadata:
   name: btc-balance-notifier
   namespace: crypto
   annotations:
-    kubernetes.io/ingress.class: nginx
     cert-manager.io/cluster-issuer: letsencrypt
     acme.cert-manager.io/http01-edit-in-place: "true"
     nignx.ingress.kubernetes.io/force-ssl-redirect: "true"
@@ -40,7 +39,6 @@ metadata:
   name: btc-balance-notifier-oauth2-proxy
   namespace: crypto
   annotations:
-    kubernetes.io/ingress.class: nginx
     cert-manager.io/cluster-issuer: letsencrypt
     external-dns.alpha.kubernetes.io/exclude: "true"
 spec:

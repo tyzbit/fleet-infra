@@ -4,7 +4,6 @@ metadata:
   name: btc-rpc-explorer
   namespace: crypto
   annotations:
-    kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/proxy-body-size: 256m
     cert-manager.io/cluster-issuer: letsencrypt
     acme.cert-manager.io/http01-edit-in-place: "true"

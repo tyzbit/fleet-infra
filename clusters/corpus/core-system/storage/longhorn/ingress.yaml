@@ -4,7 +4,6 @@ metadata:
   name: longhorn
   namespace: longhorn-system
   annotations:
-    kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/auth-url: "http://longhorn-oauth2-proxy.longhorn-system.svc.cluster.local/oauth2/auth"
     nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
     cert-manager.io/cluster-issuer: letsencrypt
@@ -48,7 +47,6 @@ metadata:
   name: longhorn-oauth2-proxy
   namespace: longhorn-system
   annotations:
-    kubernetes.io/ingress.class: nginx
     cert-manager.io/cluster-issuer: letsencrypt
     external-dns.alpha.kubernetes.io/exclude: "true"
   labels:

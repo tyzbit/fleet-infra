@@ -4,7 +4,6 @@ metadata:
   name: space-engineers-filebrowser
   namespace: games
   annotations:
-    kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
     nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
     cert-manager.io/cluster-issuer: letsencrypt
@@ -37,7 +36,6 @@ metadata:
   name: space-engineers-fb-oauth2-proxy
   namespace: games
   annotations:
-    kubernetes.io/ingress.class: nginx
     cert-manager.io/cluster-issuer: letsencrypt
     external-dns.alpha.kubernetes.io/exclude: "true"
 spec:
