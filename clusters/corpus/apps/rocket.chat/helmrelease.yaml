@@ -19,6 +19,8 @@ spec:
     - kind: Secret
       name: rocketchat-${chat_name}-chat
   values:
+    image:
+      tag: 6.4.5
     microservices:
       enabled: true
     persistence:
