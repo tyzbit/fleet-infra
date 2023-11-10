@@ -18,7 +18,7 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - &host "longhorn-corpus.${personal_domain}"
+        - &host "longhorn.${personal_domain}"
       secretName: *host
   rules:
     - host: longhorn.corpus.jura
@@ -57,7 +57,7 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - &host "longhorn-corpus.${personal_domain}"
+        - &host "longhorn.${personal_domain}"
       secretName: *host
   rules:
     - host: longhorn.corpus.jura
