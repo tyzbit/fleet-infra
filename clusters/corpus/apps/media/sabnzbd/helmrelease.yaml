@@ -114,7 +114,7 @@ spec:
             secretName: sabnzbd.${personal_domain}-tls
       oauth:
         enabled: true
-        ingressClassName: nginx
+        className: nginx
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt
           acme.cert-manager.io/http01-edit-in-place: "true"
