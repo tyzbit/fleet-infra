@@ -12,13 +12,10 @@ spec:
   secretRef:
     name: github-webhook-token
   resources:
-    - &resource
-      apiVersion: source.toolkit.fluxcd.io/v1
+    - apiVersion: source.toolkit.fluxcd.io/v1
       kind: GitRepository
       name: flux-system
       namespace: flux-system
-    - name: longhorn
-      <<: *resource
 ---
 apiVersion: notification.toolkit.fluxcd.io/v1
 kind: Receiver
