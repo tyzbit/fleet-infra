@@ -40,6 +40,8 @@ spec:
               TZ: America/New_York
               SABNZBD__PORT: &port 80
               SABNZBD__HOST_WHITELIST_ENTRIES: >-
+                sabnzbd,
+                sabnzbd.media,
                 sabnzbd.media.svc.cluster.local,
                 sabnzbd.${personal_domain}
             envFrom:
