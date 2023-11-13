@@ -43,7 +43,7 @@ spec:
                 sabnzbd,
                 sabnzbd.media,
                 sabnzbd.media.svc.cluster.local,
-                sabnzbd.${personal_domain}
+                usenet.${personal_domain}
             envFrom:
               - secretRef:
                   name: sabnzbd-config
