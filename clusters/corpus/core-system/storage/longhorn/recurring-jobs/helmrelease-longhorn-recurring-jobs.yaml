@@ -100,6 +100,8 @@ spec:
         backup:
           - interval: 24h
             retain: 2
+        filesystem-trim:
+          - interval: 20m
 
       "Multimedia":
         backup:
