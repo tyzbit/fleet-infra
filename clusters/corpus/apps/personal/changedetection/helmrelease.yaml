@@ -1,0 +1,134 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app changedetection
+  namespace: flux-system
+spec:
+  targetNamespace: personal
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 1.5.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  values:
+    image:
+      repository: ghcr.io/dgtlmoon/changedetection.io
+      tag: "0.45@sha256:e14695cbabe984dcf7ce70407ab655e749ce17c5c241dd0aeb57ab9a8df74b35"
+    env:
+      PORT: &port 5000
+      USE_X_SETTINGS: 1
+      PLAYWRIGHT_DRIVER_URL: ws://localhost:3000/?stealth=1&--disable-web-security=true&--user-data-dir=~/browserless-cache-123
+      PUID: 1000
+      PGID: 1000
+    sidecars:
+      browser:
+        name: browser
+        image: docker.io/browserless/chrome:latest@sha256:5080f14e7e34f79611d11f51acc0ea08cee511bba99991a2b438f762eb6e0715
+        imagePullPolicy: Always
+        env:
+          - name: SCREEN_WIDTH
+            value: "1920"
+          - name: SCREEN_HEIGHT
+            value: "1024"
+          - name: SCREEN_DEPTH
+            value: "16"
+          - name: ENABLE_DEBUGGER
+            value: "false"
+          - name: PREBOOT_CHROME
+            value: "true"
+          - name: CONNECTION_TIMEOUT
+            value: "300000"
+          - name: MAX_CONCURRENT_SESSIONS
+            value: "10"
+          - name: CHROME_REFRESH_TIME
+            value: "600000"
+          - name: DEFAULT_BLOCK_ADS
+            value: "true"
+          - name: DEFAULT_STEALTH
+            value: "true"
+    ingress:
+      main:
+        enabled: true
+        ingressclassname: nginx
+        annotations:
+          acme.cert-manager.io/http01-edit-in-place: "true"
+          nginx.ingress.kubernetes.io/auth-url: "http://changedetection-oauth2-proxy.personal.svc.cluster.local/oauth2/auth"
+          nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
+          cert-manager.io/cluster-issuer: letsencrypt
+          external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+          external-dns.alpha.kubernetes.io/target: ${cloudflared_tunnel_uuid}.cfargotunnel.com
+        hosts:
+          - host: &host "change.${personal_domain}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host
+      oauth:
+        enabled: true
+        ingressClassName: nginx
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt
+          external-dns.alpha.kubernetes.io/exclude: "true"
+        hosts:
+          - host: *host
+            paths:
+              - path: "/oauth2"
+                service:
+                  name: changedetection-oauth2-proxy
+                  port: 80
+        tls:
+          - hosts:
+              - *host
+            secretName: *host
+
+    service:
+      main:
+        ports:
+          http:
+            port: *port
+    persistence:
+      config:
+        enabled: true
+        mountPath: /datastore
+        existingClaim: changedetection-config-nas
+    # resources:
+    #   requests:
+    #     cpu: 10m
+    #     memory: 100Mi
+    #   limits:
+    #     memory: 250Mi
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &name changedetection-oauth2-proxy
+  namespace: flux-system
+spec:
+  targetNamespace: personal
+  releaseName: *name
+  chart:
+    spec:
+      chart: oauth2-proxy
+      version: "6.19.1"
+      sourceRef:
+        kind: HelmRepository
+        name: oauth2-proxy
+        namespace: flux-system
+  interval: 2m0s
+  values:
+    replicaCount: 1
+    extraArgs:
+      provider: github
+      github-org: "${blog_name}"
+      github-team: "super-admins,changedetection"
+      cookie-expire: 168h0m0s
+      scope: "user:email"
+    config:
+      existingSecret: changedetection-oauth2-proxy
