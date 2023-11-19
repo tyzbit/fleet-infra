@@ -41,6 +41,8 @@ spec:
       image:
         repository: quay.io/enix/kube-image-keeper
     registry:
+      garbageCollection:
+        deleteUntagged: false
       image:
         repository: public.ecr.aws/docker/library/registry
       persistence:
