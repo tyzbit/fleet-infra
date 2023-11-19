@@ -55,7 +55,7 @@ spec:
     ingress:
       main:
         enabled: true
-        ingressclassname: nginx
+        ingressClassName: nginx
         annotations:
           acme.cert-manager.io/http01-edit-in-place: "true"
           nginx.ingress.kubernetes.io/auth-url: "http://changedetection-oauth2-proxy.personal.svc.cluster.local/oauth2/auth"
