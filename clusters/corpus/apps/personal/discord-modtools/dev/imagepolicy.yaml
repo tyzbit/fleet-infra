@@ -1,11 +1,14 @@
 apiVersion: image.toolkit.fluxcd.io/v1beta2
 kind: ImagePolicy
 metadata:
-  name: go-discord-modtools
+  name: go-discord-modtools-dev
   namespace: flux-system
 spec:
   imageRepositoryRef:
     name: go-discord-modtools
+  filterTags:
+    pattern: "develop-(?<timestamp>\\d+)"
+    extract: timestamp
   policy:
-    semver:
-      range: ">= 0.0.0"
+    numerical:
+      order: asc
