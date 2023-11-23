@@ -11,7 +11,7 @@ spec:
   wait: false
   prune: true
 
-  path: "./clusters/corpus/apps/personal/discord-modtools/app"
+  path: "./clusters/corpus/apps/personal/discord-modtools/dev"
   sourceRef:
     kind: GitRepository
     name: flux-system
