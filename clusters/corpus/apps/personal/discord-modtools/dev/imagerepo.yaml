@@ -1,0 +1,10 @@
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImageRepository
+metadata:
+  name: go-discord-modtools
+  namespace: flux-system
+spec:
+  secretRef:
+    name: universal-image-pull-secret
+  image: docker.io/tyzbit/go-discord-modtools
+  interval: 2m0s
