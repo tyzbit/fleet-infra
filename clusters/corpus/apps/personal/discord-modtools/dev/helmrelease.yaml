@@ -17,7 +17,7 @@ spec:
   interval: 2m0s
   values:
     image:
-      repository: docker.io/tyzbit/go-discord-modtools
+      repository: ghcr.io/tyzbit/go-discord-modtools
       tag: develop@sha256:ebd0a3ea4c63d43d5f6264fded356f7097bc27b201ffa93c3bf59913eaa88e93 # {"$imagepolicy": "flux-system:go-discord-modtools:tag"}
     envFrom:
       - secretRef:
