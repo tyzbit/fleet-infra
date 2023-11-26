@@ -6,7 +6,7 @@ metadata:
   labels:
     app: blogger-grab
 spec:
-  replicas: 80
+  replicas: 100
   selector:
     matchLabels:
       app: blogger-grab
