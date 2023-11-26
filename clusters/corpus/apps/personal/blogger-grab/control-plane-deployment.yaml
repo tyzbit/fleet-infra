@@ -1,26 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: &app blogger-grab
+  name: blogger-grab-control
   namespace: personal
   labels:
-    app: *app
+    app: blogger-grab-control
 spec:
-  replicas: 100
+  replicas: 50
   selector:
     matchLabels:
-      app: *app
+      app: blogger-grab-control
   template:
     metadata:
       labels:
-        app: *app
-    tolerations:
-      - key: "node-role.kubernetes.io/control-plane"
-        operator: "Exists"
-        effect: "PreferNoSchedule"
+        app: blogger-grab-control
     spec:
       containers:
-        - name: *app
+        - name: blogger-grab-control
           image: atdr.meo.ws/archiveteam/blogger-grab
           env:
             - name: SHARED_RSYNC_THREADS
@@ -38,3 +34,5 @@ spec:
           emptyDir:
             sizeLimit: 4096Mi
           imagePullPolicy: Always
+      nodeSelector:
+        node-role.kubernetes.io/control-plane: "true"
