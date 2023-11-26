@@ -102,9 +102,15 @@ spec:
                           EOF
                           chroot /host bash /dev/shm/smart_tbw_monitor.sh
                         split: horizontal
-                        split_by: ','
+                        split_by: ","
                         set_header:
-                          [ device, model, manufacturerTbw, ssdBytesWritten, percentTbwUsed]
+                          [
+                            device,
+                            model,
+                            manufacturerTbw,
+                            ssdBytesWritten,
+                            percentTbwUsed,
+                          ]
             - name: nri-flex
               config:
                 name: linuxDiskTemperatureIntegration
@@ -140,7 +146,7 @@ spec:
                           EOF
                           chroot /host bash /dev/shm/smart_temp_monitor.sh
                         split: horizontal
-                        split_by: ','
+                        split_by: ","
                         set_header: [thermalSensor, model, temperatureC]
             - name: nri-flex
               config:
@@ -153,7 +159,7 @@ spec:
                             echo "$(echo $sensor|sed -E 's/.*(th.*[0-9]).*/\\1/g'),$(echo $sensor|sed -E 's/.*(th.*[0-9]).*/\\1/g'),$(( $(cat $sensor) / 1000 ))" 
                           done
                         split: horizontal
-                        split_by: ','
+                        split_by: ","
                         set_header: [thermalSensor, model, temperatureC]
       config:
         enable_process_metrics: false
@@ -307,7 +313,7 @@ spec:
             [FILTER]
                 Name     grep
                 Match    *
-                Exclude  $kubernetes['container_name'] /(kube\\-events|calico\\-node|oauth2\\-proxy|kube\\-apiserver|mosquitto|event\\-exporter|ytdl\\-sub)/
+                Exclude  $kubernetes['container_name'] /(kube\\-events|calico\\-node|oauth2\\-proxy|kube\\-apiserver|mosquitto|event\\-exporter|ytdl\\-sub|blogger\\-grab)/
 
             # Filter unwanted namespaces
             [FILTER]
