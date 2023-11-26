@@ -15,32 +15,32 @@ spec:
         app: duplicacy
     spec:
       containers:
-        - name: duplicacy
-          image: saspus/duplicacy-web:v1.7.2
-          env:
-            - name: TZ
-              value: America/New_York
-          ports:
-            - containerPort: 3875
-              name: http-duplicacy
-          volumeMounts:
-            - name: duplicacy-config
-              mountPath: /config
-            - name: duplicacy-logs
-              mountPath: /logs
-            - name: duplicacy-cache
-              mountPath: /cache
-            - name: nas-volume1
-              mountPath: /volume1
-              readOnly: true
-            - name: nas-volume1-cluster-storage
-              mountPath: /cluster_storage
-              readOnly: true
-          resources:
-            requests:
-              cpu: 1500m
-            limits:
-              memory: 10Gi
+      - name: duplicacy
+        image: saspus/duplicacy-web:v1.7.2
+        env:
+        - name: TZ
+          value: America/New_York
+        ports:
+        - containerPort: 3875
+          name: http-duplicacy
+        volumeMounts:
+        - name: duplicacy-config
+          mountPath: /config
+        - name: duplicacy-logs
+          mountPath: /logs
+        - name: duplicacy-cache
+          mountPath: /cache
+        - name: nas-volume1
+          mountPath: /volume1
+          readOnly: true
+        - name: nas-volume1-cluster-storage
+          mountPath: /cluster_storage
+          readOnly: true
+        resources:
+          requests:
+            cpu: 1500m
+          limits:
+            memory: 10Gi
       volumes:
         - name: duplicacy-config
           persistentVolumeClaim:
@@ -57,4 +57,4 @@ spec:
           persistentVolumeClaim:
             claimName: nas-volume1-cluster-storage
       # nodeSelector:
-      #   k3s.io/hostname: propman
+      #   kubernetes.io/hostname: propman

@@ -89,7 +89,7 @@ spec:
       limits:
         memory: 6Gi
       # nodeSelector:
-      #   k3s.io/hostname: cameraman
+      #   kubernetes.io/hostname: cameraman
       # ---
       # apiVersion: helm.toolkit.fluxcd.io/v2beta1
       # kind: HelmRelease

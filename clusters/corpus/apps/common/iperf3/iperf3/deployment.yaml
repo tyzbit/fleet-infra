@@ -36,7 +36,7 @@ spec:
             limits:
               memory: 128Mi
       # nodeSelector:
-      #   k3s.io/hostname: weatherman
+      #   kubernetes.io/hostname: weatherman
       # colo: aws
 ---
 apiVersion: apps/v1
@@ -71,7 +71,7 @@ spec:
                     operator: In
                     values:
                       - iperf3-server
-              topologyKey: "k3s.io/hostname"
+              topologyKey: "kubernetes.io/hostname"
       containers:
         - name: iperf3-client
           image: networkstatic/iperf3:latest
@@ -83,5 +83,5 @@ spec:
             limits:
               memory: 128Mi
       # nodeSelector:
-      #   k3s.io/hostname: weatherman
+      #   kubernetes.io/hostname: weatherman
       # colo: aws

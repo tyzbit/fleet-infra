@@ -45,7 +45,7 @@ spec:
                     operator: In
                     values:
                       - personal-grav-${anime_blog_name}
-              topologyKey: k3s.io/hostname
+              topologyKey: kubernetes.io/hostname
     persistence:
       enabled: true
       existingClaimName: grav-${anime_blog_name}-data-longhorn-webapp
