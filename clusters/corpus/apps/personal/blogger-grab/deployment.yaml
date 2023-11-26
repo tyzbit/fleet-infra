@@ -23,7 +23,7 @@ spec:
               value: "2"
           args:
             - "--concurrent"
-            - "20"
+            - "40"
             - "--disable-web-server"
             - "tyzbit"
           volumeMounts:
