@@ -38,14 +38,16 @@ spec:
           emptyDir:
             sizeLimit: 4096Mi
           imagePullPolicy: Always
-    affinity:
-      podAntiAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          - topologyKey: "kubernetes.io/hostname"
-            labelSelector:
-              matchExpressions:
-                - key: app.kubernetes.io/name
-                  operator: In
-                  values:
-                    - "plex"
-                    - "plex-secondary"
+      nodeSelector:
+        kubernetes.io/hostname: "myocyte4-kpkjn"
+    # affinity:
+    #   podAntiAffinity:
+    #     requiredDuringSchedulingIgnoredDuringExecution:
+    #       - topologyKey: "kubernetes.io/hostname"
+    #         labelSelector:
+    #           matchExpressions:
+    #             - key: app.kubernetes.io/name
+    #               operator: In
+    #               values:
+    #                 - "plex"
+    #                 - "plex-secondary"
