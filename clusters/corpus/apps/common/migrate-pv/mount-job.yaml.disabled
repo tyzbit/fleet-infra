@@ -22,7 +22,7 @@ spec:
           name: dst
       restartPolicy: Never
       nodeSelector:
-        kubernetes.io/hostname: cameraman
+        k3s.io/hostname: cameraman
       volumes:
       # - name: src
       #   persistentVolumeClaim:

@@ -27,7 +27,7 @@ spec:
       #           operator: In
       #           values:
       #           - bitcoin
-      #       topologyKey: kubernetes.io/hostname
+      #       topologyKey: k3s.io/hostname
       containers:
         - name: electrumx
           image: lukechilds/electrumx:v1.16.0

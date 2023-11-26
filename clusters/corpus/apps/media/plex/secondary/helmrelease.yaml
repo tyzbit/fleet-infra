@@ -86,7 +86,7 @@ spec:
     affinity:
       podAntiAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
-          - topologyKey: "kubernetes.io/hostname"
+          - topologyKey: "k3s.io/hostname"
             labelSelector:
               matchExpressions:
                 - key: app.kubernetes.io/name

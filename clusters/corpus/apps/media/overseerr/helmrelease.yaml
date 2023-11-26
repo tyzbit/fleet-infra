@@ -65,4 +65,4 @@ spec:
     #   limits:
     #     memory: 6Gi
     # nodeSelector:
-    #   kubernetes.io/hostname: cameraman
+    #   k3s.io/hostname: cameraman
