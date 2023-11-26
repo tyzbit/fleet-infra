@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: blogger-grab
-          image: atdr.meo.ws/archiveteam/blogger-grab@sha256:d60797c520bdc4379b0289d399408bbe3a3d36a85c62c3abdb66ccfef2d2bbcf
+          image: atdr.meo.ws/archiveteam/blogger-grab
           env:
             - name: SHARED_RSYNC_THREADS
               value: "2"
