@@ -39,7 +39,7 @@ spec:
             sizeLimit: 4096Mi
           imagePullPolicy: Always
       nodeSelector:
-        kubernetes.io/hostname: "myocyte4-kpkjn"
+        blogger-node: "true"
     # affinity:
     #   podAntiAffinity:
     #     requiredDuringSchedulingIgnoredDuringExecution:
