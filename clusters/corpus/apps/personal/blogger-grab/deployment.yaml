@@ -14,6 +14,10 @@ spec:
     metadata:
       labels:
         app: blogger-grab
+    tolerations:
+      - key: "node-role.kubernetes.io/control-plane"
+        operator: "Exists"
+        effect: "NoSchedule"
     spec:
       containers:
         - name: blogger-grab
