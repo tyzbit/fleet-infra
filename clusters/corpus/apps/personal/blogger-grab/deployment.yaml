@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blogger-grab
+  namespace: personal
+  labels:
+    app: blogger-grab
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: blogger-grab
+  template:
+    metadata:
+      labels:
+        app: blogger-grab
+    spec:
+      containers:
+        - name: blogger-grab
+          image: atdr.meo.ws/archiveteam/blogger-grab:latest@sha256:d60797c520bdc4379b0289d399408bbe3a3d36a85c62c3abdb66ccfef2d2bbcf
+          env:
+            - name: SHARED_RSYNC_THREADS
+              value: "2"
+          args:
+            - "--concurrent"
+            - "20"
+            - "--disable-web-server"
+            - "tyzbit"
+          volumeMounts:
+            - mountPath: /grab/data
+              name: cache-volume
+      volumes:
+        - name: cache-volume
+          emptyDir:
+            sizeLimit: 4096Mi
+          imagePullPolicy: Always
