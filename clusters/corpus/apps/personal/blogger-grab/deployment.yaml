@@ -7,6 +7,10 @@ metadata:
     app: *app
 spec:
   replicas: 36
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
   selector:
     matchLabels:
       app: *app
@@ -33,6 +37,12 @@ spec:
           volumeMounts:
             - mountPath: /grab/data
               name: cache-volume
+          readinessProbe:
+            exec:
+              command:
+                - "true"
+            initialDelaySeconds: 10
+            periodSeconds: 1
       volumes:
         - name: cache-volume
           emptyDir:
