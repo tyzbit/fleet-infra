@@ -41,7 +41,7 @@ spec:
             exec:
               command:
                 - "true"
-            initialDelaySeconds: 10
+            initialDelaySeconds: 30
             periodSeconds: 1
       volumes:
         - name: cache-volume
