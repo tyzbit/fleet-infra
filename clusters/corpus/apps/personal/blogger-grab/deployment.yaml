@@ -25,6 +25,11 @@ spec:
           env:
             - name: SHARED_RSYNC_THREADS
               value: "2"
+              args:
+                - "--concurrent"
+                - "20"
+                - "--disable-web-server"
+                - "tyzbit"
               # command:
               #   - bash
               #   - -c
@@ -33,11 +38,6 @@ spec:
               #     echo "sleeping $sleep"
               #     sleep $sleep
               #     run-pipeline3
-              args:
-                - "--concurrent"
-                - "20"
-                - "--disable-web-server"
-                - "tyzbit"
           volumeMounts:
             - mountPath: /grab/data
               name: cache-volume
