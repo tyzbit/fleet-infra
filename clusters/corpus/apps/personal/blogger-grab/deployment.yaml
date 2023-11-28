@@ -25,11 +25,11 @@ spec:
           env:
             - name: SHARED_RSYNC_THREADS
               value: "2"
-              args:
-                - "--concurrent"
-                - "20"
-                - "--disable-web-server"
-                - "tyzbit"
+          args:
+            - "--concurrent"
+            - "20"
+            - "--disable-web-server"
+            - "tyzbit"
               # command:
               #   - bash
               #   - -c
