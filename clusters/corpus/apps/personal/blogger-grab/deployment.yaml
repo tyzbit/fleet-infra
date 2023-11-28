@@ -6,7 +6,7 @@ metadata:
   labels:
     app: *app
 spec:
-  replicas: 1
+  replicas: 36
   selector:
     matchLabels:
       app: *app
@@ -25,19 +25,20 @@ spec:
           env:
             - name: SHARED_RSYNC_THREADS
               value: "2"
-          args:
-            - "--concurrent"
-            - "20"
-            - "--disable-web-server"
-            - "tyzbit"
-              # command:
-              #   - bash
-              #   - -c
-              #   - |
-              #     sleep=$((1 + $RANDOM % 120))
-              #     echo "sleeping $sleep"
-              #     sleep $sleep
-              #     run-pipeline3
+          command:
+            - bash
+            - -c
+            - |
+              sleep=$((1 + $RANDOM % 120))
+              echo "sleeping $sleep"
+              sleep $sleep
+              /usr/local/bin/python
+              /usr/local/bin/run-pipeline3
+              --disable-web-server
+              pipeline.py
+              --concurrent 20  
+              --disable-web-server            
+              tyzbit
           volumeMounts:
             - mountPath: /grab/data
               name: cache-volume
