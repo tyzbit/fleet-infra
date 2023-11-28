@@ -46,8 +46,8 @@ spec:
           emptyDir:
             sizeLimit: 4096Mi
           imagePullPolicy: Always
-      # nodeSelector:
-      #   blogger-node: "true"
+      nodeSelector:
+        blogger-node: "true"
     # affinity:
     #   podAntiAffinity:
     #     requiredDuringSchedulingIgnoredDuringExecution:
