@@ -6,7 +6,7 @@ metadata:
   labels:
     app: *app
 spec:
-  replicas: 4
+  replicas: 12
   selector:
     matchLabels:
       app: *app
@@ -26,18 +26,9 @@ spec:
             - name: SHARED_RSYNC_THREADS
               value: "2"
           command:
-            - bash
-            - -c
-            - |
-              sleep=$((1 + $RANDOM % 120))
-              echo "sleeping $sleep"
-              sleep $sleep
-              run-pipeline3 \
-              --disable-web-server \
-              pipeline.py \
-              --concurrent 20 \
-              --disable-web-server \
-              tyzbit
+            - --concurrent 20
+            - --disable-web-server
+            - tyzbit
           volumeMounts:
             - mountPath: /grab/data
               name: cache-volume
