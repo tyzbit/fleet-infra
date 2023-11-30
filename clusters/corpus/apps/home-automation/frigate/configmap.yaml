@@ -134,9 +134,9 @@ data:
           enabled: False
         detect:
           enabled: False
-          # width: 1280
-          # height: 720
-          # fps: 5
+          width: 1280
+          height: 720
+          fps: 5
         mqtt:
           height: 540
 
@@ -173,10 +173,10 @@ data:
         snapshots:
           enabled: False
         detect:
-          enabled: False
-        #   width: 1920
-        #   height: 1080
-        #   fps: 5
+          enabled: True
+          width: 1920
+          height: 1080
+          fps: 5
         mqtt:
           height: 540
 
