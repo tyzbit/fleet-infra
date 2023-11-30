@@ -133,7 +133,7 @@ data:
         snapshots:
           enabled: False
         detect:
-          enabled: False
+          enabled: True
           width: 1280
           height: 720
           fps: 5
