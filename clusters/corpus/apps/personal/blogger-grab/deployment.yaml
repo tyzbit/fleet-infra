@@ -25,7 +25,7 @@ spec:
           env:
             - name: SHARED_RSYNC_THREADS
               value: "2"
-          command:
+          args:
             - --concurrent 20
             - --disable-web-server
             - tyzbit
