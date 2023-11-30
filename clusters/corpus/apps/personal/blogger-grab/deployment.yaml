@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: *app
-          image: atdr.meo.ws/archiveteam/blogger-grab@sha256:c803d93730810a3b96fde6b77cda65e2dc1aca7092bd45831280cee9066af5a3
+          image: atdr.meo.ws/archiveteam/blogger-grab@sha256:2e2b09ffa5556ed38e841447dfbcb16b568ab4df042c80211266ed51932bd7d8
           env:
             - name: SHARED_RSYNC_THREADS
               value: "2"
