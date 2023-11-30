@@ -20,7 +20,7 @@ spec:
       replicas: 0
     image:
       repository: ghcr.io/tyzbit/go-discord-modtools
-      tag: develop-1701373448 # {"$imagepolicy": "flux-system:go-discord-modtools-dev:tag"}
+      tag: develop-1701377405 # {"$imagepolicy": "flux-system:go-discord-modtools-dev:tag"}
     envFrom:
       - secretRef:
           name: go-discord-modtools-dev
