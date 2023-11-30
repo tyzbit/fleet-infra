@@ -26,9 +26,9 @@ spec:
             - name: SHARED_RSYNC_THREADS
               value: "2"
           args:
-            - --concurrent 20
+            - --concurrent
+            - "20"
             - --disable-web-server
-            - pipeline.py
             - tyzbit
           volumeMounts:
             - mountPath: /grab/data
