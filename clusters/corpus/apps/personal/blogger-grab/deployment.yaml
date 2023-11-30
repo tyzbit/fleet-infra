@@ -26,6 +26,7 @@ spec:
             - name: SHARED_RSYNC_THREADS
               value: "2"
           args:
+            - pipeline.py
             - --concurrent 20
             - --disable-web-server
             - tyzbit
