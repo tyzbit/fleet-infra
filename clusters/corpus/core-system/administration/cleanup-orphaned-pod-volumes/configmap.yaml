@@ -7,7 +7,7 @@ data:
   # double dollar signs is because flux does variable substitution
   # backslashes also need to be escaped, but I think that's usual
   cleanup.sh: |
-    tail -n 0 -f /host/var/log/syslog | 
+    journalctl -f | 
     grep 'orphaned pod' | 
     grep -Eow '\\w{8}-\\w{4}-\\w{4}-\\w{4}-\\w{12}' | 
     while read pod; do
