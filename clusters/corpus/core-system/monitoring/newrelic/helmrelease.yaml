@@ -89,15 +89,18 @@ spec:
                             lba_size_bytes=$(fdisk /dev/$device -l | grep 'Units' | awk '{print $8}')
                             model=$(fdisk /dev/$device -l | grep model | sed -E 's/.*: //g' | awk '{$1=$1};1')
                             multiplier=$${multipliers["$model"]}
-                            if [[ $smart_output_line =~ "LBA" ]]; then
-                              measurement=$(echo "$smart_output_line" | awk '{print $10}')
-                            elif [[ $smart_output_line =~ "Data" ]]; then
-                              measurement=$(echo "$smart_output_line" | awk '{print $4}' | tr -d ',')
+                            # This is the disk model for Longhorn disks and perhaps more
+                            if [[ $model != "VIRTUAL-DISK" ]]; then
+                              if [[ $smart_output_line =~ "LBA" ]]; then
+                                measurement=$(echo "$smart_output_line" | awk '{print $10}')
+                              elif [[ $smart_output_line =~ "Data" ]]; then
+                                measurement=$(echo "$smart_output_line" | awk '{print $4}' | tr -d ',')
+                              fi
+                              ssd_bytes_written=$(( measurement * lba_size_bytes * multiplier ))
+                              mfr_tbw=$${tbw["$model"]}
+                              percent_tbw_used=$(echo "scale=2; ( $ssd_bytes_written / 1000 / 1000 / 1000 / 1000) / $mfr_tbw" | bc -l)
+                              echo "$device,$model,$mfr_tbw,$ssd_bytes_written,$percent_tbw_used"
                             fi
-                            ssd_bytes_written=$(( measurement * lba_size_bytes * multiplier ))
-                            mfr_tbw=$${tbw["$model"]}
-                            percent_tbw_used=$(echo "scale=2; ( $ssd_bytes_written / 1000 / 1000 / 1000 / 1000) / $mfr_tbw" | bc -l)
-                            echo "$device,$model,$mfr_tbw,$ssd_bytes_written,$percent_tbw_used"
                           done
                           EOF
                           chroot /host bash /dev/shm/smart_tbw_monitor.sh
