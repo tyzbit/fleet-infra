@@ -4,10 +4,10 @@ metadata:
   name: valheim-data-longhorn
   namespace: games
 spec:
-  accessModes: 
+  accessModes:
     - ReadWriteOnce
   volumeMode: Filesystem
-  storageClassName: longhorn
+  storageClassName: longhorn-games
   resources:
     requests:
       storage: 60Gi
