@@ -35,7 +35,7 @@ spec:
     #   targetPath: pixie-chart.deployKey
   values:
     global:
-      cluster: takeout
+      cluster: corpus
     infrastructure:
       enabled: true
       image:
