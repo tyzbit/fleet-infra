@@ -27,11 +27,14 @@ spec:
     keepHistory: false
   values:
     controllers:
+      main: &disabled
+        disabled: true
       sabnzbd:
         type: statefulset
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
+          main: *disabled
           sabnzbd:
             enabled: true
             image:
