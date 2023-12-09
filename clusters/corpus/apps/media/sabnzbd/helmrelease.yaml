@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: sabnzbd
+  name: &app sabnzbd
   namespace: media
 spec:
   interval: 30m
@@ -27,15 +27,13 @@ spec:
     keepHistory: false
   values:
     controllers:
-      main: &disabled
-        disabled: true
-      sabnzbd:
+      main:
         type: statefulset
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
-          main: *disabled
-          sabnzbd:
+          main:
+            nameOverride: *app
             enabled: true
             image:
               repository: ghcr.io/onedr0p/sabnzbd
