@@ -7914,7 +7914,7 @@ spec:
   - name: http
     port: 80
     protocol: TCP
-    targetPort: http
+    targetPort: http-main
   selector:
     app: notification-controller
   type: ClusterIP
@@ -7984,7 +7984,7 @@ spec:
         name: manager
         ports:
         - containerPort: 9090
-          name: http
+          name: http-main
           protocol: TCP
         - containerPort: 9292
           name: http-webhook
