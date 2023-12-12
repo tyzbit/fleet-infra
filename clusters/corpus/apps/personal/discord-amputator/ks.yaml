@@ -9,14 +9,19 @@ spec:
   timeout: 5m
 
   wait: false
-  prune: true
+  prune: false
 
   path: "./clusters/corpus/apps/personal/discord-amputator"
   sourceRef:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
-  dependsOn: [{ name: kubernetes-secrets }, { name: longhorn-recurring-jobs }, { name: imagepullsecret-patcher }]
+  dependsOn:
+    [
+      { name: kubernetes-secrets },
+      { name: longhorn-recurring-jobs },
+      { name: imagepullsecret-patcher },
+    ]
   postBuild:
     substituteFrom:
       - kind: Secret

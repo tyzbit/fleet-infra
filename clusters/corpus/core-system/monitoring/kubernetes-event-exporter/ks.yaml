@@ -9,7 +9,7 @@ spec:
   timeout: 5m
 
   wait: false
-  prune: true
+  prune: false
 
   path: "./clusters/corpus/core-system/monitoring/kubernetes-event-exporter"
   sourceRef:
