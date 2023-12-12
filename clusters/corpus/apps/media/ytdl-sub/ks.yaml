@@ -9,7 +9,7 @@ spec:
   timeout: 5m
 
   wait: false
-  prune: false
+  prune: true
 
   path: "./clusters/corpus/apps/media/ytdl-sub"
   sourceRef:

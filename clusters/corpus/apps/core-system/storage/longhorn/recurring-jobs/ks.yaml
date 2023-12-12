@@ -14,7 +14,7 @@ spec:
       namespace: flux-system
 
   wait: false
-  prune: false
+  prune: true
 
   path: "./clusters/corpus/apps/core-system/storage/longhorn/recurring-jobs"
   sourceRef:
