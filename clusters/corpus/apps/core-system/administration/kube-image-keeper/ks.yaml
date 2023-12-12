@@ -11,7 +11,7 @@ spec:
   wait: false
   prune: false
 
-  path: "./clusters/corpus/core-system/administration/kube-image-keeper"
+  path: "./clusters/corpus/apps/core-system/administration/kube-image-keeper"
   sourceRef:
     kind: GitRepository
     name: flux-system

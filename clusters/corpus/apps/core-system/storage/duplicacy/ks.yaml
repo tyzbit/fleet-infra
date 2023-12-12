@@ -11,7 +11,7 @@ spec:
   wait: false
   prune: false
 
-  path: "./clusters/corpus/core-system/storage/duplicacy"
+  path: "./clusters/corpus/core-system/apps/storage/duplicacy"
   sourceRef:
     kind: GitRepository
     name: flux-system
