@@ -11,7 +11,7 @@ spec:
   wait: false
   prune: false
 
-  path: "./clusters/corpus/apps/games/valheim"
+  path: "./clusters/corpus/apps/flux-addons/webhook-receiver"
   sourceRef:
     kind: GitRepository
     name: flux-system
