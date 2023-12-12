@@ -4859,7 +4859,7 @@ spec:
                   be achieved with a patch, but this operator is simpler to specify.
                 items:
                   description: Image contains an image name, a new name, a new tag
-                patcheswill replace the original name and tag.
+                    or digest, which will replace the original name and tag.
                   properties:
                     digest:
                       description: Digest is the value used to replace the original
@@ -5503,7 +5503,7 @@ spec:
                       reconcileStrategy:
                         default: ChartVersion
                         description: Determines what enables the creation of a new
-                patchesalid values are ('ChartVersion', 'Revision').
+                          artifact. Valid values are ('ChartVersion', 'Revision').
                           See the documentation of the values for an explanation on
                           their behavior. Defaults to ChartVersion when omitted.
                         enum:
@@ -6483,7 +6483,7 @@ spec:
             type: object
           spec:
             description: HelmReleaseSpec defines the desired state of a Helm release.
-            properties:patches
+            properties:
               chart:
                 description: Chart defines the template of the v1beta2.HelmChart that
                   should be created for this HelmRelease.
