@@ -6,6 +6,7 @@ metadata:
 spec:
   releaseName: ${chat_name}-chat
   targetNamespace: rocketchat-${chat_name}-chat
+  createNamespace: true
   chart:
     spec:
       chart: rocketchat
