@@ -22,7 +22,7 @@ spec:
     - kustomize:
         patches:
           - target:
-              apiVersion: v1
+              version: v1
               kind: ConfigMap
               name: longhorn-default-setting
             patch: |
