@@ -1,5 +1,5 @@
 # https://github.com/JJGadgets/Biohazard/blob/a7de80b5bdc5cfda9745681fcce2f7e0e5110d4b/kube/deploy/apps/gotosocial/app/hr.yaml
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
   name: &app ${social_name}-gotosocial

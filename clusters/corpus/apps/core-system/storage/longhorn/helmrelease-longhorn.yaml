@@ -1,4 +1,4 @@
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
   name: longhorn
@@ -20,7 +20,7 @@ spec:
   # overridden at runtime.
   postRenderers:
     - kustomize:
-        patchesStrategicMerge:
+        patches:
           - apiVersion: v1
             kind: ConfigMap
             metadata:
@@ -84,7 +84,7 @@ spec:
                 v2-data-engine-hugepage-limit: 1024
                 v2-data-engine: false
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
   name: longhorn-oauth2-proxy
