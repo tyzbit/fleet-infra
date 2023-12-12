@@ -1,7 +1,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cloudflared
+  name: imagepullsecret-patcher
   namespace: flux-system
 spec:
   interval: 30m
@@ -11,13 +11,8 @@ spec:
   wait: false
   prune: false
 
-  path: "./clusters/corpus/core-system/networking/cloudflared"
+  path: "./clusters/corpus/core-system/administration/imagepullsecret-patcher"
   sourceRef:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
-  dependsOn: [{ name: kubernetes-secrets }]
-  postBuild:
-    substituteFrom:
-      - kind: Secret
-        name: sensitive-values

@@ -17,11 +17,7 @@ spec:
     name: flux-system
     namespace: flux-system
   dependsOn:
-    [
-      { name: kubernetes-secrets },
-      { name: longhorn-recurring-jobs },
-      { name: imagepullsecret-patcher },
-    ]
+    [{ name: longhorn-recurring-jobs }, { name: imagepullsecret-patcher }]
   postBuild:
     substituteFrom:
       - kind: Secret

@@ -1,7 +1,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cert-manager
+  name: longhorn
   namespace: flux-system
 spec:
   interval: 30m
@@ -9,15 +9,10 @@ spec:
   timeout: 5m
 
   wait: false
-  prune: false
+  prune: true
 
-  path: "./clusters/corpus/core-system/networking/cert-manager"
+  path: "./clusters/corpus/core-system/storage/longhorn"
   sourceRef:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
-  dependsOn: [{ name: kubernetes-secrets }]
-  postBuild:
-    substituteFrom:
-      - kind: Secret
-        name: sensitive-values

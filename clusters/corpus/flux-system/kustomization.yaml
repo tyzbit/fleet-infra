@@ -14,3 +14,10 @@ patches:
     target:
       kind: Deployment
       name: "(kustomize-controller|helm-controller|source-controller)"
+  - patch: |
+      - op: replace
+        path: /spec/template/spec/containers/0/resources/limits/memory
+        value: 2Gi
+    target:
+      kind: Deployment
+      name: "(source-controller)"

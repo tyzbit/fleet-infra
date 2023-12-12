@@ -20,12 +20,8 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m0s
-  path: ./clusters/corpus
+  path: ./clusters/corpus/flux-system
   prune: false
   sourceRef:
     kind: GitRepository
     name: flux-system
-  postBuild:
-    substituteFrom:
-      - kind: Secret
-        name: sensitive-values
