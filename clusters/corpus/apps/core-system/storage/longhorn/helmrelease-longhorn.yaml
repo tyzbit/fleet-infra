@@ -25,6 +25,7 @@ spec:
               version: v1
               kind: ConfigMap
               name: longhorn-default-setting
+              namespace: longhorn-system
             patch: |
               - op: replace
                 path: /data/default-setting.yaml
