@@ -22,14 +22,13 @@ spec:
     - kustomize:
         patches:
           - target:
-              version: v1
               kind: ConfigMap
               name: longhorn-default-setting
               namespace: longhorn-system
             patch: |
               - op: replace
                 path: /data/default-setting.yaml
-                value: |
+                value: |-
                   allow-collecting-longhorn-usage-metrics: false
                   allow-recurring-job-while-volume-detached: false
                   allow-volume-creation-with-degraded-availability: true
@@ -40,8 +39,6 @@ spec:
                   backing-image-recovery-wait-interval: 300
                   backup-compression-method: lz4
                   backup-concurrent-limit: 2
-                  # backupTarget: s3://${longhorn_backup_bucket}@us-east-1/
-                  # backupTargetCredentialSecret: longhorn-corpus-backups
                   backupTarget: nfs://nas.onair:/volume1/longhorn_corpus_backups
                   backupstore-poll-interval: 0
                   concurrent-automatic-engine-upgrade-per-node-limit: 3
