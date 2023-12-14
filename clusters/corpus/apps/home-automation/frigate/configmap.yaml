@@ -184,7 +184,6 @@ data:
         birdseye:
           order: 6
         ffmpeg:
-          hwaccel_args: preset-vaapi
           inputs:
             # - path: 'rtsp://localhost:8554/backyard'
             - path: 'rtsp://{FRIGATE_BUNNIES_CREDENTIALS}@bunnies.onair:554/1'
