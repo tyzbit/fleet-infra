@@ -16,6 +16,7 @@ spec:
   interval: 2m0s
   values:
     fullnameOverride: grav-${family_pictures_name}
+    replicaCount: 1
     grav:
       image:
         repository: dsavell/grav
