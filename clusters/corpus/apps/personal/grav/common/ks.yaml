@@ -1,7 +1,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: grav-imagerepo
+  name: grav-common
   namespace: flux-system
 spec:
   interval: 30m
@@ -11,13 +11,17 @@ spec:
   wait: false
   prune: true
 
-  path: "./clusters/corpus/apps/personal/grav"
+  path: "./clusters/corpus/apps/personal/grav/common"
   sourceRef:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
   dependsOn:
-    [{ name: longhorn-recurring-jobs }, { name: imagepullsecret-patcher }]
+    [
+      { name: kubernetes-secrets },
+      { name: longhorn-recurring-jobs },
+      { name: imagepullsecret-patcher },
+    ]
   postBuild:
     substituteFrom:
       - kind: Secret
