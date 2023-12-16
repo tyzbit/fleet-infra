@@ -20,4 +20,4 @@ patches:
         value: 2Gi
     target:
       kind: Deployment
-      name: "(source-controller)"
+      name: "(helm-controller|source-controller)"
