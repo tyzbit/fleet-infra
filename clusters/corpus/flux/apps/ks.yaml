@@ -11,7 +11,7 @@ spec:
   wait: false
   prune: true
 
-  path: "./clusters/corpus/flux/apps"
+  path: "./clusters/corpus/apps"
   sourceRef:
     kind: GitRepository
     name: flux-system
