@@ -16,6 +16,7 @@ spec:
   interval: 2m0s
   values:
     fullnameOverride: grav-${blog_name}
+    replicaCount: 0
     grav:
       image:
         repository: dsavell/grav
