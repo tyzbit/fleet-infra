@@ -17,7 +17,7 @@ data:
     receivers:
       - name: "Discord"
         webhook:
-          endpoint: $${discord_kube_event_exporter_webhook}
+          endpoint: '$${discord_kube_event_exporter_webhook}'
           headers:
             User-Agent: kube-event-exporter 1.0
           layout:
