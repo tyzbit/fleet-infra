@@ -3,6 +3,8 @@ kind: Deployment
 metadata:
   name: event-exporter
   namespace: monitoring
+  annotations:
+    reloader.stakater.com/auto: "true"
 spec:
   replicas: 1
   selector:
