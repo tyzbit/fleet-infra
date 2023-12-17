@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: ./charts/external-dns
-      version: "v0.12.0" # Set in the referenced GitRepository
+      version: "v0.13.1" # Set in the referenced GitRepository
       sourceRef:
         kind: GitRepository
         name: external-dns
