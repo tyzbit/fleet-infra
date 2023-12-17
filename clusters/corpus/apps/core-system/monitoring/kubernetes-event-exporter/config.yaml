@@ -5,7 +5,7 @@ metadata:
   namespace: monitoring
 data:
   config.yaml: |
-    logLevel: warn
+    logLevel: debug
     logFormat: json
     metricsNamePrefix: event_exporter_
     route:
