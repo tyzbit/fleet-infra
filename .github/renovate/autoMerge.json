@@ -18,8 +18,7 @@
         "eritislami/evobot",
         "ghcr.io/onedr0p/radarr-develop",
         "ghcr.io/onedr0p/sonarr-develop",
-        "linuxserver/jackett",
-        "atdr.meo.ws/archiveteam/blogger-grab"
+        "linuxserver/jackett"
       ]
     },
     {
