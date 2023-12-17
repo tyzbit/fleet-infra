@@ -12,8 +12,8 @@ data:
       routes:
         - match:
           - receiver: "Discord"
-          drop:
-          - type: "Normal"
+          # drop:
+          # - type: "Normal"
     receivers:
       - name: "Discord"
         webhook:
