@@ -16,6 +16,9 @@ spec:
         namespace: flux-system
   interval: 2m0s
   values:
+    image:
+      repository: registry.k8s.io/external-dns/external-dns
+      tag: v0.14.0
     provider: cloudflare
     triggerLoopOnEvent: true
     txtOwnerId: "corpus-automatic"
