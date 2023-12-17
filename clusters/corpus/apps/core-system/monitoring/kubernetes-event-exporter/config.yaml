@@ -5,7 +5,7 @@ metadata:
   namespace: monitoring
 data:
   config.yaml: |
-    logLevel: debug
+    logLevel: warn
     logFormat: json
     metricsNamePrefix: event_exporter_
     route:
@@ -17,7 +17,7 @@ data:
     receivers:
       - name: "Discord"
         webhook:
-          endpoint: $${DISCORD_KUBE_EVENT_EXPORTER_WEBHOOK}
+          endpoint: $${discord_kube_event_exporter_webhook}
           headers:
             User-Agent: kube-event-exporter 1.0
           layout:
