@@ -5,15 +5,14 @@ metadata:
   namespace: monitoring
 data:
   config.yaml: |
-    logLevel: debug
     logFormat: json
     metricsNamePrefix: event_exporter_
     route:
       routes:
         - match:
           - receiver: "Discord"
-          # drop:
-          # - type: "Normal"
+          drop:
+          - type: "Normal"
     receivers:
       - name: "Discord"
         webhook:
