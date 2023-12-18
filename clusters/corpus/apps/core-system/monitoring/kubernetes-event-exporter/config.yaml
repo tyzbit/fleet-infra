@@ -17,6 +17,9 @@ data:
             - apiVersion: longhorn.io/v1beta2
               Kind: Snapshot
               message: "snapshot becomes not ready to use"
+            - apiVersion: longhorn.io/v1beta2
+              Kind: Snapshot
+              message: "(snapshot becomes not ready to use|snapshot is marked as removed|snapshot becomes not ready to use)"
             # - apiVersion: v1
             #   Kind: Pod
             #   Reason: ProbeWarning
