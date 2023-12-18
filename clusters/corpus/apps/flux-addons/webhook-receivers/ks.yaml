@@ -11,7 +11,7 @@ spec:
   wait: false
   prune: true
 
-  path: "./clusters/corpus/apps/flux-addons/webhook-receiver"
+  path: "./clusters/corpus/apps/flux-addons/webhook-receivers"
   sourceRef:
     kind: GitRepository
     name: flux-system
