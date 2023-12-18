@@ -16,7 +16,7 @@ spec:
   interval: 2m0s
   values:
     fullnameOverride: grav-${anime_blog_name}
-    replicaCount: 0
+    replicaCount: 1
     grav:
       image:
         repository: dsavell/grav
