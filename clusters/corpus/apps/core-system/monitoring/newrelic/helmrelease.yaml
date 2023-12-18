@@ -258,12 +258,6 @@ spec:
                 Match    kube.*
                 Exclude  log kube\\-probe
 
-            # Filter nzbget/ingress jsonrpc hits
-            [FILTER]
-                Name     grep
-                Match    kube.*
-                Exclude  log /POST \\/jsonrpc/ 
-
             # Filter nextcloud propfind
             [FILTER]
                 Name     grep

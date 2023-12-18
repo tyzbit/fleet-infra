@@ -54,10 +54,6 @@ spec:
         enabled: true
         existingClaim: sonarr-config-longhorn-webapp
 
-      # nzb-downloads:
-      #   enabled: true
-      #   existingClaim: nzbget-downloads
-
       media:
         enabled: true
         existingClaim: nas-volume1-media
