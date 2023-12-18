@@ -7,7 +7,7 @@ spec:
   type: github
   events:
     - ping
-    - push
+    - registry_package
   secretRef:
     name: github-webhook-token
   resources:
