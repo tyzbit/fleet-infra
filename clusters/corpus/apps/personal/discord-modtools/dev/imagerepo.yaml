@@ -7,4 +7,4 @@ spec:
   secretRef:
     name: universal-image-pull-secret
   image: ghcr.io/tyzbit/go-discord-modtools
-  interval: 10s
+  interval: 5m
