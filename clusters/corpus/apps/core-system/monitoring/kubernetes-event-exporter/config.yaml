@@ -15,8 +15,7 @@ data:
           drop:
             - type: Normal
             - message: snapshot becomes not ready to use
-            # - message: snapshot is marked as removed
-            # - reason: ProbeWarning
+            - message: snapshot is marked as removed
     receivers:
       - name: "Discord"
         webhook:
