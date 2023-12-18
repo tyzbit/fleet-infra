@@ -11,13 +11,13 @@ data:
       routes:
         - match:
             - receiver: "Discord"
-          # drop:
-          #   - type: "Normal"
-          #   - apiVersion: longhorn.io/v1beta2
-          #     Kind: Snapshot
-          #     message: "snapshot becomes not ready to use"
-          #   - Kind: Pod
-          #     Reason: ProbeWarning
+          drop:
+            # - type: "Normal"
+            - apiVersion: longhorn.io/v1beta2
+              Kind: Snapshot
+              message: "snapshot becomes not ready to use"
+            - Kind: Pod
+              Reason: ProbeWarning
     receivers:
       - name: "Discord"
         webhook:
