@@ -14,13 +14,9 @@ data:
             - receiver: "Discord"
           drop:
             - type: "Normal"
-            - apiVersion: longhorn.io/v1beta2
-              Kind: Snapshot
-              message: "(snapshot becomes not ready to use|snapshot is marked as removed)"
-            # - apiVersion: v1
-            #   Kind: Pod
-            #   Reason: ProbeWarning
-            #   type: Warning
+            - message: snapshot becomes not ready to use
+            - message: snapshot is marked as removed
+            - reason: ProbeWarning
     receivers:
       - name: "Discord"
         webhook:
