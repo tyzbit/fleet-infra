@@ -16,8 +16,10 @@ data:
             - apiVersion: longhorn.io/v1beta2
               Kind: Snapshot
               message: "snapshot becomes not ready to use"
-            # - Kind: Pod
-            #   Reason: ProbeWarning
+            - apiVersion: v1
+              Kind: Pod
+              Reason: ProbeWarning
+              type: warning
     receivers:
       - name: "Discord"
         webhook:
