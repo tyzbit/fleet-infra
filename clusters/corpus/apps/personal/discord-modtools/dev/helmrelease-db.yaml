@@ -1,10 +1,10 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
-  name: go-discord-modtools-db-dev
+  name: go-discord-modtools-dev-db
   namespace: flux-system
 spec:
-  releaseName: go-discord-modtools-db-dev
+  releaseName: go-discord-modtools-dev-db
   targetNamespace: personal
   chart:
     spec:
@@ -22,7 +22,7 @@ spec:
 
     envFrom:
       - secretRef:
-          name: go-discord-modtools-db-dev
+          name: go-discord-modtools-dev-db
 
     controller:
       type: statefulset
