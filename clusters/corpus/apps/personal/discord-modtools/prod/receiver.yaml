@@ -15,3 +15,7 @@ spec:
       kind: ImageRepository
       name: go-discord-modtools
       namespace: flux-system
+    - apiVersion: image.toolkit.fluxcd.io/v1beta1
+      kind: ImageUpdateAutomation
+      name: flux-system
+      namespace: flux-system
