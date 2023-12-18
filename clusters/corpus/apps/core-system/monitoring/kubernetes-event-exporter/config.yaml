@@ -12,14 +12,14 @@ data:
         - match:
             - receiver: "Discord"
           drop:
-            # - type: "Normal"
+            - type: "Normal"
             - apiVersion: longhorn.io/v1beta2
               Kind: Snapshot
               message: "snapshot becomes not ready to use"
             - apiVersion: v1
               Kind: Pod
               Reason: ProbeWarning
-              type: warning
+              type: Warning
     receivers:
       - name: "Discord"
         webhook:
