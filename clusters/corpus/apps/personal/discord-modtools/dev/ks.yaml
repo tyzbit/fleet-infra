@@ -16,4 +16,9 @@ spec:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
-  dependsOn: [{ name: imagepullsecret-patcher }]
+  dependsOn:
+    [
+      { name: go-discord-modtools },
+      { name: kubernetes-secrets },
+      { name: imagepullsecret-patcher },
+    ]

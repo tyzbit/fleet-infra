@@ -1,0 +1,11 @@
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImagePolicy
+metadata:
+  name: go-discord-modtools
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: go-discord-modtools
+  policy:
+    semver:
+      range: ">= 0.0.0"

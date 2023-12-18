@@ -1,10 +1,10 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
-  name: go-discord-modtools-dev-db
+  name: go-discord-modtools-db-dev
   namespace: flux-system
 spec:
-  releaseName: go-discord-modtools-dev-db
+  releaseName: go-discord-modtools-db-dev
   targetNamespace: personal
   chart:
     spec:
@@ -20,19 +20,9 @@ spec:
       repository: mariadb
       tag: 10.8
 
-    command:
-      - bash
-      - -c
-      - |
-        mariadb-dump -h go-discord-modtools-db --password="$(MARIADB_PROD_ROOT_PASSWORD)" go_modtools > /backup/dump.sql && \
-        while [[ $(mariadb -uroot --password="$${MARIADB_ROOT_PASSWORD}" "$${MARIADB_DATABASE}" < /backup/dump.sql; echo $?) != 0 ]]; do
-          sleep 1
-        done &
-        exec docker-entrypoint.sh mariadbd
-
     envFrom:
       - secretRef:
-          name: go-discord-modtools-dev-db
+          name: go-discord-modtools-db-dev
 
     controller:
       type: statefulset
@@ -41,11 +31,8 @@ spec:
     persistence:
       data:
         enabled: true
-        type: emptyDir
+        existingClaim: go-discord-modtools-dev-mariadb-longhorn-database
         mountPath: /var/lib/mysql
-      backup:
-        enabled: true
-        type: emptyDir
 
     podAnnotations:
       reloader.stakater.com/auto: "true"
@@ -59,7 +46,10 @@ spec:
             enabled: false
           sql:
             port: 3306
-            nodePort: 30306
+            nodePort: 31135
+
+    nodeSelector:
+      longhorn: primary
 
     resources:
       requests:
