@@ -21,11 +21,7 @@ spec:
       labels:
         app: iperf3-server
     spec:
-      # tolerations:
-      # - key: "colo"
-      #   operator: "Equal"
-      #   value: "aws"
-      #   effect: "NoSchedule"
+      terminationGracePeriodSeconds: 0
       containers:
         - name: iperf3
           image: networkstatic/iperf3:latest
@@ -62,6 +58,7 @@ spec:
       labels:
         app: iperf3-client
     spec:
+      terminationGracePeriodSeconds: 0
       affinity:
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -75,12 +72,7 @@ spec:
       containers:
         - name: iperf3-client
           image: networkstatic/iperf3:latest
-          command:
-            - bash
-            - -c
-            - |
-              trap 'echo "Received SIGTERM. Exiting..."; exit 0' SIGTERM
-              sleep infinity
+          command: ["sleep", "infinity"]
           #args: ["-c","iperf3-server","-t","0"]
           resources:
             requests:
