@@ -75,7 +75,7 @@ spec:
       containers:
         - name: iperf3-client
           image: networkstatic/iperf3:latest
-          command: ["tail", "-f", "/dev/null"]
+          command: ["sleep", "infinity"]
           #args: ["-c","iperf3-server","-t","0"]
           resources:
             requests:
