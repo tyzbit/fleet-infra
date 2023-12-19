@@ -75,7 +75,12 @@ spec:
       containers:
         - name: iperf3-client
           image: networkstatic/iperf3:latest
-          command: ["sleep", "infinity"]
+          command:
+            - bash
+            - -c
+            - |
+              trap 'echo "Received SIGTERM. Exiting..."; exit 0' SIGTERM
+              sleep infinity
           #args: ["-c","iperf3-server","-t","0"]
           resources:
             requests:
