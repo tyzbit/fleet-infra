@@ -16,6 +16,7 @@ data:
             - type: Normal
             - message: snapshot becomes not ready to use
             - message: snapshot is marked as removed
+            - message: *probe failed*
     receivers:
       - name: "Discord"
         webhook:
