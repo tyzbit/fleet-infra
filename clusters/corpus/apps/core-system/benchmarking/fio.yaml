@@ -1,12 +1,12 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: kbench-pvc-longhorn-media
+  name: kbench-pvc-longhorn-multimedia
   namespace: default
 spec:
   volumeMode: Filesystem
   # storageClassName: longhorn-gameserver # 2 replicas
-  storageClassName: longhorn-media # 3 replicas
+  storageClassName: longhorn-multimedia # 3 replicas
   accessModes:
     - ReadWriteOnce
   resources:
@@ -47,5 +47,5 @@ spec:
       volumes:
         - name: vol
           persistentVolumeClaim:
-            claimName: kbench-pvc-longhorn-media
+            claimName: kbench-pvc-longhorn-multimedia
   backoffLimit: 0
