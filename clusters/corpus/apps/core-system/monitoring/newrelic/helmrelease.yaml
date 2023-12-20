@@ -229,6 +229,9 @@ spec:
       image:
         pullPolicy: Always
     newrelic-logging:
+      resources:
+        limits:
+          memory: 256Mi
       fluentBit:
         config:
           filters: |
