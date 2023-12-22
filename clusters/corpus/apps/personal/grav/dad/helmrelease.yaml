@@ -66,5 +66,5 @@ spec:
       tls:
         - secretName: ${dad_work_domain}-tls
           hosts:
-            - "grav-files.${dad_work_domain}"
+            - "files.${dad_work_domain}"
             - "staging.${dad_work_domain}"
