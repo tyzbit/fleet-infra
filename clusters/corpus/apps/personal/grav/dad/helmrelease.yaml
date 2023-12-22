@@ -67,4 +67,4 @@ spec:
         - secretName: ${dad_work_domain}-tls
           hosts:
             - "${dad_work_domain}"
-            - "staging.${dad_work_domain}"
+            - "files.${dad_work_domain}"
