@@ -59,12 +59,12 @@ spec:
       labels:
         use-cloudflare-dns-solver: "true"
       hosts:
-        - host: "staging.${dad_work_domain}"
+        - host: "${dad_work_domain}"
           paths:
             - path: /
               pathType: ImplementationSpecific
       tls:
         - secretName: ${dad_work_domain}-tls
           hosts:
-            - "files.${dad_work_domain}"
+            - "${dad_work_domain}"
             - "staging.${dad_work_domain}"
