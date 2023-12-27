@@ -6,7 +6,9 @@ metadata:
   name: &app sabnzbd
   namespace: media
 spec:
-  <<: ${helmReleaseBoilerplate}
+  # prettier-ignore
+  <<: 
+    ${helmReleaseBoilerplate}
   interval: 30m
   chart:
     spec:
