@@ -18,7 +18,7 @@ data:
       value: ${defaultHR.maxHistory}
     - op: add
       path: /spec/installation/remediation/retries
-      value: ${defaultHR.install.emediation-retries}
+      value: ${defaultHR.install.remediation-retries}
     - op: add
       path: /spec/upgrade/cleanupOnFail
       value: ${defaultHR.upgrade.cleanupOnFail}
