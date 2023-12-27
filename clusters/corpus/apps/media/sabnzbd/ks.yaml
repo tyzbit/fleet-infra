@@ -17,9 +17,16 @@ spec:
     name: flux-system
     namespace: flux-system
   dependsOn: [{ name: kubernetes-secrets }, { name: longhorn-recurring-jobs }]
+  patches:
+    - patch: |
+        - op: add
+          path: /spec
+          value:
+            maxHistory: 10
+      target:
+        kind: HelmRelease
+        labelSelector: default-helmrelease-values="true"
   postBuild:
     substituteFrom:
       - kind: Secret
         name: sensitive-values
-      - kind: ConfigMap
-        name: public-values
