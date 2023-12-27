@@ -20,9 +20,10 @@ spec:
   patches:
     - patch: |
         - op: add
-          path: spec
+          path: /
           value:
-            maxHistory: 10
+            spec:
+              maxHistory: 10
       target:
         version: helm.toolkit.fluxcd.io/v2beta2
         kind: HelmRelease
