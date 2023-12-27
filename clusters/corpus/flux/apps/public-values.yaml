@@ -12,7 +12,7 @@ data:
   defaultHR_upgrade_cleanupOnFail: "true"
   defaultHR_upgrade_remediation_retries: "3"
   defaultHR_uninstall_keepHistory: "false"
-  defaultHR.patch: |-
+  defaultHR_patch: |-
     - op: add
       path: /spec/maxHistory
       value: 2
