@@ -7,6 +7,11 @@ metadata:
   namespace: flux-system
 data:
   # prettier-ignore
+  defaultHR.maxHistory: "2"
+  defaultHR.install.remediation.retries: "3"
+  defaultHR.upgrade.cleanupOnFail: "true"
+  defaultHR.upgrade.remediation.retries: "3"
+  defaultHR.uninstall.keepHistory: "false"
   defaultHR.patch: |-
     - op: add
       path: /spec/maxHistory
