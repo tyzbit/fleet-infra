@@ -20,7 +20,7 @@ spec:
   patches:
     - patch: |
         - op: add
-          path: /spec
+          path: spec
           value:
             maxHistory: 10
       target:
