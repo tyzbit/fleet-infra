@@ -19,13 +19,10 @@ spec:
   dependsOn: [{ name: kubernetes-secrets }, { name: longhorn-recurring-jobs }]
   patches:
     - patch: |-
-        apiVersion: helm.toolkit.fluxcd.io/v2beta2
-        kind: HelmRelease
-        metadata:
-          labels:
-            helmrelease-values: default
-        spec:
-          maxHistory: 10
+        - op: add
+          path: /spec
+          value:
+            maxHistory: 10
       target:
         kind: HelmRelease
         name: sabnzbd
