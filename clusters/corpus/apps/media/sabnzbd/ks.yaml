@@ -25,7 +25,7 @@ spec:
             maxHistory: 10
       target:
         kind: HelmRelease
-        labelSelector: default-helmrelease-values="true"
+        labelSelector: default-helmrelease-values=""
   postBuild:
     substituteFrom:
       - kind: Secret
