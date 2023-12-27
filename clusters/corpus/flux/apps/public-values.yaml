@@ -9,7 +9,7 @@ data:
   # prettier-ignore
   helmReleaseBoilerplate: |
 
-    maxHistory: 2
+      maxHistory: 2
       install:
         remediation:
           retries: 3
