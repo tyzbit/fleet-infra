@@ -18,3 +18,5 @@ data:
         retries: 3
     uninstall:
       keepHistory: false
+  simpleBoilerplate: |
+    maxHistory: 2
