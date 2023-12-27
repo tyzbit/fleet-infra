@@ -18,37 +18,32 @@ spec:
     namespace: flux-system
   dependsOn: [{ name: kubernetes-secrets }, { name: longhorn-recurring-jobs }]
   patches:
-    - patch: $${defaultHR_patch}
+    - patch: |-
+        - op: add
+          path: /spec/maxHistory
+          value: $${defaultHR_maxHistory}
+        - op: add
+          path: /spec/install
+          value:
+            remediation:
+              retries: $${defaultHR_install_remediation_retries}
+        - op: add
+          path: /spec/upgrade
+          value:
+            cleanupOnFail: $${defaultHR_upgrade_cleanupOnFail}
+        - op: add
+          path: /spec/upgrade
+          value:
+            remediation:
+              retries: $${defaultHR_upgrade_remediation_retries}
+        - op: add
+          path: /spec/uninstall
+          value:
+            keepHistory: $${defaultHR_uninstall_keepHistory}
       target:
         kind: HelmRelease
-        name: sabnzbd
-        # labelSelector: helmrelease-values=default
-    # - patch: |-
-    #     - op: add
-    #       path: /spec/maxHistory
-    #       value: $${defaultHR_maxHistory}
-    #     - op: add
-    #       path: /spec/install
-    #       value:
-    #         remediation:
-    #           retries: $${defaultHR_install_remediation_retries}
-    #     - op: add
-    #       path: /spec/upgrade
-    #       value:
-    #         cleanupOnFail: $${defaultHR_upgrade_cleanupOnFail}
-    #     - op: add
-    #       path: /spec/upgrade
-    #       value:
-    #         remediation:
-    #           retries: $${defaultHR_upgrade_remediation_retries}
-    #     - op: add
-    #       path: /spec/uninstall
-    #       value:
-    #         keepHistory: $${defaultHR_uninstall_keepHistory}
-    #   target:
-    #     kind: HelmRelease
-    #     name: sabnzbd
-    #     # labelSelector: helmrelease-values=default
+        # name: sabnzbd
+        labelSelector: helmrelease-values=default
   postBuild:
     substituteFrom:
       - kind: ConfigMap
