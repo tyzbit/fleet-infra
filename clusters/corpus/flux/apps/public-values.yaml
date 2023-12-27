@@ -8,7 +8,7 @@ metadata:
 data:
   # prettier-ignore
   defaultHR_maxHistory: "2"
-  defaultHR_install_remediation_retries: "3"
+  defaultHR_install_remediation_retries: "2"
   defaultHR_upgrade_cleanupOnFail: "true"
   defaultHR_upgrade_remediation_retries: "3"
   defaultHR_uninstall_keepHistory: "false"
