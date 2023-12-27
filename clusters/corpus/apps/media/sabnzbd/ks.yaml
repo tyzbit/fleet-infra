@@ -23,6 +23,7 @@ spec:
           maxHistory: 10
       target:
         kind: HelmRelease
+        name: sabnzbd
   postBuild:
     substituteFrom:
       - kind: Secret
