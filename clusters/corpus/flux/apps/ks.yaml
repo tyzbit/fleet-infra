@@ -17,6 +17,32 @@ spec:
     name: flux-system
     namespace: flux-system
   dependsOn: [{ name: kubernetes-secrets }]
+  patches:
+    - patch: |-
+        - op: add
+          path: /spec/maxHistory
+          value: ${defaultHR_maxHistory}
+        - op: add
+          path: /spec/install
+          value:
+            remediation:
+              retries: ${defaultHR_install_remediation_retries}
+        - op: add
+          path: /spec/upgrade
+          value:
+            cleanupOnFail: ${defaultHR_upgrade_cleanupOnFail}
+        - op: add
+          path: /spec/upgrade
+          value:
+            remediation:
+              retries: ${defaultHR_upgrade_remediation_retries}
+        - op: add
+          path: /spec/uninstall
+          value:
+            keepHistory: ${defaultHR_uninstall_keepHistory}
+      target:
+        kind: HelmRelease
+        labelSelector: helmrelease-values=default
   postBuild:
     substituteFrom:
       - kind: ConfigMap
