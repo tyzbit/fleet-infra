@@ -7,7 +7,8 @@ metadata:
   namespace: media
 spec:
   # prettier-ignore
-  <<: ${helmReleaseBoilerplate}
+  <<: |
+    ${helmReleaseBoilerplate}
   interval: 30m
   chart:
     spec:
