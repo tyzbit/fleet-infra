@@ -20,10 +20,11 @@ spec:
   patches:
     - patch: |
         - op: add
-          path: /spec/
+          path: /spec
           value:
             maxHistory: 10
       target:
+        apiVersion: helm.toolkit.fluxcd.io/v2beta2
         kind: HelmRelease
         labelSelector: helmrelease-values=default
   postBuild:
