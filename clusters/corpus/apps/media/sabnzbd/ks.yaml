@@ -21,7 +21,8 @@ spec:
     - patch: ${defaultHR.patch}
       target:
         kind: HelmRelease
-        labelSelector: helmrelease-values=default
+        name: sabnzbd
+        # labelSelector: helmrelease-values=default
   postBuild:
     substituteFrom:
       - kind: Secret
