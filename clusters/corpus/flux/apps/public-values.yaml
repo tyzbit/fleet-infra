@@ -7,8 +7,8 @@ metadata:
   namespace: flux-system
 data:
   # prettier-ignore
-  defaultHR.maxHistory: "2"
-  defaultHR.install.remediation.retries: "3"
-  defaultHR.upgrade.cleanupOnFail: "true"
-  defaultHR.upgrade.remediation.retries: "3"
-  defaultHR.uninstall.keepHistory: "false"
+  defaultHR_maxHistory: "2"
+  defaultHR_install_remediation_retries: "3"
+  defaultHR_upgrade_cleanupOnFail: "true"
+  defaultHR_upgrade_remediation_retries: "3"
+  defaultHR_uninstall_keepHistory: "false"

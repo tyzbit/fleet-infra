@@ -21,25 +21,25 @@ spec:
     - patch: |-
         - op: add
           path: /spec/maxHistory
-          value: $${defaultHR.maxHistory}
+          value: $${defaultHR_maxHistory}
         - op: add
           path: /spec/installation
           value: 
             remediation:
-              retries: $${defaultHR.install.remediation.retries}
+              retries: $${defaultHR_install_remediation_retries}
         - op: add
           path: /spec/upgrade
           value: 
-            cleanupOnFail: $${defaultHR.upgrade.cleanupOnFail}
+            cleanupOnFail: $${defaultHR_upgrade_cleanupOnFail}
         - op: add
           path: /spec/upgrade
           value: 
             remediation:
-              retries: $${defaultHR.upgrade.remediation.retries}
+              retries: $${defaultHR_upgrade_remediation_retries}
         - op: add
           path: /spec/uninstall
           value: 
-            keepHistory: $${defaultHR.uninstall.keepHistory}
+            keepHistory: $${defaultHR_uninstall_keepHistory}
       target:
         kind: HelmRelease
         name: sabnzbd
