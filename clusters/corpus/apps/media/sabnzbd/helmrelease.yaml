@@ -6,7 +6,7 @@ metadata:
   name: &app sabnzbd
   namespace: media
   labels:
-    default-helmrelease-values: ""
+    helmrelease-values: default
 spec:
   interval: 30m
   chart:
