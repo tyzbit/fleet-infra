@@ -12,19 +12,3 @@ data:
   defaultHR.upgrade.cleanupOnFail: "true"
   defaultHR.upgrade.remediation.retries: "3"
   defaultHR.uninstall.keepHistory: "false"
-  defaultHR.patch: |-
-    - op: add
-      path: /spec/maxHistory
-      value: $$${defaultHR.maxHistory}
-    - op: add
-      path: /spec/installation/remediation/retries
-      value: $$${defaultHR.install.remediation.retries}
-    - op: add
-      path: /spec/upgrade/cleanupOnFail
-      value: $$${defaultHR.upgrade.cleanupOnFail}
-    - op: add
-      path: /spec/upgrade/remediation/retries
-      value: $$${defaultHR.upgrade.remediation.retries}
-    - op: add
-      path: /spec/uninstall/keepHistory
-      value: $$${defaultHR.uninstall.keepHistory}
