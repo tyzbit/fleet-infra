@@ -9,12 +9,12 @@ data:
   # prettier-ignore
   helmReleaseBoilerplate: |
       maxHistory: 2
-      install:
-        remediation:
-          retries: 3
-      upgrade:
-        cleanupOnFail: true
-        remediation:
-          retries: 3
-      uninstall:
-        keepHistory: false
+        install:
+          remediation:
+            retries: 3
+        upgrade:
+          cleanupOnFail: true
+          remediation:
+            retries: 3
+        uninstall:
+          keepHistory: false
