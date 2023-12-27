@@ -19,12 +19,9 @@ spec:
   dependsOn: [{ name: kubernetes-secrets }, { name: longhorn-recurring-jobs }]
   patches:
     - patch: |
-        - op: add
-          path: /spec/-
-          value:
-            maxHistory: 10
-      target:
         kind: HelmRelease
+        spec:
+          maxHistory: 10
   postBuild:
     substituteFrom:
       - kind: Secret
