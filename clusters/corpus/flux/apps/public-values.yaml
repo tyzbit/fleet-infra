@@ -19,4 +19,4 @@ data:
     uninstall:
       keepHistory: false
   simpleBoilerplate: |
-    maxHistory: 2
+      maxHistory: 2
