@@ -31,6 +31,9 @@ spec:
           path: /spec/upgrade
           value: 
             cleanupOnFail: $${defaultHR.upgrade.cleanupOnFail}
+        - op: add
+          path: /spec/upgrade
+          value: 
             remediation:
               retries: $${defaultHR.upgrade.remediation.retries}
         - op: add
