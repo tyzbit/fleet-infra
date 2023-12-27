@@ -18,13 +18,10 @@ spec:
     namespace: flux-system
   dependsOn: [{ name: kubernetes-secrets }, { name: longhorn-recurring-jobs }]
   patches:
-    - patch: |-
-        - op: add
-          path: /spec/maxHistory
-          value: 10
+    - patch: ${defaultHR.patch}
       target:
         kind: HelmRelease
-        name: sabnzbd
+        labelSelector: helmrelease-values=default
   postBuild:
     substituteFrom:
       - kind: Secret
