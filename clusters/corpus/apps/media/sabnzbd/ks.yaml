@@ -21,8 +21,7 @@ spec:
     - patch: |-
         - op: add
           path: /spec
-          value:
-            maxHistory: 10
+          value: { maxHistory: 10 }
       target:
         kind: HelmRelease
         name: sabnzbd
