@@ -27,5 +27,3 @@ spec:
     substituteFrom:
       - kind: Secret
         name: sensitive-values
-      - kind: ConfigMap
-        name: public-values
