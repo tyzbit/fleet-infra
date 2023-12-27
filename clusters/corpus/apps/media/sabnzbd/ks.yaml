@@ -23,7 +23,7 @@ spec:
           path: /spec/maxHistory
           value: $${defaultHR_maxHistory}
         - op: add
-          path: /spec/installation
+          path: /spec/install
           value: 
             remediation:
               retries: $${defaultHR_install_remediation_retries}
