@@ -19,5 +19,7 @@ spec:
   dependsOn: [{ name: kubernetes-secrets }]
   postBuild:
     substituteFrom:
+      - kind: ConfigMap
+        name: public-values
       - kind: Secret
         name: sensitive-values
