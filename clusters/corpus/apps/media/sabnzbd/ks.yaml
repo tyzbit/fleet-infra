@@ -18,7 +18,7 @@ spec:
     namespace: flux-system
   dependsOn: [{ name: kubernetes-secrets }, { name: longhorn-recurring-jobs }]
   patches:
-    - patch: ${defaultHR.patch}
+    - patch: $${defaultHR.patch}
       target:
         kind: HelmRelease
         name: sabnzbd
