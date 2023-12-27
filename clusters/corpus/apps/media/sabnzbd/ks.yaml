@@ -46,7 +46,7 @@ spec:
         # labelSelector: helmrelease-values=default
   postBuild:
     substituteFrom:
-      - kind: Secret
-        name: sensitive-values
       - kind: ConfigMap
         name: public-values
+      - kind: Secret
+        name: sensitive-values
