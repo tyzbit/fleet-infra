@@ -20,5 +20,5 @@ data:
       path: /spec/upgrade/remediation/retries
       value: 3
     - op: add
-      path: /spec/uninstall.keepHistory
+      path: /spec/uninstall/keepHistory
       value: false
