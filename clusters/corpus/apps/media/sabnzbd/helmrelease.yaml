@@ -15,7 +15,7 @@ spec:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
-${simpleBoilerplate}
+  ${simpleBoilerplate}
   values:
     controllers:
       main:
