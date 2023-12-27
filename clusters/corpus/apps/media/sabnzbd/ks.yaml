@@ -44,7 +44,8 @@ spec:
     #     kind: HelmRelease
     #     name: sabnzbd
     #     # labelSelector: helmrelease-values=default
-    - patch: ${defaultHR_patch}
+    - patch: |-
+        ${defaultHR_patch}
       target:
         kind: HelmRelease
         name: sabnzbd
