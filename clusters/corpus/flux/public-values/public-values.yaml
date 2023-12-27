@@ -1,0 +1,20 @@
+# -- This is like `sensitive-values` except these are intended to be public
+# -- and therefore safe from sensitive or secret values.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: public-values
+  namespace: flux-system
+data:
+  # prettier-ignore
+  helmReleaseBoilerplate: |
+    maxHistory: 2
+    install:
+      remediation:
+        retries: 3
+    upgrade:
+      cleanupOnFail: true
+      remediation:
+        retries: 3
+    uninstall:
+      keepHistory: false
