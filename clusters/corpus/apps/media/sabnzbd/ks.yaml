@@ -24,7 +24,7 @@ spec:
           value:
             maxHistory: 10
       target:
-        apiVersion: helm.toolkit.fluxcd.io/v2beta2
+        version: helm.toolkit.fluxcd.io/v2beta2
         kind: HelmRelease
         labelSelector: helmrelease-values=default
   postBuild:
