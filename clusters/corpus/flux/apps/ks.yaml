@@ -42,7 +42,7 @@ spec:
             keepHistory: false
       target:
         kind: HelmRelease
-        labelSelector: helmrelease-values=default
+        # labelSelector: helmrelease-values=default
   postBuild:
     substituteFrom:
       - kind: Secret
