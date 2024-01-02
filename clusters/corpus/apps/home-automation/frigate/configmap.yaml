@@ -34,7 +34,10 @@ data:
         - person
     birdseye:
       enabled: True
-      # objects, motion, continuous
+      quality: 8
+      width: 1920
+      height: 1080
+      # -- objects, motion, continuous
       mode: continuous
     ffmpeg:
       # hwaccel_args: ["-hwaccel", "vaapi", "-hwaccel_device", "/dev/dri/renderD128", "-hwaccel_output_format", "yuv420p"]
