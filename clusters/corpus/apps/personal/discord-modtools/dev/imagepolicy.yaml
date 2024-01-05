@@ -7,7 +7,7 @@ spec:
   imageRepositoryRef:
     name: go-discord-modtools
   filterTags:
-    pattern: "develop-(?P<timestamp>[0-9]+)"
+    pattern: "^develop-(?P<timestamp>.*)$"
     extract: "$timestamp"
   policy:
     numerical:
