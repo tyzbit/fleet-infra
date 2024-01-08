@@ -20,7 +20,7 @@ spec:
     grav:
       image:
         repository: dsavell/grav
-        tag: admin-1.7.42.3 # {"$imagepolicy": "flux-system:grav-${anime_blog_name}:tag"}
+        tag: admin-1.7.43-20231203 # {"$imagepolicy": "flux-system:grav-${anime_blog_name}:tag"}
         pullPolicy: Always
       probes:
         liveness: &probes
