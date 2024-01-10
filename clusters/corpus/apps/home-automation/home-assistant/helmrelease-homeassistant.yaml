@@ -39,6 +39,7 @@ spec:
         type: hostPath
         hostPath: &dbus /run/dbus
         mountPath: *dbus
+        readOnly: true
       config:
         enabled: true
         existingClaim: home-assistant-config-nas
