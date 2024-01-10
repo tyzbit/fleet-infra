@@ -34,17 +34,6 @@ spec:
       TZ: America/New_York
 
     persistence:
-      dbus: # needed for Bluetooth
-        enabled: true
-        type: hostPath
-        hostPath: &dbus /run/dbus
-        mountPath: *dbus
-        readOnly: true
-      hci: # needed for Bluetooth
-        enabled: true
-        type: hostPath
-        hostPath: &hci /dev/hci0
-        mountPath: *hci
       config:
         enabled: true
         existingClaim: home-assistant-config-nas
