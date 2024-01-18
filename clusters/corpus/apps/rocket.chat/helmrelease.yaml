@@ -21,7 +21,7 @@ spec:
   values:
     image:
       repository: registry.rocket.chat/rocketchat/rocket.chat
-      tag: 6.5.2
+      tag: 6.5.3
     microservices:
       enabled: true
     persistence:
