@@ -5,7 +5,7 @@ metadata:
   namespace: personal
 spec:
   selector:
-    app: public-service
+    app: public-services-home
   ports:
     - name: http
       port: 80
