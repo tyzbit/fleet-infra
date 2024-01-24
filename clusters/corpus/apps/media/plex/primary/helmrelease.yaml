@@ -67,7 +67,11 @@ spec:
           external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
           external-dns.alpha.kubernetes.io/target: ${home_domain_ddns}
         hosts:
-          - host: &host "plex.${blog_domain}"
+          - host: &host "active.plex.${blog_domain}"
+            paths:
+              - path: /
+                pathType: Prefix
+          - host: &host2 "plex.${blog_domain}"
             paths:
               - path: /
                 pathType: Prefix
@@ -75,6 +79,7 @@ spec:
           - secretName: *host
             hosts:
               - *host
+              - *host2
       new:
         enabled: true
         ingressClassName: nginx
@@ -85,7 +90,7 @@ spec:
           external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
           external-dns.alpha.kubernetes.io/target: ${home_domain_ddns}
         hosts:
-          - host: &public "plex.${public_services_domain}"
+          - host: &public "active.plex.${public_services_domain}"
             paths:
               - path: /
                 pathType: Prefix
