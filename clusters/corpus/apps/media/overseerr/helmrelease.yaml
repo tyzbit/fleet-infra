@@ -54,7 +54,7 @@ spec:
           - hosts:
               - *public
             secretName: *public
-      newredirect:
+      old:
         enabled: true
         ingressClassName: nginx
         annotations:

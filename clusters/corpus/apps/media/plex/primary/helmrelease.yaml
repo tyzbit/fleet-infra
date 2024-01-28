@@ -80,7 +80,7 @@ spec:
             hosts:
               - *public
               - *public2
-      new:
+      old:
         enabled: true
         ingressClassName: nginx
         annotations:
