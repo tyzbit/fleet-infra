@@ -22,7 +22,7 @@ spec:
       tag: v4.4.3.1
 
     controller:
-      replicas: 0 # active nas
+      replicas: 1 # active nas
 
     podSecurityContext:
       fsGroup: 568

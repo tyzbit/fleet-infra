@@ -33,7 +33,7 @@ spec:
 
     controller:
       type: statefulset
-      replicas: 1
+      replicas: 1 # active nas
 
     persistence:
       config:
