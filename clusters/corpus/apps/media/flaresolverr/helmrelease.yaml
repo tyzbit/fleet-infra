@@ -21,7 +21,7 @@ spec:
       tag: v3.3.13
 
     controller:
-      replicas: 1 # active nas
+      replicas: 1
 
     env:
       TZ: America/New_York
