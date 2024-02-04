@@ -18,7 +18,7 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - &host "files.${blog_domain}"
+        - &host "files.${public_services_domain}"
       secretName: *host
   rules:
     - host: *host
@@ -46,7 +46,7 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - &host "files.${blog_domain}"
+        - &host "files.${public_services_domain}"
       secretName: *host
   rules:
     - host: *host
