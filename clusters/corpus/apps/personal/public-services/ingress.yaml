@@ -31,10 +31,3 @@ spec:
                 name: public-services
                 port:
                   number: 80
-          - pathType: Prefix
-            path: "/yt/"
-            backend:
-              service:
-                name: public-services
-                port:
-                  number: 80
