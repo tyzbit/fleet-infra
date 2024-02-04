@@ -38,6 +38,6 @@ spec:
             limits:
               memory: "256Mi"
       volumes:
-        - name: public-services-home
+        - name: media
           persistentVolumeClaim:
             claimName: nas-volume1-media
