@@ -24,14 +24,13 @@ spec:
               protocol: TCP
           volumeMounts:
             - name: media
-              subPath: web/public-services/index.html
-              mountPath: /usr/share/nginx/html/index.html
+              subPath: web/public-services/
+              mountPath: /usr/share/nginx/html/
             - name: media
-              subPath: web/public-services/home.png
-              mountPath: /usr/share/nginx/html/home.png
-            - name: media
-              subPath: youtube
-              mountPath: /usr/share/nginx/html/yt
+              mountPath: /media/
+            - name: conf
+              subPath: yt.conf
+              mountPath: /etc/nginx/conf.d/yt.conf
           resources:
             requests:
               cpu: "10m"
@@ -41,3 +40,6 @@ spec:
         - name: media
           persistentVolumeClaim:
             claimName: nas-volume1-media
+        - name: conf
+          configMap:
+            name: public-services-config

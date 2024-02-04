@@ -32,3 +32,21 @@ data:
         <img src="home.png" alt="Home Image" />
       </body>
     </html>
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: public-services-config
+  namespace: personal
+data:
+  yt.conf: |
+    server {
+      listen       80;
+      listen  [::]:80;
+      server_name  localhost;
+
+      location /yt/ {
+          root   /media/youtube/;
+          autoindex on;
+      }
+    }
