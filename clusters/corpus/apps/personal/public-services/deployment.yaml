@@ -26,8 +26,8 @@ spec:
             - name: media
               subPath: web/public-services/
               mountPath: /usr/share/nginx/html/
-            - name: media
-              mountPath: /media/
+            # - name: media
+            #   mountPath: /media/
             - name: conf
               mountPath: /etc/nginx/conf.d/
           resources:

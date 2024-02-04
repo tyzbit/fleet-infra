@@ -50,10 +50,10 @@ data:
             index  index.html index.htm;
         }
 
-        location /youtube {
-            root   /media/;
-            autoindex on;
-        }
+        # location /youtube {
+        #     root   /media/;
+        #     autoindex on;
+        # }
 
         error_page   500 502 503 504  /50x.html;
         location = /50x.html {
