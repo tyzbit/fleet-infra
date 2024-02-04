@@ -19,9 +19,11 @@ spec:
   interval: 2m0s
   values:
     controller:
+      allowSnippetAnnotations: true
       service:
         type: ClusterIP
       replicaCount: 3
+
       # metrics:
       #   service:
       #     annotations:
