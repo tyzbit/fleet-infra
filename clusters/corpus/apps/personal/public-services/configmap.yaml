@@ -45,14 +45,14 @@ data:
         listen  [::]:80;
         server_name  localhost;
 
-        location /yt/ {
-            root   /media/youtube/;
-            autoindex on;
-        }
-
         location / {
             root   /usr/share/nginx/html;
             index  index.html index.htm;
+        }
+
+        location /yt/ {
+            root   /media/youtube/;
+            autoindex on;
         }
 
         error_page   500 502 503 504  /50x.html;
