@@ -50,8 +50,8 @@ data:
             index  index.html index.htm;
         }
 
-        location /yt/ {
-            root   /media/youtube/;
+        location /youtube {
+            root   /media/;
             autoindex on;
         }
 
