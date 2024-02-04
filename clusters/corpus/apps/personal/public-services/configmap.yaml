@@ -39,14 +39,24 @@ metadata:
   name: public-services-config
   namespace: personal
 data:
-  yt.conf: |
+  default.conf: |
     server {
-      listen       80;
-      listen  [::]:80;
-      server_name  localhost;
+        listen       80;
+        listen  [::]:80;
+        server_name  localhost;
 
-      location /yt/ {
-          root   /media/youtube/;
-          autoindex on;
-      }
+        location /yt/ {
+            root   /media/youtube/;
+            autoindex on;
+        }
+
+        location / {
+            root   /usr/share/nginx/html;
+            index  index.html index.htm;
+        }
+
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+            root   /usr/share/nginx/html;
+        }
     }
