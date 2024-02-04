@@ -23,10 +23,13 @@ spec:
               name: http
               protocol: TCP
           volumeMounts:
-            - name: public-services-home
-              subPath: web/public-services
+            - &web
+              name: media
+              subPath: web/public-services/index.html
               mountPath: /usr/share/nginx/html/
-            - name: yt
+            - <<: *web
+              subPath: web/public-services/home.png
+            - name: media
               subPath: youtube
               mountPath: /usr/share/nginx/html/yt
           resources:
@@ -36,8 +39,5 @@ spec:
               memory: "256Mi"
       volumes:
         - name: public-services-home
-          persistentVolumeClaim:
-            claimName: nas-volume1-media
-        - name: yt
           persistentVolumeClaim:
             claimName: nas-volume1-media
