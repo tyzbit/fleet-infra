@@ -26,6 +26,9 @@ spec:
             - name: public-services-home
               subPath: web/public-services
               mountPath: /usr/share/nginx/html/
+            - name: yt
+              subPath: youtube
+              mountPath: /media/youtube/
           resources:
             requests:
               cpu: "10m"
@@ -33,5 +36,8 @@ spec:
               memory: "256Mi"
       volumes:
         - name: public-services-home
+          persistentVolumeClaim:
+            claimName: nas-volume1-media
+        - name: yt
           persistentVolumeClaim:
             claimName: nas-volume1-media
