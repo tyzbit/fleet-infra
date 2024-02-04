@@ -23,12 +23,12 @@ spec:
               name: http
               protocol: TCP
           volumeMounts:
-            - &web
-              name: media
+            - name: media
               subPath: web/public-services/index.html
-              mountPath: /usr/share/nginx/html/
-            - <<: *web
+              mountPath: /usr/share/nginx/html/index.html
+            - name: media
               subPath: web/public-services/home.png
+              mountPath: /usr/share/nginx/html/home.png
             - name: media
               subPath: youtube
               mountPath: /usr/share/nginx/html/yt
