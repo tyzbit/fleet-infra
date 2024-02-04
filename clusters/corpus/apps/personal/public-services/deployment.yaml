@@ -28,7 +28,7 @@ spec:
               mountPath: /usr/share/nginx/html/
             - name: yt
               subPath: youtube
-              mountPath: /media/youtube/
+              mountPath: /usr/share/nginx/html/yr
           resources:
             requests:
               cpu: "10m"

@@ -10,7 +10,6 @@ metadata:
     external-dns.alpha.kubernetes.io/target: ${home_domain_ddns}
     nginx.ingress.kubernetes.io/server-snippet: |
       location /yt/ {
-          root /media/youtube/;
           autoindex on;
       }
   labels:
