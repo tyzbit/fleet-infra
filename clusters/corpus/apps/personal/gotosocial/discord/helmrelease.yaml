@@ -30,7 +30,7 @@ spec:
 
     image:
       repository: docker.io/superseriousbusiness/gotosocial
-      tag: 0.13.1
+      tag: 0.13.2
 
     env:
       TZ: America/New_York
