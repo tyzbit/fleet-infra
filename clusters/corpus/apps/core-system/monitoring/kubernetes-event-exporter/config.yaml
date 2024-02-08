@@ -18,7 +18,6 @@ data:
             - message: snapshot is marked as removed
             - message: lost track of the corresponding snapshot info inside volume engine
             - message: .*probe failed.*
-              namespace: ^(?!.*calico-apiserver|.*calico-system|.*cert-manager|.*cloudflared|.*default|.*flux-system|.*home-automation|.*kube-node-lease|.*kube-public|.*kube-system|.*kuik-system|.*longhorn-system|.*monitoring|.*storage|.*tigera-operator).*$
     receivers:
       - name: "Discord"
         webhook:
