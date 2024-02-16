@@ -22,6 +22,6 @@ spec:
       github-org: "${blog_name}"
       github-team: "super-admins,handbrake"
       cookie-expire: 168h0m0s
-      scope: "user:email"
+      scope: "user:email, read:org"
     config:
       existingSecret: handbrake-oauth2-proxy
