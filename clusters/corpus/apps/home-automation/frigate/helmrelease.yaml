@@ -20,7 +20,7 @@ spec:
     image:
       pullPolicy: Always
       repository: ghcr.io/blakeblackshear/frigate
-      tag: 0.13.1
+      tag: 0.13.2
 
     controller:
       replicas: 1 # active longhorn
