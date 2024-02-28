@@ -22,6 +22,5 @@ spec:
       github-org: "${blog_name}"
       github-team: "super-admins,the-forest-primary"
       cookie-expire: 168h0m0s
-      scope: "user:email"
     config:
       existingSecret: the-forest-oauth2-proxy-fb
