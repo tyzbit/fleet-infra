@@ -64,8 +64,6 @@ spec:
             protocol: UDP
           rustdesk-4:
             port: 21118
-      hbbr:
-        ports:
           rustdesk-5:
             port: 21117
           rustdesk-6:
