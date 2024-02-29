@@ -53,8 +53,11 @@ spec:
       DB_URL: /db/db_v2.sqlite3
 
     service:
-      hbbs:
+      main:
+        enabled: false
         ports:
+          http:
+            enabled: false
           rustdesk-1:
             port: 21115
           rustdesk-2:
