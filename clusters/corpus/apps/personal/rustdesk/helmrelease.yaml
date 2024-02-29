@@ -1,0 +1,83 @@
+# https://github.com/JJGadgets/Biohazard/blob/a7de80b5bdc5cfda9745681fcce2f7e0e5110d4b/kube/deploy/apps/gotosocial/app/hr.yaml
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: &app rustdesk
+  namespace: flux-system
+spec:
+  releaseName: *app
+  targetNamespace: personal
+  timeout: 5m
+  interval: 2m0s
+  chart:
+    spec:
+      chart: app-template
+      version: "1.5.1"
+      sourceRef:
+        name: bjw-s
+        kind: HelmRepository
+        namespace: flux-system
+  valuesFrom:
+    # Encryption key
+    - kind: Secret
+      name: rustdesk-config
+  values:
+    controller:
+      annotations:
+        reloader.stakater.com/auto: "true"
+      type: deployment
+      replicas: 1
+
+    image:
+      repository: rustdesk/rustdesk-server:latest
+      tag: 0.13.3
+
+    additionalContainers:
+      hbbr:
+        name: hbbr
+        image: filebrowser/filebrowser:v2
+        args: ["-d", "/db/database.db"]
+        env:
+          - name: TZ
+            value: America/New_York
+        volumeMounts:
+          - name: config
+            subPath: filebrowser
+            mountPath: /db
+          - name: config
+            mountPath: /srv/homeassistant
+
+    env:
+      RELAY: "${home_domain_ddns}:21117"
+      ENCRYPTED_ONLY: "1"
+      DB_URL: /db/db_v2.sqlite3
+
+    service:
+      hbbs:
+        ports:
+          rustdesk-1:
+            port: 21115
+          rustdesk-2:
+            port: &port 21116
+          rustdesk-3:
+            port: *port
+            protocol: UDP
+          rustdesk-4:
+            port: 21118
+      hbbr:
+        ports:
+          rustdesk-5:
+            port: 21117
+          rustdesk-6:
+            port: 21119
+
+    persistence:
+      db:
+        enabled: true
+        existingClaim: ${social_name}-gotosocial-longhorn-webapp
+
+    resources:
+      requests:
+        cpu: 10m
+      limits:
+        memory: 256Mi
