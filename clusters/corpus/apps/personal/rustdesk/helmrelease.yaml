@@ -29,23 +29,17 @@ spec:
       replicas: 1
 
     image:
-      repository: rustdesk/rustdesk-server:latest
-      tag: 0.13.3
+      repository: rustdesk/rustdesk-server
+      tag: 1.1.10-3
 
     additionalContainers:
       hbbr:
         name: hbbr
-        image: filebrowser/filebrowser:v2
-        args: ["-d", "/db/database.db"]
-        env:
-          - name: TZ
-            value: America/New_York
+        image: rustdesk/rustdesk-server:1.1.10-3
         volumeMounts:
-          - name: config
-            subPath: filebrowser
+          - name: db
+            subPath: hbbr
             mountPath: /db
-          - name: config
-            mountPath: /srv/homeassistant
 
     env:
       RELAY: "${home_domain_ddns}:21117"
@@ -86,6 +80,10 @@ spec:
       db:
         enabled: true
         existingClaim: ${social_name}-gotosocial-longhorn-webapp
+        subPath:
+          - path: hbbs
+            subPath: hbbs
+            mountPath: /db
 
     resources:
       requests:
