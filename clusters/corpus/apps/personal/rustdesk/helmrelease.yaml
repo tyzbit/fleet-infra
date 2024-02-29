@@ -71,6 +71,14 @@ spec:
           rustdesk-6:
             port: 21119
 
+    probes:
+      startup:
+        enabled: false
+      liveness:
+        enabled: false
+      readiness:
+        enabled: false
+
     persistence:
       db:
         enabled: true
