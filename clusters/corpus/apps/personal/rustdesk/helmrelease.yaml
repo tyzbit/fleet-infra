@@ -22,12 +22,12 @@ spec:
     - kind: Secret
       name: rustdesk-config
   values:
+    command: hbbs -r ${home_domain_ddns}:21117
     controller:
       annotations:
         reloader.stakater.com/auto: "true"
       type: deployment
       replicas: 1
-      command: hbbs -r ${home_domain_ddns}:21117
 
     image:
       repository: rustdesk/rustdesk-server
