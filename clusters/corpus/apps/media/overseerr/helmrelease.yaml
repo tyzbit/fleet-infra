@@ -54,24 +54,6 @@ spec:
           - hosts:
               - *public
             secretName: *public
-      old:
-        enabled: true
-        ingressClassName: nginx
-        annotations:
-          cert-manager.io/cluster-issuer: letsencrypt
-          acme.cert-manager.io/http01-edit-in-place: "true"
-          external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
-          external-dns.alpha.kubernetes.io/target: ${cloudflared_tunnel_uuid}.cfargotunnel.com
-          nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-          nginx.ingress.kubernetes.io/permanent-redirect: "https://request.${public_services_domain}"
-        hosts:
-          - host: &host "request.${blog_domain}"
-            paths:
-              - path: "/"
-        tls:
-          - hosts:
-              - *host
-            secretName: *host
 
     persistence:
       config:
