@@ -31,6 +31,7 @@ spec:
       NEKO_TCPMUX: &mux "5100"
       NEKO_UDPMUX: *mux
       NEKO_ICELITE: "true"
+      NEKO_BROADCAST_URL: ${neko_name}-neko-nginx
       # NEKO_HWENC: vaapi
       # NEKO_VIDEO: >-
       #   ximagesrc display-name=%s show-pointer=true use-damage=false
