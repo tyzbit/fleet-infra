@@ -5,7 +5,7 @@ metadata:
   namespace: media
 data:
   nginx.conf: |
-    worker_processes 1;
+    worker_processes auto;
     rtmp_auto_push on;
     events {}
     rtmp {

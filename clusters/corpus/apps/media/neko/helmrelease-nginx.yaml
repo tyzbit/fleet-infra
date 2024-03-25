@@ -53,10 +53,10 @@ spec:
           rtmp:
             port: &port 1935
             targetPort: *port
-          rtmp-udp:
-            port: *port
-            targetPort: *port
-            protocol: UDP
+          # rtmp-udp:
+          #   port: *port
+          #   targetPort: *port
+          #   protocol: UDP
 
     probes:
       readiness: &probe
