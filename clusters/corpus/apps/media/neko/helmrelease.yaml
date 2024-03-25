@@ -47,7 +47,7 @@ spec:
           tune=zerolatency 
           speed-preset=veryfast 
         ! video/x-h264,stream-format=byte-stream,profile=constrained-baseline
-        ! rtspsink location=rtsp://127.0.0.1:554/v
+        ! rtph264pay name=pay0 pt=96
 
     controller:
       type: statefulset
