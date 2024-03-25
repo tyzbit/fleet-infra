@@ -46,7 +46,8 @@ spec:
     service:
       main:
         enabled: true
-        type: LoadBalancer
+        type: CluserIP
+        externalTrafficPolicy: Local
         ports:
           http:
             enabled: false
