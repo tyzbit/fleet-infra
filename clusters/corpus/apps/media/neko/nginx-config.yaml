@@ -7,7 +7,7 @@ data:
   nginx.conf: |
     worker_processes auto;
     events {
-      worker_connections: 1024;
+      worker_connections 1024;
     }
 
     rtmp_auto_push on;
