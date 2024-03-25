@@ -31,7 +31,7 @@ spec:
       NEKO_TCPMUX: &mux "5100"
       NEKO_UDPMUX: *mux
       NEKO_ICELITE: "true"
-      NEKO_HWENC: vaapi
+      # NEKO_HWENC: vaapi
       # NEKO_VIDEO: >-
       #   ximagesrc display-name=%s show-pointer=true use-damage=false
       #   ! video/x-raw,framerate=30/1
