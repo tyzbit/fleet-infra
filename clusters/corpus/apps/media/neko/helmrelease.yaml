@@ -178,8 +178,8 @@ spec:
             enabled: false
           rtmp-tcp:
             enabled: true
-            port: &port 1935
-            targetPort: *port
+            port: 1935
+            targetPort: 1935
           rtmp-udp:
             enabled: true
             port: 1936
