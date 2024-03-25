@@ -35,6 +35,9 @@ spec:
         subPath: nginx.conf
         readOnly: true
         defaultMode: 0755
+      cache:
+        enabled: true
+        type: emptyDir
 
     podAnnotations:
       reloader.stakater.com/auto: "true"
@@ -63,3 +66,25 @@ spec:
         enabled: false
       liveness: *probe
       startup: *probe
+
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: nginx
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt
+          acme.cert-manager.io/http01-edit-in-place: "true"
+          nginx.ingress.kubernetes.io/proxy-read-timeout: "14400"
+          nginx.ingress.kubernetes.io/proxy-send-timeout: "14400"
+          external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
+          external-dns.alpha.kubernetes.io/target: ${home_domain_ddns}
+        hosts:
+          - host: ${neko_domain}
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - secretName: ${neko_domain}-tls
+            hosts:
+              - rtmp.${neko_domain}
+              - ${neko_domain}

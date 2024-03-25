@@ -5,6 +5,20 @@ metadata:
   namespace: media
 data:
   nginx.conf: |
+    server {
+      listen 80;      
+
+      location / {
+        # Serve HLS fragments
+        types {
+            application/vnd.apple.mpegurl m3u8;
+            video/mp2t ts;
+        }
+        root /cache;
+        add_header Cache-Control no-cache;
+      }
+    }
+
     rtmp_auto_push on;
     events {}
     rtmp {
@@ -19,6 +33,21 @@ data:
                 allow publish 172.16.0.0/12;
                 deny publish all;
                 record off;
+
+                # -- HLS --
+                hls on;
+                hls_path /cache/hls; # this is where all of HLS's files will be stored. 
+                                  # They are a running replacement so disk space will be minimal. 
+                                  # Adjust other HLS settings if necessary to level it out if it's a problem.
+                                  
+                                  
+                hls_playlist_length 4s; # Thies 2 lines should help with latency
+                hls_fragment 1s;        # The hls_fragment should match your keyframe interval in obs see screenshot in readme
+                
+                # optionally,
+                #hls_continuous on;
+                # Uncommenting will fix a minor issue if the stream ends prematurely.
+                # However... this does have a side effect of using more disk space.
             }
         }
     }
