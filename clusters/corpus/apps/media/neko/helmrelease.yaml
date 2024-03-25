@@ -34,8 +34,8 @@ spec:
       NEKO_HWENC: vaapi
       NEKO_VIDEO: >-
         gst-launch-1.0
-        -v v4l2src
-        device=/dev/video0
+        ximagesrc display-name=%s show-pointer=true use-damage=false
+        ! video/x-raw,framerate=30/1
         ! videoconvert
         ! x264enc
         ! rtph264pay name=pay0 pt=96
