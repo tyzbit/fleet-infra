@@ -24,7 +24,7 @@ data:
 
                 # -- HLS --
                 hls on;
-                hls_path /cache; # this is where all of HLS's files will be stored. 
+                hls_path /hls; # this is where all of HLS's files will be stored. 
                                   # They are a running replacement so disk space will be minimal. 
                                   # Adjust other HLS settings if necessary to level it out if it's a problem.
                 hls_cleanup off;
@@ -44,7 +44,8 @@ data:
       server {
         listen 80;      
 
-        location / {          
+        location / {  
+          root /hls;        
           # Disable cache
           add_header 'Cache-Control' 'no-cache';
 
@@ -66,7 +67,7 @@ data:
               video/mp2t ts;
               application/dash+xml mpd;
           }
-          root /cache;
+
         }
       }
     }

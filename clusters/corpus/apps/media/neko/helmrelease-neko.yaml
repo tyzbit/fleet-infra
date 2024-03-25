@@ -62,8 +62,8 @@ spec:
           - name: nginx
             subPath: nginx.conf
             mountPath: /etc/nginx/nginx.conf
-          - name: cache
-            mountPath: /cache
+          - name: hls
+            mountPath: /hls
 
     persistence:
       config:
@@ -90,7 +90,7 @@ spec:
         mountPath: *shm
 
       # NGINX mounts
-      cache:
+      hls:
         enabled: true
         type: emptyDir
       nginx:
