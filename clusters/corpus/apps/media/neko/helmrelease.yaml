@@ -176,13 +176,13 @@ spec:
         ports:
           http:
             enabled: false
-          # rtmp-tcp:
-          #   port: 1935
-          #   targetPort: 1935
           rtmp-udp:
             port: 1935
             targetPort: 1935
             protocol: UDP
+          # rtmp-tcp:
+          #   port: 1935
+          #   targetPort: 1935
 
     ingress:
       main:
