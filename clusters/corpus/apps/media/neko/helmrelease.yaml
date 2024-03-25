@@ -101,15 +101,15 @@ spec:
           mux:
             port: &port 5100
             targetPort: *port
+          rtsp:
+            port: &rtsp 8554
+            targetPort: *rtsp
           muxudp:
             port: *port
             targetPort: *port
             protocol: UDP
-          # rtsp:
-          #   port: &rtsp 8554
-          #   targetPort: *rtsp
           rtspudp:
-            port: &rtsp 8554
+            port: *rtsp
             targetPort: *rtsp
             protocol: UDP
 
