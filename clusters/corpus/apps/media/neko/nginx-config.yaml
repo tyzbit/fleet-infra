@@ -44,8 +44,6 @@ data:
 
     http {
       sendfile off;
-      aio on;
-      directio 512;
       default_type application/octet-stream;
       
       server {
