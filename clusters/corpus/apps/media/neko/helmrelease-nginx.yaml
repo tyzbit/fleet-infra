@@ -30,7 +30,7 @@ spec:
       config:
         enabled: true
         name: neko-nginx-rtmp-config
-        type: configmap
+        type: configMap
         mountPath: /etc/nginx/nginx.conf
         subPath: nginx.conf
         readOnly: true
