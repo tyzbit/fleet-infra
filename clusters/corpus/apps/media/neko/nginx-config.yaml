@@ -68,7 +68,7 @@ data:
               video/mp2t ts;
               application/dash+xml mpd;
           }
-          root /cache/hls;
+          root /cache;
         }
       }
     }
