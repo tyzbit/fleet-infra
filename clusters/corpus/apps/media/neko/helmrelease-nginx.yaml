@@ -46,7 +46,7 @@ spec:
     service:
       main:
         enabled: true
-        type: CluserIP
+        type: ClusterIP
         externalTrafficPolicy: Local
         ports:
           http:
