@@ -101,14 +101,14 @@ spec:
           mux:
             port: &port 5100
             targetPort: *port
-          rtsp:
+          video1:
             port: &rtsp 8554
             targetPort: *rtsp
           muxudp:
             port: *port
             targetPort: *port
             protocol: UDP
-          rtspudp:
+          video2:
             port: *rtsp
             targetPort: *rtsp
             protocol: UDP
