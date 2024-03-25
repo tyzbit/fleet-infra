@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: neko-nginx-rtmp-config
+  namespace: media
+data:
+  nginx.conf: |
+    worker_processes auto;
+    rtmp_auto_push on;
+    events {}
+    rtmp {
+        server {
+            listen 1935;
+            chunk_size 4000;
+
+            application l {
+                live on;
+                allow publish 127.0.0.1 192.168.0.1/16 172.16.0.0/12;
+                deny publish all;
+                record off;
+            }
+        }
+    }
