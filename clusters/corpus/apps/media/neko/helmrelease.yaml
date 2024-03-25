@@ -106,7 +106,7 @@ spec:
             targetPort: *port
             protocol: UDP
           rtsp:
-            port: &rtsp 554
+            port: &rtsp 8554
             targetPort: *rtsp
           rtspudp:
             port: *rtsp
