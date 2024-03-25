@@ -180,6 +180,10 @@ spec:
             port: &port 1935
             targetPort: *port
             protocol: UDP
+          rtmptcp:
+            port: &port 1935
+            targetPort: *port
+            protocol: TCP
 
     ingress:
       main:
