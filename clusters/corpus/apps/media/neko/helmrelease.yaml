@@ -179,9 +179,11 @@ spec:
           rtmp-tcp:
             enabled: true
             port: &port 1935
+            targetPort: *port
           rtmp-udp:
             enabled: true
             port: *port
+            targetPort: *port
             protocol: UDP
 
     ingress:
