@@ -179,11 +179,10 @@ spec:
           rtmp:
             port: 1935
             targetPort: 1935
-            protocol: UDP
-          rtmptcp:
+          rtmp-udp:
             port: 1935
             targetPort: 1935
-            protocol: TCP
+            protocol: UDP
 
     ingress:
       main:
