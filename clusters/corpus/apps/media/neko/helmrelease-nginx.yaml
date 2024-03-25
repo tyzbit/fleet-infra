@@ -47,7 +47,6 @@ spec:
       main:
         enabled: true
         type: ClusterIP
-        externalTrafficPolicy: Local
         ports:
           http:
             enabled: false
