@@ -133,7 +133,6 @@ spec:
       nginx-rtmp:
         enabled: true
         primary: false
-        name: ${neko_name}-neko-nginx
         ports:
           nginx-http:
             enabled: true
@@ -161,7 +160,7 @@ spec:
               - path: /hls
                 pathType: Prefix
                 service:
-                  name: ${neko_name}-neko-nginx
+                  name: ${neko_name}-neko-nginx-rtmp
                   port: 80
 
         tls:
