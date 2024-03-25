@@ -36,7 +36,7 @@ spec:
     service:
       main:
         enabled: true
-        type: ClusterIP
+        type: NodePort
         ports:
           http:
             port: 80
