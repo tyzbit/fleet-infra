@@ -171,6 +171,8 @@ spec:
 
     service:
       main:
+        enabled: true
+        type: NodePort
         ports:
           http:
             enabled: false
