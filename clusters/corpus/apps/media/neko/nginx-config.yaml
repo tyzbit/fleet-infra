@@ -15,7 +15,9 @@ data:
 
             application l {
                 live on;
-                allow publish 127.0.0.1 192.168.0.1/16 172.16.0.0/12;
+                allow publish 127.0.0.1;
+                allow publish 192.168.0.1/16;
+                allow publish 172.16.0.0/12;
                 deny publish all;
                 record off;
             }
