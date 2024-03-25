@@ -182,9 +182,8 @@ spec:
             targetPort: *port
           rtmp-udp:
             enabled: true
-            port: *port
-            targetPort: *port
-            protocol: UDP
+            port: 1936
+            targetPort: 1936
 
     ingress:
       main:
