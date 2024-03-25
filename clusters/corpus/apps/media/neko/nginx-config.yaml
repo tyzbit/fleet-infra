@@ -6,6 +6,7 @@ metadata:
 data:
   nginx.conf: |
     rtmp_auto_push on;
+    events {}
     rtmp {
         server {
             listen 1935;
