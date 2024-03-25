@@ -16,7 +16,7 @@ data:
             listen 1935;
             chunk_size 4000;
 
-            application l {
+            application live {
                 live on;
                 allow publish 127.0.0.1;
                 allow publish 192.168.0.0/16;
