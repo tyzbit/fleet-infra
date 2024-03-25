@@ -39,12 +39,11 @@ spec:
         type: NodePort
         ports:
           http:
-            port: 80
-            targetPort: 80
-          mux:
+            enabled: false
+          rtmp:
             port: &port 1935
             targetPort: *port
-          muxudp:
+          rtmp-udp:
             port: *port
             targetPort: *port
             protocol: UDP
