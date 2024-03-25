@@ -38,7 +38,7 @@ spec:
         ! videoconvert
         ! x264enc
         ! rtph264pay name=pay0 pt=96
-        ! rtspsink location=rtsp://127.0.0.1:8554/
+        ! rtspsink location=rtsp://0.0.0.0:554/
 
     controller:
       type: statefulset
@@ -97,7 +97,7 @@ spec:
             targetPort: *port
             protocol: UDP
           rtsp:
-            port: &rtsp 8554
+            port: &rtsp 554
             targetPort: *rtsp
           rtspudp:
             port: *rtsp
