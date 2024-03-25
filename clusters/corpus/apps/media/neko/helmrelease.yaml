@@ -176,7 +176,7 @@ spec:
         ports:
           http:
             enabled: false
-          rtmp:
+          rtmp-tcp:
             port: 1935
             targetPort: 1935
           rtmp-udp:
