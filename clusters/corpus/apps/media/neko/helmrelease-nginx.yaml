@@ -29,8 +29,12 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: neko-nginx-rtmp-config
+        name: neko-nginx-rtmp-config
+        type: configmap
         mountPath: /etc/nginx/nginx.conf
+        subPath: nginx.conf
+        readOnly: true
+        defaultMode: 0755
 
     podAnnotations:
       reloader.stakater.com/auto: "true"
