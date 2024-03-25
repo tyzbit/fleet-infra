@@ -135,6 +135,9 @@ spec:
         primary: false
         name: ${neko_name}-neko-nginx
         ports:
+          http:
+            enabled: true
+            port: 80
           rtmp:
             enabled: true
             port: 1935
