@@ -171,18 +171,14 @@ spec:
 
     service:
       main:
-        enabled: true
-        type: ClusterIP
         ports:
           http:
             enabled: false
-          rtmp-udp:
-            port: 1935
-            targetPort: 1935
+          rtmp-1:
+            port: &port 1935
+          rtmp-2:
+            port: *port
             protocol: UDP
-          # rtmp-tcp:
-          #   port: 1935
-          #   targetPort: 1935
 
     ingress:
       main:
