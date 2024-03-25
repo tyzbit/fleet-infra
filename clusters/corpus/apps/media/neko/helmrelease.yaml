@@ -175,8 +175,7 @@ spec:
         type: ClusterIP
         ports:
           http:
-            port: 80
-            targetPort: 80
+            enabled: false
           rtmp:
             port: &port 1935
             targetPort: *port
