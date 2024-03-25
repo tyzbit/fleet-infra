@@ -35,7 +35,7 @@ spec:
       NEKO_TCPMUX: &mux "5100"
       NEKO_UDPMUX: *mux
       NEKO_ICELITE: "true"
-      NEKO_BROADCAST_URL: rtmp://${neko_name}-neko-nginx/l/neko
+      NEKO_BROADCAST_URL: rtmp://127.0.0.1/l/neko
       # NEKO_HWENC: vaapi
       # NEKO_VIDEO: >-
       #   ximagesrc display-name=%s show-pointer=true use-damage=false
