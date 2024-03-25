@@ -46,7 +46,7 @@ spec:
           byte-stream=true 
           tune=zerolatency 
           speed-preset=veryfast 
-        ! video/x-h264,stream-format=byte-stream,profile=constrained-baseline
+#        ! video/x-h264,stream-format=byte-stream,profile=constrained-baseline
         ! rtph264pay name=pay0 pt=96
         ! rtspsink location=rtsp://0.0.0.0:554/v
 
