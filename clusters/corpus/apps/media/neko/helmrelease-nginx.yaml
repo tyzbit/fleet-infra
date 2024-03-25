@@ -46,7 +46,7 @@ spec:
     service:
       main:
         enabled: true
-        type: NodePort
+        type: LoadBalancer
         ports:
           http:
             enabled: false
