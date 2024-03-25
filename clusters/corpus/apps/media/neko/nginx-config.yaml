@@ -5,7 +5,7 @@ metadata:
   namespace: media
 data:
   nginx.conf: |
-    worker_processes auto;
+    worker_processes 1;
     rtmp_auto_push on;
     events {}
     rtmp {
@@ -16,7 +16,7 @@ data:
             application l {
                 live on;
                 allow publish 127.0.0.1;
-                allow publish 192.168.0.1/16;
+                allow publish 192.168.0.0/16;
                 allow publish 172.16.0.0/12;
                 deny publish all;
                 record off;
