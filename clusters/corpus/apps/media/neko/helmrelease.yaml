@@ -176,9 +176,11 @@ spec:
         ports:
           http:
             enabled: false
-          rtmp-1:
+          rtmp-tcp:
+            enabled: true
             port: &port 1935
-          rtmp-2:
+          rtmp-udp:
+            enabled: true
             port: *port
             protocol: UDP
 
