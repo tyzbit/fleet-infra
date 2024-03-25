@@ -63,6 +63,7 @@ spec:
             subPath: nginx.conf
             mountPath: /etc/nginx/nginx.conf
           - name: cache
+            mountPath: /cache
 
     persistence:
       config:
