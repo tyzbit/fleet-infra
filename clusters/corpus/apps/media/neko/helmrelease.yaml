@@ -31,6 +31,15 @@ spec:
       NEKO_TCPMUX: &mux "5100"
       NEKO_UDPMUX: *mux
       NEKO_ICELITE: "true"
+      NEKO_HWENC: vaapi
+      NEKO_VIDEO: >-
+        gst-launch-1.0
+        -v v4l2src
+        device=/dev/video0
+        ! videoconvert
+        ! x264enc
+        ! rtph264pay name=pay0 pt=96
+        ! rtspsink location=rtsp://127.0.0.1:8554/
 
     controller:
       type: statefulset
@@ -87,6 +96,13 @@ spec:
           muxudp:
             port: *port
             targetPort: *port
+            protocol: UDP
+          rtsp:
+            port: &rtsp 8554
+            targetPort: *rtsp
+          rtspudp:
+            port: *rtsp
+            targetPort: *rtsp
             protocol: UDP
 
     ingress:
