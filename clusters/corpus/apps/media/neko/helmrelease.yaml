@@ -177,12 +177,12 @@ spec:
           http:
             enabled: false
           rtmp:
-            port: &port 1935
-            targetPort: *port
+            port: 1935
+            targetPort: 1935
             protocol: UDP
           rtmptcp:
-            port: &port 1935
-            targetPort: *port
+            port: 1935
+            targetPort: 1935
             protocol: TCP
 
     ingress:
