@@ -37,8 +37,8 @@ data:
           # Uncommenting will fix a minor issue if the stream ends prematurely.
           # However... this does have a side effect of using more disk space.
 
-          dash on;
-          dash_path /media;
+          # dash on;
+          # dash_path /media;
         }
       }
     }
