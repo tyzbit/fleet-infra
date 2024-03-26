@@ -6,5 +6,5 @@ metadata:
 spec:
   secretRef:
     name: universal-image-pull-secret
-  image: docker.io/tyzbit/go-discord-amputator
+  image: ghcr.io/tyzbit/go-discord-amputator
   interval: 2m0s
