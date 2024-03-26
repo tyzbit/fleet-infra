@@ -45,6 +45,7 @@ data:
         listen 80;
 
         location / {
+          index /hls/obs.m3u8;
           root /hls;
 
           # Disable cache
