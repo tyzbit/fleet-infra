@@ -12,7 +12,7 @@ data:
     rtmp {
       server {
         listen 1935;
-        server_name ${game_name}-stream.media.svc.cluster.local
+        server_name ${game_name}-stream.media.svc.cluster.local;
         chunk_size 4000;
 
         application l {
