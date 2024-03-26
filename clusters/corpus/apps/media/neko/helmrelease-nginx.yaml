@@ -52,7 +52,9 @@ spec:
         type: ClusterIP
         ports:
           http:
-            enabled: false
+            enabled: true
+            port: 80
+            targetPort: 80
           rtmp:
             port: &port 1935
             targetPort: *port
@@ -79,12 +81,11 @@ spec:
           external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
           external-dns.alpha.kubernetes.io/target: ${home_domain_ddns}
         hosts:
-          - host: ${neko_domain}
+          - host: vr.${game_domain}
             paths:
               - path: /
                 pathType: Prefix
         tls:
-          - secretName: ${neko_domain}-tls
+          - secretName: vr.${game_domain}-tls
             hosts:
-              - rtmp.${neko_domain}
-              - ${neko_domain}
+              - vr.${game_domain}

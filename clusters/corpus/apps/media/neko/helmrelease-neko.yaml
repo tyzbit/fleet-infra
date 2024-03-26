@@ -54,16 +54,16 @@ spec:
       #   ! video/x-h264,stream-format=byte-stream,profile=constrained-baseline
       #   ! rtph264pay name=pay0 pt=96
 
-    additionalContainers:
-      nginx-rtmp:
-        name: nginx-rtmp
-        image: tiangolo/nginx-rtmp:latest-2024-03-25
-        volumeMounts:
-          - name: nginx
-            subPath: nginx.conf
-            mountPath: /etc/nginx/nginx.conf
-          - name: hls
-            mountPath: /hls
+    # additionalContainers:
+    #   nginx-rtmp:
+    #     name: nginx-rtmp
+    #     image: tiangolo/nginx-rtmp:latest-2024-03-25
+    #     volumeMounts:
+    #       - name: nginx
+    #         subPath: nginx.conf
+    #         mountPath: /etc/nginx/nginx.conf
+    #       - name: hls
+    #         mountPath: /hls
 
     persistence:
       config:
@@ -89,18 +89,18 @@ spec:
         hostPath: &shm /dev/shm
         mountPath: *shm
 
-      # NGINX mounts
-      hls:
-        enabled: true
-        type: emptyDir
-      nginx:
-        enabled: true
-        name: neko-nginx-rtmp-config
-        type: configMap
-        mountPath: /etc/nginx/nginx.conf
-        subPath: nginx.conf
-        readOnly: true
-        defaultMode: 0755
+      # # NGINX mounts
+      # hls:
+      #   enabled: true
+      #   type: emptyDir
+      # nginx:
+      #   enabled: true
+      #   name: neko-nginx-rtmp-config
+      #   type: configMap
+      #   mountPath: /etc/nginx/nginx.conf
+      #   subPath: nginx.conf
+      #   readOnly: true
+      #   defaultMode: 0755
 
     # podSecurityContext:
     #   supplementalGroups: [44, 109, 10000]
@@ -130,16 +130,16 @@ spec:
             port: *port
             targetPort: *port
             protocol: UDP
-      nginx-rtmp:
-        enabled: true
-        primary: false
-        ports:
-          nginx-http:
-            enabled: true
-            port: 80
-          rtmp:
-            enabled: true
-            port: 1935
+      # nginx-rtmp:
+      #   enabled: true
+      #   primary: false
+      #   ports:
+      #     nginx-http:
+      #       enabled: true
+      #       port: 80
+      #     rtmp:
+      #       enabled: true
+      #       port: 1935
 
     ingress:
       main:
@@ -157,13 +157,13 @@ spec:
             paths:
               - path: /
                 pathType: Prefix
-          - host: vr.${game_domain}
-            paths:
-              - path: /
-                pathType: Prefix
-                service:
-                  name: ${neko_name}-neko-nginx-rtmp
-                  port: 80
+          # - host: vr.${game_domain}
+          #   paths:
+          #     - path: /
+          #       pathType: Prefix
+          #       service:
+          #         name: ${neko_name}-neko-nginx-rtmp
+          #         port: 80
 
         tls:
           - secretName: ${neko_domain}-tls
