@@ -157,7 +157,9 @@ spec:
             paths:
               - path: /
                 pathType: Prefix
-              - path: /obs.m3u8
+          - host: vr.${game_domain}
+            paths:
+              - path: /
                 pathType: Prefix
                 service:
                   name: ${neko_name}-neko-nginx-rtmp
@@ -167,3 +169,4 @@ spec:
           - secretName: ${neko_domain}-tls
             hosts:
               - ${neko_domain}
+              - ${game_domain}
