@@ -136,7 +136,7 @@ spec:
         ports:
           nginx-http:
             enabled: true
-            port: 443
+            port: 80
           rtmp:
             enabled: true
             port: 1935
@@ -161,7 +161,7 @@ spec:
                 pathType: Prefix
                 service:
                   name: ${neko_name}-neko-nginx-rtmp
-                  port: 443
+                  port: 80
 
         tls:
           - secretName: ${neko_domain}-tls
