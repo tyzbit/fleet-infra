@@ -18,7 +18,7 @@ spec:
   values:
     image:
       repository: ghcr.io/tyzbit/go-discord-archiver
-      tag: 2.10.0 # {"$imagepolicy": "flux-system:go-discord-archiver:tag"}
+      tag: 2.11.0 # {"$imagepolicy": "flux-system:go-discord-archiver:tag"}
     envFrom:
       - secretRef:
           name: go-discord-archiver
@@ -42,7 +42,7 @@ spec:
         enabled: true
         custom: true
         spec:
-          <<: *spec
+          !!merge <<: *spec
           failureThreshold: 15
           initialDelaySeconds: 5
     service:
