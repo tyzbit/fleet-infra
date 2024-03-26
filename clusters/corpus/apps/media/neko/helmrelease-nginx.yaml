@@ -35,7 +35,7 @@ spec:
         subPath: nginx.conf
         readOnly: true
         defaultMode: 0755
-      cache:
+      hls:
         enabled: true
         type: emptyDir
 
