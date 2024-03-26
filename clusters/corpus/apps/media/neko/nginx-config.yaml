@@ -14,7 +14,7 @@ data:
         listen 1935;
         chunk_size 4000;
 
-        application live {
+        application l {
           live on;
           allow publish 127.0.0.1;
           allow publish 192.168.0.0/16;
@@ -44,8 +44,8 @@ data:
       server {
         listen 80;
 
-        location /hls {
-          root /hls;        
+        location / {
+          root /hls;    
           # Disable cache
           add_header 'Cache-Control' 'no-cache';
 

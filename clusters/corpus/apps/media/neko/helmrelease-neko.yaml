@@ -157,7 +157,10 @@ spec:
             paths:
               - path: /
                 pathType: Prefix
-              - path: /hls
+              - path: /
+          - host: hls.${neko_domain}
+            paths:
+              - path: /
                 pathType: Prefix
                 service:
                   name: ${neko_name}-neko-nginx-rtmp
@@ -166,5 +169,5 @@ spec:
         tls:
           - secretName: ${neko_domain}-tls
             hosts:
-              - rtmp.${neko_domain}
+              - hls.${neko_domain}
               - ${neko_domain}
