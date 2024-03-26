@@ -45,7 +45,7 @@ data:
         listen 80;
 
         location / {
-          root /hls;    
+          root /hls;
           # Disable cache
           add_header 'Cache-Control' 'no-cache';
 
