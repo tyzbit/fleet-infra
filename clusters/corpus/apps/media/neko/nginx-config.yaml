@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: neko-nginx-rtmp-config
+  name: ${game_name}-stream-config
   namespace: media
 data:
   nginx.conf: |
