@@ -35,7 +35,7 @@ spec:
         subPath: nginx.conf
         readOnly: true
         defaultMode: 0755
-      hls:
+      media:
         enabled: true
         type: emptyDir
 
