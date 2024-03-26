@@ -33,7 +33,7 @@ data:
           hls_fragment 1s;        # The hls_fragment should match your keyframe interval in obs see screenshot in readme
           
           # optionally,
-          # hls_continuous on;
+          hls_continuous on;
           # Uncommenting will fix a minor issue if the stream ends prematurely.
           # However... this does have a side effect of using more disk space.
 
