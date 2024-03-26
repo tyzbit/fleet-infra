@@ -14,7 +14,7 @@ data:
         listen 1935;
         chunk_size 4000;
 
-        application l {
+        application {
           live on;
           allow publish 127.0.0.1;
           allow publish 192.168.0.0/16;
@@ -36,6 +36,9 @@ data:
           hls_continuous on;
           # Uncommenting will fix a minor issue if the stream ends prematurely.
           # However... this does have a side effect of using more disk space.
+
+          dash on;
+          dash_path /hls;
         }
       }
     }
