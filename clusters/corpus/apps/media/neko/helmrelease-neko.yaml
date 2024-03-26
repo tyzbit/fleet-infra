@@ -157,7 +157,7 @@ spec:
             paths:
               - path: /
                 pathType: Prefix
-              - path: /obs.m3u8
+              - path: /obs
                 pathType: Prefix
                 service:
                   name: ${neko_name}-neko-nginx-rtmp
