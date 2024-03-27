@@ -17,7 +17,7 @@ spec:
   interval: 2m0s
   values:
     controller:
-      replicas: 1
+      replicas: 0
     image:
       repository: ghcr.io/tyzbit/go-discord-modtools
       tag: 07f0699-1710004648 # {"$imagepolicy": "flux-system:go-discord-modtools-dev:tag"}
