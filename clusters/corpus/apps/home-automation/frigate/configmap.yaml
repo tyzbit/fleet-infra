@@ -173,6 +173,17 @@ data:
             - path: 'rtsp://{FRIGATE_COURT_CREDENTIALS}@court.onair:554/live'
               roles:
                 - record
+        objects:  
+          track:
+            - person
+            - cat
+            - dog
+          filters:
+            person:
+              min_score: 0.78
+            cat: &animalthreshold
+              threshold: 0.5
+            dog: *animalthreshold
         snapshots:
           enabled: False
         detect:
