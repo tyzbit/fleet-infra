@@ -181,9 +181,9 @@ data:
           filters:
             person:
               min_score: 0.78
-            cat: &animalthreshold
+            cat: &courtanimalthreshold
               threshold: 0.5
-            dog: *animalthreshold
+            dog: *courtanimalthreshold
         snapshots:
           enabled: False
         detect:
@@ -216,9 +216,9 @@ data:
             # - giraffe
             # - bear
           filters:
-            cat: &animalthreshold
+            cat: &flowerbedanimalthreshold
               threshold: 0.5
-            dog: *animalthreshold
+            dog: *flowerbedanimalthreshold
             # horse: *animalthreshold
             # sheep: *animalthreshold
             # cow: *animalthreshold
