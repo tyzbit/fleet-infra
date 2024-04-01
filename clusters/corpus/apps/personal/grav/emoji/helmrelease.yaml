@@ -57,12 +57,12 @@ spec:
       labels:
         use-cloudflare-dns-solver: "true"
       hosts:
-        - host: ${fyi_domain}
+        - host: ${emoji_domain}
           paths:
             - path: /
               pathType: ImplementationSpecific
       tls:
-        - secretName: ${fyi_domain}-tls
+        - secretName: ${emoji_domain}-tls
           hosts:
-            - ${fyi_domain}
-            - "files.${fyi_domain}"
+            - ${emoji_domain}
+            - "files.${emoji_domain}"
