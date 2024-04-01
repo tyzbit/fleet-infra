@@ -1,7 +1,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: grav-discord-fyi
+  name: grav-emoji
   namespace: flux-system
 spec:
   interval: 30m
@@ -11,7 +11,7 @@ spec:
   wait: false
   prune: true
 
-  path: "./clusters/corpus/apps/personal/grav/discord_fyi"
+  path: "./clusters/corpus/apps/personal/grav/emoji"
   sourceRef:
     kind: GitRepository
     name: flux-system

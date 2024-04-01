@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: grav-${fyi_name}-data-nas
+  name: grav-${emoji_name}-data-nas
   namespace: personal
 spec:
   resources:

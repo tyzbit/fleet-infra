@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
-  name: grav-${fyi_name}
+  name: grav-${emoji_name}
   namespace: flux-system
 spec:
   targetNamespace: personal
@@ -15,12 +15,12 @@ spec:
         namespace: flux-system
   interval: 2m0s
   values:
-    fullnameOverride: grav-${fyi_name}
+    fullnameOverride: grav-${emoji_name}
     replicaCount: 1 # active nas
     grav:
       image:
         repository: dsavell/grav
-        tag: admin-1.7.43-20231203 # {"$imagepolicy": "flux-system:grav-${fyi_name}:tag"}
+        tag: admin-1.7.43-20231203 # {"$imagepolicy": "flux-system:grav-${emoji_name}:tag"}
         pullPolicy: Always
       probes:
         liveness: &probes
@@ -40,7 +40,7 @@ spec:
         pullPolicy: Always
     persistence:
       enabled: true
-      existingClaimName: grav-${fyi_name}-data-nas
+      existingClaimName: grav-${emoji_name}-data-nas
     deploymentAnnotations:
       reloader.stakater.com/auto: "true"
     statefulSetAnnotations:
