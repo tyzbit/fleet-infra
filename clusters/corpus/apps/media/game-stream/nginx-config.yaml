@@ -12,7 +12,7 @@ data:
     rtmp {
       server {
         listen 1935;
-        chunk_size 4000;
+        chunk_size 512;
 
         application l {
           live on;
@@ -35,7 +35,7 @@ data:
           #wait_key on;
 
           # optionally,
-          hls_continuous on;
+          # hls_continuous on;
           # Uncommenting will fix a minor issue if the stream ends prematurely.
           # However... this does have a side effect of using more disk space.
 
