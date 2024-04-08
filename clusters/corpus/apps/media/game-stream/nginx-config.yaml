@@ -27,9 +27,9 @@ data:
           hls_path /media; # this is where all of HLS's files will be stored. 
                          # They are a running replacement so disk space will be minimal. 
                          # Adjust other HLS settings if necessary to level it out if it's a problem.
-          hls_cleanup off;
+          hls_cleanup on;
                             
-          hls_playlist_length 3s; # Thies 2 lines should help with latency
+          hls_playlist_length 4s; # Thies 2 lines should help with latency
           hls_fragment 1s;        # The hls_fragment should match your keyframe interval in obs see screenshot in readme
           #interleave on;
           #wait_key on;
