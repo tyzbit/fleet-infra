@@ -37,6 +37,7 @@ spec:
         defaultMode: 0755
       stream:
         enabled: true
+        defaultMode: 0777
         type: emptyDir
 
     podAnnotations:
