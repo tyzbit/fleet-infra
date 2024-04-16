@@ -24,7 +24,7 @@ data:
 
           # -- HLS --
           hls on;
-          hls_path /media; # this is where all of HLS's files will be stored. 
+          hls_path /tmp/stream; # this is where all of HLS's files will be stored. 
                          # They are a running replacement so disk space will be minimal. 
                          # Adjust other HLS settings if necessary to level it out if it's a problem.
           hls_cleanup on;
@@ -40,7 +40,7 @@ data:
           # However... this does have a side effect of using more disk space.
 
           # dash on;
-          # dash_path /media;
+          # dash_path /tmp/stream;
         }
       }
     }
@@ -51,7 +51,7 @@ data:
 
         location / {
           index /vrc.m3u8;
-          root /media;
+          root /tmp/stream;
 
           # Disable cache
           add_header 'Cache-Control' 'no-cache';
