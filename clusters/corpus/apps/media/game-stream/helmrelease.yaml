@@ -35,8 +35,9 @@ spec:
         subPath: nginx.conf
         readOnly: true
         defaultMode: 0755
-      media:
+      stream:
         enabled: true
+        mountPath: /tmp/stream
         type: emptyDir
 
     podAnnotations:
