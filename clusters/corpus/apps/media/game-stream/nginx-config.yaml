@@ -24,14 +24,14 @@ data:
 
           # -- HLS --
           hls on;
-          hls_path /tmp/stream; # this is where all of HLS's files will be stored. 
-                         # They are a running replacement so disk space will be minimal. 
-                         # Adjust other HLS settings if necessary to level it out if it's a problem.
+          hls_path /stream; # this is where all of HLS's files will be stored. 
+                                # They are a running replacement so disk space will be minimal. 
+                                # Adjust other HLS settings if necessary to level it out if it's a problem.
           hls_cleanup on;
                             
           hls_playlist_length 4s; # Thies 2 lines should help with latency
           hls_fragment 1s;        # The hls_fragment should match your keyframe interval in obs see screenshot in readme
-          #interleave on;
+          interleave on;
           #wait_key on;
 
           # optionally,
@@ -40,7 +40,7 @@ data:
           # However... this does have a side effect of using more disk space.
 
           # dash on;
-          # dash_path /tmp/stream;
+          # dash_path /stream;
         }
       }
     }
@@ -51,7 +51,7 @@ data:
 
         location / {
           index /vrc.m3u8;
-          root /tmp/stream;
+          root /stream;
 
           # Disable cache
           add_header 'Cache-Control' 'no-cache';

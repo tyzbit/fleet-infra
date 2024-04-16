@@ -37,7 +37,6 @@ spec:
         defaultMode: 0755
       stream:
         enabled: true
-        mountPath: /tmp/stream
         type: emptyDir
 
     podAnnotations:
