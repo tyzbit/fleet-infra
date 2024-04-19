@@ -23,7 +23,7 @@ spec:
 
     image:
       repository: "ghcr.io/jjgadgets/phanpy"
-      tag: "2024.04.04.65d51b0"
+      tag: "2024.04.19.5145730"
 
     service:
       main:
