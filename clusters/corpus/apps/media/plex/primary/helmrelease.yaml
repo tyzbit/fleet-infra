@@ -18,7 +18,7 @@ spec:
   values:
     image:
       repository: plexinc/pms-docker
-      tag: 1.40.1.8227-c0dd5a73e
+      tag: 1.40.2.8395-c67dce28e
     podAnnotations:
       reloader.stakater.com/auto: "true"
     controller:
