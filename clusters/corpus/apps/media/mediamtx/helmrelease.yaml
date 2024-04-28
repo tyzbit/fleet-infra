@@ -19,6 +19,8 @@ spec:
       mediamtx:
         replicas: 1
         strategy: RollingUpdate
+        annotations:
+          reloader.stakater.com/auto: "true"
 
         containers:
           mediamtx:
@@ -34,9 +36,6 @@ spec:
                 enabled: false
               startup:
                 enabled: false
-
-    podAnnotations:
-      reloader.stakater.com/auto: "true"
 
     persistence:
       config:
