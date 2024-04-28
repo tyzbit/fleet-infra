@@ -52,8 +52,8 @@ spec:
       app:
         controller: mediamtx
         ports:
-          http:
-            port: 8554
+          rtsp:
+            port: 554
           hls:
             port: 8888
           webrtc:
