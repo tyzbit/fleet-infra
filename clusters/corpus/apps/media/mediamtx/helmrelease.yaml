@@ -35,6 +35,9 @@ spec:
               startup:
                 enabled: false
 
+    podAnnotations:
+      reloader.stakater.com/auto: "true"
+
     persistence:
       config:
         name: mediamtx-config
