@@ -56,8 +56,6 @@ data:
     # Internal authentication.
     # list of users.
     authInternalUsers:
-      # Default unprivileged user.
-      # Username. 'any' means any user, including anonymous ones.
     - user: tyzbit
       # Password. Not used in case of 'any' user.
       pass: ${mediamtx_password}
@@ -83,6 +81,8 @@ data:
       # List of permissions.
       permissions:
         # Available actions are: publish, read, playback, api, metrics, pprof.
+      - action: read
+        path:
       - action: playback
         path:
 
