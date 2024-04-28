@@ -1,0 +1,61 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: mediamtx
+  namespace: home
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.1.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  values:
+    controllers:
+      mediamtx:
+        replicas: 1
+        strategy: RollingUpdate
+
+        containers:
+          mediamtx:
+            image:
+              repository: bluenviron/mediamtx
+              tag: latest-ffmpeg
+            env:
+              MTX_PROTOCOLS: "tcp"
+            probes:
+              liveness:
+                enabled: false
+              readiness:
+                enabled: false
+              startup:
+                enabled: false
+
+    persistence:
+      config:
+        enabled: true
+        name: mediamtx-config
+        type: configMap
+        mountPath: /mediamtx.yml
+        subPath: mediamtx.yml
+        readOnly: true
+        defaultMode: 0755
+
+    service:
+      app:
+        controller: mediamtx
+        ports:
+          http:
+            port: 8554
+          hls:
+            port: 8888
+          webrtc:
+            port: 8889
+          srt:
+            port: 8890
+          rtmp:
+            port: 1935
