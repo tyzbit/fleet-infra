@@ -37,13 +37,14 @@ spec:
 
     persistence:
       config:
-        enabled: true
         name: mediamtx-config
         type: configMap
-        mountPath: /mediamtx.yml
-        subPath: mediamtx.yml
-        readOnly: true
-        defaultMode: 0755
+        advancedMounts:
+          mediamtx:
+            mediamtx:
+              - path: /mediamtx.yml
+                readOnly: true
+                subPath: mediamtx.yml
 
     service:
       app:
