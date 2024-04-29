@@ -64,9 +64,8 @@ spec:
             port: 1935
 
     ingress:
-      main:
-        enabled: true
-        ingressClassName: nginx
+      mediamtx:
+        className: nginx
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt
           acme.cert-manager.io/http01-edit-in-place: "true"
@@ -78,11 +77,11 @@ spec:
           external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
           external-dns.alpha.kubernetes.io/target: ${cloudflared_tunnel_uuid}.cfargotunnel.com
         hosts:
-          - host: mtx.${game_domain}
+          - host: &host "mtx.${game_domain}"
             paths:
               - path: /
-                pathType: Prefix
+                service:
+                  identifier: app
+                  port: http
         tls:
-          - secretName: mtx.${game_domain}-tls
-            hosts:
-              - mtx.${game_domain}
+          - hosts: [*host]
