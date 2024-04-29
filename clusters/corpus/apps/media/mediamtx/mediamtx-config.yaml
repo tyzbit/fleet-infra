@@ -388,7 +388,7 @@ data:
     # ICE servers. Needed only when local listeners can't be reached by clients.
     # STUN servers allows to obtain and share the public IP of the server.
     # TURN/TURNS servers forces all traffic through them.
-    webrtcICEServers2: [stun.stunprotocol.org:3478]
+    webrtcICEServers2: ["stun.stunprotocol.org:3478"]
       # - url: stun:stun.l.google.com:19302
       # if user is "AUTH_SECRET", then authentication is secret based.
       # the secret must be inserted into the password field.
