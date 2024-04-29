@@ -50,7 +50,7 @@ data:
         listen 80;
 
         location / {
-          index /vrc.m3u8;
+          index /live.m3u8;
           root /stream;
 
           # Disable cache
