@@ -56,9 +56,8 @@ spec:
             port: 554
           hls:
             port: 8888
-          # webrtc
           http:
-            port: 80
+            port: 8889
           srt:
             port: 8890
           rtmp:
