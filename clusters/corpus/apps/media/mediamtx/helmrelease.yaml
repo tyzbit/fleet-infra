@@ -56,15 +56,22 @@ spec:
             port: 554
           hls:
             port: 8888
-          http:
-            port: 8889
-          rtcudp:
+          hlsudp:
+            port: 8888
+            protocol: UDP
+          webrtc:
+            port: 80
+          webrtcudp:
             port: 8189
             protocol: UDP
           srt:
             port: 8890
+            protocol: UDP
           rtmp:
             port: 1935
+          rtmpudp:
+            port: 1935
+            protocol: UDP
 
     ingress:
       mediamtx:
@@ -85,6 +92,6 @@ spec:
               - path: /
                 service:
                   identifier: app
-                  port: http
+                  port: webrtc
         tls:
           - hosts: [*host]

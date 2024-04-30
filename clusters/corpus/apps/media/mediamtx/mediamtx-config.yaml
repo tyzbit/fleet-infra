@@ -351,7 +351,7 @@ data:
     # Enable publishing and reading streams with the WebRTC protocol.
     webrtc: yes
     # Address of the WebRTC HTTP listener.
-    webrtcAddress: :8889
+    webrtcAddress: :80
     # Enable TLS/HTTPS on the WebRTC server.
     webrtcEncryption: no
     # Path to the server key.
