@@ -273,7 +273,7 @@ data:
     # Global settings -> RTMP server
 
     # Enable publishing and reading streams with the RTMP protocol.
-    rtmp: yes
+    rtmp: no
     # Address of the RTMP listener. This is needed only when encryption is "no" or "optional".
     rtmpAddress: :1935
     # Encrypt connections with TLS (RTMPS).
@@ -293,7 +293,7 @@ data:
     # Global settings -> HLS server
 
     # Enable reading streams with the HLS protocol.
-    hls: yes
+    hls: no
     # Address of the HLS listener.
     hlsAddress: :8888
     # Enable TLS/HTTPS on the HLS server.
@@ -399,7 +399,7 @@ data:
     # Global settings -> SRT server
 
     # Enable publishing and reading streams with the SRT protocol.
-    srt: yes
+    srt: no
     # Address of the SRT listener.
     srtAddress: :8890
 
