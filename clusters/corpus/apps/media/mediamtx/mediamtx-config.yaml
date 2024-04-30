@@ -293,7 +293,7 @@ data:
     # Global settings -> HLS server
 
     # Enable reading streams with the HLS protocol.
-    hls: no
+    hls: yes
     # Address of the HLS listener.
     hlsAddress: :8888
     # Enable TLS/HTTPS on the HLS server.
