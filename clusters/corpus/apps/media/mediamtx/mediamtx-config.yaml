@@ -399,7 +399,7 @@ data:
     # Global settings -> SRT server
 
     # Enable publishing and reading streams with the SRT protocol.
-    srt: no
+    srt: yes
     # Address of the SRT listener.
     srtAddress: :8890
 
