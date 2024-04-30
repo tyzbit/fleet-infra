@@ -85,4 +85,5 @@ spec:
                   identifier: app
                   port: webrtc
         tls:
-          - hosts: [*host]
+          - secretName: *host
+            hosts: [*host]
