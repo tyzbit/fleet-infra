@@ -58,6 +58,9 @@ spec:
             port: 8888
           http:
             port: 8889
+          rtcudp:
+            port: 8189
+            protocol: UDP
           srt:
             port: 8890
           rtmp:
