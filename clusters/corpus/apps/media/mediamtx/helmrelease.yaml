@@ -54,6 +54,11 @@ spec:
         ports:
           webrtc:
             port: 80
+          rtsp:
+            port: 554
+          rtspudp:
+            port: 8000
+            protocol: UDP
           webrtcudp:
             port: 8189
             protocol: UDP
