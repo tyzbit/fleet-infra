@@ -273,7 +273,7 @@ data:
     # Global settings -> RTMP server
 
     # Enable publishing and reading streams with the RTMP protocol.
-    rtmp: no
+    rtmp: yes
     # Address of the RTMP listener. This is needed only when encryption is "no" or "optional".
     rtmpAddress: :1935
     # Encrypt connections with TLS (RTMPS).
