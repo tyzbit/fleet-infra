@@ -78,7 +78,7 @@ spec:
           # external-dns.alpha.kubernetes.io/target: ${cloudflared_tunnel_uuid}.cfargotunnel.com
           external-dns.alpha.kubernetes.io/target: ${home_domain_ddns}
         hosts:
-          - host: &host "v.${game_domain}"
+          - host: &host "mtx.${game_domain}"
             paths:
               - path: /
                 service:

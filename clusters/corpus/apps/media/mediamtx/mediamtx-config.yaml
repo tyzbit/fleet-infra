@@ -54,7 +54,7 @@ data:
     # Internal authentication.
     # list of users.
     authInternalUsers:
-    - user: tyzbit
+    - user: stream
       # Password. Not used in case of 'any' user.
       pass: ${mediamtx_password}
       # IPs or networks allowed to use this user. An empty list means any IP.
