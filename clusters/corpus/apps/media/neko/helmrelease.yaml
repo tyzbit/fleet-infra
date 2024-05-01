@@ -36,34 +36,6 @@ spec:
       NEKO_UDPMUX: *mux
       NEKO_ICELITE: "true"
       NEKO_BROADCAST_URL: rtmp://${neko_name}-neko-nginx-rtmp/l/neko
-      # NEKO_HWENC: vaapi
-      # NEKO_VIDEO: >-
-      #   ximagesrc display-name=%s show-pointer=true use-damage=false
-      #   ! video/x-raw,framerate=30/1
-      #   ! videoconvert
-      #   ! queue
-      #   ! video/x-raw,format=NV12
-      #   ! x264enc
-      #     threads=4
-      #     bitrate=3500
-      #     key-int-max=60
-      #     vbv-buf-capacity=4000
-      #     byte-stream=true
-      #     tune=zerolatency
-      #     speed-preset=veryfast
-      #   ! video/x-h264,stream-format=byte-stream,profile=constrained-baseline
-      #   ! rtph264pay name=pay0 pt=96
-
-    # additionalContainers:
-    #   nginx-rtmp:
-    #     name: nginx-rtmp
-    #     image: tiangolo/nginx-rtmp:latest-2024-03-25
-    #     volumeMounts:
-    #       - name: nginx
-    #         subPath: nginx.conf
-    #         mountPath: /etc/nginx/nginx.conf
-    #       - name: hls
-    #         mountPath: /hls
 
     persistence:
       config:
@@ -88,19 +60,6 @@ spec:
         type: hostPath
         hostPath: &shm /dev/shm
         mountPath: *shm
-
-      # # NGINX mounts
-      # hls:
-      #   enabled: true
-      #   type: emptyDir
-      # nginx:
-      #   enabled: true
-      #   name: neko-nginx-rtmp-config
-      #   type: configMap
-      #   mountPath: /etc/nginx/nginx.conf
-      #   subPath: nginx.conf
-      #   readOnly: true
-      #   defaultMode: 0755
 
     # podSecurityContext:
     #   supplementalGroups: [44, 109, 10000]
@@ -130,16 +89,6 @@ spec:
             port: *port
             targetPort: *port
             protocol: UDP
-      # nginx-rtmp:
-      #   enabled: true
-      #   primary: false
-      #   ports:
-      #     nginx-http:
-      #       enabled: true
-      #       port: 80
-      #     rtmp:
-      #       enabled: true
-      #       port: 1935
 
     ingress:
       main:
@@ -157,13 +106,6 @@ spec:
             paths:
               - path: /
                 pathType: Prefix
-          # - host: vr.${game_domain}
-          #   paths:
-          #     - path: /
-          #       pathType: Prefix
-          #       service:
-          #         name: ${neko_name}-neko-nginx-rtmp
-          #         port: 80
 
         tls:
           - secretName: ${neko_domain}-tls
