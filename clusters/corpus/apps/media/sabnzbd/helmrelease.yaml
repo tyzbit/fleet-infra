@@ -1,6 +1,6 @@
 ---
 # yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2beta1.json
-apiVersion: helm.toolkit.fluxcd.io/v2beta2
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: &app sabnzbd
@@ -124,7 +124,7 @@ spec:
               - "usenet.${personal_domain}"
             secretName: usenet.${personal_domain}-tls
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta2
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: sabnzbd-oauth2-proxy
