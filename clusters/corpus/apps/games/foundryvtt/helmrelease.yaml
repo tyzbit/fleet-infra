@@ -67,7 +67,7 @@ spec:
                 value: America/New_York
 
     service:
-      main:
+      app:
         controller: foundryvtt
         ports:
           http:
