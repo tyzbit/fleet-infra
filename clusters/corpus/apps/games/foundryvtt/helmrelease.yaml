@@ -96,7 +96,7 @@ spec:
             paths:
               - path: "/"
                 service:
-                  name: foundryvtt
+                  name: foundryvtt-app
                   port: 30000
           - host: &hostfb "tabletop-files.${game_domain}"
             paths:
