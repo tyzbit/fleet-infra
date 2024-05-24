@@ -22,12 +22,11 @@ spec:
         replicas: 0
         annotations:
           reloader.stakater.com/auto: "true"
-
         containers:
           go-discord-modtools:
             image:
               repository: ghcr.io/tyzbit/go-discord-modtools
-              tag: "c37b5aa-1715722721" # {"$imagepolicy": "flux-system:go-discord-modtools:tag"}
+              tag: "0.2.3" # {"$imagepolicy": "flux-system:go-discord-modtools:tag"}
             envFrom:
               - secretRef:
                   name: go-discord-modtools
@@ -51,7 +50,7 @@ spec:
                 enabled: true
                 custom: true
                 spec:
-                  <<: *spec
+                  !!merge <<: *spec
                   failureThreshold: 15
                   initialDelaySeconds: 5
             resources:
@@ -59,7 +58,6 @@ spec:
                 cpu: "50m"
               limits:
                 memory: "256Mi"
-
     service:
       main:
         controller: main
