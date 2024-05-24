@@ -51,15 +51,14 @@ spec:
         type: configMap
         advancedMounts:
           neko:
-            filebrowser:
+            neko:
               - path: /usr/lib/firefox/distribution/policies.json
                 subPath: policies.json
       profile:
-        enabled: true
         existingClaim: neko-firefox-profile-nas
         advancedMounts:
           neko:
-            filebrowser:
+            neko:
               - path: /home/neko/.mozilla/firefox/profile.default
       dri:
         type: hostPath
