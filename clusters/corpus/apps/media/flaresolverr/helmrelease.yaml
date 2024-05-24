@@ -18,13 +18,13 @@ spec:
         namespace: flux-system
   values:
     controllers:
-      flaresoverr:
+      flaresolverr:
         replicas: 1
         annotations:
           reloader.stakater.com/auto: "true"
 
         containers:
-          flaresoverr:
+          flaresolverr:
             image:
               repository: ghcr.io/flaresolverr/flaresolverr
               tag: "v3.3.18"
