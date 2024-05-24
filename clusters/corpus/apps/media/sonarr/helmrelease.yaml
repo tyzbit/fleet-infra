@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.1/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -11,66 +12,55 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: "1.5.1"
+      version: "3.2.1"
       sourceRef:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
   values:
-    image:
-      repository: ghcr.io/onedr0p/sonarr-develop
-      tag: 4.0.4.1668
+    controllers:
+      sonarr:
+        replicas: 1 # active longhorn-webapp nas
+        type: statefulset
+        annotations:
+          reloader.stakater.com/auto: "true"
+        pod:
+          securityContext:
+            fsGroup: 568
+          nodeSelector:
+            longhorn: primary
 
-    controller:
-      replicas: 1 # active longhorn-webapp nas
-
-    nodeSelector:
-      longhorn: primary
-
-    env:
-      TZ: America/New_York
-      SONARR__AUTHENTICATION_METHOD: External
-
-    podSecurityContext:
-      fsGroup: 568
-
-    # initContainers:
-    #   fixperms:
-    #     name: fixperms
-    #     image: busybox
-    #     command:
-    #     - sh
-    #     - -c
-    #     - chown 568:568 /config -R
-    #     env:
-    #     - name: TZ
-    #       value: America/New_York
-    #     volumeMounts:
-    #     - name: config
-    #       mountPath: /config
+        containers:
+          sonarr:
+            image:
+              repository: ghcr.io/onedr0p/sonarr-develop
+              tag: "4.0.4.1668"
+            env:
+              TZ: America/New_York
+              SONARR__AUTHENTICATION_METHOD: External
+            resources:
+              requests:
+                cpu: 10m
+              limits:
+                memory: 4Gi
 
     persistence:
       config:
-        enabled: true
         existingClaim: sonarr-config-longhorn-webapp
-
       media:
-        enabled: true
         existingClaim: nas-volume1-media
 
     service:
       main:
-        enabled: true
+        controller: sonarr
         type: ClusterIP
         ports:
           http:
             port: 8989
-            targetPort: 8989
 
     ingress:
       main:
-        enabled: true
-        ingressClassName: nginx
+        className: nginx
         annotations:
           nginx.ingress.kubernetes.io/auth-url: "http://sonarr-oauth2-proxy.media.svc.cluster.local/oauth2/auth"
           nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
@@ -82,14 +72,15 @@ spec:
           - host: "shows.${personal_domain}"
             paths:
               - path: "/"
+                service:
+                  identifier: main
         tls:
           - hosts:
               - "shows.${personal_domain}"
             secretName: shows.${personal_domain}-tls
 
       oauth:
-        enabled: true
-        ingressClassName: nginx
+        className: nginx
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt
           external-dns.alpha.kubernetes.io/exclude: "true"

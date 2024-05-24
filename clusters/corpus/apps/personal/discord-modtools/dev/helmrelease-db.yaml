@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.1/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -9,50 +10,49 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: "1.5.1"
+      version: "3.2.1"
       sourceRef:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
   interval: 2m0s
   values:
-    image:
-      repository: mariadb
-      tag: 10.8
+    controllers:
+      go-discord-modtools-dev-db:
+        replicas: 1 # active longhorn
+        type: statefulset
+        annotations:
+          reloader.stakater.com/auto: "true"
+        pod:
+          nodeSelector:
+            longhorn: primary
 
-    envFrom:
-      - secretRef:
-          name: go-discord-modtools-dev-db
-
-    controller:
-      type: statefulset
-      replicas: 1 # active longhorn
+        containers:
+          mariadb:
+            image:
+              repository: mariadb
+              tag: "10.8"
+            envFrom:
+              - secretRef:
+                  name: go-discord-modtools-dev-db
+            resources:
+              requests:
+                cpu: 10m
+              limits:
+                memory: 512Mi
 
     persistence:
       data:
-        enabled: true
         existingClaim: go-discord-modtools-dev-mariadb-longhorn-database
-        mountPath: /var/lib/mysql
-
-    podAnnotations:
-      reloader.stakater.com/auto: "true"
+        advancedMounts:
+          go-discord-modtools-dev-db:
+            mariadb:
+              - path: /var/lib/mysql
 
     service:
       main:
-        enabled: true
+        controller: go-discord-modtools-dev-db
         type: ClusterIP
         ports:
-          http:
-            enabled: false
           sql:
             port: 3306
-            nodePort: 31135
-
-    nodeSelector:
-      longhorn: primary
-
-    resources:
-      requests:
-        cpu: 10m
-      limits:
-        memory: 512Mi

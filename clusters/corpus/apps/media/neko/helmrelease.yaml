@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.1/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -9,7 +10,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: "1.5.1"
+      version: "3.2.1"
       sourceRef:
         kind: HelmRepository
         name: bjw-s
@@ -19,64 +20,60 @@ spec:
     - kind: Secret
       name: ${neko_name}-neko
   values:
-    image:
-      # results in a blank screen
-      # repository: ghcr.io/m1k1o/neko/intel-firefox
-      repository: ghcr.io/m1k1o/neko/firefox
-      tag: 2.8.11
+    controllers:
+      neko:
+        replicas: 1 # active nas
+        type: statefulset
+        annotations:
+          reloader.stakater.com/auto: "true"
 
-    controller:
-      type: statefulset
-      replicas: 1
-
-    env:
-      NEKO_SCREEN: 1280x720@30
-      NEKO_PROXY: "true"
-      NEKO_TCPMUX: &mux "5100"
-      NEKO_UDPMUX: *mux
-      NEKO_ICELITE: "true"
-      NEKO_BROADCAST_URL: rtmp://${neko_name}-neko-nginx-rtmp/l/neko
+        containers:
+          neko:
+            image:
+              # results in a blank screen
+              # repository: ghcr.io/m1k1o/neko/intel-firefox
+              repository: ghcr.io/m1k1o/neko/firefox
+              tag: "2.8.11"
+            envFrom:
+              - secretRef:
+                  name: neko
+            env:
+              NEKO_SCREEN: 1280x720@30
+              NEKO_PROXY: "true"
+              NEKO_TCPMUX: &mux "5100"
+              NEKO_UDPMUX: *mux
+              NEKO_ICELITE: "true"
+              NEKO_BROADCAST_URL: rtmp://${neko_name}-neko-nginx-rtmp/l/neko
+            resources:
+              requests:
+                cpu: 1400m
 
     persistence:
       config:
-        enabled: true
         name: neko-firefox-config
         type: configMap
-        mountPath: /usr/lib/firefox/distribution/policies.json
-        subPath: policies.json
-        readOnly: true
-        defaultMode: 0755
+        advancedMounts:
+          foundryvtt:
+            filebrowser:
+              - path: /usr/lib/firefox/distribution/policies.json
+                subPath: policies.json
       profile:
         enabled: true
         existingClaim: neko-firefox-profile-nas
-        mountPath: /home/neko/.mozilla/firefox/profile.default
+        advancedMounts:
+          foundryvtt:
+            filebrowser:
+              - path: /home/neko/.mozilla/firefox/profile.default
       dri:
-        enabled: true
         type: hostPath
-        hostPath: &dri /dev/dri
-        mountPath: *dri
+        hostPath: /dev/dri
       shm:
-        enabled: true
         type: hostPath
-        hostPath: &shm /dev/shm
-        mountPath: *shm
-
-    # podSecurityContext:
-    #   supplementalGroups: [44, 109, 10000]
-
-    # securityContext:
-    #   privileged: true
-
-    podAnnotations:
-      reloader.stakater.com/auto: "true"
-
-    resources:
-      requests:
-        cpu: 1400m
+        hostPath: /dev/shm
 
     service:
       main:
-        enabled: true
+        controller: neko
         type: ClusterIP
         ports:
           http:
@@ -84,16 +81,13 @@ spec:
             targetPort: 8080
           mux:
             port: &port 5100
-            targetPort: *port
           muxudp:
             port: *port
-            targetPort: *port
             protocol: UDP
 
     ingress:
       main:
-        enabled: true
-        ingressClassName: nginx
+        className: nginx
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt
           acme.cert-manager.io/http01-edit-in-place: "true"
@@ -106,9 +100,11 @@ spec:
             paths:
               - path: /
                 pathType: Prefix
+                service:
+                  identifier: main
+                  port: 80
 
         tls:
           - secretName: ${neko_domain}-tls
             hosts:
               - ${neko_domain}
-              - ${game_domain}

@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.1/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -9,57 +10,74 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: "1.5.1"
+      version: "3.2.1"
       sourceRef:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
   interval: 2m0s
   values:
-    image:
-      repository: plexinc/pms-docker
-      tag: 1.40.2.8395-c67dce28e
-    podAnnotations:
-      reloader.stakater.com/auto: "true"
-    controller:
-      type: statefulset
-      replicas: 1 # active longhorn nas
+    controllers:
+      plex:
+        replicas: 1 # active longhorn nas
+        type: statefulset
+        annotations:
+          reloader.stakater.com/auto: "true"
+        pod:
+          securityContext:
+            runAsUser: 0
+          nodeSelector:
+            graphics: dri
+            longhorn: primary
+          affinity:
+            podAntiAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                - topologyKey: "kubernetes.io/hostname"
+                  labelSelector:
+                    matchExpressions:
+                      - key: app.kubernetes.io/name
+                        operator: In
+                        values:
+                          - "plex-secondary"
+
+        containers:
+          plex:
+            image:
+              repository: plexinc/pms-docker
+              tag: "1.40.2.8395-c67dce28e"
+            envFrom:
+              - configMapRef:
+                  name: plex-config
+            resources:
+              requests:
+                cpu: 100m
+              limits:
+                memory: 8192Mi
+
     persistence:
       media:
-        enabled: true
         existingClaim: nas-volume1-media
       config:
-        enabled: true
         existingClaim: plex-config-longhorn-plex
       transcode:
-        enabled: true
         type: hostPath
         hostPathType: DirectoryOrCreate
-        hostPath: &transcode /dev/shm/transcode
-        mountPath: *transcode
+        hostPath: /dev/shm/transcode
       dri:
-        enabled: true
         type: hostPath
-        hostPath: &dri /dev/dri
-        mountPath: *dri
-    envFrom:
-      - configMapRef:
-          name: plex-config
-    # podSecurityContext:
-    #   supplementalGroups: [8, 13, 44, 100, 109, 10000]
-    securityContext:
-      privileged: true
+        hostPath: /dev/dri
+
     service:
       main:
-        enabled: true
+        controller: plex
         type: ClusterIP
         ports:
           http:
             port: 32400
+
     ingress:
       main:
-        enabled: true
-        ingressClassName: nginx
+        className: nginx
         annotations:
           nginx.ingress.kubernetes.io/proxy-body-size: 256m
           cert-manager.io/cluster-issuer: letsencrypt
@@ -71,31 +89,16 @@ spec:
             paths:
               - path: /
                 pathType: Prefix
+                service:
+                  identifier: main
           - host: &public2 "plex.${public_services_domain}"
             paths:
               - path: /
                 pathType: Prefix
+                service:
+                  identifier: main
         tls:
           - secretName: *public
             hosts:
               - *public
               - *public2
-
-    nodeSelector:
-      graphics: dri
-      longhorn: primary
-    resources:
-      requests:
-        cpu: 100m
-      limits:
-        memory: 8192Mi
-    affinity:
-      podAntiAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          - topologyKey: "kubernetes.io/hostname"
-            labelSelector:
-              matchExpressions:
-                - key: app.kubernetes.io/name
-                  operator: In
-                  values:
-                    - "plex-secondary"

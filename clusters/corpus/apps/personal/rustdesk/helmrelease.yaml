@@ -1,4 +1,4 @@
-# https://github.com/JJGadgets/Biohazard/blob/a7de80b5bdc5cfda9745681fcce2f7e0e5110d4b/kube/deploy/apps/gotosocial/app/hr.yaml
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.1/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -12,7 +12,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: "1.5.1"
+      version: "3.2.1"
       sourceRef:
         name: bjw-s
         kind: HelmRepository
@@ -22,38 +22,41 @@ spec:
     - kind: Secret
       name: rustdesk-config
   values:
-    command: ["hbbs", "-r ${home_domain_ddns}:21117"]
+    controllers:
+      rustdesk:
+        replicas: 1
+        annotations:
+          reloader.stakater.com/auto: "true"
 
-    controller:
-      annotations:
-        reloader.stakater.com/auto: "true"
-      type: deployment
-      replicas: 1
+        containers:
+          rustdesk:
+            image:
+              repository: rustdesk/rustdesk-server
+              tag: "1.1.10-3"
+            command: ["hbbs", "-r ${home_domain_ddns}:21117"]
+            env:
+              RELAY: "${home_domain_ddns}:21117"
+              ENCRYPTED_ONLY: "1"
+              DB_URL: /db/db_v2.sqlite3
+            resources:
+              requests:
+                cpu: 10m
+              limits:
+                memory: 256Mi
 
-    image:
-      repository: rustdesk/rustdesk-server
-      tag: 1.1.10-3
-
-    additionalContainers:
-      hbbr:
-        name: hbbr
-        image: rustdesk/rustdesk-server:1.1.10-3
-        command: ["hbbr"]
-        volumeMounts:
-          - name: db
-            subPath: hbbr
-            mountPath: /db
-
-    env:
-      RELAY: "${home_domain_ddns}:21117"
-      ENCRYPTED_ONLY: "1"
-      DB_URL: /db/db_v2.sqlite3
+          hbbr:
+            image:
+              repository: rustdesk/rustdesk-server
+              tag: "1.1.10-3"
+            command: ["hbbr"]
 
     service:
       main:
+        controller: rustdesk
         ports:
           http:
             enabled: false
+            port: 80
           rustdesk-1:
             port: 21115
           rustdesk-2:
@@ -64,6 +67,7 @@ spec:
           rustdesk-4:
             port: 21118
       hbbr:
+        controller: rustdesk
         ports:
           rustdesk-5:
             port: 21117
@@ -80,15 +84,9 @@ spec:
 
     persistence:
       db:
-        enabled: true
         existingClaim: ${social_name}-gotosocial-longhorn-webapp
-        subPath:
-          - path: hbbs
-            subPath: hbbs
-            mountPath: /db
-
-    resources:
-      requests:
-        cpu: 10m
-      limits:
-        memory: 256Mi
+        advancedMounts:
+          rustdesk:
+            hbbr:
+              - path: /db
+                subPath: hbbs

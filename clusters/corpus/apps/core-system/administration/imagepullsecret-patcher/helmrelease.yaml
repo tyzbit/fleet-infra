@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.1/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -11,59 +12,56 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: "1.5.1"
+      version: "3.2.1"
       sourceRef:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
   values:
-    image:
-      repository: quay.io/titansoft/imagepullsecret-patcher
-      tag: v0.14
+    controllers:
+      imagepullsecret-patcher:
+        replicas: 1
+        strategy: RollingUpdate
+        annotations:
+          reloader.stakater.com/auto: "true"
 
-    controller:
-      replicas: 1
-
-    env:
-      TZ: America/New_York
-      ## https://github.com/titansoft-pte-ltd/imagepullsecret-patcher#installation-and-configuration
-      # CONFIG_ALLSERVICEACCOUNT: "true"
-      # CONFIG_DEBUG: "true"
-      # CONFIG_EXCLUDED_NAMESPACES: default,kube-system
-      # CONFIG_FORCE: "true"
-      # CONFIG_MANAGEDONLY: "true"
-      CONFIG_DOCKERCONFIGJSONPATH: /.dockerconfigjson
-      CONFIG_LOOP_DURATION: 1m0s
-      CONFIG_SECRETNAME: universal-image-pull-secret
-      CONFIG_SERVICEACCOUNTS: default
-      ## Exit after updating secrets
-      # CONFIG_RUNONCE: "true"
+        containers:
+          imagepullsecret-patcher:
+            image:
+              repository: quay.io/titansoft/imagepullsecret-patcher
+              tag: "v0.14"
+            env:
+              TZ: America/New_York
+              ## https://github.com/titansoft-pte-ltd/imagepullsecret-patcher#installation-and-configuration
+              # CONFIG_ALLSERVICEACCOUNT: "true"
+              # CONFIG_DEBUG: "true"
+              # CONFIG_EXCLUDED_NAMESPACES: default,kube-system
+              # CONFIG_FORCE: "true"
+              # CONFIG_MANAGEDONLY: "true"
+              CONFIG_DOCKERCONFIGJSONPATH: /.dockerconfigjson
+              CONFIG_LOOP_DURATION: 1m0s
+              CONFIG_SECRETNAME: universal-image-pull-secret
+              CONFIG_SERVICEACCOUNTS: default
+              ## Exit after updating secrets
+              # CONFIG_RUNONCE: "true"
+            probes:
+              liveness:
+                enabled: false
+              readiness:
+                enabled: false
+              startup:
+                enabled: false
 
     serviceAccount:
       name: imagepullsecret-patcher
 
     persistence:
       secret:
-        enabled: true
         name: universal-docker-auth
         type: secret
-        mountPath: /.dockerconfigjson
-        subPath: .dockerconfigjson
-        readOnly: true
-        defaultMode: 0755
-
-    probes:
-      startup:
-        enabled: false
-      liveness:
-        enabled: false
-      readiness:
-        enabled: false
-
-    service:
-      main:
-        enabled: false
-
-    ingress:
-      main:
-        enabled: false
+        advancedMounts:
+          imagepullsecret-patcher:
+            imagepullsecret-patcher:
+              - path: /.dockerconfigjson
+                readOnly: true
+                subPath: .dockerconfigjson

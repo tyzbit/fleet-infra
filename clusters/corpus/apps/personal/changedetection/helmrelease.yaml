@@ -1,4 +1,4 @@
----
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.1/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -11,53 +11,74 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
+      version: "3.2.1"
       sourceRef:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
   values:
-    image:
-      repository: ghcr.io/dgtlmoon/changedetection.io
-      tag: "0.45.8.1"
-    env:
-      PORT: &port 5000
-      USE_X_SETTINGS: 1
-      PLAYWRIGHT_DRIVER_URL: ws://localhost:3000/?stealth=1&--disable-web-security=true&--user-data-dir=~/browserless-cache-123
-      PUID: 1000
-      PGID: 1000
-    podAnnotations:
-      reloader.stakater.com/auto: "true"
-    sidecars:
-      browser:
-        name: browser
-        image: docker.io/browserless/chrome:1-chrome-stable
-        imagePullPolicy: Always
-        env:
-          - name: SCREEN_WIDTH
-            value: "1920"
-          - name: SCREEN_HEIGHT
-            value: "1024"
-          - name: SCREEN_DEPTH
-            value: "16"
-          - name: ENABLE_DEBUGGER
-            value: "false"
-          - name: PREBOOT_CHROME
-            value: "true"
-          - name: CONNECTION_TIMEOUT
-            value: "300000"
-          - name: MAX_CONCURRENT_SESSIONS
-            value: "10"
-          - name: CHROME_REFRESH_TIME
-            value: "600000"
-          - name: DEFAULT_BLOCK_ADS
-            value: "true"
-          - name: DEFAULT_STEALTH
-            value: "true"
+    controllers:
+      changedetection:
+        replicas: 1 # active nas
+        type: statefulset
+        annotations:
+          reloader.stakater.com/auto: "true"
+
+        containers:
+          changedetection:
+            image:
+              repository: ghcr.io/dgtlmoon/changedetection.io
+              tag: "0.45.8.1"
+            env:
+              PORT: &port 5000
+            # resources:
+            #   requests:
+            #     cpu: 10m
+            #     memory: 100Mi
+            #   limits:
+            #     memory: 250Mi
+
+          browser:
+            image:
+              pullPolicy: Always
+              repository: docker.io/browserless/chrome
+              tag: "1-chrome-stable"
+            env:
+              - name: SCREEN_WIDTH
+                value: "1920"
+              - name: SCREEN_HEIGHT
+                value: "1024"
+              - name: SCREEN_DEPTH
+                value: "16"
+              - name: ENABLE_DEBUGGER
+                value: "false"
+              - name: PREBOOT_CHROME
+                value: "true"
+              - name: CONNECTION_TIMEOUT
+                value: "300000"
+              - name: MAX_CONCURRENT_SESSIONS
+                value: "10"
+              - name: CHROME_REFRESH_TIME
+                value: "600000"
+              - name: DEFAULT_BLOCK_ADS
+                value: "true"
+              - name: DEFAULT_STEALTH
+                value: "true"
+
+    persistence:
+      datastore:
+        existingClaim: changedetection-config-nas
+
+    service:
+      main:
+        controller: changedetection
+        ports:
+          http:
+            port: *port
+
     ingress:
       main:
-        enabled: true
-        ingressClassName: nginx
+        className: nginx
         annotations:
           acme.cert-manager.io/http01-edit-in-place: "true"
           nginx.ingress.kubernetes.io/auth-url: "http://changedetection-oauth2-proxy.personal.svc.cluster.local/oauth2/auth"
@@ -70,13 +91,15 @@ spec:
             paths:
               - path: /
                 pathType: Prefix
+                service:
+                  identifier: main
         tls:
           - hosts:
               - *host
             secretName: *host
+
       oauth:
-        enabled: true
-        ingressClassName: nginx
+        className: nginx
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt
           external-dns.alpha.kubernetes.io/exclude: "true"
@@ -93,23 +116,6 @@ spec:
           - hosts:
               - *host
             secretName: *host
-
-    service:
-      main:
-        ports:
-          http:
-            port: *port
-    persistence:
-      config:
-        enabled: true
-        mountPath: /datastore
-        existingClaim: changedetection-config-nas
-    # resources:
-    #   requests:
-    #     cpu: 10m
-    #     memory: 100Mi
-    #   limits:
-    #     memory: 250Mi
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
