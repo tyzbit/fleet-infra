@@ -18,13 +18,12 @@ spec:
   interval: 2m0s
   values:
     controllers:
-      flaresoverr:
+      go-discord-archiver:
         replicas: 1
         annotations:
           reloader.stakater.com/auto: "true"
-
         containers:
-          flaresoverr:
+          go-discord-archiver:
             image:
               repository: ghcr.io/tyzbit/go-discord-archiver
               tag: "2.11.0" # {"$imagepolicy": "flux-system:go-discord-archiver:tag"}
@@ -62,5 +61,5 @@ spec:
 
     service:
       main:
-        controller: main
+        controller: go-discord-archiver
         enabled: false
