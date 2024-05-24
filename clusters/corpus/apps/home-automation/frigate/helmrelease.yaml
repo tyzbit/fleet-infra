@@ -58,16 +58,18 @@ spec:
           frigate:
             frigate:
               - path: /config/model_cache
+                subPath: model_cache
               - path: /media/frigate
+                subPath: media
       config:
         name: frigate-config
         type: configMap
         advancedMounts:
           frigate:
             frigate:
-              - path: /config/config.yml
+              - path: config.yml
                 readOnly: true
-                subPath: config.yml
+                subPath: /config/config.yml
       usb:
         type: hostPath
         hostPath: /dev/bus/usb
