@@ -24,15 +24,6 @@ spec:
         annotations:
           reloader.stakater.com/auto: "true"
         pod:
-          securityContext:
-            runAsUser: 568
-            runAsGroup: 568
-            runAsNonRoot: true
-            fsGroup: 568
-            fsGroupChangePolicy: OnRootMismatch
-            supplementalGroups:
-              - 44
-              - 65537
           nodeSelector:
             graphics: dri
             longhorn: primary
@@ -61,10 +52,7 @@ spec:
               limits:
                 memory: 8192Mi
             securityContext:
-              allowPrivilegeEscalation: false
-              capabilities:
-                drop:
-                  - ALL
+              privileged: true
 
     persistence:
       media:

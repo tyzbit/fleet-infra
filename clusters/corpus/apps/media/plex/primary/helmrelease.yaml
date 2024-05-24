@@ -24,9 +24,6 @@ spec:
         annotations:
           reloader.stakater.com/auto: "true"
         pod:
-          securityContext:
-            runAsUser: 0
-            runAsGroup: 0
           nodeSelector:
             graphics: dri
             longhorn: primary
@@ -46,6 +43,8 @@ spec:
             image:
               repository: plexinc/pms-docker
               tag: "1.40.2.8395-c67dce28e"
+            securityContext:
+              privileged: true
             envFrom:
               - configMapRef:
                   name: plex-config
