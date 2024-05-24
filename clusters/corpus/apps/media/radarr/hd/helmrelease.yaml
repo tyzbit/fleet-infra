@@ -46,11 +46,9 @@ spec:
 
     persistence:
       config:
-        enabled: true
         existingClaim: radarr-hd-config-longhorn-webapp
 
       media:
-        enabled: true
         existingClaim: nas-volume1-media
 
     probes:
@@ -80,7 +78,7 @@ spec:
             paths:
               - path: "/"
                 service:
-                  identifier: radarr-hd
+                  identifier: main
         tls:
           - hosts:
               - *host
