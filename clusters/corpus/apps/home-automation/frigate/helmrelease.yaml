@@ -67,9 +67,9 @@ spec:
         advancedMounts:
           frigate:
             frigate:
-              - path: config.yml
+              - path: /config/config.yml
                 readOnly: true
-                subPath: /config/config.yml
+                subPath: config.yml
       usb:
         type: hostPath
         hostPath: /dev/bus/usb
