@@ -41,10 +41,10 @@ spec:
         existingClaim: qbittorrent-data-nas
         advancedMounts:
           qbittorrent:
-            filebrowser:
+            qbittorrent:
               - path: /config
                 subPath: config
-              - path: /srv/homeassistant
+              - path: /data
 
       media:
         existingClaim: nas-volume1-media
