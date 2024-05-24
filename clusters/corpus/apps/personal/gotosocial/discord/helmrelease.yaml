@@ -63,7 +63,6 @@ spec:
 
     persistence:
       db:
-        enabled: true
         existingClaim: ${social_name}-gotosocial-longhorn-webapp
         advancedMounts:
           gotosocial:

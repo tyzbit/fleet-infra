@@ -84,7 +84,6 @@ spec:
 
     ingress:
       main:
-        enabled: true
         className: nginx
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt

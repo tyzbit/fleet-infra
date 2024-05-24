@@ -65,6 +65,18 @@ spec:
               - name: TZ
                 value: America/New_York
 
+    persistence:
+      data:
+        existingClaim: foundry-data-longhorn-gameserver
+        advancedMounts:
+          foundryvtt:
+            foundryvtt:
+              - path: /data
+            filebrowser:
+              - path: /db
+                subPath: filebrowser
+              - path: /srv/homeassistant
+
     service:
       main:
         controller: foundryvtt
@@ -77,7 +89,6 @@ spec:
         primary: false
         ports:
           fbhttp:
-            enabled: true
             port: 80
 
     ingress:
@@ -106,13 +117,3 @@ spec:
               - *host
               - *hostfb
             secretName: *host
-
-    persistence:
-      data:
-        existingClaim: foundry-data-longhorn-gameserver
-        advancedMounts:
-          foundryvtt:
-            filebrowser:
-              - path: /db
-                subPath: filebrowser
-              - path: /srv/homeassistant
