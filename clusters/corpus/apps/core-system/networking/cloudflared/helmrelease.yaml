@@ -65,22 +65,20 @@ spec:
 
     persistence:
       config:
-        enabled: true
         name: cloudflared-config
         type: configMap
         advancedMounts:
-          config:
-            config:
+          cloudflared:
+            cloudflared:
               - path: *configpath
                 readOnly: true
                 subPath: config.yaml
       credentials:
-        enabled: true
         name: cloudflared-cred
         type: secret
         advancedMounts:
-          config:
-            config:
+          cloudflared:
+            cloudflared:
               - path: /etc/cloudflared/cred.json
                 readOnly: true
                 subPath: cred.json
