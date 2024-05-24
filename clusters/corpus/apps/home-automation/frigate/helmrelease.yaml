@@ -27,6 +27,7 @@ spec:
             coral: attached
           securityContext:
             runAsUser: 0
+            runAsGroup: 0
         annotations:
           reloader.stakater.com/auto: "true"
         labels:
