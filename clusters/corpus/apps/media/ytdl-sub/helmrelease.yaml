@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.1/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -17,78 +18,75 @@ spec:
         name: bjw-s
         namespace: flux-system
   values:
-    image:
-      pullPolicy: Always
-      repository: ghcr.io/jmbannon/ytdl-sub
-      tag: "latest@sha256:990e80d8e84fe3a957f9fa4e91c0b5695436070aaba7b47fd4fe3a6f6216baf7" # 2023-02-24 03:00 -0400
+    controllers:
+      ytdl-sub:
+        replicas: 1 # active longhorn
+        type: cronjob
+        pod:
+          restartPolicy: OnFailure
+        cronjob:
+          # schedule: "0 0 5 31 2" # Disable cronjob by giving it a schedule that will never run
+          schedule: "*/15 * * * *"
+          ttlSecondsAfterFinished: 86400
+        annotations:
+          reloader.stakater.com/auto: "true"
+        labels:
+          kube-image-keeper.enix.io/image-cache: disabled
 
-    controller:
-      type: cronjob
-      restartPolicy: OnFailure
-      cronjob:
-        # schedule: "0 0 5 31 2" # Disable cronjob by giving it a schedule that will never run
-        schedule: "*/15 * * * *"
-        ttlSecondsAfterFinished: 86400
-
-    podLabels:
-      kube-image-keeper.enix.io/image-cache: disabled
-
-    command:
-      - bash
-      - -c
-      - |
-        cp /config/cookies.txt /config/cookies-rw.txt
-        ytdl-sub --log-level=debug --config=/config/config.yaml sub /media/youtube/subscriptions.yaml
-        echo "[cronjob:command] Fixing permissions, started at $$(date --rfc-2822)"
-        find $${MEDIA_FOLDER} -user root -exec chown 568:568 "{}" \; -exec chmod 777 "{}" \;
-        echo "[cronjob:command] Fixed permissions, ended at $$(date --rfc-2822)"
-
-    env:
-      TZ: America/New_York
-      PUID: 568
-      PGID: 568
-      MEDIA_FOLDER: /media/youtube
+        containers:
+          ytdl-sub:
+            image:
+              pullPolicy: Always
+              repository: ghcr.io/jmbannon/ytdl-sub
+              tag: "latest@sha256:990e80d8e84fe3a957f9fa4e91c0b5695436070aaba7b47fd4fe3a6f6216baf7" # 2023-02-24 03:00 -0400
+            command:
+              - bash
+              - -c
+              - |
+                cp /config/cookies.txt /config/cookies-rw.txt
+                ytdl-sub --log-level=debug --config=/config/config.yaml sub /media/youtube/subscriptions.yaml
+                echo "[cronjob:command] Fixing permissions, started at $$(date --rfc-2822)"
+                find $${MEDIA_FOLDER} -user root -exec chown 568:568 "{}" \; -exec chmod 777 "{}" \;
+                echo "[cronjob:command] Fixed permissions, ended at $$(date --rfc-2822)"
+            env:
+              TZ: America/New_York
+              PUID: 568
+              PGID: 568
+              MEDIA_FOLDER: /media/youtube
+            resources:
+              requests:
+                cpu: 100m
+                memory: 128M
+              limits:
+                memory: 4G
 
     persistence:
       config:
-        enabled: true
         name: ytdl-sub-config
         type: configMap
-        mountPath: /config/config.yaml
-        subPath: config.yaml
-        readOnly: true
-        defaultMode: 0755
+        advancedMounts:
+          ytdl-sub:
+            ytdl-sub:
+              - path: /config/config.yaml
+                subPath: config.yaml
+                readOnly: true
       ## yt-dlp doesn't like a readonly cookies file. Changing readOnly has no
       ## effect.
       cookies:
-        enabled: true
         name: ytdl-sub-cookies
         type: secret
-        mountPath: /config/cookies.txt
-        subPath: cookies.txt
-        readOnly: false
-        defaultMode: 0755
+        advancedMounts:
+          ytdl-sub:
+            ytdl-sub:
+              - path: /config/cookies.txt
+                subPath: cookies.txt
       media:
-        enabled: true
         existingClaim: nas-volume1-media
       tmp:
-        enabled: true
         type: emptyDir
-        mountPath: /tmp/ytdl-sub
+        advancedMounts:
+          ytdl-sub:
+            ytdl-sub:
+              - path: /tmp/ytdl-sub
         # medium: Memory
         # sizeLimit: 2Gi
-
-    service:
-      main:
-        enabled: false
-
-    ingress:
-      main:
-        enabled: false
-
-    resources:
-      requests:
-        cpu: 100m
-        memory: 128M
-      limits:
-        memory: 4G
