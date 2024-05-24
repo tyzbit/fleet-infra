@@ -96,6 +96,7 @@ spec:
               - path: "/"
                 service:
                   identifier: main
+                  port: 8123
           - host: &hostfb "home-fb.${personal_domain}"
             paths:
               - path: "/"
