@@ -58,7 +58,6 @@ spec:
           home-assistant:
             home-assistant:
               - path: /config
-          filebrowser:
             filebrowser:
               - path: /db
                 subPath: filebrowser
