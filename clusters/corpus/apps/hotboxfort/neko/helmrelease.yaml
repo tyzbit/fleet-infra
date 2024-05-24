@@ -59,7 +59,6 @@ spec:
           hotboxfort-neko:
             hotboxfort-neko:
               - path: /home/neko/.mozilla/firefox/profile.default
-                readOnly: true
       dri:
         type: hostPath
         hostPath: /dev/dri
