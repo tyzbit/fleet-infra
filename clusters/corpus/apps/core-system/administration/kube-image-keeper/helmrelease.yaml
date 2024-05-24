@@ -42,6 +42,7 @@ spec:
         repository: quay.io/enix/kube-image-keeper
     registry:
       garbageCollection:
+        schedule: "13 8/6 * * *"
         deleteUntagged: false
       image:
         repository: public.ecr.aws/docker/library/registry
