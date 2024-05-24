@@ -60,7 +60,7 @@ spec:
         type: ClusterIP
         ports:
           http:
-            port: 80
+            port: 5678
           sqlite:
             port: 3000
 
