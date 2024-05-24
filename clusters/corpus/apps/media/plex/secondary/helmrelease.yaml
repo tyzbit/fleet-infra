@@ -62,7 +62,6 @@ spec:
                 memory: 8192Mi
             securityContext:
               allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
               capabilities:
                 drop:
                   - ALL
