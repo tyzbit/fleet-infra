@@ -27,7 +27,7 @@ spec:
           flaresolverr:
             image:
               repository: ghcr.io/flaresolverr/flaresolverr
-              tag: "v3.3.18"
+              tag: "v3.3.19"
             env:
               TZ: America/New_York
             resources:
