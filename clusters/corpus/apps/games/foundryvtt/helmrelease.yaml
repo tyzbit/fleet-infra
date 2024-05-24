@@ -28,7 +28,7 @@ spec:
           foundryvtt:
             image:
               repository: felddy/foundryvtt
-              tag: "11.315.1"
+              tag: "12.324.0"
             envFrom:
               - secretRef:
                   name: foundryvtt
