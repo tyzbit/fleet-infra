@@ -20,6 +20,7 @@ spec:
     controllers:
       qbittorrent:
         replicas: 1 # active nas
+        type: statefulset
         annotations:
           reloader.stakater.com/auto: "true"
         pod:
