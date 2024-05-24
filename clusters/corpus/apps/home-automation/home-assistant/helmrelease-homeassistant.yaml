@@ -54,10 +54,15 @@ spec:
     persistence:
       config:
         existingClaim: home-assistant-config-nas
-        globalMounts:
-          - path: /db
-            subPath: filebrowser
-          - path: /srv/homeassistant
+        advancedMounts:
+          home-assistant:
+            home-assistant:
+              - path: /config
+          filebrowser:
+            filebrowser:
+              - path: /db
+                subPath: filebrowser
+              - path: /srv/homeassistant
       media:
         type: emptyDir
 
