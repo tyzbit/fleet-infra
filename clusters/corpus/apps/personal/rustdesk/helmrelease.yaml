@@ -84,7 +84,7 @@ spec:
 
     persistence:
       db:
-        existingClaim: ${social_name}-gotosocial-longhorn-webapp
+        existingClaim: rustdesk
         advancedMounts:
           rustdesk:
             hbbr:
