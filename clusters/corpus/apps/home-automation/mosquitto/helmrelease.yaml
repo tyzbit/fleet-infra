@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.1/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -16,16 +17,30 @@ spec:
         name: bjw-s
         namespace: flux-system
   values:
-    image:
-      repository: eclipse-mosquitto
-      tag: 2.0.18
+    controllers:
+      mosquitto:
+        replicas: 1
+        strategy: RollingUpdate
+        annotations:
+          reloader.stakater.com/auto: "true"
 
-    env:
-      TZ: America/New_York
+        containers:
+          mosquitto:
+            image:
+              repository: eclipse-mosquitto
+              tag: "2.0.18"
+            env:
+              TZ: America/New_York
+            probes:
+              liveness:
+                enabled: false
+              readiness:
+                enabled: false
+              startup:
+                enabled: false
 
     configMaps:
       config:
-        enabled: true
         data:
           mosquitto.conf: |
             listener 1883
@@ -36,19 +51,21 @@ spec:
 
     persistence:
       config:
-        enabled: true
         type: configMap
         name: mosquitto-config
-        mountPath: /mosquitto/config/mosquitto.conf
-        subPath: mosquitto.conf
+        advancedMounts:
+          mosquitto:
+            mosquitto:
+              - path: /mosquitto/config/mosquitto.conf
+                readOnly: true
+                subPath: mosquitto.conf
 
     service:
       main:
+        controller: mosquitto
         type: ClusterIP
         ports:
           http:
-            enabled: false
+            port: 80
           mqtt:
-            enabled: true
             port: 1883
-            targetPort: 1883

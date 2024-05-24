@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.1/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -16,53 +17,50 @@ spec:
         namespace: flux-system
   interval: 2m0s
   values:
-    image:
-      repository: mariadb
-      tag: 10.8
+    controllers:
+      go-discord-archiver-dev-db:
+        replicas: 1 # active longhorn
+        type: statefulset
+        annotations:
+          reloader.stakater.com/auto: "true"
 
-    command:
-      - bash
-      - -c
-      - |
-        mariadb-dump -h go-discord-archiver-db --password="$(MARIADB_PROD_ROOT_PASSWORD)" go_archiver > /backup/dump.sql && \
-        while [[ $(mariadb -uroot --password="$${MARIADB_ROOT_PASSWORD}" "$${MARIADB_DATABASE}" < /backup/dump.sql; echo $?) != 0 ]]; do
-          sleep 1
-        done &
-        exec docker-entrypoint.sh mariadbd
-
-    envFrom:
-      - secretRef:
-          name: go-discord-archiver-dev-db
-
-    controller:
-      type: statefulset
-      replicas: 1 # active longhorn
+        containers:
+          mariadb:
+            image:
+              repository: mariadb
+              tag: "10.8"
+            command:
+              - bash
+              - -c
+              - |
+                mariadb-dump -h go-discord-archiver-db --password="$(MARIADB_PROD_ROOT_PASSWORD)" go_archiver > /backup/dump.sql && \
+                while [[ $(mariadb -uroot --password="$${MARIADB_ROOT_PASSWORD}" "$${MARIADB_DATABASE}" < /backup/dump.sql; echo $?) != 0 ]]; do
+                  sleep 1
+                done &
+                exec docker-entrypoint.sh mariadbd
+            envFrom:
+              - secretRef:
+                  name: go-discord-archiver-dev-db
+            resources:
+              requests:
+                cpu: 10m
+              limits:
+                memory: 512Mi
 
     persistence:
       data:
-        enabled: true
         type: emptyDir
-        mountPath: /var/lib/mysql
+        advancedMounts:
+          go-discord-archiver-dev-db:
+            mariadb:
+              - path: /var/lib/mysql
       backup:
-        enabled: true
         type: emptyDir
-
-    podAnnotations:
-      reloader.stakater.com/auto: "true"
 
     service:
       main:
-        enabled: true
+        controller: go-discord-archiver-dev-db
         type: ClusterIP
         ports:
-          http:
-            enabled: false
           sql:
             port: 3306
-            nodePort: 30306
-
-    resources:
-      requests:
-        cpu: 10m
-      limits:
-        memory: 512Mi

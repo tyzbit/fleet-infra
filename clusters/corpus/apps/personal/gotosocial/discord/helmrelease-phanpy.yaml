@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.1/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -17,24 +18,37 @@ spec:
         kind: HelmRepository
         namespace: flux-system
   values:
-    controller:
-      type: deployment
-      replicas: 1
+    controllers:
+      phanpy:
+        replicas: 1
+        type: deployment
+        annotations:
+          reloader.stakater.com/auto: "true"
 
-    image:
-      repository: "ghcr.io/jjgadgets/phanpy"
-      tag: "2024.05.15.6976191"
+        containers:
+          phanpy:
+            image:
+              repository: "ghcr.io/jjgadgets/phanpy"
+              tag: "2024.05.15.6976191"
+            envFrom:
+              - secretRef:
+                  name: phanpy
+            resources:
+              requests:
+                cpu: 10m
+              limits:
+                memory: 512Mi
 
     service:
       main:
+        controller: phanpy
         ports:
           http:
             port: 8080
 
     ingress:
       main:
-        enabled: true
-        ingressClassName: nginx
+        className: nginx
         annotations:
           acme.cert-manager.io/http01-edit-in-place: "true"
           cert-manager.io/cluster-issuer: letsencrypt
@@ -46,13 +60,10 @@ spec:
             paths:
               - path: /
                 pathType: Prefix
+                service:
+                  identifier: main
         tls:
           - hosts:
               - ${social_domain}
               - web.${social_domain}
-            secretName: ${social_name}-gotosocial-tls
-    resources:
-      requests:
-        cpu: 10m
-      limits:
-        memory: 512Mi
+            secretName: ${social_name}-phanpy-tls

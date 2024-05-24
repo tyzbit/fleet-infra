@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.1/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -19,58 +20,58 @@ spec:
     - kind: Secret
       name: sheanxious-neko
   values:
-    image:
-      # repository: ghcr.io/m1k1o/neko/intel-firefox
-      repository: ghcr.io/m1k1o/neko/firefox
-      tag: 2.8.11
+    controllers:
+      sheanxious-neko:
+        replicas: 1 # active nas
+        type: statefulset
+        annotations:
+          reloader.stakater.com/auto: "true"
 
-    env:
-      NEKO_SCREEN: 1280x720@30
-      NEKO_PROXY: "true"
-      NEKO_TCPMUX: &mux "5102"
-      NEKO_UDPMUX: *mux
-      NEKO_ICELITE: "true"
-
-    controller:
-      type: statefulset
-      replicas: 1 # active nas
+        containers:
+          sheanxious-neko:
+            image:
+              # repository: ghcr.io/m1k1o/neko/intel-firefox
+              repository: ghcr.io/m1k1o/neko/firefox
+              tag: "2.8.11"
+            envFrom:
+              - secretRef:
+                  name: sheanxious-neko
+            env:
+              NEKO_SCREEN: 1280x720@30
+              NEKO_PROXY: "true"
+              NEKO_TCPMUX: &mux "5102"
+              NEKO_UDPMUX: *mux
+              NEKO_ICELITE: "true"
+            resources:
+              requests:
+                cpu: 1000m
 
     persistence:
       config:
-        enabled: true
         name: neko-firefox-config
         type: configMap
-        mountPath: /usr/lib/firefox/distribution/policies.json
-        subPath: policies.json
-        readOnly: true
-        defaultMode: 0755
+        advancedMounts:
+          sheanxious-neko:
+            filebrowser:
+              - path: /usr/lib/firefox/distribution/policies.json
+                subPath: policies.json
+                readOnly: true
       profile:
-        enabled: true
         existingClaim: neko-firefox-profile-nas
-        mountPath: /home/neko/.mozilla/firefox/profile.default
+        advancedMounts:
+          sheanxious-neko:
+            filebrowser:
+              - path: /home/neko/.mozilla/firefox/profile.default
       dri:
-        enabled: true
         type: hostPath
-        hostPath: &dri /dev/dri
-        mountPath: *dri
+        hostPath: /dev/dri
       shm:
-        enabled: true
         type: hostPath
-        hostPath: &shm /dev/shm
-        mountPath: *shm
-
-    # podSecurityContext:
-    #   supplementalGroups: [44, 109, 10000]
-
-    # securityContext:
-    #   privileged: true
-
-    podAnnotations:
-      reloader.stakater.com/auto: "true"
+        hostPath: /dev/shm
 
     service:
       main:
-        enabled: true
+        controller: sheanxious-neko
         type: ClusterIP
         ports:
           http:
@@ -84,14 +85,10 @@ spec:
             targetPort: *port
             protocol: UDP
 
-    resources:
-      requests:
-        cpu: 1000m
-
     ingress:
       main:
         enabled: true
-        ingressClassName: nginx
+        className: nginx
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt
           acme.cert-manager.io/http01-edit-in-place: "true"
@@ -104,6 +101,9 @@ spec:
             paths:
               - path: /
                 pathType: Prefix
+                service:
+                  identifier: main
+                  port: 80
         tls:
           - secretName: movienight.${sheanxious_domain}-tls
             hosts:

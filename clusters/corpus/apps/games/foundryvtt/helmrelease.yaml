@@ -1,4 +1,3 @@
----
 # yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.1/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
@@ -29,7 +28,7 @@ spec:
           foundryvtt:
             image:
               repository: felddy/foundryvtt
-              tag: 11.315.1
+              tag: "11.315.1"
             envFrom:
               - secretRef:
                   name: foundryvtt
@@ -60,14 +59,14 @@ spec:
           filebrowser:
             image:
               repository: filebrowser/filebrowser
-              tag: v2
+              tag: "v2"
             args: ["-d", "/db/database.db"]
             env:
               - name: TZ
                 value: America/New_York
 
     service:
-      app:
+      main:
         controller: foundryvtt
         ports:
           http:
@@ -83,7 +82,6 @@ spec:
 
     ingress:
       main:
-        enabled: true
         className: nginx
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt
@@ -96,8 +94,7 @@ spec:
             paths:
               - path: "/"
                 service:
-                  name: foundryvtt-app
-                  port: 30000
+                  identifier: main
           - host: &hostfb "tabletop-files.${game_domain}"
             paths:
               - path: "/"
@@ -112,7 +109,6 @@ spec:
 
     persistence:
       data:
-        enabled: true
         existingClaim: foundry-data-longhorn-gameserver
         advancedMounts:
           foundryvtt:

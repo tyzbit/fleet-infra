@@ -1,4 +1,4 @@
----
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.1/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -17,45 +17,68 @@ spec:
         name: bjw-s
         namespace: flux-system
   values:
-    global:
-      nameOverride: *app
-    controller:
-      type: daemonset
-      annotations:
-        reloader.stakater.com/auto: "true"
-    image:
-      repository: cloudflare/cloudflared
-      tag: 2024.5.0-amd64
-    args:
-      - tunnel
-      - --config
-      - &configpath /etc/cloudflared/config.yaml
-      - --no-autoupdate
-      - run
+    controllers:
+      cloudflared:
+        replicas: 1
+        type: daemonset
+        annotations:
+          reloader.stakater.com/auto: "true"
+
+        containers:
+          cloudflared:
+            image:
+              repository: cloudflare/cloudflared
+              tag: "2024.5.0-amd64"
+            args:
+              - tunnel
+              - --config
+              - &configpath /etc/cloudflared/config.yaml
+              - --no-autoupdate
+              - run
+            env:
+              TZ: America/New_York
+              ## https://github.com/titansoft-pte-ltd/config#installation-and-configuration
+              # CONFIG_ALLSERVICEACCOUNT: "true"
+              # CONFIG_DEBUG: "true"
+              # CONFIG_EXCLUDED_NAMESPACES: default,kube-system
+              # CONFIG_FORCE: "true"
+              # CONFIG_MANAGEDONLY: "true"
+              CONFIG_DOCKERCONFIGJSONPATH: /.dockerconfigjson
+              CONFIG_LOOP_DURATION: 1m0s
+              CONFIG_SECRETNAME: universal-image-pull-secret
+              CONFIG_SERVICEACCOUNTS: default
+              ## Exit after updating secrets
+              # CONFIG_RUNONCE: "true"
+            probes:
+              liveness:
+                enabled: false
+              readiness:
+                enabled: false
+              startup:
+                enabled: false
+            resources:
+              requests:
+                memory: 64Mi
+                cpu: 10m
+              limits:
+                memory: 128Mi
+
     persistence:
       config: &config
-        enabled: true
         name: cloudflared-config
         type: configMap
-        mountPath: *configpath
-        subPath: config.yaml
-        readOnly: true
-        defaultMode: 0755
+        advancedMounts:
+          config:
+            config:
+              - path: *configpath
+                readOnly: true
+                subPath: config.yaml
       credentials:
-        <<: *config
-        type: secret
         name: cloudflared-cred
-        mountPath: /etc/cloudflared/cred.json
-        subPath: cred.json
-    resources:
-      requests:
-        memory: 64Mi
-        cpu: 10m
-      limits:
-        memory: 128Mi
-    service:
-      main:
-        enabled: false
-    ingress:
-      main:
-        enabled: false
+        type: secret
+        advancedMounts:
+          config:
+            config:
+              - path: /etc/cloudflared/cred.json
+                readOnly: true
+                subPath: cred.json

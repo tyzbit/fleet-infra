@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.1/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -16,21 +17,30 @@ spec:
         name: bjw-s
         namespace: flux-system
   values:
-    image:
-      repository: ghcr.io/flaresolverr/flaresolverr
-      tag: v3.3.18
+    controllers:
+      flaresoverr:
+        replicas: 1
+        annotations:
+          reloader.stakater.com/auto: "true"
 
-    controller:
-      replicas: 1
-
-    env:
-      TZ: America/New_York
+        containers:
+          flaresoverr:
+            image:
+              repository: ghcr.io/flaresolverr/flaresolverr
+              tag: "v3.3.18"
+            env:
+              TZ: America/New_York
+            resources:
+              requests:
+                cpu: 100m
+                memory: 128M
+              limits:
+                memory: 4G
 
     service:
       main:
-        enabled: true
+        controller: flaresolverr
         type: ClusterIP
         ports:
           http:
             port: 8191
-            targetPort: 8191

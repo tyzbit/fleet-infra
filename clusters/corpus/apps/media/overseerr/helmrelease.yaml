@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.1/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -15,31 +16,49 @@ spec:
         namespace: flux-system
   interval: 2m0s
   values:
-    image:
-      repository: ghcr.io/sct/overseerr
-      tag: 1.33.2
+    controllers:
+      foundryvtt:
+        replicas: 1 # active longhorn-webapp
+        type: statefulset
+        annotations:
+          reloader.stakater.com/auto: "true"
+        pod:
+          securityContext:
+            fsGroup: 568
 
-    fullnameOverride: overseerr
+        containers:
+          foundryvtt:
+            image:
+              repository: ghcr.io/sct/overseerr
+              tag: "1.33.2"
+            envFrom:
+              - secretRef:
+                  name: foundryvtt
+            resources:
+              requests:
+                cpu: 10m
+              limits:
+                memory: 4Gi
 
-    controller:
-      replicas: 1 # active longhorn-webapp
-
-    podSecurityContext:
-      fsGroup: 568
+    persistence:
+      config:
+        existingClaim: overseerr-config-longhorn-webapp
+        advancedMounts:
+          foundryvtt:
+            filebrowser:
+              - path: /app/config
 
     service:
       main:
-        enabled: true
+        controller: overseerr
         type: ClusterIP
         ports:
           http:
             port: 5055
-            targetPort: 5055
 
     ingress:
       main:
-        enabled: true
-        ingressClassName: nginx
+        className: nginx
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt
           acme.cert-manager.io/http01-edit-in-place: "true"
@@ -50,20 +69,9 @@ spec:
           - host: &public "request.${public_services_domain}"
             paths:
               - path: "/"
+                service:
+                  identifier: main
         tls:
           - hosts:
               - *public
             secretName: *public
-
-    persistence:
-      config:
-        enabled: true
-        existingClaim: overseerr-config-longhorn-webapp
-        mountPath: /app/config
-    # resources:
-    #   requests:
-    #     cpu: 200m
-    #   limits:
-    #     memory: 6Gi
-    # nodeSelector:
-    #   kubernetes.io/hostname: cameraman

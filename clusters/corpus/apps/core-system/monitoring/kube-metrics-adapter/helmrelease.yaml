@@ -17,6 +17,6 @@ spec:
   values:
     registry:
       image: registry.opensource.zalan.do/teapot/kube-metrics-adapter
-      imageTag: v0.1.17
+      imagetag: "v0.1.17"
     enableCustomMetricsApi: true
     enableExternalMetricsApi: true

@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.1/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -17,78 +18,81 @@ spec:
         name: bjw-s
         namespace: flux-system
   values:
-    image:
-      pullPolicy: Always
-      repository: ghcr.io/blakeblackshear/frigate
-      tag: 0.13.2
+    controllers:
+      frigate:
+        replicas: 1 # active longhorn
+        type: statefulset
+        pod:
+          nodeSelector:
+            coral: attached
+          securityContext:
+            runAsUser: 0
+        annotations:
+          reloader.stakater.com/auto: "true"
+        labels:
+          kube-image-keeper.enix.io/image-cache: disabled
 
-    controller:
-      replicas: 1 # active longhorn
-      type: statefulset
-
-    podAnnotations:
-      reloader.stakater.com/auto: "true"
-    podLabels:
-      kube-image-keeper.enix.io/image-cache: disabled
-
-    env:
-      - name: TZ
-        value: America/New_York
-    envFrom:
-      - secretRef:
-          name: frigate
+        containers:
+          frigate:
+            image:
+              repository: ghcr.io/blakeblackshear/frigate
+              tag: "0.13.2"
+              pullPolicy: Always
+            envFrom:
+              - secretRef:
+                  name: frigate
+            env:
+              TZ: America/New_York
+            resources:
+              requests:
+                cpu: 1000m
+              limits:
+                memory: 4Gi
 
     persistence:
       db:
-        enabled: true
         existingClaim: frigate-database-longhorn-database
       data:
-        enabled: true
         existingClaim: frigate-data-nas
-        subPath:
-          - path: model_cache
-            mountPath: /config/model_cache
-          - path: media
-            mountPath: /media/frigate
+        advancedMounts:
+          frigate:
+            frigate:
+              - path: model_cache
+                readOnly: true
+                subPath: /config/model_cache
+              - path: media
+                readOnly: true
+                subPath: /media/frigate
       config:
-        enabled: true
         name: frigate-config
         type: configMap
-        mountPath: /config/config.yml
-        subPath: config.yml
-        readOnly: true
-        defaultMode: 0755
+        advancedMounts:
+          frigate:
+            frigate:
+              - path: config.yml
+                readOnly: true
+                subPath: /config/config.yml
       usb:
-        enabled: true
         type: hostPath
-        hostPath: &usb /dev/bus/usb
-        mountPath: *usb
+        hostPath: /dev/bus/usb
       dri:
-        enabled: true
         type: hostPath
-        hostPath: &dri /dev/dri
-        mountPath: *dri
+        hostPath: /dev/dri
       shm:
-        enabled: true
         type: hostPath
-        hostPath: &shm /dev/shm
-        mountPath: *shm
+        hostPath: /dev/shm
       cache:
-        enabled: true
         type: emptyDir
-        mountPath: /tmp/cache
+        advancedMounts:
+          frigate:
+            frigate:
+              - path: /tmp/cache
         # medium: Memory
         # sizeLimit: 2Gi
 
-    nodeSelector:
-      coral: attached
-
-    securityContext:
-      privileged: true
-
     service:
       main:
-        enabled: true
+        controller: frigate
         type: ClusterIP
         ports:
           http:
@@ -99,9 +103,8 @@ spec:
             targetPort: 1935
 
     ingress:
-      main:
-        enabled: true
-        ingressClassName: nginx
+      frigate:
+        className: nginx
         annotations:
           nginx.ingress.kubernetes.io/proxy-body-size: 256m
           nginx.ingress.kubernetes.io/auth-url: "http://frigate-oauth2-proxy.home-automation.svc.cluster.local/oauth2/auth"
@@ -114,14 +117,15 @@ spec:
           - host: &host "frigate.${personal_domain}"
             paths:
               - path: "/"
+                service:
+                  identifier: main
         tls:
           - hosts:
               - *host
             secretName: *host
 
       oauth:
-        enabled: true
-        ingressClassName: nginx
+        className: nginx
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt
           external-dns.alpha.kubernetes.io/exclude: "true"
@@ -138,12 +142,6 @@ spec:
           - hosts:
               - *host
             secretName: *host
-
-    resources:
-      requests:
-        cpu: 1000m
-      limits:
-        memory: 4Gi
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease

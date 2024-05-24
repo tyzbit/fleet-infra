@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.1/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -17,44 +18,55 @@ spec:
         name: bjw-s
         namespace: flux-system
   values:
-    image:
-      pullPolicy: Always
-      repository: n8nio/n8n
-      tag: 1.43.0
+    controllers:
+      n8n:
+        replicas: 1 # active longhorn
+        type: statefulset
+        annotations:
+          reloader.stakater.com/auto: "true"
 
-    controller:
-      type: statefulset
-      replicas: 1 # active longhorn
-
-    envFrom:
-      - secretRef:
-          name: n8n-config
+        containers:
+          n8n:
+            image:
+              pullPolicy: Always
+              repository: n8nio/n8n
+              tag: "1.43.0"
+            envFrom:
+              - secretRef:
+                  name: n8n-config
+            resources:
+              requests:
+                cpu: 100m
+                memory: 128M
+              limits:
+                memory: 4G
 
     serviceAccount:
       create: true
 
     persistence:
       data:
-        enabled: true
-        mountPath: /home/node/.n8n
         existingClaim: n8n-data-longhorn-database
+        advancedMounts:
+          home-assistant:
+            filebrowser:
+              - path: /home/node/.n8n
+                subPath: filebrowser
+              - path: /srv/homeassistant
 
     service:
       main:
-        enabled: true
+        controller: n8n
         type: ClusterIP
         ports:
           http:
             port: 80
-            targetPort: 5678
           sqlite:
             port: 3000
-            targetPort: 3000
 
     ingress:
       main:
-        enabled: true
-        ingressClassName: nginx
+        className: nginx
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt
           acme.cert-manager.io/http01-edit-in-place: "true"
@@ -66,10 +78,11 @@ spec:
           - host: &host "n8n.${blog_domain}"
             paths:
               - path: "/"
+                service:
+                  identifier: main
 
       webhooks:
-        enabled: true
-        ingressClassName: nginx
+        className: nginx
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt
           acme.cert-manager.io/http01-edit-in-place: "true"
@@ -78,16 +91,18 @@ spec:
           - host: *host
             paths:
               - path: "/webhook"
+                service:
+                  identifier: main
               - path: "/webhook-test"
-
+                service:
+                  identifier: main
         tls:
           - hosts:
               - *host
             secretName: *host
 
       oauth:
-        enabled: true
-        ingressClassName: nginx
+        className: nginx
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt
           acme.cert-manager.io/http01-edit-in-place: "true"
@@ -105,13 +120,6 @@ spec:
           - hosts:
               - *host
             secretName: *host
-
-    resources:
-      requests:
-        cpu: 100m
-        memory: 128M
-      limits:
-        memory: 4G
 
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2

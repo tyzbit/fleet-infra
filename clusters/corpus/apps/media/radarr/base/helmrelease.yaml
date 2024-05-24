@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.1/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -17,68 +18,54 @@ spec:
         name: bjw-s
         namespace: flux-system
   values:
-    image:
-      repository: ghcr.io/onedr0p/radarr-develop
-      tag: 5.6.0.8846
+    controllers:
+      radarr:
+        replicas: 1 # active longhorn-webapp nas
+        type: statefulset
+        annotations:
+          reloader.stakater.com/auto: "true"
+        pod:
+          securityContext:
+            fsGroup: 568
+          nodeSelector:
+            longhorn: primary
 
-    controller:
-      replicas: 1 # active longhorn-webapp nas
-
-    nodeSelector:
-      longhorn: primary
-
-    env:
-      TZ: America/New_York
-      RADARR__AUTHENTICATION_METHOD: External
+        containers:
+          radarr:
+            image:
+              repository: ghcr.io/onedr0p/radarr-develop
+              tag: "5.6.0.8846"
+            env:
+              TZ: America/New_York
+              RADARR__AUTHENTICATION_METHOD: External
+            resources:
+              requests:
+                cpu: 10m
+              limits:
+                memory: 4Gi
 
     persistence:
       config:
-        enabled: true
         existingClaim: radarr-config-longhorn-webapp
 
-      # nzb-downloads:
-      #   enabled: true
-      #   existingClaim: radarr-downloads
-
       media:
-        enabled: true
         existingClaim: nas-volume1-media
 
     probes:
       liveness:
         enabled: false
 
-    podSecurityContext:
-      fsGroup: 568
-
-    # initContainers:
-    #   fixperms:
-    #     name: fixperms
-    #     image: busybox
-    #     command:
-    #     - sh
-    #     - -c
-    #     - chown 568:568 /config -R
-    #     env:
-    #     - name: TZ
-    #       value: America/New_York
-    #     volumeMounts:
-    #     - name: config
-    #       mountPath: /config
-
     service:
       main:
-        enabled: true
+        controller: radarr
         type: ClusterIP
         ports:
           http:
             port: 7878
-            targetPort: 7878
 
     ingress:
       main:
-        enabled: true
-        ingressClassName: nginx
+        className: nginx
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt
           acme.cert-manager.io/http01-edit-in-place: "true"
@@ -90,14 +77,15 @@ spec:
           - host: "movies.${personal_domain}"
             paths:
               - path: "/"
+                service:
+                  identifier: main
         tls:
           - hosts:
               - "movies.${personal_domain}"
             secretName: movies.${personal_domain}-tls
 
       oauth:
-        enabled: true
-        ingressClassName: nginx
+        className: nginx
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt
           external-dns.alpha.kubernetes.io/exclude: "true"

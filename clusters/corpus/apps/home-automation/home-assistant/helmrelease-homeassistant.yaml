@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.1/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -17,52 +18,72 @@ spec:
         name: bjw-s
         namespace: flux-system
   values:
-    image:
-      pullPolicy: Always
-      repository: ghcr.io/home-assistant/home-assistant
-      tag: "2024.5.4"
+    controllers:
+      home-assistant:
+        replicas: 1 # active longhorn-database nas
+        type: statefulset
+        annotations:
+          reloader.stakater.com/auto: "true"
+        pod:
+          hostNetwork: true
+          # nodeSelector:
+          #   bluetooth: "true"
 
-    controller:
-      type: statefulset
-      replicas: 1 # active longhorn-database nas
+        containers:
+          home-assistant:
+            image:
+              repository: ghcr.io/home-assistant/home-assistant
+              tag: "2024.5.4"
+            env:
+              TZ: America/New_York
+            resources:
+              requests:
+                cpu: 10m
+              limits:
+                memory: 4Gi
 
-    hostNetwork: true
-
-    dnsPolicy: ClusterFirstWithHostNet
-
-    env:
-      TZ: America/New_York
+          filebrowser:
+            image:
+              repository: filebrowser/filebrowser
+              tag: "v2"
+            args: ["-d", "/db/database.db"]
+            env:
+              - name: TZ
+                value: America/New_York
 
     persistence:
       config:
-        enabled: true
         existingClaim: home-assistant-config-nas
+        advancedMounts:
+          home-assistant:
+            filebrowser:
+              - path: /db
+                subPath: filebrowser
+              - path: /srv/homeassistant
       media:
-        enabled: true
         type: emptyDir
 
-    # nodeSelector:
-    #   bluetooth: "true"
+    service:
+      main:
+        type: ClusterIP
+        controller: home-assistant
+        ports:
+          http:
+            port: 8123
+          matter:
+            port: 5580
 
-    additionalContainers:
       filebrowser:
-        name: filebrowser
-        image: filebrowser/filebrowser:v2
-        args: ["-d", "/db/database.db"]
-        env:
-          - name: TZ
-            value: America/New_York
-        volumeMounts:
-          - name: config
-            subPath: filebrowser
-            mountPath: /db
-          - name: config
-            mountPath: /srv/homeassistant
+        primary: false
+        controller: home-assistant
+        ports:
+          fbhttp:
+            port: 80
 
     ingress:
       main:
         enabled: true
-        ingressClassName: nginx
+        className: nginx
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt
           acme.cert-manager.io/http01-edit-in-place: "true"
@@ -75,35 +96,15 @@ spec:
           - host: &host "home.${personal_domain}"
             paths:
               - path: "/"
+                service:
+                  identifier: main
           - host: &hostfb "home-fb.${personal_domain}"
             paths:
               - path: "/"
                 service:
-                  name: home-assistant-filebrowser
-                  port: 80
+                  identifier: filebrowser
         tls:
           - hosts:
               - *host
               - *hostfb
             secretName: home.${personal_domain}-multi-tls
-
-    service:
-      main: &svc
-        enabled: true
-        type: ClusterIP
-        ports:
-          http:
-            port: 8123
-            targetPort: 8123
-          matter:
-            port: 5580
-            targetPort: 5580
-
-      filebrowser:
-        enabled: true
-        primary: false
-        name: home-assistant-filebrowser
-        ports:
-          fbhttp:
-            enabled: true
-            port: 80
