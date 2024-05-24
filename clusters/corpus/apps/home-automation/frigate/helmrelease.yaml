@@ -25,9 +25,6 @@ spec:
         pod:
           nodeSelector:
             coral: attached
-          securityContext:
-            runAsUser: 0
-            runAsGroup: 0
         annotations:
           reloader.stakater.com/auto: "true"
         labels:
@@ -39,6 +36,8 @@ spec:
               repository: ghcr.io/blakeblackshear/frigate
               tag: "0.13.2"
               pullPolicy: Always
+            securityContext:
+              privileged: true
             envFrom:
               - secretRef:
                   name: frigate
