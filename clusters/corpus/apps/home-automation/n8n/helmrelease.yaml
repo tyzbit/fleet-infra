@@ -51,8 +51,6 @@ spec:
           n8n:
             n8n:
               - path: /home/node/.n8n
-                subPath: filebrowser
-              - path: /srv/homeassistant
 
     service:
       main:
