@@ -30,9 +30,6 @@ spec:
             image:
               repository: "ghcr.io/jjgadgets/phanpy"
               tag: "2024.05.15.6976191"
-            envFrom:
-              - secretRef:
-                  name: phanpy
             resources:
               requests:
                 cpu: 10m
