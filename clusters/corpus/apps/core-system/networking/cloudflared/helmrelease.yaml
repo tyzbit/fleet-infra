@@ -64,7 +64,8 @@ spec:
                 memory: 128Mi
 
     persistence:
-      config: &config
+      config:
+        enabled: true
         name: cloudflared-config
         type: configMap
         advancedMounts:
@@ -74,6 +75,7 @@ spec:
                 readOnly: true
                 subPath: config.yaml
       credentials:
+        enabled: true
         name: cloudflared-cred
         type: secret
         advancedMounts:
