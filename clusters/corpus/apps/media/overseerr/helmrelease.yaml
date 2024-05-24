@@ -5,6 +5,7 @@ metadata:
   name: overseerr
   namespace: flux-system
 spec:
+  releaseName: overseerr
   targetNamespace: media
   chart:
     spec:
@@ -25,15 +26,11 @@ spec:
         pod:
           securityContext:
             fsGroup: 568
-
         containers:
           overseerr:
             image:
               repository: ghcr.io/sct/overseerr
               tag: "1.33.2"
-            envFrom:
-              - secretRef:
-                  name: overseerr
             resources:
               requests:
                 cpu: 10m
