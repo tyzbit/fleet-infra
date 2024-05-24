@@ -48,4 +48,4 @@ spec:
       persistence:
         enabled: true
         storageClass: longhorn-containerimagecache
-        size: 40Gi
+        size: 60Gi
