@@ -25,6 +25,7 @@ spec:
     controllers:
       rustdesk:
         replicas: 1
+        type: statefulset
         annotations:
           reloader.stakater.com/auto: "true"
 
