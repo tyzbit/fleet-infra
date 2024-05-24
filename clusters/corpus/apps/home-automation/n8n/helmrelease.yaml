@@ -48,8 +48,8 @@ spec:
       data:
         existingClaim: n8n-data-longhorn-database
         advancedMounts:
-          home-assistant:
-            filebrowser:
+          n8n:
+            n8n:
               - path: /home/node/.n8n
                 subPath: filebrowser
               - path: /srv/homeassistant
