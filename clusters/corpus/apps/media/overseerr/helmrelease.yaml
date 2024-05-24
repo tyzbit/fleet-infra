@@ -17,7 +17,7 @@ spec:
   interval: 2m0s
   values:
     controllers:
-      foundryvtt:
+      overseerr:
         replicas: 1 # active longhorn-webapp
         type: statefulset
         annotations:
@@ -27,13 +27,13 @@ spec:
             fsGroup: 568
 
         containers:
-          foundryvtt:
+          overseerr:
             image:
               repository: ghcr.io/sct/overseerr
               tag: "1.33.2"
             envFrom:
               - secretRef:
-                  name: foundryvtt
+                  name: overseerr
             resources:
               requests:
                 cpu: 10m
@@ -44,7 +44,7 @@ spec:
       config:
         existingClaim: overseerr-config-longhorn-webapp
         advancedMounts:
-          foundryvtt:
+          overseerr:
             filebrowser:
               - path: /app/config
 

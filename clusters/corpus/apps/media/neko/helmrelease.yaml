@@ -53,7 +53,7 @@ spec:
         name: neko-firefox-config
         type: configMap
         advancedMounts:
-          foundryvtt:
+          neko:
             filebrowser:
               - path: /usr/lib/firefox/distribution/policies.json
                 subPath: policies.json
@@ -61,7 +61,7 @@ spec:
         enabled: true
         existingClaim: neko-firefox-profile-nas
         advancedMounts:
-          foundryvtt:
+          neko:
             filebrowser:
               - path: /home/neko/.mozilla/firefox/profile.default
       dri:
