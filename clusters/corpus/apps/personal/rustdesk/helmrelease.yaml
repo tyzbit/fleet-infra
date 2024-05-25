@@ -51,6 +51,21 @@ spec:
               tag: "1.1.10-3"
             command: ["hbbr"]
 
+    persistence:
+      db:
+        existingClaim: rustdesk
+        globalMounts:
+          - path: /db
+            subPath: hbbs
+
+    probes:
+      startup:
+        enabled: false
+      liveness:
+        enabled: false
+      readiness:
+        enabled: false
+
     service:
       main:
         controller: rustdesk
@@ -74,18 +89,3 @@ spec:
             port: 21117
           rustdesk-6:
             port: 21119
-
-    probes:
-      startup:
-        enabled: false
-      liveness:
-        enabled: false
-      readiness:
-        enabled: false
-
-    persistence:
-      db:
-        existingClaim: rustdesk
-        globalMounts:
-          - path: /db
-            subPath: hbbs

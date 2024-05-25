@@ -49,7 +49,7 @@ spec:
         type: configMap
         advancedMounts:
           sheanxious-neko:
-            filebrowser:
+            sheanxious-neko:
               - path: /usr/lib/firefox/distribution/policies.json
                 subPath: policies.json
                 readOnly: true
@@ -57,7 +57,7 @@ spec:
         existingClaim: neko-firefox-profile-nas
         advancedMounts:
           sheanxious-neko:
-            filebrowser:
+            sheanxious-neko:
               - path: /home/neko/.mozilla/firefox/profile.default
       dri:
         type: hostPath
