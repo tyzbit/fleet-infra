@@ -34,7 +34,7 @@ spec:
           sonarr:
             image:
               repository: ghcr.io/onedr0p/sonarr-develop
-              tag: "4.0.4.1668"
+              tag: "4.0.4.1699"
             env:
               TZ: America/New_York
               SONARR__AUTHENTICATION_METHOD: External
