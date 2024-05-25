@@ -42,7 +42,7 @@ spec:
         existingClaim: overseerr-config-longhorn-webapp
         advancedMounts:
           overseerr:
-            filebrowser:
+            overseerr:
               - path: /app/config
 
     service:
