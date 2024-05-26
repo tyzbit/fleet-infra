@@ -19,19 +19,8 @@ spec:
         name: bjw-s
         namespace: flux-system
   values:
-    defaultPodOptions:
-      securityContext:
-        runAsUser: 0
-        runAsGroup: 0
-        fsGroup: 1000
-        fsGroupChangePolicy: "OnRootMismatch"
-        # # Required for passthrough of /dev/dri devices from NFD
-        # # https://dgpu-docs.intel.com/installation-guides/ubuntu/ubuntu-focal.html
-        # supplementalGroups:
-        #   - 44
-        #   - 109
     controllers:
-      tdarr:
+      *app :
         type: statefulset
         pod:
           nodeSelector:
@@ -49,11 +38,11 @@ spec:
                           - "plex"
 
         containers:
-          app:
+          &ui tdarr-app:
             image:
               repository: haveagitgat/tdarr
               tag: 2.19.01@sha256:7ab5059f9e47237b872b9b9936542869d1d1a63fed754a4452a35f3d5ac761d2
-          node:
+          &worker tdarr-node:
             image:
               repository: haveagitgat/tdarr_node
               tag: 2.19.01@sha256:1ef70ed89e78040ca68fa23670c39f7e103330e1a4a55b7c6cabd34680f7175f
@@ -72,12 +61,12 @@ spec:
         existingClaim: tdarr-longhorn-webapp
         advancedMounts:
           tdarr:
-            app:
+            *ui :
               - path: /app/configs
                 subPath: config
               - path: /app/server
                 subPath: server
-            node:
+            *worker :
               - path: /app/configs
                 subPath: config
               - path: /app/server
@@ -85,18 +74,20 @@ spec:
       media:
         existingClaim: nas-volume1-media
       transcode:
-        existingClaim: tdarr-shared-longhorn-ephemeralcache
+        type: hostPath
+        hostPathType: DirectoryOrCreate
+        hostPath: /dev/shm/tdarr_transcode
       dri:
         type: hostPath
         hostPath: /dev/dri
 
     service:
-      app:
+      *ui :
         controller: *app
         ports:
           http:
             port: 8265
-      server:
+      *worker :
         controller: *app
         ports:
           server:
@@ -116,11 +107,12 @@ spec:
             paths:
               - path: /
                 service:
-                  identifier: app
+                  identifier: *ui
                   port: http
         tls:
           - hosts:
               - *host
+            secretName: tdarr.${personal_domain}-tls
 
       oauth:
         className: nginx
@@ -130,7 +122,7 @@ spec:
         labels:
           use-cloudflare-dns-solver: "true"
         hosts:
-          - host: "tdarr.${personal_domain}"
+          - host: *host
             paths:
               - path: "/oauth2"
                 service:
@@ -138,7 +130,7 @@ spec:
                   port: 80
         tls:
           - hosts:
-              - "tdarr.${personal_domain}"
+              - *host
             secretName: tdarr.${personal_domain}-tls
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
