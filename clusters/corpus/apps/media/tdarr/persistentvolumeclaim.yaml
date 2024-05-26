@@ -11,3 +11,17 @@ spec:
   storageClassName: longhorn-webapp
   accessModes:
     - ReadWriteOnce
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: tdarr-shared-longhorn-ephemeralcache
+  namespace: media
+spec:
+  resources:
+    requests:
+      storage: 50Gi
+  volumeMode: Filesystem
+  storageClassName: longhorn-ephemeralcache
+  accessModes:
+    - ReadWriteOnce

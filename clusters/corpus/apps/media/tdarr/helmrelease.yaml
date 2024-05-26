@@ -64,6 +64,8 @@ spec:
                 value: localhost
               - name: serverPort
                 value: 8266
+            # securityContext:
+            #   privileged: true
 
     persistence:
       config:
@@ -83,9 +85,7 @@ spec:
       media:
         existingClaim: nas-volume1-media
       transcode:
-        type: hostPath
-        hostPathType: DirectoryOrCreate
-        hostPath: /dev/shm/tdarr_transcode
+        existingClaim: tdarr-shared-longhorn-ephemeralcache
       dri:
         type: hostPath
         hostPath: /dev/dri
