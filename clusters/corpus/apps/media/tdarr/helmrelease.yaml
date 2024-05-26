@@ -23,6 +23,8 @@ spec:
       *app :
         type: statefulset
         pod:
+          securityContext:
+            fsGroup: 1000
           nodeSelector:
             graphics: dri
             longhorn: primary
