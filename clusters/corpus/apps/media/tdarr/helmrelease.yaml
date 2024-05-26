@@ -25,11 +25,11 @@ spec:
         runAsGroup: 0
         fsGroup: 1000
         fsGroupChangePolicy: "OnRootMismatch"
-        # Required for passthrough of /dev/dri devices from NFD
-        # https://dgpu-docs.intel.com/installation-guides/ubuntu/ubuntu-focal.html
-        supplementalGroups:
-          - 44
-          - 109
+        # # Required for passthrough of /dev/dri devices from NFD
+        # # https://dgpu-docs.intel.com/installation-guides/ubuntu/ubuntu-focal.html
+        # supplementalGroups:
+        #   - 44
+        #   - 109
     controllers:
       tdarr:
         type: statefulset
@@ -64,8 +64,8 @@ spec:
                 value: localhost
               - name: serverPort
                 value: 8266
-            # securityContext:
-            #   privileged: true
+            securityContext:
+              privileged: true
 
     persistence:
       config:
