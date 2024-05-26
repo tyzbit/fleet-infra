@@ -1,11 +1,11 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.1/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.1/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: hotboxfort-neko
+  name: &app hotboxfort-neko
   namespace: flux-system
 spec:
-  releaseName: hotboxfort-neko
+  releaseName: *app
   targetNamespace: hotboxfort
   chart:
     spec:
@@ -18,17 +18,17 @@ spec:
   interval: 2m0s
   valuesFrom:
     - kind: Secret
-      name: hotboxfort-neko
+      name: *app
   values:
     controllers:
-      hotboxfort-neko:
+      *app :
         replicas: 1 # active nas
         type: statefulset
         annotations:
           reloader.stakater.com/auto: "true"
 
         containers:
-          hotboxfort-neko:
+          *app :
             image:
               # repository: ghcr.io/m1k1o/neko/intel-firefox
               repository: ghcr.io/m1k1o/neko/firefox
@@ -48,16 +48,16 @@ spec:
         name: hotboxfort-neko-firefox-config
         type: configMap
         advancedMounts:
-          hotboxfort-neko:
-            hotboxfort-neko:
+          *app :
+            *app :
               - path: /usr/lib/firefox/distribution/policies.json
                 readOnly: true
                 subPath: policies.json
       profile:
         existingClaim: hotboxfort-neko-firefox-profile-nas
         advancedMounts:
-          hotboxfort-neko:
-            hotboxfort-neko:
+          *app :
+            *app :
               - path: /home/neko/.mozilla/firefox/profile.default
       dri:
         type: hostPath
@@ -68,7 +68,7 @@ spec:
 
     service:
       main:
-        controller: hotboxfort-neko
+        controller: *app
         type: ClusterIP
         ports:
           http:

@@ -1,9 +1,9 @@
 ---
-# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.1/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.1/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: mediamtx
+  name: &app mediamtx
   namespace: media
 spec:
   interval: 5m
@@ -17,16 +17,16 @@ spec:
         namespace: flux-system
   values:
     controllers:
-      mediamtx:
+      *app :
         replicas: 1
         strategy: RollingUpdate
         annotations:
           reloader.stakater.com/auto: "true"
 
         containers:
-          mediamtx:
+          *app :
             image:
-              repository: bluenviron/mediamtx
+              repository: bluenviron/*app
               tag: "latest-ffmpeg"
             env:
               MTX_PROTOCOLS: "tcp"
@@ -43,15 +43,15 @@ spec:
         name: mediamtx-config
         type: configMap
         advancedMounts:
-          mediamtx:
-            mediamtx:
+          *app :
+            *app :
               - path: /mediamtx.yml
                 readOnly: true
                 subPath: mediamtx.yml
 
     service:
       main:
-        controller: mediamtx
+        controller: *app
         ports:
           webrtc:
             port: 80
@@ -65,7 +65,7 @@ spec:
             protocol: UDP
 
     ingress:
-      mediamtx:
+      *app :
         className: nginx
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt

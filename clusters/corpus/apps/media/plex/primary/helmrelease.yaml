@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.1/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.1/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -18,7 +18,7 @@ spec:
   interval: 2m0s
   values:
     controllers:
-      plex:
+      *app :
         replicas: 1 # active longhorn nas
         type: statefulset
         annotations:
@@ -39,7 +39,7 @@ spec:
                           - "plex-secondary"
 
         containers:
-          plex:
+          *app :
             image:
               repository: plexinc/pms-docker
               tag: "1.40.2.8395-c67dce28e"
@@ -69,7 +69,7 @@ spec:
 
     service:
       main:
-        controller: plex
+        controller: *app
         type: ClusterIP
         ports:
           http:

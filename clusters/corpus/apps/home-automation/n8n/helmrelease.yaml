@@ -1,11 +1,11 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.1/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.1/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: n8n
+  name: &app n8n
   namespace: flux-system
 spec:
-  releaseName: n8n
+  releaseName: *app
   targetNamespace: home-automation
   timeout: 15m
   interval: 2m0s
@@ -19,17 +19,17 @@ spec:
         namespace: flux-system
   values:
     controllers:
-      n8n:
+      *app :
         replicas: 1 # active longhorn
         type: statefulset
         annotations:
           reloader.stakater.com/auto: "true"
 
         containers:
-          n8n:
+          *app :
             image:
               pullPolicy: Always
-              repository: n8nio/n8n
+              repository: n8nio/*app
               tag: "1.43.1"
             envFrom:
               - secretRef:
@@ -48,13 +48,13 @@ spec:
       data:
         existingClaim: n8n-data-longhorn-database
         advancedMounts:
-          n8n:
-            n8n:
-              - path: /home/node/.n8n
+          *app :
+            *app :
+              - path: /home/node/.*app
 
     service:
       main:
-        controller: n8n
+        controller: *app
         type: ClusterIP
         ports:
           http:

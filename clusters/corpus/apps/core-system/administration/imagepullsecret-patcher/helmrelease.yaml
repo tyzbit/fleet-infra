@@ -1,11 +1,11 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.1/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.1/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: imagepullsecret-patcher
+  name: &app imagepullsecret-patcher
   namespace: flux-system
 spec:
-  releaseName: imagepullsecret-patcher
+  releaseName: *app
   targetNamespace: kube-system
   timeout: 2m
   interval: 2m0s
@@ -19,20 +19,20 @@ spec:
         namespace: flux-system
   values:
     controllers:
-      imagepullsecret-patcher:
+      *app :
         replicas: 1
         strategy: RollingUpdate
         annotations:
           reloader.stakater.com/auto: "true"
 
         containers:
-          imagepullsecret-patcher:
+          *app :
             image:
-              repository: quay.io/titansoft/imagepullsecret-patcher
+              repository: quay.io/titansoft/*app
               tag: "v0.14"
             env:
               TZ: America/New_York
-              ## https://github.com/titansoft-pte-ltd/imagepullsecret-patcher#installation-and-configuration
+              ## https://github.com/titansoft-pte-ltd/*app#installation-and-configuration
               # CONFIG_ALLSERVICEACCOUNT: "true"
               # CONFIG_DEBUG: "true"
               # CONFIG_EXCLUDED_NAMESPACES: default,kube-system
@@ -53,15 +53,15 @@ spec:
                 enabled: false
 
     serviceAccount:
-      name: imagepullsecret-patcher
+      name: *app
 
     persistence:
       secret:
         name: universal-docker-auth
         type: secret
         advancedMounts:
-          imagepullsecret-patcher:
-            imagepullsecret-patcher:
+          *app :
+            *app :
               - path: /.dockerconfigjson
                 readOnly: true
                 subPath: .dockerconfigjson

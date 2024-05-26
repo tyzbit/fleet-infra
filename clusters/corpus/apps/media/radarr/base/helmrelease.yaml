@@ -1,11 +1,11 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.1/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.1/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: radarr
+  name: &app radarr
   namespace: flux-system
 spec:
-  releaseName: radarr
+  releaseName: *app
   targetNamespace: media
   timeout: 4m
   interval: 2m0s
@@ -19,7 +19,7 @@ spec:
         namespace: flux-system
   values:
     controllers:
-      radarr:
+      *app :
         replicas: 1 # active longhorn-webapp nas
         type: statefulset
         annotations:
@@ -31,7 +31,7 @@ spec:
             longhorn: primary
 
         containers:
-          radarr:
+          *app :
             image:
               repository: ghcr.io/onedr0p/radarr-develop
               tag: "5.6.0.8846"
@@ -57,7 +57,7 @@ spec:
 
     service:
       main:
-        controller: radarr
+        controller: *app
         type: ClusterIP
         ports:
           http:

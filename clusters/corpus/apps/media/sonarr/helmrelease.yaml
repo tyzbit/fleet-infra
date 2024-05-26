@@ -1,11 +1,11 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.1/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.1/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: sonarr
+  name: &app sonarr
   namespace: flux-system
 spec:
-  releaseName: sonarr
+  releaseName: *app
   targetNamespace: media
   timeout: 2m
   interval: 2m0s
@@ -19,7 +19,7 @@ spec:
         namespace: flux-system
   values:
     controllers:
-      sonarr:
+      *app :
         replicas: 1 # active longhorn-webapp nas
         type: statefulset
         annotations:
@@ -31,7 +31,7 @@ spec:
             longhorn: primary
 
         containers:
-          sonarr:
+          *app :
             image:
               repository: ghcr.io/onedr0p/sonarr-develop
               tag: "4.0.4.1699"
@@ -52,7 +52,7 @@ spec:
 
     service:
       main:
-        controller: sonarr
+        controller: *app
         type: ClusterIP
         ports:
           http:

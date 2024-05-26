@@ -1,11 +1,11 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.1/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.1/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: flaresolverr
+  name: &app flaresolverr
   namespace: flux-system
 spec:
-  releaseName: flaresolverr
+  releaseName: *app
   targetNamespace: media
   interval: 2m0s
   chart:
@@ -18,15 +18,15 @@ spec:
         namespace: flux-system
   values:
     controllers:
-      flaresolverr:
+      *app :
         replicas: 1
         annotations:
           reloader.stakater.com/auto: "true"
 
         containers:
-          flaresolverr:
+          *app :
             image:
-              repository: ghcr.io/flaresolverr/flaresolverr
+              repository: ghcr.io/flaresolverr/*app
               tag: "v3.3.19"
             env:
               TZ: America/New_York
@@ -39,7 +39,7 @@ spec:
 
     service:
       main:
-        controller: flaresolverr
+        controller: *app
         type: ClusterIP
         ports:
           http:

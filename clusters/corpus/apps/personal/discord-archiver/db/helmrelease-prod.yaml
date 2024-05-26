@@ -1,11 +1,11 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.1/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.1/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: go-discord-archiver-db
+  name: &app go-discord-archiver-db
   namespace: flux-system
 spec:
-  releaseName: go-discord-archiver-db
+  releaseName: *app
   targetNamespace: personal
   chart:
     spec:
@@ -18,7 +18,7 @@ spec:
   interval: 2m0s
   values:
     controllers:
-      go-discord-archiver-db:
+      *app :
         replicas: 1 # active longhorn
         type: statefulset
         annotations:
@@ -34,7 +34,7 @@ spec:
               tag: "10.8"
             envFrom:
               - secretRef:
-                  name: go-discord-archiver-db
+                  name: *app
             resources:
               requests:
                 cpu: 10m
@@ -45,13 +45,13 @@ spec:
       data:
         existingClaim: go-discord-archiver-mariadb-longhorn-database
         advancedMounts:
-          go-discord-archiver-db:
+          *app :
             mariadb:
               - path: /var/lib/mysql
 
     service:
       main:
-        controller: go-discord-archiver-db
+        controller: *app
         type: ClusterIP
         ports:
           sql:

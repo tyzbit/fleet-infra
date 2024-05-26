@@ -1,11 +1,11 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.1/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.1/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: sheanxious-neko
+  name: &app sheanxious-neko
   namespace: flux-system
 spec:
-  releaseName: sheanxious-neko
+  releaseName: *app
   targetNamespace: sheanxious
   chart:
     spec:
@@ -18,17 +18,17 @@ spec:
   interval: 2m0s
   valuesFrom:
     - kind: Secret
-      name: sheanxious-neko
+      name: *app
   values:
     controllers:
-      sheanxious-neko:
+      *app :
         replicas: 1 # active nas
         type: statefulset
         annotations:
           reloader.stakater.com/auto: "true"
 
         containers:
-          sheanxious-neko:
+          *app :
             image:
               # repository: ghcr.io/m1k1o/neko/intel-firefox
               repository: ghcr.io/m1k1o/neko/firefox
@@ -48,16 +48,16 @@ spec:
         name: neko-firefox-config
         type: configMap
         advancedMounts:
-          sheanxious-neko:
-            sheanxious-neko:
+          *app :
+            *app :
               - path: /usr/lib/firefox/distribution/policies.json
                 subPath: policies.json
                 readOnly: true
       profile:
         existingClaim: neko-firefox-profile-nas
         advancedMounts:
-          sheanxious-neko:
-            sheanxious-neko:
+          *app :
+            *app :
               - path: /home/neko/.mozilla/firefox/profile.default
       dri:
         type: hostPath
@@ -68,7 +68,7 @@ spec:
 
     service:
       main:
-        controller: sheanxious-neko
+        controller: *app
         type: ClusterIP
         ports:
           http:

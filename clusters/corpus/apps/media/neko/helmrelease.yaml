@@ -1,11 +1,11 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.1/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.1/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: ${neko_name}-neko
+  name: &app ${neko_name}-neko
   namespace: flux-system
 spec:
-  releaseName: ${neko_name}-neko
+  releaseName: *app
   targetNamespace: media
   chart:
     spec:
@@ -18,17 +18,17 @@ spec:
   interval: 2m0s
   valuesFrom:
     - kind: Secret
-      name: ${neko_name}-neko
+      name: *app
   values:
     controllers:
-      neko:
+      *app :
         replicas: 1 # active nas
         type: statefulset
         annotations:
           reloader.stakater.com/auto: "true"
 
         containers:
-          neko:
+          *app :
             image:
               # results in a blank screen
               # repository: ghcr.io/m1k1o/neko/intel-firefox
@@ -40,7 +40,7 @@ spec:
               NEKO_TCPMUX: &mux "5100"
               NEKO_UDPMUX: *mux
               NEKO_ICELITE: "true"
-              NEKO_BROADCAST_URL: rtmp://${neko_name}-neko-nginx-rtmp/l/neko
+              NEKO_BROADCAST_URL: rtmp://*app-nginx-rtmp/l/neko
             resources:
               requests:
                 cpu: 1400m
@@ -50,15 +50,15 @@ spec:
         name: neko-firefox-config
         type: configMap
         advancedMounts:
-          neko:
-            neko:
+          *app :
+            *app :
               - path: /usr/lib/firefox/distribution/policies.json
                 subPath: policies.json
       profile:
         existingClaim: neko-firefox-profile-nas
         advancedMounts:
-          neko:
-            neko:
+          *app :
+            *app :
               - path: /home/neko/.mozilla/firefox/profile.default
       dri:
         type: hostPath
@@ -69,7 +69,7 @@ spec:
 
     service:
       main:
-        controller: neko
+        controller: *app
         type: ClusterIP
         ports:
           http:

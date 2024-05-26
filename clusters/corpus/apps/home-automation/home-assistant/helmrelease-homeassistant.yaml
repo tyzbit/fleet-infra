@@ -1,11 +1,11 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.1/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.1/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: home-assistant
+  name: &app home-assistant
   namespace: flux-system
 spec:
-  releaseName: home-assistant
+  releaseName: *app
   targetNamespace: home-automation
   timeout: 15m
   interval: 2m0s
@@ -19,7 +19,7 @@ spec:
         namespace: flux-system
   values:
     controllers:
-      home-assistant:
+      *app :
         replicas: 1 # active longhorn-database nas
         type: statefulset
         annotations:
@@ -30,9 +30,9 @@ spec:
           #   bluetooth: "true"
 
         containers:
-          home-assistant:
+          *app :
             image:
-              repository: ghcr.io/home-assistant/home-assistant
+              repository: ghcr.io/*app /*app
               tag: "2024.5.5"
             env:
               TZ: America/New_York
@@ -55,8 +55,8 @@ spec:
       config:
         existingClaim: home-assistant-config-nas
         advancedMounts:
-          home-assistant:
-            home-assistant:
+          *app :
+            *app :
               - path: /config
             filebrowser:
               - path: /db
@@ -68,7 +68,7 @@ spec:
     service:
       main:
         type: ClusterIP
-        controller: home-assistant
+        controller: *app
         ports:
           http:
             port: 8123
@@ -77,7 +77,7 @@ spec:
 
       filebrowser:
         primary: false
-        controller: home-assistant
+        controller: *app
         ports:
           fbhttp:
             port: 80

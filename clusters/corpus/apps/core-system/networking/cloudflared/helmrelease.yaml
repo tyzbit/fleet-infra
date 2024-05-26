@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.1/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.1/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -18,21 +18,21 @@ spec:
         namespace: flux-system
   values:
     controllers:
-      cloudflared:
+      *app :
         replicas: 1
         type: daemonset
         annotations:
           reloader.stakater.com/auto: "true"
 
         containers:
-          cloudflared:
+          *app :
             image:
-              repository: cloudflare/cloudflared
+              repository: cloudflare/*app
               tag: "2024.5.0-amd64"
             args:
               - tunnel
               - --config
-              - &configpath /etc/cloudflared/config.yaml
+              - &configpath /etc/*app/config.yaml
               - --no-autoupdate
               - run
             env:
@@ -65,20 +65,20 @@ spec:
 
     persistence:
       config:
-        name: cloudflared-config
+        name: *app-config
         type: configMap
         advancedMounts:
-          cloudflared:
-            cloudflared:
+          *app :
+            *app :
               - path: *configpath
                 readOnly: true
                 subPath: config.yaml
       credentials:
-        name: cloudflared-cred
+        name: *app-cred
         type: secret
         advancedMounts:
-          cloudflared:
-            cloudflared:
-              - path: /etc/cloudflared/cred.json
+          *app :
+            *app :
+              - path: /etc/*app/cred.json
                 readOnly: true
                 subPath: cred.json

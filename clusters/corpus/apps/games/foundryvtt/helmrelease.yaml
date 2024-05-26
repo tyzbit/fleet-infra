@@ -1,13 +1,13 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.1/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.1/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: foundryvtt
+  name: &app foundryvtt
   namespace: flux-system
 spec:
   interval: 15m
   targetNamespace: games
-  releaseName: foundryvtt
+  releaseName: *app
   chart:
     spec:
       chart: app-template
@@ -18,20 +18,20 @@ spec:
         namespace: flux-system
   values:
     controllers:
-      foundryvtt:
+      *app :
         replicas: 1 # active longhorn
         type: statefulset
         annotations:
           reloader.stakater.com/auto: "true"
 
         containers:
-          foundryvtt:
+          *app :
             image:
-              repository: felddy/foundryvtt
+              repository: felddy/*app
               tag: "12.324.0"
             envFrom:
               - secretRef:
-                  name: foundryvtt
+                  name: *app
             env:
               TIMEZONE: America/New_York
               CONTAINER_CACHE: /data/container_cache
@@ -69,8 +69,8 @@ spec:
       data:
         existingClaim: foundry-data-longhorn-gameserver
         advancedMounts:
-          foundryvtt:
-            foundryvtt:
+          *app :
+            *app :
               - path: /data
             filebrowser:
               - path: /db
@@ -79,13 +79,13 @@ spec:
 
     service:
       main:
-        controller: foundryvtt
+        controller: *app
         ports:
           http:
             port: 30000
 
       filebrowser:
-        controller: foundryvtt
+        controller: *app
         primary: false
         ports:
           fbhttp:
@@ -110,7 +110,7 @@ spec:
             paths:
               - path: "/"
                 service:
-                  name: foundryvtt-filebrowser
+                  name: *app-filebrowser
                   port: 80
         tls:
           - hosts:

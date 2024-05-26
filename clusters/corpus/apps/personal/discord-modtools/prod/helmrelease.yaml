@@ -1,11 +1,11 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.1/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.1/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: go-discord-modtools
+  name: &app go-discord-modtools
   namespace: flux-system
 spec:
-  releaseName: go-discord-modtools
+  releaseName: *app
   targetNamespace: personal
   chart:
     spec:
@@ -18,18 +18,18 @@ spec:
   interval: 2m0s
   values:
     controllers:
-      go-discord-modtools:
+      *app :
         replicas: 0
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
-          go-discord-modtools:
+          *app :
             image:
               repository: ghcr.io/tyzbit/go-discord-modtools
-              tag: "0.2.3" # {"$imagepolicy": "flux-system:go-discord-modtools:tag"}
+              tag: "0.2.3" # {"$imagepolicy": "flux-system:*app :tag"}
             envFrom:
               - secretRef:
-                  name: go-discord-modtools
+                  name: *app
             probes:
               liveness:
                 enabled: true

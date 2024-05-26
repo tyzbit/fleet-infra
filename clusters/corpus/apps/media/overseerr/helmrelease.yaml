@@ -1,11 +1,11 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.1/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.1/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: overseerr
+  name: &app overseerr
   namespace: flux-system
 spec:
-  releaseName: overseerr
+  releaseName: *app
   targetNamespace: media
   chart:
     spec:
@@ -18,7 +18,7 @@ spec:
   interval: 2m0s
   values:
     controllers:
-      overseerr:
+      *app :
         replicas: 1 # active longhorn-webapp
         type: statefulset
         annotations:
@@ -27,9 +27,9 @@ spec:
           securityContext:
             fsGroup: 568
         containers:
-          overseerr:
+          *app :
             image:
-              repository: ghcr.io/sct/overseerr
+              repository: ghcr.io/sct/*app
               tag: "1.33.2"
             resources:
               requests:
@@ -41,13 +41,13 @@ spec:
       config:
         existingClaim: overseerr-config-longhorn-webapp
         advancedMounts:
-          overseerr:
-            overseerr:
+          *app :
+            *app :
               - path: /app/config
 
     service:
       main:
-        controller: overseerr
+        controller: *app
         type: ClusterIP
         ports:
           http:

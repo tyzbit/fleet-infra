@@ -32,40 +32,20 @@
     "mariadb"
   ],
   "flux": {
-    "fileMatch": [
-      "clusters/.+\\.ya?ml$",
-      "custom\\-resources/.+\\.ya?ml$",
-      "custom\\-resource\\-consumers/.+\\.ya?ml$"
-    ]
+    "fileMatch": ["clusters/.+\\.ya?ml$"]
   },
   "helm-values": {
-    "fileMatch": [
-      "clusters/.+\\.ya?ml$",
-      "custom\\-resources/.+\\.ya?ml$",
-      "custom\\-resource\\-consumers/.+\\.ya?ml$"
-    ]
+    "fileMatch": ["clusters/.+\\.ya?ml$"]
   },
   "helmv3": {
-    "fileMatch": [
-      "charts/.+/Chart\\.ya?ml$",
-      "custom\\-resources/.+\\.ya?ml$",
-      "custom\\-resource\\-consumers/.+\\.ya?ml$"
-    ]
+    "fileMatch": ["charts/.+/Chart\\.ya?ml$"]
   },
   "kubernetes": {
-    "fileMatch": [
-      "clusters/.+\\.ya?ml$",
-      "custom\\-resources/.+\\.ya?ml$",
-      "custom\\-resource\\-consumers/.+\\.ya?ml$"
-    ]
+    "fileMatch": ["clusters/.+\\.ya?ml$"]
   },
   "regexManagers": [
     {
-      "fileMatch": [
-        "clusters/.+\\.ya?ml$",
-        "custom\\-resources/.+\\.ya?ml$",
-        "custom\\-resource\\-consumers/.+\\.ya?ml$"
-      ],
+      "fileMatch": ["clusters/.+\\.ya?ml$"],
       "matchStrings": [
         "datasource=(?<datasource>.*?)\n *url: https://github\\.com/(?<depName>.*?)\\.git\n *ref:\n *tag: (?<currentValue>.*)\n",
         "datasource=(?<datasource>.*?) depName=(?<depName>.*?)\n.*?_version: \"(?<currentValue>.*)\"\n",
@@ -74,11 +54,7 @@
       "datasourceTemplate": "github-releases"
     },
     {
-      "fileMatch": [
-        "clusters/.+\\.ya?ml$",
-        "custom\\-resources/.+\\.ya?ml$",
-        "custom\\-resource\\-consumers/.+\\.ya?ml$"
-      ],
+      "fileMatch": ["clusters/.+\\.ya?ml$"],
       "matchStrings": [
         "registryUrl=(?<registryUrl>.*?)\n *tag: (?<depName>[a-zA-Z-]+)-(?<currentValue>.*)\n",
         "registryUrl=(?<registryUrl>.*?) chart=(?<depName>.*?)\n.*\\/(?<currentValue>.*?)\\/"
@@ -86,11 +62,7 @@
       "datasourceTemplate": "helm"
     },
     {
-      "fileMatch": [
-        "clusters/.+\\.ya?ml$",
-        "custom\\-resources/.+\\.ya?ml$",
-        "custom\\-resource\\-consumers/.+\\.ya?ml$"
-      ],
+      "fileMatch": ["clusters/.+\\.ya?ml$"],
       "matchStrings": [
         "datasource=(?<datasource>.*?) depName=(?<depName>.*?)\n .*: (?<currentValue>.*=?)"
       ],

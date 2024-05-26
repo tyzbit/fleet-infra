@@ -1,11 +1,11 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.1/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.1/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: ytdl-sub
+  name: &app ytdl-sub
   namespace: flux-system
 spec:
-  releaseName: ytdl-sub
+  releaseName: *app
   targetNamespace: media
   timeout: 15m
   interval: 2m0s
@@ -19,7 +19,7 @@ spec:
         namespace: flux-system
   values:
     controllers:
-      ytdl-sub:
+      *app :
         replicas: 1 # active longhorn
         type: cronjob
         pod:
@@ -34,7 +34,7 @@ spec:
           kube-image-keeper.enix.io/image-cache: disabled
 
         containers:
-          ytdl-sub:
+          *app :
             image:
               pullPolicy: Always
               repository: ghcr.io/jmbannon/ytdl-sub
@@ -65,8 +65,8 @@ spec:
         name: ytdl-sub-config
         type: configMap
         advancedMounts:
-          ytdl-sub:
-            ytdl-sub:
+          *app :
+            *app :
               - path: /config/config.yaml
                 subPath: config.yaml
                 readOnly: true
@@ -76,8 +76,8 @@ spec:
         name: ytdl-sub-cookies
         type: secret
         advancedMounts:
-          ytdl-sub:
-            ytdl-sub:
+          *app :
+            *app :
               - path: /config/cookies.txt
                 subPath: cookies.txt
       media:
@@ -85,8 +85,8 @@ spec:
       tmp:
         type: emptyDir
         advancedMounts:
-          ytdl-sub:
-            ytdl-sub:
+          *app :
+            *app :
               - path: /tmp/ytdl-sub
         # medium: Memory
         # sizeLimit: 2Gi
