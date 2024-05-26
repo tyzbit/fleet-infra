@@ -76,9 +76,9 @@ spec:
       media:
         existingClaim: nas-volume1-media
       transcode:
-        type: hostPath
-        hostPathType: DirectoryOrCreate
-        hostPath: /dev/shm/tdarr_transcode
+        type: emptyDir
+        medium: Memory
+        sizeLimit: 20Gi
       dri:
         type: hostPath
         hostPath: /dev/dri
