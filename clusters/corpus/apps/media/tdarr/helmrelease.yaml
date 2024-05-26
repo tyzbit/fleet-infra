@@ -1,0 +1,157 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.1/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app tdarr
+  namespace: default
+spec:
+  releaseName: *app
+  targetNamespace: media
+  timeout: 2m
+  interval: 2m0s
+  chart:
+    spec:
+      chart: app-template
+      version: "3.2.1"
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  values:
+    controllers:
+      tdarr:
+        pod:
+          nodeSelector:
+            graphics: dri
+            longhorn: primary
+          affinity:
+            podAntiAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                - topologyKey: "kubernetes.io/hostname"
+                  labelSelector:
+                    matchExpressions:
+                      - key: app.kubernetes.io/name
+                        operator: In
+                        values:
+                          - "plex"
+
+        containers:
+          app:
+            image:
+              repository: haveagitgat/tdarr
+              tag: 2.19.01@sha256:7ab5059f9e47237b872b9b9936542869d1d1a63fed754a4452a35f3d5ac761d2
+          node:
+            image:
+              repository: haveagitgat/tdarr_node
+              tag: 2.19.01@sha256:1ef70ed89e78040ca68fa23670c39f7e103330e1a4a55b7c6cabd34680f7175f
+            env:
+              - name: nodeID
+                value: node
+              - name: serverIP
+                value: localhost
+              - name: serverPort
+                value: 8266
+
+    persistence:
+      config:
+        existingClaim: tdarr-longhorn-webapp
+        advancedMounts:
+          tdarr:
+            app:
+              - path: /app/configs
+                subPath: config
+              - path: /app/server
+                subPath: server
+            node:
+              - path: /app/configs
+                subPath: config
+              - path: /app/server
+                subPath: server
+      media:
+        existingClaim: nas-volume1-media
+      transcode:
+        type: hostPath
+        hostPathType: DirectoryOrCreate
+        hostPath: /dev/shm/tdarr_transcode
+      dri:
+        type: hostPath
+        hostPath: /dev/dri
+
+    service:
+      app:
+        controller: *app
+        ports:
+          http:
+            port: 8265
+      server:
+        controller: *app
+        ports:
+          server:
+            port: 8266
+    ingress:
+      app:
+        className: nginx
+        annotations:
+          nginx.ingress.kubernetes.io/auth-url: "http://tdarr-oauth2-proxy.media.svc.cluster.local/oauth2/auth"
+          nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
+          cert-manager.io/cluster-issuer: letsencrypt
+          acme.cert-manager.io/http01-edit-in-place: "true"
+          external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+          external-dns.alpha.kubernetes.io/target: ${cloudflared_tunnel_uuid}.cfargotunnel.com
+        hosts:
+          - host: &host "tdarr.${personal_domain}"
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
+        tls:
+          - hosts:
+              - *host
+
+      oauth:
+        className: nginx
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt
+          external-dns.alpha.kubernetes.io/exclude: "true"
+        labels:
+          use-cloudflare-dns-solver: "true"
+        hosts:
+          - host: "tdarr.${personal_domain}"
+            paths:
+              - path: "/oauth2"
+                service:
+                  name: tdarr-oauth2-proxy
+                  port: 80
+        tls:
+          - hosts:
+              - "tdarr.${personal_domain}"
+            secretName: tdarr.${personal_domain}-tls
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: tdarr-oauth2-proxy
+  namespace: media
+spec:
+  targetNamespace: media
+  releaseName: tdarr-oauth2-proxy
+  chart:
+    spec:
+      chart: oauth2-proxy
+      version: "7.5.5"
+      sourceRef:
+        kind: HelmRepository
+        name: oauth2-proxy
+        namespace: flux-system
+  interval: 2m0s
+  values:
+    replicaCount: 1
+    extraArgs:
+      provider: github
+      github-org: "${blog_name}"
+      github-team: "super-admins,tdarr"
+      cookie-expire: 168h0m0s
+    config:
+      existingSecret: tdarr-oauth2-proxy
