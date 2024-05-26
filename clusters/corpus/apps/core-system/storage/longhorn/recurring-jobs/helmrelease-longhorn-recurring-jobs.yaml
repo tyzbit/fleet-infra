@@ -78,6 +78,16 @@ spec:
         filesystem-trim:
           - interval: 20m
 
+      "EphemeralCache":
+        options:
+          parameters:
+            numberOfReplicas: "1"
+        snapshot:
+          - interval: 10m
+            retain: 1
+        filesystem-trim:
+          - interval: 20m
+
       "Gameserver":
         options:
           parameters:
@@ -90,6 +100,21 @@ spec:
         backup:
           - interval: 12h
             retain: 4
+        filesystem-trim:
+          - interval: 20m
+
+      "ObjectStorage":
+        options:
+          parameters:
+            numberOfReplicas: "2"
+        snapshot:
+          - interval: 6h
+            retain: 4
+          - interval: 24h
+            retain: 2
+        backup:
+          - interval: 24h
+            retain: 7
         filesystem-trim:
           - interval: 20m
 
@@ -114,21 +139,6 @@ spec:
         snapshot:
           - interval: 10m
             retain: 6
-        backup:
-          - interval: 24h
-            retain: 7
-        filesystem-trim:
-          - interval: 20m
-
-      "ObjectStorage":
-        options:
-          parameters:
-            numberOfReplicas: "2"
-        snapshot:
-          - interval: 6h
-            retain: 4
-          - interval: 24h
-            retain: 2
         backup:
           - interval: 24h
             retain: 7
