@@ -2,10 +2,10 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: &app ${neko_name}-neko
+  name: &hr ${neko_name}-neko
   namespace: flux-system
 spec:
-  releaseName: *app
+  releaseName: *hr
   targetNamespace: media
   chart:
     spec:
@@ -18,10 +18,10 @@ spec:
   interval: 2m0s
   valuesFrom:
     - kind: Secret
-      name: *app
+      name: ${neko_name}-neko
   values:
     controllers:
-      *app :
+      &app neko:
         replicas: 1 # active nas
         type: statefulset
         annotations:
