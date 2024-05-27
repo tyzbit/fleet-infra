@@ -27,7 +27,7 @@ spec:
         containers:
           *app :
             image:
-              repository: felddy/*app
+              repository: felddy/foundryvtt
               tag: "12.324.0"
             envFrom:
               - secretRef:
@@ -110,7 +110,7 @@ spec:
             paths:
               - path: "/"
                 service:
-                  name: *app-filebrowser
+                  name: foundryvtt-filebrowser
                   port: 80
         tls:
           - hosts:

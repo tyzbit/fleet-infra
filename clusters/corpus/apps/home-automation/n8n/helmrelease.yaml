@@ -29,7 +29,7 @@ spec:
           *app :
             image:
               pullPolicy: Always
-              repository: n8nio/*app
+              repository: n8nio/n8n
               tag: "1.43.1"
             envFrom:
               - secretRef:
@@ -50,7 +50,7 @@ spec:
         advancedMounts:
           *app :
             *app :
-              - path: /home/node/.*app
+              - path: /home/node/.n8n
 
     service:
       main:

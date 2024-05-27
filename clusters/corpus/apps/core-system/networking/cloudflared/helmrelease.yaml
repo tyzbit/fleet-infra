@@ -27,12 +27,12 @@ spec:
         containers:
           *app :
             image:
-              repository: cloudflare/*app
+              repository: cloudflare/cloudflared
               tag: "2024.5.0-amd64"
             args:
               - tunnel
               - --config
-              - &configpath /etc/*app/config.yaml
+              - &configpath /etc/cloudflared/config.yaml
               - --no-autoupdate
               - run
             env:
@@ -65,7 +65,7 @@ spec:
 
     persistence:
       config:
-        name: *app-config
+        name: cloudflared-config
         type: configMap
         advancedMounts:
           *app :
@@ -74,11 +74,11 @@ spec:
                 readOnly: true
                 subPath: config.yaml
       credentials:
-        name: *app-cred
+        name: cloudflared-cred
         type: secret
         advancedMounts:
           *app :
             *app :
-              - path: /etc/*app/cred.json
+              - path: /etc/cloudflared/cred.json
                 readOnly: true
                 subPath: cred.json

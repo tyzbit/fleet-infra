@@ -29,7 +29,7 @@ spec:
         containers:
           *app :
             image:
-              repository: ghcr.io/sct/*app
+              repository: ghcr.io/sct/overseerr
               tag: "1.33.2"
             resources:
               requests:
