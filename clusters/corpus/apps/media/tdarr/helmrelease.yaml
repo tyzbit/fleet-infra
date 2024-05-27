@@ -82,15 +82,11 @@ spec:
 
     service:
       app:
+        nameOverride: tdarr
         controller: *app
         ports:
           http:
             port: 8265
-      node:
-        controller: *app
-        ports:
-          server:
-            port: 8266
     ingress:
       app:
         className: nginx
