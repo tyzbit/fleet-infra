@@ -52,7 +52,7 @@ spec:
               - name: nodeID
                 value: node
               - name: serverIP
-                value: localhost
+                value: "127.0.0.1"
               - name: serverPort
                 value: "8266"
             securityContext:
