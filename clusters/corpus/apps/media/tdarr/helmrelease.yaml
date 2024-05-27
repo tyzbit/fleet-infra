@@ -24,7 +24,8 @@ spec:
         type: statefulset
         pod:
           securityContext:
-            fsGroup: 1000
+            fsGroup: 568
+            fsGroupChangePolicy: OnRootMismatch
           nodeSelector:
             graphics: dri
             longhorn: primary
@@ -52,7 +53,7 @@ spec:
               - name: nodeID
                 value: node
               - name: serverIP
-                value: "127.0.0.1"
+                value: localhost
               - name: serverPort
                 value: "8266"
             securityContext:
