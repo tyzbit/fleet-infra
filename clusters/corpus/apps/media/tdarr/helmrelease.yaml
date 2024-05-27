@@ -63,16 +63,12 @@ spec:
         existingClaim: tdarr-longhorn-webapp
         advancedMounts:
           tdarr:
-            *ui :
+            *ui : &paths
               - path: /app/configs
                 subPath: config
               - path: /app/server
                 subPath: server
-            *worker :
-              - path: /app/configs
-                subPath: config
-              - path: /app/server
-                subPath: server
+            *worker : *paths
       media:
         existingClaim: nas-volume1-media
       transcode:
