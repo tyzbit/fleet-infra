@@ -24,10 +24,17 @@ spec:
         type: statefulset
         pod:
           securityContext:
-            fsGroup: 568
-            runAsGroup: 568
-            runAsUser: 568
-            fsGroupChangePolicy: OnRootMismatch
+            runAsUser: 0
+            runAsGroup: 0
+            fsGroup: 100
+            fsGroupChangePolicy: "OnRootMismatch"
+            supplementalGroups:
+              - 44 # video
+              - 125 # render
+              - 105 # render
+              - 568
+              - 1000
+              - 10000
           nodeSelector:
             graphics: dri
             longhorn: primary
