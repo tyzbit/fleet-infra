@@ -26,6 +26,9 @@ spec:
         pod:
           securityContext:
             fsGroup: 568
+            runAsGroup: 568
+            runAsUser: 568
+            fsGroupChangePolicy: OnRootMismatch
         containers:
           *app :
             image:

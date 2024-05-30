@@ -5,3 +5,5 @@ metadata:
   namespace: media
 data:
   ADVERTISE_IP: "http://172.18.126.107:32400,https://plex.${blog_domain}"
+  PLEX_UID: "568"
+  PLEX_GID: "568"
