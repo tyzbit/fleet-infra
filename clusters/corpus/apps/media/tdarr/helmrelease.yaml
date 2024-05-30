@@ -83,8 +83,8 @@ spec:
         existingClaim: nas-volume1-media
       transcode:
         type: emptyDir
-        medium: Memory
-        sizeLimit: 20Gi
+        # medium: Memory
+        # sizeLimit: 20Gi
       dri:
         type: hostPath
         hostPath: /dev/dri
