@@ -67,7 +67,7 @@ spec:
         enabled: false
 
     service:
-      main:
+      *app :
         controller: *app
         ports:
           http:
