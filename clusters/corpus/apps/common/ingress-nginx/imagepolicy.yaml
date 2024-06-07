@@ -8,4 +8,4 @@ spec:
     name: nginx
   policy:
     semver:
-      range: "= 1.25.3"
+      range: "= 1.25.5"
