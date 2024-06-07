@@ -45,7 +45,7 @@ spec:
               limits:
                 memory: 256Mi
 
-          hbbr:
+          &relay relay:
             image:
               repository: rustdesk/rustdesk-server
               tag: "1.1.10-3"
@@ -70,9 +70,6 @@ spec:
       *app :
         controller: *app
         ports:
-          http:
-            enabled: false
-            port: 80
           rustdesk-1:
             port: 21115
           rustdesk-2:
@@ -82,7 +79,7 @@ spec:
             protocol: UDP
           rustdesk-4:
             port: 21118
-      hbbr:
+      *relay :
         controller: *app
         ports:
           rustdesk-5:
