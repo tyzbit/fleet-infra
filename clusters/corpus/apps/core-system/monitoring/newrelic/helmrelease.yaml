@@ -158,6 +158,9 @@ spec:
                   - name: Temperature
                     commands:
                       - run: |
+                          host_script="/hostshm/system_temp_monitor.sh"
+                          cat <<"EOF" > $host_script
+                          set -m
                           for sensor in /sys/class/thermal/thermal_zone*/temp; do 
                             reading=$(cat $sensor 2>/dev/null || true)
                             # fixes `cat: thermal_zone3/temp: No data available` error
@@ -165,6 +168,8 @@ spec:
                               echo "$(echo $sensor|sed -E 's/.*(th.*[0-9]).*/\1/g'),$(echo $sensor|sed -E 's/.*(th.*[0-9]).*/\1/g'),$(( $reading / 1000 ))" 
                             fi
                           done
+                          EOF
+                          chroot /host bash /dev/shm/smart_temp_monitor.sh
                         split: horizontal
                         split_by: ","
                         set_header: [thermalSensor, model, temperatureC]
