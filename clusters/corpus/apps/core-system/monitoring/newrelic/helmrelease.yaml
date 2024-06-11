@@ -163,7 +163,7 @@ spec:
                           set -m
                           for sensor in /sys/class/thermal/thermal_zone*/temp; do 
                             reading=$(cat $sensor 2>/dev/null || true)
-                            # fixes `cat: thermal_zone3/temp: No data available` error
+                            # fixes "cat: thermal_zone3/temp: No data available" error
                             if [ "${reading}x" != "x" ]; then
                               echo "$(echo $sensor|sed -E 's/.*(th.*[0-9]).*/\1/g'),$(echo $sensor|sed -E 's/.*(th.*[0-9]).*/\1/g'),$(( $reading / 1000 ))" 
                             fi
