@@ -124,7 +124,7 @@ spec:
                           host_script="/hostshm/smart_temp_monitor.sh"
                           cat <<"EOF" > $host_script
                           set -m
-                          devices=$(lsblk | grep -E 'sda\\s+|nvme0n1\\s+' | awk '{print $1}')
+                          devices=$(lsblk | grep -E 'sda\s+|nvme0n1\s+' | awk '{print $1}')
                           for device in $${devices[@]}; do
                             smart_output_line=$(smartctl -A /dev/$device | grep Cel)
                             model=$(fdisk /dev/$device -l | grep model | sed -E 's/.*: //g' | xargs)
@@ -162,7 +162,7 @@ spec:
                             reading=$(cat $sensor 2>/dev/null || true)
                             # fixes `cat: thermal_zone3/temp: No data available` error
                             if [ "${reading}x" != "x" ]; then
-                              echo "$(echo $sensor|sed -E 's/.*(th.*[0-9]).*/\\1/g'),$(echo $sensor|sed -E 's/.*(th.*[0-9]).*/\\1/g'),$(( $reading / 1000 ))" 
+                              echo "$(echo $sensor|sed -E 's/.*(th.*[0-9]).*/\1/g'),$(echo $sensor|sed -E 's/.*(th.*[0-9]).*/\1/g'),$(( $reading / 1000 ))" 
                             fi
                           done
                         split: horizontal
