@@ -288,7 +288,8 @@ spec:
                 Exclude  log /^no changes since last reconciliation/
                 Exclude  log /^release in-sync with desired state/
                 Exclude  log /^artifact up-to-date with/
-                Exclude  log /(is|release) in\\-sync/
+                Exclude  log /release in\\-sync/
+                Exclude  log /is in\\-sync/
 
             # Filter etcd status checks
             [FILTER]
