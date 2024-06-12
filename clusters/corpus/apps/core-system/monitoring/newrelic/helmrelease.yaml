@@ -311,6 +311,12 @@ spec:
                 Match    kube.*
                 Exclude  log /This connection closed normally without authentication/
 
+            # Filter nginx ingress endpoint
+            [FILTER]
+                Name     grep
+                Match    kube.*
+                Exclude  log /does not have any active Endpoint/
+
             # Filter longhorn instance manager debug
             [FILTER]
                 Name     grep
