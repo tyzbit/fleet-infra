@@ -242,7 +242,7 @@ spec:
           memory: 256Mi
       fluentBit:
         config:
-          filters: |
+          extraFilters: |
             [FILTER]
                 Name                kubernetes
                 Match               kube.*
