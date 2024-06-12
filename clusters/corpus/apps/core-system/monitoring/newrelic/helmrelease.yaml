@@ -323,6 +323,14 @@ spec:
                 Match    kube.*
                 Exclude  log /longhorn\\-instance\\-manager.*debug/
 
+            # Filter longhorn info messages
+            [FILTER]
+                Name     grep
+                Match    kube.*
+                Logical_Op and
+                Exclude  log /level=info/
+                Exclude  $kubernetes['namespace_name'] /(longhorn\\-system)/
+
             # Filter unwanted containers
             [FILTER]
                 Name     grep
