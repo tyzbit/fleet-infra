@@ -290,6 +290,8 @@ spec:
                 Exclude  log /^artifact up-to-date with/
                 Exclude  log /release in.sync/
                 Exclude  log /is in.sync/
+                Exclude  log /checking [0-9]+ dependencies/
+                Exclude  log /all dependencies are ready/
 
             # Filter etcd status checks
             [FILTER]
@@ -331,6 +333,14 @@ spec:
                 Match    kube.*
                 Logical_Op and
                 Exclude  log /level=info/
+                Exclude  $kubernetes['namespace_name'] /(longhorn.system)/
+
+            # Filter longhorn GET messages
+            [FILTER]
+                Name     grep
+                Match    kube.*
+                Logical_Op and
+                Exclude  log /"([A-Z]+) .*" 200/
                 Exclude  $kubernetes['namespace_name'] /(longhorn.system)/
 
             # Filter unwanted containers
