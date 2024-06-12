@@ -273,7 +273,7 @@ spec:
             [FILTER]
                 Name     grep
                 Match    kube.*
-                Exclude  log /PROPFIND \\/remote\\.php\\/dav\\/files\\/tyler/ 
+                Exclude  log /PROPFIND/ 
 
             # Filter New Relic event truncated messages
             [FILTER]
@@ -291,19 +291,34 @@ spec:
             [FILTER]
                 Name     grep
                 Match    kube.*
-                Exclude  log /([Rr]econcili?ation finished in|All dependencies are ready, proceeding with reconciliation|^artifact up\\-to\\-date with remote revision|^Latest image tag for|^no new tags found, next scan|^Discarding event, no alerts found for the involved object|^no changes made in working directory|^no changes since last reconciliation|^release in-sync with desired state|^artifact up-to-date with|is in-sync)/
+                Logical_Op or
+                Exclude  log /[Rr]econcili?ation finished in/
+                Exclude  log /All dependencies are ready, proceeding with reconciliation/
+                Exclude  log /^artifact up\\-to\\-date with remote revision/
+                Exclude  log /^Latest image tag for/
+                Exclude  log /^no new tags found, next scan/
+                Exclude  log /^Discarding event, no alerts found for the involved object/
+                Exclude  log /^no changes made in working directory/
+                Exclude  log /^no changes since last reconciliation/
+                Exclude  log /^release in-sync with desired state/
+                Exclude  log /^artifact up-to-date with/
+                Exclude  log /is in-sync/
 
             # Filter etcd status checks
             [FILTER]
                 Name     grep
                 Match    kube.*
-                Exclude  log /etcdserver\\/api\\/etcdhttp: \\/health OK \\(status code 200\\)/
+                Logical_Op or
+                Exclude  log /etcdserver\\/api\\/etcdhttp: \\/
+                Exclude  log /health OK \\(status code 200\\)/
 
             # Filter mongo status checks
             [FILTER]
                 Name     grep
                 Match    kube.*
-                Exclude  log /Connection ended|client metadata/
+                Logical_Op or
+                Exclude  log /Connection ended/
+                Exclude  log /client metadata/
 
             # Filter mariadb status checks
             [FILTER]
@@ -335,7 +350,15 @@ spec:
             [FILTER]
                 Name     grep
                 Match    *
-                Exclude  $kubernetes['container_name'] /(kube\\-events|calico\\-node|oauth2\\-proxy|kube\\-apiserver|mosquitto|event\\-exporter|ytdl\\-sub|blogger\\-grab)/
+                Logical_Op or
+                Exclude  $kubernetes['container_name'] /kube\\-events/
+                Exclude  $kubernetes['container_name'] /calico\\-node/
+                Exclude  $kubernetes['container_name'] /oauth2\\-proxy/
+                Exclude  $kubernetes['container_name'] /kube\\-apiserver/
+                Exclude  $kubernetes['container_name'] /mosquitto/
+                Exclude  $kubernetes['container_name'] /event\\-exporter/
+                Exclude  $kubernetes['container_name'] /ytdl\\-sub/
+                Exclude  $kubernetes['container_name'] /blogger\\-grab/
 
             # Filter unwanted namespaces
             [FILTER]
