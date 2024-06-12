@@ -247,13 +247,13 @@ spec:
             [FILTER]
                 Name     grep
                 Match    kube.*
-                Exclude  log GET \\- \\"/ping\\"
+                Exclude  log GET . \\"/ping\\"
 
             # Filter kube-probe
             [FILTER]
                 Name     grep
                 Match    kube.*
-                Exclude  log kube\\-probe
+                Exclude  log kube.probe
 
             # Filter nextcloud propfind
             [FILTER]
@@ -280,7 +280,7 @@ spec:
                 Logical_Op or
                 Exclude  log /[Rr]econcili?ation finished in/
                 Exclude  log /All dependencies are ready, proceeding with reconciliation/
-                Exclude  log /^artifact up\\-to\\-date with remote revision/
+                Exclude  log /^artifact up.to.date with remote revision/
                 Exclude  log /^Latest image tag for/
                 Exclude  log /^no new tags found, next scan/
                 Exclude  log /^Discarding event, no alerts found for the involved object/
@@ -323,7 +323,7 @@ spec:
             [FILTER]
                 Name     grep
                 Match    kube.*
-                Exclude  log /longhorn\\-instance\\-manager.*debug/
+                Exclude  log /longhorn.instance.manager.*debug/
 
             # Filter longhorn info messages
             [FILTER]
@@ -331,27 +331,27 @@ spec:
                 Match    kube.*
                 Logical_Op and
                 Exclude  log /level=info/
-                Exclude  $kubernetes['namespace_name'] /(longhorn\\-system)/
+                Exclude  $kubernetes['namespace_name'] /(longhorn.system)/
 
             # Filter unwanted containers
             [FILTER]
                 Name     grep
                 Match    *
                 Logical_Op or
-                Exclude  $kubernetes['container_name'] /kube\\-events/
-                Exclude  $kubernetes['container_name'] /calico\\-node/
-                Exclude  $kubernetes['container_name'] /oauth2\\-proxy/
-                Exclude  $kubernetes['container_name'] /kube\\-apiserver/
+                Exclude  $kubernetes['container_name'] /kube.events/
+                Exclude  $kubernetes['container_name'] /calico.node/
+                Exclude  $kubernetes['container_name'] /oauth2.proxy/
+                Exclude  $kubernetes['container_name'] /kube.apiserver/
                 Exclude  $kubernetes['container_name'] /mosquitto/
-                Exclude  $kubernetes['container_name'] /event\\-exporter/
-                Exclude  $kubernetes['container_name'] /ytdl\\-sub/
-                Exclude  $kubernetes['container_name'] /blogger\\-grab/
+                Exclude  $kubernetes['container_name'] /event.exporter/
+                Exclude  $kubernetes['container_name'] /ytdl.sub/
+                Exclude  $kubernetes['container_name'] /blogger.grab/
 
             # Filter unwanted namespaces
             [FILTER]
                 Name     grep
                 Match    *
-                Exclude  $kubernetes['namespace_name'] /(kuik\\-system)/
+                Exclude  $kubernetes['namespace_name'] /(kuik.system)/
     webhook:
       enabled: false
     # newrelic-pixie:
