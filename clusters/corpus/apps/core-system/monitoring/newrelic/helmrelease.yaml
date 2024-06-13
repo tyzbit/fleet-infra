@@ -267,7 +267,7 @@ spec:
                 Match    kube.*
                 Exclude  log /event truncated to NRDB limit/ 
 
-            # Filter wordpress
+            # Filter wordpress urls from bots
             [FILTER]
                 Name     grep
                 Match    kube.*
@@ -287,11 +287,12 @@ spec:
                 Exclude  log /^no changes made in working directory/
                 Exclude  log /^no changes since last reconciliation/
                 Exclude  log /^release in-sync with desired state/
-                Exclude  log /^artifact up-to-date with/
                 Exclude  log /release in.sync/
                 Exclude  log /is in.sync/
                 Exclude  log /checking [0-9]+ dependencies/
                 Exclude  log /all dependencies are ready/
+                Exclude  log /artifact up.to.date with remote revision/
+                Exclude  log /discarding event, no alerts found for the involved object/
 
             # Filter etcd status checks
             [FILTER]
@@ -315,11 +316,27 @@ spec:
                 Match    kube.*
                 Exclude  log /This connection closed normally without authentication/
 
-            # Filter nginx ingress endpoint
+            # Filter nginx ingress endpoint message
             [FILTER]
                 Name     grep
                 Match    kube.*
                 Exclude  log /does not have any active Endpoint/
+
+            # Filter nginx ingress config validated
+            [FILTER]
+                Name     grep
+                Match    kube.*
+                Logical_Op and
+                Exclude  log /successfully validated configuration/
+                Exclude  $kubernetes['labels.app.kubernetes.io/instance'] /(.*ingress.nginx)/
+
+            # Filter coredns glob pattern
+            [FILTER]
+                Name     grep
+                Match    kube.*
+                Logical_Op and
+                Exclude  log /No files matching import glob pattern/
+                Exclude  $kubernetes['container_name'] coredns
 
             # Filter longhorn instance manager debug
             [FILTER]
@@ -342,6 +359,14 @@ spec:
                 Logical_Op and
                 Exclude  log /"([A-Z]+) .*" 200/
                 Exclude  $kubernetes['namespace_name'] /(longhorn.system)/
+
+            # Filter kube metrics adapter messages
+            [FILTER]
+                Name     grep
+                Match    kube.*
+                Logical_Op and
+                Exclude  log /level=info msg="Looking for HPAs"/
+                Exclude  $kubernetes['namespace_name'] /(kube.system)/
 
             # Filter unwanted containers
             [FILTER]
