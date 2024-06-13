@@ -17,7 +17,7 @@ spec:
   values:
     image:
       repository: registry.k8s.io/external-dns/external-dns
-      tag: "v1.12.2"
+      tag: "v0.14.2"
     provider: cloudflare
     triggerLoopOnEvent: true
     txtOwnerId: "corpus-automatic"
