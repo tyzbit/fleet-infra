@@ -31,6 +31,7 @@ spec:
               tag: "0.45.8.1"
             env:
               PORT: &port 5000
+              WEBDRIVER_URL: localhost
             # resources:
             #   requests:
             #     cpu: 10m
