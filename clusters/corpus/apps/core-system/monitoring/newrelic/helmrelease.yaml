@@ -271,7 +271,23 @@ spec:
             [FILTER]
                 Name     grep
                 Match    kube.*
-                Exclude  log /GET \\/wp-login\\.php/ 
+                Exclude  log /GET \\/wp-login\\.php/
+
+            # Filter gotosocial info messages
+            [FILTER]
+                Name     grep
+                Match    kube.*
+                Logical_Op and
+                Exclude  log /level=INFO/
+                Exclude  $kubernetes['container_name'] /(earthlings.social.gotosocial)/
+
+            # Filter calico apiserver info messages
+            [FILTER]
+                Name     grep
+                Match    kube.*
+                Logical_Op and
+                Exclude  log /level=info/
+                Exclude  $kubernetes['container_name'] /(calico.apiserver)/
 
             # Filter flux reconciliations
             [FILTER]
