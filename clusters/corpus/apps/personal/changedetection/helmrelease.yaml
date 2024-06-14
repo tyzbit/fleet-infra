@@ -31,7 +31,7 @@ spec:
               tag: "0.45.23"
             env:
               PORT: &port 5000
-              WEBDRIVER_URL: http://localhost:4444
+              PLAYWRIGHT_DRIVER_URL: ws://localhost:3000
             # resources:
             #   requests:
             #     cpu: 10m
