@@ -36,7 +36,7 @@ spec:
           *app :
             image:
               repository: docker.io/superseriousbusiness/gotosocial
-              tag: "0.15.0"
+              tag: "0.16.0"
             env:
               TZ: America/New_York
               GTS_APPLICATION_NAME: "${social_app}"
