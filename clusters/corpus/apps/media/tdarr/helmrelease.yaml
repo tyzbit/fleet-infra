@@ -52,12 +52,12 @@ spec:
         containers:
           &ui tdarr-app:
             image:
-              repository: haveagitgat/tdarr
-              tag: "2.19.01"
+              repository: ghcr.io/haveagitgat/tdarr
+              tag: "2.20.01"
           &node tdarr-node:
             image:
-              repository: haveagitgat/tdarr_node
-              tag: "2.19.01"
+              repository: ghcr.io/haveagitgat/tdarr_node
+              tag: "2.20.01"
             env:
               - name: nodeID
                 value: node
