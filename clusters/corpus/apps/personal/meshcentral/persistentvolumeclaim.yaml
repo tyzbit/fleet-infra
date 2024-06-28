@@ -1,0 +1,11 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: meshcentral-data
+spec:
+  accessModes: ["ReadWriteOnce"]
+  storageClassName: longhorn-webapp
+  resources:
+    requests:
+      storage: 5Gi
