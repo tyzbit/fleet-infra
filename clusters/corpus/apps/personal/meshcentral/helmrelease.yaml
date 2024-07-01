@@ -25,6 +25,7 @@ spec:
         type: statefulset
         annotations:
           reloader.stakater.com/auto: "true"
+          fakeannotation: *app
         containers:
           *app :
             image:
