@@ -90,6 +90,11 @@ data:
           season: "00"
           tv_show_name: "{subscription_name}"
 
+      yt_videos:
+        preset: yt_playlist
+        output_options:
+          output_directory: "/media/youtube/videos"
+
       yt_channel:
         preset: yt_playlist
         overrides:
