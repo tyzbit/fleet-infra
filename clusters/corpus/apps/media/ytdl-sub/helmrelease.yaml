@@ -27,8 +27,9 @@ spec:
         cronjob:
           # schedule: "0 0 5 31 2" # Disable cronjob by giving it a schedule that will never run
           schedule: "*/15 * * * *"
-          ttlSecondsAfterFinished: 86400
           concurrencyPolicy: Forbid
+          activeDeadlineSeconds: 14400
+          ttlSecondsAfterFinished: 86400
         annotations:
           reloader.stakater.com/auto: "true"
         labels:
