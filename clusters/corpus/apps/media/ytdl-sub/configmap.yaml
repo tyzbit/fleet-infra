@@ -92,6 +92,8 @@ data:
 
       yt_videos:
         preset: yt_playlist
+        overrides:
+          season: "00"
         output_options:
           output_directory: "/media/youtube/videos"
 
