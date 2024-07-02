@@ -1,0 +1,412 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: newrelic-bundle
+  namespace: flux-system
+spec:
+  targetNamespace: monitoring
+  releaseName: nri-bundle
+  timeout: 5m
+  chart:
+    spec:
+      chart: nri-bundle
+      version: "5.0.84"
+      sourceRef:
+        kind: HelmRepository
+        name: newrelic
+        namespace: flux-system
+  interval: 2m0s
+  valuesFrom:
+    - kind: Secret
+      name: newrelic
+      valuesKey: license-key
+      targetPath: global.licenseKey
+    # - kind: Secret
+    #   name: newrelic
+    #   valuesKey: config
+    #   targetPath: newrelic-infrastructure.config
+    # - kind: Secret
+    #   name: newrelic
+    #   valuesKey: pixie-apikey
+    #   targetPath: newrelic-pixie.apiKey
+    # - kind: Secret
+    #   name: newrelic
+    #   valuesKey: pixie-deploykey
+    #   targetPath: pixie-chart.deployKey
+  values:
+    global:
+      cluster: workbench
+    infrastructure:
+      enabled: true
+      image:
+        pullPolicy: Always
+    newrelic-infrastructure:
+      # privileged: true
+      # # https://github.com/newrelic/nri-kubernetes/tree/main/charts/newrelic-infrastructure#low-data-mode
+      # common:
+      #   config:
+      #     interval: 15s
+      # lowDataMode: true
+      kubelet:
+        extraVolumes:
+          - name: host-shm
+            hostPath:
+              path: /dev/shm
+        extraVolumeMounts:
+          - name: host-shm
+            mountPath: /hostshm
+      integrations:
+        nri-flex:
+          integrations:
+            - name: nri-flex
+              config:
+                name: linuxSMARTIntegration
+                apis:
+                  - name: SMART
+                    commands:
+                      - run: |
+                          host_script="/hostshm/smart_tbw_monitor.sh"
+                          cat <<"EOF" > $host_script
+                          declare -A tbw multipliers
+                          tbw=(
+                            ["Samsung SSD 860"]="2400"
+                            ["Samsung SSD 970 EVO Plus 2TB"]="1200"
+                            ["Samsung SSD 990 PRO with Heatsink 4TB"]="2400"
+                            ["WDC WDS400T1R0A"]="2500"
+                            ["ADATA LEGEND 700 GOLD"]="480"
+                          )
+                          multipliers=(
+                            ["Samsung SSD 860"]="1"
+                            ["Samsung SSD 970 EVO Plus 2TB"]="10000"
+                            ["Samsung SSD 990 PRO with Heatsink 4TB"]="1"
+                            ["WDC WDS400T1R0A"]="1000000"
+                            ["ADATA LEGEND 700 GOLD"]="1"
+                          )
+                          set -m
+                          devices=$(lsblk | grep -E 'sda\s+|nvme0n1\s+' | awk '{print $1}')
+                          for device in $${devices[@]}; do
+                            smart_output_line=$(smartctl -A /dev/$device | grep Written)
+                            lba_size_bytes=$(fdisk /dev/$device -l | grep 'Units' | awk '{print $8}')
+                            model=$(fdisk /dev/$device -l | grep model | sed -E 's/.*: //g' | awk '{$1=$1};1')
+                            multiplier=$${multipliers["$model"]}
+                            # This is the disk model for Longhorn disks and perhaps more
+                            if [[ $model != "VIRTUAL-DISK" ]]; then
+                              if [[ $smart_output_line =~ "LBA" ]]; then
+                                measurement=$(echo "$smart_output_line" | awk '{print $10}')
+                              elif [[ $smart_output_line =~ "Data" ]]; then
+                                measurement=$(echo "$smart_output_line" | awk '{print $4}' | tr -d ',')
+                              fi
+                              ssd_bytes_written=$(( measurement * lba_size_bytes * multiplier ))
+                              mfr_tbw=$${tbw["$model"]}
+                              percent_tbw_used=$(echo "scale=2; ( $ssd_bytes_written / 1000 / 1000 / 1000 / 1000) / $mfr_tbw" | bc -l)
+                              echo "$device,$model,$mfr_tbw,$ssd_bytes_written,$percent_tbw_used"
+                            fi
+                          done
+                          EOF
+                          chroot /host bash /dev/shm/smart_tbw_monitor.sh
+                        split: horizontal
+                        split_by: ","
+                        set_header:
+                          [
+                            device,
+                            model,
+                            manufacturerTbw,
+                            ssdBytesWritten,
+                            percentTbwUsed,
+                          ]
+            - name: nri-flex
+              config:
+                name: linuxDiskTemperatureIntegration
+                apis:
+                  - name: Temperature
+                    commands:
+                      - run: |
+                          host_script="/hostshm/smart_temp_monitor.sh"
+                          cat <<"EOF" > $host_script
+                          set -m
+                          devices=$(lsblk | grep -E 'sda\s+|nvme0n1\s+' | awk '{print $1}')
+                          for device in $${devices[@]}; do
+                            smart_output_line=$(smartctl -A /dev/$device | grep Cel)
+                            model=$(fdisk /dev/$device -l | grep model | sed -E 's/.*: //g' | xargs)
+                            if [[ "$model" =~ "Samsung SSD 860" ]]; then
+                              sensor=$(echo $smart_output_line | cut -f 2 -d' ')
+                              value=$(echo $smart_output_line | sed 's/ Celsius//g' | awk '{print $NF}')
+                            elif [[ "$model" =~ "Samsung SSD 970 EVO Plus 2TB" ]]; then
+                              sensor=$(echo $smart_output_line | sed 's/:.*//g')
+                              value=$(echo $smart_output_line | sed -E 's/.*\:\s+([0-9]+).*/\1/g')
+                            elif [[ "$model" =~ "Samsung SSD 990 PRO with Heatsink 4TB" ]]; then
+                              sensor=$(echo $smart_output_line | sed 's/:.*//g')
+                              value=$(echo $smart_output_line | sed -E 's/.*\:\s+([0-9]+).*/\1/g')
+                            elif [[ "$model" =~ "WDC  WDS400T1R0A" ]]; then
+                              sensor=$(echo $smart_output_line | cut -f 2 -d' ')
+                              value=$(echo $smart_output_line | sed 's/ Celsius//g' | awk '{print $10}')
+                            elif [[ "$model" =~ "ADATA LEGEND 700 GOLD" ]]; then
+                              sensor=$(echo $smart_output_line | cut -f 1 -d':')
+                              value=$(echo $smart_output_line | cut -f 2 -d' ')
+                            fi
+                            echo "$sensor,$model,$value"
+                          done
+                          EOF
+                          chroot /host bash /dev/shm/smart_temp_monitor.sh
+                        split: horizontal
+                        split_by: ","
+                        set_header: [thermalSensor, model, temperatureC]
+            - name: nri-flex
+              config:
+                name: linuxSensorTemperatureIntegration
+                apis:
+                  - name: Temperature
+                    commands:
+                      - run: |
+                          host_script="/hostshm/system_temp_monitor.sh"
+                          cat <<"EOF" > $host_script
+                          set -m
+                          for sensor in /sys/class/thermal/thermal_zone*/temp; do 
+                            reading=$(cat $sensor 2>/dev/null || true)
+                            if [ "$${reading}x" != "x" ]; then
+                              echo "$(echo $sensor|sed -E 's/.*(th.*[0-9]).*/\1/g'),$(echo $sensor|sed -E 's/.*(th.*[0-9]).*/\1/g'),$(( $reading / 1000 ))" 
+                            fi
+                          done
+                          EOF
+                          chroot /host bash /dev/shm/system_temp_monitor.sh
+                        split: horizontal
+                        split_by: ","
+                        set_header: [thermalSensor, model, temperatureC]
+      config:
+        enable_process_metrics: false
+        network_interface_filters:
+          prefix:
+            - dummy
+            - lo
+            - cali
+            - vxlan
+        daemontools_interval_sec: 60
+        network_interface_interval_sec: 60
+        metrics_network_sample_rate: 30
+        metrics_nfs_sample_rate: 120
+        metrics_process_sample_rate: 60
+        metrics_storage_sample_rate: 120
+        metrics_system_sample_rate: 30
+        strip_command_line: true
+    kubeEvents:
+      enabled: true
+    ksm:
+      enabled: true
+    # https://github.com/kubernetes/kube-state-metrics/blob/848354c3c7aae95d809bee7811b6cdfd4a305867/charts/kube-state-metrics/values.yaml
+    kube-state-metrics:
+      collectors:
+        - deployments
+        - jobs
+        - nodes
+        - pods
+
+        # - persistentvolumeclaims
+        # - persistentvolumes
+        # - volumeattachments
+
+        # - certificatesigningrequests
+        # - configmaps
+        # - cronjobs
+        # - endpoints
+        # - horizontalpodautoscalers
+        # - ingresses
+        # - limitranges
+        # - mutatingwebhookconfigurations
+        # - namespaces
+        # - networkpolicies
+        # - poddisruptionbudgets
+        # - replicasets
+        # - replicationcontrollers
+        # - resourcequotas
+        # - secrets
+        # - services
+        # - storageclasses
+        # - validatingwebhookconfigurations
+    prometheus:
+      enabled: false
+    # nri-prometheus:
+    #   config:
+    #     scrape_timeout: "90s"
+    #     transformations:
+    #       - description: "Exclude all but kasa metrics"
+    #         ignore_metrics:
+    #           - except:
+    #               - kasa_
+    logging:
+      enabled: true
+      image:
+        pullPolicy: Always
+    newrelic-logging:
+      resources:
+        limits:
+          memory: 256Mi
+      fluentBit:
+        config:
+          extraFilters: |
+            # Filter pings from oauth2-proxy
+            [FILTER]
+                Name     grep
+                Match    kube.*
+                Exclude  log GET . \\"/ping\\"
+
+            # Filter kube-probe
+            [FILTER]
+                Name     grep
+                Match    kube.*
+                Exclude  log kube.probe
+
+            # Filter nextcloud propfind
+            [FILTER]
+                Name     grep
+                Match    kube.*
+                Exclude  log /PROPFIND/ 
+
+            # Filter New Relic event truncated messages
+            [FILTER]
+                Name     grep
+                Match    kube.*
+                Exclude  log /event truncated to NRDB limit/ 
+
+            # Filter wordpress urls from bots
+            [FILTER]
+                Name     grep
+                Match    kube.*
+                Exclude  log /GET \\/wp-login\\.php/
+
+            # Filter gotosocial info messages
+            [FILTER]
+                Name     grep
+                Match    kube.*
+                Logical_Op and
+                Exclude  log /level=INFO/
+                Exclude  $kubernetes['container_name'] /(earthlings.social.gotosocial)/
+
+            # Filter calico apiserver info messages
+            [FILTER]
+                Name     grep
+                Match    kube.*
+                Logical_Op and
+                Exclude  log /level=info/
+                Exclude  $kubernetes['container_name'] /(calico.apiserver)/
+
+            # Filter flux reconciliations
+            [FILTER]
+                Name     grep
+                Match    kube.*
+                Logical_Op or
+                Exclude  log /[Rr]econcili?ation finished in/
+                Exclude  log /All dependencies are ready, proceeding with reconciliation/
+                Exclude  log /^artifact up.to.date with remote revision/
+                Exclude  log /^Latest image tag for/
+                Exclude  log /^no new tags found, next scan/
+                Exclude  log /^Discarding event, no alerts found for the involved object/
+                Exclude  log /^no changes made in working directory/
+                Exclude  log /^no changes since last reconciliation/
+                Exclude  log /^release in-sync with desired state/
+                Exclude  log /release in.sync/
+                Exclude  log /is in.sync/
+                Exclude  log /checking [0-9]+ dependencies/
+                Exclude  log /all dependencies are ready/
+                Exclude  log /artifact up.to.date with remote revision/
+                Exclude  log /discarding event, no alerts found for the involved object/
+
+            # Filter etcd status checks
+            [FILTER]
+                Name     grep
+                Match    kube.*
+                Logical_Op or
+                Exclude  log /etcdserver\\/api\\/etcdhttp: \\/
+                Exclude  log /health OK \\(status code 200\\)/
+
+            # Filter mongo status checks
+            [FILTER]
+                Name     grep
+                Match    kube.*
+                Logical_Op or
+                Exclude  log /Connection ended/
+                Exclude  log /client metadata/
+
+            # Filter mariadb status checks
+            [FILTER]
+                Name     grep
+                Match    kube.*
+                Exclude  log /This connection closed normally without authentication/
+
+            # Filter nginx ingress endpoint message
+            [FILTER]
+                Name     grep
+                Match    kube.*
+                Exclude  log /does not have any active Endpoint/
+
+            # Filter nginx ingress config validated
+            [FILTER]
+                Name     grep
+                Match    kube.*
+                Logical_Op and
+                Exclude  log /successfully validated configuration/
+                Exclude  $kubernetes['labels.app.kubernetes.io/instance'] /(.*ingress.nginx)/
+
+            # Filter coredns glob pattern
+            [FILTER]
+                Name     grep
+                Match    kube.*
+                Logical_Op and
+                Exclude  log /No files matching import glob pattern/
+                Exclude  $kubernetes['container_name'] coredns
+
+            # Filter longhorn instance manager debug
+            [FILTER]
+                Name     grep
+                Match    kube.*
+                Exclude  log /longhorn.instance.manager.*debug/
+
+            # Filter longhorn info messages
+            [FILTER]
+                Name     grep
+                Match    kube.*
+                Logical_Op and
+                Exclude  log /level=info/
+                Exclude  $kubernetes['namespace_name'] /(longhorn.system)/
+
+            # Filter longhorn GET messages
+            [FILTER]
+                Name     grep
+                Match    kube.*
+                Logical_Op and
+                Exclude  log /"([A-Z]+) .*" 200/
+                Exclude  $kubernetes['namespace_name'] /(longhorn.system)/
+
+            # Filter kube metrics adapter messages
+            [FILTER]
+                Name     grep
+                Match    kube.*
+                Logical_Op and
+                Exclude  log /level=info msg="Looking for HPAs"/
+                Exclude  $kubernetes['namespace_name'] /(kube.system)/
+
+            # Filter unwanted containers
+            [FILTER]
+                Name     grep
+                Match    *
+                Logical_Op or
+                Exclude  $kubernetes['container_name'] /kube.events/
+                Exclude  $kubernetes['container_name'] /calico.node/
+                Exclude  $kubernetes['container_name'] /oauth2.proxy/
+                Exclude  $kubernetes['container_name'] /kube.apiserver/
+                Exclude  $kubernetes['container_name'] /mosquitto/
+                Exclude  $kubernetes['container_name'] /event.exporter/
+                Exclude  $kubernetes['container_name'] /ytdl.sub/
+                Exclude  $kubernetes['container_name'] /blogger.grab/
+
+            # Filter unwanted namespaces
+            [FILTER]
+                Name     grep
+                Match    *
+                Exclude  $kubernetes['namespace_name'] /(kuik.system)/
+    webhook:
+      enabled: false
+    # newrelic-pixie:
+    #   enabled: true
+    # pixie-chart:
+    #   enabled: true
+    #   clusterName: takeout
