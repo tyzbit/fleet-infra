@@ -11,5 +11,3 @@ spec:
       protocol: TCP
       targetPort: 6443
       nodePort: 32443
-  externalIPs:
-    - "192.168.1.11"
