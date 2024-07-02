@@ -9,4 +9,4 @@ spec:
     app: corpus-control-plane
   ports:
     - port: 3443
-      nodePort: 34443
+      nodePort: 32443
