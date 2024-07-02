@@ -9,7 +9,7 @@ addressType: IPv4
 ports:
   - name: k8s
     protocol: TCP
-    port: 3443
+    port: 6443
 endpoints:
   - nodeName: neuron1
     addresses:

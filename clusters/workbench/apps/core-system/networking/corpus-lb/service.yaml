@@ -8,5 +8,5 @@ spec:
   selector:
     app: corpus-control-plane
   ports:
-    - port: 3443
+    - port: 6443
       nodePort: 32443
