@@ -59,16 +59,6 @@ spec:
         app: iperf3-client
     spec:
       terminationGracePeriodSeconds: 0
-      affinity:
-        podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            - labelSelector:
-                matchExpressions:
-                  - key: app
-                    operator: In
-                    values:
-                      - iperf3-server
-              topologyKey: "kubernetes.io/hostname"
       containers:
         - name: iperf3-client
           image: networkstatic/iperf3:latest
