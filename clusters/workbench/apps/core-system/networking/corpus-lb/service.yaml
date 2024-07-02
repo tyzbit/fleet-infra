@@ -8,5 +8,8 @@ spec:
   selector:
     app: corpus-control-plane
   ports:
-    - port: 6443
+    - name: k8s
+      port: 6443
+      protocol: TCP
+      targetPort: 6443
       nodePort: 32443

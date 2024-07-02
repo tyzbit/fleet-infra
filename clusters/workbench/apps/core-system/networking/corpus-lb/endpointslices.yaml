@@ -4,20 +4,14 @@ metadata:
   name: corpus-control-plane
   namespace: networking
   labels:
-    endpointslice.kubernetes.io/managed-by: endpointslice-controller.k8s.io
     kubernetes.io/service-name: corpus-control-plane
 addressType: IPv4
 ports:
   - name: k8s
-    protocol: TCP
     port: 6443
+    protocol: TCP
 endpoints:
-  - nodeName: neuron1
-    addresses:
+  - addresses:
       - "192.168.1.21"
-  - nodeName: neuron2
-    addresses:
       - "192.168.1.22"
-  - nodeName: neuron3
-    addresses:
       - "192.168.1.23"
