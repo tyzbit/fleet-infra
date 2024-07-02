@@ -67,7 +67,6 @@ spec:
         className: nginx
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt
-          acme.cert-manager.io/http01-edit-in-place: "true"
           nginx.ingress.kubernetes.io/auth-url: "http://n8n-oauth2-proxy.home-automation.svc.cluster.local/oauth2/auth"
           nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
           external-dns.alpha.kubernetes.io/cloudflare-proxied: "true" # CF breaks n8n sessions
@@ -87,7 +86,6 @@ spec:
         className: nginx
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt
-          acme.cert-manager.io/http01-edit-in-place: "true"
           external-dns.alpha.kubernetes.io/exclude: "true"
         hosts:
           - host: *host
@@ -107,7 +105,6 @@ spec:
         className: nginx
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt
-          acme.cert-manager.io/http01-edit-in-place: "true"
           external-dns.alpha.kubernetes.io/exclude: "true"
         labels:
           use-cloudflare-dns-solver: "true"

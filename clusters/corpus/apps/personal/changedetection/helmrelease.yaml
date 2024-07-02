@@ -81,7 +81,6 @@ spec:
       main:
         className: nginx
         annotations:
-          acme.cert-manager.io/http01-edit-in-place: "true"
           nginx.ingress.kubernetes.io/auth-url: "http://changedetection-oauth2-proxy.personal.svc.cluster.local/oauth2/auth"
           nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
           cert-manager.io/cluster-issuer: letsencrypt

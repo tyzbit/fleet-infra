@@ -87,7 +87,6 @@ spec:
         className: nginx
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt
-          acme.cert-manager.io/http01-edit-in-place: "true"
           nginx.ingress.kubernetes.io/proxy-read-timeout: "14400"
           nginx.ingress.kubernetes.io/proxy-send-timeout: "14400"
           external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
