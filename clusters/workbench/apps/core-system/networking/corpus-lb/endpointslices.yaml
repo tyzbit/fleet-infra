@@ -4,6 +4,7 @@ metadata:
   name: corpus-control-plane
   namespace: networking
   labels:
+    endpointslice.kubernetes.io/managed-by: endpointslice-controller.k8s.io
     kubernetes.io/service-name: corpus-control-plane
 addressType: IPv4
 ports:
