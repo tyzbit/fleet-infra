@@ -1,0 +1,22 @@
+apiVersion: discovery.k8s.io/v1
+kind: EndpointSlice
+metadata:
+  name: corpus-control-plane
+  namespace: networking
+  labels:
+    kubernetes.io/service-name: corpus-control-plane
+addressType: IPv4
+ports:
+  - name: k8s
+    protocol: TCP
+    port: 3443
+endpoints:
+  - nodeName: neuron1
+    addresses:
+      - "192.168.1.21"
+  - nodeName: neuron2
+    addresses:
+      - "192.168.1.22"
+  - nodeName: neuron3
+    addresses:
+      - "192.168.1.23"
