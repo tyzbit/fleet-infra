@@ -1,0 +1,67 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.1/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app imagepullsecret-patcher
+  namespace: flux-system
+spec:
+  releaseName: *app
+  targetNamespace: kube-system
+  timeout: 2m
+  interval: 2m0s
+  chart:
+    spec:
+      chart: app-template
+      version: "3.2.1"
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  values:
+    controllers:
+      *app :
+        replicas: 1
+        strategy: RollingUpdate
+        annotations:
+          reloader.stakater.com/auto: "true"
+
+        containers:
+          *app :
+            image:
+              repository: quay.io/titansoft/imagepullsecret-patcher
+              tag: "v0.14"
+            env:
+              TZ: America/New_York
+              ## https://github.com/titansoft-pte-ltd/imagepullsecret-patcher#installation-and-configuration
+              # CONFIG_ALLSERVICEACCOUNT: "true"
+              # CONFIG_DEBUG: "true"
+              # CONFIG_EXCLUDED_NAMESPACES: default,kube-system
+              # CONFIG_FORCE: "true"
+              # CONFIG_MANAGEDONLY: "true"
+              CONFIG_DOCKERCONFIGJSONPATH: /.dockerconfigjson
+              CONFIG_LOOP_DURATION: 1m0s
+              CONFIG_SECRETNAME: universal-image-pull-secret
+              CONFIG_SERVICEACCOUNTS: default
+              ## Exit after updating secrets
+              # CONFIG_RUNONCE: "true"
+            probes:
+              liveness:
+                enabled: false
+              readiness:
+                enabled: false
+              startup:
+                enabled: false
+
+    serviceAccount:
+      name: *app
+
+    persistence:
+      secret:
+        name: universal-docker-auth
+        type: secret
+        advancedMounts:
+          *app :
+            *app :
+              - path: /.dockerconfigjson
+                readOnly: true
+                subPath: .dockerconfigjson

@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: event-exporter-cfg
+  namespace: monitoring
+data:
+  config.yaml: |
+    logLevel: debug
+    logFormat: json
+    metricsNamePrefix: event_exporter_
+    route:
+      routes:
+        - match:
+            - receiver: "Discord"
+          drop:
+            - type: Normal
+            - message: snapshot becomes not ready to use
+            - message: snapshot is marked as removed
+            - message: lost track of the corresponding snapshot info inside volume engine
+            - message: .*probe failed.*
+    receivers:
+      - name: "Discord"
+        webhook:
+          endpoint: "${discord_kube_event_exporter_webhook}"
+          headers:
+            User-Agent: kube-event-exporter 1.0
+          layout:
+            embeds:
+              - title: '{{ .Type }}: ({{ .Reason }}) {{ .Message }}'
+                description: '[{{ .InvolvedObject.Kind }}] {{ .InvolvedObject.Namespace }}/{{ .InvolvedObject.Name }}'
+                color: '{{ if eq .Type "Error" }}16738657{{ else }}16645526{{ end }}'
+                fields:
+                  - name: 'Host'
+                    value: '{{ .Source.Host }}'
+                    inline: false
+                  - name: 'First Timestamp'
+                    value: '{{ .FirstTimestamp }}'
+                    inline: false
+                  - name: 'Last Timestamp'
+                    value: '{{ .LastTimestamp }}'
+                    inline: false
