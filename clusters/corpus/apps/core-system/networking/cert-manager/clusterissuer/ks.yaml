@@ -8,7 +8,7 @@ spec:
   retryInterval: 1m
   timeout: 5m
 
-  wait: false
+  wait: true
   prune: true
 
   path: "./clusters/corpus/apps/core-system/networking/cert-manager/clusterissuer"
