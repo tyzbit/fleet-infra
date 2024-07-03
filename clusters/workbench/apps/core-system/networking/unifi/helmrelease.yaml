@@ -49,21 +49,22 @@ spec:
     persistence:
       unifi:
         existingClaim: unifi-config
-    # no service needed because host network
-    # service:
-    #   main:
-    #     controller: *app
-    #     type: NodePort
-    #     # externalTrafficPolicy: Local
-    #     ports:
-    #       http:
-    #         port: 8443
-    #         protocol: HTTPS
-    #         nodePort: 30843
-    #       controller: &tcp
-    #         protocol: TCP
-    #         port: 8080
-    #         nodePort: 30808
+
+    # most ports exposed via hostNetwork
+    service:
+      main:
+        controller: *app
+        type: ClusterIP
+        externalTrafficPolicy: Local
+        ports:
+          controller: &tcp
+            protocol: TCP
+            port: 8080
+            nodePort: 30808
+          # http:
+          #   port: 8443
+          #   protocol: HTTPS
+          #   nodePort: 30843
     #       speedtest:
     #         <<: *tcp
     #         port: 6789
@@ -96,3 +97,4 @@ spec:
               - path: /
                 service:
                   identifier: main
+                  port: 8080
