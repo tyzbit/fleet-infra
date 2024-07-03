@@ -6,7 +6,7 @@ metadata:
   namespace: flux-system
 spec:
   releaseName: *app
-  targetNamespace: personal
+  targetNamespace: networking
   timeout: 5m
   interval: 2m0s
   chart:
