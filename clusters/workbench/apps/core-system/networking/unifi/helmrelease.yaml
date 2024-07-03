@@ -23,7 +23,7 @@ spec:
       hostNetwork: true
     controllers:
       *app :
-        replicas: 0
+        replicas: 1
         type: statefulset
         annotations:
           reloader.stakater.com/auto: "true"
