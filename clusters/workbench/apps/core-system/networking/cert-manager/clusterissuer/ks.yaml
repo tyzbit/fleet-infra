@@ -16,7 +16,7 @@ spec:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
-  dependsOn: [{ name: kubernetes-secrets }, { name: cert-manager }]
+  dependsOn: [{ name: kubernetes-secrets }, { name: cert-manager }, { name: cert-manager-crd }]
   postBuild:
     substituteFrom:
       - kind: Secret
