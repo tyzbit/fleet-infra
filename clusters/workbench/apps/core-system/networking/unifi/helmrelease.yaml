@@ -55,7 +55,6 @@ spec:
       main:
         controller: *app
         type: ClusterIP
-        externalTrafficPolicy: Local
         ports:
           http:
             port: 8443
