@@ -57,30 +57,24 @@ spec:
         type: ClusterIP
         externalTrafficPolicy: Local
         ports:
-          controller: &tcp
-            protocol: TCP
-            port: 8080
-            nodePort: 30808
-          # http:
-          #   port: 8443
-          #   protocol: HTTPS
-          #   nodePort: 30843
+          http:
+            port: 8443
+            protocol: HTTPS
+          # controller: &tcp
+          #   protocol: TCP
+          #   port: 8080
     #       speedtest:
     #         <<: *tcp
     #         port: 6789
-    #         nodePort: 30789
     #       stun: &udp
     #         port: 3478
     #         protocol: UDP
-    #         nodePort: 30478
     #       syslog:
     #         <<: *udp
     #         port: 5514
-    #         nodePort: 30514
     #       discovery:
     #         <<: *udp
     #         port: 10001
-    #         nodePort: 30001
 
     ingress:
       main:
