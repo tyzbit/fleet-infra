@@ -12,11 +12,17 @@ ports:
     protocol: TCP
 endpoints:
   - node: neuron1
+    conditions:
+      ready: true
     addresses:
       - "192.168.1.51"
   - node: neuron2
+    conditions:
+      ready: true
     addresses:
       - "192.168.1.52"
   - node: neuron3
+    conditions:
+      ready: true
     addresses:
       - "192.168.1.53"
