@@ -1,0 +1,97 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.1/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app meshcentral
+  namespace: flux-system
+spec:
+  releaseName: *app
+  targetNamespace: personal
+  timeout: 5m
+  interval: 2m0s
+  chart:
+    spec:
+      chart: app-template
+      version: 3.2.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  values:
+    defaultPodOptions:
+      terminationGracePeriodSeconds: 1
+    controllers:
+      *app :
+        replicas: 1
+        type: statefulset
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          *app :
+            image:
+              repository: jacobalberty/unifi
+              tag: v8.2.93
+            env:
+              RUNAS_UID0: "false"
+              BIND_PRIV: "false"
+              UNIFI_UID: "999"
+              UNIFI_GID: "999"
+              UNIFI_STDOUT: "true"
+              JVM_INIT_HEAP_SIZE:
+              JVM_MAX_HEAP_SIZE: 1024M
+            resources:
+              requests:
+                cpu: 100m
+              limits:
+                memory: 2Gi
+
+    persistence:
+      unifi:
+        existingClaim: unifi-config
+
+    service:
+      main:
+        controller: *app
+        type: NodePort
+        # externalTrafficPolicy: Local
+        ports:
+          http:
+            port: 8443
+            protocol: HTTPS
+            nodePort: 30843
+          controller: &tcp
+            protocol: TCP
+            port: 8080
+            nodePort: 30808
+          speedtest:
+            <<: *tcp
+            port: 6789
+            nodePort: 30789
+          stun: &udp
+            port: 3478
+            protocol: UDP
+            nodePort: 30478
+          syslog:
+            <<: *udp
+            port: 5514
+            nodePort: 30514
+          discovery:
+            <<: *udp
+            port: 10001
+            nodePort: 30001
+
+    ingress:
+      main:
+        className: nginx
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt
+          external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+          external-dns.alpha.kubernetes.io/target: ${cloudflared_tunnel_uuid}.cfargotunnel.com
+          nginx.ingress.kubernetes.io/proxy-body-size: 4096m
+          nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+        hosts:
+          - host: &host "unifi.${personal_domain}"
+            paths:
+              - path: /
+                service:
+                  identifier: main
