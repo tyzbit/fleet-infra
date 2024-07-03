@@ -84,6 +84,8 @@ spec:
           external-dns.alpha.kubernetes.io/target: ${cloudflared_tunnel_uuid}.cfargotunnel.com
           nginx.ingress.kubernetes.io/proxy-body-size: 4096m
           nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+        labels:
+          use-cloudflare-dns-solver: "true"
         hosts:
           - host: &host "unifi.${personal_domain}"
             paths:
