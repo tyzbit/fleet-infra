@@ -40,6 +40,8 @@ spec:
               UNIFI_STDOUT: "true"
               JVM_INIT_HEAP_SIZE: 1024M
               JVM_MAX_HEAP_SIZE: 1024M
+              CERTNAME: tls.crt
+              CERT_PRIVATE_NAME: tls.key
             resources:
               requests:
                 cpu: 100m
@@ -47,8 +49,22 @@ spec:
                 memory: 2Gi
 
     persistence:
-      unifi:
+      unifi-config:
         existingClaim: unifi-config
+        advancedMounts:
+          *app :
+            *app :
+              - path: /unifi/data
+                subPath: data
+              - path: /unifi/log
+                subPath: log
+              - path: /unifi/run
+                subPath: run
+      unifi-cert:
+        name: &tlssecret unifi.${personal_domain}-tls
+        type: secret
+        globalMounts:
+          - path: /unifi/cert
 
     # most ports exposed via hostNetwork
     service:
@@ -95,4 +111,4 @@ spec:
         tls:
           - hosts:
               - *host
-            secretName: unifi.${personal_domain}-tls
+            secretName: *tlssecret
