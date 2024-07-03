@@ -91,4 +91,3 @@ spec:
               - path: /
                 service:
                   identifier: main
-                  port: 8443
