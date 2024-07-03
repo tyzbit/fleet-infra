@@ -20,7 +20,7 @@ spec:
   values:
     controllers:
       *app :
-        replicas: 0 # active longhorn-database nas
+        replicas: 1
         type: statefulset
         annotations:
           reloader.stakater.com/auto: "true"
@@ -107,5 +107,7 @@ spec:
         tls:
           - hosts:
               - *host
+            secretName: home.${personal_domain}-tls
+          - hosts:
               - *hostfb
-            secretName: home.${personal_domain}-multi-tls
+            secretName: home-fb.${personal_domain}-tls
