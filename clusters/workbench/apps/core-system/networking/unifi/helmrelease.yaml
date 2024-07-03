@@ -20,6 +20,7 @@ spec:
   values:
     defaultPodOptions:
       terminationGracePeriodSeconds: 1
+      hostNetwork: true
     controllers:
       *app :
         replicas: 1
@@ -48,37 +49,37 @@ spec:
     persistence:
       unifi:
         existingClaim: unifi-config
-
-    service:
-      main:
-        controller: *app
-        type: NodePort
-        # externalTrafficPolicy: Local
-        ports:
-          http:
-            port: 8443
-            protocol: HTTPS
-            nodePort: 30843
-          controller: &tcp
-            protocol: TCP
-            port: 8080
-            nodePort: 30808
-          speedtest:
-            <<: *tcp
-            port: 6789
-            nodePort: 30789
-          stun: &udp
-            port: 3478
-            protocol: UDP
-            nodePort: 30478
-          syslog:
-            <<: *udp
-            port: 5514
-            nodePort: 30514
-          discovery:
-            <<: *udp
-            port: 10001
-            nodePort: 30001
+    # no service needed because host network
+    # service:
+    #   main:
+    #     controller: *app
+    #     type: NodePort
+    #     # externalTrafficPolicy: Local
+    #     ports:
+    #       http:
+    #         port: 8443
+    #         protocol: HTTPS
+    #         nodePort: 30843
+    #       controller: &tcp
+    #         protocol: TCP
+    #         port: 8080
+    #         nodePort: 30808
+    #       speedtest:
+    #         <<: *tcp
+    #         port: 6789
+    #         nodePort: 30789
+    #       stun: &udp
+    #         port: 3478
+    #         protocol: UDP
+    #         nodePort: 30478
+    #       syslog:
+    #         <<: *udp
+    #         port: 5514
+    #         nodePort: 30514
+    #       discovery:
+    #         <<: *udp
+    #         port: 10001
+    #         nodePort: 30001
 
     ingress:
       main:
