@@ -41,6 +41,7 @@ spec:
               JVM_MAX_HEAP_SIZE: 1024M
               CERTNAME: tls.crt
               CERT_PRIVATE_NAME: tls.key
+              CERT_IS_CHAIN: "true"
             resources:
               requests:
                 cpu: 100m
