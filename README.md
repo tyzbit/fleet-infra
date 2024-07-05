@@ -10,29 +10,7 @@ something I have in here, I will close it.
 ## Repo organization
 
 Like most Flux repos, I have a `clusters` folder with a folder for every cluster
-I've bootstrapped but at the moment, it's only one: `takeout`
-(like takeout *containers*🥡, get it?).
+I've bootstrapped. `corpus` is the main cluster, 3 control panel nodes, 3 workers. `workbench` is a single node cluster on a micro form factory system. It is the k8s load balancer for corpus, runs the unifi controller and home assistant, etc. The intention is to make it as stand-alone as possible so if there are cluster issues or issues with my router (which previously was the k8s load balancer), it would remain up or be able to be restarted without relying on anything else.
 
-Then it gets a little complicated because of CRDs and SOPS secrets.
+The Customization organization is pretty straightforward, a folder for Flux-related things and then another folder for apps. I've taken the time to declare dependencies for everything so re-bootstrapping is hands-off.
 
-`cluters/takeout` (has cluster tools like metallb, newrelic, generally things
-that don't need other CRDs or secrets)
-
-`custom-resources/takeout` (has prereq CRDs like cert-manager and storage that
-depend on stuff in the `clusters/takeout` folder)
-
-`customer-resource-consumers/takeout` (has most user apps that may need storage,
-CRDs or secrets)
-
-Here's the Kustomization hierarchy:
-
-```
-cluters/takeout
-  \_⬆️ Depends on ⬆️ custom-resources/takeout
-    \_⬆️ Depends on ⬆️ customer-resource-consumers/takeout
-```
-
-As you might assume, other clusters can be set up in these folders, but I only
-have one right now. Flux takes about a minute to reconcile so there's room for
-improvement but this organization should let me re-bootstrap without too many
-race conditions.
