@@ -17,6 +17,8 @@ spec:
         name: bjw-s
         namespace: flux-system
   values:
+    defaultPodOptions:
+      hostNetwork: true
     controllers:
       *app :
         replicas: 1
