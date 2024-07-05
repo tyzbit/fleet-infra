@@ -14,7 +14,7 @@ data:
     # model:
     #   path: plus://25407b0ec1226e1daba65503b2f7c013
     mqtt:
-      host: mosquitto
+      host: 192.168.1.11
     record:
       enabled: True
       retain:
