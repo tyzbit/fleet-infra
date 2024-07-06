@@ -37,8 +37,8 @@ spec:
               UNIFI_UID: "999"
               UNIFI_GID: "999"
               UNIFI_STDOUT: "true"
-              JVM_INIT_HEAP_SIZE: 1024M
-              JVM_MAX_HEAP_SIZE: 1024M
+              JVM_INIT_HEAP_SIZE: 256M
+              JVM_MAX_HEAP_SIZE: 256M
               CERTNAME: tls.crt
               CERT_PRIVATE_NAME: tls.key
               CERT_IS_CHAIN: "true"
@@ -46,7 +46,7 @@ spec:
               requests:
                 cpu: 100m
               limits:
-                memory: 2Gi
+                memory: 768Mi
 
     persistence:
       unifi-config:
