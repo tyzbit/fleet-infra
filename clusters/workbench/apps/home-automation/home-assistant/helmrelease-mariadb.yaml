@@ -32,7 +32,6 @@ spec:
   values:
     enabled: true
     primary:
-      existingConfigmap: home-assistant-db-config
       persistence:
         # It will run with an emptyDir
         enabled: false
