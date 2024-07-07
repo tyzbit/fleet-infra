@@ -31,6 +31,8 @@ spec:
       targetPath: auth.rootPassword
   values:
     enabled: true
+    auth:
+      database: home-assistant
     primary:
       existingConfigmap: home-assistant-db-config
       persistence:
