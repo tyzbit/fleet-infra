@@ -42,7 +42,7 @@ spec:
               requests:
                 cpu: 10m
               limits:
-                memory: 1280Mi
+                memory: 768Mi
 
           filebrowser:
             image:
