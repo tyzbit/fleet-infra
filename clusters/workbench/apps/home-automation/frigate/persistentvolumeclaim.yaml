@@ -8,7 +8,7 @@ spec:
     requests:
       storage: 5Gi
   volumeMode: Filesystem
-  storageClassName: longhorn-database
+  storageClassName: nas
   accessModes:
     - ReadWriteOnce
 ---
