@@ -61,31 +61,31 @@ data:
         device: usb
 
     cameras:
-      porch:
-        birdseye:
-          order: 1
-        ffmpeg:
-          inputs:
-            # - path: 'rtsp://localhost:8554/porch'
-            - path: 'rtsp://{FRIGATE_PORCH_CREDENTIALS}@porch.onair:554/live'
-              roles:
-                - detect
-                - record
-        motion:
-          mask:
-            - 2688,1520,1950,1520,2168,751,2688,738
-        objects:
-          filters:
-            person:
-              # min_score: 0.73
-              mask:
-                - 2688,1520,1950,1520,2168,751,2688,738
-        detect:
-          width: 1280
-          height: 720
-          fps: 5
-        mqtt:
-          height: 540
+      # porch:
+      #   birdseye:
+      #     order: 1
+      #   ffmpeg:
+      #     inputs:
+      #       # - path: 'rtsp://localhost:8554/porch'
+      #       - path: 'rtsp://{FRIGATE_PORCH_CREDENTIALS}@porch.onair:554/live'
+      #         roles:
+      #           - detect
+      #           - record
+      #   motion:
+      #     mask:
+      #       - 2688,1520,1950,1520,2168,751,2688,738
+      #   objects:
+      #     filters:
+      #       person:
+      #         # min_score: 0.73
+      #         mask:
+      #           - 2688,1520,1950,1520,2168,751,2688,738
+      #   detect:
+      #     width: 1280
+      #     height: 720
+      #     fps: 5
+      #   mqtt:
+      #     height: 540
 
       frontdoor:
         birdseye:
@@ -195,40 +195,40 @@ data:
           height: 540
 
       flowerbed:
-        birdseye:
-          order: 6
-        ffmpeg:
-          inputs:
-            # - path: 'rtsp://localhost:8554/backyard'
-            - path: 'rtsp://{FRIGATE_BUNNIES_CREDENTIALS}@bunnies.onair:554/1'
-              roles:
-                - detect
-                - record
-        objects:  
-          track:
-            - cat
-            - dog
-            # - horse
-            # - sheep
-            # - cow
-            # - elephant
-            # - zebra
-            # - giraffe
-            # - bear
-          filters:
-            cat: &flowerbedanimalthreshold
-              threshold: 0.5
-            dog: *flowerbedanimalthreshold
-            # horse: *animalthreshold
-            # sheep: *animalthreshold
-            # cow: *animalthreshold
-            # elephant: *animalthreshold
-            # zebra: *animalthreshold
-            # giraffe: *animalthreshold
-            # bear: *animalthreshold
-        detect:
-          width: 1920
-          height: 1080
-          fps: 30
-        mqtt:
-          height: 540
+        # birdseye:
+        #   order: 6
+        # ffmpeg:
+        #   inputs:
+        #     # - path: 'rtsp://localhost:8554/backyard'
+        #     - path: 'rtsp://{FRIGATE_BUNNIES_CREDENTIALS}@bunnies.onair:554/1'
+        #       roles:
+        #         - detect
+        #         - record
+        # objects:  
+        #   track:
+        #     - cat
+        #     - dog
+        #     # - horse
+        #     # - sheep
+        #     # - cow
+        #     # - elephant
+        #     # - zebra
+        #     # - giraffe
+        #     # - bear
+        #   filters:
+        #     cat: &flowerbedanimalthreshold
+        #       threshold: 0.5
+        #     dog: *flowerbedanimalthreshold
+        #     # horse: *animalthreshold
+        #     # sheep: *animalthreshold
+        #     # cow: *animalthreshold
+        #     # elephant: *animalthreshold
+        #     # zebra: *animalthreshold
+        #     # giraffe: *animalthreshold
+        #     # bear: *animalthreshold
+        # detect:
+        #   width: 1920
+        #   height: 1080
+        #   fps: 30
+        # mqtt:
+        #   height: 540
