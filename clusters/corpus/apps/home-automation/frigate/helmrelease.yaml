@@ -91,7 +91,7 @@ spec:
     service:
       main:
         controller: *app
-        type: LoadBalancer
+        type: ClusterIP
         ports:
           http:
             port: 80
