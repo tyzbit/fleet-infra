@@ -6,9 +6,9 @@ metadata:
 data:
   config.yml: |
     logger:
-      default: info
-      logs:
-        frigate.app: debug
+      default: debug
+      # logs:
+      #   frigate.app: debug
       #   frigate.record: debug
     database:
       path: /db/frigate.db
