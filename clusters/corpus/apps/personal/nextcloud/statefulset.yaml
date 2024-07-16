@@ -97,6 +97,7 @@ spec:
           args:
             - |
               while :; do /cron.sh; done &
+              su www-data -s /usr/local/bin/php occ db:add-missing-indices &&
               /entrypoint.sh apache2-foreground
           # command: ["tail","-f","/dev/null"]
           envFrom:
