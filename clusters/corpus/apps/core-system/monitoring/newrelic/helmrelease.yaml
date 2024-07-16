@@ -296,13 +296,13 @@ spec:
                 Logical_Op or
                 Exclude  log /[Rr]econcili?ation finished in/
                 Exclude  log /All dependencies are ready, proceeding with reconciliation/
-                Exclude  log /^artifact up.to.date with remote revision/
-                Exclude  log /^Latest image tag for/
-                Exclude  log /^no new tag(s)? found, next scan/
-                Exclude  log /^Discarding event, no alerts found for the involved object/
-                Exclude  log /^no change(s)? made in working directory/
-                Exclude  log /^no change(s)? since last reconciliation/
-                Exclude  log /^release in-sync with desired state/
+                Exclude  log /artifact up.to.date with remote revision/
+                Exclude  log /Latest image tag for/
+                Exclude  log /no new tag(s)? found, next scan/
+                Exclude  log /Discarding event, no alerts found for the involved object/
+                Exclude  log /no change(s)? made in working directory/
+                Exclude  log /no change(s)? since last reconciliation/
+                Exclude  log /release in-sync with desired state/
                 Exclude  log /release in.sync/
                 Exclude  log /server.side apply completed/
                 Exclude  log /is in.sync/
