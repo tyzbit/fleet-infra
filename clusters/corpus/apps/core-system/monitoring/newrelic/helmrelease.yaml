@@ -399,7 +399,7 @@ spec:
                 Name     grep
                 Match    kube.*
                 Logical_Op or
-                Exclude  log /level=warning msg=\\"pvc-/
+                Exclude  log /level=warning msg="pvc-/
 
             # Filter kube metrics adapter messages
             [FILTER]
