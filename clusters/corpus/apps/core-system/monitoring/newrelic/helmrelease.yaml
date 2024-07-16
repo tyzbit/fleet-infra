@@ -301,7 +301,7 @@ spec:
                 Exclude  log /no new tag(s)? found, next scan/
                 Exclude  log /Discarding event, no alerts found for the involved object/
                 Exclude  log /no change(s)? made in working directory/
-                Exclude  log /no change(s)? since last reconciliation/
+                Exclude  log /no change(s)? since last reconcil(i)?ation/
                 Exclude  log /release in-sync with desired state/
                 Exclude  log /release in.sync/
                 Exclude  log /server.side apply completed/
