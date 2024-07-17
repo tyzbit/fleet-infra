@@ -317,8 +317,8 @@ spec:
                 Name     grep
                 Match    kube.*
                 Logical_Op and
-                Exclude  log /.*UPDATE.*/
-                Exclude  $kubernetes['labels.app.kubernetes.io/instance'] /(external.dns)/
+                Exclude  log /level=info msg="Changing record." action=UPDATE/
+                Exclude  $kubernetes['container_name'] /external.dns/
 
             # Filter Unifi DEBUG lines
             [FILTER]
