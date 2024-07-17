@@ -325,8 +325,8 @@ spec:
                 Name     grep
                 Match    kube.*
                 Logical_Op and
-                Exclude  log /.*DEBUG.*/
-                Exclude  $kubernetes['labels.app.kubernetes.io/instance'] unifi
+                Exclude  log /DEBUG/
+                Exclude  $kubernetes['container_name'] unifi
 
             # Filter etcd status checks
             [FILTER]
