@@ -350,11 +350,13 @@ spec:
                 Match    kube.*
                 Exclude  log /This connection closed normally without authentication/
 
-            # Filter nginx ingress endpoint message
+            # Filter nginx ingress unnecessary messages
             [FILTER]
                 Name     grep
                 Match    kube.*
+                Logical_Op or
                 Exclude  log /does not have any active Endpoint/
+                Exclude  log /SSL_do_handshake/
 
             # Filter nginx ingress config validated
             [FILTER]
