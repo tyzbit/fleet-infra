@@ -325,8 +325,8 @@ spec:
                 Name     grep
                 Match    kube.*
                 Logical_Op and
-                Exclude  log /.*DEBUG.*/
-                Exclude  $kubernetes['labels.app.kubernetes.io/instance'] /(unifi)/
+                Exclude  log DEBUG
+                Exclude  $kubernetes['labels.app.kubernetes.io/instance'] unifi
 
             # Filter etcd status checks
             [FILTER]
@@ -406,7 +406,7 @@ spec:
                 Name     grep
                 Match    kube.*
                 Logical_Op and
-                Exclude  log /level=info msg=\\"Looking for HPAs\\"/
+                Exclude  log /level=info msg="Looking for HPAs"/
                 Exclude  $kubernetes['namespace_name'] /(kube.system)/
 
             # Filter unwanted containers
