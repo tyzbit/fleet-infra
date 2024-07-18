@@ -393,10 +393,10 @@ spec:
                 Name     grep
                 Match    kube.*
                 Logical_Op and
-                Exclude  log /\\"([A-Z]+) .*\\" 200/
+                Exclude  log /"[A-Z]+ .*" 200/
                 Exclude  $kubernetes['namespace_name'] /(longhorn.system)/
 
-            # Filter longhorn GET messages
+            # Filter longhorn PVC messages
             [FILTER]
                 Name     grep
                 Match    kube.*
