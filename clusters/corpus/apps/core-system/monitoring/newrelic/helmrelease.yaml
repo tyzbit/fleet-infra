@@ -403,6 +403,12 @@ spec:
                 Logical_Op or
                 Exclude  log /level=warning msg="pvc-/
 
+            # Filter cert-manager messages
+            [FILTER]
+                Name     grep
+                Match    kube.*
+                Exclude  log /skipping re-verifying ACME account/
+
             # Filter kube metrics adapter messages
             [FILTER]
                 Name     grep

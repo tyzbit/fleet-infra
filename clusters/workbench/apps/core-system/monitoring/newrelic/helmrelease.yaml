@@ -411,6 +411,12 @@ spec:
                 Exclude  log /level=info msg="Looking for HPAs"/
                 Exclude  $kubernetes['namespace_name'] /(kube.system)/
 
+            # Filter cert-manager messages
+            [FILTER]
+                Name     grep
+                Match    kube.*
+                Exclude  log /skipping re-verifying ACME account/
+
             # Filter unwanted containers
             [FILTER]
                 Name     grep
