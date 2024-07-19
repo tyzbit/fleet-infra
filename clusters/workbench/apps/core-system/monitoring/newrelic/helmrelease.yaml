@@ -433,6 +433,17 @@ spec:
                 Match    kube.*
                 Exclude  log /skipping re-verifying ACME account/
 
+            # Filter *arr scans
+            [FILTER]
+                Name     grep
+                Match    kube.*
+                Logical_Op or
+                Exclude  log [Info] DiskScanService
+                Exclude  log [Info] ExistingSubtitleImporter
+                Exclude  log [Info] ExistingExtraFileService
+                Exclude  log [Info] ExistingOtherExtraImporter
+                Exclude  log [Info] ExistingMetadataImporter
+
             # Filter unwanted containers
             [FILTER]
                 Name     grep
