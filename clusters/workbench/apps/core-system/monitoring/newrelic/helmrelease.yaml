@@ -411,6 +411,14 @@ spec:
                 Logical_Op or
                 Exclude  log /level=warning msg=\\"pvc-/
 
+            # Filter longhorn transfer messages
+            [FILTER]
+                Name     grep
+                Match    kube.*
+                Logical_Op and
+                Exclude  log /[0-9]{6}: ->[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}:[0-9]+/
+                Exclude  $kubernetes['namespace_name'] /(longhorn.system)/
+
             # Filter kube metrics adapter messages
             [FILTER]
                 Name     grep
