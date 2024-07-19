@@ -374,6 +374,14 @@ spec:
                 Exclude  log /No files matching import glob pattern/
                 Exclude  $kubernetes['container_name'] coredns
 
+            # Filter overseerr debug messages
+            [FILTER]
+                Name     grep
+                Match    kube.*
+                Logical_Op and
+                Exclude  log /debug/
+                Exclude  $kubernetes['container_name'] overseerr
+
             # Filter longhorn instance manager debug
             [FILTER]
                 Name     grep
