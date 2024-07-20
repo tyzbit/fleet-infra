@@ -438,11 +438,12 @@ spec:
                 Name     grep
                 Match    kube.*
                 Logical_Op or
-                Exclude  log [Info] DiskScanService
-                Exclude  log [Info] ExistingSubtitleImporter
-                Exclude  log [Info] ExistingExtraFileService
-                Exclude  log [Info] ExistingOtherExtraImporter
-                Exclude  log [Info] ExistingMetadataImporter
+                Exclude  log /\[Info\] DiskScanService/
+                Exclude  log /\[Info\] ExistingSubtitleImporter/
+                Exclude  log /\[Info\] ExistingExtraFileService/
+                Exclude  log /\[Info\] ExistingOtherExtraImporter/
+                Exclude  log /\[Info\] ExistingMetadataImporter/
+
 
             # Filter unwanted containers
             [FILTER]
