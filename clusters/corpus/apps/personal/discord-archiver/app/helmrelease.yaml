@@ -18,15 +18,15 @@ spec:
   interval: 2m0s
   values:
     controllers:
-      *app :
+      *app:
         replicas: 1
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
-          *app :
+          *app:
             image:
               repository: ghcr.io/tyzbit/go-discord-archiver
-              tag: "2.11.0" # {"$imagepolicy": "flux-system:go-discord-archiver:tag"}
+              tag: "2.11.1" # {"$imagepolicy": "flux-system:go-discord-archiver:tag"}
             envFrom:
               - secretRef:
                   name: *app
@@ -50,7 +50,7 @@ spec:
                 enabled: true
                 custom: true
                 spec:
-                  <<: *spec
+                  !!merge <<: *spec
                   failureThreshold: 15
                   initialDelaySeconds: 5
             resources:
@@ -58,7 +58,6 @@ spec:
                 cpu: "50m"
               limits:
                 memory: "256Mi"
-
     service:
       main:
         controller: *app
