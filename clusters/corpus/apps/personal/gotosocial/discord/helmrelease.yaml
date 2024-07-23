@@ -44,7 +44,7 @@ spec:
               GTS_ACCOUNT_DOMAIN: *host
               GTS_PROTOCOL: "https"
               GTS_PORT: "8080"
-              GTS_TRUSTED_PROXIES: 172.18.0.0/16
+              GTS_TRUSTED_PROXIES: 172.23.0.0/16
               GTS_ACCOUNTS_APPROVAL_REQUIRED: "true"
               GTS_ACCOUNTS_REASON_REQUIRED: "true"
               GTS_TLS_CERTIFICATE_CHAIN: &chain "/tls/fullchain.pem"
