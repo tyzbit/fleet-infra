@@ -71,18 +71,20 @@ spec:
         controller: *app
         ports:
           rustdesk-1:
-            port: 21115
+            port: 21114
           rustdesk-2:
-            port: &port 21116
+            port: 21115
           rustdesk-3:
+            port: &port 21116
+          rustdesk-4:
             port: *port
             protocol: UDP
-          rustdesk-4:
+          rustdesk-6:
             port: 21118
       *relay :
         controller: *app
         ports:
           rustdesk-5:
             port: 21117
-          rustdesk-6:
+          rustdesk-7:
             port: 21119
