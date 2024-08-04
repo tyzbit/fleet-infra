@@ -13,7 +13,7 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - &host "pasta.${blog_domain}"
+        - &host "pasta.${public_services_domain}"
       secretName: *host
   rules:
     - host: *host
