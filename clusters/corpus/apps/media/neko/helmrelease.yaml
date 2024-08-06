@@ -40,7 +40,8 @@ spec:
               NEKO_TCPMUX: &mux "5100"
               NEKO_UDPMUX: *mux
               NEKO_ICELITE: "true"
-              NEKO_BROADCAST_URL: rtmp://${neko_name}-neko-nginx-rtmp/l/neko
+              # NEKO_BROADCAST_URL: rtmp://${neko_name}-neko-nginx-rtmp/l/neko
+              NEKO_NAT1TO1: ${home_domain_ddns}
             resources:
               requests:
                 cpu: 1400m
