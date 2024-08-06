@@ -41,7 +41,7 @@ spec:
               NEKO_UDPMUX: *mux
               NEKO_ICELITE: "true"
               # NEKO_BROADCAST_URL: rtmp://${neko_name}-neko-nginx-rtmp/l/neko
-              NEKO_NAT1TO1: ${home_ip}
+              NEKO_ICESERVER: stun:stun.l.google.com:19302
             resources:
               requests:
                 cpu: 1400m
