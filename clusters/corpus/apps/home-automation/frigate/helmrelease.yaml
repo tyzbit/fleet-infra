@@ -116,12 +116,15 @@ spec:
               - path: "/"
                 service:
                   identifier: main
-          - host: &internal "frigate.internal"
+          - host: &host "frigate.internal"
             paths:
               - path: "/"
                 service:
                   identifier: main
         tls:
+          - hosts:
+              - *host
+            secretName: *host
           - hosts:
               - *internal
             secretName: internal-wildcard-tls
