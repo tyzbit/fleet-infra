@@ -112,3 +112,16 @@ spec:
           - hosts:
               - *host
             secretName: *tlssecret
+
+      internal:
+        className: nginx
+        hosts:
+          - host: "unifi.home.arpa"
+            paths:
+              - path: /
+                service:
+                  identifier: main
+        tls:
+          - hosts:
+              - "*.home.arpa"
+            secretName: internal-wildcard-tls
