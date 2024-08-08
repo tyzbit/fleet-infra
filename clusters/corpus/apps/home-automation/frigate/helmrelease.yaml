@@ -124,7 +124,7 @@ spec:
       internal:
         className: nginx
         hosts:
-          - host: &internal "frigate.home.arpa"
+          - host: "frigate.home.arpa"
             paths:
               - path: "/"
                 service:

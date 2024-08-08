@@ -82,6 +82,19 @@ spec:
               - *host
             secretName: *host
 
+      internal:
+        className: nginx
+        hosts:
+          - host: "n8n.home.arpa"
+            paths:
+              - path: "/"
+                service:
+                  identifier: main
+        tls:
+          - hosts:
+              - "*.home.arpa"
+            secretName: internal-wildcard-tls
+
       webhooks:
         className: nginx
         annotations:
