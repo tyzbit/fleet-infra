@@ -116,7 +116,7 @@ spec:
               - path: "/"
                 service:
                   identifier: main
-          - host: &host "frigate.internal"
+          - host: &internal "frigate.internal"
             paths:
               - path: "/"
                 service:
