@@ -131,7 +131,7 @@ spec:
                   identifier: main
         tls:
           - hosts:
-              - *internal
+              - "*.home.arpa"
             secretName: internal-wildcard-tls
 
       oauth:
