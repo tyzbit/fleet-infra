@@ -116,15 +116,20 @@ spec:
               - path: "/"
                 service:
                   identifier: main
+        tls:
+          - hosts:
+              - *host
+            secretName: *host
+
+      internal:
+        className: nginx
+        hosts:
           - host: &internal "frigate.internal"
             paths:
               - path: "/"
                 service:
                   identifier: main
         tls:
-          - hosts:
-              - *host
-            secretName: *host
           - hosts:
               - *internal
             secretName: internal-wildcard-tls
