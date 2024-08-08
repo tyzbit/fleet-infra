@@ -41,7 +41,7 @@ spec:
                   backup-concurrent-limit: 2
                   # backupTarget: s3://${longhorn_backup_bucket}@us-east-1/
                   # backupTargetCredentialSecret: longhorn-corpus-backups
-                  backupTarget: nfs://nas.onair:/volume1/longhorn_corpus_backups
+                  backupTarget: nfs://nas.internal:/volume1/longhorn_corpus_backups
                   backupstore-poll-interval: 0
                   concurrent-automatic-engine-upgrade-per-node-limit: 3
                   concurrent-replica-rebuild-per-node-limit: 10

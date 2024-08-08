@@ -18,7 +18,7 @@ spec:
         - &host "longhorn.${personal_domain}"
       secretName: *host
   rules:
-    - host: longhorn.onair
+    - host: longhorn.internal
       http:
         paths:
           - pathType: Prefix
@@ -56,7 +56,7 @@ spec:
         - &host "longhorn.${personal_domain}"
       secretName: *host
   rules:
-    - host: longhorn.onair
+    - host: longhorn.internal
       http:
         paths:
           - path: /oauth2
