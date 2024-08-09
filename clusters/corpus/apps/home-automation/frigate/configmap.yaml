@@ -62,7 +62,7 @@ data:
           - birdseye
         icon: vuBird
         order: 0
-      "Birdseye":
+      "All Cameras":
         cameras:
           - driveway
           - court
