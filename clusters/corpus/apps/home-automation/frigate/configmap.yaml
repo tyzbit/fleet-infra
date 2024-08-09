@@ -56,6 +56,13 @@ data:
     #     court: 'rtsp://{FRIGATE_COURT_CREDENTIALS}@court.home.arpa:554/cam/realmonitor?channel=1&subtype=0'
     #     # court_low: 'rtsp://{FRIGATE_COURT_CREDENTIALS}@court.home.arpa:554/cam/realmonitor?channel=1&subtype=1'
 
+    camera_groups:
+      "All Cameras":
+        cameras:
+          - birdseye
+        icon: bird
+        order: 0
+
     detectors:
       coral:
         type: edgetpu
