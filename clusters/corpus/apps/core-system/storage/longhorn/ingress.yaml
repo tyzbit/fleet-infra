@@ -18,16 +18,6 @@ spec:
         - &host "longhorn.${personal_domain}"
       secretName: *host
   rules:
-    - host: longhorn.home.arpa
-      http:
-        paths:
-          - pathType: Prefix
-            path: "/"
-            backend:
-              service:
-                name: longhorn-frontend
-                port:
-                  number: 80
     - host: *host
       http:
         paths:
@@ -48,7 +38,7 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - &"*.home.arpa"
+        - "*.home.arpa"
       secretName: internal-wildcard-tls
   rules:
     - host: longhorn.home.arpa
@@ -79,16 +69,6 @@ spec:
         - &host "longhorn.${personal_domain}"
       secretName: *host
   rules:
-    - host: longhorn.home.arpa
-      http:
-        paths:
-          - path: /oauth2
-            pathType: Prefix
-            backend:
-              service:
-                name: longhorn-oauth2-proxy
-                port:
-                  number: 80
     - host: *host
       http:
         paths:
