@@ -201,6 +201,11 @@ data:
           fps: 5
         mqtt:
           height: 540
+        onvif:
+          host: court.home.arpa
+          port: 8000
+          user: ${basic_user}
+          password: ${basic_password}
 
       # flowerbed:
       #   birdseye:
