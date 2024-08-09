@@ -57,11 +57,19 @@ data:
     #     # court_low: 'rtsp://{FRIGATE_COURT_CREDENTIALS}@court.home.arpa:554/cam/realmonitor?channel=1&subtype=1'
 
     camera_groups:
-      "All Cameras":
+      "Birdseye":
         cameras:
           - birdseye
-        icon: bird
+        icon: vuBird
         order: 0
+      "Birdseye":
+        cameras:
+          - driveway
+          - court
+          - backyard
+          - frontdoor
+        icon: vuHome
+        order: 1
 
     detectors:
       coral:
