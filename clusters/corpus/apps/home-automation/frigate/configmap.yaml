@@ -203,7 +203,7 @@ data:
           height: 540
         onvif:
           host: court.home.arpa
-          port: 8000
+          port: 80
           user: ${basic_user}
           password: ${basic_password}
 
