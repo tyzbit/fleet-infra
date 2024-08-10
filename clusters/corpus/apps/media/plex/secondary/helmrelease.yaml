@@ -59,6 +59,15 @@ spec:
         existingClaim: nas-volume1-media
       config:
         existingClaim: plex-secondary-config-longhorn-plex
+      certificate:
+        name: certificate
+        type: configMap
+        advancedMounts:
+          *app :
+            *app :
+              - path: /home/plex/certificates/plex/certificate.p12
+                readOnly: true
+                subPath: certificate.p12
       transcode:
         type: hostPath
         hostPathType: DirectoryOrCreate
