@@ -22,5 +22,5 @@ spec:
       name: nas
       pathPattern: "$${.PVC.namespace}-$${.PVC.name}"
     nfs:
-      server: nas.jura
+      server: nas.home.arpa
       path: /volume1/workbench_cluster_storage
