@@ -223,41 +223,41 @@ data:
           user: ${basic_user}
           password: ${basic_password}
 
-      # flowerbed:
-      #   birdseye:
-      #     order: 6
-      #   ffmpeg:
-      #     inputs:
-      #       # - path: 'rtsp://localhost:8554/backyard'
-      #       - path: 'rtsp://{FRIGATE_BUNNIES_CREDENTIALS}@bunnies.home.arpa:554/1'
-      #         roles:
-      #           - detect
-      #           - record
-      #   objects:  
-      #     track:
-      #       - cat
-      #       - dog
-      #       # - horse
-      #       # - sheep
-      #       # - cow
-      #       # - elephant
-      #       # - zebra
-      #       # - giraffe
-      #       # - bear
-      #     filters:
-      #       cat: &flowerbedanimalthreshold
-      #         threshold: 0.5
-      #       dog: *flowerbedanimalthreshold
-      #       # horse: *animalthreshold
-      #       # sheep: *animalthreshold
-      #       # cow: *animalthreshold
-      #       # elephant: *animalthreshold
-      #       # zebra: *animalthreshold
-      #       # giraffe: *animalthreshold
-      #       # bear: *animalthreshold
-      #   detect:
-      #     width: 1920
-      #     height: 1080
-      #     fps: 30
-      #   mqtt:
-      #     height: 540
+       flowerbed:
+         birdseye:
+           order: 6
+         ffmpeg:
+           inputs:
+             # - path: 'rtsp://localhost:8554/backyard'
+             - path: 'rtsp://{FRIGATE_BUNNIES_CREDENTIALS}@bunnies.home.arpa:554/1'
+               roles:
+                 - detect
+                 - record
+         objects:  
+           track:
+             - cat
+             - dog
+             # - horse
+             # - sheep
+             # - cow
+             # - elephant
+             # - zebra
+            # - giraffe
+             # - bear
+           filters:
+             cat: &flowerbedanimalthreshold
+               threshold: 0.5
+             dog: *flowerbedanimalthreshold
+             # horse: *animalthreshold
+              # sheep: *animalthreshold
+             # cow: *animalthreshold
+              # elephant: *animalthreshold
+              # zebra: *animalthreshold
+              # giraffe: *animalthreshold
+             # bear: *animalthreshold
+          detect:
+           width: 1920
+            height: 1080
+            fps: 30
+          mqtt:
+            height: 540
