@@ -70,6 +70,14 @@ data:
           - birdseye
         icon: LuBird
         order: 1
+      "Backyard Featured":
+        cameras:
+          - backyard
+          - frontdoor
+          - driveway
+          - court
+        icon: LuTrees
+        order: 2
 
     detectors:
       coral:
