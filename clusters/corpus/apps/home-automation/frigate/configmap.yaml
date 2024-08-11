@@ -217,10 +217,6 @@ data:
           fps: 5
         mqtt:
           height: 540
-          host: court.home.arpa
-          password: ${basic_password}
-          port: 80
-          user: ${basic_user}
         onvif:
           host: court.home.arpa
           port: 80
