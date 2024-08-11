@@ -229,7 +229,7 @@ data:
         ffmpeg:
           inputs:
             # - path: 'rtsp://localhost:8554/backyard'
-            - path: 'rtsp://{FRIGATE_BUNNIES_CREDENTIALS}@temp.home.arpa:554/1'
+            - path: 'rtsp://{FRIGATE_BUNNIES_CREDENTIALS}@temp.home.arpa:554/live'
               roles:
                 - detect
                 - record
