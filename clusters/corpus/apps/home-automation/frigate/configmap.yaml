@@ -217,11 +217,11 @@ data:
           fps: 5
         mqtt:
           height: 540
-        onvif:
           host: court.home.arpa
+          password: ${basic_password}
           port: 80
           user: ${basic_user}
-          password: ${basic_password}
+        onvif:
 
       flowerbed:
         birdseye:
@@ -229,7 +229,7 @@ data:
         ffmpeg:
           inputs:
             # - path: 'rtsp://localhost:8554/backyard'
-            - path: 'rtsp://{FRIGATE_BUNNIES_CREDENTIALS}@bunnies.home.arpa:554/1'
+            - path: 'rtsp://{FRIGATE_BUNNIES_CREDENTIALS}@temp.home.arpa:554/1'
               roles:
                 - detect
                 - record
@@ -261,3 +261,8 @@ data:
           fps: 30
         mqtt:
           height: 540
+        onvif:
+          host: temp.home.arpa
+          port: 80
+          user: ${basic_user}
+          password: ${basic_password}
