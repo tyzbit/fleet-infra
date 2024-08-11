@@ -18,12 +18,12 @@ spec:
   interval: 2m0s
   values:
     controllers:
-      *app:
-        replicas: 0
+      *app :
+        replicas: 1
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
-          *app:
+          *app :
             image:
               repository: ghcr.io/tyzbit/go-discord-modtools
               tag: "0.2.3" # {"$imagepolicy": "flux-system:go-discord-modtools:tag"}
@@ -50,7 +50,7 @@ spec:
                 enabled: true
                 custom: true
                 spec:
-                  !!merge <<: *spec
+                  <<: *spec
                   failureThreshold: 15
                   initialDelaySeconds: 5
             resources:
