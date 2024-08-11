@@ -222,6 +222,10 @@ data:
           port: 80
           user: ${basic_user}
         onvif:
+          host: court.home.arpa
+          port: 80
+          user: ${basic_user}
+          password: ${basic_password}
 
       flowerbed:
         birdseye:
