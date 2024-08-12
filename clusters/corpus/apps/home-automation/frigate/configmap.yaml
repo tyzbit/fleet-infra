@@ -63,6 +63,7 @@ data:
           - court
           - backyard
           - frontdoor
+          - floor
         icon: LuHome
         order: 0
       "Birdseye":
@@ -76,8 +77,18 @@ data:
           - frontdoor
           - driveway
           - court
+          - floor
         icon: LuTrees
         order: 2
+      "Woking on the house":
+        cameras:
+          - floor
+          - backyard
+          - frontdoor
+          - driveway
+          - court
+        icon: LuWrench
+        order: 3
 
     detectors:
       coral:
