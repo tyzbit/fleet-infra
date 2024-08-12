@@ -54,6 +54,12 @@ spec:
                 value: America/New_York
 
     persistence:
+      bluetooth-usb:
+        type: hostPath
+        advancedMounts:
+          *app :
+            *app :
+              - path: /dev/bus/usb/003/
       config:
         existingClaim: home-assistant-config-nas
         advancedMounts:
