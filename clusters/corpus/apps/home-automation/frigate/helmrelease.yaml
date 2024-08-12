@@ -131,7 +131,7 @@ spec:
                   identifier: main
           - host: &host "frigate.${personal_domain}"
             paths:
-              - path: "/api/flowerbed"
+              - path: "/api/floor"
                 service:
                   identifier: main
         tls:

@@ -223,7 +223,7 @@ data:
           user: ${basic_user}
           password: ${basic_password}
 
-      flowerbed:
+      floor:
         birdseye:
           order: 6
         ffmpeg:
