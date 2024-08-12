@@ -129,10 +129,18 @@ spec:
               - path: "/"
                 service:
                   identifier: main
+          - host: &host "frigate.${personal_domain}"
+            paths:
+              - path: "/api/flowerbed"
+                service:
+                  identifier: main
         tls:
           - hosts:
               - "*.home.arpa"
             secretName: internal-wildcard-tls
+          - hosts:
+              - *host
+            secretName: *host
 
       oauth:
         className: nginx
