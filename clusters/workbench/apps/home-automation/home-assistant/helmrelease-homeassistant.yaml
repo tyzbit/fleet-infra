@@ -61,6 +61,13 @@ spec:
           *app :
             *app :
               - path: *usb
+      dbus:
+        type: hostPath
+        hostPath: &dbus /run/dbus
+        advancedMounts:
+          *app :
+            *app :
+              - path: *dbus
       config:
         existingClaim: home-assistant-config-nas
         advancedMounts:
