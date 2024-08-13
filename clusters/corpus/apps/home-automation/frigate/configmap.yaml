@@ -80,7 +80,7 @@ data:
           - floor
         icon: LuTrees
         order: 2
-      "Woking on the house":
+      "Working on the house":
         cameras:
           - floor
           - backyard
