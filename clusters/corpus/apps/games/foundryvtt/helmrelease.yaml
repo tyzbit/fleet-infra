@@ -28,7 +28,7 @@ spec:
           *app :
             image:
               repository: felddy/foundryvtt
-              tag: "12.330.0"
+              tag: "12.331.0"
             envFrom:
               - secretRef:
                   name: *app
