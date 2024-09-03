@@ -75,7 +75,7 @@ spec:
             filebrowser:
               - path: /db
                 subPath: filebrowser
-              - path: /srv/homeassistant
+              - path: /srv/data
 
     service:
       main:
