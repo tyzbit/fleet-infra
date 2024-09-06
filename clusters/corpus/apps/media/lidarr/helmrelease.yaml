@@ -79,7 +79,7 @@ spec:
         tls:
           - hosts:
               - "music.${personal_domain}"
-            secretName: shows.${personal_domain}-tls
+            secretName: music.${personal_domain}-tls
 
       oauth:
         className: nginx
@@ -89,7 +89,7 @@ spec:
         labels:
           use-cloudflare-dns-solver: "true"
         hosts:
-          - host: "msuic.${personal_domain}"
+          - host: "music.${personal_domain}"
             paths:
               - path: "/oauth2"
                 service:
@@ -98,7 +98,7 @@ spec:
         tls:
           - hosts:
               - "music.${personal_domain}"
-            secretName: shows.${personal_domain}-tls
+            secretName: music.${personal_domain}-tls
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
