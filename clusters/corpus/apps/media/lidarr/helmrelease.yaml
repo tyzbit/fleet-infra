@@ -1,0 +1,128 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.4.0/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app lidarr
+  namespace: flux-system
+spec:
+  releaseName: *app
+  targetNamespace: media
+  timeout: 2m
+  interval: 2m0s
+  chart:
+    spec:
+      chart: app-template
+      version: "3.4.0"
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  values:
+    controllers:
+      *app :
+        replicas: 1 # active longhorn-webapp nas
+        type: statefulset
+        annotations:
+          reloader.stakater.com/auto: "true"
+        pod:
+          securityContext:
+            fsGroup: 568
+            runAsGroup: 568
+            runAsUser: 568
+            fsGroupChangePolicy: OnRootMismatch
+          nodeSelector:
+            longhorn: primary
+
+        containers:
+          *app :
+            image:
+              repository: ghcr.io/onedr0p/lidarr-develop
+              tag: "4.0.9.2332"
+            env:
+              TZ: America/New_York
+              LIDARR__AUTHENTICATION_METHOD: External
+            resources:
+              requests:
+                cpu: 10m
+              limits:
+                memory: 4Gi
+
+    persistence:
+      config:
+        existingClaim: lidarr-config-longhorn-webapp
+      media:
+        existingClaim: nas-volume1-media
+
+    service:
+      main:
+        controller: *app
+        type: ClusterIP
+        ports:
+          http:
+            port: 8989
+
+    ingress:
+      main:
+        className: nginx
+        annotations:
+          nginx.ingress.kubernetes.io/auth-url: "http://lidarr-oauth2-proxy.media.svc.cluster.local/oauth2/auth"
+          nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
+          cert-manager.io/cluster-issuer: letsencrypt
+          external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+          external-dns.alpha.kubernetes.io/target: ${cloudflared_tunnel_uuid}.cfargotunnel.com
+        hosts:
+          - host: "music.${personal_domain}"
+            paths:
+              - path: "/"
+                service:
+                  identifier: main
+        tls:
+          - hosts:
+              - "music.${personal_domain}"
+            secretName: shows.${personal_domain}-tls
+
+      oauth:
+        className: nginx
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt
+          external-dns.alpha.kubernetes.io/exclude: "true"
+        labels:
+          use-cloudflare-dns-solver: "true"
+        hosts:
+          - host: "msuic.${personal_domain}"
+            paths:
+              - path: "/oauth2"
+                service:
+                  name: lidarr-oauth2-proxy
+                  port: 80
+        tls:
+          - hosts:
+              - "music.${personal_domain}"
+            secretName: shows.${personal_domain}-tls
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: lidarr-oauth2-proxy
+  namespace: media
+spec:
+  targetNamespace: media
+  releaseName: lidarr-oauth2-proxy
+  chart:
+    spec:
+      chart: oauth2-proxy
+      version: "7.7.15"
+      sourceRef:
+        kind: HelmRepository
+        name: oauth2-proxy
+        namespace: flux-system
+  interval: 2m0s
+  values:
+    replicaCount: 1
+    extraArgs:
+      provider: github
+      github-org: "${blog_name}"
+      github-team: "super-admins,lidarr"
+      cookie-expire: 168h0m0s
+    config:
+      existingSecret: lidarr-oauth2-proxy
