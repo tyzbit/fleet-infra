@@ -10,9 +10,6 @@ data:
 
     presets:
       yt_video:
-        download:
-          download_strategy: "url"
-
         ytdl_options:
           # Graciously stolen from https://github.com/npawelek/k8s-gitops/blob/4e92f498939b2b956455f9185cf58ed8d8c7726a/cluster/apps/ytdl-sub/cm.yaml#L18
           # format: "bestvideo[ext=webm][height<=1440]+bestaudio[ext=webm]/best[ext=webm]/best"
@@ -61,7 +58,6 @@ data:
           - season_by_year__episode_by_download_index
 
         download:
-          download_strategy: "url"
           playlist_thumbnails:
             - name: "poster.jpg"
               uid: "avatar_uncropped"
