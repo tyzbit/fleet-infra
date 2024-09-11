@@ -92,7 +92,7 @@ data:
           season: "00"
         output_options:
           output_directory: "/media/youtube/videos"
-          download_archive_name: "videos-download-archive.json"
+          download_archive_name: ".{tv_show_name_sanitized}-download-archive.json"
 
       yt_channel:
         preset: yt_playlist
