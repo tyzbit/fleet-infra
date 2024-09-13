@@ -22,13 +22,13 @@ spec:
         nginx.ingress.kubernetes.io/proxy-body-size: 500m
         kubernetes.io/tls-acme: "true"
         cert-manager.io/cluster-issuer: "letsencrypt-prod"
-      host: listen.example.com
+      host: ${funkwhale_host}
       protocol: https
 
       tls:
-      - secretName: listen.example.com-tls
-        hosts:
-          - listen.example.com
+        - secretName: ${funkwhale_host}-tls
+          hosts:
+            - ${funkwhale_host}
     persistence:
       enabled: true
       existingClaim: funkwhale-config-longhorn-webapp
