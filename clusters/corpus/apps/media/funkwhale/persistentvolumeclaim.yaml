@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: funkwhale-config-longhorn-plex
+  name: funkwhale-config-longhorn-webapp
   namespace: media
 spec:
   resources:
