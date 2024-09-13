@@ -31,7 +31,7 @@ spec:
           - listen.example.com
     persistence:
       enabled: true
-      existingClaim: funkwhale-config-longhown-webapp
+      existingClaim: funkwhale-config-longhorn-webapp
       # storageClass: "-"
 
       ## Note; Using ReadWriteOnce for persistence will require the addition of
