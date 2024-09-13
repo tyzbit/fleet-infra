@@ -22,7 +22,7 @@ spec:
         cert-manager.io/cluster-issuer: letsencrypt
         external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
         external-dns.alpha.kubernetes.io/target: ${cloudflared_tunnel_uuid}.cfargotunnel.com
-      host: listen.example.com
+      host: ${funkwhale_host}
       protocol: https
 
       tls:
