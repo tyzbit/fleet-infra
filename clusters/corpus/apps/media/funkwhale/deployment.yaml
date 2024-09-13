@@ -24,7 +24,7 @@ spec:
           command:
             - sh
             - -c
-            - funkwhale-manage import_files ${funkwhale_local_library} "/srv/funkwhale/data/music/local/" --recursive --noinput --in-place --watch
+            - /venv/bin/funkwhale-manage import_files ${funkwhale_local_library} "/srv/funkwhale/data/music/local/" --recursive --noinput --in-place --watch
           imagePullPolicy: Always
           envFrom:
           - configMapRef:
