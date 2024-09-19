@@ -91,7 +91,7 @@ spec:
         # nodeSelector:
         #   node.longhorn.io/create-default-disk: "true"
         - name: nextcloud
-          image: nextcloud:29.0.6
+          image: nextcloud:30.0.0
           imagePullPolicy: Always
           command: ["/bin/bash", "-c"]
           args:
