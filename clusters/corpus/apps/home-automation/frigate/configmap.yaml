@@ -59,11 +59,7 @@ data:
     camera_groups:
       "All Cameras":
         cameras:
-          - driveway
-          - court
-          - backyard
-          - frontdoor
-          - floor
+          - doorbell
         icon: LuHome
         order: 0
       "Birdseye":
@@ -71,24 +67,15 @@ data:
           - birdseye
         icon: LuBird
         order: 1
-      "Backyard Featured":
-        cameras:
-          - backyard
-          - frontdoor
-          - driveway
-          - court
-          - floor
-        icon: LuTrees
-        order: 2
-      "Working on the house":
-        cameras:
-          - floor
-          - backyard
-          - frontdoor
-          - driveway
-          - court
-        icon: LuWrench
-        order: 3
+      # "Backyard Featured":
+      #   cameras:
+      #     - backyard
+      #     - frontdoor
+      #     - driveway
+      #     - court
+      #     - floor
+      #   icon: LuTrees
+      #   order: 2
 
     detectors:
       coral:
@@ -96,105 +83,27 @@ data:
         device: usb
 
     cameras:
-      # porch:
-      #   birdseye:
-      #     order: 1
-      #   ffmpeg:
-      #     inputs:
-      #       # - path: 'rtsp://localhost:8554/porch'
-      #       - path: 'rtsp://{FRIGATE_PORCH_CREDENTIALS}@porch.home.arpa:554/live'
-      #         roles:
-      #           - detect
-      #           - record
-      #   motion:
-      #     mask:
-      #       - 2688,1520,1950,1520,2168,751,2688,738
-      #   objects:
-      #     filters:
-      #       person:
-      #         # min_score: 0.73
-      #         mask:
-      #           - 2688,1520,1950,1520,2168,751,2688,738
-      #   detect:
-      #     width: 1280
-      #     height: 720
-      #     fps: 5
-      #   mqtt:
-      #     height: 540
-
       frontdoor:
         birdseye:
           order: 2
-        motion:
-          mask:
-            - 0,0.542,0.151,0.419,0.325,0.347,0.479,0.281,0.552,0.268,0.798,0.215,0.898,0.157,0.889,0,0,0
-        objects:
-          filters:
-            person:
-              mask:
-                - 0,0.542,0.151,0.419,0.325,0.347,0.479,0.281,0.552,0.268,0.798,0.215,0.898,0.157,0.889,0,0,0
+        # motion:
+        #   mask:
+        #     - 0,0.542,0.151,0.419,0.325,0.347,0.479,0.281,0.552,0.268,0.798,0.215,0.898,0.157,0.889,0,0,0
+        # objects:
+        #   filters:
+        #     person:
+        #       mask:
+        #         - 0,0.542,0.151,0.419,0.325,0.347,0.479,0.281,0.552,0.268,0.798,0.215,0.898,0.157,0.889,0,0,0
         ffmpeg:
           inputs:
             # - path: 'rtsp://localhost:8554/frontdoor_low'
-            - path: 'rtsp://{FRIGATE_FRONTDOOR_CREDENTIALS}@frontdoor.home.arpa:554'
+            - path: 'rtsp://{FRIGATE_DOORBELL_CREDENTIALS}@doorbell.home.arpa:554/Preview_01_main'
               roles:
                 - detect
                 - record
         detect:
           width: 1280
           height: 720
-          fps: 5
-        mqtt:
-          height: 540
-
-      driveway:
-        birdseye:
-          order: 3
-        ffmpeg:
-          inputs:
-            # - path: 'rtsp://localhost:8554/driveway'
-            - path: 'rtsp://{FRIGATE_DRIVEWAY_CREDENTIALS}@driveway.home.arpa:554/1'
-              roles:
-                - detect
-                - record
-        motion:
-          mask:
-           - 0.555,0,0.512,0.224,1,0.303,1,0
-           - 0.07,1,0,1,0,0.971,0.162,0.787,0.201,0.854
-        objects:
-          filters:
-            person:
-              min_score: 0.78
-              mask: 
-                - 0.555,0,0.512,0.224,1,0.303,1,0
-                - 0.07,1,0,1,0,0.971,0.162,0.787,0.201,0.854
-        snapshots:
-          enabled: False
-        detect:
-          enabled: True
-          width: 1280
-          height: 720
-          fps: 5
-        mqtt:
-          height: 540
-
-      backyard:
-        birdseye:
-          order: 4
-        ffmpeg:
-          inputs:
-            # - path: 'rtsp://localhost:8554/backyard'
-            - path: 'rtsp://{FRIGATE_BACKYARD_CREDENTIALS}@backyard.home.arpa:554/1'
-              roles:
-                - detect
-                - record
-        objects:
-          filters:
-            person:
-              min_score: 0.82
-        detect:
-          width: 1920
-          height: 1080
           fps: 5
         mqtt:
           height: 540
@@ -230,50 +139,6 @@ data:
           height: 540
         onvif:
           host: court.home.arpa
-          port: 80
-          user: ${basic_user}
-          password: ${basic_password}
-
-      floor:
-        birdseye:
-          order: 6
-        ffmpeg:
-          inputs:
-            # - path: 'rtsp://localhost:8554/backyard'
-            - path: 'rtsp://{FRIGATE_BUNNIES_CREDENTIALS}@temp.home.arpa:554/live'
-              roles:
-                - detect
-                - record
-        objects:  
-          track:
-            - cat
-            - dog
-            # - horse
-            # - sheep
-            # - cow
-            # - elephant
-            # - zebra
-          # - giraffe
-            # - bear
-          filters:
-            cat: &flowerbedanimalthreshold
-              threshold: 0.5
-            dog: *flowerbedanimalthreshold
-            # horse: *animalthreshold
-            # sheep: *animalthreshold
-            # cow: *animalthreshold
-            # elephant: *animalthreshold
-            # zebra: *animalthreshold
-            # giraffe: *animalthreshold
-            # bear: *animalthreshold
-        detect:
-          width: 1920
-          height: 1080
-          fps: 30
-        mqtt:
-          height: 540
-        onvif:
-          host: temp.home.arpa
           port: 80
           user: ${basic_user}
           password: ${basic_password}
