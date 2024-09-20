@@ -44,17 +44,9 @@ data:
       # hwaccel_args: ["-hwaccel", "vaapi", "-hwaccel_device", "/dev/dri/renderD128", "-hwaccel_output_format", "yuv420p"]
       hwaccel_args: preset-vaapi
       input_args: preset-rtsp-restream
-    # go2rtc is disabled because frigate kept running out of memory and also 404ing
-    # go2rtc:
-    #   streams:
-    #     frontdoor: 'rtsp://{FRIGATE_FRONTDOOR_CREDENTIALS}@frontdoor.home.arpa:554'
-    #     # frontdoor_low: 'rtsp://{FRIGATE_FRONTDOOR_CREDENTIALS}@frontdoor.home.arpa:554/low'
-    #     backyard: 'rtsp://{FRIGATE_BACKYARD_CREDENTIALS}@backyard.home.arpa:554/1'
-    #     driveway: 'rtsp://{FRIGATE_DRIVEWAY_CREDENTIALS}@driveway.home.arpa:554/1'
-    #     porch: 'rtsp://{FRIGATE_PORCH_CREDENTIALS}@porch.home.arpa:554//cam/realmonitor?channel=1&subtype=0'
-    #     # porch_low: 'rtsp://{FRIGATE_PORCH_CREDENTIALS}@porch.home.arpa:554/cam/realmonitor?channel=1&subtype=1'
-    #     court: 'rtsp://{FRIGATE_COURT_CREDENTIALS}@court.home.arpa:554/cam/realmonitor?channel=1&subtype=0'
-    #     # court_low: 'rtsp://{FRIGATE_COURT_CREDENTIALS}@court.home.arpa:554/cam/realmonitor?channel=1&subtype=1'
+    go2rtc:
+      streams:
+        doorbell: 'rtsp://{FRIGATE_DOORBELL_CREDENTIALS}@doorbell.home.arpa:554/Preview_01_main'
 
     camera_groups:
       "All Cameras":
@@ -96,8 +88,8 @@ data:
         #         - 0,0.542,0.151,0.419,0.325,0.347,0.479,0.281,0.552,0.268,0.798,0.215,0.898,0.157,0.889,0,0,0
         ffmpeg:
           inputs:
-            # - path: 'rtsp://localhost:8554/frontdoor_low'
-            - path: 'rtsp://{FRIGATE_DOORBELL_CREDENTIALS}@doorbell.home.arpa:554/Preview_01_main'
+            - path: 'rtsp://localhost:8554/doorbell'
+            # - path: 'rtsp://{FRIGATE_DOORBELL_CREDENTIALS}@doorbell.home.arpa:554/Preview_01_main'
               roles:
                 - detect
                 - record
