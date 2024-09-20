@@ -95,6 +95,7 @@ spec:
         ports:
           http:
             port: 80
+            targetPort: 5000
 
     ingress:
       *app :
