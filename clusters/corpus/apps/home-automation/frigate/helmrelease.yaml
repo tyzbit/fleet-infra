@@ -95,10 +95,6 @@ spec:
         ports:
           http:
             port: 80
-            targetPort: 5000
-          rtmp:
-            port: 1935
-            targetPort: 1935
 
     ingress:
       *app :
@@ -112,7 +108,7 @@ spec:
           external-dns.alpha.kubernetes.io/target: ${cloudflared_tunnel_uuid}.cfargotunnel.com
         hosts:
           - host: &host "frigate.${personal_domain}"
-            paths:
+            paths: &frigatepath
               - path: "/"
                 service:
                   identifier: main
@@ -125,21 +121,19 @@ spec:
         className: nginx
         hosts:
           - host: "frigate.home.arpa"
-            paths:
-              - path: "/"
-                service:
-                  identifier: main
-          - host: &host "frigate.${personal_domain}"
-            paths:
-              - path: "/api/floor"
-                service:
-                  identifier: main
-              - path: "/exports/floor_emwspi.mp4"
-                service:
-                  identifier: main
-              - path: "/exports/floor_495uzm.mp4"
-                service:
-                  identifier: main
+            paths: *frigatepath
+          # # For sharing exports without auth
+          # - host: &host "frigate.${personal_domain}"
+          #   paths:
+          #     - path: "/api/floor"
+          #       service:
+          #         identifier: main
+          #     - path: "/exports/floor_emwspi.mp4"
+          #       service:
+          #         identifier: main
+          #     - path: "/exports/floor_495uzm.mp4"
+          #       service:
+          #         identifier: main
         tls:
           - hosts:
               - "*.home.arpa"
