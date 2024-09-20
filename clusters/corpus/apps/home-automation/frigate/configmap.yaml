@@ -83,7 +83,7 @@ data:
         device: usb
 
     cameras:
-      frontdoor:
+      doorbell:
         birdseye:
           order: 2
         # motion:
@@ -108,37 +108,37 @@ data:
         mqtt:
           height: 540
 
-      court:
-        birdseye:
-          order: 5
-        ffmpeg:
-          inputs:
-            # - path: 'rtsp://localhost:8554/court'
-            - path: 'rtsp://{FRIGATE_COURT_CREDENTIALS}@court.home.arpa:554/live'
-              roles:
-                - record
-        objects:  
-          track:
-            - person
-            - cat
-            - dog
-          filters:
-            person:
-              min_score: 0.78
-            cat: &courtanimalthreshold
-              threshold: 0.5
-            dog: *courtanimalthreshold
-        snapshots:
-          enabled: False
-        detect:
-          enabled: True
-          width: 1920
-          height: 1080
-          fps: 5
-        mqtt:
-          height: 540
-        onvif:
-          host: court.home.arpa
-          port: 80
-          user: ${basic_user}
-          password: ${basic_password}
+      # court:
+      #   birdseye:
+      #     order: 5
+      #   ffmpeg:
+      #     inputs:
+      #       # - path: 'rtsp://localhost:8554/court'
+      #       - path: 'rtsp://{FRIGATE_COURT_CREDENTIALS}@court.home.arpa:554/live'
+      #         roles:
+      #           - record
+      #   objects:  
+      #     track:
+      #       - person
+      #       - cat
+      #       - dog
+      #     filters:
+      #       person:
+      #         min_score: 0.78
+      #       cat: &courtanimalthreshold
+      #         threshold: 0.5
+      #       dog: *courtanimalthreshold
+      #   snapshots:
+      #     enabled: False
+      #   detect:
+      #     enabled: True
+      #     width: 1920
+      #     height: 1080
+      #     fps: 5
+      #   mqtt:
+      #     height: 540
+      #   onvif:
+      #     host: court.home.arpa
+      #     port: 80
+      #     user: ${basic_user}
+      #     password: ${basic_password}
