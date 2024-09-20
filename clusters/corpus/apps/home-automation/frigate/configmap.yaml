@@ -97,7 +97,7 @@ data:
         ffmpeg:
           inputs:
             # - path: 'rtsp://localhost:8554/frontdoor_low'
-            - path: 'rtsp://${FRIGATE_DOORBELL_CREDENTIALS}@doorbell.home.arpa:554/Preview_01_main'
+            - path: 'rtsp://{FRIGATE_DOORBELL_CREDENTIALS}@doorbell.home.arpa:554/Preview_01_main'
               roles:
                 - detect
                 - record
