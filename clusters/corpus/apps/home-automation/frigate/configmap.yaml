@@ -77,19 +77,18 @@ data:
     cameras:
       doorbell:
         birdseye:
-          order: 2
-        # motion:
-        #   mask:
-        #     - 0,0.542,0.151,0.419,0.325,0.347,0.479,0.281,0.552,0.268,0.798,0.215,0.898,0.157,0.889,0,0,0
-        # objects:
-        #   filters:
-        #     person:
-        #       mask:
-        #         - 0,0.542,0.151,0.419,0.325,0.347,0.479,0.281,0.552,0.268,0.798,0.215,0.898,0.157,0.889,0,0,0
+          order: 0
+        motion:
+          mask:
+            - 1,0.553,0.765,0.591,0.219,0.589,0.22,0.327,0.628,0.306,0.866,0,1,0
+        objects:
+          filters:
+            person:
+              mask:
+                - 1,0.553,0.765,0.591,0.219,0.589,0.22,0.327,0.628,0.306,0.866,0,1,0
         ffmpeg:
           inputs:
             - path: 'rtsp://localhost:8554/doorbell'
-            # - path: 'rtsp://{FRIGATE_DOORBELL_CREDENTIALS}@doorbell.home.arpa:554/Preview_01_main'
               roles:
                 - detect
                 - record
