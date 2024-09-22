@@ -46,7 +46,8 @@ data:
       input_args: preset-rtsp-restream
     go2rtc:
       streams:
-        doorbell: 'rtsp://{FRIGATE_DOORBELL_CREDENTIALS}@doorbell.home.arpa:554/Preview_01_main'
+        doorbell: 'ffmpeg:http://doorbell.home.arpa/flv?port=1935&app=bcs&stream=channel0_main.bcs&user={FRIGATE_DOORBELL_USER}&password={FRIGATE_DOORBELL_PASSWORD}#video=copy#audio=copy#audio=opus'
+        # doorbell: 'rtsp://{FRIGATE_DOORBELL_USER}:{FRIGATE_DOORBELL_PASSWORD}@doorbell.home.arpa:554/Preview_01_main'
 
     camera_groups:
       "All Cameras":
