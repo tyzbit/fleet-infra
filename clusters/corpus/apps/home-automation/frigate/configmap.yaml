@@ -93,11 +93,12 @@ data:
                 - detect
                 - record
         detect:
+          # 2560x1920
           width: 1280
-          height: 720
-          fps: 5
+          height: 960
+          # fps: 5
         mqtt:
-          height: 540
+          height: 640
 
       # court:
       #   birdseye:
