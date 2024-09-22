@@ -124,11 +124,11 @@ spec:
           - host: "frigate.home.arpa"
             paths: *frigatepath
           # # For sharing exports without auth
-          # - host: &host "frigate.${personal_domain}"
-          #   paths:
-          #     - path: "/api/floor"
-          #       service:
-          #         identifier: main
+          - host: &host "frigate.${personal_domain}"
+            paths:
+              - path: "/api/events"
+                service:
+                  identifier: main
           #     - path: "/exports/floor_emwspi.mp4"
           #       service:
           #         identifier: main
