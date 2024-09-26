@@ -83,10 +83,18 @@ data:
           mask:
             - 1,0.553,0.765,0.591,0.219,0.589,0.22,0.327,0.628,0.306,0.866,0,1,0
         objects:
+          track:
+            - person
+            - cat
+            - dog
+            - bird
           filters:
-            person:
+            person: &mask
               mask:
                 - 1,0.553,0.765,0.591,0.219,0.589,0.22,0.327,0.628,0.306,0.866,0,1,0
+            cat: *mask
+            dog: *mask
+            bird: *mask
         ffmpeg:
           inputs:
             - path: 'rtsp://localhost:8554/doorbell'
