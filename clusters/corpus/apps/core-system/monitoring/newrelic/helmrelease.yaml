@@ -419,6 +419,14 @@ spec:
                 Exclude  log /[0-9]{6}: ->[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}:[0-9]+/
                 Exclude  $kubernetes['namespace_name'] /(longhorn.system)/
 
+            # Filter longhorn unschedulable node messages
+            [FILTER]
+                Name     grep
+                Match    kube.*
+                Logical_Op and
+                Exclude  log Including unschedulable node because the replica is scheduled and running
+                Exclude  $kubernetes['namespace_name'] /(longhorn.system)/
+
             # Filter cert-manager messages
             [FILTER]
                 Name     grep
