@@ -31,7 +31,7 @@ spec:
       containers:
         - name: electrumx
           image: lukechilds/electrumx:v1.16.0
-          command: ["tail", "-f", "/dev/null"]
+          # command: ["tail", "-f", "/dev/null"]
           imagePullPolicy: Always
           env:
             - name: COIN
