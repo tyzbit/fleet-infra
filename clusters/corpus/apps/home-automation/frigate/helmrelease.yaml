@@ -38,9 +38,6 @@ spec:
               pullPolicy: Always
             securityContext:
               privileged: true
-              supplementalGroups:
-                - 44
-                - 104
             envFrom:
               - secretRef:
                   name: *app
