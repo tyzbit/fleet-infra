@@ -43,7 +43,6 @@ spec:
                   name: *app
             env:
               TZ: America/New_York
-              LIBVA_DRIVER_NAME: i965
             resources:
               requests:
                 cpu: 1000m
