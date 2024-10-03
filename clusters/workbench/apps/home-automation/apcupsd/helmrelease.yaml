@@ -20,12 +20,12 @@ spec:
       tag: v1.0.6
     env:
       [
-        { name: UPSNAME, value: apc1500c },
-        { name: UPSCABLE, value: usb },
-        { name: UPSTYPE, value: usb },
-        { name: BATTERYLEVEL, value: 5% },
-        { name: MINUTES, value: !!str 5 },
-        { name: TIMEOUT, value: !!str 0 },
+        { name: APCUPSD_UPSNAME, value: apc1500c },
+        { name: APCUPSD_UPSCABLE, value: usb },
+        { name: APCUPSD_UPSTYPE, value: usb },
+        { name: APCUPSD_BATTERYLEVEL, value: 5% },
+        { name: APCUPSD_MINUTES, value: !!str 5 },
+        { name: APCUPSD_TIMEOUT, value: !!str 0 },
       ]
     volumeMounts:
       - name: &vol usb-device
