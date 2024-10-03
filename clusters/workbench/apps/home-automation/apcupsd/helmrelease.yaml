@@ -11,7 +11,7 @@ spec:
       chart: ./deploy/helm/apcupsd
       sourceRef:
         kind: GitRepository
-        name: thelande-apcupsd
+        name: tyzbit-apcupsd
         namespace: flux-system
   interval: 2m0s
   values:

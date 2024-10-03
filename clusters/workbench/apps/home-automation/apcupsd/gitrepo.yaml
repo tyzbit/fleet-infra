@@ -10,3 +10,16 @@ spec:
   secretRef:
     name: flux-system
   url: https://github.com/thelande/apcupsd.git
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: tyzbit-apcupsd
+  namespace: flux-system
+spec:
+  interval: 2m0s
+  ref:
+    branch: misc-fixes
+  secretRef:
+    name: flux-system
+  url: https://github.com/tyzbit/apcupsd.git
