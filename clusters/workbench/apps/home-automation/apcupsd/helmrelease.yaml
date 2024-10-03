@@ -18,10 +18,13 @@ spec:
     image:
       repository: thelande/apcupsd
       tag: v1.0.6
+    volumeMounts:
+      - name: &vol usb-device
+        path: &path /dev/usb/hiddev0
     volumes:
-      - name: usb-device
+      - name: *vol
         hostPath:
-          path: /dev/usb/hiddev0
+          path: *path
           type: CharDevice
 
     resources:
