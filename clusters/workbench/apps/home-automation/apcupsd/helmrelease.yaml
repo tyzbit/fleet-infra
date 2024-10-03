@@ -34,7 +34,7 @@ spec:
       - name: *vol
         hostPath:
           path: *path
-          type: CharDevice
+          type: HostPath
 
     resources:
       requests:
