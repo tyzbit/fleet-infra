@@ -18,11 +18,11 @@ spec:
     image:
       repository: thelande/apcupsd
       tag: v1.0.6
-    env:
-      [
+    env: [
         { name: APCUPSD_UPSNAME, value: apc1500c },
         { name: APCUPSD_UPSCABLE, value: usb },
         { name: APCUPSD_UPSTYPE, value: usb },
+        { name: APCUPSD_DEVICE, value: !!str  }, # autodetect is best for USB
         { name: APCUPSD_BATTERYLEVEL, value: 5% },
         { name: APCUPSD_MINUTES, value: !!str 5 },
         { name: APCUPSD_TIMEOUT, value: !!str 0 },
