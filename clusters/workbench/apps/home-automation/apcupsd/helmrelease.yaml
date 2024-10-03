@@ -30,10 +30,16 @@ spec:
     volumeMounts:
       - name: &vol usb-device
         mountPath: &path /dev/bus/usb
+      - name: &tty tty
+        mountPath: &ttypath /dev/ttyS0
     volumes:
       - name: *vol
         hostPath:
           path: *path
+          type: Directory
+      - name: *tty
+        hostPath:
+          path: *ttypath
           type: Directory
 
     resources:
