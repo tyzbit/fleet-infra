@@ -1,0 +1,32 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: thelande-apcupsd
+  namespace: flux-system
+spec:
+  targetNamespace: home-automation
+  releaseName: apcupsd
+  chart:
+    spec:
+      chart: ./deploy/helm/apcupsd
+      sourceRef:
+        kind: GitRepository
+        name: thelande-apcupsd
+        namespace: flux-system
+  interval: 2m0s
+  values:
+    image:
+      repository: thelande/apcupsd
+      tag: v1.0.6
+    volumes:
+      - name: usb-device
+        hostPath:
+          path: /dev/usb/hiddev0
+          type: CharDevice
+
+    resources:
+      requests:
+        cpu: 10m
+      limits:
+        cpu: 100m
+        memory: 64Mi
