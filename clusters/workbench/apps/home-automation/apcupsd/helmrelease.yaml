@@ -40,7 +40,7 @@ spec:
       - name: *tty
         hostPath:
           path: *ttypath
-          type: Directory
+          type: CharDevice
 
     resources:
       requests:
