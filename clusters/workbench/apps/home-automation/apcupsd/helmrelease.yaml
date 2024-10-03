@@ -20,7 +20,7 @@ spec:
       tag: v1.0.6
     volumeMounts:
       - name: &vol usb-device
-        path: &path /dev/usb/hiddev0
+        mountPath: &path /dev/usb/hiddev0
     volumes:
       - name: *vol
         hostPath:
