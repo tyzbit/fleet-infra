@@ -19,12 +19,14 @@ spec:
       repository: thelande/apcupsd
       tag: v1.0.6
     env:
-      UPSNAME: apc1500c
-      UPSCABLE: usb
-      UPSTYPE: usb
-      BATTERYLEVEL: 5%
-      MINUTES: !!str 5
-      TIMEOUT: !!str 0
+      [
+        { name: UPSNAME, value: apc1500c },
+        { name: UPSCABLE, value: usb },
+        { name: UPSTYPE, value: usb },
+        { name: BATTERYLEVEL, value: 5% },
+        { name: MINUTES, value: !!str 5 },
+        { name: TIMEOUT, value: !!str 0 },
+      ]
     volumeMounts:
       - name: &vol usb-device
         mountPath: &path /dev/usb/hiddev0
