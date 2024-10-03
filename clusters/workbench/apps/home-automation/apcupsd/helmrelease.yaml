@@ -29,7 +29,7 @@ spec:
       ]
     volumeMounts:
       - name: &vol usb-device
-        mountPath: &path /dev/usb/hiddev0
+        mountPath: &path /dev/bus/usb
     volumes:
       - name: *vol
         hostPath:
