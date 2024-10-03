@@ -30,3 +30,7 @@ spec:
       limits:
         cpu: 100m
         memory: 64Mi
+
+    # -- Chart doesn't use this but is referenced in NOTES.txt
+    ingress:
+      enabled: false
