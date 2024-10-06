@@ -42,7 +42,7 @@ spec:
           *app :
             image:
               repository: plexinc/pms-docker
-              tag: 1.40.5.8921-836b34c27
+              tag: 1.41.0.8994-f2c27da23
             securityContext:
               privileged: true
             envFrom:
