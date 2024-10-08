@@ -3,6 +3,8 @@ kind: Endpoints
 metadata:
   name: corpus-control-plane
   namespace: networking
+  labels:
+    kubernetes.io/service-name: corpus-control-plane
 subsets:
   - addresses:
       - ip: 192.168.1.51
