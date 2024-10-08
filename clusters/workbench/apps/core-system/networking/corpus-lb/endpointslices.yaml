@@ -12,7 +12,7 @@ ports:
     protocol: TCP
 endpoints:
   - conditions:
-      ready: true
+      ready: false
     addresses:
       - "192.168.1.51"
   - conditions:
