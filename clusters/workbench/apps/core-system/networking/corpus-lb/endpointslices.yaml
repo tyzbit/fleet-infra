@@ -16,7 +16,7 @@ endpoints:
     addresses:
       - "192.168.1.51"
   - conditions:
-      ready: false
+      ready: true
     addresses:
       - "192.168.1.52"
   - conditions:
