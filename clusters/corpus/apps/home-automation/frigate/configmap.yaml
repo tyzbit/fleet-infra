@@ -48,9 +48,9 @@ data:
       streams:
         doorbell: 
           - ffmpeg:http://doorbell.home.arpa/flv?port=1935&app=bcs&stream=channel0_main.bcs&user={FRIGATE_DOORBELL_USER}&password={FRIGATE_DOORBELL_PASSWORD}#video=copy#audio=copy#audio=opus
-          - rtsp://doorbell.home.arpa/Preview_01_sub
-        doorbell_audio: 
-          - ffmpeg:http://doorbell.home.arpa/flv?port=1935&app=bcs&stream=channel0_ext.bcs&user={FRIGATE_DOORBELL_USER}&password={FRIGATE_DOORBELL_PASSWORD}
+        #   - rtsp://doorbell.home.arpa/Preview_01_sub
+        # doorbell_audio: 
+        #   - ffmpeg:http://doorbell.home.arpa/flv?port=1935&app=bcs&stream=channel0_ext.bcs&user={FRIGATE_DOORBELL_USER}&password={FRIGATE_DOORBELL_PASSWORD}
 
     camera_groups:
       "All Cameras":
