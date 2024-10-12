@@ -50,7 +50,7 @@ data:
           - ffmpeg:http://doorbell.home.arpa/flv?port=1935&app=bcs&stream=channel0_main.bcs&user={FRIGATE_DOORBELL_USER}&password={FRIGATE_DOORBELL_PASSWORD}#video=copy#audio=copy#audio=opus
         #   - rtsp://doorbell.home.arpa/Preview_01_sub
         backyard: 
-          - rtsp://{basic_user}:{basic_password}@backyard.home.arpa/live
+          - rtsp://${basic_user}:${basic_password}@backyard.home.arpa/live
         # doorbell_audio: 
         #   - ffmpeg:http://doorbell.home.arpa/flv?port=1935&app=bcs&stream=channel0_ext.bcs&user={FRIGATE_DOORBELL_USER}&password={FRIGATE_DOORBELL_PASSWORD}
 
