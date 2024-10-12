@@ -49,6 +49,8 @@ data:
         doorbell: 
           - ffmpeg:http://doorbell.home.arpa/flv?port=1935&app=bcs&stream=channel0_main.bcs&user={FRIGATE_DOORBELL_USER}&password={FRIGATE_DOORBELL_PASSWORD}#video=copy#audio=copy#audio=opus
         #   - rtsp://doorbell.home.arpa/Preview_01_sub
+        backyard: 
+          - rtsp://{basic_user}:{basic_password}@backyard.home.arpa/live
         # doorbell_audio: 
         #   - ffmpeg:http://doorbell.home.arpa/flv?port=1935&app=bcs&stream=channel0_ext.bcs&user={FRIGATE_DOORBELL_USER}&password={FRIGATE_DOORBELL_PASSWORD}
 
@@ -56,6 +58,7 @@ data:
       "All Cameras":
         cameras:
           - doorbell
+          - backyard
         icon: LuHome
         order: 0
       "Birdseye":
@@ -63,15 +66,15 @@ data:
           - birdseye
         icon: LuBird
         order: 1
-      # "Backyard Featured":
-      #   cameras:
-      #     - backyard
-      #     - frontdoor
-      #     - driveway
-      #     - court
-      #     - floor
-      #   icon: LuTrees
-      #   order: 2
+      "Backyard Featured":
+        cameras:
+          - doorbell
+          - backyard
+          # - driveway
+          # - court
+          # - floor
+        icon: LuTrees
+        order: 2
 
     detectors:
       coral:
@@ -111,6 +114,44 @@ data:
           # fps: 5
         mqtt:
           height: 640
+
+      backyard:
+        birdseye:
+          order: 1
+        # motion:
+        #   mask:
+        #     - 1,0.553,0.765,0.591,0.219,0.589,0.22,0.327,0.628,0.306,0.866,0,1,0
+        objects:
+          track:
+            - person
+            - cat
+            - dog
+            - bird
+          # filters:
+          #   person: &mask
+          #     mask:
+          #       - 1,0.553,0.765,0.591,0.219,0.589,0.22,0.327,0.628,0.306,0.866,0,1,0
+          #   cat: *mask
+          #   dog: *mask
+          #   bird: *mask
+        ffmpeg:
+          inputs:
+            - path: 'rtsp://localhost:8554/backyard'
+              roles:
+                - detect
+                - record
+        detect:
+          # 2560x1920
+          width: 1280
+          height: 960
+          # fps: 5
+        mqtt:
+          height: 640
+        onvif:
+          host: backyard.home.arpa
+          port: 80
+          user: ${basic_user}
+          password: ${basic_password}
 
       # court:
       #   birdseye:
