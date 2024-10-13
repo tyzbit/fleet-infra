@@ -22,7 +22,7 @@ spec:
       allowSnippetAnnotations: true
       service:
         type: ClusterIP
-      replicaCount: 3
+      replicaCount: 2
 
       # metrics:
       #   service:
