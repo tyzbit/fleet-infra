@@ -1,8 +1,8 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: migrate-pv-game
-  namespace: personal
+  name: migrate-pv-bitcoin
+  namespace: crypto
 spec:
   backoffLimit: 0
   template:
@@ -36,9 +36,9 @@ spec:
       volumes:
         - name: src
           persistentVolumeClaim:
-            claimName: grav-${game_name}-data-nas
+            claimName: bitcoin-blockchain-longhorn-crypto
         - name: dst
           persistentVolumeClaim:
-            claimName: grav-${game_name}-data-longhorn-webapp
-      # nodeSelector:
-      #   kubernetes.io/hostname: doorman
+            claimName: bitcoin-blockchain-longhorn-crypto-2
+      nodeSelector:
+        kubernetes.io/hostname: myocyte2-ejhdq
