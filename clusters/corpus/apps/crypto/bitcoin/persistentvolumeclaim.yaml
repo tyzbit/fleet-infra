@@ -11,3 +11,17 @@ spec:
   storageClassName: longhorn-crypto
   accessModes:
     - ReadWriteOnce
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: bitcoin-blockchain-longhorn-crypto-2
+  namespace: crypto
+spec:
+  resources:
+    requests:
+      storage: 850Gi
+  volumeMode: Filesystem
+  storageClassName: longhorn-crypto
+  accessModes:
+    - ReadWriteOnce
