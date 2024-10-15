@@ -36,9 +36,9 @@ spec:
       volumes:
         - name: src
           persistentVolumeClaim:
-            claimName: bitcoin-blockchain-longhorn-crypto
+            claimName: bitcoin-blockchain-longhorn-crypto-2
         - name: dst
           persistentVolumeClaim:
-            claimName: bitcoin-blockchain-longhorn-crypto-2
+            claimName: bitcoin-blockchain-longhorn-crypto
       nodeSelector:
         kubernetes.io/hostname: myocyte2-ejhdq
