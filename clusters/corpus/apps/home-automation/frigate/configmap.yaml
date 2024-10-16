@@ -92,6 +92,9 @@ data:
             cat: *mask
             dog: *mask
             bird: *mask
+            car:
+              mask:
+                - 0.935,0.586,0.968,0.533,1,0.532,0.999,0.656,0.861,0.616
         ffmpeg:
           inputs:
             - path: 'rtsp://localhost:8554/doorbell'
