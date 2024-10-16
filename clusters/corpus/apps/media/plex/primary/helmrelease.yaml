@@ -38,6 +38,7 @@ spec:
                         values:
                           - "plex-secondary"
                           - "tdarr"
+                          - "frigate"
         containers:
           *app :
             image:
