@@ -33,6 +33,10 @@ data:
     objects:
       track:
         - person
+    review:
+      alerts:
+        labels:
+          - person
     birdseye:
       enabled: True
       quality: 8
@@ -66,15 +70,6 @@ data:
           - birdseye
         icon: LuBird
         order: 1
-      "Backyard Featured":
-        cameras:
-          - doorbell
-          - backyard
-          # - driveway
-          # - court
-          # - floor
-        icon: LuTrees
-        order: 2
 
     detectors:
       coral:
@@ -94,6 +89,8 @@ data:
             - cat
             - dog
             - bird
+            - car
+            - bicycle
           filters:
             person: &mask
               mask:
@@ -118,22 +115,12 @@ data:
       backyard:
         birdseye:
           order: 1
-        # motion:
-        #   mask:
-        #     - 1,0.553,0.765,0.591,0.219,0.589,0.22,0.327,0.628,0.306,0.866,0,1,0
         objects:
           track:
             - person
             - cat
             - dog
             - bird
-          # filters:
-          #   person: &mask
-          #     mask:
-          #       - 1,0.553,0.765,0.591,0.219,0.589,0.22,0.327,0.628,0.306,0.866,0,1,0
-          #   cat: *mask
-          #   dog: *mask
-          #   bird: *mask
         ffmpeg:
           inputs:
             - path: 'rtsp://localhost:8554/backyard'
