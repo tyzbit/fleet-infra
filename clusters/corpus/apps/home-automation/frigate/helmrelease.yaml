@@ -126,10 +126,13 @@ spec:
         hosts:
           - host: "frigate.home.arpa"
             paths: *frigatepath
-          # # For sharing exports without auth
+          # # For sharing paths without auth
           - host: &host "frigate.${personal_domain}"
             paths:
               - path: "/api/events"
+                service:
+                  identifier: main
+              - path: "/api/config/schema.json"
                 service:
                   identifier: main
           #     - path: "/exports/floor_emwspi.mp4"
