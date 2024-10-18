@@ -32,6 +32,10 @@ spec:
               limits:
                 memory: 2Gi
 
+    persistence:
+      tmp:
+        type: emptyDir
+
     service:
       *app :
         controller: morphos
