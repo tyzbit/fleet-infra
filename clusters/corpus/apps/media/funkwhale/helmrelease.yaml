@@ -15,20 +15,6 @@ spec:
         namespace: flux-system
       interval: 1m
   values:
-    ingress:
-      enabled: true
-      className: nginx
-      annotations:
-        cert-manager.io/cluster-issuer: letsencrypt
-        external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
-        external-dns.alpha.kubernetes.io/target: ${cloudflared_tunnel_uuid}.cfargotunnel.com
-      host: ${funkwhale_host}
-      protocol: https
-
-      tls:
-        - secretName: ${funkwhale_host}-tls
-          hosts:
-            - ${funkwhale_host}
     persistence:
       enabled: true
       existingClaim: funkwhale-config-longhorn-webapp
@@ -77,3 +63,18 @@ spec:
 
         extraVolumes:
           - <<: *extraVolume
+
+    ingress:
+      enabled: true
+      className: nginx
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt
+        external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+        external-dns.alpha.kubernetes.io/target: ${cloudflared_tunnel_uuid}.cfargotunnel.com
+      host: ${funkwhale_host}
+      protocol: https
+
+      tls:
+        - secretName: ${funkwhale_host}-tls
+          hosts:
+            - ${funkwhale_host}
