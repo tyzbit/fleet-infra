@@ -132,9 +132,6 @@ spec:
               - path: "/api/events"
                 service:
                   identifier: main
-              - path: "/api/config/schema.json"
-                service:
-                  identifier: main
           #     - path: "/exports/floor_emwspi.mp4"
           #       service:
           #         identifier: main
