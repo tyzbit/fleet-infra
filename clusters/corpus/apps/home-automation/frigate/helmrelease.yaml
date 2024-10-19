@@ -96,6 +96,9 @@ spec:
           http:
             port: 80
             targetPort: 5000
+          rtsp:
+            port: 8554
+            targetPort: 8554
 
     ingress:
       *app :
