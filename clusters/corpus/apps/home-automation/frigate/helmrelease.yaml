@@ -97,8 +97,11 @@ spec:
             port: 80
             targetPort: 5000
           rtsp:
-            port: 8554
-            targetPort: 8554
+            port: &rtsp 8554
+            targetPort: *rtsp
+          webrtc:
+            port: &webrtc 8555
+            targetPort: *webrtc
 
     ingress:
       *app :
