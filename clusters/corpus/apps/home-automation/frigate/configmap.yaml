@@ -100,7 +100,7 @@ data:
                 - 0.859,0.555,0.857,0.516,0.927,0.505,0.932,0.548 # across the street on the curb
                 - 0.956,0.491,0.955,0.52,1,0.523,1,0.488 # across the street far right
                 - 0.221,0.507,0.317,0.51,0.382,0.508,0.375,0.523,0.336,0.528,0.301,0.537,0.221,0.536 # left side of street
-        motion: *filter
+        # motion: *filter
         ffmpeg:
           inputs:
             - path: "rtsp://localhost:8554/doorbell"
