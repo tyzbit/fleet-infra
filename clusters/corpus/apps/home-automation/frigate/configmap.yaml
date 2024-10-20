@@ -75,9 +75,6 @@ data:
       doorbell:
         birdseye:
           order: 0
-        # motion:
-        #   mask: &personmask
-        #     - 1,0.553,0.765,0.591,0.219,0.589,0.22,0.327,0.628,0.306,0.866,0,1,0
         objects:
           track:
             - person
@@ -86,7 +83,7 @@ data:
             - bird
             - car
             - bicycle
-          filters:
+          filters: &filter
             person:
               mask:
                 - &personmask 1,0.553,0.936,0.587,0.769,0.609,0.221,0.606,0.22,0.327,0.628,0.306,0.866,0,1,0
@@ -100,8 +97,10 @@ data:
                 - 0.223,0.472,1,0.454,1,0,0,0,0,1,1,1,1,0.663,0.767,0.59,0.223,0.589 # general mask
                 - 0.935,0.586,0.968,0.533,1,0.532,0.999,0.656,0.861,0.616 # my car
                 - 0.542,0.523,0.541,0.494,0.502,0.493,0.414,0.508,0.411,0.541 # across the street
-                - 0.956,0.491,0.955,0.52,1,0.523,1,0.488 # across the street to the right
+                - 0.859,0.555,0.857,0.516,0.927,0.505,0.932,0.548 # across the street on the curb
+                - 0.956,0.491,0.955,0.52,1,0.523,1,0.488 # across the street far right
                 - 0.221,0.507,0.317,0.51,0.382,0.508,0.375,0.523,0.336,0.528,0.301,0.537,0.221,0.536 # left side of street
+        motion: *filter
         ffmpeg:
           inputs:
             - path: "rtsp://localhost:8554/doorbell"
