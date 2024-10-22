@@ -24,6 +24,7 @@ spec:
           reloader.stakater.com/auto: "true"
         pod:
           hostNetwork: true
+          automountServiceAccountToken: false
 
         containers:
           *app :
