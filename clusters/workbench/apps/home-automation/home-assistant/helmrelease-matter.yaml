@@ -22,9 +22,9 @@ spec:
       *app :
         annotations:
           reloader.stakater.com/auto: "true"
-        pod:
-          hostNetwork: true
-          automountServiceAccountToken: false
+        # pod:
+        #   hostNetwork: true
+        #   automountServiceAccountToken: false
 
         containers:
           *app :
