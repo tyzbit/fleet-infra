@@ -41,7 +41,7 @@ spec:
               requests:
                 cpu: 10m
               limits:
-                memory: 500Gi
+                memory: 500Mi
 
     persistence:
       data:
