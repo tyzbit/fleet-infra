@@ -80,7 +80,6 @@ spec:
               - path: /srv/homeassistant
       media:
         type: emptyDir
-        sizeLimit: 100G
 
     service:
       main:
