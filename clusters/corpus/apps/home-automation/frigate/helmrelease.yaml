@@ -107,7 +107,10 @@ spec:
       *app :
         className: nginx
         annotations:
-          nginx.ingress.kubernetes.io/proxy-body-size: 256m
+          nginx.ingress.kubernetes.io/proxy-body-size: 1024m
+          nginx.ingress.kubernetes.io/proxy-connect-timeout: "20"
+          nginx.ingress.kubernetes.io/proxy-read-timeout: "14400"
+          nginx.ingress.kubernetes.io/proxy-send-timeout: "14400"
           nginx.ingress.kubernetes.io/auth-url: "http://frigate-oauth2-proxy.home-automation.svc.cluster.local/oauth2/auth"
           nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
           cert-manager.io/cluster-issuer: letsencrypt
