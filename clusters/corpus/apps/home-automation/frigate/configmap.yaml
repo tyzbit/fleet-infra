@@ -56,6 +56,8 @@ data:
         #   - rtsp://doorbell.home.arpa/Preview_01_sub
         backyard:
           - rtsp://${basic_user}:${basic_password}@backyard.home.arpa/live
+        shed:
+          - rtsp://${basic_user}:${basic_password}@shed.home.arpa/live
         # doorbell_audio:
         #   - ffmpeg:http://doorbell.home.arpa/flv?port=1935&app=bcs&stream=channel0_ext.bcs&user={FRIGATE_DOORBELL_USER}&password={FRIGATE_DOORBELL_PASSWORD}
 
@@ -138,14 +140,39 @@ data:
                 - detect
                 - record
         detect:
-          # 2560x1920
-          width: 1280
-          height: 960
+          # 2688x1520
+          width: 2016
+          height: 1140
           # fps: 5
         mqtt:
           height: 640
         onvif:
           host: backyard.home.arpa
+          port: 80
+          user: ${basic_user}
+          password: ${basic_password}
+
+      shed:
+        birdseye:
+          order: 2
+        objects:
+          track:
+            - person
+        ffmpeg:
+          inputs:
+            - path: "rtsp://localhost:8554/shed"
+              roles:
+                - detect
+                - record
+        detect:
+          # 1920x1080
+          width: 1440
+          height: 960
+          # fps: 5
+        mqtt:
+          height: 640
+        onvif:
+          host: shed.home.arpa
           port: 80
           user: ${basic_user}
           password: ${basic_password}
