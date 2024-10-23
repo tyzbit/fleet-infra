@@ -52,6 +52,11 @@ spec:
             env:
               - name: TZ
                 value: America/New_York
+            resources:
+              requests:
+                cpu: 10m
+              limits:
+                memory: 100Mi
 
           matter-server:
             image:
