@@ -53,6 +53,21 @@ spec:
               - name: TZ
                 value: America/New_York
 
+          matter-server:
+            image:
+              repository: ghcr.io/home-assistant-libs/python-matter-server
+              tag: "6.6.0"
+            env:
+              MATTER_SERVER__INSTANCE_NAME: matter-server
+              MATTER_SERVER__PORT: &matterport 5580
+              MATTER_SERVER__APPLICATION_URL: matter.home.arpa
+              MATTER_SERVER__LOG_LEVEL: info
+            resources:
+              requests:
+                cpu: 10m
+              limits:
+                memory: 500Mi
+
     persistence:
       bluetoothusb:
         type: hostPath
@@ -80,6 +95,12 @@ spec:
               - path: /srv/homeassistant
       media:
         type: emptyDir
+      data:
+        existingClaim: matter-config-nas
+        advancedMounts:
+          *app :
+            matter-server:
+              - path: /data
 
     service:
       main:
@@ -97,6 +118,13 @@ spec:
         ports:
           fbhttp:
             port: 80
+
+      matter-server:
+        primary: false
+        controller: *app
+        ports:
+          matter:
+            port: *matterport
 
     ingress:
       main:
