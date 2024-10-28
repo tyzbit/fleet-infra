@@ -17,7 +17,7 @@ spec:
   values:
     image:
       repository: thelande/apcupsd
-      tag: v1.0.6
+      tag: v1.1.0
     env: [
         { name: APCUPSD_UPSNAME, value: apc1500c },
         { name: APCUPSD_UPSCABLE, value: usb },
