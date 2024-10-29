@@ -36,8 +36,7 @@ spec:
     primary:
       existingConfigmap: home-assistant-db-config
       persistence:
-        # It will run with an emptyDir
-        enabled: false
+        existingClaim: home-assistant-data-nas
       resources:
         requests:
           cpu: 100m

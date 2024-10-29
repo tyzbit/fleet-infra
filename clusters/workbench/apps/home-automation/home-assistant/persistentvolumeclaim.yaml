@@ -25,3 +25,17 @@ spec:
   storageClassName: nas
   accessModes:
     - ReadWriteMany
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: home-assistant-data-nas
+  namespace: home-automation
+spec:
+  resources:
+    requests:
+      storage: 100Gi
+  volumeMode: Filesystem
+  storageClassName: nas
+  accessModes:
+    - ReadWriteOnce
