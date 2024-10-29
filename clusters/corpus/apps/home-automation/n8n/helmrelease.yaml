@@ -58,6 +58,7 @@ spec:
         type: ClusterIP
         ports:
           http:
+            primary: true
             port: 5678
           sqlite:
             port: 3000
