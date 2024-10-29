@@ -54,6 +54,7 @@ spec:
         controller: *app
         ports:
           webrtc:
+            primary: true
             port: 80
           rtsp:
             port: 554
