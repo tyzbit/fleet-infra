@@ -94,6 +94,7 @@ spec:
         type: ClusterIP
         ports:
           http:
+            primary: true
             port: 80
             targetPort: 5000
           rtsp:
