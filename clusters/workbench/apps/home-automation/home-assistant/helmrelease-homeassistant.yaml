@@ -113,6 +113,7 @@ spec:
         controller: *app
         ports:
           http:
+            primary: true
             port: 8123
           matter:
             port: 5580
