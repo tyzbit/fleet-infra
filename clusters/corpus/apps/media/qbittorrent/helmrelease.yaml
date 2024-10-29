@@ -57,6 +57,7 @@ spec:
         type: ClusterIP
         ports:
           http:
+            primary: true
             port: 8080
           torrent-tcp:
             port: 32123
