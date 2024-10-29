@@ -6,7 +6,7 @@ metadata:
 spec:
   interval: 2m0s
   ref:
-    tag: "v1.0.6"
+    tag: "v1.1.0"
   secretRef:
     name: flux-system
   url: https://github.com/thelande/apcupsd.git
