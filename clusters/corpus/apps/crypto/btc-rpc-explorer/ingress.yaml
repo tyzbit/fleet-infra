@@ -12,7 +12,7 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - &host "btc.${blog_domain}"
+        - &host "btc.${public_services_domain}"
       secretName: *host
   rules:
     - host: *host
