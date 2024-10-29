@@ -30,7 +30,7 @@ spec:
           *app :
             image:
               repository: eclipse-mosquitto
-              tag: "2.0.18"
+              tag: "2.0.20"
             env:
               TZ: America/New_York
             probes:
