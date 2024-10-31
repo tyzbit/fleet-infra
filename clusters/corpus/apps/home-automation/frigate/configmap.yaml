@@ -185,10 +185,10 @@ data:
             - path: "rtsp://localhost:8554/backyard"
               roles: *detectandrecordroles
         detect:
-          - person
-          - dog
-          - cat
-          - bird
+          # 2688x1520
+          width: 2016
+          height: 1140
+          # fps: 5
         mqtt: *mqttheight
         onvif:
           host: backyard.home.arpa
