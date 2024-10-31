@@ -25,6 +25,10 @@ data:
         retain:
           default: 30
           mode: active_objects
+    detectors:
+      coral:
+        type: edgetpu
+        device: usb
     snapshots:
       enabled: True
       retain:
@@ -54,6 +58,12 @@ data:
         doorbell:
           - ffmpeg:http://doorbell.home.arpa/flv?port=1935&app=bcs&stream=channel0_main.bcs&user={FRIGATE_DOORBELL_USER}&password={FRIGATE_DOORBELL_PASSWORD}#video=copy#audio=copy#audio=opus
         #   - rtsp://doorbell.home.arpa/Preview_01_sub
+        garage:
+          - ffmpeg:http://garage.home.arpa/flv?port=1935&app=bcs&stream=channel0_main.bcs&user={FRIGATE_DOORBELL_USER}&password={FRIGATE_DOORBELL_PASSWORD}#video=copy#audio=copy#audio=opus
+        sidegarage:
+          - ffmpeg:http://sidegarage.home.arpa/flv?port=1935&app=bcs&stream=channel0_main.bcs&user={FRIGATE_DOORBELL_USER}&password={FRIGATE_DOORBELL_PASSWORD}#video=copy#audio=copy#audio=opus
+        backdeck:
+          - ffmpeg:http://backdeck.home.arpa/flv?port=1935&app=bcs&stream=channel0_main.bcs&user={FRIGATE_DOORBELL_USER}&password={FRIGATE_DOORBELL_PASSWORD}#video=copy#audio=copy#audio=opus
         backyard:
           - rtsp://${basic_user}:${basic_password}@backyard.home.arpa/live
         # shed:
@@ -68,23 +78,38 @@ data:
         icon: LuBird
         order: 1
 
-    detectors:
-      coral:
-        type: edgetpu
-        device: usb
-
     cameras:
-      doorbell:
+
+      garage:
         birdseye:
           order: 0
         objects:
-          track:
+          track: &trackedobjects
             - person
             - cat
             - dog
             - bird
             - car
             - bicycle
+        ffmpeg:
+          inputs:
+            - path: "rtsp://localhost:8554/garage"
+              roles: &detectandrecordroles
+                - detect
+                - record
+        detect: &detect
+          # 2560x1920
+          width: 1280
+          height: 960
+          # fps: 5
+        mqtt:
+          height: 640
+
+      doorbell:
+        birdseye:
+          order: 1
+        objects:
+          track: *trackedobjects
           filters: &filter
             person:
               mask:
@@ -107,20 +132,80 @@ data:
         ffmpeg:
           inputs:
             - path: "rtsp://localhost:8554/doorbell"
-              roles:
-                - detect
-                - record
+              roles: *detectandrecordroles
         detect:
           # 2560x1920
           width: 1280
           height: 960
           # fps: 5
-        mqtt:
+        mqtt: &mqttheight
           height: 640
+
+      sidegarage:
+        birdseye:
+          order: 3
+        objects:
+          track: *trackedobjects
+          filters: &filter
+            person:
+              mask:
+                - &personmask 1,0.553,0.936,0.587,0.769,0.609,0.221,0.606,0.22,0.327,0.628,0.306,0.866,0,1,0
+                - 0.468,0.574,0.573,0.575,0.573,0.667,0.47,0.665 # yard decorations
+            cat: { mask: [*personmask] }
+            dog: { mask: [*personmask] }
+            # additional mask is temporary, remove later
+            bird:
+              { mask: [*personmask, "0.228,0.343,0,0.27,0,1,0.194,1,0.24,0.855"] }
+            car:
+              mask:
+                - 0.223,0.472,1,0.454,1,0,0,0,0,1,1,1,1,0.663,0.767,0.59,0.223,0.589 # general mask
+                - 0.935,0.586,0.968,0.533,1,0.532,0.999,0.656,0.861,0.616 # my car
+                - 0.542,0.523,0.541,0.494,0.502,0.493,0.414,0.508,0.411,0.541 # across the street
+                - 0.859,0.555,0.857,0.516,0.927,0.505,0.932,0.548 # across the street on the curb
+                - 0.956,0.491,0.955,0.52,1,0.523,1,0.488 # across the street far right
+                - 0.221,0.507,0.317,0.51,0.382,0.508,0.375,0.523,0.336,0.528,0.301,0.537,0.221,0.536 # left side of street
+        # motion: *filter
+        ffmpeg:
+          inputs:
+            - path: "rtsp://localhost:8554/sidegarage"
+              roles: *detectandrecordroles
+        detect: *detect
+        mqtt: *mqttheight
+
+      backdeck:
+        birdseye:
+          order: 4
+        objects:
+          track: *trackedobjects
+          filters: &filter
+            person:
+              mask:
+                - &personmask 1,0.553,0.936,0.587,0.769,0.609,0.221,0.606,0.22,0.327,0.628,0.306,0.866,0,1,0
+                - 0.468,0.574,0.573,0.575,0.573,0.667,0.47,0.665 # yard decorations
+            cat: { mask: [*personmask] }
+            dog: { mask: [*personmask] }
+            # additional mask is temporary, remove later
+            bird:
+              { mask: [*personmask, "0.228,0.343,0,0.27,0,1,0.194,1,0.24,0.855"] }
+            car:
+              mask:
+                - 0.223,0.472,1,0.454,1,0,0,0,0,1,1,1,1,0.663,0.767,0.59,0.223,0.589 # general mask
+                - 0.935,0.586,0.968,0.533,1,0.532,0.999,0.656,0.861,0.616 # my car
+                - 0.542,0.523,0.541,0.494,0.502,0.493,0.414,0.508,0.411,0.541 # across the street
+                - 0.859,0.555,0.857,0.516,0.927,0.505,0.932,0.548 # across the street on the curb
+                - 0.956,0.491,0.955,0.52,1,0.523,1,0.488 # across the street far right
+                - 0.221,0.507,0.317,0.51,0.382,0.508,0.375,0.523,0.336,0.528,0.301,0.537,0.221,0.536 # left side of street
+        # motion: *filter
+        ffmpeg:
+          inputs:
+            - path: "rtsp://localhost:8554/backdeck"
+              roles: *detectandrecordroles
+        detect: *detect
+        mqtt: *mqttheight
 
       backyard:
         birdseye:
-          order: 1
+          order: 5
         motion:
           mask:
             - >-
@@ -129,24 +214,13 @@ data:
               1,0,0,0,0,1,1,1,1,0.908,0.766,0.956,0.48,0.924,0.328,0.878,0.218,0.824,
               0.13,0.77,0.053,0.715
         objects:
-          track:
-            - person
-            - cat
-            - dog
-            - bird
+          track: *trackedobjects
         ffmpeg:
           inputs:
             - path: "rtsp://localhost:8554/backyard"
-              roles:
-                - detect
-                - record
-        detect:
-          # 2688x1520
-          width: 2016
-          height: 1140
-          # fps: 5
-        mqtt:
-          height: 640
+              roles: *detectandrecordroles
+        detect: *detect
+        mqtt: *mqttheight
         onvif:
           host: backyard.home.arpa
           port: 80
