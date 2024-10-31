@@ -81,6 +81,7 @@ data:
     cameras:
 
       garage:
+        enabled: false
         birdseye:
           order: 0
         objects:
@@ -141,6 +142,7 @@ data:
         mqtt: *mqttheight
 
       sidegarage:
+        enabled: false
         birdseye:
           order: 3
         objects:
@@ -155,6 +157,7 @@ data:
         mqtt: *mqttheight
 
       backdeck:
+        enabled: false
         birdseye:
           order: 4
         objects:
