@@ -184,7 +184,11 @@ data:
           inputs:
             - path: "rtsp://localhost:8554/backyard"
               roles: *detectandrecordroles
-        detect: *detect
+        detect:
+          - person
+          - dog
+          - cat
+          - bird
         mqtt: *mqttheight
         onvif:
           host: backyard.home.arpa
