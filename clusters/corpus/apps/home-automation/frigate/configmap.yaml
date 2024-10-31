@@ -97,13 +97,13 @@ data:
               roles: &detectandrecordroles
                 - detect
                 - record
-        detect: &detect
-          # 2560x1920
-          width: 1280
-          height: 960
+        detect: &foodlightdetect
+          # 4608X1728
+          width: 2304
+          height: 864
           # fps: 5
-        mqtt:
-          height: 640
+        mqtt: &mqttheight
+          height: 960
 
       doorbell:
         birdseye:
@@ -138,8 +138,7 @@ data:
           width: 1280
           height: 960
           # fps: 5
-        mqtt: &mqttheight
-          height: 640
+        mqtt: *mqttheight
 
       sidegarage:
         birdseye:
@@ -152,7 +151,7 @@ data:
           inputs:
             - path: "rtsp://localhost:8554/sidegarage"
               roles: *detectandrecordroles
-        detect: *detect
+        detect: *foodlightdetect
         mqtt: *mqttheight
 
       backdeck:
@@ -166,7 +165,7 @@ data:
           inputs:
             - path: "rtsp://localhost:8554/backdeck"
               roles: *detectandrecordroles
-        detect: *detect
+        detect: *foodlightdetect
         mqtt: *mqttheight
 
       backyard:
