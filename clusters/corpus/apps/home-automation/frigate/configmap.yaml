@@ -110,7 +110,7 @@ data:
           order: 1
         objects:
           track: *trackedobjects
-          filters: &filter
+          filters:
             person:
               mask:
                 - &personmask 1,0.553,0.936,0.587,0.769,0.609,0.221,0.606,0.22,0.327,0.628,0.306,0.866,0,1,0
