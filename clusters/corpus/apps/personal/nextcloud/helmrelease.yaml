@@ -19,7 +19,7 @@ spec:
         namespace: flux-system
   values:
     controllers:
-      &db nextcloud-db:
+      db:
         replicas: 1 # active longhorn
         type: statefulset
         annotations:
@@ -29,7 +29,7 @@ spec:
             longhorn: primary
 
         containers:
-          *db :
+          &db nextcloud-db:
             image:
               repository: mariadb:10.8
               tag: "10.8"
@@ -43,14 +43,14 @@ spec:
               limits:
                 memory: 1Gi
 
-      *app :
+      app:
         replicas: 1
         type: deployment
         annotations:
           reloader.stakater.com/auto: "true"
 
         containers:
-          *app :
+          &app nextcloud-app:
             image:
               repository: nextcloud
               tag: &nextcloudver "30.0.1"
@@ -78,14 +78,14 @@ spec:
               limits:
                 memory: 32Mi
 
-      &worker nextcloud-worker:
+      worker:
         replicas: 1
         type: statefulset
         annotations:
           reloader.stakater.com/auto: "true"
 
         containers:
-          *worker :
+          &worker nextcloud-worker:
             image:
               repository: nextcloud
               tag: *nextcloudver
@@ -111,21 +111,21 @@ spec:
               limits:
                 memory: 1Gi
 
-          *cache : *cachecontainer
+          cache: *cachecontainer
 
     persistence:
       # MariaDB
       db:
-        existingClaim: frigate-database-longhorn-database
+        existingClaim: nextcloud-mariadb-longhorn-database
         advancedMounts:
-          *db :
+          db:
             *db :
               - path: /var/lib/mysql
       db-config:
         name: nextcloud-db-config
         type: configMap
         advancedMounts:
-          *db :
+          db:
             *db :
               - path: /etc/mysql/conf.d
                 readOnly: true
@@ -134,17 +134,17 @@ spec:
       data:
         existingClaim: nextcloud-data-nas
         advancedMounts:
-          *app :
+          app:
             *app :
               - path: &datamount /var/www/html
-            *worker :
+            worker:
               - path: *datamount
       cache:
         type: emptyDir
         medium: Memory
         sizeLimit: 128Mi
         advancedMounts:
-          *app :
+          app:
             *cache :
               - path: /data
       socket:
@@ -152,7 +152,7 @@ spec:
         medium: Memory
         sizeLimit: 128Mi
         advancedMounts:
-          *app :
+          app:
             *cache :
               - path: /data
             *app :
@@ -162,7 +162,7 @@ spec:
 
     service:
       main:
-        controller: *app
+        controller: app
         type: ClusterIP
         ports:
           http:
@@ -170,7 +170,7 @@ spec:
             port: 80
 
       db:
-        controller: *db
+        controller: db
         type: ClusterIP
         ports:
           mariadb:
@@ -178,7 +178,7 @@ spec:
             port: 3306
 
     ingress:
-      *app :
+      app:
         className: nginx
         annotations:
           nginx.ingress.kubernetes.io/proxy-body-size: 2048m
