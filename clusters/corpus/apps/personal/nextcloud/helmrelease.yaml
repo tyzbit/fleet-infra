@@ -139,14 +139,6 @@ spec:
               - path: &datamount /var/www/html
             worker:
               - path: *datamount
-      cache:
-        type: emptyDir
-        medium: Memory
-        sizeLimit: 128Mi
-        advancedMounts:
-          app:
-            *cache :
-              - path: /data
       socket:
         type: emptyDir
         medium: Memory
@@ -159,6 +151,23 @@ spec:
               - path: &varredis /var/run/redis/
             *worker :
               - path: *varredis
+      cache:
+        type: emptyDir
+        medium: Memory
+        sizeLimit: 128Mi
+        advancedMounts:
+          app:
+            *cache :
+              - path: /data
+      cache-config:
+        name: nextcloud-cache-config
+        type: configMap
+        advancedMounts:
+          app:
+            *cache :
+              - path: /usr/local/etc/redis/redis.conf
+                subPath: redis.conf
+                readOnly: true
 
     service:
       main:
