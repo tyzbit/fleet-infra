@@ -110,7 +110,7 @@ data:
         birdseye:
           order: 0
           layout:
-            scaling_factor: 2.0
+            scaling_factor: 5.0
         objects:
           track: *trackedobjects
           filters:
