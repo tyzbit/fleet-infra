@@ -149,8 +149,9 @@ spec:
               - path: /var/run/redis/
             *app : *redis
           worker:
-            *cache : *redis
-            *worker : *redis
+            *cache : &redis
+              - path: /var/run/redis/
+            *app : *redis
 
       # Redis-only
       cache:
