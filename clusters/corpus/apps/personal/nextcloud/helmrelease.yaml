@@ -104,9 +104,9 @@ spec:
                 green="\e[1;32m"
                 red="\e[1;31m"
                 for op in "$${ops[@]}" ; do
-                  echo -e "$grey Running php occ $op $reset"
+                  echo -e "$${grey}Running php occ $op $reset"
                   su www-data -s /usr/local/bin/php occ $op && echo -en "$green" || echo -en "$red"
-                  echo "Finished php occ $op $reset"
+                  echo -e "Finished php occ $op $reset"
                 done &&
                 while :; do /cron.sh; done
             resources:
