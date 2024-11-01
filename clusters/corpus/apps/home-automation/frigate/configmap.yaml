@@ -78,10 +78,13 @@ data:
       "Birdseye":
         cameras: [birdseye]
         icon: LuBird
+        order: 0
+      "All Cameras":
+        cameras: [doorbell, garage, sidegarage, backdeck]
+        icon: LuRadar
         order: 1
 
     cameras:
-
       garage:
         enabled: true
         birdseye:
