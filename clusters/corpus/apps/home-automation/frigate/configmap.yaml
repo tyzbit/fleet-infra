@@ -49,6 +49,8 @@ data:
       height: 1080
       # -- objects, motion, continuous
       mode: continuous
+      layout:
+          scaling_factor: 3.0
     ffmpeg:
       # hwaccel_args: ["-hwaccel", "vaapi", "-hwaccel_device", "/dev/dri/renderD128", "-hwaccel_output_format", "yuv420p"]
       hwaccel_args: preset-vaapi
@@ -109,8 +111,6 @@ data:
         enabled: true
         birdseye:
           order: 0
-          layout:
-            scaling_factor: 5.0
         objects:
           track: *trackedobjects
           filters:
