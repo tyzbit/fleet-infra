@@ -106,7 +106,7 @@ spec:
                 for op in "$${ops[@]}" ; do
                   echo -e "$grey Running php occ $op $reset"
                   su www-data -s /usr/local/bin/php occ $op && echo -en "$green" || echo -en "$red"
-                  Finished php occ $op"
+                  echo "Finished php occ $op $reset"
                 done &&
                 su www-data -s /usr/local/bin/php occ background-job:worker
             resources:
