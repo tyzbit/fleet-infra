@@ -163,11 +163,12 @@ spec:
         name: nextcloud-cache-config
         type: configMap
         advancedMounts:
-          app:
+          app: &cachemount
             *cache :
               - path: /usr/local/etc/redis/redis.conf
                 subPath: redis.conf
                 readOnly: true
+          worker: *cachemount
 
     service:
       main:
