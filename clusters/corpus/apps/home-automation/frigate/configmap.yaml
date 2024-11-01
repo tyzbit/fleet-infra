@@ -58,8 +58,8 @@ data:
         doorbell:
           - ffmpeg:http://doorbell.home.arpa/flv?port=1935&app=bcs&stream=channel0_main.bcs&user={FRIGATE_CAMERA_USER}&password={FRIGATE_CAMERA_PASSWORD}#video=copy#audio=copy#audio=opus
         #   - rtsp://doorbell.home.arpa/Preview_01_sub
-        # garage:
-        #   - ffmpeg:rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@garage.home.arpa/Preview_01_main
+        garage:
+          - ffmpeg:rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@garage.home.arpa/Preview_01_main
         sidegarage:
           - ffmpeg:rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@sidegarage.home.arpa/Preview_01_main
         backdeck:
@@ -81,7 +81,7 @@ data:
     cameras:
 
       garage:
-        enabled: false
+        enabled: true
         birdseye:
           order: 1
         objects:
