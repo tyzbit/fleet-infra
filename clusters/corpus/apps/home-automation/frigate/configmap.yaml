@@ -143,7 +143,7 @@ data:
         mqtt: *mqttheight
 
       sidegarage:
-        enabled: false
+        enabled: true
         birdseye:
           order: 2
         objects:
@@ -158,7 +158,7 @@ data:
         mqtt: *mqttheight
 
       backdeck:
-        enabled: false
+        enabled: true
         birdseye:
           order: 3
         objects:
@@ -173,6 +173,7 @@ data:
         mqtt: *mqttheight
 
       backyard:
+        enabled: false
         birdseye:
           order: 4
         motion:
