@@ -109,6 +109,8 @@ data:
         enabled: true
         birdseye:
           order: 0
+          layout:
+            scaling_factor: 2.0
         objects:
           track: *trackedobjects
           filters:
