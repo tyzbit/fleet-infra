@@ -111,7 +111,7 @@ spec:
               limits:
                 memory: 1Gi
 
-          cache: *cachecontainer
+          *cache : *cachecontainer
 
     persistence:
       # MariaDB
@@ -169,7 +169,7 @@ spec:
                 subPath: redis.conf
                 readOnly: true
           worker:
-            *worker : *cachemount
+            *cache : *cachemount
 
     service:
       main:
