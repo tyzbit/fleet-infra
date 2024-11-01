@@ -138,7 +138,7 @@ spec:
           app:
             *app :
               - path: &datamount /var/www/html
-            worker:
+          worker:
               - path: *datamount
       socket:
         type: emptyDir
