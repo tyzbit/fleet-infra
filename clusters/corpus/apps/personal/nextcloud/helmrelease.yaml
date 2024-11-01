@@ -109,7 +109,9 @@ spec:
                   echo -e "Finished php occ $op $reset"
                 done &&
                 while :; do /cron.sh; done &
-                wait $!
+                pid=$!
+                func endproc { kill $pid }
+                trap SIGINT endprod
             resources:
               requests:
                 cpu: 1000m
