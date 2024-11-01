@@ -99,7 +99,7 @@ spec:
                 "db:add-missing-columns"
                 "files:cleanup"
                 )
-                for op in "${ops[@]}" ; do
+                for op in "$${ops[@]}" ; do
                   echo "Running php occ $op"
                   su www-data -s /usr/local/bin/php occ db:$op;
                   echo "Finished php occ $op"
