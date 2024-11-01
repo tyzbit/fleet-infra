@@ -108,9 +108,7 @@ spec:
                   su www-data -s /usr/local/bin/php occ $op && echo -en "$green" || echo -en "$red"
                   echo -e "Finished php occ $op $reset"
                 done &&
-                while :; do /cron.sh; done &
-                pid=$!
-                trap "kill $pid" SIGINT TERM
+                while :; do /cron.sh; done
             resources:
               requests:
                 cpu: 1000m
