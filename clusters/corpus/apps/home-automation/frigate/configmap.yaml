@@ -63,7 +63,8 @@ data:
         sidegarage:
           - ffmpeg:rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@sidegarage.home.arpa/Preview_01_main#video=copy
         backdeck:
-          - ffmpeg:rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@backdeck.home.arpa/Preview_01_main#video=copy
+          - ffmpeg:ffmpeg:http://backdeck.home.arpa/flv?port=1935&app=bcs&stream=channel0_main.bcs&user={FRIGATE_CAMERA_USER}&password={FRIGATE_CAMERA_PASSWORD}#video=copy
+          # - ffmpeg:rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@backdeck.home.arpa/Preview_01_main#video=copy
         # backyard:
         #   - rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@backyard.home.arpa/live
         # shed:
@@ -172,34 +173,34 @@ data:
         detect: *foodlightdetect
         mqtt: *mqttheight
 
-      backyard:
-        enabled: false
-        birdseye:
-          order: 4
-        motion:
-          mask:
-            - >-
-              0.041,0.486,0.101,0.45,0.224,0.44,0.255,0.482,0.348,0.439,0.61,0.486,
-              0.613,0.504,0.528,0.566,0.531,0.652,0.619,0.726,0.918,0.835,1,0.856,
-              1,0,0,0,0,1,1,1,1,0.908,0.766,0.956,0.48,0.924,0.328,0.878,0.218,0.824,
-              0.13,0.77,0.053,0.715
-        objects:
-          track: *trackedobjects
-        ffmpeg:
-          inputs:
-            - path: "rtsp://localhost:8554/backyard"
-              roles: *detectandrecordroles
-        detect:
-          # 2688x1520
-          width: 2016
-          height: 1140
-          fps: 5
-        mqtt: *mqttheight
-        onvif:
-          host: backyard.home.arpa
-          port: 80
-          user: ${basic_user}
-          password: ${basic_password}
+      # backyard:
+      #   enabled: false
+      #   birdseye:
+      #     order: 4
+      #   motion:
+      #     mask:
+      #       - >-
+      #         0.041,0.486,0.101,0.45,0.224,0.44,0.255,0.482,0.348,0.439,0.61,0.486,
+      #         0.613,0.504,0.528,0.566,0.531,0.652,0.619,0.726,0.918,0.835,1,0.856,
+      #         1,0,0,0,0,1,1,1,1,0.908,0.766,0.956,0.48,0.924,0.328,0.878,0.218,0.824,
+      #         0.13,0.77,0.053,0.715
+      #   objects:
+      #     track: *trackedobjects
+      #   ffmpeg:
+      #     inputs:
+      #       - path: "rtsp://localhost:8554/backyard"
+      #         roles: *detectandrecordroles
+      #   detect:
+      #     # 2688x1520
+      #     width: 2016
+      #     height: 1140
+      #     fps: 5
+      #   mqtt: *mqttheight
+      #   onvif:
+      #     host: backyard.home.arpa
+      #     port: 80
+      #     user: ${basic_user}
+      #     password: ${basic_password}
 
       # shed:
       #   birdseye:
