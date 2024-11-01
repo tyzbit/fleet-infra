@@ -31,7 +31,7 @@ spec:
         containers:
           &db nextcloud-db:
             image:
-              repository: mariadb:10.8
+              repository: mariadb
               tag: "10.8"
               pullPolicy: Always
             envFrom:
