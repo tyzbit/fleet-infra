@@ -9,9 +9,9 @@ data:
     logger:
       default: info
       # logs:
-      #   frigate.app: debug # testing # testing
+      #   frigate.app: debug
       #   frigate.record: debug # testing
-    database:.path: /db/frigate.db # testing
+    database.path: /db/frigate.db # testing
     # model:
     #   path: plus://25407b0ec1226e1daba65503b2f7c013
     mqtt.host: 192.168.1.11 # testing
