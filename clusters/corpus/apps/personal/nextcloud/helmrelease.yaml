@@ -110,7 +110,7 @@ spec:
                 done &&
                 while :; do /cron.sh; done &
                 pid=$!
-                trap "kill $pid" SIGINT
+                trap "kill $pid" SIGINT TERM
             resources:
               requests:
                 cpu: 1000m
