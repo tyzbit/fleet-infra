@@ -8,7 +8,8 @@ data:
     # yaml-language-server: $schema=https://demo.frigate.video/api/config/schema.json
     logger:
       default: info
-      # logs:
+      logs:
+        frigate.record.maintainer: debug
       #   frigate.app: debug
       #   frigate.record: debug
     database:
