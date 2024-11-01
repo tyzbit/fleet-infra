@@ -14,10 +14,12 @@ data:
     database.path: /db/frigate.db
     # model:
     #   path: plus://25407b0ec1226e1daba65503b2f7c013
-    mqtt.host: 192.168.1.11
+    mqtt:
+      host: 192.168.1.11
     record:
       enabled: true
-      retain.days: 10
+      retain:
+        days: 10
       events:
         retain:
           default: 30
@@ -32,10 +34,13 @@ data:
         default: 30
         objects:
           person: 30
-    objects.track:
-      - person
-    review.alerts.labels:
-      - person
+    objects:
+      track:
+        - person
+    review:
+      alerts:
+        labels:
+          - person
     birdseye:
       enabled: true
       quality: 8
@@ -75,13 +80,15 @@ data:
 
       garage:
         enabled: true
-        birdseye.order: 1
-        objects.track: &trackedobjects
-          - person
-          - cat
-          - dog
-          - car
-          - bicycle
+        birdseye:
+          order: 1
+        objects:
+          track: &trackedobjects
+            - person
+            - cat
+            - dog
+            - car
+            - bicycle
         ffmpeg:
           inputs:
             - path: "rtsp://localhost:8554/garage"
@@ -93,28 +100,35 @@ data:
           width: 1152
           height: 432
           fps: 5
-        mqtt.height: &mqttheight 1728
+        mqtt:
+          height: &mqttheight 1728
 
       doorbell:
         enabled: true
-        birdseye.order: 0
+        birdseye:
+          order: 0
         objects:
           track: *trackedobjects
           filters:
-            person.mask:
+            person:
+              mask:
                 - &personmask 1,0.553,0.936,0.587,0.769,0.609,0.221,0.606,0.22,0.327,0.628,0.306,0.866,0,1,0
                 - 0.468,0.574,0.573,0.575,0.573,0.667,0.47,0.665 # yard decorations
-            cat.mask: [*personmask]
-            dog.mask: [*personmask]
+            cat:
+              mask: [*personmask]
+            dog:
+              mask: [*personmask]
             # additional mask is temporary, remove later
-            bird.mask: [*personmask, "0.228,0.343,0,0.27,0,1,0.194,1,0.24,0.855"]
-            car.mask:
-              - 0.223,0.472,1,0.454,1,0,0,0,0,1,1,1,1,0.663,0.767,0.59,0.223,0.589 # general mask
-              - 0.935,0.586,0.968,0.533,1,0.532,0.999,0.656,0.861,0.616 # my car
-              - 0.542,0.523,0.541,0.494,0.502,0.493,0.414,0.508,0.411,0.541 # across the street
-              - 0.859,0.555,0.857,0.516,0.927,0.505,0.932,0.548 # across the street on the curb
-              - 0.956,0.491,0.955,0.52,1,0.523,1,0.488 # across the street far right
-              - 0.221,0.507,0.317,0.51,0.382,0.508,0.375,0.523,0.336,0.528,0.301,0.537,0.221,0.536 # left side of street
+            bird:
+              mask: [*personmask, "0.228,0.343,0,0.27,0,1,0.194,1,0.24,0.855"]
+            car:
+              mask:
+                - 0.223,0.472,1,0.454,1,0,0,0,0,1,1,1,1,0.663,0.767,0.59,0.223,0.589 # general mask
+                - 0.935,0.586,0.968,0.533,1,0.532,0.999,0.656,0.861,0.616 # my car
+                - 0.542,0.523,0.541,0.494,0.502,0.493,0.414,0.508,0.411,0.541 # across the street
+                - 0.859,0.555,0.857,0.516,0.927,0.505,0.932,0.548 # across the street on the curb
+                - 0.956,0.491,0.955,0.52,1,0.523,1,0.488 # across the street far right
+                - 0.221,0.507,0.317,0.51,0.382,0.508,0.375,0.523,0.336,0.528,0.301,0.537,0.221,0.536 # left side of street
         # motion: *filter
         ffmpeg:
           inputs:
@@ -129,7 +143,8 @@ data:
 
       sidegarage:
         enabled: false
-        birdseye.order: 2
+        birdseye:
+          order: 2
         objects:
           track: *trackedobjects
           # filters: *filter
@@ -143,8 +158,10 @@ data:
 
       backdeck:
         enabled: false
-        birdseye.order: 3
-        objects.track: [person,cat,dog]
+        birdseye:
+          order: 3
+        objects:
+          track: [person,cat,dog]
           # filters: *filter
         # motion: *filter
         ffmpeg:
@@ -155,7 +172,8 @@ data:
         mqtt: *mqttheight
 
       backyard:
-        birdseye.order: 4
+        birdseye:
+          order: 4
         motion:
           mask:
             - >-
@@ -163,7 +181,8 @@ data:
               0.613,0.504,0.528,0.566,0.531,0.652,0.619,0.726,0.918,0.835,1,0.856,
               1,0,0,0,0,1,1,1,1,0.908,0.766,0.956,0.48,0.924,0.328,0.878,0.218,0.824,
               0.13,0.77,0.053,0.715
-        objects.track: *trackedobjects
+        objects:
+          track: *trackedobjects
         ffmpeg:
           inputs:
             - path: "rtsp://localhost:8554/backyard"
