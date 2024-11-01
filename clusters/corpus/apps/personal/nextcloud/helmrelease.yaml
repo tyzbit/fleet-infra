@@ -99,11 +99,14 @@ spec:
                 "db:add-missing-columns"
                 "files:cleanup"
                 )
-                cd /var/www/html
+                grey="\e[1;30m"
+                reset="\e[0m"
+                green="\e[1;32m"
+                red="\e[1;31m"
                 for op in "$${ops[@]}" ; do
-                  echo "Running php occ $op"
-                  su www-data -s /usr/local/bin/php occ db:$op;
-                  echo "Finished php occ $op"
+                  echo -e "$grey Running php occ $op $reset"
+                  su www-data -s /usr/local/bin/php occ db:$op && echo -en "$green" || echo -en "$red"
+                  echo -e "Finished php occ $op $reset"
                 done &&
                 su www-data -s /usr/local/bin/php occ background-job:worker
             resources:
@@ -139,6 +142,7 @@ spec:
             *app :
               - path: &datamount /var/www/html
           worker:
+            *worker :
               - path: *datamount
       socket:
         type: emptyDir
