@@ -11,7 +11,8 @@ data:
       # logs:
       #   frigate.app: debug
       #   frigate.record: debug
-    database.path: /db/frigate.db
+    database:
+      path: /db/frigate.db
     # model:
     #   path: plus://25407b0ec1226e1daba65503b2f7c013
     mqtt:
@@ -100,8 +101,8 @@ data:
           width: 1152
           height: 432
           fps: 5
-        mqtt:
-          height: &mqttheight 1728
+        mqtt: &mqttheight
+          height: 1728
 
       doorbell:
         enabled: true
