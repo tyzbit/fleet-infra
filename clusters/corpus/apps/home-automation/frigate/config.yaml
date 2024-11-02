@@ -1,16 +1,15 @@
 # yaml-language-server: $schema=https://demo.frigate.video/api/config/schema.json
 logger:
   default: info
-  # logs:
+  logs:
+    watchdog: debug
   #   frigate.record.maintainer: debug
   #   frigate.app: debug
   #   frigate.record: debug
-database:
-  path: /db/frigate.db
+database: { path: /db/frigate.db }
 # model:
 #   path: plus://25407b0ec1226e1daba65503b2f7c013
-mqtt:
-  host: 192.168.1.11
+mqtt: { host: 192.168.1.11 }
 record:
   enabled: true
   retain:
@@ -19,23 +18,10 @@ record:
     retain:
       default: 30
       mode: active_objects
-detectors:
-  coral:
-    type: edgetpu
-    device: usb
-snapshots:
-  enabled: true
-  retain:
-    default: 30
-    objects:
-      person: 30
-objects:
-  track:
-    - person
-review:
-  alerts:
-    labels:
-      - person
+detectors: { coral: { type: edgetpu, device: usb } }
+snapshots: { enabled: true, retain: { default: 30, objects: { person: 30 } } }
+objects: { track: [person] }
+review: { alerts: { labels: [person] } }
 birdseye:
   enabled: true
   quality: 8
@@ -43,8 +29,8 @@ birdseye:
   height: 1080
   # -- objects, motion, continuous
   mode: continuous
-  layout:
-    scaling_factor: 3.0
+  # layout: { scaling_factor: 3.0 }
+
 ffmpeg:
   # global_args: -hide_banner -loglevel warning -threads 4
   # hwaccel_args: ["-hwaccel", "vaapi", "-hwaccel_device", "/dev/dri/renderD128", "-hwaccel_output_format", "yuv420p"]
@@ -52,21 +38,14 @@ ffmpeg:
   input_args: preset-rtsp-restream
 go2rtc:
   streams:
+    garage:
+      - "rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@garage.home.arpa/Preview_01_main"
     doorbell:
       - "ffmpeg:http://doorbell.home.arpa/flv?port=1935&app=bcs&stream=channel0_main.bcs&user={FRIGATE_CAMERA_USER}&password={FRIGATE_CAMERA_PASSWORD}#video=copy#audio=copy#audio=opus"
-    #   - rtsp://doorbell.home.arpa/Preview_01_sub
-    garage:
-      - rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@garage.home.arpa/Preview_01_main
     sidegarage:
-      - rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@sidegarage.home.arpa/Preview_01_main
+      - "rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@sidegarage.home.arpa/Preview_01_main"
     backdeck:
-      - rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@backdeck.home.arpa/Preview_01_main
-    # backyard:
-    #   - rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@backyard.home.arpa/live
-    # shed:
-    #   - rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@shed.home.arpa/live
-    # doorbell_audio:
-    #   - ffmpeg:http://doorbell.home.arpa/flv?port=1935&app=bcs&stream=channel0_ext.bcs&user={FRIGATE_CAMERA_USER}&password={FRIGATE_CAMERA_PASSWORD}
+      - "rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@backdeck.home.arpa/Preview_01_main"
 
 camera_groups:
   "Birdseye":
@@ -81,15 +60,9 @@ camera_groups:
 cameras:
   garage:
     enabled: true
-    birdseye:
-      order: 1
+    birdseye: { order: 1 }
     objects:
-      track: &trackedobjects
-        - person
-        - cat
-        - dog
-        - car
-        - bicycle
+      track: &trackedobjects [person, cat, dog, car, bicycle]
       filters:
         person: &garagemask
           mask:
@@ -105,10 +78,8 @@ cameras:
     motion: *garagemask
     ffmpeg:
       inputs:
-        - path: "rtsp://localhost:8554/garage"
-          roles: &detectandrecordroles
-            - detect
-            - record
+        - path: rtsp://localhost:8554/doorbell
+          roles: &detectandrecord [detect, record]
     detect: &foodlightdetect # 4608x1728
       width: 1152
       height: 432
@@ -118,8 +89,7 @@ cameras:
 
   doorbell:
     enabled: true
-    birdseye:
-      order: 0
+    birdseye: { order: 0 }
     objects:
       track: *trackedobjects
       filters:
@@ -128,13 +98,10 @@ cameras:
             - &personmask >-
               1,0.553,0.936,0.587,0.769,0.609,0.221,
               0.606,0.22,0.327,0.628,0.306,0.866,0,1,0
-        cat:
-          mask: [*personmask]
-        dog:
-          mask: [*personmask]
+        cat: { mask: [*personmask] }
+        dog: { mask: [*personmask] }
         # additional mask is temporary, remove later
-        bird:
-          mask: [*personmask, "0.228,0.343,0,0.27,0,1,0.194,1,0.24,0.855"]
+        bird: { mask: [*personmask] }
         car:
           mask:
             - >- # general mask
@@ -143,17 +110,20 @@ cameras:
             - >- # my car
               0.935,0.586,0.968,0.533,1,0.532,0.999,
               0.656,0.861,0.616
-            - 0.542,0.523,0.541,0.494,0.502,0.493,0.414,0.508,0.411,0.541 # across the street
-            - 0.859,0.555,0.857,0.516,0.927,0.505,0.932,0.548 # across the street on the curb
-            - 0.956,0.491,0.955,0.52,1,0.523,1,0.488 # across the street far right
+            - >- # across the street
+              0.542,0.523,0.541,0.494,0.502,0.493,0.414,0.508,0.411,0.541
+            - >- # across the street on the curb
+              0.859,0.555,0.857,0.516,0.927,0.505,0.932,0.548
+            - >- # across the street far right
+              0.956,0.491,0.955,0.52,1,0.523,1,0.488
             - >- # left side of street
               0.221,0.507,0.317,0.51,0.382,0.508,0.375,0.523,
               0.336,0.528,0.301,0.537,0.221,0.536
     # motion: *filter
     ffmpeg:
       inputs:
-        - path: "rtsp://localhost:8554/doorbell"
-          roles: *detectandrecordroles
+        - path: rtsp://localhost:8554/doorbell
+          roles: *detectandrecord
     detect:
       # 2560x1920
       width: 1280
@@ -163,43 +133,41 @@ cameras:
 
   sidegarage:
     enabled: true
-    birdseye:
-      order: 2
+    birdseye: { order: 2 }
     objects:
       track: *trackedobjects
       filters:
         person: &sidegaragemask
           mask:
-            - >-
+            - >- # sky and neighbors
               1,0.506,0.85,0.343,0.735,0.284,0.428,0.149,
               0.267,0.216,0.032,0.517,0,0.409,0,0,1,0
         car: *sidegaragemask
     motion: *sidegaragemask
     ffmpeg:
       inputs:
-        - path: "rtsp://localhost:8554/sidegarage"
-          roles: *detectandrecordroles
+        - path: rtsp://localhost:8554/sidegarage
+          roles: *detectandrecord
     detect: *foodlightdetect
     mqtt: *mqttheight
 
   backdeck:
     enabled: true
-    birdseye:
-      order: 3
+    birdseye: { order: 3 }
     objects:
       track: [person, cat, dog]
       filters:
         person: &backdeckmask
           mask:
-            - >-
+            - >- # grill
               0.533,0.392,0.619,0.365,0.735,0.657,0.777,
               0.635,0.921,0.82,0.862,1,0.622,1,0.532,0.622
             - 1,0.464,0.754,0.18,0.419,0.099,0.419,0,0.73,0,1,0
     motion: *backdeckmask
     ffmpeg:
       inputs:
-        - path: "rtsp://localhost:8554/backdeck"
-          roles: *detectandrecordroles
+        - path: rtsp://localhost:8554/backdeck
+          roles: *detectandrecord
     detect: *foodlightdetect
     mqtt: *mqttheight
 
