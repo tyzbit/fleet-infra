@@ -7,7 +7,6 @@ resources:
   - persistentvolumeclaim.yaml
 configMapGenerator:
   - name: frigate-config
-    namespace: home-automation
     files:
       - config.yml=config.yaml
 configurations:

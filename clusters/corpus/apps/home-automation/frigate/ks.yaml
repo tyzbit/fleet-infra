@@ -16,11 +16,7 @@ spec:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
-  dependsOn:
-    [
-      { name: kubernetes-secrets, namespace: flux-system },
-      { name: longhorn-recurring-jobs, namespace: flux-system },
-    ]
+  dependsOn: [{ name: kubernetes-secrets }, { name: longhorn-recurring-jobs }]
   postBuild:
     substituteFrom:
       - kind: Secret
