@@ -5,6 +5,7 @@ metadata:
   namespace: flux-system
 namespace: home-automation
 resources:
+  - ks.yaml
   - helmrelease.yaml
   - longhorn-pvc.yaml
   - nas-pvc.yaml
