@@ -17,11 +17,12 @@ spec:
     name: flux-system
     namespace: flux-system
   dependsOn:
-    [
-      { name: kubernetes-secrets, namespace: flux-system },
-      { name: longhorn-recurring-jobs, namespace: flux-system },
-    ]
+    - name: kubernetes-secrets
+      namespace: flux-system
+    - name: longhorn-recurring-jobs
+      namespace: flux-system
   postBuild:
     substituteFrom:
       - kind: Secret
-        name: flux-system/sensitive-values
+        name: sensitive-values
+        optional: false

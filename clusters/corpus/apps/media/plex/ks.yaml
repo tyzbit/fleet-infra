@@ -22,3 +22,4 @@ spec:
     substituteFrom:
       - kind: Secret
         name: sensitive-values
+        optional: false

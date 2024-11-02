@@ -16,8 +16,10 @@ spec:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
-  dependsOn: [{ name: kubernetes-secrets }, { name: nfs-subdir-external-provisioner }]
+  dependsOn:
+    [{ name: kubernetes-secrets }, { name: nfs-subdir-external-provisioner }]
   postBuild:
     substituteFrom:
       - kind: Secret
         name: sensitive-values
+        optional: false
