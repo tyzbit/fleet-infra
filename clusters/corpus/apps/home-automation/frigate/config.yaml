@@ -79,7 +79,7 @@ cameras:
     motion: *garagemask
     ffmpeg:
       inputs:
-        - path: rtsp://localhost:8554/doorbell
+        - path: rtsp://localhost:8554/garage
           roles: &detectandrecord [detect, record]
     detect: &foodlightdetect # 4608x1728
       width: 1152
