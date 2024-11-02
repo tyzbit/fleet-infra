@@ -24,4 +24,4 @@ spec:
   postBuild:
     substituteFrom:
       - kind: Secret
-        name: sensitive-values
+        name: flux-system/sensitive-values
