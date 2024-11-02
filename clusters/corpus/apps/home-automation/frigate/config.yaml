@@ -46,14 +46,14 @@ birdseye:
   layout:
     scaling_factor: 3.0
 ffmpeg:
-  global_args: -hide_banner -loglevel warning -threads 4
+  # global_args: -hide_banner -loglevel warning -threads 4
   # hwaccel_args: ["-hwaccel", "vaapi", "-hwaccel_device", "/dev/dri/renderD128", "-hwaccel_output_format", "yuv420p"]
   hwaccel_args: preset-vaapi
   input_args: preset-rtsp-restream
 go2rtc:
   streams:
     doorbell:
-      - ffmpeg:http://doorbell.home.arpa/flv?port=1935&app=bcs&stream=channel0_main.bcs&user={FRIGATE_CAMERA_USER}&password={FRIGATE_CAMERA_PASSWORD}#video=copy#audio=copy
+      - "ffmpeg:http://doorbell.home.arpa/flv?port=1935&app=bcs&stream=channel0_main.bcs&user={FRIGATE_CAMERA_USER}&password={FRIGATE_CAMERA_PASSWORD}#video=copy#audio=copy#audio=opus"
     #   - rtsp://doorbell.home.arpa/Preview_01_sub
     garage:
       - rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@garage.home.arpa/Preview_01_main
