@@ -1,6 +1,6 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: home-automation
+namespace: flux-system
 resources:
   - helmrelease.yaml
   - ks.yaml
@@ -11,13 +11,3 @@ configMapGenerator:
       - config.yml=config.yaml
 configurations:
   - kustomizeconfig.yaml
-replacements:
-  - source:
-      kind: Secret
-      name: sensitive-values
-      namespace: flux-system
-    targets:
-      - select:
-          kind: ConfigMap
-          name: frigate-config
-          namespace: home-automation
