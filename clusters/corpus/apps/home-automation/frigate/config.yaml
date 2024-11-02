@@ -53,7 +53,7 @@ ffmpeg:
 go2rtc:
   streams:
     doorbell:
-      - ffmpeg:http://doorbell.home.arpa/flv?port=1935&app=bcs&stream=channel0_main.bcs&user={FRIGATE_CAMERA_USER}&password={FRIGATE_CAMERA_PASSWORD}#video=copy#audio=copy#audio=opus
+      - ffmpeg:http://doorbell.home.arpa/flv?port=1935&app=bcs&stream=channel0_main.bcs&user={FRIGATE_CAMERA_USER}&password={FRIGATE_CAMERA_PASSWORD}#video=copy#audio=copy
     #   - rtsp://doorbell.home.arpa/Preview_01_sub
     garage:
       - rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@garage.home.arpa/Preview_01_main
