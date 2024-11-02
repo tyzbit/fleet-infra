@@ -25,3 +25,4 @@ spec:
     substituteFrom:
       - kind: Secret
         name: sensitive-values
+        namespace: flux-system
