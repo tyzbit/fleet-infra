@@ -26,11 +26,11 @@ review: { alerts: { labels: [person] } }
 birdseye:
   enabled: true
   quality: 8
-  width: 960
+  width: 1920
   height: 1080
   # -- objects, motion, continuous
   mode: continuous
-  # layout: { scaling_factor: 3.0 }
+  layout: { scaling_factor: 2.5 }
 
 ffmpeg:
   # global_args: -hide_banner -loglevel warning -threads 4
