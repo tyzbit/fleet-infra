@@ -2,7 +2,8 @@
 logger:
   default: info
   logs:
-    watchdog: debug
+    frigate.watchdog: debug
+    frigate.ffmpeg: debug
   #   frigate.record.maintainer: debug
   #   frigate.app: debug
   #   frigate.record: debug
