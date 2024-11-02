@@ -11,17 +11,3 @@ spec:
   storageClassName: longhorn-database
   accessModes:
     - ReadWriteOnce
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: frigate-data-nas
-  namespace: home-automation
-spec:
-  resources:
-    requests:
-      storage: 1Gi
-  volumeMode: Filesystem
-  storageClassName: nas
-  accessModes:
-    - ReadWriteMany
