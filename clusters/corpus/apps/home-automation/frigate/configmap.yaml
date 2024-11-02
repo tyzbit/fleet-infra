@@ -96,6 +96,11 @@ data:
             - dog
             - car
             - bicycle
+          filters:
+            person: &garagemask
+              mask:
+                - 1,0.376,0.757,0.124,0.4,0.041,0.215,0.097,0,0.409,0,0,1,0
+        motion: *garagemask
         ffmpeg:
           inputs:
             - path: "rtsp://localhost:8554/garage"
@@ -154,8 +159,12 @@ data:
           order: 2
         objects:
           track: *trackedobjects
-          # filters: *filter
-        # motion: *filter
+          filters:
+            person: &sidegaragemask
+              mask:
+                - 1,0.376,0.757,0.124,0.4,0.041,0.215,0.097,0,0.409,0,0,1,0
+                - 0.424,0.047,0.315,0.022,0,0.251,0,0,0.422,0
+        motion: *sidegaragemask
         ffmpeg:
           inputs:
             - path: "rtsp://localhost:8554/sidegarage"
@@ -169,8 +178,12 @@ data:
           order: 3
         objects:
           track: [person,cat,dog]
-          # filters: *filter
-        # motion: *filter
+          filters:
+            person: &backdeckmask
+              mask:
+                - 0.533,0.392,0.619,0.365,0.735,0.657,0.777,0.635,0.921,0.82,0.862,1,0.622,1,0.532,0.622
+                - 1,0.464,0.754,0.18,0.419,0.099,0.419,0,0.73,0,1,0
+        motion: *backdeckmask
         ffmpeg:
           inputs:
             - path: "rtsp://localhost:8554/backdeck"
