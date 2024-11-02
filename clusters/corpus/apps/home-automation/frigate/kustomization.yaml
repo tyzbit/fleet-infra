@@ -11,3 +11,12 @@ configMapGenerator:
       - config.yml=config.yaml
 configurations:
   - kustomizeconfig.yaml
+replacements:
+  - source:
+      kind: Secret
+      name: sensitive-values
+      namespace: flux-system
+    targets:
+      - select:
+          kind: ConfigMap
+          name: frigate-config
