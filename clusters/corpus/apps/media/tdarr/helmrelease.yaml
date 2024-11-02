@@ -64,7 +64,7 @@ spec:
               - name: serverIP
                 value: localhost
               - name: serverPort
-                value: "8266"
+                value: "8265"
             securityContext:
               privileged: true
 
