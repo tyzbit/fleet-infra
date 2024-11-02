@@ -61,7 +61,7 @@ camera_groups:
 cameras:
   garage:
     enabled: true
-    birdseye: { order: 0, scaling_factor: 1.0 }
+    birdseye: { order: 0 }
     objects:
       track: &trackedobjects [person, cat, dog, car, bicycle]
       filters:
@@ -90,7 +90,7 @@ cameras:
 
   doorbell:
     enabled: true
-    birdseye: { order: 3, scaling_factor: 2.5 }
+    birdseye: { order: 3 }
     objects:
       track: *trackedobjects
       filters:
@@ -134,7 +134,7 @@ cameras:
 
   sidegarage:
     enabled: true
-    birdseye: { order: 1, scaling_factor: 1.0 }
+    birdseye: { order: 1 }
     objects:
       track: *trackedobjects
       filters:
@@ -154,7 +154,7 @@ cameras:
 
   backdeck:
     enabled: true
-    birdseye: { order: 2, scaling_factor: 1.0 }
+    birdseye: { order: 2 }
     objects:
       track: [person, cat, dog]
       filters:
