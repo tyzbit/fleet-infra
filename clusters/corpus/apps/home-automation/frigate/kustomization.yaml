@@ -20,3 +20,4 @@ replacements:
       - select:
           kind: ConfigMap
           name: frigate-config
+          namespace: home-automation
