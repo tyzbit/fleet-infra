@@ -25,8 +25,6 @@ spec:
         pod:
           nodeSelector:
             coral: attached
-        annotations:
-          reloader.stakater.com/auto: "true"
         labels:
           kube-image-keeper.enix.io/image-cache: disabled
 
