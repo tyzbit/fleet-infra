@@ -21,13 +21,13 @@ spec:
     provider: cloudflare
     triggerLoopOnEvent: true
     txtOwnerId: "workbench-automatic"
+    loglevel: debug
     sources:
       - ingress
     extraArgs:
       - --annotation-filter=external-dns.alpha.kubernetes.io/exclude notin (true)
       - --txt-wildcard-replacement=dummy
       - --ignore-ingress-tls-spec
-      - --log-level=info
     env:
       - name: CF_API_KEY
         valueFrom:
