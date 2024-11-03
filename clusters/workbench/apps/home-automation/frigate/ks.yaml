@@ -19,5 +19,3 @@ spec:
   dependsOn:
     - name: kubernetes-secrets
       namespace: flux-system
-    - name: longhorn-recurring-jobs
-      namespace: flux-system
