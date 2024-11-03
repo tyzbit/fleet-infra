@@ -50,10 +50,7 @@ spec:
         advancedMounts:
           *app :
             *app :
-              - path: /config/model_cache
-                subPath: model_cache
               - path: /media/frigate
-                subPath: media
       config:
         name: frigate-config
         type: configMap
