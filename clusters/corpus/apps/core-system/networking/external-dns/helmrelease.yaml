@@ -27,7 +27,7 @@ spec:
     sources: [ingress]
     extraArgs:
       - --annotation-filter=external-dns.alpha.kubernetes.io/exclude notin (true)
-      - --cloudflare-dns-records-per-page=250
+      - --cloudflare-dns-records-per-page=5000
       - --txt-wildcard-replacement=dummy
       - --ignore-ingress-tls-spec
     env:
