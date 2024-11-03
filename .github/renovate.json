@@ -84,6 +84,11 @@
       "matchPackageNames": ["docker.io/blakeblackshear/frigate"]
     },
     {
+      "datasources": ["docker"],
+      "versioning": "loose",
+      "packageNames": ["plexinc/pms-docker"]
+    },
+    {
       "matchDatasources": ["docker", "github-releases"],
       "versioning": "loose",
       "matchPackageNames": [
