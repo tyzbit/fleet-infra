@@ -60,7 +60,7 @@ camera_groups:
 cameras:
   garage:
     enabled: true
-    ui: &garageorder { order: 1 }
+    ui: &garageorder { order: 0 }
     birdseye: *garageorder
     objects:
       track: &trackedobjects [person, cat, dog, car, bicycle]
@@ -85,7 +85,7 @@ cameras:
 
   doorbell:
     enabled: true
-    ui: &doorbellorder { order: 0 }
+    ui: &doorbellorder { order: 1 }
     birdseye: *doorbellorder
     objects:
       track: *trackedobjects
