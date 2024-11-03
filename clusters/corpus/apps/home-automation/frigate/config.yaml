@@ -30,7 +30,6 @@ birdseye:
   height: 1080
   # -- objects, motion, continuous
   mode: continuous
-  layout: { scaling_factor: 2.5 }
 
 ffmpeg:
   # global_args: -hide_banner -loglevel warning -threads 4
@@ -90,7 +89,7 @@ cameras:
 
   doorbell:
     enabled: true
-    birdseye: { order: 3 }
+    birdseye: { order: 3, scaling_factor: 2 }
     objects:
       track: *trackedobjects
       filters:
