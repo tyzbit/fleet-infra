@@ -89,7 +89,7 @@ cameras:
 
   doorbell:
     enabled: true
-    birdseye: { order: 0, scaling_factor: 2.0 }
+    birdseye: { order: 0, scaling_factor: 3.0 }
     objects:
       track: *trackedobjects
       filters:
