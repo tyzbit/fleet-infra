@@ -89,7 +89,7 @@ cameras:
 
   doorbell:
     enabled: true
-    birdseye: { order: 3, scaling_factor: 4 }
+    birdseye: { order: 3 }
     objects:
       track: *trackedobjects
       filters:
@@ -153,7 +153,7 @@ cameras:
 
   backdeck:
     enabled: true
-    birdseye: { order: 2 }
+    birdseye: { order: 2, scaling_factor: 4 }
     objects:
       track: [person, cat, dog]
       filters:
