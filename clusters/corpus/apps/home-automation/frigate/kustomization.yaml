@@ -6,7 +6,7 @@ metadata:
 namespace: home-automation
 resources:
   - ks.yaml
-  - helmrelease.yaml
+  # - helmrelease.yaml
   - longhorn-pvc.yaml
   - nas-pvc.yaml
 configMapGenerator:
