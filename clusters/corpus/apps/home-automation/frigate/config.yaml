@@ -133,7 +133,7 @@ cameras:
 
   sidegarage:
     enabled: true
-    birdseye: { order: 2, scaling_factor: 1.5 }
+    birdseye: { order: 2, scaling_factor: 5 }
     objects:
       track: *trackedobjects
       filters:
