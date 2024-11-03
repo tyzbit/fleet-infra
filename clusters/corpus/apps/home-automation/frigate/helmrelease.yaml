@@ -140,12 +140,6 @@ spec:
               - path: "/api/events"
                 service:
                   identifier: main
-          #     - path: "/exports/floor_emwspi.mp4"
-          #       service:
-          #         identifier: main
-          #     - path: "/exports/floor_495uzm.mp4"
-          #       service:
-          #         identifier: main
         tls:
           - hosts:
               - "*.home.arpa"
