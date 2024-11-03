@@ -130,9 +130,6 @@ spec:
           - hosts:
               - "*.home.arpa"
             secretName: internal-wildcard-tls
-          - hosts:
-              - *host
-            secretName: *host
 
       noauth:
         className: nginx
