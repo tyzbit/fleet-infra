@@ -89,7 +89,7 @@ cameras:
 
   doorbell:
     enabled: true
-    birdseye: { order: 3 }
+    birdseye: { order: 1 }
     objects:
       track: *trackedobjects
       filters:
@@ -133,7 +133,7 @@ cameras:
 
   sidegarage:
     enabled: true
-    birdseye: { order: 1 }
+    birdseye: { order: 3, scaling_factor: 1 }
     objects:
       track: *trackedobjects
       filters:
