@@ -60,7 +60,7 @@ camera_groups:
 cameras:
   garage:
     enabled: true
-    birdseye: { order: 1, scaling_factor: 1.0 }
+    birdseye: { order: 1, scaling_factor: 3.0 }
     objects:
       track: &trackedobjects [person, cat, dog, car, bicycle]
       filters:
