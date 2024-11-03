@@ -26,8 +26,8 @@ review: { alerts: { labels: [person] } }
 birdseye:
   enabled: true
   quality: 8
-  width: 1920
-  height: 1080
+  width: 2432
+  height: 1728
   # -- objects, motion, continuous
   mode: continuous
 
@@ -60,7 +60,7 @@ camera_groups:
 cameras:
   garage:
     enabled: true
-    birdseye: { order: 1, scaling_factor: 3.0 }
+    birdseye: { order: 1, scaling_factor: 2.0 }
     objects:
       track: &trackedobjects [person, cat, dog, car, bicycle]
       filters:
@@ -80,7 +80,7 @@ cameras:
       inputs:
         - path: rtsp://localhost:8554/garage
           roles: &detectandrecord [detect, record]
-    detect: &foodlightdetect # 4608x1728
+    detect: &floodlightdetect # 4608x1728
       width: 1152
       height: 432
       fps: 5
@@ -89,7 +89,7 @@ cameras:
 
   doorbell:
     enabled: true
-    birdseye: { order: 0, scaling_factor: 3.0 }
+    birdseye: { order: 0, scaling_factor: 2.0 }
     objects:
       track: *trackedobjects
       filters:
@@ -148,7 +148,7 @@ cameras:
       inputs:
         - path: rtsp://localhost:8554/sidegarage
           roles: *detectandrecord
-    detect: *foodlightdetect
+    detect: *floodlightdetect
     mqtt: *mqttheight
 
   backdeck:
@@ -168,7 +168,7 @@ cameras:
       inputs:
         - path: rtsp://localhost:8554/backdeck
           roles: *detectandrecord
-    detect: *foodlightdetect
+    detect: *floodlightdetect
     mqtt: *mqttheight
 
   #   onvif:
