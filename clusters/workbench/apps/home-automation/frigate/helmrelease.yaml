@@ -20,11 +20,8 @@ spec:
   values:
     controllers:
       *app :
-        replicas: 0 # active longhorn
+        replicas: 1
         type: statefulset
-        pod:
-          nodeSelector:
-            coral: attached
         labels:
           kube-image-keeper.enix.io/image-cache: disabled
 
@@ -48,8 +45,6 @@ spec:
                 memory: 4Gi
 
     persistence:
-      db:
-        existingClaim: frigate-database-longhorn-database
       data:
         existingClaim: frigate-data-nas
         advancedMounts:
