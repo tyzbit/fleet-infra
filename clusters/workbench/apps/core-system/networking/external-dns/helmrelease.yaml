@@ -18,14 +18,16 @@ spec:
     image:
       repository: registry.k8s.io/external-dns/external-dns
       tag: "v0.15.0"
+    loglevel: debug
     provider: cloudflare
     triggerLoopOnEvent: true
+    policy: sync
     txtOwnerId: "workbench-automatic"
-    loglevel: debug
-    sources:
-      - ingress
+    txtPrefix: "k8s."
+    sources: [ingress]
     extraArgs:
       - --annotation-filter=external-dns.alpha.kubernetes.io/exclude notin (true)
+      - --cloudflare-dns-records-per-page=250
       - --txt-wildcard-replacement=dummy
       - --ignore-ingress-tls-spec
     env:
