@@ -11,7 +11,7 @@ spec:
   wait: false
   prune: true
 
-  path: "./clusters/corpus/apps/home-automation/frigate"
+  path: "./clusters/workbench/apps/home-automation/frigate"
   sourceRef:
     kind: GitRepository
     name: flux-system
