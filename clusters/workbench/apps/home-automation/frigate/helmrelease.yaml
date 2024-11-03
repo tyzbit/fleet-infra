@@ -126,15 +126,26 @@ spec:
         hosts:
           - host: "frigate.home.arpa"
             paths: *frigatepath
+        tls:
+          - hosts:
+              - "*.home.arpa"
+            secretName: internal-wildcard-tls
+          - hosts:
+              - *host
+            secretName: *host
+
+      noauth:
+        className: nginx
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt
+          external-dns.alpha.kubernetes.io/exclude: "true"
+        hosts:
           - host: &host "frigate.${personal_domain}"
             paths:
               - path: "/api/events"
                 service:
                   identifier: main
         tls:
-          - hosts:
-              - "*.home.arpa"
-            secretName: internal-wildcard-tls
           - hosts:
               - *host
             secretName: *host
