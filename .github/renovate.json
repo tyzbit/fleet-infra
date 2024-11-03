@@ -12,11 +12,6 @@
     "github>tyzbit/fleet-infra//.github/renovate/labels",
     "github>tyzbit/fleet-infra//.github/renovate/semanticCommits"
   ],
-  "platform": "github",
-  "username": "renovate[bot]",
-  "repositories": ["tyzbit/fleet-infra"],
-  "onboarding": false,
-  "requireConfig": false,
   "dependencyDashboardTitle": "Renovate Dashboard 🤖",
   "rebaseWhen": "conflicted",
   "commitBodyTable": true,
