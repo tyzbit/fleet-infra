@@ -26,7 +26,7 @@ review: { alerts: { labels: [person] } }
 birdseye:
   enabled: true
   quality: 8
-  width: 2432
+  width: 2468
   height: 1728
   # -- objects, motion, continuous
   mode: continuous
