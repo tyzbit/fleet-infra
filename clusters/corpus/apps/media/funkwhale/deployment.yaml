@@ -18,6 +18,16 @@ spec:
       labels:
         app: funkwhale-import
     spec:
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - topologyKey: "kubernetes.io/hostname"
+              labelSelector:
+                matchExpressions:
+                  - key: app.kubernetes.io/name
+                    operator: In
+                    values:
+                      - "funkwhale"
       containers:
         - name: funkwhale-import
           image: funkwhale/api:1.4.0
@@ -27,10 +37,10 @@ spec:
             - funkwhale-manage import_files "${funkwhale_local_library}" "/srv/funkwhale/data/music/local" --recursive --noinput --in-place --watch
           imagePullPolicy: Always
           envFrom:
-          - configMapRef:
-              name: funkwhale
-          - secretRef:
-              name: funkwhale
+            - configMapRef:
+                name: funkwhale
+            - secretRef:
+                name: funkwhale
           volumeMounts:
             - mountPath: /srv/funkwhale/data/static/
               name: static
@@ -52,7 +62,7 @@ spec:
           emptyDir: {}
         - name: data
           persistentVolumeClaim:
-            claimName: funkwhale-config-longhorn-webapp   
+            claimName: funkwhale-config-longhorn-webapp
         - name: music
           persistentVolumeClaim:
             claimName: nas-volume1-music
