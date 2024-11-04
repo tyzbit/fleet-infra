@@ -26,10 +26,10 @@ review: { alerts: { labels: [person] } }
 birdseye:
   enabled: true
   quality: 8
-  width: 1280
-  height: 720
+  width: 1920
+  height: 1080
   # -- objects, motion, continuous
-  mode: continuous
+  mode: objects
 
 ffmpeg:
   # global_args: -hide_banner -loglevel warning -threads 4
