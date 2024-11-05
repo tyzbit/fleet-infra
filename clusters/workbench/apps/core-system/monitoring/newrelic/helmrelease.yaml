@@ -74,6 +74,7 @@ spec:
                             ["Samsung SSD 990 PRO with Heatsink 4TB"]="2400"
                             ["WDC WDS400T1R0A"]="2500"
                             ["ADATA LEGEND 700 GOLD"]="480"
+                            ["KINGSTON OM8PGP41024Q-A0"]="320"
                           )
                           multipliers=(
                             ["Samsung SSD 860"]="1"
@@ -81,6 +82,7 @@ spec:
                             ["Samsung SSD 990 PRO with Heatsink 4TB"]="1"
                             ["WDC WDS400T1R0A"]="1000000"
                             ["ADATA LEGEND 700 GOLD"]="1"
+                            ["KINGSTON OM8PGP41024Q-A0"]="512"
                           )
                           set -m
                           devices=$(lsblk | grep -E 'sda\s+|nvme0n1\s+' | awk '{print $1}')
@@ -141,6 +143,9 @@ spec:
                               sensor=$(echo $smart_output_line | cut -f 2 -d' ')
                               value=$(echo $smart_output_line | sed 's/ Celsius//g' | awk '{print $10}')
                             elif [[ "$model" =~ "ADATA LEGEND 700 GOLD" ]]; then
+                              sensor=$(echo $smart_output_line | cut -f 1 -d':')
+                              value=$(echo $smart_output_line | cut -f 2 -d' ')
+                            elif [[ "$model" =~ "KINGSTON OM8PGP41024Q-A0" ]]; then
                               sensor=$(echo $smart_output_line | cut -f 1 -d':')
                               value=$(echo $smart_output_line | cut -f 2 -d' ')
                             fi
