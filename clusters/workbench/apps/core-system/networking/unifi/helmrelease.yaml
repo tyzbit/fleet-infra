@@ -97,7 +97,7 @@ spec:
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt
           external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
-          external-dns.alpha.kubernetes.io/target: ${cloudflared_tunnel_uuid}.cfargotunnel.com
+          external-dns.alpha.kubernetes.io/target: ${home_domain_ddns}
           nginx.ingress.kubernetes.io/proxy-body-size: 4096m
           nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
         labels:
