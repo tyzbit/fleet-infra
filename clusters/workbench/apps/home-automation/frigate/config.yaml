@@ -85,7 +85,7 @@ cameras:
 
   doorbell:
     enabled: true
-    ui: &doorbellorder { order: 1 }
+    ui: &doorbellorder { order: 2 }
     birdseye: *doorbellorder
     objects:
       track: [person, cat, dog, bicycle]
@@ -130,7 +130,7 @@ cameras:
 
   sidegarage:
     enabled: true
-    ui: &sidegarageorder { order: 2 }
+    ui: &sidegarageorder { order: 1 }
     birdseye: *sidegarageorder
     objects:
       track: *trackedobjects
@@ -151,7 +151,7 @@ cameras:
 
   backdeck:
     enabled: true
-    ui: &backdeckorder { order: 3 }
+    ui: &backdeckorder { order: 2 }
     birdseye: *backdeckorder
     objects:
       track: [person, cat, dog]
