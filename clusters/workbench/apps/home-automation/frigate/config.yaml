@@ -29,7 +29,7 @@ birdseye:
   width: 1440
   height: 1080
   layout:
-    scaling_factor: 3.0
+    scaling_factor: 1.0
   # -- objects, motion, continuous
   mode: continuous
 
@@ -88,7 +88,7 @@ cameras:
   doorbell:
     enabled: true
     ui: { order: 1 }
-    birdseye: { order: 3 }
+    birdseye: { order: 1 }
     objects:
       track: [person, cat, dog, bicycle]
       filters:
@@ -133,7 +133,7 @@ cameras:
   sidegarage:
     enabled: true
     ui: { order: 2 }
-    birdseye: { order: 1 }
+    birdseye: { order: 2 }
     objects:
       track: *trackedobjects
       filters:
@@ -154,7 +154,7 @@ cameras:
   backdeck:
     enabled: true
     ui: { order: 3 }
-    birdseye: { order: 2 }
+    birdseye: { order: 3 }
     objects:
       track: [person, cat, dog]
       filters:
