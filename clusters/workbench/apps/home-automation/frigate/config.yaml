@@ -27,9 +27,9 @@ birdseye:
   enabled: true
   quality: 8
   width: 1920
-  height: 1080
+  height: 1440
   layout:
-    scaling_factor: 5.0
+    scaling_factor: 2.0
   # -- objects, motion, continuous
   mode: continuous
 
