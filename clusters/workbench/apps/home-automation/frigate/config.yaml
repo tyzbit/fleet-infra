@@ -28,6 +28,8 @@ birdseye:
   quality: 8
   width: 1920
   height: 1080
+  layout:
+    scaling_factor: 3.0
   # -- objects, motion, continuous
   mode: continuous
 
@@ -86,7 +88,7 @@ cameras:
   doorbell:
     enabled: true
     ui: { order: 1 }
-    birdseye: { order: 0, layout: { scaling_factor: 3.0 } }
+    birdseye: { order: 0 }
     objects:
       track: [person, cat, dog, bicycle]
       filters:
