@@ -26,7 +26,7 @@ review: { alerts: { labels: [person] } }
 birdseye:
   enabled: true
   quality: 8
-  width: 3240
+  width: 1440
   height: 1080
   layout:
     scaling_factor: 2.0
