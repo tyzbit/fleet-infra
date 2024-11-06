@@ -29,7 +29,7 @@ birdseye:
   width: 1920
   height: 1080
   # -- objects, motion, continuous
-  mode: objects
+  mode: continuous
 
 ffmpeg:
   # global_args: -hide_banner -loglevel warning -threads 4
