@@ -26,8 +26,8 @@ review: { alerts: { labels: [person] } }
 birdseye:
   enabled: true
   quality: 8
-  width: 1440
-  height: 1080
+  width: 1920
+  height: 960
   layout:
     scaling_factor: 2.0
   # -- objects, motion, continuous
