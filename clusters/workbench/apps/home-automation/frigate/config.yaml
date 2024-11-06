@@ -29,7 +29,7 @@ birdseye:
   width: 1920
   height: 1080
   layout:
-    scaling_factor: 3.5
+    scaling_factor: 5.0
   # -- objects, motion, continuous
   mode: continuous
 
