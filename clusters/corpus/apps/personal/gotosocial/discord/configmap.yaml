@@ -110,8 +110,9 @@ data:
         <h3 id="apps">Client applications</h3>
         <div class="about-section-contents">
             <p>
-                Visit https://web.${social_domain} to use Phanpy as your client. Otherwise
-                feel free to check out the alternatives below.
+                Visit <a href="https://web.${social_domain}">https://web.${social_domain}</a> to use 
+                this instance's Phanpy web client as your client. All data is stored client-side.
+                Otherwise feel free to check out the alternatives below.
             </p>
             <ul class="applist nodot" role="group">
                 <li class="applist-entry">
