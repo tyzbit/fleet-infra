@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: toot-now-web-templates
+  name: ${social_name}-web-templates
   namespace: personal
 data:
   # ripped from the app, if this changes in the build it must be manually updated
-  index.tmpl: |
+  index_apps.tmpl: |
     {{- /*
     // GoToSocial
     // Copyright (C) GoToSocial Authors admin@gotosocial.org
@@ -25,63 +25,102 @@ data:
     // along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */ -}}
 
-    {{ template "header.tmpl" .}}
-    <section class="excerpt-top">
-      home to <span class="count">{{.instance.Stats.user_count}}</span> users
-        who posted <span class="count">{{.instance.Stats.status_count}}</span> statuses,
-        federating with  <span class="count">{{.instance.Stats.domain_count}}</span> other instances.
+    {{- with . }}
+    <section role="region" class="about-section apps" aria-labelledby="apps">
+        <h3 id="apps">Client applications</h3>
+        <div class="about-section-contents">
+            <p>
+                Visit <a href="https://web.toot.now">https://web.toot.now</a> to use 
+                this instance's Phanpy web client as your client. All data is stored client-side.
+                Otherwise feel free to check out the alternatives below.
+            </p>
+            <ul class="applist nodot" role="group">
+                <li class="applist-entry">
+                    <div class="applist-text">
+                        <p><strong>Semaphore</strong> is a web client designed for speed and simplicity.</p>
+                        <a
+                            href="https://semaphore.social/"
+                            rel="nofollow noreferrer noopener"
+                            target="_blank"
+                        >
+                            Use Semaphore
+                        </a>
+                    </div>
+                    <svg
+                        role="img"
+                        aria-labelledby="semaphore-title semaphore-desc"
+                        class="applist-logo redraw"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 146 120"
+                        width="100"
+                        height="100"
+                    >
+                        <title id="semaphore-title">The Semaphore logo</title>
+                        <desc id="semaphore-desc">A waving flag</desc>
+                        <path d="M68.13 0C53.94 0 42.81 20 13.9 27.1l-2.23-5.29a6.5 6.5 0 0 0-5.17-10.4 6.5 6.5 0 0 0-.81 12.95L46.2 120l5.99-2.5-14.42-33.33c22.8-6.86 32.51-22.16 49.83-20.58 9.9.9 4.87 19.56 8.11 17.93 16.22-8.15 32.44-11.41 50.29-11.41-7.96-9.78-17.38-20.55-22.71-31.74L120.8 32c-2.32-7.33-2.56-14.75.87-22.22-9.74-3.26-21.1 0-32.45 4.9C82.2 9.77 79.5 0 68.13 0zM15.26 30.42c8.95 6.63 13.63 13.86 16.07 20.94l1.62 6.32c1.24 6.58 1.07 12.8 1.27 18.03z"></path>
+                    </svg>
+                </li>
+                <li class="applist-entry">
+                    <div class="applist-text">
+                        <p><strong>Tusky</strong> is a lightweight mobile client for Android.</p>
+                        <a
+                            href="https://tusky.app"
+                            rel="nofollow noreferrer noopener"
+                            target="_blank"
+                        >
+                            Get Tusky
+                        </a>
+                    </div>
+                    <img
+                        class="applist-logo"
+                        src="/assets/tusky.svg"
+                        alt="The Tusky mascot, a cartoon elephant tooting happily"
+                        title="The Tusky mascot, a cartoon elephant tooting happily"
+                        width="100"
+                        height="100"
+                    />
+                </li>
+                <li class="applist-entry">
+                    <div class="applist-text">
+                        <p><strong>Feditext</strong> (beta) is a beautiful client for iOS, iPadOS and macOS.</p>
+                        <a
+                            href="https://github.com/feditext/feditext"
+                            rel="nofollow noreferrer noopener"
+                            target="_blank"
+                        >
+                            Get Feditext
+                        </a>
+                    </div>
+                    <img
+                        class="applist-logo"
+                        src="/assets/feditext.svg"
+                        alt="The Feditext logo, the characters 'ft' at a slight angle"
+                        title="The Feditext logo, the characters 'ft' at a slight angle"
+                        width="100"
+                        height="100"
+                    />
+                </li>
+                <li class="applist-entry">
+                    <div class="applist-text">
+                        <p>Or try one of the <strong>Mastodon clients</strong> listed on the official Mastodon page.</p>
+                        <a
+                            href="https://joinmastodon.org/apps"
+                            rel="nofollow noreferrer noopener"
+                            target="_blank"
+                        >
+                            Get Mastodon apps
+                        </a>
+                    </div>
+                    <img
+                        class="applist-logo"
+                        src="/assets/mastodon.svg"
+                        alt="The Mastodon logo, the character 'M' in a speech bubble"
+                        title="The Mastodon logo, the character 'M' in a speech bubble"
+                        width="100"
+                        height="100"
+                    />
+                </li>
+            </ul>
+        </div>
     </section>
-    <main class="lightgray">
-      <section>
-        <div className="short-description">
-          {{.instance.ShortDescription |noescape}}
-        </div>
-      </section>
-      <section class="apps">
-        <p>
-          toot.now does not provide its own webclient, but implements the Mastodon client API.
-          You can use this server through a variety of other clients:
-        </p>
-        <div class="applist">
-          <div class="entry">
-            <svg role="img" aria-labelledby="phanpyTitle phanpyDesc" class="logo redraw" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
-              <title id="phanpyTitle">The Phanpy logo</title>
-              <desc id="phanpyDesc">A waving flag</desc>
-              <path fill="#a4bff7" d="M37.774 11.471c14.639 3.752 19.034 16.557 15.889 31.304-.696 3.261-2.563 6.661-6.356 8.693-3.204 1.717-8.07 2.537-15.338.55l-9.634-2.404C11.651 46.992 8.378 38.733 10.027 31.823c3.627-15.201 15.543-23.48 27.747-20.352Z"/>
-              <path fill="#d8e7fe" d="M36.76 15.429c12.289 3.15 15.547 14.114 12.907 26.493-.947 4.44-4.937 9.365-16.664 6.143l-9.684-2.417c-7.854-1.923-10.53-7.8-9.318-12.877 3.016-12.639 12.611-19.943 22.759-17.342Z"/>
-              <path fill="#6081e6" d="M27.471 24.991c-1.457-.698-7.229 3.213-7.663 8.926-.182 2.39 4.55 3.237 5.071-.169.725-4.743 3.715-8.218 2.592-8.757Zm10.746 2.005c-2.083.327-.382 5.901-.595 10.727-.123 2.8 4.388 3.464 4.703 2.011 1.098-5.073-2.066-13.058-4.108-12.738Z"/>
-            </svg>
-            <div>
-              <h2>Phanpy</h2>
-              <p>Phanpy is a web client you can use for toot.now and other Mastodon-compatible servers.</p>
-              <a href="https://web.toot.now/" target="_blank" rel="noopener">Use Phanpy</a>
-            </div>
-          </div>
-          <div class="entry">
-            <img class="logo" src="/assets/tusky.svg" alt="The Tusky mascot, a cartoon elephant tooting happily"/>
-            <div>
-              <h2>Tusky</h2>
-              <p>Tusky is a lightweight mobile client for Android.</p>
-              <a href="https://tusky.app" target="_blank" rel="noopener">Get Tusky</a>
-            </div>
-          </div>
-          <div class="entry">
-            <img class="logo" src="/assets/feditext.svg" alt="The Feditext logo, the characters ft at a slight angle">
-            <div>
-              <h2>Feditext</h2>
-              <p>Feditext (beta) is a beautiful client for iOS, iPadOS and macOS.</p>
-              <a href="https://fedi.software/@Feditext" target="_blank" rel="noopener">Get Feditext</a>
-            </div>
-          </div>
-          <div class="entry">
-            <img class="logo" src="/assets/mastodon.svg" alt="The Mastodon logo, the character M in a speech bubble">
-            <div>
-              <h2>More clients</h2>
-              <p>Or try one of the clients listed on the official Mastodon page.</p>
-              <a href="https://joinmastodon.org/apps" target="_blank" rel="noopener">Get Mastodon apps</a>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-    {{ template "footer.tmpl" .}}
+    {{- end }}

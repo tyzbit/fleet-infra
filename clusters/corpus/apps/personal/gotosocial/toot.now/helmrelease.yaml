@@ -89,8 +89,8 @@ spec:
         advancedMounts:
           *app :
             *app :
-              - path: /gotosocial/web/template/index.tmpl
-                subPath: index.tmpl
+              - path: /gotosocial/web/template/index_apps.tmpl
+                subPath: index_apps.tmpl
                 readOnly: true
 
     probes:
