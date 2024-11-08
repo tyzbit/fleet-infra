@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: ${social_name}-gotosocial-longhorn-webapp
+  name: ${social_name}-gotosocial-longhorn-webapp # pvc-ea7dd997-c3df-4c94-b4f9-d8414c06d4f3 in backups
   namespace: personal
 spec:
   resources:
