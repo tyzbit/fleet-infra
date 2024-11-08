@@ -11,7 +11,7 @@ spec:
   wait: false
   prune: true
 
-  path: "./clusters/corpus/apps/personal/gotosocial/discord"
+  path: "./clusters/corpus/apps/personal/gotosocial/toot.now"
   sourceRef:
     kind: GitRepository
     name: flux-system
