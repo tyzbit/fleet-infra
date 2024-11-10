@@ -83,15 +83,15 @@ spec:
               - path: *key
                 subPath: tls.key
                 readOnly: true
-      web-template-overrides:
-        type: configMap
-        name: toot-now-web-templates
-        advancedMounts:
-          *app :
-            *app :
-              - path: /gotosocial/web/template/index_apps.tmpl
-                subPath: index_apps.tmpl
-                readOnly: true
+      # web-template-overrides:
+      #   type: configMap
+      #   name: toot-now-web-templates
+      #   advancedMounts:
+      #     *app :
+      #       *app :
+      #         - path: /gotosocial/web/template/index_apps.tmpl
+      #           subPath: index_apps.tmpl
+      #           readOnly: true
 
     probes:
       # this is mostly to get rid of the "TLS handshake error: EOF" logs, more than getting more precise healthchecks lol
