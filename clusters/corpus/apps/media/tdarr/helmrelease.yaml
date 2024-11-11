@@ -120,12 +120,11 @@ spec:
         tls:
           - hosts:
               - *host
-            secretName: tdarr.${personal_domain}-tls
+            secretName: *host
 
       oauth:
         className: nginx
         annotations:
-          cert-manager.io/cluster-issuer: letsencrypt
           external-dns.alpha.kubernetes.io/exclude: "true"
         labels:
           use-cloudflare-dns-solver: "true"
@@ -139,7 +138,7 @@ spec:
         tls:
           - hosts:
               - *host
-            secretName: tdarr.${personal_domain}-tls
+            secretName: *host
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease

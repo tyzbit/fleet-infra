@@ -34,7 +34,6 @@ metadata:
   name: duplicacy-oauth2-proxy
   namespace: storage
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt
     external-dns.alpha.kubernetes.io/exclude: "true"
   labels:
     use-cloudflare-dns-solver: "true"

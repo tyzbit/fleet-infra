@@ -37,7 +37,6 @@ metadata:
   name: btc-balance-notifier-oauth2-proxy
   namespace: crypto
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt
     external-dns.alpha.kubernetes.io/exclude: "true"
   labels:
     use-cloudflare-dns-solver: "true"

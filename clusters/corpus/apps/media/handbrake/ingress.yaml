@@ -35,7 +35,6 @@ metadata:
   name: handbrake-oauth2-proxy
   namespace: media
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt
     external-dns.alpha.kubernetes.io/exclude: "true"
   labels:
     use-cloudflare-dns-solver: "true"

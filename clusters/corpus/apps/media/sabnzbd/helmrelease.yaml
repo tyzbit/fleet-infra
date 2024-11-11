@@ -99,17 +99,16 @@ spec:
         tls:
           - hosts:
               - *host
-            secretName: usenet.${personal_domain}-tls
+            secretName: *host
 
       oauth:
         className: nginx
         annotations:
-          cert-manager.io/cluster-issuer: letsencrypt
           external-dns.alpha.kubernetes.io/exclude: "true"
         labels:
           use-cloudflare-dns-solver: "true"
         hosts:
-          - host: "usenet.${personal_domain}"
+          - host: *host
             paths:
               - path: "/oauth2"
                 service:
@@ -117,8 +116,8 @@ spec:
                   port: 80
         tls:
           - hosts:
-              - "usenet.${personal_domain}"
-            secretName: usenet.${personal_domain}-tls
+              - *host
+            secretName: *host
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease

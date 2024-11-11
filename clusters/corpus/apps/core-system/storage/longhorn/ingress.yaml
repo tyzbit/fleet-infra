@@ -34,6 +34,8 @@ kind: Ingress
 metadata:
   name: longhorn-internal
   namespace: longhorn-system
+  annotations:
+    external-dns.alpha.kubernetes.io/exclude: "true"
 spec:
   ingressClassName: nginx
   tls:
@@ -58,7 +60,6 @@ metadata:
   name: longhorn-oauth2-proxy
   namespace: longhorn-system
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt
     external-dns.alpha.kubernetes.io/exclude: "true"
   labels:
     use-cloudflare-dns-solver: "true"
