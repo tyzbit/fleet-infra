@@ -61,7 +61,7 @@ spec:
               - path: /unifi/run
                 subPath: run
       unifi-cert:
-        name: &tlssecret unifi.${personal_domain}-tls
+        name: &host unifi.${home_domain}
         type: secret
         globalMounts:
           - path: /unifi/cert
@@ -103,7 +103,7 @@ spec:
         labels:
           use-cloudflare-dns-solver: "true"
         hosts:
-          - host: &host "unifi.${home_domain}"
+          - host: *host
             paths:
               - path: /
                 service:
@@ -111,7 +111,7 @@ spec:
         tls:
           - hosts:
               - *host
-            secretName: *tlssecret
+            secretName: *host
 
       internal:
         className: nginx
