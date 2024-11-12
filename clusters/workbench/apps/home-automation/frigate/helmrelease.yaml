@@ -135,7 +135,7 @@ spec:
         annotations:
           external-dns.alpha.kubernetes.io/exclude: "true"
         hosts:
-          - host: &host "frigate.${home_domain}"
+          - host: *host
             paths:
               - path: "/api/events"
                 service:
