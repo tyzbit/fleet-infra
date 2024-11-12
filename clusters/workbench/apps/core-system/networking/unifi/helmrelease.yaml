@@ -115,6 +115,9 @@ spec:
 
       internal:
         className: nginx
+        annotations:
+          nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+          external-dns.alpha.kubernetes.io/exclude: "true"
         hosts:
           - host: "unifi.home.arpa"
             paths:
