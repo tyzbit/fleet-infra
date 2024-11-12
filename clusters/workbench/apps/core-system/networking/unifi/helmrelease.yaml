@@ -103,7 +103,7 @@ spec:
         labels:
           use-cloudflare-dns-solver: "true"
         hosts:
-          - host: &host "unifi.${personal_domain}"
+          - host: &host "unifi.${home_domain}"
             paths:
               - path: /
                 service:

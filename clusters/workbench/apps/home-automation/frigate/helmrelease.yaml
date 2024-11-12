@@ -108,7 +108,7 @@ spec:
           external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
           external-dns.alpha.kubernetes.io/target: ${home_domain_ddns}
         hosts:
-          - host: &host "frigate.${personal_domain}"
+          - host: &host "frigate.${home_domain}"
             paths: &frigatepath
               - path: "/"
                 service:
@@ -135,7 +135,7 @@ spec:
         annotations:
           external-dns.alpha.kubernetes.io/exclude: "true"
         hosts:
-          - host: &host "frigate.${personal_domain}"
+          - host: &host "frigate.${home_domain}"
             paths:
               - path: "/api/events"
                 service:
