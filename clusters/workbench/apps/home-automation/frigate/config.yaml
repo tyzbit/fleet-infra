@@ -58,6 +58,10 @@ camera_groups:
     cameras: [doorbell, garage, sidegarage, backdeck]
     icon: LuRadar
     order: 1
+  "Deliveries":
+    cameras: [doorbell, garage]
+    icon: LuTruck
+    order: 2
 
 cameras:
   garage:
