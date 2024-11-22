@@ -84,7 +84,7 @@ cameras:
     motion: *garagemask
     ffmpeg:
       inputs:
-        - path: rtsp://localhost:8554/garage?video=all&audio=all
+        - path: rtsp://localhost:8554/garage
           roles: &detectandrecord [detect, record]
     detect: &floodlightdetect # 4608x1728
       width: 1152
@@ -129,7 +129,7 @@ cameras:
     # motion: *filter
     ffmpeg:
       inputs:
-        - path: rtsp://localhost:8554/doorbell?video=all&audio=all
+        - path: rtsp://localhost:8554/doorbell
           roles: *detectandrecord
     detect:
       # 2560x1920
@@ -154,7 +154,7 @@ cameras:
     motion: *sidegaragemask
     ffmpeg:
       inputs:
-        - path: rtsp://localhost:8554/sidegarage?video=all&audio=all
+        - path: rtsp://localhost:8554/sidegarage
           roles: *detectandrecord
     detect: *floodlightdetect
     mqtt: *mqttheight
@@ -175,7 +175,7 @@ cameras:
     motion: *backdeckmask
     ffmpeg:
       inputs:
-        - path: rtsp://localhost:8554/backdeck?video=all&audio=all
+        - path: rtsp://localhost:8554/backdeck
           roles: *detectandrecord
     detect: *floodlightdetect
     mqtt: *mqttheight
