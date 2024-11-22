@@ -125,6 +125,8 @@ spec:
         hosts:
           - host: "frigate.home.arpa"
             paths: *frigatepath
+          - host: "frigate"
+            paths: *frigatepath
         tls:
           - hosts:
               - "*.home.arpa"
