@@ -31,7 +31,7 @@ birdseye:
   layout:
     scaling_factor: 1.0
   # -- objects, motion, continuous
-  mode: continuous
+  mode: objects
 
 ffmpeg:
   # global_args: -hide_banner -loglevel warning -threads 4
