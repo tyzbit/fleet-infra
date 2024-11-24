@@ -37,22 +37,21 @@ ffmpeg:
   # global_args: -hide_banner -loglevel warning -threads 4
   # hwaccel_args: ["-hwaccel", "vaapi", "-hwaccel_device", "/dev/dri/renderD128", "-hwaccel_output_format", "yuv420p"]
   hwaccel_args: preset-vaapi
-  input_args: preset-rtsp-restream
+  # input_args: preset-rtsp-restream
+  input_args: preset-rtsp-restream-low-latency
+  output_args:
+    record: preset-record-generic-audio-copy
 go2rtc:
   streams:
     doorbell:
-      - "ffmpeg:http://doorbell.home.arpa/flv?port=1935&app=bcs&stream=channel0_main.bcs&user={FRIGATE_CAMERA_USER}&password={FRIGATE_CAMERA_PASSWORD}#video=copy#audio=copy"
-      - "ffmpeg:rtsp://doorbell#audio=aac"
+      - "ffmpeg:http://doorbell.home.arpa/flv?port=1935&app=bcs&stream=channel0_main.bcs&user={FRIGATE_CAMERA_USER}&password={FRIGATE_CAMERA_PASSWORD}"
     # These kinds of cameras do not support http-flv
     garage:
-      - "ffmpeg:rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@garage.home.arpa/Preview_01_main#video=copy"
-      - "ffmpeg:rtsp://garage#audio=aac"
+      - "rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@garage.home.arpa/Preview_01_main"
     sidegarage:
-      - "ffmpeg:rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@sidegarage.home.arpa/Preview_01_main#video=copy"
-      - "ffmpeg:rtsp://sidegarage#audio=aac"
+      - "rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@sidegarage.home.arpa/Preview_01_main"
     backdeck:
-      - "ffmpeg:rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@backdeck.home.arpa/Preview_01_main#video=copy"
-      - "ffmpeg:rtsp://backdeck#audio=aac"
+      - "rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@backdeck.home.arpa/Preview_01_main"
 
 camera_groups:
   "Birdseye":
@@ -86,7 +85,7 @@ cameras:
     motion: *garagemask
     ffmpeg:
       inputs:
-        - path: rtsp://localhost:8554/garage?video=all&audio=all
+        - path: rtsp://localhost:8554/garage
           roles: &detectandrecord [detect, record]
     detect: &floodlightdetect # 4608x1728
       width: 1152
@@ -131,7 +130,8 @@ cameras:
     # motion: *filter
     ffmpeg:
       inputs:
-        - path: rtsp://localhost:8554/doorbell?video=all&audio=all
+        - path: rtsp://localhost:8554/doorbell
+          input_args: preset-http-reolink
           roles: *detectandrecord
     detect:
       # 2560x1920
@@ -156,7 +156,7 @@ cameras:
     motion: *sidegaragemask
     ffmpeg:
       inputs:
-        - path: rtsp://localhost:8554/sidegarage?video=all&audio=all
+        - path: rtsp://localhost:8554/sidegarage
           roles: *detectandrecord
     detect: *floodlightdetect
     mqtt: *mqttheight
@@ -179,7 +179,7 @@ cameras:
     motion: *backdeckmask
     ffmpeg:
       inputs:
-        - path: rtsp://localhost:8554/backdeck?video=all&audio=all
+        - path: rtsp://localhost:8554/backdeck
           roles: *detectandrecord
     detect: *floodlightdetect
     mqtt: *mqttheight
