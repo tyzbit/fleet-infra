@@ -41,14 +41,14 @@ ffmpeg:
 go2rtc:
   streams:
     doorbell:
-      - "ffmpeg:http://doorbell.home.arpa/flv?port=1935&app=bcs&stream=channel0_main.bcs&user={FRIGATE_CAMERA_USER}&password={FRIGATE_CAMERA_PASSWORD}#video=copy#audio=opus"
+      - "ffmpeg:http://doorbell.home.arpa/flv?port=1935&app=bcs&stream=channel0_main.bcs&user={FRIGATE_CAMERA_USER}&password={FRIGATE_CAMERA_PASSWORD}#video=copy#audio=copy"
     # These kinds of cameras do not support http-flv
     garage:
-      - "ffmpeg:rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@garage.home.arpa/Preview_01_main#video=copy#audio=copy#audio=opus"
+      - "ffmpeg:rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@garage.home.arpa/Preview_01_main#video=copy#audio=copy"
     sidegarage:
-      - "ffmpeg:rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@sidegarage.home.arpa/Preview_01_main#video=copy#audio=copy#audio=opus"
+      - "ffmpeg:rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@sidegarage.home.arpa/Preview_01_main#video=copy#audio=copy"
     backdeck:
-      - "ffmpeg:rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@backdeck.home.arpa/Preview_01_main#video=copy#audio=copy#audio=opus"
+      - "ffmpeg:rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@backdeck.home.arpa/Preview_01_main#video=copy#audio=copy"
 
 camera_groups:
   "Birdseye":
@@ -82,7 +82,7 @@ cameras:
     motion: *garagemask
     ffmpeg:
       inputs:
-        - path: rtsp://localhost:8554/garage?video=all&audio=opus
+        - path: rtsp://localhost:8554/garage?video=all&audio=all
           roles: &detectandrecord [detect, record]
     detect: &floodlightdetect # 4608x1728
       width: 1152
@@ -127,7 +127,7 @@ cameras:
     # motion: *filter
     ffmpeg:
       inputs:
-        - path: rtsp://localhost:8554/doorbell?video=all&audio=opus
+        - path: rtsp://localhost:8554/doorbell?video=all&audio=all
           roles: *detectandrecord
     detect:
       # 2560x1920
@@ -152,7 +152,7 @@ cameras:
     motion: *sidegaragemask
     ffmpeg:
       inputs:
-        - path: rtsp://localhost:8554/sidegarage?video=all&audio=opus
+        - path: rtsp://localhost:8554/sidegarage?video=all&audio=all
           roles: *detectandrecord
     detect: *floodlightdetect
     mqtt: *mqttheight
@@ -175,7 +175,7 @@ cameras:
     motion: *backdeckmask
     ffmpeg:
       inputs:
-        - path: rtsp://localhost:8554/backdeck?video=all&audio=opus
+        - path: rtsp://localhost:8554/backdeck?video=all&audio=all
           roles: *detectandrecord
     detect: *floodlightdetect
     mqtt: *mqttheight
