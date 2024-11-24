@@ -44,7 +44,7 @@ ffmpeg:
 go2rtc:
   streams:
     doorbell:
-      - "http://doorbell.home.arpa/flv?port=1935&app=bcs&stream=channel0_main.bcs&user={FRIGATE_CAMERA_USER}&password={FRIGATE_CAMERA_PASSWORD}"
+      - "ffmpeg:http://doorbell.home.arpa/flv?port=1935&app=bcs&stream=channel0_main.bcs&user={FRIGATE_CAMERA_USER}&password={FRIGATE_CAMERA_PASSWORD}#video=copy#audio=copy"
     # These kinds of cameras do not support http-flv
     garage:
       - "rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@garage.home.arpa/Preview_01_main"
@@ -131,7 +131,6 @@ cameras:
     ffmpeg:
       inputs:
         - path: rtsp://localhost:8554/doorbell
-          input_args: preset-http-reolink
           roles: *detectandrecord
     detect:
       # 2560x1920
