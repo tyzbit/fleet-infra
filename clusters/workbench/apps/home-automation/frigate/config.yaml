@@ -42,17 +42,17 @@ go2rtc:
   streams:
     doorbell:
       - "ffmpeg:http://doorbell.home.arpa/flv?port=1935&app=bcs&stream=channel0_main.bcs&user={FRIGATE_CAMERA_USER}&password={FRIGATE_CAMERA_PASSWORD}#video=copy#audio=copy"
-      - "ffmpeg:doorbell#audio=aac"
+      - "ffmpeg:rtsp://doorbell#audio=aac"
     # These kinds of cameras do not support http-flv
     garage:
       - "ffmpeg:rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@garage.home.arpa/Preview_01_main#video=copy"
-      - "ffmpeg:garage#audio=aac"
+      - "ffmpeg:rtsp://garage#audio=aac"
     sidegarage:
       - "ffmpeg:rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@sidegarage.home.arpa/Preview_01_main#video=copy"
-      - "ffmpeg:sidegarage#audio=aac"
+      - "ffmpeg:rtsp://sidegarage#audio=aac"
     backdeck:
       - "ffmpeg:rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@backdeck.home.arpa/Preview_01_main#video=copy"
-      - "ffmpeg:backdeck#audio=aac"
+      - "ffmpeg:rtsp://backdeck#audio=aac"
 
 camera_groups:
   "Birdseye":
