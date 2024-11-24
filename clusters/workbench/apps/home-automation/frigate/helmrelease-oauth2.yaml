@@ -17,7 +17,7 @@ spec:
   interval: 2m0s
   valuesFrom:
     - kind: Secret
-      name: sensitive-values
+      name: frigate-oauth2-proxy
       valuesKey: blog_name
       targetPath: extraArgs.github-org
   values:
