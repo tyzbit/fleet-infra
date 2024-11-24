@@ -44,8 +44,7 @@ go2rtc:
       - "ffmpeg:http://doorbell.home.arpa/flv?port=1935&app=bcs&stream=channel0_main.bcs&user={FRIGATE_CAMERA_USER}&password={FRIGATE_CAMERA_PASSWORD}#video=copy#audio=opus"
     # These kinds of cameras do not support http-flv
     garage:
-      - "ffmpeg:rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@garage.home.arpa/Preview_01_main#video=copy#audio=copy"
-      - "ffmpeg:rtsp://garage#audio=opus"
+      - "ffmpeg:rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@garage.home.arpa/Preview_01_main#video=copy#audio=copy#audio=mp3"
     sidegarage:
       - "ffmpeg:rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@sidegarage.home.arpa/Preview_01_main#video=copy#audio=copy#audio=opus"
     backdeck:
