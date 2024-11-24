@@ -87,9 +87,10 @@ cameras:
       inputs:
         - path: rtsp://localhost:8554/garage
           roles: &detectandrecord [detect, record]
-    detect: &floodlightdetect # 4608x1728
-      width: 1152
-      height: 432
+    detect: &floodlightdetect
+      # 4608x1728
+      # width: 1152
+      # height: 432
       fps: 5
     mqtt: &mqttheight
       height: 1728
@@ -137,7 +138,8 @@ cameras:
       width: 1280
       height: 960
       fps: 5
-    mqtt: *mqttheight
+    mqtt:
+      height: 1920
 
   sidegarage:
     enabled: true
