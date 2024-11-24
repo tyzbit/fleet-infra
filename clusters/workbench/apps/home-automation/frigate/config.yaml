@@ -46,9 +46,9 @@ go2rtc:
     garage:
       - "ffmpeg:rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@garage.home.arpa/Preview_01_main#video=copy#audio=opus"
     sidegarage:
-      - "ffmpeg:rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@sidegarage.home.arpa/Preview_01_main#video=copy#audio=copy#audio=opus"
+      - "ffmpeg:rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@sidegarage.home.arpa/Preview_01_main#video=copy#audio=opus"
     backdeck:
-      - "ffmpeg:rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@backdeck.home.arpa/Preview_01_main#video=copy#audio=copy#audio=opus"
+      - "ffmpeg:rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@backdeck.home.arpa/Preview_01_main#video=copy#audio=opus"
 
 camera_groups:
   "Birdseye":
@@ -82,7 +82,7 @@ cameras:
     motion: *garagemask
     ffmpeg:
       inputs:
-        - path: rtsp://localhost:8554/garage?mp4
+        - path: rtsp://localhost:8554/garage?video=all&audio=all
           roles: &detectandrecord [detect, record]
     detect: &floodlightdetect # 4608x1728
       width: 1152
@@ -127,7 +127,7 @@ cameras:
     # motion: *filter
     ffmpeg:
       inputs:
-        - path: rtsp://localhost:8554/doorbell
+        - path: rtsp://localhost:8554/doorbell?video=all&audio=all
           roles: *detectandrecord
     detect:
       # 2560x1920
@@ -152,7 +152,7 @@ cameras:
     motion: *sidegaragemask
     ffmpeg:
       inputs:
-        - path: rtsp://localhost:8554/sidegarage
+        - path: rtsp://localhost:8554/sidegarage?video=all&audio=all
           roles: *detectandrecord
     detect: *floodlightdetect
     mqtt: *mqttheight
@@ -175,7 +175,7 @@ cameras:
     motion: *backdeckmask
     ffmpeg:
       inputs:
-        - path: rtsp://localhost:8554/backdeck
+        - path: rtsp://localhost:8554/backdeck?video=all&audio=all
           roles: *detectandrecord
     detect: *floodlightdetect
     mqtt: *mqttheight
