@@ -61,7 +61,7 @@ spec:
           matter-server:
             image:
               repository: ghcr.io/home-assistant-libs/python-matter-server
-              tag: "6.6.0"
+              tag: "6.6.1"
             env:
               MATTER_SERVER__INSTANCE_NAME: matter-server
               MATTER_SERVER__PORT: &matterport 5580
