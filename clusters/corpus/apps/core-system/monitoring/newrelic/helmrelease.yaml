@@ -416,6 +416,7 @@ spec:
                 Match    kube.*
                 Logical_Op or
                 Exclude  log /level=warning msg="pvc-/
+                Exclude  log /Cannot auto-balance volume in unknown state/
 
             # Filter longhorn transfer messages
             [FILTER]
