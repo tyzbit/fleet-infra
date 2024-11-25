@@ -4,6 +4,6 @@ metadata:
   name: newrelic
   namespace: flux-system
 spec:
-  interval: 10m
-  timeout: 1m0s
+  interval: 1h
+  timeout: 2m
   url: https://helm-charts.newrelic.com

@@ -4,5 +4,5 @@ metadata:
   name: enix
   namespace: flux-system
 spec:
-  interval: 10m
+  interval: 1h
   url: https://charts.enix.io/

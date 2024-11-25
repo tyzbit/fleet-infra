@@ -4,5 +4,5 @@ metadata:
   name: ananace
   namespace: flux-system
 spec:
-  interval: 1h0s
+  interval: 1h
   url: https://ananace.gitlab.io/charts
