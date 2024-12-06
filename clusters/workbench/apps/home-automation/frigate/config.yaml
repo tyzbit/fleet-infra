@@ -84,6 +84,9 @@ cameras:
               0.103,0.453,0.188,0.358,0.286,0.277,0.442,0.241
         car: *garagemask
     motion: *garagemask
+    review:
+      alerts:
+        labels: [person, car]
     ffmpeg:
       inputs:
         - path: rtsp://localhost:8554/garage
@@ -100,7 +103,7 @@ cameras:
     ui: { order: 1 }
     birdseye: { order: 1 }
     objects:
-      track: [person, cat, dog, bicycle]
+      track: *trackedobjects
       filters:
         person:
           mask:
