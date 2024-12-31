@@ -79,7 +79,7 @@ spec:
     service:
       main:
         controller: *app
-        type: ClusterIP
+        type: NodePort
         externalTrafficPolicy: Local
         ports:
           http:
