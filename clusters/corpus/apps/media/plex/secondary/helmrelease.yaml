@@ -80,6 +80,7 @@ spec:
       main:
         controller: *app
         type: ClusterIP
+        internalTrafficPolicy: Local
         ports:
           http:
             port: 32400
