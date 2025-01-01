@@ -110,9 +110,9 @@ cameras:
             - &personmask >-
               1,0.605,0.936,0.587,0.769,0.609,0.221,
               0.606,0.22,0.327,0.628,0.306,0.866,0,1,0
-        cat: { mask: [*personmask, *decorations] }
-        dog: { mask: [*personmask, *decorations] }
-        bird: { mask: [*personmask, *decorations] }
+        cat: { mask: [*personmask] }
+        dog: { mask: [*personmask] }
+        bird: { mask: [*personmask] }
         # car:
         #   mask:
         #     - >- # general mask
