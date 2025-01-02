@@ -70,7 +70,7 @@ camera_groups:
   "Just Doorbell":
     cameras: [doorbell]
     icon: LuBellRing
-    order: 2
+    order: 3
 
 cameras:
   garage:
