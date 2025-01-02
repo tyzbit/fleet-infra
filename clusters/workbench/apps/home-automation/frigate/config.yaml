@@ -67,6 +67,10 @@ camera_groups:
     cameras: [doorbell, garage]
     icon: LuTruck
     order: 2
+  "Just Doorbell":
+    cameras: [doorbell]
+    icon: LuBellRing
+    order: 2
 
 cameras:
   garage:
