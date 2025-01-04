@@ -15,18 +15,10 @@ spec:
         name: oauth2-proxy
         namespace: flux-system
   interval: 2m0s
-  valuesFrom:
-    - kind: Secret
-      name: frigate-oauth2-proxy
-      valuesKey: blog_name
-      targetPath: extraArgs.github-org
   values:
     replicaCount: 1
     extraArgs:
-      provider: github
-      # This needs valuesFrom because the kustomization overrides the Kustomization
-      # github-org: "${blog_name}"
-      github-team: "super-admins,frigate"
-      cookie-expire: 168h0m0s
+      provider: google
+      cookie-expire: 1h
     config:
       existingSecret: frigate-oauth2-proxy
