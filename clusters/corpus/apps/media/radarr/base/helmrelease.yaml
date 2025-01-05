@@ -37,7 +37,7 @@ spec:
           *app :
             image:
               repository: ghcr.io/onedr0p/radarr-develop
-              tag: "5.17.0.9555"
+              tag: "5.17.2.9580"
             env:
               TZ: America/New_York
               RADARR__AUTHENTICATION_METHOD: External
