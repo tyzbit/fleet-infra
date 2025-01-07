@@ -124,7 +124,7 @@ cameras:
               0.456,0.497,0.22,0.503
             - &rightsidecars >-
               0.998,0.475,0.95,0.476,0.953,0.526,1,0.534
-    motion: { mask: [*personmask, *leftsidecars, *rightsidecars] }
+    # motion: { mask: [*personmask, *leftsidecars, *rightsidecars] }
     ffmpeg:
       inputs:
         - path: rtsp://localhost:8554/doorbell
