@@ -117,24 +117,14 @@ cameras:
         cat: { mask: [*personmask] }
         dog: { mask: [*personmask] }
         bird: { mask: [*personmask] }
-        # car:
-        #   mask:
-        #     - >- # general mask
-        #       0.223,0.472,1,0.454,1,0,0,0,0,1,1,1,1,
-        #       0.663,0.767,0.59,0.223,0.589
-        #     - >- # my car
-        #       0.935,0.586,0.968,0.533,1,0.532,0.999,
-        #       0.656,0.861,0.616
-        #     - >- # across the street
-        #       0.542,0.523,0.541,0.494,0.502,0.493,0.414,0.508,0.411,0.541
-        #     - >- # across the street on the curb
-        #       0.859,0.555,0.857,0.516,0.927,0.505,0.932,0.548
-        #     - >- # across the street far right
-        #       0.956,0.491,0.955,0.52,1,0.523,1,0.488
-        #     - >- # left side of street
-        #       0.221,0.507,0.317,0.51,0.382,0.508,0.375,0.523,
-        #       0.336,0.528,0.301,0.537,0.221,0.536
-    # motion: *filter
+        car:
+          mask:
+            - &leftsidecars >-
+              0.225,0.564,0.554,0.531,0.555,0.492,
+              0.456,0.497,0.22,0.503
+            - &rightsidecars >-
+              0.998,0.475,0.95,0.476,0.953,0.526,1,0.534
+    motion: { mask: [*personmask, *leftsidecars, *rightsidecars] }
     ffmpeg:
       inputs:
         - path: rtsp://localhost:8554/doorbell
