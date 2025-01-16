@@ -38,6 +38,7 @@ spec:
               TIMETAGGER_DATADIR: /data
               TIMETAGGER_LOG_LEVEL: info
               TIMETAGGER_PROXY_AUTH_ENABLED: "true"
+              TIMETAGGER_PROXY_AUTH_TRUSTED: "172.23.0.0/16"
             resources:
               requests:
                 cpu: 10m
