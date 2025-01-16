@@ -54,6 +54,9 @@ spec:
     service:
       main:
         controller: *app
+        ports:
+          http:
+            port: 80
 
     ingress:
       main:
