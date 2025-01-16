@@ -49,12 +49,11 @@ spec:
         existingClaim: *app
 
     service:
-      *app :
+      main:
         controller: *app
         ports:
           http:
-            primary: true
-            port: &port 8080
+            port: 8080
 
     ingress:
       main:
@@ -72,7 +71,6 @@ spec:
                 pathType: Prefix
                 service:
                   identifier: *app
-                  port: *port
         tls:
           - hosts:
               - *host
