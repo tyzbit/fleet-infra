@@ -37,6 +37,7 @@ spec:
             env:
               TIMETAGGER_DATADIR: /data
               TIMETAGGER_LOG_LEVEL: info
+              TIMETAGGER_CREDENTIALS: ${timetagger_creds}
               # TIMETAGGER_PROXY_AUTH_ENABLED: "true"
               # TIMETAGGER_PROXY_AUTH_TRUSTED: "0.0.0.0/0"
             resources:
