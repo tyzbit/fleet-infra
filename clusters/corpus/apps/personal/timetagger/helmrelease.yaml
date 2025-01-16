@@ -36,6 +36,7 @@ spec:
               tag: v24.12.2-nonroot
             env:
               TIMETAGGER_DATADIR: /data
+              TIMETAGGER_BIND: 0.0.0.0:80
               TIMETAGGER_LOG_LEVEL: info
               TIMETAGGER_CREDENTIALS: ${timetagger_creds}
               # TIMETAGGER_PROXY_AUTH_ENABLED: "true"
@@ -53,9 +54,6 @@ spec:
     service:
       main:
         controller: *app
-        ports:
-          http:
-            port: 8080
 
     ingress:
       main:
