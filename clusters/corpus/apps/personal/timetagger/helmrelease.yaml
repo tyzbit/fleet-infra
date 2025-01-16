@@ -37,8 +37,8 @@ spec:
             env:
               TIMETAGGER_DATADIR: /data
               TIMETAGGER_LOG_LEVEL: info
-              TIMETAGGER_PROXY_AUTH_ENABLED: "true"
-              TIMETAGGER_PROXY_AUTH_TRUSTED: "0.0.0.0/0"
+              # TIMETAGGER_PROXY_AUTH_ENABLED: "true"
+              # TIMETAGGER_PROXY_AUTH_TRUSTED: "0.0.0.0/0"
             resources:
               requests:
                 cpu: 10m
