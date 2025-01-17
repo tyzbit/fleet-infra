@@ -125,8 +125,8 @@ cameras:
               0.456,0.497,0.22,0.503
             - &rightsidecars >-
               0.998,0.475,0.95,0.476,0.953,0.526,1,0.534
-            - >- # the car that sometimes parks across the street
-              0.84,0.517,0.952,0.51,0.957,0.544,0.846,0.563
+            - &occasionalcar >- # the car that sometimes parks across the street
+              0.938,0.498,0.844,0.497,0.846,0.566,0.957,0.556
     # motion: { mask: [*personmask, *leftsidecars, *rightsidecars] }
     ffmpeg:
       inputs:
