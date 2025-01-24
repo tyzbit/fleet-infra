@@ -41,8 +41,10 @@ spec:
           value:
             keepHistory: false
         - op: add
-          path: /spec/values/defaultPodOptions/automountServiceAccountToken
-          value: false
+          path: /spec/values
+          value:
+            defaultPodOptions:
+              automountServiceAccountToken: false
       target:
         kind: HelmRelease
         # labelSelector: helmrelease-values=default
