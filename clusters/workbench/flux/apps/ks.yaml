@@ -41,7 +41,7 @@ spec:
           value:
             keepHistory: false
         - op: add
-          path: /values/defaultPodOptions
+          path: /spec/values/defaultPodOptions
           value:
             automountServiceAccountToken: false
       target:
