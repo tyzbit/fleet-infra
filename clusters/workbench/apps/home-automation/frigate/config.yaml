@@ -21,8 +21,10 @@ record:
       mode: active_objects
 detectors: { coral: { type: edgetpu, device: usb } }
 snapshots: { enabled: true, retain: { default: 30, objects: { person: 30 } } }
-objects: { track: [person] }
-review: { alerts: { labels: [person] } }
+objects: { track: &trackedobjects [person, cat, dog, car, bicycle] }
+review:
+  alerts: { labels: [person] }
+  detections: { labels: *trackedobjects }
 birdseye:
   enabled: true
   quality: 8
@@ -78,7 +80,6 @@ cameras:
     ui: { order: 0 }
     birdseye: { order: 0 }
     objects:
-      track: &trackedobjects [person, cat, dog, car, bicycle]
       filters:
         person: &garagemask
           mask:
@@ -107,7 +108,6 @@ cameras:
     ui: { order: 1 }
     birdseye: { order: 1 }
     objects:
-      track: *trackedobjects
       filters:
         person:
           mask:
@@ -145,7 +145,6 @@ cameras:
     ui: { order: 2 }
     birdseye: { order: 2 }
     objects:
-      track: *trackedobjects
       filters:
         person: &sidegaragemask
           mask:
@@ -166,7 +165,6 @@ cameras:
     ui: { order: 3 }
     birdseye: { order: 3 }
     objects:
-      track: [person, cat, dog]
       filters:
         person: &backdeckmask
           mask:
