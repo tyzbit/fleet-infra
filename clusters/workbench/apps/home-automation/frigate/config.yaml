@@ -73,7 +73,7 @@ go2rtc:
 
 objects:
   track: 
-    <<: &trackedobjects [person, cat, dog, car, package]
+    !merge <<: &trackedobjects [person, cat, dog, car, package]
     # attribute labels, these don't generate events
     - amazon
     - usps
