@@ -21,11 +21,25 @@ record:
       mode: active_objects
 detectors: { coral: { type: edgetpu, device: usb } }
 snapshots: { enabled: true, retain: { default: 30, objects: { person: 30 } } }
-objects:
-  { track: &trackedobjects [person, cat, dog, car, amazon, fedex, package] }
-review:
-  alerts: { labels: [person] }
-  detections: { labels: *trackedobjects }
+
+camera_groups:
+  "Birdseye":
+    cameras: [birdseye]
+    icon: LuBird
+    order: 0
+  "All Cameras":
+    cameras: [doorbell, garage, sidegarage, backdeck]
+    icon: LuRadar
+    order: 1
+  "Deliveries":
+    cameras: [doorbell, garage]
+    icon: LuTruck
+    order: 2
+  "Just Doorbell":
+    cameras: [doorbell]
+    icon: LuBellRing
+    order: 3
+
 birdseye:
   enabled: true
   quality: 8
@@ -57,23 +71,19 @@ go2rtc:
     backdeck:
       - "rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@backdeck.home.arpa/Preview_01_main"
 
-camera_groups:
-  "Birdseye":
-    cameras: [birdseye]
-    icon: LuBird
-    order: 0
-  "All Cameras":
-    cameras: [doorbell, garage, sidegarage, backdeck]
-    icon: LuRadar
-    order: 1
-  "Deliveries":
-    cameras: [doorbell, garage]
-    icon: LuTruck
-    order: 2
-  "Just Doorbell":
-    cameras: [doorbell]
-    icon: LuBellRing
-    order: 3
+objects:
+  track: 
+    <<: &trackedobjects [person, cat, dog, car, package]
+    # attribute labels, these don't generate events
+    - amazon
+    - usps
+    - ups
+    - dhl
+    - fedex
+    - license_plate 
+review:
+  alerts: { labels: [person] }
+  detections: { labels: *trackedobjects }
 
 cameras:
   garage:
@@ -90,9 +100,6 @@ cameras:
               0.103,0.453,0.188,0.358,0.286,0.277,0.442,0.241
         car: *garagemask
     motion: *garagemask
-    review:
-      alerts:
-        labels: [person, car]
     ffmpeg:
       inputs:
         - path: rtsp://localhost:8554/garage
@@ -108,6 +115,9 @@ cameras:
     enabled: true
     ui: { order: 1 }
     birdseye: { order: 1 }
+    review:
+      alerts:
+        labels: [person, package]
     objects:
       filters:
         person:
@@ -128,7 +138,6 @@ cameras:
               0.998,0.475,0.95,0.476,0.953,0.526,1,0.534
             - &occasionalcar >- # the car that sometimes parks across the street
               0.938,0.498,0.844,0.497,0.846,0.566,0.957,0.556
-    # motion: { mask: [*personmask, *leftsidecars, *rightsidecars] }
     ffmpeg:
       inputs:
         - path: rtsp://localhost:8554/doorbell
