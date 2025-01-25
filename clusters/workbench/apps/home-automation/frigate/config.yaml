@@ -21,7 +21,8 @@ record:
       mode: active_objects
 detectors: { coral: { type: edgetpu, device: usb } }
 snapshots: { enabled: true, retain: { default: 30, objects: { person: 30 } } }
-objects: { track: &trackedobjects [person, cat, dog, car, motorcycle, bicycle] }
+objects:
+  { track: &trackedobjects [person, cat, dog, car, amazon, fedex, package] }
 review:
   alerts: { labels: [person] }
   detections: { labels: *trackedobjects }
