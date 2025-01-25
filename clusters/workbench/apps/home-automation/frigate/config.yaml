@@ -72,15 +72,10 @@ go2rtc:
       - "rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@backdeck.home.arpa/Preview_01_main"
 
 objects:
-  track: 
-    !merge <<: &trackedobjects [person, cat, dog, car, package]
-    # attribute labels, these don't generate events
-    - amazon
-    - usps
-    - ups
-    - dhl
-    - fedex
-    - license_plate 
+  track: &trackedobjects [
+    person, cat, dog, car, package,
+    amazon, usps, ups, dhl, fedex, license_plate # attribute labels, these don't generate events
+  ]
 review:
   alerts: { labels: [person] }
   detections: { labels: *trackedobjects }
