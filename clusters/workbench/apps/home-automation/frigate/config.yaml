@@ -133,7 +133,7 @@ cameras:
               0.998,0.475,0.95,0.476,0.953,0.526,1,0.534
             - &occasionalcar >- # the car that sometimes parks across the street
               0.938,0.498,0.844,0.497,0.846,0.566,0.957,0.556
-    motion: *personmask
+    motion: { mask: *personmask }
     ffmpeg:
       inputs:
         - path: rtsp://localhost:8554/doorbell
