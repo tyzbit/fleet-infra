@@ -8,8 +8,8 @@ logger:
   #   frigate.app: debug
   #   frigate.record: debug
 database: { path: /media/frigate/frigate.db }
-# model:
-#   path: plus://25407b0ec1226e1daba65503b2f7c013
+model:
+  path: plus://d7eb8337f3dc634f306cbd93ffcaf4be
 mqtt: { host: mosquitto }
 record:
   enabled: true
@@ -21,7 +21,7 @@ record:
       mode: active_objects
 detectors: { coral: { type: edgetpu, device: usb } }
 snapshots: { enabled: true, retain: { default: 30, objects: { person: 30 } } }
-objects: { track: &trackedobjects [person, cat, dog, car, bicycle] }
+objects: { track: &trackedobjects [person, cat, dog, car, motorcycle, bicycle] }
 review:
   alerts: { labels: [person] }
   detections: { labels: *trackedobjects }
