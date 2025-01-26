@@ -72,8 +72,8 @@ spec:
         ports:
           http:
             port: 8000
-          data:
-            port: 5173
+          # data:
+          #   port: 5173
 
     ingress:
       main:
