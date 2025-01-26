@@ -48,8 +48,16 @@ spec:
                 memory: 4Gi
 
     persistence:
-      config:
+      tunarr:
         existingClaim: tunarr-config-longhorn-webapp
+        advancedMounts:
+          *app :
+            *app :
+              - path: /tunarr
+                subPath: tunarr
+              - path: /root
+                subPath: root
+
       media:
         existingClaim: nas-volume1-media
 
