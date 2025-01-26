@@ -57,7 +57,11 @@ spec:
                 subPath: tunarr
               - path: /.dizquetv
                 subPath: dizquetv
-
+              - path: /root
+                subPath: root
+      dri:
+        type: hostPath
+        hostPath: /dev/dri
       media:
         existingClaim: nas-volume1-media
 
