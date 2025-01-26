@@ -57,7 +57,7 @@ spec:
                 subPath: tunarr
               - path: /.dizquetv
                 subPath: dizquetv
-              - path: /root
+              - path: /root/.local/share/tunarr/
                 subPath: root
       dri:
         type: hostPath
