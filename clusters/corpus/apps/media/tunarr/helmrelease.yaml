@@ -54,9 +54,9 @@ spec:
           *app :
             *app :
               - path: /tunarr
-                subPath: tunarr
-              - path: /root
-                subPath: root
+              #   subPath: tunarr
+              # - path: /root
+              #   subPath: root
 
       media:
         existingClaim: nas-volume1-media
