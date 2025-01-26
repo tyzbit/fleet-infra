@@ -9,7 +9,7 @@ logger:
   #   frigate.record: debug
 database: { path: /media/frigate/frigate.db }
 model:
-  path: plus://d7eb8337f3dc634f306cbd93ffcaf4be
+  path: plus://6da3e52e46a7f1afa68933aed8a8eead
 mqtt: { host: mosquitto }
 record:
   enabled: true
@@ -73,9 +73,18 @@ go2rtc:
 
 objects:
   track: &trackedobjects [
-    person, cat, dog, car, package,
-    amazon, usps, ups, dhl, fedex, license_plate # attribute labels, these don't generate events
-  ]
+      person,
+      cat,
+      dog,
+      car,
+      package,
+      amazon,
+      usps,
+      ups,
+      dhl,
+      fedex,
+      license_plate, # attribute labels, these don't generate events
+    ]
 review:
   alerts: { labels: [person] }
   detections: { labels: *trackedobjects }
