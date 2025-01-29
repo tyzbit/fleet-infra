@@ -9,7 +9,7 @@ logger:
   #   frigate.record: debug
 database: { path: /media/frigate/frigate.db }
 model:
-  path: plus://6da3e52e46a7f1afa68933aed8a8eead
+  path: plus://2454cd6fed716da86d95d4f77754537d
 mqtt: { host: mosquitto }
 record:
   enabled: true
