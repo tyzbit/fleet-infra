@@ -37,7 +37,7 @@ spec:
           *app :
             image:
               repository: ghcr.io/chrisbenincasa/tunarr
-              tag: "0.18.6-vaapi"
+              tag: "0.18.7-vaapi"
             env:
               TZ: America/New_York
               # tunarr__AUTHENTICATION_METHOD: External
