@@ -23,9 +23,9 @@ detectors:
   coral1:
     type: edgetpu
     device: usb:0
-  coral2:
-    type: edgetpu
-    device: usb:1
+  # coral2:
+  #   type: edgetpu
+  #   device: usb:1
 snapshots: { enabled: true, retain: { default: 30, objects: { person: 30 } } }
 
 camera_groups:
