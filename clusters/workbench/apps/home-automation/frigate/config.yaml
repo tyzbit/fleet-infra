@@ -127,7 +127,7 @@ cameras:
     birdseye: { order: 1 }
     zones:
       prius:
-        coordinates: 0.388,0.499,0.472,0.494,0.477,0.542,0.383,0.549
+        coordinates: 0.487,0.518,0.413,0.526,0.416,0.555,0.492,0.544
         objects: [car]
     review:
       alerts:
