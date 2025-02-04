@@ -57,6 +57,8 @@ spec:
         globalMounts:
           - path: /db
             subPath: hbbs
+          - path: /root
+            subPath: root
 
     probes:
       startup:
