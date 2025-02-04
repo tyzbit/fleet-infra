@@ -125,6 +125,10 @@ cameras:
     enabled: true
     ui: { order: 1 }
     birdseye: { order: 1 }
+    zones:
+      prius:
+        coordinates: 0.388,0.499,0.472,0.494,0.477,0.542,0.383,0.549
+        objects: [car]
     review:
       alerts:
         labels: [person, package]
