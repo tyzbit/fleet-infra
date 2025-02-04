@@ -145,9 +145,9 @@ cameras:
         bird: { mask: [*personmask] }
         car:
           mask:
-            - &leftsidecars >-
-              0.225,0.564,0.554,0.531,0.555,0.492,
-              0.456,0.497,0.22,0.503
+            # - &leftsidecars >-
+            #   0.225,0.564,0.554,0.531,0.555,0.492,
+            #   0.456,0.497,0.22,0.503
             - &rightsidecars >-
               0.998,0.475,0.95,0.476,0.953,0.526,1,0.534
             - &occasionalcar >- # the car that sometimes parks across the street
