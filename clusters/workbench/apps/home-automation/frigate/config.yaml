@@ -32,7 +32,7 @@ detectors:
 snapshots: { enabled: true, retain: { default: 30, objects: { person: 30 } } }
 semantic_search:
   enabled: true
-  reindex: true
+  reindex: false
 
 camera_groups:
   "Birdseye":
