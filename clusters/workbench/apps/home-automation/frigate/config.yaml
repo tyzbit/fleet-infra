@@ -104,11 +104,17 @@ cameras:
       filters:
         person: &garagemask
           mask:
+            - >- # my car, the street minus the mailbox
+              0.597,0.264,0.725,0.948,0.876,0.744,0.911,0.607,1,0.754,
+              1,0,0,0,-0.002,0.404,0.039,0.434,0.08,0.604,0.125,0.538,
+              0.108,0.461,0.192,0.374,0.285,0.288,0.385,0.258,0.4,0.118,
+              0.454,0.104,0.456,0.257
+        car:
+          mask:
             - >- # my car, the street
               0.597,0.264,0.725,0.948,0.876,0.744,0.911,0.607,1,0.754,
               1,0,0,0,-0.002,0.404,0.039,0.434,0.08,0.604,0.125,0.538,
               0.108,0.461,0.192,0.374,0.285,0.288,0.442,0.241
-        car: *garagemask
     motion: *garagemask
     ffmpeg:
       inputs:
@@ -132,12 +138,16 @@ cameras:
       filters:
         person:
           mask:
-            - &personmask >-
+            - &personmask >- # exclude mailbox
+              1,0.605,0.936,0.587,0.776,0.609,0.763,
+              0.519,0.704,0.522,0.693,0.606,0.221,0.606,
+              0.22,0.327,0.628,0.306,0.866,0,1,0
+            - &animalmask >-
               1,0.605,0.936,0.587,0.769,0.609,0.221,
               0.606,0.22,0.327,0.628,0.306,0.866,0,1,0
-        cat: { mask: [*personmask] }
-        dog: { mask: [*personmask] }
-        bird: { mask: [*personmask] }
+        cat: { mask: [*animalmask] }
+        dog: { mask: [*animalmask] }
+        bird: { mask: [*animalmask] }
         car:
           mask:
             - &parkedcars >- # the cars that are parked at houses
