@@ -16,7 +16,8 @@ record:
   retain:
     days: 10
   detections:
-    days: 30
+    retain:
+      days: 30
   alerts:
     retain:
       default: 90
