@@ -75,6 +75,7 @@ spec:
           *app :
             *app :
               - path: /tmp/cache
+              - path: /config/model_cache
         # medium: Memory
         # sizeLimit: 2Gi
 
