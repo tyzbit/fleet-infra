@@ -15,9 +15,11 @@ record:
   enabled: true
   retain:
     days: 10
-  events:
+  detections:
+    days: 30
+  alerts:
     retain:
-      default: 30
+      default: 90
       mode: active_objects
 detectors:
   coral1:
