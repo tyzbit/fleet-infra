@@ -33,7 +33,7 @@ snapshots: { enabled: true, retain: { default: 30, objects: { person: 30 } } }
 semantic_search:
   enabled: true
   model_size: "large"
-  reindex: false
+  reindex: true
 
 camera_groups:
   "Birdseye":
