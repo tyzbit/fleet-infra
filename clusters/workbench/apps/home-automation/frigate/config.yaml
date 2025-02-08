@@ -30,6 +30,9 @@ detectors:
   #   type: edgetpu
   #   device: usb:1
 snapshots: { enabled: true, retain: { default: 30, objects: { person: 30 } } }
+semantic_search:
+  enabled: true
+  reindex: true
 
 camera_groups:
   "Birdseye":
