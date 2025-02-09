@@ -166,7 +166,7 @@ cameras:
     review:
       alerts:
         labels: [person, package]
-        required_zones: [on_property]
+        # required_zones: [on_property]
     objects:
       filters:
         person:
