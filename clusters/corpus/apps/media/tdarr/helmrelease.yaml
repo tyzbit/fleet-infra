@@ -57,7 +57,7 @@ spec:
           &node tdarr-node:
             image:
               repository: ghcr.io/haveagitgat/tdarr_node
-              tag: "2.31.02"
+              tag: "2.32.01"
             env:
               - name: nodeID
                 value: node
