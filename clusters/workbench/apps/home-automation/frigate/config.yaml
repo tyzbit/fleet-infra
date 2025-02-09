@@ -113,7 +113,7 @@ cameras:
           0,0.407,0.034,0.431,0.079,0.604,0.127,0.529,0.109,0.457,0.27,
           0.301,0.392,0.239,0.6,0.261,0.743,0.92,0.88,0.731,0.912,0.612,
           0.997,0.761,1,1,0,1
-        objects: &property_objects [person, package, cat, dog, bird, car]
+        objects: &property_objects [person, package, cat, dog, car]
     review:
       alerts:
         labels: [person, package, car]
