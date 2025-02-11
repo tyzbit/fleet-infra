@@ -67,7 +67,7 @@ spec:
           acarsrouter:
             image:
               repository: ghcr.io/sdr-enthusiasts/acars_router
-              tag: v1.3.1Build494
+              tag: 1.3.1_linux_amd64
             env:
               FEED_ID: VDL-2
               TZ: Etc/UTC
