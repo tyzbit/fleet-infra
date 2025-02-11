@@ -98,19 +98,19 @@ spec:
             #   limits:
             #     memory: 250Mi
 
-    # persistence:
-    #   usb:
-    #     type: hostPath
-    #     hostPath: /dev/bus/usb
-    #   cache:
-    #     type: emptyDir
-    #     globalMounts:
-    #       - path: /tmp/cache
-    #       - path: /run
-    #   acarshub:
-    #     existingClaim: acars-config-nas
-    #     advancedMounts:
-    #       - path: /run/acars
+    persistence:
+      usb:
+        type: hostPath
+        hostPath: /dev/bus/usb
+      cache:
+        type: emptyDir
+        globalMounts:
+          - path: /tmp/cache
+          - path: /run
+      acarshub:
+        existingClaim: acars-config-nas
+        advancedMounts:
+          - path: /run/acars
 
     # service:
     #   main:
