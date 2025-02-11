@@ -37,7 +37,7 @@ spec:
               TZ: Etc/UTC
               SERIAL: "00000000"
               FREQUENCIES: "131.550;131.725;130.025"
-              SERVER: acars_router
+              SERVER: "127.0.0.1"
               SERVER_PORT: "5550"
             # resources:
             #   requests:
@@ -71,9 +71,9 @@ spec:
             env:
               FEED_ID: VDL-2
               TZ: Etc/UTC
-              AR_SEND_UDP_ACARS: acarshub:5550
-              AR_SEND_UDP_VDLM2: acarshub:5555
-              AR_RECV_ZMQ_VDLM2: dumpvdl2:45555
+              AR_SEND_UDP_ACARS: 127.0.0.1:5550
+              AR_SEND_UDP_VDLM2: 127.0.0.1:5555
+              AR_RECV_ZMQ_VDLM2: 127.0.0.1:45555
             # resources:
             #   requests:
             #     cpu: 10m
@@ -102,11 +102,18 @@ spec:
       usb:
         type: hostPath
         hostPath: /dev/bus/usb
+        advancedMounts:
+          *app :
+            acarsdec:
+              - path: /dev/bus/usb
+            dumpvld2:
+              - path: /dev/bus/usb
       cache:
         type: emptyDir
         globalMounts:
           - path: /tmp/cache
-          - path: /run
+      run:
+        type: emptyDir
       acarshub:
         existingClaim: acars-config-nas
         advancedMounts:
