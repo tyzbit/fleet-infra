@@ -129,7 +129,7 @@ spec:
             targetPort: 15555
 
     ingress:
-      main:
+      *app :
         className: nginx
         annotations:
           nginx.ingress.kubernetes.io/auth-url: "http://acars-oauth2-proxy.personal.svc.cluster.local/oauth2/auth"
