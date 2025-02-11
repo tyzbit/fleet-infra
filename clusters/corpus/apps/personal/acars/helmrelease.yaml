@@ -1,0 +1,187 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.7.0/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app acars
+  namespace: flux-system
+spec:
+  targetNamespace: personal
+  releaseName: *app
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: "3.7.0"
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  values:
+    controllers:
+      *app :
+        replicas: 1 # active nas
+        type: statefulset
+        annotations:
+          reloader.stakater.com/auto: "true"
+
+        containers:
+          acarsdec:
+            image:
+              repository: ghcr.io/sdr-enthusiasts/docker-acarsdec
+              tag: latest-build-412
+            env:
+              FEED_ID: FEED-1
+              TZ: Etc/UTC
+              SERIAL: "00000002"
+              FREQUENCIES: "131.550;131.725;130.025"
+              SERVER: acars_router
+              SERVER_PORT: &router_port "5550"
+            # resources:
+            #   requests:
+            #     cpu: 10m
+            #     memory: 100Mi
+            #   limits:
+            #     memory: 250Mi
+
+          dumpvdl2:
+            image:
+              repository: ghcr.io/sdr-enthusiasts/docker-dumpvdl2
+              tag: latest-build-348
+            env:
+              FEED_ID: VDL-2
+              TZ: Etc/UTC
+              SERIAL: "00000002"
+              FREQUENCIES: "136.975;136.650"
+              ZMQ_MODE: server
+              ZMQ_ENDPOINT: tcp://0.0.0.0:45555
+            # resources:
+            #   requests:
+            #     cpu: 10m
+            #     memory: 100Mi
+            #   limits:
+            #     memory: 250Mi
+
+          acars_router:
+            image:
+              repository: ghcr.io/sdr-enthusiasts/acars_router
+              tag: v1.3.1Build494
+            env:
+              FEED_ID: VDL-2
+              TZ: Etc/UTC
+              AR_SEND_UDP_ACARS: acarshub:5550
+              AR_SEND_UDP_VDLM2: acarshub:5555
+              AR_RECV_ZMQ_VDLM2: dumpvdl2:45555
+            # resources:
+            #   requests:
+            #     cpu: 10m
+            #     memory: 100Mi
+            #   limits:
+            #     memory: 250Mi
+
+          acarshub:
+            image:
+              repository: ghcr.io/sdr-enthusiasts/docker-acarshub
+              tag: v3.8.0Build1377
+            env:
+              FEED_ID: VDL-2
+              TZ: Etc/UTC
+              ENABLE_ADSB: "false"
+              ENABLE_ACARS: external
+              ENABLE_VDLM: external
+            # resources:
+            #   requests:
+            #     cpu: 10m
+            #     memory: 100Mi
+            #   limits:
+            #     memory: 250Mi
+
+    persistence:
+      usb:
+        type: hostPath
+        hostPath: /dev/bus/usb
+      cache:
+        type: emptyDir
+        globalMounts:
+          - path: /tmp/cache
+          - path: /run
+      acarshub:
+        existingClaim: acars-config-nas
+        advancedMounts:
+          - path: /run/acars
+
+    service:
+      main:
+        controller: *app
+        ports:
+          http:
+            port: &port 80
+          jsonstream1:
+            port: 15550
+          jsonstream2:
+            port: 15555
+
+    ingress:
+      main:
+        className: nginx
+        annotations:
+          nginx.ingress.kubernetes.io/auth-url: "http://acars-oauth2-proxy.personal.svc.cluster.local/oauth2/auth"
+          nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
+          cert-manager.io/cluster-issuer: letsencrypt
+          external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+          external-dns.alpha.kubernetes.io/target: ${cloudflared_tunnel_uuid}.cfargotunnel.com
+        hosts:
+          - host: &host "acars.${personal_domain}"
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: main
+        tls:
+          - hosts:
+              - *host
+            secretName: *host
+
+      oauth:
+        className: nginx
+        annotations:
+          external-dns.alpha.kubernetes.io/exclude: "true"
+        labels:
+          use-cloudflare-dns-solver: "true"
+        hosts:
+          - host: *host
+            paths:
+              - path: "/oauth2"
+                service:
+                  name: acars-oauth2-proxy
+                  port: 80
+        tls:
+          - hosts:
+              - *host
+            secretName: *host
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &name acars-oauth2-proxy
+  namespace: flux-system
+spec:
+  targetNamespace: personal
+  releaseName: *name
+  chart:
+    spec:
+      chart: oauth2-proxy
+      version: "7.10.4"
+      sourceRef:
+        kind: HelmRepository
+        name: oauth2-proxy
+        namespace: flux-system
+  interval: 2m0s
+  values:
+    replicaCount: 1
+    extraArgs:
+      provider: github
+      github-org: "${blog_name}"
+      github-team: "super-admins,acars"
+      cookie-expire: 168h0m0s
+    config:
+      existingSecret: acars-oauth2-proxy
