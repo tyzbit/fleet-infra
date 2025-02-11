@@ -118,10 +118,13 @@ spec:
         ports:
           http:
             port: 80
+            enabled: true
           jsonstream1:
             port: 15550
+            enabled: true
           jsonstream2:
             port: 15555
+            enabled: true
 
     ingress:
       main:
