@@ -114,7 +114,7 @@ spec:
 
     service:
       main:
-        controller: *app
+        controller: acars
         ports:
           http:
             port: 80
