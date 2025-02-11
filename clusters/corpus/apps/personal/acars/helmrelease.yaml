@@ -17,16 +17,16 @@ spec:
         name: bjw-s
         namespace: flux-system
   values:
+    common_settings: &common_settings
+      annotations:
+        reloader.stakater.com/auto: "true"
+      pod:
+        nodeSelector:
+          hackrf: "true"
     controllers:
-      *app :
-        replicas: 1 # active nas
-        type: statefulset
-        annotations:
-          reloader.stakater.com/auto: "true"
-        pod:
-          nodeSelector:
-            hackrf: "true"
-
+      acarsdec:
+        <<: *common_settings
+        replicas: 1
         containers:
           acarsdec:
             image:
@@ -37,7 +37,7 @@ spec:
               TZ: Etc/UTC
               # SERIAL: "00000000"
               FREQUENCIES: "131.550;131.725;130.025"
-              SERVER: "127.0.0.1"
+              SERVER: acarsrouter
               SERVER_PORT: "5550"
             # resources:
             #   requests:
@@ -46,6 +46,10 @@ spec:
             #   limits:
             #     memory: 250Mi
 
+      dumpvdl2:
+        <<: *common_settings
+        replicas: 1
+        containers:
           dumpvdl2:
             image:
               repository: ghcr.io/sdr-enthusiasts/docker-dumpvdl2
@@ -64,6 +68,10 @@ spec:
             #   limits:
             #     memory: 250Mi
 
+      acarsrouter:
+        <<: *common_settings
+        replicas: 1
+        containers:
           acarsrouter:
             image:
               repository: ghcr.io/sdr-enthusiasts/acars_router
@@ -81,6 +89,11 @@ spec:
             #   limits:
             #     memory: 250Mi
 
+      acarshub:
+        <<: *common_settings
+        replicas: 1 # active nas
+        type: statefulset
+        containers:
           acarshub:
             image:
               repository: ghcr.io/sdr-enthusiasts/docker-acarshub
@@ -103,9 +116,10 @@ spec:
         type: hostPath
         hostPath: /dev/bus/usb
         advancedMounts:
-          *app :
+          acarsdec:
             acarsdec:
               - path: /dev/bus/usb
+          dumpvdl2:
             dumpvld2:
               - path: /dev/bus/usb
       # run:
@@ -113,30 +127,40 @@ spec:
       acarshub:
         existingClaim: acars-config-nas
         advancedMounts:
-          *app :
+          acarshub:
             acarshub:
               - path: /run/acars
 
     service:
-      main:
-        controller: acars
+      acarsrouter:
+        controller: acarsrouter
+        type: ClusterIP
+        ports:
+          router:
+            port: 5550
+      dumpvdl2:
+        controller: dumpvdl2
+        type: ClusterIP
+        ports:
+          vdl:
+            port: 45555
+      acarshub:
+        controller: acarshub
         type: ClusterIP
         ports:
           http:
-            primary: true
             port: 80
-            targetPort: 80
-          jsonstream1:
-            primary: false
+          json1:
+            port: 5550
+          json2:
+            port: 5555
+          jsonudp1:
             port: 15550
-            targetPort: 15550
-          jsonstream2:
-            primary: false
+          jsonudp2:
             port: 15555
-            targetPort: 15555
 
     ingress:
-      *app :
+      acarshub:
         className: nginx
         annotations:
           nginx.ingress.kubernetes.io/auth-url: "http://acars-oauth2-proxy.personal.svc.cluster.local/oauth2/auth"
@@ -150,7 +174,7 @@ spec:
               - path: /
                 pathType: Prefix
                 service:
-                  identifier: main
+                  identifier: acarshub
                   port: 80
         tls:
           - hosts:
