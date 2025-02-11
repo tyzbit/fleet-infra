@@ -23,9 +23,9 @@ spec:
         type: statefulset
         annotations:
           reloader.stakater.com/auto: "true"
-        # pod:
-        #   nodeSelector:
-        #     hackrf: "true"
+        pod:
+          nodeSelector:
+            hackrf: "true"
 
         containers:
           acarsdec:
