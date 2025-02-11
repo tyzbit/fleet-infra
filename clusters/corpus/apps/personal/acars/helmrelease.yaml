@@ -122,8 +122,10 @@ spec:
             port: 80
           jsonstream1:
             port: 15550
+            targetPort: 15550
           jsonstream2:
             port: 15555
+            targetPort: 15555
 
     ingress:
       main:
