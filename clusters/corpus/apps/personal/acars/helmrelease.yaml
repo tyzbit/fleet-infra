@@ -114,7 +114,7 @@ spec:
 
     service:
       main:
-        controller: *app
+        controller: acars
         type: ClusterIP
         ports:
           http:
@@ -165,9 +165,9 @@ spec:
     #               name: acars-oauth2-proxy
     #               port: 80
     #     tls:
-          - hosts:
-              - *host
-            secretName: *host
+    #       - hosts:
+    #           - *host
+    #         secretName: *host
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
