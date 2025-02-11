@@ -64,22 +64,22 @@ spec:
             #   limits:
             #     memory: 250Mi
 
-    #       acars_router:
-    #         image:
-    #           repository: ghcr.io/sdr-enthusiasts/acars_router
-    #           tag: v1.3.1Build494
-    #         env:
-    #           FEED_ID: VDL-2
-    #           TZ: Etc/UTC
-    #           AR_SEND_UDP_ACARS: acarshub:5550
-    #           AR_SEND_UDP_VDLM2: acarshub:5555
-    #           AR_RECV_ZMQ_VDLM2: dumpvdl2:45555
-    #         # resources:
-    #         #   requests:
-    #         #     cpu: 10m
-    #         #     memory: 100Mi
-    #         #   limits:
-    #         #     memory: 250Mi
+          acars_router:
+            image:
+              repository: ghcr.io/sdr-enthusiasts/acars_router
+              tag: v1.3.1Build494
+            env:
+              FEED_ID: VDL-2
+              TZ: Etc/UTC
+              AR_SEND_UDP_ACARS: acarshub:5550
+              AR_SEND_UDP_VDLM2: acarshub:5555
+              AR_RECV_ZMQ_VDLM2: dumpvdl2:45555
+            # resources:
+            #   requests:
+            #     cpu: 10m
+            #     memory: 100Mi
+            #   limits:
+            #     memory: 250Mi
 
     #       acarshub:
     #         image:
