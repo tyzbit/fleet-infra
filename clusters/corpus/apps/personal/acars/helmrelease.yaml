@@ -155,6 +155,7 @@ spec:
                 pathType: Prefix
                 service:
                   identifier: main
+                  port: 80
         tls:
           - hosts:
               - *host
