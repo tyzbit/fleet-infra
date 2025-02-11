@@ -18,7 +18,7 @@ spec:
         namespace: flux-system
   values:
     controllers:
-      *app :
+      acars:
         replicas: 1 # active nas
         type: statefulset
         annotations:
