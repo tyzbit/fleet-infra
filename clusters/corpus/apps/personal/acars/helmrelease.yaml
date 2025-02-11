@@ -118,9 +118,9 @@ spec:
         ports:
           http:
             port: 80
-          jsonstream1:
+          jsonstream:
             port: 15550
-          jsonstream2:
+          jsonstreamalt:
             port: 15555
 
     ingress:
