@@ -57,7 +57,7 @@ spec:
             env:
               FEED_ID: VDL-2
               TZ: Etc/UTC
-              # SERIAL: "00000000"
+              SERIAL: "00000000"
               FREQUENCIES: "136.975;136.650"
               ZMQ_MODE: server
               ZMQ_ENDPOINT: tcp://0.0.0.0:45555
@@ -115,6 +115,7 @@ spec:
       usb:
         type: hostPath
         hostPath: /dev/bus/usb
+        hostPathType: device
         advancedMounts:
           acarsdec:
             acarsdec:
