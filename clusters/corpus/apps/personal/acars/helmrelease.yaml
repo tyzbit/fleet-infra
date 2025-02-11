@@ -122,9 +122,11 @@ spec:
             port: 80
             targetPort: 80
           jsonstream1:
+            primary: false
             port: 15550
             targetPort: 15550
           jsonstream2:
+            primary: false
             port: 15555
             targetPort: 15555
 
