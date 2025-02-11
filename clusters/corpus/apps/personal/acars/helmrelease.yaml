@@ -23,6 +23,7 @@ spec:
       pod:
         nodeSelector:
           hackrf: "true"
+
     controllers:
       acarsdec:
         <<: *common_settings
@@ -35,7 +36,7 @@ spec:
             env:
               FEED_ID: FEED-1
               TZ: Etc/UTC
-              # SERIAL: "00000000"
+              SERIAL: "00000000"
               FREQUENCIES: "131.550;131.725;130.025"
               SERVER: acarsrouter
               SERVER_PORT: "5550"
