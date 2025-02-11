@@ -108,12 +108,8 @@ spec:
               - path: /dev/bus/usb
             dumpvld2:
               - path: /dev/bus/usb
-      cache:
-        type: emptyDir
-        globalMounts:
-          - path: /tmp/cache
-      run:
-        type: emptyDir
+      # run:
+      #   type: emptyDir
       acarshub:
         existingClaim: acars-config-nas
         advancedMounts:
