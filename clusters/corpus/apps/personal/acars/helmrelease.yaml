@@ -114,13 +114,15 @@ spec:
 
     service:
       main:
-        controller: acars
+        controller: *app
+        type: ClusterIP
         ports:
           http:
+            primary: true
             port: 80
-          jsonstream:
+          jsonstream1:
             port: 15550
-          jsonstreamalt:
+          jsonstream2:
             port: 15555
 
     ingress:
