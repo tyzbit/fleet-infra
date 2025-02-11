@@ -116,7 +116,7 @@ spec:
       usb:
         type: hostPath
         hostPath: /dev/bus/usb
-        hostPathType: device
+        hostPathType: CharDevice
         advancedMounts:
           acarsdec:
             acarsdec:
