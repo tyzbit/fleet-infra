@@ -30,6 +30,8 @@ spec:
         replicas: 1
         containers:
           acarsdec:
+            securityContext:
+              privileged: true
             image:
               repository: ghcr.io/sdr-enthusiasts/docker-acarsdec
               tag: latest-build-412
