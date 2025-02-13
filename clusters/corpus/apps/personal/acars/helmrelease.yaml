@@ -36,7 +36,7 @@ spec:
             env:
               FEED_ID: FEED-1
               TZ: Etc/UTC
-              SOAPYSDR: driver=sdrplay
+              SOAPYSDR: driver=hackrf
               FREQUENCIES: "131.550;131.725;130.025"
               SERVER: acarsrouter
               SERVER_PORT: "5550"
