@@ -81,12 +81,9 @@ spec:
           rustdesk-4:
             port: *port
             protocol: UDP
+          rustdesk-5-relay:
+            port: 21117
           rustdesk-6:
             port: 21118
-      *relay :
-        controller: *app
-        ports:
-          rustdesk-5:
-            port: 21117
-          rustdesk-7:
+          rustdesk-7-relay:
             port: 21119
