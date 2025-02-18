@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: default-backend
-          image: docker.io/nginx:1.27.3
+          image: docker.io/nginx:1.27.4
           ports:
             - containerPort: 80
               name: http
