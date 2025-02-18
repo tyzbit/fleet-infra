@@ -30,6 +30,8 @@ spec:
         replicas: 1
         containers:
           acarsdec:
+            securityContext:
+              privileged: true
             image:
               repository: ghcr.io/sdr-enthusiasts/docker-acarsdec
               tag: latest-build-412
@@ -52,13 +54,15 @@ spec:
         replicas: 1
         containers:
           dumpvdl2:
+            securityContext:
+              privileged: true
             image:
               repository: ghcr.io/sdr-enthusiasts/docker-dumpvdl2
               tag: latest-build-348
             env:
               FEED_ID: VDL-2
               TZ: Etc/UTC
-              SOAPYSDR: driver=sdrplay
+              SOAPYSDR: driver=rtlsdr
               FREQUENCIES: "136.975;136.650"
               ZMQ_MODE: server
               ZMQ_ENDPOINT: tcp://0.0.0.0:45555
