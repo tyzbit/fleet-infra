@@ -162,12 +162,13 @@ cameras:
           0.283,0.286,0.089,0.467,0.125,0.539
     objects:
       filters:
-        person:
+        person: &sidegaragemask
           mask:
             - >- # sky and neighbors
               0.597,0.264,0.725,0.948,0.876,0.744,0.913,0.586,
               1,0.73,1,0,0,0,-0.002,0.404,0,0.713,0.125,0.538,
               0.108,0.461,0.192,0.374,0.285,0.288,0.442,0.241
+        car: *sidegaragemask
 
   backdeck:
     enabled: true
