@@ -1,40 +1,42 @@
 # yaml-language-server: $schema=https://demo.frigate.video/api/config/schema.json
-logger:
-  default: info
-  logs:
-    frigate.watchdog: debug
-    frigate.ffmpeg: debug
-  #   frigate.record.maintainer: debug
-  #   frigate.app: debug
-  #   frigate.record: debug
-database: { path: /media/frigate/frigate.db }
-model:
-  path: plus://dd3da9ca34a33c7eea7bfd72d3ca6d2b # 2025/02/17
-mqtt: { host: mosquitto }
-record:
-  enabled: true
-  retain:
-    days: 10
-  detections:
-    retain:
-      days: 30
-  alerts:
-    retain:
-      days: 90
-      mode: active_objects
-detectors:
-  coral1:
-    type: edgetpu
-    device: usb:0
-  # coral2:
-  #   type: edgetpu
-  #   device: usb:1
-snapshots: { enabled: true, retain: { default: 30, objects: { person: 30 } } }
-semantic_search:
-  enabled: true
-  model_size: "large"
-  reindex: false
+logger: {default: info}
+database: {path: /media/frigate/frigate.db}
+mqtt: {host: mosquitto}
 
+model: {path: plus://dd3da9ca34a33c7eea7bfd72d3ca6d2b} # 2025/02/17
+semantic_search: {enabled: true, model_size: "large", reindex: false}
+detectors: {coral: {type: edgetpu, device: usb}}
+
+snapshots: {enabled: true, retain: {default: 30, objects: {person: 30}}}
+record: {enabled: true,
+  retain: {days: 14},
+  detections: {retain: {days: 30}},
+  alerts: {retain: {days: 90, mode: active_objects}}
+}
+objects:
+  track: &trackedobjects [person,cat,dog,car,package,amazon,usps,ups,dhl,fedex,
+      license_plate, # attribute label, these don't generate events
+    ]
+review: {detections: {labels: *trackedobjects}}
+
+ffmpeg:
+  hwaccel_args: preset-vaapi
+  input_args: preset-rtsp-restream-low-latency
+  output_args: {record: preset-record-generic-audio-copy}
+go2rtc:
+  streams:
+    doorbell:
+      - "ffmpeg:http://doorbell.home.arpa/flv?port=1935&app=bcs&stream=channel0_main.bcs&user={FRIGATE_CAMERA_USER}&password={FRIGATE_CAMERA_PASSWORD}#video=copy#audio=copy"
+      - "rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@doorbell.home.arpa/Preview_01_sub" # two-way audio
+    # These kinds of cameras do not support http-flv
+    garage: ["rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@garage.home.arpa/Preview_01_main"]
+    sidegarage: ["rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@sidegarage.home.arpa/Preview_01_main"]
+    backdeck: ["rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@backdeck.home.arpa/Preview_01_main"]
+birdseye: {enabled: true,
+  quality: 8, width: 1440, height: 1080, layout: {scaling_factor: 1.0},
+  # -- objects, motion, continuous
+  mode: objects
+}
 camera_groups:
   "Birdseye":
     cameras: [birdseye]
@@ -53,231 +55,116 @@ camera_groups:
     icon: LuBellRing
     order: 3
 
-birdseye:
-  enabled: true
-  quality: 8
-  width: 1440
-  height: 1080
-  layout:
-    scaling_factor: 1.0
-  # -- objects, motion, continuous
-  mode: objects
-
-ffmpeg:
-  # global_args: -hide_banner -loglevel warning -threads 4
-  # hwaccel_args: ["-hwaccel", "vaapi", "-hwaccel_device", "/dev/dri/renderD128", "-hwaccel_output_format", "yuv420p"]
-  hwaccel_args: preset-vaapi
-  # input_args: preset-rtsp-restream
-  input_args: preset-rtsp-restream-low-latency
-  output_args:
-    record: preset-record-generic-audio-copy
-go2rtc:
-  streams:
-    doorbell:
-      - "ffmpeg:http://doorbell.home.arpa/flv?port=1935&app=bcs&stream=channel0_main.bcs&user={FRIGATE_CAMERA_USER}&password={FRIGATE_CAMERA_PASSWORD}#video=copy#audio=copy"
-      - "rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@doorbell.home.arpa/Preview_01_sub" # two-way audio
-    # These kinds of cameras do not support http-flv
-    garage:
-      - "rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@garage.home.arpa/Preview_01_main"
-    sidegarage:
-      - "rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@sidegarage.home.arpa/Preview_01_main"
-    backdeck:
-      - "rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@backdeck.home.arpa/Preview_01_main"
-
-objects:
-  track: &trackedobjects [
-      person,
-      cat,
-      dog,
-      car,
-      package,
-      amazon,
-      usps,
-      ups,
-      dhl,
-      fedex,
-      license_plate, # attribute labels, these don't generate events
-    ]
-review:
-  alerts: { labels: [person] }
-  detections: { labels: *trackedobjects }
-
 cameras:
   garage:
     enabled: true
-    ui: { order: 0 }
-    birdseye: { order: 0 }
+    detect: &floodlightdetect {width: 1152, height: 432, fps: 5} # 4608x1728
+    ffmpeg: {inputs:
+      [{path: rtsp://localhost:8554/garage, roles: &detectandrecord [detect, record]}]}
+    mqtt: &mqttheight {height: 1728}
+    ui: {order: 0}
+    birdseye: {order: 0}
+    review: {alerts: {required_zones: [on_property, mailbox]}}
     zones:
-      on_property:
+      on_property: &zonedefault
         inertia: 5
         loitering_time: 2
+        objects: [person, package, cat, dog, car]
         coordinates: >-
           0,0.407,0.034,0.431,0.079,0.604,0.127,0.529,0.256,0.352,
           0.557,0.362,0.689,0.973,0.9,0.744,0.942,0.6,1,0.713,1,1,0,1
-        objects: &property_objects [person, package, cat, dog, car]
-    review:
-      alerts:
-        labels: [person, package, car]
-        required_zones: [on_property]
-    objects:
-      filters:
-        person: &garagemask
-          mask:
-            - >- # the sky
-              0.002,0.42,0.039,0.431,0.08,0.59,0.127,0.532,0.243,0.252,0.364,
-              0.133,0.524,0.106,0.645,0.301,0.826,0.391,1,0.702,1,0,0,0
-            - >- # my car
-              0.652,0.189,0.791,0.29,0.953,0.575,0.899,0.75,
-              0.69,0.974,0.555,0.239
-            # - >- # my car, the street
-            #   0.597,0.264,0.725,0.948,0.876,0.744,0.911,0.607,1,0.754,
-            #   1,0,0,0,-0.002,0.404,0.039,0.434,0.08,0.604,0.125,0.538,
-            #   0.108,0.461,0.192,0.374,0.285,0.288,0.442,0.241
-            # - >- # my car, the street minus the mailbox
-            #   0.597,0.264,0.725,0.948,0.876,0.744,0.911,0.607,1,0.754,
-            #   1,0,0,0,-0.002,0.404,0.039,0.434,0.08,0.604,0.125,0.538,
-            #   0.108,0.461,0.192,0.374,0.285,0.288,0.385,0.258,0.4,0.118,
-            #   0.454,0.104,0.456,0.257
-        cat: *garagemask
-        dog: *garagemask
-        bird: *garagemask
-        car: *garagemask
-    motion: *garagemask
-    ffmpeg:
-      inputs:
-        - path: rtsp://localhost:8554/garage
-          roles: &detectandrecord [detect, record]
-    detect: &floodlightdetect # 4608x1728
-      width: 1152
-      height: 432
-      fps: 5
-    mqtt: &mqttheight
-      height: 1728
+      mailbox:
+        <<: *zonedefault
+        objects: [usps]
+        coordinates: >-
+          0.351,0.09,0.479,0.065,0.482,0.236,0.365,0.258
+    motion:
+      mask:
+        - >- # the sky
+          0.002,0.42,0.039,0.431,0.08,0.59,0.127,0.532,0.243,0.252,0.364,
+          0.133,0.524,0.106,0.645,0.301,0.826,0.391,1,0.702,1,0,0,0
+        - >- # my car
+          0.652,0.189,0.791,0.29,0.953,0.575,0.899,0.75,
+          0.69,0.974,0.555,0.239
 
   doorbell:
     enabled: true
-    ui: { order: 1 }
-    birdseye: { order: 1 }
+    detect: {width: 1280, height: 960, fps: 5} # 2560x1920
+    ffmpeg: {inputs:
+      [{path: rtsp://localhost:8554/doorbell, roles: *detectandrecord}]}
+    mqtt: {height: 1920}
+    ui: {order: 1}
+    birdseye: {order: 1}
+    review: {alerts: {required_zones: [on_property, mailbox]}}
     zones:
       on_property:
-        inertia: 5
-        loitering_time: 2
+        <<: *zonedefault
+        objects: [person, package, cat, dog, car]
         coordinates: >-
           0.187,0.636,0.79,0.621,1,0.606,
           1,1,0,1,0,0.172,0.188,0.282
-        objects: *property_objects
       sign:
-        inertia: 5
-        loitering_time: 2
+        <<: *zonedefault
+        objects: [person]
         coordinates: >-
           0.697,0.531,0.78,0.529,0.778,0.602,0.702,0.606
-        objects: [person]
       house_across_the_street:
-        inertia: 5
-        loitering_time: 2
+        <<: *zonedefault
+        objects: [person]
         coordinates: >-
           0.616,0.49,0.618,0.533,0.54,0.529,0.409,0.54,0.408,0.501,0.506,0.494
-        objects: [person]
-    review:
-      alerts:
-        labels: [person, package]
-        required_zones: [on_property]
-    objects:
-      filters:
-        # person:
-        #   mask:
-        #     - &personmask >- # exclude mailbox
-        #       1,0.605,0.936,0.587,0.937,0.524,0.208,
-        #       0.559,0.204,0.316,0.628,0.306,0.866,0,1,0
-        # cat: { mask: [*personmask] }
-        # dog: { mask: [*personmask] }
-        # bird: { mask: [*personmask] }
-        car:
-          mask:
-            - &parkedcars >- # the cars that are parked at houses
-              0.222,0.563,0.222,0.471,0.366,0.481,0.421,0.484,
-              0.475,0.481,0.519,0.463,0.552,0.465,0.555,0.524,
-              0.493,0.539,0.471,0.53,0.379,0.533,0.347,0.53,
-              0.29,0.545,0.417,0.527
-            - &occasionalcar >- # the car that sometimes parks across the street
-              0.87,0.515,0.861,0.561,0.992,0.558,0.984,0.498
+      mailbox:
+        <<: *zonedefault
+        objects: [usps]
+        coordinates: >-
+          0.628,0.518,0.826,0.512,0.831,0.606,0.628,0.612
     motion:
       mask:
         - &sky >-
           0.21,0.49,0.414,0.497,0.628,0.483,0.927,0.477,
           1,0.475,1,0,0.869,0,0.627,0.305,0.209,0.319
-    ffmpeg:
-      inputs:
-        - path: rtsp://localhost:8554/doorbell
-          roles: *detectandrecord
-    detect:
-      # 2560x1920
-      width: 1280
-      height: 960
-      fps: 5
-    mqtt:
-      height: 1920
 
   sidegarage:
     enabled: true
-    ui: { order: 2 }
-    birdseye: { order: 2 }
-    objects:
-      filters:
-        person: &sidegaragemask
-          mask:
-            - >- # sky and neighbors
-              0.597,0.264,0.725,0.948,0.876,0.744,0.913,0.586,
-              1,0.73,1,0,0,0,-0.002,0.404,0,0.713,0.125,0.538,
-              0.108,0.461,0.192,0.374,0.285,0.288,0.442,0.241
-            # - >- # my car
-            #   0.124,0.54,0.001,0.702,0,0.436,0.049,0.394
-        car: *sidegaragemask
-    motion: *sidegaragemask
-    ffmpeg:
-      inputs:
-        - path: rtsp://localhost:8554/sidegarage
-          roles: *detectandrecord
     detect: *floodlightdetect
+    ffmpeg: {inputs:
+      [{path: rtsp://localhost:8554/sidegarage, roles: *detectandrecord}]}
     mqtt: *mqttheight
+    ui: {order: 2}
+    birdseye: {order: 2}
+    review: {alerts: {required_zones: [on_property]}}
+    zones:
+      on_property:
+        <<: *zonedefault
+        objects: [person, cat, dog]
+        coordinates: >-
+          0,0.712,0,1,1,1,1,0.546,0.945,0.57,0.868,
+          0.47,0.822,0.511,0.631,0.354,0.428,0.271,
+          0.283,0.286,0.089,0.467,0.125,0.539
 
   backdeck:
     enabled: true
-    ui: { order: 3 }
-    birdseye: { order: 3 }
+    detect: *floodlightdetect
+    ffmpeg: {inputs:
+      [{path: rtsp://localhost:8554/backdeck, roles: *detectandrecord}]}
+    mqtt: *mqttheight
+    ui: {order: 3}
+    birdseye: {order: 3}
     zones:
       on_property:
-        inertia: 5
-        loitering_time: 2
+        <<: *zonedefault
         coordinates: >-
-          0.416,0.675,0.384,0.295,0.181,0.365,0,0.624,0.002,
-          0.998,0.624,0.996,0.53,0.393,0.62,0.362,0.926,0.817,
-          0.979,0.611,0.723,0.194,0.46,0.183,0.465,0.613
-        objects: [person, dog, cat, ]
+          0.459,0.183,0.725,0.192,0.974,0.594,0.915,
+          0.819,0.777,0.629,0.743,0.655,0.663,0.402,
+          0.62,0.362,0.53,0.391,0.532,0.622,0.622,
+          0.991,0,1,0,0.373,0.165,0.212,0.38,
+          0.054,0.409,0.659,0.466,0.611
+        objects: [person, dog, cat]
     review:
       alerts:
-        labels: [person]
         required_zones: [on_property]
-    objects:
-      filters:
-        person: &backdeckmask
-          mask:
-            - >- # grill
-              0.533,0.392,0.619,0.365,0.735,0.657,0.777,
-              0.635,0.921,0.82,0.862,1,0.622,1,0.532,0.622
-            - >- # neighbors
-              1,0.464,0.977,0.552,0.894,0.437,0.909,0.357,
-              0.759,0.196,0.424,0.181,0.419,0,0.73,0,1,0
-    motion: *backdeckmask
-    ffmpeg:
-      inputs:
-        - path: rtsp://localhost:8554/backdeck
-          roles: *detectandrecord
-    detect: *floodlightdetect
-    mqtt: *mqttheight
-
-  #   onvif:
-  #     host: shed.home.arpa
-  #     port: 80
-  #     user: ${basic_user}
-  #     password: ${basic_password}
+    motion:
+      mask:
+        - >- # neighbors
+          1,0.464,0.977,0.552,0.894,0.437,0.909,0.357,
+          0.759,0.196,0.424,0.181,0.419,0,0.73,0,1,0
