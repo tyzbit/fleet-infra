@@ -26,7 +26,11 @@ ffmpeg:
 go2rtc:
   streams:
     doorbell:
-      - "ffmpeg:http://doorbell.home.arpa/flv?port=1935&app=bcs&stream=channel0_main.bcs&user={FRIGATE_CAMERA_USER}&password={FRIGATE_CAMERA_PASSWORD}#video=copy#audio=copy"
+      - >-
+        ffmpeg:http://doorbell.home.arpa/flv?port=1935&app=bcs&stream=channel0_main.bcs&
+        user={FRIGATE_CAMERA_USER}&
+        password={FRIGATE_CAMERA_PASSWORD}
+        #video=copy#audio=copy
       - "rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@doorbell.home.arpa/Preview_01_sub" # two-way audio
     # These kinds of cameras do not support http-flv
     garage: ["rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@garage.home.arpa/Preview_01_main"]
@@ -78,7 +82,7 @@ cameras:
         objects: [usps]
         coordinates: >-
           0.351,0.09,0.479,0.065,0.482,0.236,0.365,0.258
-    motion:
+    motion: &garagemask
       mask:
         - >- # the sky
           0.002,0.42,0.039,0.431,0.08,0.59,0.127,0.532,0.243,0.252,0.364,
@@ -86,6 +90,9 @@ cameras:
         - >- # my car
           0.652,0.189,0.791,0.29,0.953,0.575,0.899,0.75,
           0.69,0.974,0.555,0.239
+    objects:
+      filters:
+        person: *garagemask
 
   doorbell:
     enabled: true
@@ -120,9 +127,21 @@ cameras:
           0.628,0.518,0.826,0.512,0.831,0.606,0.628,0.612
     motion:
       mask:
-        - &sky >-
+        - &doorbellsky >-
           0.21,0.49,0.414,0.497,0.628,0.483,0.927,0.477,
           1,0.475,1,0,0.869,0,0.627,0.305,0.209,0.319
+    objects:
+      filters:
+        car:
+          mask:
+            - *doorbellsky
+            - &parkedcars >- # the cars that are parked at houses
+              0.222,0.563,0.222,0.471,0.366,0.481,0.421,0.484,
+              0.475,0.481,0.519,0.463,0.552,0.465,0.555,0.524,
+              0.493,0.539,0.471,0.53,0.379,0.533,0.347,0.53,
+              0.29,0.545,0.417,0.527
+            - &occasionalcar >- # the car that sometimes parks across the street
+              0.87,0.515,0.861,0.561,0.992,0.558,0.984,0.498
 
   sidegarage:
     enabled: true
@@ -141,6 +160,14 @@ cameras:
           0,0.712,0,1,1,1,1,0.546,0.945,0.57,0.868,
           0.47,0.822,0.511,0.631,0.354,0.428,0.271,
           0.283,0.286,0.089,0.467,0.125,0.539
+    objects:
+      filters:
+        person:
+          mask:
+            - >- # sky and neighbors
+              0.597,0.264,0.725,0.948,0.876,0.744,0.913,0.586,
+              1,0.73,1,0,0,0,-0.002,0.404,0,0.713,0.125,0.538,
+              0.108,0.461,0.192,0.374,0.285,0.288,0.442,0.241
 
   backdeck:
     enabled: true
