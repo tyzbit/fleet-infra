@@ -38,7 +38,7 @@ spec:
             env:
               FEED_ID: FEED-1
               TZ: Etc/UTC
-              # SOAPYSDR: driver=rtlsdr
+              SOAPYSDR: driver=rtlsdr
               FREQUENCIES: "131.550;131.725;130.025"
               SERVER: acarsrouter
               SERVER_PORT: "5550"
@@ -62,7 +62,7 @@ spec:
             env:
               FEED_ID: VDL-2
               TZ: Etc/UTC
-              # SOAPYSDR: driver=rtlsdr
+              SOAPYSDR: driver=rtlsdr
               FREQUENCIES: "136.975;136.650"
               ZMQ_MODE: server
               ZMQ_ENDPOINT: tcp://0.0.0.0:45555
