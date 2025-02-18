@@ -92,7 +92,7 @@ cameras:
           0.69,0.974,0.555,0.239
     objects:
       filters:
-        person: *garagemask
+        car: *garagemask
 
   doorbell:
     enabled: true
