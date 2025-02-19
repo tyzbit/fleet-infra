@@ -22,7 +22,7 @@ spec:
         reloader.stakater.com/auto: "true"
       pod:
         nodeSelector:
-          hackrf: "true"
+          acars: "true"
 
     controllers:
       acarsdec:
@@ -39,7 +39,11 @@ spec:
               FEED_ID: FEED-1
               TZ: Etc/UTC
               SOAPYSDR: driver=rtlsdr
-              FREQUENCIES: "130.025;130.450;131.125;131.550;131.725"
+              # FREQUENCIES: "130.025;130.450;131.125;131.550;131.725"
+              FREQUENCIES: >- # Enabling all frequencies to determine which are actually used
+                129.125;129.350;129.525;130.025;130.450;130.825;131.125;
+                131.425;131.550;131.725;131.850;136.575;136.650;136.675;
+                136.700;136.725;136.750;136.775;136.800;136.850;136.975
               OUTPUT_SERVER: acars-acarsrouter
               OUTPUT_SERVER_PORT: "5550"
               OUTPUT_SERVER_MODE: tcp
