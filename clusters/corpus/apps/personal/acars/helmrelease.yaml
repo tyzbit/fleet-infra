@@ -65,7 +65,7 @@ spec:
               SOAPYSDR: driver=rtlsdr
               FREQUENCIES: "136.975;136.650"
               ZMQ_MODE: server
-              ZMQ_ENDPOINT: tcp://0.0.0.0:45555
+              ZMQ_ENDPOINT: tcp://acars-acarsrouter:45555
             # resources:
             #   requests:
             #     cpu: 10m
@@ -84,9 +84,9 @@ spec:
             env:
               FEED_ID: VDL-2
               TZ: Etc/UTC
-              AR_SEND_UDP_ACARS: 127.0.0.1:5550
-              AR_SEND_UDP_VDLM2: 127.0.0.1:5555
-              AR_RECV_ZMQ_VDLM2: 127.0.0.1:45555
+              AR_SEND_UDP_ACARS: acars-acarshub:5550
+              AR_SEND_UDP_VDLM2: acars-acarshub:5555
+              AR_RECV_ZMQ_VDLM2: acars-acarshub:45555
             # resources:
             #   requests:
             #     cpu: 10m
