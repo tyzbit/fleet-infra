@@ -116,6 +116,7 @@ spec:
               ENABLE_ADSB: "false"
               ENABLE_ACARS: external
               # ENABLE_VDLM: external
+              QUIET_MESSAGES: "false" # This logs the messages themselves
             resources:
               requests:
                 cpu: 10m
