@@ -42,6 +42,7 @@ spec:
               FREQUENCIES: "130.025;130.450;131.125;131.550;131.725"
               OUTPUT_SERVER: acars-acarsrouter
               OUTPUT_SERVER_PORT: "5550"
+              OUTPUT_SERVER_MODE: tcp
             resources:
               requests:
                 cpu: 150m
