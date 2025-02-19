@@ -108,7 +108,7 @@ spec:
               TZ: Etc/UTC
               ENABLE_ADSB: "false"
               ENABLE_ACARS: external
-              ENABLE_VDLM: external
+              # ENABLE_VDLM: external
             resources:
               requests:
                 cpu: 10m
