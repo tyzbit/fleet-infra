@@ -39,7 +39,7 @@ spec:
               FEED_ID: FEED-1
               TZ: Etc/UTC
               SOAPYSDR: driver=rtlsdr
-              FREQUENCIES: "131.550;131.725;130.025"
+              FREQUENCIES: "130.025;130.450;131.125;131.550;131.725"
               OUTPUT_SERVER: acars-acarsrouter
               OUTPUT_SERVER_PORT: "5550"
             resources:
