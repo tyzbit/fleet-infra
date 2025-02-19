@@ -40,7 +40,7 @@ spec:
               TZ: Etc/UTC
               SOAPYSDR: driver=rtlsdr
               FREQUENCIES: "131.550;131.725;130.025"
-              SERVER: acarsrouter
+              SERVER: acars-acarsrouter
               OUTPUT_SERVER_PORT: "5550"
             # resources:
             #   requests:
