@@ -85,9 +85,9 @@ spec:
             env:
               FEED_ID: VDL-2
               TZ: Etc/UTC
-              AR_SEND_TCP_ACARS: 127.0.0.1:5550
-              AR_SEND_TCP_VDLM2: 127.0.0.1:5555
-              AR_RECV_ZMQ_VDLM2: 127.0.0.1:45555
+              AR_SEND_UDP_ACARS: acars-acarshub:5550
+              AR_SEND_UDP_VDLM2: acars-acarshub:5555
+              AR_RECV_ZMQ_VDLM2: acars-acarshub:45555
             resources:
               requests:
                 cpu: 10m
@@ -158,8 +158,10 @@ spec:
             port: 80
           json1:
             port: 5550
+            protocol: UDP
           json2:
             port: 5555
+            protocol: UDP
           jsonudp1:
             port: 15550
           jsonudp2:
