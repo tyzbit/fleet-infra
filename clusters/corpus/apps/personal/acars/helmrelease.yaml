@@ -163,15 +163,15 @@ spec:
         ports:
           http:
             port: 80
-          json1:
+          acarsinput:
             port: 5550
             protocol: UDP
-          json2:
+          vdslinput:
             port: 5555
             protocol: UDP
-          jsonudp1:
+          acarsoutput:
             port: 15550
-          jsonudp2:
+          vdsloutput:
             port: 15555
 
     ingress:
