@@ -43,7 +43,7 @@ spec:
               # Enabling all frequencies to determine which are actually used
               # RTL-SDR can only scan 2MHz range
               # See https://app.airframes.io/about
-              # FREQUENCIES: >- 
+              # FREQUENCIES: >-
               #   130.025;130.425;130.450;130.825;130.850;131.125;131.425;
               #   131.450;131.475;131.525;131.550;131.725;131.825;131.850
               OUTPUT_SERVER: acars-acarsrouter
@@ -100,6 +100,29 @@ spec:
                 memory: 128Mi
               limits:
                 memory: 256Mi
+
+      acarsannotator:
+        <<: *common_settings
+        replicas: 1 # active nas
+        type: statefulset
+        containers:
+          acarshub:
+            image:
+              repository: ghcr.io/tyzbit/acars-annotator
+              tag: latest
+            env:
+              ACARSHUB_HOST: acars-acarshub
+              ACARSHUB_PORT: "15550"
+              LOGLEVEL: debug
+            envFrom:
+              - secretRef:
+                  name: acars-annotator
+            resources:
+              requests:
+                cpu: 10m
+                memory: 64Mi
+              limits:
+                memory: 64Mi
 
       acarshub:
         <<: *common_settings
