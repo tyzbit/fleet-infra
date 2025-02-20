@@ -165,14 +165,28 @@ spec:
             port: 80
           json1:
             port: 5550
+            protocol: TCP
+          json1udp:
+            port: 5555
             protocol: UDP
           json2:
+            port: 5555
+            protocol: TCP
+          json2udp:
             port: 5555
             protocol: UDP
           jsonudp1:
             port: 15550
+            protocol: TCP
+          jsonudp1udp:
+            port: 15550
+            protocol: UDP
           jsonudp2:
-            port: 15555
+              port: 15555
+              protocol: TCP
+          jsonudp2udp:
+              port: 15555
+              protocol: UDP
 
     ingress:
       acarshub:
