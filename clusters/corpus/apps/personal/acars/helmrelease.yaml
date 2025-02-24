@@ -176,8 +176,10 @@ spec:
             probes:
               liveness:
                 enabled: true
+                port: 15550
               readiness:
                 enabled: true
+                port: 15550
             resources:
               requests:
                 cpu: 10m
