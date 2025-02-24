@@ -173,6 +173,11 @@ spec:
               ENABLE_ACARS: external
               # ENABLE_VDLM: external
               QUIET_MESSAGES: "false" # This logs the messages themselves
+            probes:
+              liveness:
+                enabled: true
+              readiness:
+                enabled: true
             resources:
               requests:
                 cpu: 10m
