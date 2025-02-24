@@ -139,6 +139,15 @@ spec:
               ANNOTATE_ACARS: "true"
               LOGLEVEL: debug
               FILTER_CRITERIA_HAS_TEXT: "true"
+              ACARS_ANNOTATOR_SELECTED_FIELDS: >-
+                acarsMessageText
+                acarsAircraftTailCode
+                acarsExtraPhotos
+                acarsExtraURL
+                acarsFlightNumber
+                acarsFrequencyMHz
+                acarsSignaldBm
+                acarsStationID
             envFrom:
               - secretRef:
                   name: acars-annotator2
