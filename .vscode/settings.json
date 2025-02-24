@@ -1,0 +1,9 @@
+{
+  "[yaml]": {
+    "editor.defaultFormatter": null
+  },
+  "[clusters/workbench/home-automation/frigate/config.yaml]": {
+    "editor.defaultFormatter": null,
+    "editor.formatOnSave": false
+  }
+}
