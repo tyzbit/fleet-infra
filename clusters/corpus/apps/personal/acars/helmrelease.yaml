@@ -113,7 +113,7 @@ spec:
               ACARSHUB_HOST: acars-acarshub
               ACARSHUB_PORT: "15550"
               ANNOTATE_ACARS: "true"
-              LOGLEVEL: debug
+              LOGLEVEL: info
             envFrom:
               - secretRef:
                   name: acars-annotator
