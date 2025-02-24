@@ -141,7 +141,7 @@ spec:
               FILTER_CRITERIA_HAS_TEXT: "true"
             envFrom:
               - secretRef:
-                  name: acars-annotator
+                  name: acars-annotator2
             resources:
               requests:
                 cpu: 10m
