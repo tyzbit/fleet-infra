@@ -138,7 +138,7 @@ spec:
               ACARSHUB_PORT: "15550"
               ANNOTATE_ACARS: "true"
               LOGLEVEL: debug
-              FILTER_CRITERIA_HAS_TEXT: "true"
+              # FILTER_CRITERIA_HAS_TEXT: "true"
               ACARS_ANNOTATOR_SELECTED_FIELDS: >-
                 acarsMessageText
                 acarsAircraftTailCode
