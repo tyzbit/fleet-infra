@@ -29,7 +29,7 @@ spec:
           *app :
             image:
               repository: "ghcr.io/jjgadgets/phanpy"
-              tag: "2024.05.15.6976191"
+              tag: rolling
             resources:
               requests:
                 cpu: 10m
