@@ -139,7 +139,6 @@ spec:
               ANNOTATE_ACARS: "true"
               LOGLEVEL: debug
               FILTER_CRITERIA_HAS_TEXT: "true"
-              FILTER_CRITERIA_MATCH_ASSSTATUS: complete
             envFrom:
               - secretRef:
                   name: acars-annotator2
