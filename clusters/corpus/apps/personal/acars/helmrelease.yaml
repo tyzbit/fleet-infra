@@ -124,6 +124,31 @@ spec:
               limits:
                 memory: 64Mi
 
+      acarsannotator2:
+        <<: *common_settings
+        replicas: 1 # active nas
+        type: statefulset
+        containers:
+          acarshub:
+            image:
+              repository: ghcr.io/tyzbit/acars-annotator
+              tag: latest
+            env:
+              ACARSHUB_HOST: acars-acarshub
+              ACARSHUB_PORT: "15550"
+              ANNOTATE_ACARS: "true"
+              LOGLEVEL: debug
+              FILTER_CRITERIA_HAS_TEXT: "true"
+            envFrom:
+              - secretRef:
+                  name: acars-annotator
+            resources:
+              requests:
+                cpu: 10m
+                memory: 64Mi
+              limits:
+                memory: 64Mi
+
       acarshub:
         <<: *common_settings
         replicas: 1 # active nas
