@@ -64,7 +64,7 @@ cameras:
     mqtt: &mqttheight {height: 1728}
     ui: {order: 0}
     birdseye: {order: 0}
-    review: {alerts: {required_zones: [on_property, mailbox]}}
+    review: {alerts: {required_zones: [on_property, mail]}}
     zones:
       on_property: &zonedefault
         inertia: 5
@@ -99,7 +99,7 @@ cameras:
     mqtt: {height: 1920}
     ui: {order: 1}
     birdseye: {order: 1}
-    review: {alerts: {required_zones: [on_property, mailbox]}}
+    review: {alerts: {required_zones: [on_property, mail]}}
     zones:
       on_property:
         <<: *zonedefault
