@@ -25,7 +25,7 @@ spec:
           acars: "true"
 
     controllers:
-      acarsdec:
+      acarsdec: &acarsdec
         <<: *common_settings
         replicas: 1
         containers:
@@ -39,7 +39,8 @@ spec:
               FEED_ID: TYZBIT-ACARS-1
               TZ: Etc/UTC
               SOAPYSDR: driver=rtlsdr
-              FREQUENCIES: "130.025;130.450;131.550;131.725"
+              # FREQUENCIES: "130.025;130.450;131.550;131.725"
+              FREQUENCIES: 130.025;130.425;130.450;130.825;130.850;131.125;131.425
               # Enabling all frequencies to determine which are actually used
               # RTL-SDR can only scan 2MHz range
               # See https://app.airframes.io/about
@@ -55,6 +56,15 @@ spec:
                 memory: 128Mi
               limits:
                 memory: 256Mi
+
+      acarsdec2:
+        <<: *acarsdec
+        replicas: 1
+        containers:
+          acarsdec:
+            env:
+              FEED_ID: TYZBIT-ACARS-2
+              FREQUENCIES: " 131.450;131.475;131.525;131.550;131.725;131.825;131.850"
 
       dumpvdl2:
         <<: *common_settings
