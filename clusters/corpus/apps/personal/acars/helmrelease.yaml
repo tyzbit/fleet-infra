@@ -61,7 +61,7 @@ spec:
         <<: *acarsdec
         replicas: 1
         containers:
-          acarsdec:
+          acarsdec2:
             env:
               FEED_ID: TYZBIT-ACARS-2
               FREQUENCIES: " 131.450;131.475;131.525;131.550;131.725;131.825;131.850"
