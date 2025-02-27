@@ -222,6 +222,8 @@ spec:
         ports:
           router:
             port: 5550
+          vdlrouter:
+            port: 45555
       dumpvdl2:
         controller: dumpvdl2
         type: ClusterIP
