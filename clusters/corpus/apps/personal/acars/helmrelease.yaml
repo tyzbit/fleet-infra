@@ -58,7 +58,7 @@ spec:
 
       dumpvdl2:
         <<: *common_settings
-        replicas: 0 # both devices can't use the adapter at once
+        replicas: 1
         containers:
           dumpvdl2:
             securityContext:
