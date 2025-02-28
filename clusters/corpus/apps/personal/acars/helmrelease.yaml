@@ -31,13 +31,7 @@ spec:
         containers:
           acarsdec:
             securityContext:
-              capabilities:
-                add:
-                  - SYS_RAWIO
-                  - DAC_READ_SEARCH
-                  - SYS_ADMIN
-                  - SYS_MODULE
-                  - MKNOD
+              privileged: true
             image:
               repository: ghcr.io/sdr-enthusiasts/docker-acarsdec
               tag: latest-build-412
@@ -229,28 +223,19 @@ spec:
                 memory: 512Mi
 
     persistence:
-      # usb:
-      #   type: hostPath
-      #   hostPath: /dev/bus/usb
-      #   advancedMounts:
-      #     acarsdec:
-      #       acarsdec:
-      #         - path: /dev/bus/usb
-      #     dumpvdl2:
-      #       dumpvld2:
-      #         - path: /dev/bus/usb
-      usb1:
+      usb:
         type: hostPath
-        hostPath: &usb1 /dev/bus/usb/001/017
-        advancedMounts: {acarsdec: {acarsdec: [path: *usb1]}}
-      usb2:
-        type: hostPath
-        hostPath: &usb2 /dev/bus/usb/001/018
-        advancedMounts: {acarsdec2: {acarsdec2: [path: *usb2]}}
-      usb3:
-        type: hostPath
-        hostPath: &usb3 /dev/bus/usb/001/019
-        advancedMounts: {dumpvdl2: {dumpvdl2: [path: *usb3]}}
+        hostPath: /dev/bus/usb
+        advancedMounts:
+          acarsdec:
+            acarsdec:
+              - path: /dev/bus/usb
+          acarsdec2:
+            acarsdec2:
+              - path: /dev/bus/usb
+          dumpvdl2:
+            dumpvld2:
+              - path: /dev/bus/usb
       # run:
       #   type: emptyDir
       acarshub:
