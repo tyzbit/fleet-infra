@@ -38,8 +38,7 @@ spec:
             env:
               FEED_ID: TYZBIT-ACARS-1
               TZ: Etc/UTC
-              # SOAPYSDR: driver=rtlsdr
-              SERIAL: "13055074"
+              SOAPYSDR: driver=rtlsdr,serial=13055074
               # FREQUENCIES: "130.025;130.450;131.550;131.725"
               FREQUENCIES: 130.025;130.425;130.450;130.825;130.850;131.125;131.425
               # Enabling all frequencies to determine which are actually used
@@ -71,8 +70,7 @@ spec:
             env:
               FEED_ID: TYZBIT-ACARS-2
               TZ: Etc/UTC
-              # SOAPYSDR: driver=rtlsdr
-              SERIAL: "58322450"
+              SOAPYSDR: driver=rtlsdr,serial=58322450
               # FREQUENCIES: "130.025;130.450;131.550;131.725"
               FREQUENCIES: 131.450;131.475;131.525;131.550;131.725;131.825;131.850
               # Enabling all frequencies to determine which are actually used
@@ -105,11 +103,10 @@ spec:
             env:
               FEED_ID: TYZBIT-VDL2-1
               TZ: Etc/UTC
-              # SOAPYSDR: driver=rtlsdr
-              SERIAL: "00000001"
+              SOAPYSDR: driver=rtlsdr,serial=00000001
               FREQUENCIES: "136.975;136.650"
               ZMQ_MODE: server
-              ZMQ_ENDPOINT: tcp://0.0.0.0:45555
+              ZMQ_ENDPOINT: tcp://0.0.0.0:5555
             resources:
               requests:
                 cpu: 10m
@@ -129,7 +126,7 @@ spec:
               TZ: Etc/UTC
               AR_SEND_UDP_ACARS: acars-acarshub:5550;${acarsdrama_acars}
               AR_SEND_UDP_VDLM2: acars-acarshub:5555;${acarsdrama_vdlm2}
-              AR_RECV_ZMQ_VDLM2: acars-dumpvdl2:45555
+              AR_RECV_ZMQ_VDLM2: acars-dumpvdl2:5555
             resources:
               requests:
                 cpu: 10m
