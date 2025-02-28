@@ -143,7 +143,10 @@ spec:
             env:
               ACARSHUB_HOST: acars-acarshub
               ACARSHUB_PORT: "15550"
+              ACARSHUB_VDLM2_HOST: acars-acarshub
+              ACARSHUB_VDLM2_PORT: "15555"
               ANNOTATE_ACARS: "true"
+              ANNOTATE_VDLM2: "true"
               LOGLEVEL: info
             envFrom:
               - secretRef:
@@ -166,7 +169,10 @@ spec:
             env:
               ACARSHUB_HOST: acars-acarshub
               ACARSHUB_PORT: "15550"
+              ACARSHUB_VDLM2_HOST: acars-acarshub
+              ACARSHUB_VDLM2_PORT: "15555"
               ANNOTATE_ACARS: "true"
+              ANNOTATE_VDLM2: "true"
               LOGLEVEL: debug
               FILTER_CRITERIA_HAS_TEXT: "true"
               ACARS_ANNOTATOR_SELECTED_FIELDS: >-
