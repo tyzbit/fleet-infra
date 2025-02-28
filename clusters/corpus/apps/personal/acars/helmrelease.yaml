@@ -73,7 +73,7 @@ spec:
               TZ: Etc/UTC
               SERIAL: "58322450"
               # FREQUENCIES: "130.025;130.450;131.550;131.725"
-              FREQUENCIES: " 131.450;131.475;131.525;131.550;131.725;131.825;131.850"
+              FREQUENCIES: 131.450;131.475;131.525;131.550;131.725;131.825;131.850
               # Enabling all frequencies to determine which are actually used
               # RTL-SDR can only scan 2MHz range
               # See https://app.airframes.io/about
