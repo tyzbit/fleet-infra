@@ -34,6 +34,7 @@ spec:
               capabilities:
                 add:
                   - SYS_RAWIO
+                  - DAC_READ_SEARCH
                   # - SYS_ADMIN
             image:
               repository: ghcr.io/sdr-enthusiasts/docker-acarsdec
