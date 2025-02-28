@@ -35,7 +35,7 @@ spec:
                 add:
                   - SYS_RAWIO
                   - DAC_READ_SEARCH
-                  # - SYS_ADMIN
+                  - SYS_ADMIN
             image:
               repository: ghcr.io/sdr-enthusiasts/docker-acarsdec
               tag: latest-build-412
