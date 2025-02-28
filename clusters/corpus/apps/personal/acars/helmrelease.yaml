@@ -182,6 +182,17 @@ spec:
                 acarsFlightNumber
                 acarsSignaldBm
                 acarsStationID
+              VDLM2_ANNOTATOR_SELECTED_FIELDS: >-
+                acarsMessageText
+                acarsExtraPhotos
+                acarsExtraURL
+                acarsFlightNumber
+                acarsAircraftTailCode
+                vdlm2SignalLeveldBm
+                vdlmSourceAddress
+                vdlmSourceType
+                vdlmDestinationAddress
+                vdlmDestinationType
             envFrom:
               - secretRef:
                   name: acars-annotator2
