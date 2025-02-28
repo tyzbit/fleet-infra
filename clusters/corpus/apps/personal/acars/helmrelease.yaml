@@ -107,7 +107,7 @@ spec:
               SERIAL: "58322450"
               FREQUENCIES: "136.975;136.650"
               ZMQ_MODE: server
-              ZMQ_ENDPOINT: tcp://acars-acarsrouter:45555
+              ZMQ_ENDPOINT: tcp://0.0.0.0:45555
             resources:
               requests:
                 cpu: 10m
@@ -247,14 +247,13 @@ spec:
         ports:
           router:
             port: 5550
-          vdlrouter:
-            port: 45555
       dumpvdl2:
         controller: dumpvdl2
         type: ClusterIP
         ports:
-          vdl:
+          vdlm2:
             port: 45555
+            protocol: TCP
       acarshub:
         controller: acarshub
         type: ClusterIP
