@@ -71,7 +71,7 @@ spec:
             env:
               FEED_ID: TYZBIT-ACARS-2
               TZ: Etc/UTC
-              SERIAL: "58322450"
+              SERIAL: "00000001"
               # FREQUENCIES: "130.025;130.450;131.550;131.725"
               FREQUENCIES: " 131.450;131.475;131.525;131.550;131.725;131.825;131.850"
               # Enabling all frequencies to determine which are actually used
@@ -104,7 +104,7 @@ spec:
             env:
               FEED_ID: TYZBIT-VDL2-1
               TZ: Etc/UTC
-              SERIAL: "00000001"
+              SERIAL: "58322450"
               FREQUENCIES: "136.975;136.650"
               ZMQ_MODE: server
               ZMQ_ENDPOINT: tcp://0.0.0.0:45555
