@@ -193,6 +193,7 @@ spec:
                 vdlmSourceType
                 vdlmDestinationAddress
                 vdlmDestinationType
+                vdlm2Station
             envFrom:
               - secretRef:
                   name: acars-annotator2
