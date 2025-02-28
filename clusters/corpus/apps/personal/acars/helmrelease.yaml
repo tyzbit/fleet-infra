@@ -106,7 +106,7 @@ spec:
               SOAPYSDR: driver=rtlsdr,serial=00000001
               FREQUENCIES: "136.975;136.650"
               ZMQ_MODE: server
-              ZMQ_ENDPOINT: tcp://0.0.0.0:5555
+              ZMQ_ENDPOINT: tcp://0.0.0.0:45555
             resources:
               requests:
                 cpu: 10m
@@ -126,7 +126,7 @@ spec:
               TZ: Etc/UTC
               AR_SEND_UDP_ACARS: acars-acarshub:5550;${acarsdrama_acars}
               AR_SEND_UDP_VDLM2: acars-acarshub:5555;${acarsdrama_vdlm2}
-              AR_RECV_ZMQ_VDLM2: acars-dumpvdl2:5555
+              AR_RECV_ZMQ_VDLM2: acars-dumpvdl2:45555
             resources:
               requests:
                 cpu: 10m
@@ -203,7 +203,7 @@ spec:
               TZ: Etc/UTC
               ENABLE_ADSB: "false"
               ENABLE_ACARS: external
-              # ENABLE_VDLM: external
+              ENABLE_VDLM: external
               QUIET_MESSAGES: "false" # This logs the messages themselves
             probes:
               liveness:
@@ -254,8 +254,9 @@ spec:
         type: ClusterIP
         ports:
           vdlm2:
+            port: 5555
+          vdlm2-zmq:
             port: 45555
-            protocol: TCP
       acarshub:
         controller: acarshub
         type: ClusterIP
