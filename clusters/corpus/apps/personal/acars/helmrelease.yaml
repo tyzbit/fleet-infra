@@ -107,7 +107,7 @@ spec:
               SERIAL: "00000001"
               FREQUENCIES: "136.975;136.650"
               ZMQ_MODE: server
-              ZMQ_ENDPOINT: tcp://0.0.0.0:45555
+              ZMQ_ENDPOINT: tcp://acars-acarsrouter:45555
             resources:
               requests:
                 cpu: 10m
