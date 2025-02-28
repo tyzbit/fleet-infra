@@ -30,8 +30,8 @@ spec:
         replicas: 1
         containers:
           acarsdec:
-            securityContext:
-              privileged: true
+            # securityContext:
+            #   privileged: true
             image:
               repository: ghcr.io/sdr-enthusiasts/docker-acarsdec
               tag: latest-build-412
@@ -63,8 +63,8 @@ spec:
         replicas: 1
         containers:
           acarsdec2:
-            securityContext:
-              privileged: true
+            # securityContext:
+            #   privileged: true
             image:
               repository: ghcr.io/sdr-enthusiasts/docker-acarsdec
               tag: latest-build-412
@@ -97,8 +97,8 @@ spec:
         replicas: 1
         containers:
           dumpvdl2:
-            securityContext:
-              privileged: true
+            # securityContext:
+            #   privileged: true
             image:
               repository: ghcr.io/sdr-enthusiasts/docker-dumpvdl2
               tag: latest-build-348
