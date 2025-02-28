@@ -36,6 +36,7 @@ spec:
                   - SYS_RAWIO
                   - DAC_READ_SEARCH
                   - SYS_ADMIN
+                  - SYS_MODULE
                   - MKNOD
             image:
               repository: ghcr.io/sdr-enthusiasts/docker-acarsdec
