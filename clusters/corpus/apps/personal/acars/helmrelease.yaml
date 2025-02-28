@@ -127,7 +127,7 @@ spec:
               TZ: Etc/UTC
               AR_SEND_UDP_ACARS: acars-acarshub:5550;${acarsdrama_acars}
               AR_SEND_UDP_VDLM2: acars-acarshub:5555;${acarsdrama_vdlm2}
-              AR_RECV_ZMQ_VDLM2: acars-dumpvdlm2:45555
+              AR_RECV_ZMQ_VDLM2: acars-dumpvdl2:45555
             resources:
               requests:
                 cpu: 10m
