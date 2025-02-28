@@ -69,7 +69,7 @@ spec:
             env:
               FEED_ID: TYZBIT-ACARS-2
               TZ: Etc/UTC
-              SOAPYSDR: driver=rtlsdr,serial=13055074
+              SOAPYSDR: driver=rtlsdr,serial=00000001
               FREQUENCIES: 131.550;131.725
               # Enabling all frequencies to determine which are actually used
               # RTL-SDR can only scan 2MHz range
@@ -100,7 +100,7 @@ spec:
             env:
               FEED_ID: TYZBIT-VDL2-1
               TZ: Etc/UTC
-              SOAPYSDR: driver=rtlsdr,serial=00000001
+              SOAPYSDR: driver=rtlsdr,serial=13055074
               FREQUENCIES: "136.975;136.650"
               ZMQ_MODE: server
               ZMQ_ENDPOINT: tcp://0.0.0.0:45555
