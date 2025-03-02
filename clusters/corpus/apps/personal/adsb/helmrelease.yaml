@@ -64,8 +64,8 @@ spec:
               TAR1090_SITESHOW: "true"
               TAR1090_RANGE_OUTLINE_COLORED_BY_ALTITUDE: "true"
               TAR1090_RANGE_OUTLINE_WIDTH: "2.0"
-              TAR1090_RANGERINGSDISTANCES: 50,100,150,200,300,500
-              TAR1090_RANGERINGSCOLORS: "'#85C7DE','#A0C4E2','#AED1E6','#C6DBF0','#CFE8EF'"
+              TAR1090_RANGERINGSDISTANCES: 50,100,200,400
+              TAR1090_RANGERINGSCOLORS: "'#7371FC','#A594F9','#CDC1FF','#E5D9F2'"
               TAR1090_USEROUTEAPI: "true"
               # GRAPHS1090 (Decoder and System Status Web Page) parameters:
               GRAPHS1090_DARKMODE: "true"
