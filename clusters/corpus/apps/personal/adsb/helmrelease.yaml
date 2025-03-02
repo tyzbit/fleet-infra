@@ -35,27 +35,26 @@ spec:
               repository: ghcr.io/sdr-enthusiasts/docker-adsb-ultrafeeder
               tag: latest
               # tag: telegraf # for use with InfluxDB/Prometheus and Grafana
-            envFrom:
-              - secretRef:
-                  name: adsb-ultrafeeder
             env:
               # https://github.com/sdr-enthusiasts/docker-adsb-ultrafeeder?tab=readme-ov-file#basic-ultrafeeder-parameters
               LOGLEVEL: debug
               TZ: US/New_York
               # UUID: "568"
               READSB_DEVICE_TYPE: rtlsdr
+              ENABLE_978: "yes"
+              URL_978: http://dump978/skyaware978
               # READSB_RTLSDR_DEVICE: 00000001 # Serial number of device
               # readsb/decoder parameters: (these are in the secret)
-              # READSB_LAT: 34
-              # READSB_LON: -119
-              # READSB_ALT: 100m
+              READSB_LAT: ${my_latitude}
+              READSB_LON: ${my_longitude}
+              READSB_ALT: 3m
               READSB_RX_LOCATION_ACCURACY: 2 
               READSB_STATS_RANGE: "true"
               # TAR1090 (Map Web Page) parameters:
               UPDATE_TAR1090: "true"
               # (these are in the secret)
-              # TAR1090_DEFAULTCENTERLAT: 34
-              # TAR1090_DEFAULTCENTERLON: -119
+              TAR1090_DEFAULTCENTERLAT: ${my_latitude}
+              TAR1090_DEFAULTCENTERLON: ${my_longitude}
               TAR1090_MESSAGERATEINTITLE: "true"
               TAR1090_PLANECOUNTINTITLE: "true"
               TAR1090_ENABLE_AC_DB: "true"
@@ -104,12 +103,23 @@ spec:
             #   readiness:
             #     enabled: "true"
             #     port: 15550
-            resources:
+            resources: &resources
               requests:
                 cpu: 10m
                 memory: 128Mi
               limits:
                 memory: 512Mi
+
+          dump978:
+            image:
+              repository: ghcr.io/sdr-enthusiasts/docker-flightradar24
+              tag: latest
+            env:
+              TZ: US/New_York
+              LAT: ${my_latitude}
+              LON: ${my_longitude}
+              DUMP978_RTL_SDR_DEVICE: "30275839"
+            resources: *resources
 
     persistence:
       usb:
@@ -140,10 +150,14 @@ spec:
         ports:
           http:
             port: 80
-          # promstats1:
-          #   port: 9273
-          # promstats2:
-          #   port: 9274
+          beast:
+            port: 30005
+      dump978:
+        controller: adsb-flightradar24
+        type: ClusterIP
+        ports:
+          uat:
+            port: 30978
 
     ingress:
       adsb-ultrafeeder:
