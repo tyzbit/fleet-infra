@@ -120,6 +120,7 @@ spec:
               LAT: ${my_latitude}
               LON: ${my_longitude}
               DUMP978_RTL_SDR_DEVICE: "30275839"
+              FR24KEY: ${fr24_sharing_key}
             resources: *resources
 
           # https://github.com/sdr-enthusiasts/docker-flightradar24?tab=readme-ov-file#obtaining-a-flightradar24-sharing-key-for-adsb
