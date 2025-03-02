@@ -29,6 +29,8 @@ spec:
 
         containers:
           adsb-ultrafeeder:
+            securityContext:
+              privileged: true
             image:
               repository: ghcr.io/sdr-enthusiasts/docker-adsb-ultrafeeder
               tag: latest
