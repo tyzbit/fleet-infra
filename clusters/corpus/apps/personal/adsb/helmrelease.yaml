@@ -167,13 +167,13 @@ spec:
           beast:
             port: 30005
       dump978:
-        controller: adsb-flightradar24
+        controller: adsb-ultrafeeder
         type: ClusterIP
         ports:
           uat:
             port: 30978
       adsb-flightradar24:
-        controller: adsb-flightradar24
+        controller: adsb-ultrafeeder
         type: ClusterIP
         ports:
           http:
