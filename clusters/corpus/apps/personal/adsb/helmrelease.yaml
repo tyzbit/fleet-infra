@@ -48,8 +48,9 @@ spec:
               READSB_STATS_RANGE: "true"
               # TAR1090 (Map Web Page) parameters:
               UPDATE_TAR1090: "true"
-              TAR1090_DEFAULTCENTERLAT: 34
-              TAR1090_DEFAULTCENTERLON: -119
+              # (these are in the secret)
+              # TAR1090_DEFAULTCENTERLAT: 34
+              # TAR1090_DEFAULTCENTERLON: -119
               TAR1090_MESSAGERATEINTITLE: "true"
               TAR1090_PLANECOUNTINTITLE: "true"
               TAR1090_ENABLE_AC_DB: "true"
