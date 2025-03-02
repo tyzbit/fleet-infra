@@ -127,8 +127,6 @@ spec:
                 subPath: globe_history
               - path: /var/lib/collectd
                 subPath: collectd
-              - path: /var/globe_history
-                subPath: globe_history
 
     service:
       adsb-ultrafeeder:
