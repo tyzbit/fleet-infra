@@ -1,0 +1,209 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.7.0/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app adsb-ultrafeeder
+  namespace: flux-system
+spec:
+  targetNamespace: personal
+  releaseName: *app
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: "3.7.0"
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  values:
+    controllers:
+      adsb-ultrafeeder:
+        type: statefulset
+        annotations:
+          reloader.stakater.com/auto: "true"
+        pod:
+          nodeSelector:
+            adsb: "true"
+        replicas: 1 # active nas
+
+        containers:
+          adsb-ultrafeeder:
+            image:
+              repository: ghcr.io/sdr-enthusiasts/docker-adsb-ultrafeeder
+              tag: latest
+              # tag: telegraf # for use with InfluxDB/Prometheus and Grafana
+            env:
+              # https://github.com/sdr-enthusiasts/docker-adsb-ultrafeeder?tab=readme-ov-file#basic-ultrafeeder-parameters
+              LOGLEVEL: debug
+              TZ: US/New_York
+              # UUID: "568"
+              READSB_DEVICE_TYPE: rtlsdr
+              # READSB_RTLSDR_DEVICE: 00000001 # Serial number of device
+              # readsb/decoder parameters: (these are in the secret)
+              # READSB_LAT: 34
+              # READSB_LON: -119
+              # READSB_ALT: 100m
+              READSB_RX_LOCATION_ACCURACY: 2 
+              READSB_STATS_RANGE: "true"
+              # TAR1090 (Map Web Page) parameters:
+              UPDATE_TAR1090: "true"
+              TAR1090_DEFAULTCENTERLAT: 34
+              TAR1090_DEFAULTCENTERLON: -119
+              TAR1090_MESSAGERATEINTITLE: "true"
+              TAR1090_PLANECOUNTINTITLE: "true"
+              TAR1090_ENABLE_AC_DB: "true"
+              TAR1090_FLIGHTAWARELINKS: "true"
+              HEYWHATSTHAT_ALTS: 3000,10000,30000,40000
+              TAR1090_SITESHOW: "true"
+              TAR1090_RANGE_OUTLINE_COLORED_BY_ALTITUDE: "true"
+              TAR1090_RANGE_OUTLINE_WIDTH: "2.0"
+              TAR1090_RANGERINGSDISTANCES: 50,100,150,200,300,500
+              TAR1090_RANGERINGSCOLORS: "'#85C7DE','#A0C4E2','#AED1E6','#C6DBF0','#CFE8EF'"
+              TAR1090_USEROUTEAPI: "true"
+              # GRAPHS1090 (Decoder and System Status Web Page) parameters:
+              GRAPHS1090_DARKMODE: "true"
+              # Prometheus and InfluxDB connection parameters:
+              # PROMETHEUS_ENABLE: "true"
+              # INFLUXDBV2_URL: ""
+              # INFLUXDBV2_TOKEN: ""
+              # INFLUXDBV2_BUCKET: ""
+              # ULTRAFEEDER_CONFIG: |
+              #   adsb,dump978,30978,uat_in;
+              #   adsb,feed.adsb.fi,30004,beast_reduce_plus_out;
+              #   adsb,in.adsb.lol,30004,beast_reduce_plus_out;
+              #   adsb,feed.airplanes.live,30004,beast_reduce_plus_out;
+              #   adsb,feed.planespotters.net,30004,beast_reduce_plus_out;
+              #   adsb,feed.theairtraffic.com,30004,beast_reduce_plus_out;
+              #   adsb,data.avdelphi.com,24999,beast_reduce_plus_out;
+              #   adsb,skyfeed.hpradar.com,30004,beast_reduce_plus_out;
+              #   adsb,feed.radarplane.com,30001,beast_reduce_plus_out;
+              #   adsb,dati.flyitalyadsb.com,4905,beast_reduce_plus_out;
+              #   mlat,feed.adsb.fi,31090,39000;
+              #   mlat,in.adsb.lol,31090,39001;
+              #   mlat,feed.airplanes.live,31090,39002;
+              #   mlat,mlat.planespotters.net,31090,39003;
+              #   mlat,feed.theairtraffic.com,31090,39004;
+              #   mlat,skyfeed.hpradar.com,31090,39005;
+              #   mlat,feed.radarplane.com,31090,39006;
+              #   mlat,dati.flyitalyadsb.com,30100,39007;
+              #   mlathub,piaware,30105,beast_in;
+              #   mlathub,rbfeeder,30105,beast_in;
+              #   mlathub,radarvirtuel,30105,beast_in;
+              #   mlathub,planewatch,30105,beast_in
+            # probes:
+            #   liveness:
+            #     enabled: "true"
+            #     port: 15550
+            #   readiness:
+            #     enabled: "true"
+            #     port: 15550
+            resources:
+              requests:
+                cpu: 10m
+                memory: 128Mi
+              limits:
+                memory: 512Mi
+
+    persistence:
+      usb:
+        type: hostPath
+        hostPath: /dev/bus/usb
+      diskstats:
+        type: hostPath
+        hostPath: /proc/diskstats
+        advancedMounts:
+          adsb-ultrafeederhub:
+            adsb-ultrafeederhub:
+              - path: /proc/diskstats
+                readOnly: true
+      adsb-ultrafeederhub:
+        existingClaim: adsb-ultrafeeder-data-nas
+        advancedMounts:
+          adsb-ultrafeederhub:
+            adsb-ultrafeederhub:
+              - path: /var/globe_history
+                subPath: globe_history
+              - path: /var/lib/collectd
+                subPath: collectd
+              - path: /var/globe_history
+                subPath: globe_history
+
+    service:
+      adsb-ultrafeederrouter:
+        controller: adsb-ultrafeederrouter
+        type: ClusterIP
+        ports:
+          http:
+            port: 80
+          # promstats1:
+          #   port: 9273
+          # promstats2:
+          #   port: 9274
+
+    ingress:
+      adsb-ultrafeederhub:
+        className: nginx
+        annotations:
+          nginx.ingress.kubernetes.io/auth-url: "http://adsb-ultrafeeder-oauth2-proxy.personal.svc.cluster.local/oauth2/auth"
+          nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
+          cert-manager.io/cluster-issuer: letsencrypt
+          external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+          external-dns.alpha.kubernetes.io/target: ${cloudflared_tunnel_uuid}.cfargotunnel.com
+        hosts:
+          - host: &host "adsb.${personal_domain}"
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: adsb-ultrafeederhub
+                  port: 80
+        tls:
+          - hosts:
+              - *host
+            secretName: *host
+
+      oauth:
+        className: nginx
+        annotations:
+          external-dns.alpha.kubernetes.io/exclude: "true"
+        labels:
+          use-cloudflare-dns-solver: "true"
+        hosts:
+          - host: *host
+            paths:
+              - path: "/oauth2"
+                service:
+                  name: adsb-ultrafeeder-oauth2-proxy
+                  port: 80
+        tls:
+          - hosts:
+              - *host
+            secretName: *host
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &name adsb-ultrafeeder-oauth2-proxy
+  namespace: flux-system
+spec:
+  targetNamespace: personal
+  releaseName: *name
+  chart:
+    spec:
+      chart: oauth2-proxy
+      version: "7.12.2"
+      sourceRef:
+        kind: HelmRepository
+        name: oauth2-proxy
+        namespace: flux-system
+  interval: 2m0s
+  values:
+    replicaCount: 1
+    extraArgs:
+      provider: github
+      github-org: "${blog_name}"
+      github-team: "super-admins,adsb-ultrafeeder"
+      cookie-expire: 168h0m0s
+    config:
+      existingSecret: adsb-ultrafeeder-oauth2-proxy
