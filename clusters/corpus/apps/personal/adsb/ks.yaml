@@ -11,7 +11,7 @@ spec:
   wait: false
   prune: true
 
-  path: "./clusters/corpus/apps/personal/adsb-ultrafeeder"
+  path: "./clusters/corpus/apps/personal/adsb"
   sourceRef:
     kind: GitRepository
     name: flux-system
