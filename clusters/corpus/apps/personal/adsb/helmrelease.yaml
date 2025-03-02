@@ -131,8 +131,8 @@ spec:
                 subPath: globe_history
 
     service:
-      adsb-ultrafeederrouter:
-        controller: adsb-ultrafeederrouter
+      adsb-ultrafeeder:
+        controller: adsb-ultrafeeder
         type: ClusterIP
         ports:
           http:
