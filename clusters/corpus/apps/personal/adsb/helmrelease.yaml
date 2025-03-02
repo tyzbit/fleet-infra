@@ -35,6 +35,9 @@ spec:
               repository: ghcr.io/sdr-enthusiasts/docker-adsb-ultrafeeder
               tag: latest
               # tag: telegraf # for use with InfluxDB/Prometheus and Grafana
+            envFrom:
+              - secretRef:
+                  name: adsb-ultrafeeder
             env:
               # https://github.com/sdr-enthusiasts/docker-adsb-ultrafeeder?tab=readme-ov-file#basic-ultrafeeder-parameters
               LOGLEVEL: debug
