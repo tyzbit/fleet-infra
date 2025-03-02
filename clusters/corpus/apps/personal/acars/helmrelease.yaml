@@ -175,6 +175,7 @@ spec:
               ANNOTATE_VDLM2: "true"
               LOGLEVEL: debug
               FILTER_CRITERIA_HAS_TEXT: "true"
+              FILTER_CRITERIA_MORE: "true"
               ACARS_ANNOTATOR_SELECTED_FIELDS: >-
                 acarsMessageText
                 acarsExtraPhotos
