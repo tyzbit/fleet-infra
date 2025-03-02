@@ -22,6 +22,7 @@ spec:
         type: statefulset
         annotations:
           reloader.stakater.com/auto: "true"
+          fr24-radar-id: ${fr24_radar_id}
         pod:
           nodeSelector:
             adsb: "true"
@@ -121,6 +122,19 @@ spec:
               DUMP978_RTL_SDR_DEVICE: "30275839"
             resources: *resources
 
+          # https://github.com/sdr-enthusiasts/docker-flightradar24?tab=readme-ov-file#obtaining-a-flightradar24-sharing-key-for-adsb
+          flightradar24:
+            image:
+              repository: ghcr.io/sdr-enthusiasts/docker-flightradar24
+              tag: latest
+            env:
+              BEASTHOST: adsb-ultrafeeder
+              FR24KEY: ${fr24_sharing_key}
+              FR24KEY_UAT: ${fr24_uat_sharing_key}
+              UATHOST: dump978
+              UATPORT: "30978"
+            resources: *resources
+
     persistence:
       usb:
         type: hostPath
@@ -158,6 +172,12 @@ spec:
         ports:
           uat:
             port: 30978
+      adsb-flightradar24:
+        controller: adsb-flightradar24
+        type: ClusterIP
+        ports:
+          http:
+            port: 8754
 
     ingress:
       adsb-ultrafeeder:
@@ -171,6 +191,10 @@ spec:
         hosts:
           - host: &host "adsb.${personal_domain}"
             paths:
+              - path: /fr24
+                pathType: Prefix
+                service:
+                  identifier: adsb-flightradar24
               - path: /
                 pathType: Prefix
                 service:
