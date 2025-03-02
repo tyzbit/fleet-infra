@@ -247,8 +247,6 @@ spec:
           dumpvdl2:
             dumpvld2:
               - path: /dev/bus/usb
-      # run:
-      #   type: emptyDir
       acarshub:
         existingClaim: acars-data-nas
         advancedMounts:
