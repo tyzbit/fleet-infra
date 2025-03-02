@@ -114,15 +114,15 @@ spec:
         type: hostPath
         hostPath: /proc/diskstats
         advancedMounts:
-          adsb-ultrafeederhub:
-            adsb-ultrafeederhub:
+          adsb-ultrafeeder:
+            adsb-ultrafeeder:
               - path: /proc/diskstats
                 readOnly: true
-      adsb-ultrafeederhub:
+      adsb-ultrafeeder:
         existingClaim: adsb-ultrafeeder-data-nas
         advancedMounts:
-          adsb-ultrafeederhub:
-            adsb-ultrafeederhub:
+          adsb-ultrafeeder:
+            adsb-ultrafeeder:
               - path: /var/globe_history
                 subPath: globe_history
               - path: /var/lib/collectd
@@ -143,7 +143,7 @@ spec:
           #   port: 9274
 
     ingress:
-      adsb-ultrafeederhub:
+      adsb-ultrafeeder:
         className: nginx
         annotations:
           nginx.ingress.kubernetes.io/auth-url: "http://adsb-ultrafeeder-oauth2-proxy.personal.svc.cluster.local/oauth2/auth"
@@ -157,7 +157,7 @@ spec:
               - path: /
                 pathType: Prefix
                 service:
-                  identifier: adsb-ultrafeederhub
+                  identifier: adsb-ultrafeeder
                   port: 80
         tls:
           - hosts:
