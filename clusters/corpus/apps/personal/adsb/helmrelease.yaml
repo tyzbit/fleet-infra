@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: &app adsb-ultrafeeder
+  name: &app adsb
   namespace: flux-system
 spec:
   targetNamespace: personal
@@ -17,17 +17,18 @@ spec:
         name: bjw-s
         namespace: flux-system
   values:
+    controllercommon: &controllercommon
+      type: statefulset
+      annotations:
+        reloader.stakater.com/auto: "true"
+        fr24-radar-id: ${fr24_radar_id}
+      pod:
+        nodeSelector:
+          adsb: "true"
+      replicas: 1 # active nas
     controllers:
       adsb-ultrafeeder:
-        type: statefulset
-        annotations:
-          reloader.stakater.com/auto: "true"
-          fr24-radar-id: ${fr24_radar_id}
-        pod:
-          nodeSelector:
-            adsb: "true"
-        replicas: 1 # active nas
-
+        <<: *controllercommon
         containers:
           adsb-ultrafeeder:
             securityContext:
@@ -111,6 +112,9 @@ spec:
               limits:
                 memory: 512Mi
 
+      dump978:
+        <<: *controllercommon
+        containers:
           dump978:
             image:
               repository: ghcr.io/sdr-enthusiasts/docker-flightradar24
@@ -123,6 +127,9 @@ spec:
               FR24KEY: ${fr24_sharing_key}
             resources: *resources
 
+      flightradar24:
+        <<: *controllercommon
+        containers:
           # https://github.com/sdr-enthusiasts/docker-flightradar24?tab=readme-ov-file#obtaining-a-flightradar24-sharing-key-for-adsb
           flightradar24:
             image:
@@ -132,7 +139,7 @@ spec:
               BEASTHOST: adsb-ultrafeeder
               FR24KEY: ${fr24_sharing_key}
               FR24KEY_UAT: ${fr24_uat_sharing_key}
-              UATHOST: dump978
+              UATHOST: adsb-dump978
               UATPORT: "30978"
             resources: *resources
 
@@ -168,13 +175,13 @@ spec:
           beast:
             port: 30005
       dump978:
-        controller: adsb-ultrafeeder
+        controller: adsb-dump978
         type: ClusterIP
         ports:
           uat:
             port: 30978
       adsb-flightradar24:
-        controller: adsb-ultrafeeder
+        controller: adsb-flightradar24
         type: ClusterIP
         ports:
           http:
