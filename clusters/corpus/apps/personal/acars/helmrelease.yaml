@@ -250,7 +250,7 @@ spec:
       # run:
       #   type: emptyDir
       acarshub:
-        existingClaim: acars-config-nas
+        existingClaim: acars-data-nas
         advancedMounts:
           acarshub:
             acarshub:

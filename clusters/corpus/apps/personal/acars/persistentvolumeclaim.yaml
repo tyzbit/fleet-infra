@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: acars-config-nas
+  name: acars-data-nas
   namespace: personal
 spec:
   accessModes:
