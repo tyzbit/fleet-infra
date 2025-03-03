@@ -77,7 +77,7 @@ spec:
               # INFLUXDBV2_TOKEN: ""
               # INFLUXDBV2_BUCKET: ""
               ULTRAFEEDER_CONFIG: >-
-                adsb,dump978,30978,uat_in;
+                adsb,adsb-dump978,30978,uat_in;
               # ULTRAFEEDER_CONFIG: |
               #   adsb,dump978,30978,uat_in;
               #   adsb,feed.adsb.fi,30004,beast_reduce_plus_out;
