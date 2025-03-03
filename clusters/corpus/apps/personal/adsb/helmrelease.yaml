@@ -167,7 +167,7 @@ spec:
                 subPath: collectd
 
     service:
-      adsb-ultrafeeder:
+      adsb-ultrafeeder: &ultrafeeder
         controller: adsb-ultrafeeder
         type: ClusterIP
         ports:
@@ -175,6 +175,7 @@ spec:
             port: 80
           beast:
             port: 30005
+      readsb: *ultrafeeder
       dump978:
         controller: dump978
         type: ClusterIP
