@@ -173,7 +173,7 @@ spec:
                 subPath: collectd
 
     service:
-      adsb-ultrafeeder: &ultrafeeder
+      adsb-ultrafeeder:
         controller: adsb-ultrafeeder
         type: ClusterIP
         ports:
