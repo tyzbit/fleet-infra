@@ -52,6 +52,7 @@ spec:
               READSB_ALT: 3m
               READSB_RX_LOCATION_ACCURACY: 2 
               READSB_STATS_RANGE: "true"
+              READSB_NET_BEAST_OUTPUT_PORT: "30005"
               # TAR1090 (Map Web Page) parameters:
               UPDATE_TAR1090: "true"
               # (these are in the secret)
@@ -136,7 +137,7 @@ spec:
               repository: ghcr.io/sdr-enthusiasts/docker-flightradar24
               tag: latest
             env:
-              BEASTHOST: adsb-ultrafeeder
+              BEASTHOST: adsb-adsb-ultrafeeder
               FR24KEY: ${fr24_sharing_key}
               FR24KEY_UAT: ${fr24_uat_sharing_key}
               UATHOST: adsb-dump978
