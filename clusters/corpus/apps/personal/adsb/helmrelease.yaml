@@ -177,7 +177,7 @@ spec:
             port: 30005
       adsb-ultrafeeder-readsb:
         <<: *ultrafeeder
-        nameOverride: 
+        nameOverride: readsb
       dump978:
         controller: dump978
         type: ClusterIP
