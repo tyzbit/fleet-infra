@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: adsb-ultrafeeder-data-nas
+  name: adsb-ultrafeeder-data-longhorn-webapp
   namespace: personal
 spec:
   accessModes:

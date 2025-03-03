@@ -163,7 +163,7 @@ spec:
               - path: /proc/diskstats
                 readOnly: true
       adsb-ultrafeeder:
-        existingClaim: adsb-ultrafeeder-data-nas
+        existingClaim: adsb-ultrafeeder-data-longhorn-webapp
         advancedMounts:
           adsb-ultrafeeder:
             adsb-ultrafeeder:
