@@ -127,6 +127,7 @@ spec:
               LAT: ${my_latitude}
               LON: ${my_longitude}
               DUMP978_RTLSDR_DEVICE: "30275839"
+              FR24KEY: ${fr24_uat_sharing_key}
             resources: *resources
 
       flightradar24:
