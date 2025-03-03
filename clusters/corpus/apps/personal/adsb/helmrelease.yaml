@@ -115,21 +115,21 @@ spec:
               limits:
                 memory: 512Mi
 
-      # dump978:
-      #   <<: *controllercommon
-      #   containers:
-      #     dump978:
-      #       image:
-      #         repository: ghcr.io/sdr-enthusiasts/docker-flightradar24
-      #         tag: latest
-      #       env:
-      #         TZ: US/New_York
-      #         LAT: ${my_latitude}
-      #         LON: ${my_longitude}
-      #         BEASTHOST: adsb-adsb-ultrafeeder
-      #         DUMP978_RTLSDR_DEVICE: "30275839"
-      #         FR24KEY: ${fr24_sharing_key}
-      #       resources: *resources
+      dump978:
+        <<: *controllercommon
+        containers:
+          dump978:
+            image:
+              repository: ghcr.io/sdr-enthusiasts/docker-flightradar24
+              tag: latest
+            env:
+              TZ: US/New_York
+              LAT: ${my_latitude}
+              LON: ${my_longitude}
+              BEASTHOST: adsb-adsb-ultrafeeder
+              DUMP978_RTLSDR_DEVICE: "30275839"
+              FR24KEY: ${fr24_sharing_key}
+            resources: *resources
 
       flightradar24:
         <<: *controllercommon
@@ -180,12 +180,12 @@ spec:
             port: 30005
           uat:
             port: 30978
-      # dump978:
-      #   controller: dump978
-      #   type: ClusterIP
-      #   ports:
-      #     uat:
-      #       port: 30978
+      dump978:
+        controller: dump978
+        type: ClusterIP
+        ports:
+          uat:
+            port: 30978
       adsb-flightradar24:
         controller: flightradar24
         type: ClusterIP
