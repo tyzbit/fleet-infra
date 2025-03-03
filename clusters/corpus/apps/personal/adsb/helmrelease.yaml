@@ -189,7 +189,7 @@ spec:
       #   ports:
       #     uat:
       #       port: 30978
-      adsb-flightradar24:
+      flightradar24:
         controller: flightradar24
         type: ClusterIP
         ports:
