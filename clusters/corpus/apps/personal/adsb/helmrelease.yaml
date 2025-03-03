@@ -115,24 +115,24 @@ spec:
               limits:
                 memory: 512Mi
 
-      dump978:
-        <<: *controllercommon
-        containers:
-          dump978:
-            image:
-              repository: ghcr.io/sdr-enthusiasts/docker-flightradar24
-              tag: latest
-            env:
-              TZ: US/New_York
-              LAT: ${my_latitude}
-              LON: ${my_longitude}
-              DUMP978_RTLSDR_DEVICE: "30275839"
-              DUMP978_SDR_GAIN: autogain
-              DUMP978_SDR_PPM: "0"
-              FR24KEY: ${fr24_uat_sharing_key}
-              UATHOST: adsb-dump978
-              UATPORT: "30978"
-            resources: *resources
+      # dump978:
+      #   <<: *controllercommon
+      #   containers:
+      #     dump978:
+      #       image:
+      #         repository: ghcr.io/sdr-enthusiasts/docker-flightradar24
+      #         tag: latest
+      #       env:
+      #         TZ: US/New_York
+      #         LAT: ${my_latitude}
+      #         LON: ${my_longitude}
+      #         DUMP978_RTLSDR_DEVICE: "30275839"
+      #         DUMP978_SDR_GAIN: autogain
+      #         DUMP978_SDR_PPM: "0"
+      #         FR24KEY: ${fr24_uat_sharing_key}
+      #         UATHOST: adsb-dump978
+      #         UATPORT: "30978"
+      #       resources: *resources
 
       flightradar24:
         <<: *controllercommon
@@ -183,12 +183,12 @@ spec:
             port: 30005
           uat:
             port: 30978
-      dump978:
-        controller: dump978
-        type: ClusterIP
-        ports:
-          uat:
-            port: 30978
+      # dump978:
+      #   controller: dump978
+      #   type: ClusterIP
+      #   ports:
+      #     uat:
+      #       port: 30978
       adsb-flightradar24:
         controller: flightradar24
         type: ClusterIP
@@ -211,7 +211,8 @@ spec:
               - path: /fr24
                 pathType: Prefix
                 service:
-                  identifier: adsb-flightradar24
+                  identifier: flightradar24
+                  port: 8754
               - path: /
                 pathType: Prefix
                 service:
