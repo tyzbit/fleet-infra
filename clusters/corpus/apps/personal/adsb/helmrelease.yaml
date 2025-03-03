@@ -76,8 +76,8 @@ spec:
               # INFLUXDBV2_URL: ""
               # INFLUXDBV2_TOKEN: ""
               # INFLUXDBV2_BUCKET: ""
-              ULTRAFEEDER_CONFIG: >-
-                adsb,adsb-dump978,30978,uat_in;
+              # ULTRAFEEDER_CONFIG: >-
+              #   adsb,adsb-dump978,30978,uat_in;
               # ULTRAFEEDER_CONFIG: |
               #   adsb,dump978,30978,uat_in;
               #   adsb,feed.adsb.fi,30004,beast_reduce_plus_out;
@@ -148,7 +148,13 @@ spec:
               # FR24KEY_UAT: ${fr24_uat_sharing_key}
               # UATHOST: adsb-dump978
               # UATPORT: "30978"
-            resources: *resources
+            resources:
+              requests:
+                cpu: 10m
+                memory: 64Mi
+              limits:
+                memory: 256Mi
+                
 
     persistence:
       usb:
