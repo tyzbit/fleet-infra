@@ -175,7 +175,9 @@ spec:
             port: 80
           beast:
             port: 30005
-      readsb: *ultrafeeder
+      readsb:
+        <<: *ultrafeeder
+        nameOverride: readsb
       dump978:
         controller: dump978
         type: ClusterIP
