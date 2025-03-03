@@ -56,8 +56,8 @@ spec:
               # TAR1090 (Map Web Page) parameters:
               UPDATE_TAR1090: "true"
               # (these are in the secret)
-              TAR1090_DEFAULTCENTERLAT: ${my_latitude}
-              TAR1090_DEFAULTCENTERLON: ${my_longitude}
+              TAR1090_DEFAULTCENTERLAT: "${my_latitude}"
+              TAR1090_DEFAULTCENTERLON: "${my_longitude}"
               TAR1090_MESSAGERATEINTITLE: "true"
               TAR1090_PLANECOUNTINTITLE: "true"
               TAR1090_ENABLE_AC_DB: "true"
@@ -76,6 +76,8 @@ spec:
               # INFLUXDBV2_URL: ""
               # INFLUXDBV2_TOKEN: ""
               # INFLUXDBV2_BUCKET: ""
+              ULTRAFEEDER_CONFIG: >-
+                adsb,dump978,30978,uat_in;
               # ULTRAFEEDER_CONFIG: |
               #   adsb,dump978,30978,uat_in;
               #   adsb,feed.adsb.fi,30004,beast_reduce_plus_out;
@@ -113,21 +115,21 @@ spec:
               limits:
                 memory: 512Mi
 
-      dump978:
-        <<: *controllercommon
-        containers:
-          dump978:
-            image:
-              repository: ghcr.io/sdr-enthusiasts/docker-flightradar24
-              tag: latest
-            env:
-              TZ: US/New_York
-              LAT: ${my_latitude}
-              LON: ${my_longitude}
-              BEASTHOST: adsb-adsb-ultrafeeder
-              DUMP978_RTLSDR_DEVICE: "30275839"
-              FR24KEY: ${fr24_sharing_key}
-            resources: *resources
+      # dump978:
+      #   <<: *controllercommon
+      #   containers:
+      #     dump978:
+      #       image:
+      #         repository: ghcr.io/sdr-enthusiasts/docker-flightradar24
+      #         tag: latest
+      #       env:
+      #         TZ: US/New_York
+      #         LAT: ${my_latitude}
+      #         LON: ${my_longitude}
+      #         BEASTHOST: adsb-adsb-ultrafeeder
+      #         DUMP978_RTLSDR_DEVICE: "30275839"
+      #         FR24KEY: ${fr24_sharing_key}
+      #       resources: *resources
 
       flightradar24:
         <<: *controllercommon
@@ -176,15 +178,12 @@ spec:
             port: 80
           beast:
             port: 30005
-      adsb-ultrafeeder-readsb:
-        <<: *ultrafeeder
-        nameOverride: readsb
-      dump978:
-        controller: dump978
-        type: ClusterIP
-        ports:
-          uat:
-            port: 30978
+      # dump978:
+      #   controller: dump978
+      #   type: ClusterIP
+      #   ports:
+      #     uat:
+      #       port: 30978
       adsb-flightradar24:
         controller: flightradar24
         type: ClusterIP
