@@ -178,6 +178,8 @@ spec:
             port: 80
           beast:
             port: 30005
+          uat:
+            port: 30978
       # dump978:
       #   controller: dump978
       #   type: ClusterIP
