@@ -44,7 +44,7 @@ spec:
               # UUID: "568"
               READSB_DEVICE_TYPE: rtlsdr
               ENABLE_978: "yes"
-              URL_978: http://dump978/skyaware978
+              # URL_978: http://dump978/skyaware978
               # READSB_RTLSDR_DEVICE: 00000001 # Serial number of device
               # readsb/decoder parameters: (these are in the secret)
               READSB_LAT: ${my_latitude}
