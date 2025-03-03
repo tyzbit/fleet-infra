@@ -129,7 +129,9 @@ spec:
               DUMP978_RTLSDR_DEVICE: "30275839"
               DUMP978_SDR_GAIN: autogain
               DUMP978_SDR_PPM: "0"
-              FR24KEY: ${fr24_uat_sharing_key}
+              FR24KEY_UAT: ${fr24_uat_sharing_key}
+              UATHOST: adsb-dump978
+              UATPORT: "30978"
             resources: *resources
 
       flightradar24:
@@ -143,9 +145,9 @@ spec:
             env:
               BEASTHOST: adsb-adsb-ultrafeeder
               FR24KEY: ${fr24_sharing_key}
-              FR24KEY_UAT: ${fr24_uat_sharing_key}
-              UATHOST: adsb-dump978
-              UATPORT: "30978"
+              # FR24KEY_UAT: ${fr24_uat_sharing_key}
+              # UATHOST: adsb-dump978
+              # UATPORT: "30978"
             resources: *resources
 
     persistence:
