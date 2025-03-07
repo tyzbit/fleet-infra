@@ -132,6 +132,34 @@ spec:
               limits:
                 memory: 256Mi
 
+      acarshub:
+        <<: *common_settings
+        replicas: 1 # active nas
+        containers:
+          acarshub:
+            image:
+              repository: ghcr.io/sdr-enthusiasts/docker-acarshub
+              tag: v3.8.0Build1379_nohealthcheck
+            env:
+              TZ: Etc/UTC
+              ENABLE_ADSB: "false"
+              ENABLE_ACARS: external
+              ENABLE_VDLM: external
+              QUIET_MESSAGES: "false" # This logs the messages themselves
+            probes:
+              liveness:
+                enabled: true
+                port: 15550
+              readiness:
+                enabled: true
+                port: 15550
+            resources:
+              requests:
+                cpu: 10m
+                memory: 128Mi
+              limits:
+                memory: 512Mi
+
       acarsannotator:
         <<: *common_settings
         replicas: 1 # active nas
@@ -216,34 +244,6 @@ spec:
                 memory: 64Mi
               limits:
                 memory: 64Mi
-
-      acarshub:
-        <<: *common_settings
-        replicas: 1 # active nas
-        containers:
-          acarshub:
-            image:
-              repository: ghcr.io/sdr-enthusiasts/docker-acarshub
-              tag: v3.8.0Build1379_nohealthcheck
-            env:
-              TZ: Etc/UTC
-              ENABLE_ADSB: "false"
-              ENABLE_ACARS: external
-              ENABLE_VDLM: external
-              QUIET_MESSAGES: "false" # This logs the messages themselves
-            probes:
-              liveness:
-                enabled: true
-                port: 15550
-              readiness:
-                enabled: true
-                port: 15550
-            resources:
-              requests:
-                cpu: 10m
-                memory: 128Mi
-              limits:
-                memory: 512Mi
 
     persistence:
       usb:
