@@ -173,6 +173,7 @@ spec:
               ACARSHUB_VDLM2_PORT: "15555"
               ANNOTATE_ACARS: "true"
               ANNOTATE_VDLM2: "true"
+              TAR1090_URL: http://adsb-adsb-ultrafeeder
               LOGLEVEL: debug
               FILTER_CRITERIA_HAS_TEXT: "true"
               FILTER_CRITERIA_MORE: "true"
