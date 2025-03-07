@@ -196,6 +196,12 @@ spec:
                 vdlmDestinationAddress
                 vdlmDestinationType
                 vdlm2Station
+              TAR1090_ANNOTATOR_SELECTED_FIELDS: >-
+                DistanceFromReceiverNm
+                AltimeterGeometricFeet
+                NavModes
+                Emergency
+                RSSISignalPowerdBm
             envFrom:
               - secretRef:
                   name: acars-annotator2
