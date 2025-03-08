@@ -177,7 +177,7 @@ spec:
               ANNOTATE_ACARS: "true"
               ANNOTATE_VDLM2: "true"
               LOGLEVEL: info
-              ADSBEXCHANGE_REFERENCE_GEOLOCATION: &location ${my_latitude},${my_longitude}
+              ADBSEXCHANGE_REFERENCE_GEOLOCATION: &location ${my_latitude},${my_longitude}
               TAR1090_REFERENCE_GEOLOCATION: *location
             envFrom:
               - secretRef:
@@ -206,7 +206,7 @@ spec:
               ANNOTATE_VDLM2: "true"
               TAR1090_URL: *tar1090
               LOGLEVEL: debug
-              ADSBEXCHANGE_REFERENCE_GEOLOCATION: *location
+              ADBSEXCHANGE_REFERENCE_GEOLOCATION: *location
               TAR1090_REFERENCE_GEOLOCATION: *location
               FILTER_CRITERIA_HAS_TEXT: "true"
               FILTER_CRITERIA_MORE: "true"
