@@ -209,8 +209,8 @@ spec:
               ADBSEXCHANGE_REFERENCE_GEOLOCATION: *location
               TAR1090_REFERENCE_GEOLOCATION: *location
               FILTER_CRITERIA_HAS_TEXT: "true"
-              FILTER_CRITERIA_ENGLISH_WORD_COUNT_GREATER_THAN: "0"
-              FILTER_CRITERIA_MORE: "true"
+              FILTER_CRITERIA_ENGLISH_WORD_COUNT_MINIMUM: "1"
+              # FILTER_CRITERIA_MORE: "true"
               ACARS_ANNOTATOR_SELECTED_FIELDS: >-
                 acarsMessageText
                 acarsExtraPhotos
@@ -231,11 +231,11 @@ spec:
                 vdlmDestinationType
                 vdlm2Station
               TAR1090_ANNOTATOR_SELECTED_FIELDS: >-
-                DistanceFromReceiverNm
-                AltimeterGeometricFeet
-                NavModes
-                Emergency
-                RSSISignalPowerdBm
+                tar1090AircraftHaversineDistanceMi
+                tar1090AircraftAltimeterGeometricFeet
+                tar1090AircraftNavModes
+                tar1090AircraftEmergency
+                tar1090AircraftRSSIdBm
             envFrom:
               - secretRef:
                   name: acars-annotator2
