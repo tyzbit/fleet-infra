@@ -242,9 +242,9 @@ spec:
             resources:
               requests:
                 cpu: 10m
-                memory: 36Gi
+                memory: 30Gi
               limits:
-                memory: 36Gi
+                memory: 30Gi
 
     persistence:
       usb:
