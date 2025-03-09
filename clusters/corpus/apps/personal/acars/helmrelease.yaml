@@ -185,9 +185,9 @@ spec:
             resources:
               requests:
                 cpu: 10m
-                memory: 64Mi
+                memory: 128Mi
               limits:
-                memory: 64Mi
+                memory: 128Mi
 
       acarsannotator2:
         <<: *common_settings
@@ -242,9 +242,9 @@ spec:
             resources:
               requests:
                 cpu: 10m
-                memory: 64Mi
+                memory: 128Mi
               limits:
-                memory: 64Mi
+                memory: 128Mi
 
     persistence:
       usb:
