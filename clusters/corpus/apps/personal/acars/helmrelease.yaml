@@ -209,7 +209,7 @@ spec:
               ADBSEXCHANGE_REFERENCE_GEOLOCATION: *location
               TAR1090_REFERENCE_GEOLOCATION: *location
               FILTER_CRITERIA_HAS_TEXT: "true"
-              FILTER_CRITERIA_ENGLISH_WORD_COUNT_MINIMUM: "1"
+              FILTER_CRITERIA_ENGLISH_WORD_COUNT_MINIMUM: "4"
               # FILTER_CRITERIA_MORE: "true"
               ACARS_ANNOTATOR_SELECTED_FIELDS: >-
                 acarsMessageText
