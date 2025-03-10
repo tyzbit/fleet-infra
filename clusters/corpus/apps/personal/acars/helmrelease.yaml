@@ -164,7 +164,7 @@ spec:
         <<: *common_settings
         replicas: 1 # active nas
         containers:
-          acarshub:
+          acarsannotator:
             image:
               repository: ghcr.io/tyzbit/acars-annotator
               tag: latest
@@ -193,7 +193,7 @@ spec:
         <<: *common_settings
         replicas: 1 # active nas
         containers:
-          acarshub:
+          acarsannotator2:
             image:
               repository: ghcr.io/tyzbit/acars-annotator
               tag: latest
