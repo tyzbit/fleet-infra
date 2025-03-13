@@ -207,7 +207,9 @@ spec:
               LOGLEVEL: debug
               TAR1090_REFERENCE_GEOLOCATION: *location
               FILTER_CRITERIA_HAS_TEXT: "true"
-              FILTER_CRITERIA_DICTIONARY_PHRASE_LENGTH_MINIMUM: "2"
+              # FILTER_CRITERIA_DICTIONARY_PHRASE_LENGTH_MINIMUM: "2"
+              FILTER_OPENAI_PROMPT: Does this message look like at least part of it was written by a human?
+              # FILTER_OPENAI_APIKEY: (set in envFrom)
               # FILTER_CRITERIA_MORE: "true"
               ACARS_ANNOTATOR_SELECTED_FIELDS: >-
                 acarsMessageText
