@@ -215,25 +215,17 @@ spec:
                 acarsExtraURL
                 acarsFlightNumber
                 acarsSignaldBm
-                acarsStationID
               VDLM2_ANNOTATOR_SELECTED_FIELDS: >-
                 acarsMessageText
                 acarsExtraPhotos
                 acarsExtraURL
                 acarsFlightNumber
                 acarsAircraftTailCode
-                vdlm2SignalLeveldBm
-                vdlmSourceAddress
-                vdlmSourceType
-                vdlmDestinationAddress
-                vdlmDestinationType
-                vdlm2Station
               TAR1090_ANNOTATOR_SELECTED_FIELDS: >-
                 tar1090AircraftHaversineDistanceMi
                 tar1090AircraftAltimeterGeometricFeet
                 tar1090AircraftNavModes
                 tar1090AircraftEmergency
-                tar1090AircraftRSSIdBm
             envFrom:
               - secretRef:
                   name: acars-annotator2
