@@ -215,6 +215,11 @@ spec:
               - path: "/"
                 service:
                   identifier: main
+          - host: "cloud2.${personal_domain}"
+            paths:
+              - path: "/"
+                service:
+                  identifier: main
         tls:
           - hosts:
               - *host
