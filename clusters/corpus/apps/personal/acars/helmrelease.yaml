@@ -209,8 +209,7 @@ spec:
               FILTER_CRITERIA_HAS_TEXT: "true"
               # FILTER_CRITERIA_DICTIONARY_PHRASE_LENGTH_MINIMUM: "2"
               FILTER_OPENAI_PROMPT: >-
-                Is there what looks like part of a conversation between
-                two people, possibly using aviation-related acronyms?
+                Does this message end with text that looks like a natural English sentence?
               # FILTER_OPENAI_APIKEY: (set in envFrom)
               ACARS_ANNOTATOR_SELECTED_FIELDS: >-
                 acarsMessageText
