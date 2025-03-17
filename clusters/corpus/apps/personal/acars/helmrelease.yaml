@@ -208,23 +208,23 @@ spec:
               TAR1090_REFERENCE_GEOLOCATION: *location
               FILTER_CRITERIA_HAS_TEXT: "true"
               # FILTER_CRITERIA_DICTIONARY_PHRASE_LENGTH_MINIMUM: "2"
-              FILTER_OPENAI_PROMPT: Despite jargon or diagnostic information that might be present, does this message contain a human-meaningful sentence?
+              FILTER_OPENAI_PROMPT: >-
+                Despite jargon or extra diagnostic information that might be
+                present, does any part of this message look like it was
+                written by a person, in any language?
               # FILTER_OPENAI_APIKEY: (set in envFrom)
-              # FILTER_CRITERIA_MORE: "true"
               ACARS_ANNOTATOR_SELECTED_FIELDS: >-
                 acarsMessageText
                 acarsExtraPhotos
                 acarsExtraURL
                 acarsFlightNumber
-                acarsSignaldBm
               VDLM2_ANNOTATOR_SELECTED_FIELDS: >-
                 acarsMessageText
                 acarsExtraPhotos
                 acarsExtraURL
                 acarsFlightNumber
-                acarsAircraftTailCode
               TAR1090_ANNOTATOR_SELECTED_FIELDS: >-
-                tar1090AircraftHaversineDistanceMi
+                tar1090AircraftDistanceMi
                 tar1090AircraftAltimeterGeometricFeet
                 tar1090AircraftNavModes
                 tar1090AircraftEmergency
