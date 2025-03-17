@@ -209,9 +209,8 @@ spec:
               FILTER_CRITERIA_HAS_TEXT: "true"
               # FILTER_CRITERIA_DICTIONARY_PHRASE_LENGTH_MINIMUM: "2"
               FILTER_OPENAI_PROMPT: >-
-                Despite jargon or extra diagnostic information that might be
-                present, does any part of this message look like it was
-                written by a person, in any language?
+                Is there what looks like part of a conversation between
+                two people, possibly using aviation-related acronyms?
               # FILTER_OPENAI_APIKEY: (set in envFrom)
               ACARS_ANNOTATOR_SELECTED_FIELDS: >-
                 acarsMessageText
