@@ -15,7 +15,7 @@ record: {enabled: true,
 }
 objects:
   track: &trackedobjects [person,
-      car,bicycle,motorcycle,bus,airplane
+      car,bicycle,motorcycle,bus,airplane,
       cat,dog,bird,
       package,amazon,usps,ups,dhl,fedex,
       license_plate, # attribute label, these don't generate events
