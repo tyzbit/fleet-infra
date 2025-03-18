@@ -14,7 +14,10 @@ record: {enabled: true,
   alerts: {retain: {days: 90, mode: active_objects}}
 }
 objects:
-  track: &trackedobjects [person,cat,dog,car,package,amazon,usps,ups,dhl,fedex,
+  track: &trackedobjects [person,
+      car,bicycle,motorcycle,bus,airplane
+      cat,dog,bird,
+      package,amazon,usps,ups,dhl,fedex,
       license_plate, # attribute label, these don't generate events
     ]
 review: {detections: {labels: *trackedobjects}}
