@@ -211,6 +211,10 @@ spec:
           cert-manager.io/cluster-issuer: letsencrypt
           external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
           external-dns.alpha.kubernetes.io/target: ${cloudflared_tunnel_uuid}.cfargotunnel.com
+          hajimari.io/enable: "true"
+          hajimari.io/icon: radar
+          hajimari.io/info: "Aircraft Map"
+          hajimari.io/targetBlank: "true"
         hosts:
           - host: &host "adsb.${personal_domain}"
             paths:
