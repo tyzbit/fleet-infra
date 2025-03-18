@@ -1,5 +1,29 @@
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2.json
+
+# Tried deploy, failed, don't feel like troubleshooting right now
+# time="2025-03-18T10:41:48-04:00" level=info msg="Using config file: /config/config.yaml" _source="hajimari/main.go:31"
+# panic: runtime error: invalid memory address or nil pointer dereference
+# [signal SIGSEGV: segmentation violation code=0x1 addr=0x0 pc=0x13c3ca2]
+
+# goroutine 1 [running]:
+# github.com/toboshii/hajimari/internal/kube/util.(*ReplicaStatusGetter).GetEndpointStatuses(_, {{{0x0, 0x0}, {0x0, 0x0}}, {{0xc00048d7b0, 0x6}, {0x0, 0x0}, {0xc00048d7b6, ...}, ...}, ...})
+#     /build/internal/kube/util/replicastatusgetter.go:76 +0x7a2
+# github.com/toboshii/hajimari/internal/hajimari/ingressapps.convertIngressesToHajimariApps({0xc000354000?, 0x40, 0x1?}, {{0x0, 0x0}, 0x1, 0x1, {0x1aaf4b8, 0xc000318a80}})
+#     /build/internal/hajimari/ingressapps/apps.go:66 +0x1e5
+# github.com/toboshii/hajimari/internal/hajimari/ingressapps.(*List).Populate(0xc000461ba0, {0xc0003cf4d0?, 0xc0000e19d8?, 0xc0003b98e0?})
+#     /build/internal/hajimari/ingressapps/apps.go:53 +0x2b6
+# github.com/toboshii/hajimari/internal/services.getIngressApps()
+#     /build/internal/services/app.go:76 +0x305
+# github.com/toboshii/hajimari/internal/services.NewAppService(0xc00036ae80)
+#     /build/internal/services/app.go:38 +0x59
+# github.com/toboshii/hajimari/internal/handlers.NewHandler()
+#     /build/internal/handlers/handler.go:51 +0xad9
+# main.main()
+#     /build/cmd/hajimari/main.go:50 +0x1d
+# stream closed EOF for personal/hajimari-cc6d5c68d-rdr9n (hajimari)
+
+
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
