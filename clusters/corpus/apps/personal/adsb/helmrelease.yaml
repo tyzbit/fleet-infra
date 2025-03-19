@@ -42,7 +42,7 @@ spec:
                   name: adsb-ultrafeeder
             env:
               # https://github.com/sdr-enthusiasts/docker-adsb-ultrafeeder?tab=readme-ov-file#basic-ultrafeeder-parameters
-              LOGLEVEL: debug
+              LOGLEVEL: verbose
               TZ: US/New_York
               # UUID: "568"
               READSB_DEVICE_TYPE: rtlsdr
