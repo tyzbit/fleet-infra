@@ -25,18 +25,21 @@ spec:
       pod:
         nodeSelector:
           adsb: "true"
-      replicas: 1 # active nas
+      replicas: 1 # active longhorn-webapp
     controllers:
-      adsb-ultrafeeder:
+      ultrafeeder:
         <<: *controllercommon
         containers:
-          adsb-ultrafeeder:
+          ultrafeeder:
             securityContext:
               privileged: true
             image:
               repository: ghcr.io/sdr-enthusiasts/docker-adsb-ultrafeeder
               tag: latest
               # tag: telegraf # for use with InfluxDB/Prometheus and Grafana
+            envFrom:
+              - secretRef:
+                  name: adsb-ultrafeeder
             env:
               # https://github.com/sdr-enthusiasts/docker-adsb-ultrafeeder?tab=readme-ov-file#basic-ultrafeeder-parameters
               LOGLEVEL: debug
@@ -53,6 +56,7 @@ spec:
               READSB_RX_LOCATION_ACCURACY: 2 
               READSB_STATS_RANGE: "true"
               READSB_NET_BEAST_OUTPUT_PORT: "30005"
+              READSB_JSON_TRACE_INTERVAL: "5"
               # TAR1090 (Map Web Page) parameters:
               UPDATE_TAR1090: "true"
               # (these are in the secret)
@@ -143,7 +147,7 @@ spec:
               repository: ghcr.io/sdr-enthusiasts/docker-flightradar24
               tag: latest
             env:
-              BEASTHOST: adsb-adsb-ultrafeeder
+              BEASTHOST: adsb-ultrafeeder
               FR24KEY: ${fr24_sharing_key}
               # FR24KEY_UAT: ${fr24_uat_sharing_key}
               # UATHOST: adsb-dump978
@@ -164,23 +168,23 @@ spec:
         type: hostPath
         hostPath: /proc/diskstats
         advancedMounts:
-          adsb-ultrafeeder:
-            adsb-ultrafeeder:
+          ultrafeeder:
+            ultrafeeder:
               - path: /proc/diskstats
                 readOnly: true
-      adsb-ultrafeeder:
+      ultrafeeder:
         existingClaim: adsb-ultrafeeder-data-longhorn-webapp
         advancedMounts:
-          adsb-ultrafeeder:
-            adsb-ultrafeeder:
+          ultrafeeder:
+            ultrafeeder:
               - path: /var/globe_history
                 subPath: globe_history
               - path: /var/lib/collectd
                 subPath: collectd
 
     service:
-      adsb-ultrafeeder:
-        controller: adsb-ultrafeeder
+      ultrafeeder:
+        controller: ultrafeeder
         type: ClusterIP
         ports:
           http:
@@ -203,7 +207,7 @@ spec:
             port: 8754
 
     ingress:
-      adsb-ultrafeeder:
+      ultrafeeder:
         className: nginx
         annotations:
           nginx.ingress.kubernetes.io/auth-url: "http://adsb-ultrafeeder-oauth2-proxy.personal.svc.cluster.local/oauth2/auth"
@@ -226,7 +230,7 @@ spec:
               - path: /
                 pathType: Prefix
                 service:
-                  identifier: adsb-ultrafeeder
+                  identifier: ultrafeeder
                   port: 80
         tls:
           - hosts:
