@@ -173,7 +173,7 @@ spec:
               ACARSHUB_PORT: "15550"
               ACARSHUB_VDLM2_HOST: acars-acarshub
               ACARSHUB_VDLM2_PORT: "15555"
-              TAR1090_URL: &tar1090 http://adsb-adsb-ultrafeeder
+              TAR1090_URL: &tar1090 http://adsb-ultrafeeder
               ANNOTATE_ACARS: "true"
               ANNOTATE_VDLM2: "true"
               LOGLEVEL: info
