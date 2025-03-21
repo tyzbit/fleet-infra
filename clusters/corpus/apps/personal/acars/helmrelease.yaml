@@ -209,7 +209,7 @@ spec:
               FILTER_CRITERIA_HAS_TEXT: "true"
               # FILTER_CRITERIA_DICTIONARY_PHRASE_LENGTH_MINIMUM: "2"
               FILTER_OPENAI_PROMPT: >-
-                Does this message end with text that looks like a natural English sentence?
+                Does this end with text that looks like a message from one human to another?
               # FILTER_OPENAI_APIKEY: (set in envFrom)
               ACARS_ANNOTATOR_SELECTED_FIELDS: >-
                 acarsMessageText
