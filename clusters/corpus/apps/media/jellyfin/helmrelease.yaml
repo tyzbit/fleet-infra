@@ -18,7 +18,7 @@ spec:
     controllers:
       *app :
         type: statefulset
-        replicas: 1 # active longhorn-webapp
+        replicas: 0 # active longhorn-webapp
         statefulset:
           podManagementPolicy: Parallel
         annotations:
