@@ -65,7 +65,7 @@ spec:
         existingClaim: jellyfin-longhorn-webapp
 
     service:
-      app:
+      main:
         controller: *app
         ports:
           http:
