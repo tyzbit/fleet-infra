@@ -25,6 +25,6 @@ patches:
   #     - op: replace
   #       path: /spec/template/spec/containers/0/resources/limits/memory
   #       value: 2Gi
-    target:
-      kind: Deployment
-      name: (helm-controller|source-controller)
+  #   target:
+  #     kind: Deployment
+  #     name: (helm-controller|source-controller)
