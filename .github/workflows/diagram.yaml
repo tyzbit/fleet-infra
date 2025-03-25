@@ -1,0 +1,68 @@
+name: Generate Kubernetes Diagram
+
+# Trigger on pushes to the main branch (adjust as needed)
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  generate-diagram:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Check out the repository (with full history)
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      # 2. Set up Python (ensuring Python 3 is available)
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      # 3. Install KubeDiagrams from PyPI
+      - name: Install KubeDiagrams
+        run: pip install KubeDiagrams
+
+      # 4. Generate the diagram image
+      # Adjust "manifest.yaml" to the path of your Kubernetes manifest file(s)
+      - name: Generate diagram
+        run: |
+          # Example: generate diagram.png from a manifest file (change path as needed)
+          kube-diagrams -o diagram.png .
+
+      # 5. Configure git for committing changes
+      - name: Configure Git
+        run: |
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+
+      # 6. Check out (or create) the "diagram" branch
+      - name: Switch to diagram branch
+        run: |
+          # If the branch exists, check it out; if not, create an orphan branch.
+          if git show-ref --verify --quiet refs/heads/diagram; then
+            git checkout diagram
+          else
+            git checkout --orphan diagram
+            # Remove all files from the new orphan branch
+            git rm -rf .
+          fi
+
+      # 7. Copy the generated diagram (or move it) into the working directory
+      - name: Prepare diagram file
+        run: cp diagram.png .
+
+      # 8. Commit and push the diagram image to the "diagram" branch
+      - name: Commit and push diagram
+        run: |
+          git add diagram.png
+          if git diff-index --quiet HEAD; then
+            echo "No changes to commit."
+          else
+            git commit -m "Update diagram [skip ci]"
+            git push "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" diagram --force
+          fi
