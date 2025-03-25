@@ -33,7 +33,7 @@ jobs:
       - name: Generate diagram
         run: |
           # Example: generate diagram.png from a manifest file (change path as needed)
-          kube-diagrams -o diagram.png .
+          find . -maxdepth 1 -type f -name "*.yaml" | xargs kube-diagrams -o diagram.png
 
       # 5. Configure git for committing changes
       - name: Configure Git
