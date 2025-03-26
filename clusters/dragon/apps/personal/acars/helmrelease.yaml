@@ -258,7 +258,7 @@ spec:
       acarshub:
         className: nginx
         hosts:
-          - host: "acars-mobile.home.arpa"
+          - host: "acars.127.0.0.1.sslip.io"
             paths:
               - path: /
                 pathType: Prefix

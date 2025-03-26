@@ -142,7 +142,7 @@ spec:
       ultrafeeder:
         className: nginx
         hosts:
-          - host: "adsb.home.arpa"
+          - host: "adsb.127.0.0.1.sslip.io"
             paths:
               - path: /fr24
                 pathType: Prefix
