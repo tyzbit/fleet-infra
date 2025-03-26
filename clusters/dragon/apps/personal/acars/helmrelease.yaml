@@ -143,7 +143,6 @@ spec:
               ANNOTATE_ACARS: "true"
               ANNOTATE_VDLM2: "true"
               LOGLEVEL: info
-              TAR1090_REFERENCE_GEOLOCATION: &location ${my_latitude},${my_longitude}
             envFrom:
               - secretRef:
                   name: acars-annotator
