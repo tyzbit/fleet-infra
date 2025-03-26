@@ -1,0 +1,267 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.7.3/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app acars
+  namespace: flux-system
+spec:
+  targetNamespace: personal
+  releaseName: *app
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: "3.7.3"
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  values:
+    common_settings: &common_settings
+      type: statefulset
+      annotations:
+        reloader.stakater.com/auto: "true"
+
+    controllers:
+      acarsdec: 
+        <<: *common_settings
+        replicas: 1
+        containers:
+          acarsdec:
+            securityContext:
+              privileged: true
+            image:
+              repository: ghcr.io/sdr-enthusiasts/docker-acarsdec
+              tag: latest-build-412
+            env:
+              FEED_ID: TYZBIT-MOBILE-ACARS-1
+              TZ: Etc/UTC
+              SOAPYSDR: driver=rtlsdr
+              FREQUENCIES: 130.025;130.450;131.550;131.725
+              # Enabling all frequencies to determine which are actually used
+              # RTL-SDR can only scan 2MHz range
+              # See https://app.airframes.io/about
+              # FREQUENCIES: >-
+              #   130.025;130.425;130.450;130.825;130.850;131.125;131.425;
+              #   131.450;131.475;131.525;131.550;131.725;131.825;131.850
+              OUTPUT_SERVER: acars-acarsrouter
+              OUTPUT_SERVER_PORT: "5550"
+              OUTPUT_SERVER_MODE: tcp
+            resources:
+              requests:
+                cpu: 150m
+                memory: 128Mi
+              limits:
+                memory: 256Mi
+
+      dumpvdl2:
+        <<: *common_settings
+        replicas: 1
+        containers:
+          dumpvdl2:
+            securityContext:
+              privileged: true
+            image:
+              repository: ghcr.io/sdr-enthusiasts/docker-dumpvdl2
+              tag: latest-build-348
+            env:
+              FEED_ID: TYZBIT-MOBILE-VDL2-1
+              TZ: Etc/UTC
+              SOAPYSDR: driver=rtlsdr
+              FREQUENCIES: "136.975;136.650"
+              ZMQ_MODE: server
+              ZMQ_ENDPOINT: tcp://0.0.0.0:45555
+            resources:
+              requests:
+                cpu: 10m
+                memory: 128Mi
+              limits:
+                memory: 256Mi
+
+      acarsrouter:
+        <<: *common_settings
+        replicas: 1
+        containers:
+          acarsrouter:
+            image:
+              repository: ghcr.io/sdr-enthusiasts/acars_router
+              tag: 1.3.1_linux_amd64
+            env:
+              TZ: Etc/UTC
+              AR_SEND_UDP_ACARS: acars-acarshub:5550;feedthe.acarsdrama.com:5550
+              AR_SEND_UDP_VDLM2: acars-acarshub:5555;feedthe.acarsdrama.com:5555
+              AR_RECV_ZMQ_VDLM2: acars-dumpvdl2:45555
+            resources:
+              requests:
+                cpu: 10m
+                memory: 128Mi
+              limits:
+                memory: 256Mi
+
+      acarshub:
+        <<: *common_settings
+        replicas: 1 # active nas
+        containers:
+          acarshub:
+            image:
+              repository: ghcr.io/sdr-enthusiasts/docker-acarshub
+              tag: v3.8.0Build1379_nohealthcheck
+            env:
+              TZ: Etc/UTC
+              ENABLE_ADSB: "false"
+              ENABLE_ACARS: external
+              ENABLE_VDLM: external
+              QUIET_MESSAGES: "false" # This logs the messages themselves
+            probes:
+              liveness:
+                enabled: true
+                port: 15550
+              readiness:
+                enabled: true
+                port: 15550
+            resources:
+              requests:
+                cpu: 10m
+                memory: 128Mi
+              limits:
+                memory: 512Mi
+
+      acarsannotator:
+        <<: *common_settings
+        replicas: 1 # active nas
+        containers:
+          acarsannotator:
+            image:
+              repository: ghcr.io/tyzbit/acars-annotator
+              tag: latest
+            env:
+              ACARSHUB_HOST: acars-acarshub
+              ACARSHUB_PORT: "15550"
+              ACARSHUB_VDLM2_HOST: acars-acarshub
+              ACARSHUB_VDLM2_PORT: "15555"
+              TAR1090_URL: &tar1090 http://adsb-ultrafeeder
+              ANNOTATE_ACARS: "true"
+              ANNOTATE_VDLM2: "true"
+              LOGLEVEL: info
+              TAR1090_REFERENCE_GEOLOCATION: &location ${my_latitude},${my_longitude}
+            envFrom:
+              - secretRef:
+                  name: acars-annotator
+            resources:
+              requests:
+                cpu: 10m
+                memory: 128Mi
+              limits:
+                memory: 128Mi
+
+      acarsannotator2:
+        <<: *common_settings
+        replicas: 1 # active nas
+        containers:
+          acarsannotator2:
+            image:
+              repository: ghcr.io/tyzbit/acars-annotator
+              tag: latest
+            env:
+              ACARSHUB_HOST: acars-acarshub
+              ACARSHUB_PORT: "15550"
+              ACARSHUB_VDLM2_HOST: acars-acarshub
+              ACARSHUB_VDLM2_PORT: "15555"
+              ANNOTATE_ACARS: "true"
+              ANNOTATE_VDLM2: "true"
+              TAR1090_URL: *tar1090
+              LOGLEVEL: debug
+              TAR1090_REFERENCE_GEOLOCATION: *location
+              FILTER_CRITERIA_HAS_TEXT: "true"
+              # FILTER_CRITERIA_DICTIONARY_PHRASE_LENGTH_MINIMUM: "2"
+              FILTER_OPENAI_PROMPT: >-
+                Does this end with text that looks like a message from one human to another?
+              # FILTER_OPENAI_APIKEY: (set in envFrom)
+              ACARS_ANNOTATOR_SELECTED_FIELDS: >-
+                acarsMessageText
+                acarsExtraPhotos
+                acarsExtraURL
+                acarsFlightNumber
+              VDLM2_ANNOTATOR_SELECTED_FIELDS: >-
+                acarsMessageText
+                acarsExtraPhotos
+                acarsExtraURL
+                acarsFlightNumber
+              TAR1090_ANNOTATOR_SELECTED_FIELDS: >-
+                tar1090AircraftDistanceMi
+                tar1090AircraftAltimeterGeometricFeet
+                tar1090AircraftNavModes
+                tar1090AircraftEmergency
+            envFrom:
+              - secretRef:
+                  name: acars-annotator2
+            resources:
+              requests:
+                cpu: 10m
+                memory: 128Mi
+              limits:
+                memory: 128Mi
+
+    persistence:
+      usb:
+        type: hostPath
+        hostPath: /dev/bus/usb
+        advancedMounts:
+          acarsdec:
+            acarsdec:
+              - path: /dev/bus/usb
+          # dumpvdl2:
+          #   dumpvld2:
+          #     - path: /dev/bus/usb
+      acarshub:
+        existingClaim: acars-data-local-path
+        advancedMounts:
+          acarshub:
+            acarshub:
+              - path: /run/acars
+
+    service:
+      acarsrouter:
+        controller: acarsrouter
+        type: ClusterIP
+        ports:
+          acars:
+            port: 5550
+          vdlm2:
+            port: 15555
+      # dumpvdl2:
+      #   controller: dumpvdl2
+      #   type: ClusterIP
+      #   ports:
+      #     vdlm2:
+      #       port: 5555
+      #     vdlm2-zmq:
+      #       port: 45555
+      acarshub:
+        controller: acarshub
+        type: ClusterIP
+        ports:
+          http:
+            port: 80
+          acarsinput:
+            port: 5550
+            protocol: UDP
+          vdslinput:
+            port: 5555
+            protocol: UDP
+          acarsoutput:
+            port: 15550
+          vdsloutput:
+            port: 15555
+
+    ingress:
+      acarshub:
+        className: nginx
+        hosts:
+          - host: "acars-mobile.home.arpa"
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: acarshub
+                  port: 80

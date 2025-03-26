@@ -1,5 +1,30 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-- gotk-components.yaml
-- gotk-sync.yaml
+  - gotk-components.yaml
+  - gotk-sync.yaml
+patches:
+  - patch: |
+      - op: replace
+        path: /spec/ingress
+        value: [{}]
+    target:
+      kind: NetworkPolicy
+      name: allow-egress
+  - patch: |
+      - op: add
+        path: /spec/template/spec/containers/0/args/-
+        value: --concurrent=20
+      - op: add
+        path: /spec/template/spec/containers/0/args/-
+        value: --requeue-dependency=5s
+    target:
+      kind: Deployment
+      name: (kustomize-controller|helm-controller|source-controller)
+  # - patch: |
+  #     - op: replace
+  #       path: /spec/template/spec/containers/0/resources/limits/memory
+  #       value: 2Gi
+  #   target:
+  #     kind: Deployment
+  #     name: (helm-controller|source-controller)

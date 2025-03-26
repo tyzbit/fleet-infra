@@ -1,0 +1,218 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.7.3/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app adsb
+  namespace: flux-system
+spec:
+  targetNamespace: personal
+  releaseName: *app
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: "3.7.3"
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  values:
+    controllercommon: &controllercommon
+      type: statefulset
+      annotations:
+        reloader.stakater.com/auto: "true"
+        fr24-radar-id: ${fr24_radar_id}
+      replicas: 1 # active longhorn-webapp
+    controllers:
+      ultrafeeder:
+        <<: *controllercommon
+        containers:
+          ultrafeeder:
+            securityContext:
+              privileged: true
+            image:
+              repository: ghcr.io/sdr-enthusiasts/docker-adsb-ultrafeeder
+              tag: latest
+              # tag: telegraf # for use with InfluxDB/Prometheus and Grafana
+            envFrom:
+              - secretRef:
+                  name: adsb-ultrafeeder
+            env:
+              # https://github.com/sdr-enthusiasts/docker-adsb-ultrafeeder?tab=readme-ov-file#basic-ultrafeeder-parameters
+              LOGLEVEL: verbose
+              TZ: US/New_York
+              # UUID: "568"
+              READSB_DEVICE_TYPE: rtlsdr
+              ENABLE_978: "yes"
+              # URL_978: http://dump978/skyaware978
+              # READSB_RTLSDR_DEVICE: 00000001 # Serial number of device
+              # readsb/decoder parameters: (these are in the secret)
+              READSB_ALT: 3m
+              READSB_RX_LOCATION_ACCURACY: 2 
+              READSB_STATS_RANGE: "true"
+              READSB_NET_BEAST_OUTPUT_PORT: "30005"
+              READSB_JSON_TRACE_INTERVAL: "5"
+              READSB_HEATMAP_INTERVAL: "5" # configs replay too, should be in lock-step with trace interval
+              # TAR1090 (Map Web Page) parameters:
+              UPDATE_TAR1090: "true"
+              TAR1090_MESSAGERATEINTITLE: "true"
+              TAR1090_PLANECOUNTINTITLE: "true"
+              TAR1090_ENABLE_AC_DB: "true"
+              TAR1090_FLIGHTAWARELINKS: "true"
+              TAR1090_USEROUTEAPI: "true"
+              # GRAPHS1090 (Decoder and System Status Web Page) parameters:
+              GRAPHS1090_DARKMODE: "true"
+            # probes:
+            #   liveness: &probe_enabled
+            #     enabled: true
+            #     port: 80
+            #   readiness: *probe_enabled
+            resources:
+              requests:
+                cpu: 10m
+                memory: 128Mi
+              limits:
+                memory: 512Mi
+
+      flightradar24:
+        <<: *controllercommon
+        containers:
+          # https://github.com/sdr-enthusiasts/docker-flightradar24?tab=readme-ov-file#obtaining-a-flightradar24-sharing-key-for-adsb
+          flightradar24:
+            image:
+              repository: ghcr.io/sdr-enthusiasts/docker-flightradar24
+              tag: latest
+            env:
+              BEASTHOST: adsb-ultrafeeder
+              FR24KEY: ${fr24_sharing_key}
+              # FR24KEY_UAT: ${fr24_uat_sharing_key}
+              # UATHOST: adsb-dump978
+              # UATPORT: "30978"
+            resources:
+              requests:
+                cpu: 10m
+                memory: 64Mi
+              limits:
+                memory: 256Mi
+
+    persistence:
+      usb:
+        type: hostPath
+        hostPath: /dev/bus/usb
+      diskstats:
+        type: hostPath
+        hostPath: /proc/diskstats
+        advancedMounts:
+          ultrafeeder:
+            ultrafeeder:
+              - path: /proc/diskstats
+                readOnly: true
+      ultrafeeder:
+        existingClaim: adsb-ultrafeeder-data-local-path
+        advancedMounts:
+          ultrafeeder:
+            ultrafeeder:
+              - path: /var/globe_history
+                subPath: globe_history
+              - path: /var/lib/collectd
+                subPath: collectd
+
+    service:
+      ultrafeeder:
+        controller: ultrafeeder
+        type: ClusterIP
+        ports:
+          http:
+            port: 80
+          beast:
+            port: 30005
+          uat:
+            port: 30978
+      # dump978:
+      #   controller: dump978
+      #   type: ClusterIP
+      #   ports:
+      #     uat:
+      #       port: 30978
+      flightradar24:
+        controller: flightradar24
+        type: ClusterIP
+        ports:
+          http:
+            port: 8754
+
+    ingress:
+      ultrafeeder:
+        className: nginx
+        annotations:
+          nginx.ingress.kubernetes.io/auth-url: "http://adsb-ultrafeeder-oauth2-proxy.personal.svc.cluster.local/oauth2/auth"
+          nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
+          cert-manager.io/cluster-issuer: letsencrypt
+          external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+          external-dns.alpha.kubernetes.io/target: ${cloudflared_tunnel_uuid}.cfargotunnel.com
+          hajimari.io/enable: "true"
+          hajimari.io/icon: radar
+          hajimari.io/info: "Aircraft Map"
+          hajimari.io/targetBlank: "true"
+        hosts:
+          - host: &host "adsb.${personal_domain}"
+            paths:
+              - path: /fr24
+                pathType: Prefix
+                service:
+                  identifier: flightradar24
+                  port: 8754
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: ultrafeeder
+                  port: 80
+        tls:
+          - hosts:
+              - *host
+            secretName: *host
+
+      oauth:
+        className: nginx
+        annotations:
+          external-dns.alpha.kubernetes.io/exclude: "true"
+        labels:
+          use-cloudflare-dns-solver: "true"
+        hosts:
+          - host: *host
+            paths:
+              - path: "/oauth2"
+                service:
+                  name: adsb-ultrafeeder-oauth2-proxy
+                  port: 80
+        tls:
+          - hosts:
+              - *host
+            secretName: *host
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &name adsb-ultrafeeder-oauth2-proxy
+  namespace: flux-system
+spec:
+  targetNamespace: personal
+  releaseName: *name
+  chart:
+    spec:
+      chart: oauth2-proxy
+      version: "7.12.7"
+      sourceRef:
+        kind: HelmRepository
+        name: oauth2-proxy
+        namespace: flux-system
+  interval: 2m0s
+  values:
+    replicaCount: 1
+    extraArgs:
+      provider: github
+      github-org: "${blog_name}"
+      github-team: "super-admins,adsb-ultrafeeder"
+      cookie-expire: 168h0m0s
+    config:
+      existingSecret: adsb-ultrafeeder-oauth2-proxy
