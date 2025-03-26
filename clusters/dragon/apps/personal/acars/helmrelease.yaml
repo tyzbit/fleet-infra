@@ -170,7 +170,6 @@ spec:
               ANNOTATE_VDLM2: "true"
               TAR1090_URL: *tar1090
               LOGLEVEL: debug
-              TAR1090_REFERENCE_GEOLOCATION: *location
               FILTER_CRITERIA_HAS_TEXT: "true"
               # FILTER_CRITERIA_DICTIONARY_PHRASE_LENGTH_MINIMUM: "2"
               FILTER_OPENAI_PROMPT: >-
