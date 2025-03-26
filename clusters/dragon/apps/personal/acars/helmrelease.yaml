@@ -257,7 +257,7 @@ spec:
         annotations:
           traefik.ingress.kubernetes.io/router.entrypoints: web
         hosts:
-          - host: "acars.127.0.0.1.sslip.io"
+          - host: "acars.internal"
             paths:
               - path: /
                 pathType: Prefix
