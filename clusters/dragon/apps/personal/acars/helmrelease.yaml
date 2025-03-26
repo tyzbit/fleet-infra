@@ -126,13 +126,13 @@ spec:
               limits:
                 memory: 512Mi
 
-      acarsannotator:
+      acarsprocessor:
         <<: *common_settings
         replicas: 1 # active nas
         containers:
-          acarsannotator:
+          acarsprocessor:
             image:
-              repository: ghcr.io/tyzbit/acars-annotator
+              repository: ghcr.io/tyzbit/acars-processor
               tag: latest
             env:
               ACARSHUB_HOST: acars-acarshub
@@ -145,7 +145,7 @@ spec:
               LOGLEVEL: info
             envFrom:
               - secretRef:
-                  name: acars-annotator
+                  name: acars-processor
             resources:
               requests:
                 cpu: 10m
@@ -153,13 +153,13 @@ spec:
               limits:
                 memory: 128Mi
 
-      acarsannotator2:
+      acarsprocessor2:
         <<: *common_settings
         replicas: 1 # active nas
         containers:
-          acarsannotator2:
+          acarsprocessor2:
             image:
-              repository: ghcr.io/tyzbit/acars-annotator
+              repository: ghcr.io/tyzbit/acars-processor
               tag: latest
             env:
               ACARSHUB_HOST: acars-acarshub
@@ -192,7 +192,7 @@ spec:
                 tar1090AircraftEmergency
             envFrom:
               - secretRef:
-                  name: acars-annotator2
+                  name: acars-processor2
             resources:
               requests:
                 cpu: 10m
