@@ -56,7 +56,7 @@ spec:
 
       dumpvdl2:
         <<: *common_settings
-        replicas: 1
+        replicas: 0
         containers:
           dumpvdl2:
             securityContext:
@@ -210,9 +210,9 @@ spec:
           acarsdec:
             acarsdec:
               - path: /dev/bus/usb
-          # dumpvdl2:
-          #   dumpvld2:
-          #     - path: /dev/bus/usb
+          dumpvdl2:
+            dumpvld2:
+              - path: /dev/bus/usb
       acarshub:
         existingClaim: acars-data-local-path
         advancedMounts:
@@ -229,14 +229,14 @@ spec:
             port: 5550
           vdlm2:
             port: 15555
-      # dumpvdl2:
-      #   controller: dumpvdl2
-      #   type: ClusterIP
-      #   ports:
-      #     vdlm2:
-      #       port: 5555
-      #     vdlm2-zmq:
-      #       port: 45555
+      dumpvdl2:
+        controller: dumpvdl2
+        type: ClusterIP
+        ports:
+          vdlm2:
+            port: 5555
+          vdlm2-zmq:
+            port: 45555
       acarshub:
         controller: acarshub
         type: ClusterIP
