@@ -23,6 +23,9 @@ spec:
         reloader.stakater.com/auto: "true"
         fr24-radar-id: ${fr24_radar_id}
       replicas: 1 # active longhorn-webapp
+      pod:
+        hostNetwork: true
+
     controllers:
       ultrafeeder:
         <<: *controllercommon

@@ -21,6 +21,8 @@ spec:
       type: statefulset
       annotations:
         reloader.stakater.com/auto: "true"
+      pod:
+        hostNetwork: true
 
     controllers:
       acarsdec: 
