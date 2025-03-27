@@ -30,7 +30,7 @@ spec:
             image:
               pullPolicy: Always
               repository: n8nio/n8n
-              tag: "1.85.3"
+              tag: "1.85.4"
             envFrom:
               - secretRef:
                   name: n8n-config
