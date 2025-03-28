@@ -21,8 +21,6 @@ spec:
       type: statefulset
       annotations:
         reloader.stakater.com/auto: "true"
-      pod:
-        hostNetwork: true
 
     controllers:
       acarsdec: 
@@ -223,7 +221,7 @@ spec:
     service:
       acarsrouter:
         controller: acarsrouter
-        type: ClusterIP
+        type: NodePort
         ports:
           acars:
             port: 5550
@@ -231,7 +229,7 @@ spec:
             port: 15555
       dumpvdl2:
         controller: dumpvdl2
-        type: ClusterIP
+        type: NodePort
         ports:
           vdlm2:
             port: 5555
@@ -239,7 +237,7 @@ spec:
             port: 45555
       acarshub:
         controller: acarshub
-        type: ClusterIP
+        type: NodePort
         ports:
           http:
             port: 80
