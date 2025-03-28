@@ -33,6 +33,7 @@ spec:
             image:
               repository: ghcr.io/sdr-enthusiasts/docker-acarsdec
               tag: latest-build-412
+              pullPolicy: IfNotPresent
             env:
               FEED_ID: TYZBIT-MOBILE-ACARS-1
               TZ: Etc/UTC
@@ -64,6 +65,7 @@ spec:
             image:
               repository: ghcr.io/sdr-enthusiasts/docker-dumpvdl2
               tag: latest-build-348
+              pullPolicy: IfNotPresent
             env:
               FEED_ID: TYZBIT-MOBILE-VDL2-1
               TZ: Etc/UTC
@@ -86,6 +88,7 @@ spec:
             image:
               repository: ghcr.io/sdr-enthusiasts/acars_router
               tag: 1.3.1_linux_amd64
+              pullPolicy: IfNotPresent
             env:
               TZ: Etc/UTC
               AR_SEND_UDP_ACARS: acars-acarshub:5550 #;feedthe.acarsdrama.com:5550
@@ -106,6 +109,7 @@ spec:
             image:
               repository: ghcr.io/sdr-enthusiasts/docker-acarshub
               tag: v3.8.0Build1379_nohealthcheck
+              pullPolicy: IfNotPresent
             env:
               TZ: Etc/UTC
               ENABLE_ADSB: "false"
@@ -134,6 +138,7 @@ spec:
             image:
               repository: ghcr.io/tyzbit/acars-processor
               tag: latest
+              pullPolicy: IfNotPresent
             env:
               ACARSHUB_HOST: acars-acarshub
               ACARSHUB_PORT: "15550"
@@ -161,6 +166,7 @@ spec:
             image:
               repository: ghcr.io/tyzbit/acars-processor
               tag: latest
+              pullPolicy: IfNotPresent
             env:
               ACARSHUB_HOST: acars-acarshub
               ACARSHUB_PORT: "15550"

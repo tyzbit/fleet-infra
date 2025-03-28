@@ -30,12 +30,14 @@ spec:
         replicas: 1
         containers:
           ultrafeeder:
+
             securityContext:
               privileged: true
             image:
               repository: ghcr.io/sdr-enthusiasts/docker-adsb-ultrafeeder
               tag: latest
               # tag: telegraf # for use with InfluxDB/Prometheus and Grafana
+              pullPolicy: IfNotPresent
             env:
               # https://github.com/sdr-enthusiasts/docker-adsb-ultrafeeder?tab=readme-ov-file#basic-ultrafeeder-parameters
               LOGLEVEL: verbose
