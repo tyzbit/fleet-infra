@@ -27,6 +27,7 @@ spec:
     controllers:
       ultrafeeder:
         <<: *controllercommon
+        replicas: 1
         containers:
           ultrafeeder:
             securityContext:
@@ -75,6 +76,7 @@ spec:
 
       flightradar24:
         <<: *controllercommon
+        replicas: 0
         containers:
           # https://github.com/sdr-enthusiasts/docker-flightradar24?tab=readme-ov-file#obtaining-a-flightradar24-sharing-key-for-adsb
           flightradar24:

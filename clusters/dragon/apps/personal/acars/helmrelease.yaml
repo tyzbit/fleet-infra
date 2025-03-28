@@ -128,7 +128,7 @@ spec:
 
       acarsprocessor:
         <<: *common_settings
-        replicas: 1 # active nas
+        replicas: 0 # active nas
         containers:
           acarsprocessor:
             image:
@@ -155,7 +155,7 @@ spec:
 
       acarsprocessor2:
         <<: *common_settings
-        replicas: 1 # active nas
+        replicas: 0 # active nas
         containers:
           acarsprocessor2:
             image:
