@@ -209,23 +209,17 @@ spec:
               FILTER_CRITERIA_HAS_TEXT: "true"
               # FILTER_CRITERIA_DICTIONARY_PHRASE_LENGTH_MINIMUM: "2"
               FILTER_OPENAI_PROMPT: >-
-                Does this end with text that looks like a message from one human to another?
+                Does this have text that looks like a message from one human to another?
               # FILTER_OPENAI_APIKEY: (set in envFrom)
               ACARS_ANNOTATOR_SELECTED_FIELDS: >-
                 acarsMessageText
-                acarsExtraPhotos
-                acarsExtraURL
                 acarsFlightNumber
               VDLM2_ANNOTATOR_SELECTED_FIELDS: >-
                 acarsMessageText
-                acarsExtraPhotos
-                acarsExtraURL
                 acarsFlightNumber
               TAR1090_ANNOTATOR_SELECTED_FIELDS: >-
                 tar1090AircraftDistanceMi
                 tar1090AircraftAltimeterGeometricFeet
-                tar1090AircraftNavModes
-                tar1090AircraftEmergency
             envFrom:
               - secretRef:
                   name: acars-processor2
