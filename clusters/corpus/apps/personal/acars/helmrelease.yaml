@@ -213,10 +213,8 @@ spec:
               # FILTER_OPENAI_APIKEY: (set in envFrom)
               ACARS_ANNOTATOR_SELECTED_FIELDS: >-
                 acarsMessageText
-                acarsFlightNumber
               VDLM2_ANNOTATOR_SELECTED_FIELDS: >-
                 acarsMessageText
-                acarsFlightNumber
               TAR1090_ANNOTATOR_SELECTED_FIELDS: >-
                 tar1090AircraftDistanceMi
                 tar1090AircraftAltimeterGeometricFeet
