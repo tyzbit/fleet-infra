@@ -186,9 +186,9 @@ spec:
             resources:
               requests:
                 cpu: 10m
-                memory: 128Mi
+                memory: 256Mi
               limits:
-                memory: 128Mi
+                memory: 256Mi
 
       acarsprocessor2:
         <<: *common_settings
