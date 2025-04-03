@@ -98,6 +98,7 @@ spec:
                 "db:add-missing-indices"
                 "db:add-missing-columns"
                 "files:cleanup"
+                "maintenance:repair --include-expensive"
                 )
                 grey="\e[1;30m"
                 reset="\e[0m"
