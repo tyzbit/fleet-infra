@@ -104,7 +104,7 @@ spec:
                 reset="\e[0m"
                 green="\e[1;32m"
                 red="\e[1;31m"
-                for op in "$${ops[@]}" ; do
+                for op in "$${ops[*]}" ; do
                   echo -e "$${grey}Running php occ $op $reset"
                   su www-data -s /usr/local/bin/php occ $op && echo -en "$green" || echo -en "$red"
                   echo -e "Finished php occ $op $reset"
