@@ -209,6 +209,7 @@ spec:
               LOGLEVEL: debug
               TAR1090_REFERENCE_GEOLOCATION: *location
               FILTER_CRITERIA_HAS_TEXT: "true"
+              NEW_RELIC_CUSTOM_EVENT_TYPE: CustomACARSHumanMessages
               # FILTER_CRITERIA_DICTIONARY_PHRASE_LENGTH_MINIMUM: "2"
               FILTER_OPENAI_PROMPT: >-
                 Does this have text that looks like a message from one human to another?
