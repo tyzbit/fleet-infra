@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: acars-data-nas
+  name: acars-data-longhorn-webapp
   namespace: personal
 spec:
   accessModes:
     - ReadWriteOnce
   volumeMode: Filesystem
-  storageClassName: nas
+  storageClassName: longhorn-webapp
   resources:
     requests:
-      storage: 2Gi
+      storage: 5Gi

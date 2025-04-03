@@ -245,7 +245,7 @@ spec:
             dumpvld2:
               - path: /dev/bus/usb
       acarshub:
-        existingClaim: acars-data-nas
+        existingClaim: acars-data-longhorn-webapp
         advancedMounts:
           acarshub:
             acarshub:
