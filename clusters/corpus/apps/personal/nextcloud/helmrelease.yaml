@@ -98,17 +98,19 @@ spec:
                 "db:add-missing-indices"
                 "db:add-missing-columns"
                 "files:cleanup"
-                "maintenance:repair --include-expensive"
                 )
                 grey="\e[1;30m"
                 reset="\e[0m"
                 green="\e[1;32m"
                 red="\e[1;31m"
-                for op in "$${ops[*]}" ; do
+                for op in "$${ops[@]}" ; do
                   echo -e "$${grey}Running php occ $op $reset"
                   su www-data -s /usr/local/bin/php -- occ $op && echo -en "$green" || echo -en "$red"
                   echo -e "Finished php occ $op $reset"
                 done &&
+                echo -e "$${grey}Running php occ maintenance:repair --include-expensive $reset"
+                su www-data -s /usr/local/bin/php -- occ maintenance:repair --include-expensive && echo -en "$green" || echo -en "$red"
+                echo -e "Finished php occ maintenance:repair --include-expensive $reset"
                 while :; do /cron.sh; done
             resources:
               requests:
