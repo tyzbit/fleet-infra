@@ -216,8 +216,12 @@ spec:
                 Does this have text that looks like a message from one human to another?
               # FILTER_OPENAI_APIKEY: (set in envFrom)
               ACARS_ANNOTATOR_SELECTED_FIELDS: >-
+                acarsAircraftTailCode
+                acarsFrequencyMHz
                 acarsMessageText
               VDLM2_ANNOTATOR_SELECTED_FIELDS: >-
+                vdlm2FrequencyHz
+                acarsAircraftTailCode
                 acarsMessageText
               TAR1090_ANNOTATOR_SELECTED_FIELDS: >-
                 tar1090AircraftDistanceMi
