@@ -74,9 +74,9 @@ spec:
             command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
             resources:
               requests:
-                cpu: 1000m
+                cpu: 100m
               limits:
-                memory: 32Mi
+                memory: 256Mi
 
       worker:
         replicas: 1
