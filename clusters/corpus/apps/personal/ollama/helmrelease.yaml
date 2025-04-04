@@ -1,0 +1,79 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.7.3/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app ollama
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: "3.7.3"
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  values:
+    controllers:
+      ollama:
+        annotations:
+          reloader.stakater.com/auto: "true"
+
+        containers:
+          app:
+            image:
+              repository: docker.io/ollama/ollama
+              tag: 0.6.4
+
+            env:
+              TZ: America/New_York
+              OLLAMA_HOST: 0.0.0.0
+              OLLAMA_ORIGINS: "*"
+              OLLAMA_MODELS: &modelPath /models
+              OLLAMA_LOAD_TIMEOUT: "600"
+              OLLAMA_CONTEXT_LENGTH: "8192"
+            resources:
+              requests:
+                cpu: 200m
+              limits:
+                memory: 18Gi
+
+    persistence:
+      models:
+        existingClaim: &claim ollama-models-longhorn-objectstorage
+        globalMounts:
+          - path: *modelPath
+            subPath: models
+      config:
+        existingClaim: *claim
+        globalMounts:
+          - path: /root/.ollama
+            subPath: config
+
+    service:
+      main:
+        controller: *app
+        ports:
+          http:
+            port: &port 11434
+
+    ingress:
+      ollama:
+        className: nginx
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt
+          external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+          external-dns.alpha.kubernetes.io/target: ${cloudflared_tunnel_uuid}.cfargotunnel.com
+        hosts:
+          - host: &host "ollama.${personal_domain}"
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: main
+                  port: 80
+        tls:
+          - hosts:
+              - *host
+            secretName: *host
