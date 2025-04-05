@@ -39,7 +39,7 @@ spec:
               DOTNET_SYSTEM_IO_DISABLEFILELOCKING: 'true'
             image:
               repository: jellyfin/jellyfin
-              tag: 10.10.6
+              tag: 10.10.7
             probes:
               liveness:
                 enabled: true
