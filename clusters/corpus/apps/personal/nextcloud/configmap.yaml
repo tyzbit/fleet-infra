@@ -18,6 +18,6 @@ metadata:
   namespace: personal
 data:
   redis.conf: |
-    unixsocket /redis/redis.sock
+    unixsocket /tmp/redis.sock
     unixsocketperm 777
     port 0

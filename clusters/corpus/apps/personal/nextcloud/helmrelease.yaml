@@ -154,12 +154,12 @@ spec:
         advancedMounts:
           app:
             *cache :
-              - path: /redis/
+              - path: /tmp/
             *app : 
               - path: /redis/
           worker:
             *cache :
-              - path: /redis/
+              - path: /tmp/
             *app :
               - path: /redis/
 
