@@ -154,11 +154,11 @@ spec:
         advancedMounts:
           app:
             *cache : &redis
-              - path: /run/redis/
+              - path: /tmp/
             *app : *redis
           worker:
             *cache : &redis
-              - path: /run/redis/
+              - path: /tmp/
             *app : *redis
 
       # Redis-only
