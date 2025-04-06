@@ -159,7 +159,7 @@ spec:
               - path: /var/run/redis/redis.sock
           worker:
             *cache :
-              - - path: /run/redis/redis.sock
+              - path: /run/redis/redis.sock
             *app :
               - path: /var/run/redis/redis.sock
 
