@@ -43,14 +43,14 @@ spec:
               limits:
                 memory: 1Gi
 
-      app:
+      nextcloud:
         replicas: 1
-        type: deployment
+        type: statefulset
         annotations:
           reloader.stakater.com/auto: "true"
 
         containers:
-          &app nextcloud-app:
+          &app app:
             image:
               repository: nextcloud
               tag: &nextcloudver "31.0.2"
@@ -66,7 +66,7 @@ spec:
               limits:
                 memory: 12Gi
 
-          &cache nextcloud-cache: &cachecontainer
+          &cache cache:
             image:
               repository: redis
               tag: "7.4"
@@ -78,14 +78,7 @@ spec:
               limits:
                 memory: 256Mi
 
-      worker:
-        replicas: 1
-        type: statefulset
-        annotations:
-          reloader.stakater.com/auto: "true"
-
-        containers:
-          &worker nextcloud-worker:
+          &worker worker:
             image:
               repository: nextcloud
               tag: *nextcloudver
@@ -149,17 +142,8 @@ spec:
         type: emptyDir
         medium: Memory
         sizeLimit: 128Mi
-        advancedMounts:
-          app:
-            *cache :
-              - path: /var/run/redis/
-            *app : 
-              - path: /var/run/redis/
-          worker:
-            *cache :
-              - path: /var/run/redis/
-            *app :
-              - path: /var/run/redis/
+        globalMounts:
+          - path: /var/run/redis/
 
       # Redis-only
       cache:
@@ -167,22 +151,18 @@ spec:
         medium: Memory
         sizeLimit: 128Mi
         advancedMounts:
-          app:
-            *cache : &cachedata
+          nextcloud:
+            *cache :
               - path: /data
-          worker:
-            *cache : *cachedata
       cache-config:
         name: nextcloud-cache-config
         type: configMap
         advancedMounts:
-          app:
+          nextcloud:
             *cache : &cachemount
               - path: /usr/local/etc/redis/redis.conf
                 subPath: redis.conf
                 readOnly: true
-          worker:
-            *cache : *cachemount
 
     service:
       main:
