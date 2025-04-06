@@ -50,7 +50,7 @@ spec:
           reloader.stakater.com/auto: "true"
 
         containers:
-          &app app:
+          &app nextcloud-app:
             image:
               repository: nextcloud
               tag: &nextcloudver "31.0.2"
@@ -66,7 +66,7 @@ spec:
               limits:
                 memory: 12Gi
 
-          &cache cache:
+          &cache nextcloud-cache:
             image:
               repository: redis
               tag: "7.4"
@@ -78,7 +78,7 @@ spec:
               limits:
                 memory: 256Mi
 
-          &worker worker:
+          &worker nextcloud-worker:
             image:
               repository: nextcloud
               tag: *nextcloudver
