@@ -155,13 +155,17 @@ spec:
           app:
             *cache :
               - path: /tmp/redis.sock
+                subPath: redis.sock
             *app : 
               - path: /tmp/redis.sock
+                subPath: redis.sock
           worker:
             *cache :
               - path: /tmp/redis.sock
+                subPath: redis.sock
             *app :
               - path: /tmp/redis.sock
+                subPath: redis.sock
 
       # Redis-only
       cache:
