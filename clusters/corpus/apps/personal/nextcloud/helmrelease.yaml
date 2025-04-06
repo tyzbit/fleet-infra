@@ -154,18 +154,14 @@ spec:
         advancedMounts:
           app:
             *cache :
-              - path: /tmp/redis.sock
-                subPath: redis.sock
+              - path: /redis/
             *app : 
-              - path: /tmp/redis.sock
-                subPath: redis.sock
+              - path: /redis/
           worker:
             *cache :
-              - path: /tmp/redis.sock
-                subPath: redis.sock
+              - path: /redis/
             *app :
-              - path: /tmp/redis.sock
-                subPath: redis.sock
+              - path: /redis/
 
       # Redis-only
       cache:
