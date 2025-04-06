@@ -43,7 +43,7 @@ spec:
               limits:
                 memory: 1Gi
 
-      nextcloud:
+      app:
         replicas: 1
         type: statefulset
         annotations:
@@ -132,7 +132,7 @@ spec:
       data:
         existingClaim: nextcloud-data-nas
         advancedMounts:
-          nextcloud:
+          app:
             *app :
               - path: &datamount /var/www/html
             *worker :
@@ -142,7 +142,7 @@ spec:
         medium: Memory
         sizeLimit: 128Mi
         advancedMounts:
-          nextcloud:
+          app:
             *app :
               - path: /var/run/redis/
             *cache :
@@ -156,15 +156,15 @@ spec:
         medium: Memory
         sizeLimit: 128Mi
         advancedMounts:
-          nextcloud:
+          app:
             *cache :
               - path: /data
       cache-config:
         name: nextcloud-cache-config
         type: configMap
         advancedMounts:
-          nextcloud:
-            *cache : &cachemount
+          app:
+            *cache :
               - path: /usr/local/etc/redis/redis.conf
                 subPath: redis.conf
                 readOnly: true
