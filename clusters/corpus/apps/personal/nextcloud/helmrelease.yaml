@@ -132,18 +132,23 @@ spec:
       data:
         existingClaim: nextcloud-data-nas
         advancedMounts:
-          app:
+          nextcloud:
             *app :
               - path: &datamount /var/www/html
-          worker:
             *worker :
               - path: *datamount
       socket:
         type: emptyDir
         medium: Memory
         sizeLimit: 128Mi
-        globalMounts:
-          - path: /var/run/redis/
+        advancedMounts:
+          nextcloud:
+            *app :
+              - path: /var/run/redis/
+            *cache :
+              - path: /var/run/redis/
+            *worker :
+              - path: /var/run/redis/
 
       # Redis-only
       cache:
