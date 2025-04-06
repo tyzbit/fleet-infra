@@ -118,8 +118,6 @@ spec:
               limits:
                 memory: 1Gi
 
-          *cache : *cachecontainer
-
     persistence:
       # MariaDB
       db:
