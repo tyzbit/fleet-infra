@@ -156,12 +156,12 @@ spec:
             *cache :
               - path: /tmp/
             *app : 
-              - path: /tmp/
+              - path: /var/run/redis/
           worker:
             *cache :
               - path: /tmp/
             *app :
-              - path: /tmp/
+              - path: /var/run/redis/
 
       # Redis-only
       cache:
