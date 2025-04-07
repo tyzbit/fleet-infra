@@ -258,7 +258,8 @@ spec:
               FILTER_OLLAMA_URL: http://ollama:11434
               FILTER_OLLAMA_MODEL: gemma3
               FILTER_OLLAMA_PROMPT: >-
-                Does this have text that looks like a message from one human to another?
+                Does this have text that looks like communication between
+                one human to another at the end of the message?
               ACARS_ANNOTATOR_SELECTED_FIELDS: >-
                 acarsMessageText
               VDLM2_ANNOTATOR_SELECTED_FIELDS: >-
