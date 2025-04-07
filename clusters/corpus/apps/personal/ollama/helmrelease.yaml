@@ -43,14 +43,11 @@ spec:
                 memory: 18Gi
 
     persistence:
-      models:
+      ollama:
         existingClaim: &claim ollama-models-longhorn-objectstorage
         globalMounts:
           - path: *modelPath
             subPath: models
-      config:
-        existingClaim: *claim
-        globalMounts:
           - path: /root/.ollama
             subPath: config
 
