@@ -261,6 +261,9 @@ spec:
               FILTER_OLLAMA_MODEL: gemma3
               FILTER_OLLAMA_PROMPT: >-
                 Does this have text that looks like a message from one human to another?
+            envFrom:
+              - secretRef:
+                  name: acars-processor3
             resources:
               requests:
                 cpu: 10m
