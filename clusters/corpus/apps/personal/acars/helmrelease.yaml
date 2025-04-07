@@ -237,6 +237,37 @@ spec:
               limits:
                 memory: 128Mi
 
+      acarsprocessor3:
+        <<: *common_settings
+        replicas: 1 # active nas
+        containers:
+          acarsprocessor2:
+            image:
+              repository: ghcr.io/tyzbit/acars-processor
+              tag: latest
+            env:
+              ACARSHUB_HOST: acars-acarshub
+              ACARSHUB_PORT: "15550"
+              ACARSHUB_VDLM2_HOST: acars-acarshub
+              ACARSHUB_VDLM2_PORT: "15555"
+              ANNOTATE_ACARS: "true"
+              ANNOTATE_VDLM2: "true"
+              TAR1090_URL: *tar1090
+              LOGLEVEL: debug
+              TAR1090_REFERENCE_GEOLOCATION: *location
+              FILTER_CRITERIA_HAS_TEXT: "true"
+              # FILTER_CRITERIA_DICTIONARY_PHRASE_LENGTH_MINIMUM: "2"
+              FILTER_OLLAMA_URL: http://ollama:11434
+              FILTER_OLLAMA_MODEL: llama3.2
+              FILTER_OLLAMA_PROMPT: >-
+                Does this have text that looks like a message from one human to another?
+            resources:
+              requests:
+                cpu: 10m
+                memory: 128Mi
+              limits:
+                memory: 128Mi
+
     persistence:
       usb:
         type: hostPath
