@@ -218,12 +218,12 @@ spec:
                 acarsAircraftTailCode
                 acarsFrequencyMHz
                 acarsMessageText
-                acarsMessageSource
+                acarsMessageFrom
               VDLM2_ANNOTATOR_SELECTED_FIELDS: >-
                 vdlm2FrequencyHz
                 acarsAircraftTailCode
                 acarsMessageText
-                acarsMessageSource
+                acarsMessageFrom
               TAR1090_ANNOTATOR_SELECTED_FIELDS: >-
                 tar1090AircraftDistanceMi
                 tar1090AircraftAltimeterGeometricFeet
