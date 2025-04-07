@@ -28,7 +28,8 @@ spec:
             image:
               repository: docker.io/ollama/ollama
               tag: 0.6.3
-
+            securityContext:
+              privileged: true
             env:
               TZ: America/New_York
               OLLAMA_HOST: 0.0.0.0
@@ -44,7 +45,7 @@ spec:
 
     persistence:
       ollama:
-        existingClaim: &claim ollama-models-longhorn-objectstorage
+        existingClaim: ollama-models-longhorn-objectstorage
         globalMounts:
           - path: *modelPath
             subPath: models
