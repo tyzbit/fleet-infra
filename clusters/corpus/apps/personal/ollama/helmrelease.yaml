@@ -32,7 +32,7 @@ spec:
               privileged: true
             env:
               TZ: America/New_York
-              OLLAMA_INTEL_GPU: "1"
+              OLLAMA_INTEL_GPU: "1" # doesn't work right now, experimental
               OLLAMA_HOST: 0.0.0.0
               OLLAMA_ORIGINS: "*"
               OLLAMA_MODELS: &modelPath /models
@@ -55,6 +55,7 @@ spec:
       dri:
         type: hostPath
         hostPath: /dev/dri
+
     service:
       main:
         controller: *app
