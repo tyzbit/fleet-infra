@@ -32,7 +32,7 @@ spec:
               privileged: true
             env:
               TZ: America/New_York
-              LIBVA_DRIVER_NAME: i965
+              OLLAMA_INTEL_GPU: "1"
               OLLAMA_HOST: 0.0.0.0
               OLLAMA_ORIGINS: "*"
               OLLAMA_MODELS: &modelPath /models
