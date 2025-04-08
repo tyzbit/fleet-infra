@@ -51,7 +51,9 @@ spec:
             subPath: models
           - path: /root/.ollama
             subPath: config
-
+      dri:
+        type: hostPath
+        hostPath: /dev/dri
     service:
       main:
         controller: *app
