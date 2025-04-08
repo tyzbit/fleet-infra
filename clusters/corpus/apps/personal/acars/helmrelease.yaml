@@ -256,7 +256,7 @@ spec:
               FILTER_CRITERIA_HAS_TEXT: "true"
               # FILTER_CRITERIA_DICTIONARY_PHRASE_LENGTH_MINIMUM: "2"
               FILTER_OLLAMA_URL: http://ollama:11434
-              FILTER_OLLAMA_MODEL: deepseek-r1:671b
+              FILTER_OLLAMA_MODEL: deepseek-r1:8b
               FILTER_OLLAMA_PROMPT: >-
                 Does this have text that looks like communication between
                 one human to another at the end of the message?
