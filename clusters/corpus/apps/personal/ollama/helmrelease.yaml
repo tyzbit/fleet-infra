@@ -42,7 +42,7 @@ spec:
               requests:
                 cpu: 200m
               limits:
-                memory: 16Gi
+                memory: 20Gi
 
     persistence:
       ollama:
@@ -61,24 +61,4 @@ spec:
         controller: *app
         ports:
           http:
-            port: &port 11434
-
-    # ingress:
-    #   ollama:
-    #     className: nginx
-    #     annotations:
-    #       cert-manager.io/cluster-issuer: letsencrypt
-    #       external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
-    #       external-dns.alpha.kubernetes.io/target: ${cloudflared_tunnel_uuid}.cfargotunnel.com
-    #     hosts:
-    #       - host: &host "ollama.${personal_domain}"
-    #         paths:
-    #           - path: /
-    #             pathType: Prefix
-    #             service:
-    #               identifier: main
-    #               port: *port
-    #     tls:
-    #       - hosts:
-    #           - *host
-    #         secretName: *host
+            port: 11434
