@@ -212,8 +212,7 @@ spec:
               # FILTER_CRITERIA_DICTIONARY_PHRASE_LENGTH_MINIMUM: "2"
               FILTER_OPENAI_MODEL: gpt-4o-mini
               FILTER_OPENAI_PROMPT: >-
-                Does this contain what looks like a bespoke 
-                message from one person to another?
+                Does this have a note from a person?
               # FILTER_OPENAI_APIKEY: (set in envFrom)
               ACARS_ANNOTATOR_SELECTED_FIELDS: >-
                 acarsAircraftTailCode
@@ -259,8 +258,7 @@ spec:
               FILTER_OLLAMA_URL: http://ollama:11434
               FILTER_OLLAMA_MODEL: gemma3:4b
               FILTER_OLLAMA_PROMPT: >-
-                Does this contain what looks like a bespoke 
-                message from one person to another?
+                Does this have a note from a person?
               ACARS_ANNOTATOR_SELECTED_FIELDS: >-
                 acarsMessageText
               VDLM2_ANNOTATOR_SELECTED_FIELDS: >-
