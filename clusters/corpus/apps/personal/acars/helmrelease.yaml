@@ -212,7 +212,10 @@ spec:
               # FILTER_CRITERIA_DICTIONARY_PHRASE_LENGTH_MINIMUM: "2"
               FILTER_OPENAI_MODEL: gpt-4o-mini
               FILTER_OPENAI_PROMPT: >-
-                Does this have a note from a person?
+                You are an expert in natural language analysis, specializing in 
+                distinguishing between human-written text and 
+                machine-generated text or reports. Was this message written 
+                by a person for another person to read?
               # FILTER_OPENAI_APIKEY: (set in envFrom)
               ACARS_ANNOTATOR_SELECTED_FIELDS: >-
                 acarsAircraftTailCode
@@ -258,7 +261,10 @@ spec:
               FILTER_OLLAMA_URL: http://ollama:11434
               FILTER_OLLAMA_MODEL: gemma3:4b
               FILTER_OLLAMA_PROMPT: >-
-                Does this have a note from a person?
+                You are an expert in natural language analysis, specializing in 
+                distinguishing between human-written text and 
+                machine-generated text or reports. Was this message written 
+                by a person for another person to read?
               ACARS_ANNOTATOR_SELECTED_FIELDS: >-
                 acarsMessageText
               VDLM2_ANNOTATOR_SELECTED_FIELDS: >-
