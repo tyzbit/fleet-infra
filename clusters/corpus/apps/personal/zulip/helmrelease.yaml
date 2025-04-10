@@ -62,8 +62,9 @@ spec:
         replicas: 1
         containers:
           &db zulip-db:        
-            image: 
-              repository: postgres
+            image:
+              # This has missing dictionaries baked in
+              repository: zulip/zulip-postgresql
               tag: 14
             env:
               POSTGRES_DB: "zulip"
