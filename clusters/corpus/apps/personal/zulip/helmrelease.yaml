@@ -140,8 +140,8 @@ spec:
         advancedMounts: { redis : { *redis : [path: /data] } }
       redis-conf:
         type: configMap
-        name: *redis
-        advancedMounts: { *redis : { *redis : [path: /etc/redis.conf, subPath: redis.conf] } }
+        name: zulip-redis
+        advancedMounts: { redis : { *redis : [path: /etc/redis.conf, subPath: redis.conf] } }
 
     service:
       app:
