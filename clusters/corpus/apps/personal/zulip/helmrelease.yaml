@@ -39,7 +39,7 @@ spec:
               SECRETS_memcached_password: ${zulip_memcached_password}
               SECRETS_postgres_password: ${zulip_postgres_password}
               SECRETS_rabbitmq_password: ${zulip_rabbitmq_password}
-              # SECRETS_redis_password: ${zulip_redis_password}
+              SECRETS_redis_password: ${zulip_redis_password}
               SECRETS_secret_key: ${zulip_secret_key}
               SETTING_EMAIL_HOST_USER: AKIA3NTKMLEAZCH3EGRK
               SETTING_EMAIL_HOST: email-smtp.us-east-1.amazonaws.com
@@ -138,6 +138,10 @@ spec:
       redis:
         existingClaim: zulip-redis-longhorn-database
         advancedMounts: { redis : { *redis : [path: /data] } }
+      redis-conf:
+        type: configMap
+        name: zulip-redis
+        advancedMounts: { *redis : { *redis : [path: /etc/redis.conf, subPath: redis.conf] } }
 
     service:
       app:

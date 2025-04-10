@@ -5,7 +5,7 @@ metadata:
   namespace: personal
 data:
   redis.conf: |
-    requirepass ${zulip_redis_password}
+    requirepass '${zulip_redis_password}'
 ---
 apiVersion: v1
 kind: ConfigMap
