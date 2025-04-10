@@ -52,7 +52,6 @@ spec:
               SETTING_REDIS_HOST: &redis zulip-redis
               SETTING_ZULIP_ADMINISTRATOR: ${personal_email}
               ZULIP_AUTH_BACKENDS: EmailAuthBackend
-              ZULIP_CUSTOM_SETTINGS: redis_password = 'zulip'
 
             # resources:
             #   requests:
@@ -91,6 +90,14 @@ spec:
             image: 
               repository: redis
               tag: alpine
+            env:
+              REDIS_PASSWORD: ${zulip_redis_password}
+            command:
+              - "sh"
+              - "-euc"
+              - |
+                echo "requirepass '$$REDIS_PASSWORD'" > /etc/redis.conf
+                exec redis-server /etc/redis.conf
 
       rabbitmq:
         <<: *common
