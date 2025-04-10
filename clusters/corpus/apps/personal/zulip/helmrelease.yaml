@@ -134,10 +134,10 @@ spec:
       *redis :
         existingClaim: zulip-redis-longhorn-database
         advancedMounts: { *redis : { *redis : [path: /data] } }
-      redis-conf:
-        type: configMap
-        name: *redis
-        advancedMounts: { *redis : { *redis : [path: /etc/redis.conf, subPath: redis.conf] } }
+      # redis-conf:
+      #   type: configMap
+      #   name: *redis
+      #   advancedMounts: { *redis : { *redis : [path: /etc/redis.conf, subPath: redis.conf] } }
 
     service:
       main:
