@@ -118,7 +118,7 @@ spec:
         advancedMounts: { app : { *app : [path: /data] } }
       db:
         existingClaim: zulip-postgresql-longhorn-database
-        advancedMounts: { db : { *db : [path: /var/lib/postgresql/data] } }
+        advancedMounts: { db : { *db : [path: /var/lib/postgresql] } }
       memcached:
         type: configMap
         name: *memcached
