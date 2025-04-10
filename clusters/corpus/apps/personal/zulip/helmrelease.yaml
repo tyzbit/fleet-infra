@@ -32,6 +32,7 @@ spec:
             env:
               AUTO_BACKUP_ENABLED: "False" # Longhorn already backs up
               DISABLE_HTTPS: "True" # ingress provides https
+              LOADBALANCER_IPS: 172.23.0.0/18
               DB_HOST: zulip-db
               DB_USER: zulip
               SECRETS_email_password: ${zulip_smtp_password}
