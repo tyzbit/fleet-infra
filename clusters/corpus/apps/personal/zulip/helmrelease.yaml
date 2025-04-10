@@ -160,7 +160,7 @@ spec:
         controller: memcached
         ports:
           memcached:
-            port: 11212
+            port: 11211
       redis:
         type: ClusterIP
         controller: redis
