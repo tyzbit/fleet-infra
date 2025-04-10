@@ -105,7 +105,13 @@ spec:
       *app :
         type: secret
         name: ${chat_domain}
-        advancedMounts: { *app : { *app : [path: /opt/docker/zulip/zulip/certs/] } }
+        advancedMounts:
+          *app :
+            *app :
+              - path: /opt/docker/zulip/zulip/certs/zulip.key
+                subPath: tls.key
+              - path: /opt/docker/zulip/zulip/certs/zulip.crt
+                subPath: tls.crt
       app-data:
         existingClaim: zulip-app-longhorn-webapp
         advancedMounts: { *app : { *app : [path: /data] } }
