@@ -45,7 +45,7 @@ spec:
               SETTING_EMAIL_USE_SSL: "True"
               SETTING_EMAIL_USE_TLS: "True"
               SETTING_EXTERNAL_HOST: ${chat_domain}
-              SETTING_MEMCACHED_LOCATION: &memcached zulip-memcached
+              SETTING_MEMCACHED_LOCATION: zulip-memcached:11211
               SETTING_RABBITMQ_HOST: &rmq zulip-rabbitmq
               SETTING_REDIS_HOST: &redis zulip-redis
               SETTING_ZULIP_ADMINISTRATOR: ${personal_email}
@@ -74,7 +74,7 @@ spec:
         <<: *common
         replicas: 1
         containers:
-          *memcached :
+          &memcached zulip-memcached:
             image:
               repository: memcached
               tag: alpine
