@@ -1,0 +1,167 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.7.3/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app zulip
+  namespace: flux-system
+spec:
+  releaseName: *app
+  targetNamespace: personal
+  timeout: 15m
+  interval: 2m0s
+  chart:
+    spec:
+      chart: app-template
+      version: "3.7.3"
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  values:
+    controllers:
+      &db zulip-db: &common
+        replicas: 1
+        type: statefulset
+        annotations:
+          reloader.stakater.com/auto: "true"
+
+        containers:
+          *db :        
+            image: 
+              repository: zulip/zulip-postgresql
+              tag: 14
+            env:
+              POSTGRES_DB: "zulip"
+              POSTGRES_USER: "zulip"
+              POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+
+      &memcached zulip-memcached:
+        <<: *common
+        replicas: 1
+        containers:
+          *memcached :
+            image:
+              repository: memcached
+              tag: alpine
+
+      &redis zulip-redis:
+        <<: *common
+        replicas: 1
+        containers:
+          *redis :
+            image: 
+              repository: redis
+              tag: alpine
+
+      &rmq zulip-rabbitmq:
+        <<: *common
+        replicas: 1
+        containers:
+          *rmq :
+            image: 
+              repository: rabbitmq
+              tag: 4.0.7
+            env:
+              RABBITMQ_DEFAULT_USER: zulip
+              RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS}
+
+      &app zulip-app:
+        <<: *common
+        replicas: 1
+        containers:
+          *app :
+            image:
+              repository: ghcr.io/zulip/zulip
+              tag: "2025.4.1"
+            env:
+              # Required
+              SETTING_EXTERNAL_HOST: &host ${chat_personal}
+              SETTING_ZULIP_ADMINISTRATOR: ${personal_email}
+              ###
+              <<: *dbenv
+              DB_HOST: zulip-db
+              DB_USER: zulip
+              ZULIP_AUTH_BACKENDS: EmailAuthBackend
+              SETTING_MEMCACHED_LOCATION: *memcached
+              SETTING_RABBITMQ_HOST: *rmq
+              SETTING_EMAIL_HOST: email-smtp.us-east-1.amazonaws.com
+              SETTING_EMAIL_HOST_USER: AKIA3NTKMLEAZCH3EGRK
+              SETTING_EMAIL_PORT: "587"
+              SETTING_EMAIL_USE_SSL: "True"
+              SETTING_EMAIL_USE_TLS: "True"
+              SECRETS_email_password: ${smtp_password}
+              SECRETS_rabbitmq_password: ${RABBITMQ_DEFAULT_PASS}
+              SECRETS_postgres_password: ${POSTGRES_PASSWORD}
+              SECRETS_memcached_password: ${MEMCACHED_PASSWORD}
+              SECRETS_redis_password: ${REDIS_PASSWORD}
+              SECRETS_secret_key: ${secret_key}
+
+            # resources:
+            #   requests:
+            #     cpu: 10m
+            #   limits:
+            #     memory: 2Gi
+
+    persistence:
+      *db :
+        existingClaim: zulip-postgresql-longhorn-database
+        advancedMounts: { *db : { *db : [path: /var/lib/postgresql/data] } }
+      *memcached :
+        type: configMap
+        name: *memcached
+        advancedMounts: 
+          *memcached : 
+            *memcached :
+              - path: /home/memcache/memcached.conf
+                subPath: memcached.conf
+              - path: /home/memcache/memcached-sasl-db
+                subPath: memcached-sasl-db
+      *rmq :
+        existingClaim: zulip-rabbitmq-longhorn-database
+        advancedMounts: { *rmq : { *rmq : [path: /var/lib/rabbitmq] } }
+      *redis :
+        existingClaim: zulip-redis-longhorn-database
+        advancedMounts: { *redis : { *redis : [path: /data] } }
+      redis-conf:
+        type: configMap
+        name: *redis
+        advancedMounts: { *redis : { *redis : [path: /etc/redis.conf, subPath: redis.conf] } }
+      *app :
+        type: secret
+        name: *host
+        advancedMounts: { *rmq : { *rmq : [path: /opt/docker/zulip/zulip/certs/] } }
+      app-data:
+        existingClaim: zulip-app-longhorn-webapp
+        advancedMounts: { *app : { *app : [path: /data] } }
+
+    service:
+      main:
+        type: ClusterIP
+        controller: *app
+        ports:
+          http:
+            port: 80
+          https:
+            port: 443
+
+    ingress:
+      main:
+        className: nginx
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt
+          nginx.ingress.kubernetes.io/proxy-connect-timeout: "20"
+          nginx.ingress.kubernetes.io/proxy-read-timeout: "14400"
+          nginx.ingress.kubernetes.io/proxy-send-timeout: "14400"
+          nginx.ingress.kubernetes.io/proxy-body-size: 1024m
+          external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+          external-dns.alpha.kubernetes.io/target: ${cloudflared_tunnel_uuid}.cfargotunnel.com
+        hosts:
+          - host: *host
+            paths:
+              - path: "/"
+                service:
+                  identifier: main
+        tls:
+          - hosts:
+              - *host
+            secretName: home.${personal_personal}-tls
