@@ -4,9 +4,10 @@ apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: &app ollama
-  namespace: personal
+  namespace: flux-system
 spec:
   interval: 30m
+  targetNamespace: personal
   chart:
     spec:
       chart: app-template
