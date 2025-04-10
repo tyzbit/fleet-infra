@@ -38,8 +38,8 @@ spec:
               DB_HOST: zulip-db
               DB_USER: zulip
               ZULIP_AUTH_BACKENDS: EmailAuthBackend
-              SETTING_MEMCACHED_LOCATION: *memcached
-              SETTING_RABBITMQ_HOST: *rmq
+              SETTING_MEMCACHED_LOCATION: &memcached zulip-memcached
+              SETTING_RABBITMQ_HOST: &rmq zulip-rabbitmq
               SETTING_EMAIL_HOST: email-smtp.us-east-1.amazonaws.com
               SETTING_EMAIL_HOST_USER: AKIA3NTKMLEAZCH3EGRK
               SETTING_EMAIL_PORT: "587"
@@ -71,7 +71,7 @@ spec:
               POSTGRES_USER: "zulip"
               POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
 
-      &memcached zulip-memcached:
+      *memcached :
         <<: *common
         replicas: 1
         containers:
@@ -89,7 +89,7 @@ spec:
               repository: redis
               tag: alpine
 
-      &rmq zulip-rabbitmq:
+      *rmq :
         <<: *common
         replicas: 1
         containers:
