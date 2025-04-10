@@ -20,9 +20,11 @@ spec:
   values:
     controllers:
 
-      &app zulip-app:
-        <<: *common
+      &app zulip-app: &common
         replicas: 1
+        type: statefulset
+        annotations:
+          reloader.stakater.com/auto: "true"
         containers:
           *app :
             image:
@@ -56,12 +58,9 @@ spec:
             #   limits:
             #     memory: 2Gi
 
-      &db zulip-db: &common
+      &db zulip-db: 
+        <<: *common
         replicas: 1
-        type: statefulset
-        annotations:
-          reloader.stakater.com/auto: "true"
-
         containers:
           *db :        
             image: 
