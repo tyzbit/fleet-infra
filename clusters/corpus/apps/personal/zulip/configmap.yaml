@@ -5,7 +5,7 @@ metadata:
   namespace: personal
 data:
   redis.conf: |
-    requirepass ${REDIS_PASSWORD}
+    requirepass ${zulip_redis_password}
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -16,4 +16,4 @@ data:
   memcached.conf: |
     mech_list: plain
   memcached-sasl-db: |
-    zulip:${MEMCACHED_PASSWORD}
+    zulip:${zulip_memcached_password}
