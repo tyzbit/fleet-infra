@@ -174,7 +174,7 @@ spec:
         controller: rabbitmq
         ports:
           rabbitmq:
-            port: 15672
+            port: 5672
 
     ingress:
       main:
