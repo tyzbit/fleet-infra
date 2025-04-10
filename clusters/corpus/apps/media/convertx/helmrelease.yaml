@@ -24,7 +24,7 @@ spec:
         containers:
           *app :
             image:
-              repository: ghcr.io/c4illin/convertx:main
+              repository: ghcr.io/c4illin/convertx
               tag: v0.12.1
             env:
               AUTO_DELETE_EVERY_N_HOURS: "72"
