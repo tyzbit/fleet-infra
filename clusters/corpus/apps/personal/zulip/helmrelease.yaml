@@ -108,9 +108,9 @@ spec:
         advancedMounts:
           *app :
             *app :
-              - path: /data/zulip.key
+              - path: /data/certs/zulip.key
                 subPath: tls.key
-              - path: /data/zulip.crt
+              - path: /data/certs/zulip.crt
                 subPath: tls.crt
       app-data:
         existingClaim: zulip-app-longhorn-webapp
