@@ -19,14 +19,13 @@ spec:
         namespace: flux-system
   values:
     controllers:
-
-      &app zulip-app: &common
+      app: &common
         replicas: 1
         type: statefulset
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
-          *app :
+          &app zulip-app :
             image:
               repository: zulip/docker-zulip
               tag: 10.1-0
@@ -58,11 +57,11 @@ spec:
             #   limits:
             #     memory: 2Gi
 
-      &db zulip-db: 
+      db: 
         <<: *common
         replicas: 1
         containers:
-          *db :        
+          &db zulip-db:        
             image: 
               repository: postgres
               tag: 14
@@ -71,7 +70,7 @@ spec:
               POSTGRES_USER: "zulip"
               POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
 
-      *memcached :
+      memcached:
         <<: *common
         replicas: 1
         containers:
@@ -80,16 +79,16 @@ spec:
               repository: memcached
               tag: alpine
 
-      &redis zulip-redis:
+      redis:
         <<: *common
         replicas: 1
         containers:
-          *redis :
+          &redis zulip-redis:
             image: 
               repository: redis
               tag: alpine
 
-      *rmq :
+      rabbitmq:
         <<: *common
         replicas: 1
         containers:
@@ -102,11 +101,11 @@ spec:
               RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS}
 
     persistence:
-      *app :
+      app-certs:
         type: secret
         name: ${chat_domain}
         advancedMounts:
-          *app :
+          app:
             *app :
               - path: /data/certs/zulip.key
                 subPath: tls.key
@@ -114,26 +113,26 @@ spec:
                 subPath: tls.crt
       app-data:
         existingClaim: zulip-app-longhorn-webapp
-        advancedMounts: { *app : { *app : [path: /data] } }
-      *db :
+        advancedMounts: { app : { *app : [path: /data] } }
+      db:
         existingClaim: zulip-postgresql-longhorn-database
-        advancedMounts: { *db : { *db : [path: /var/lib/postgresql/data/db] } }
-      *memcached :
+        advancedMounts: { db : { *db : [path: /var/lib/postgresql/data/db] } }
+      memcached:
         type: configMap
         name: *memcached
         advancedMounts: 
-          *memcached : 
+          memcached: 
             *memcached :
               - path: /home/memcache/memcached.conf
                 subPath: memcached.conf
               - path: /home/memcache/memcached-sasl-db
                 subPath: memcached-sasl-db
-      *rmq :
+      rabbitmq:
         existingClaim: zulip-rabbitmq-longhorn-database
-        advancedMounts: { *rmq : { *rmq : [path: /var/lib/rabbitmq] } }
-      *redis :
+        advancedMounts: { rabbitmq : { *rmq : [path: /var/lib/rabbitmq] } }
+      redis:
         existingClaim: zulip-redis-longhorn-database
-        advancedMounts: { *redis : { *redis : [path: /data] } }
+        advancedMounts: { redis : { *redis : [path: /data] } }
       # redis-conf:
       #   type: configMap
       #   name: *redis
