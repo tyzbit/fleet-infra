@@ -64,7 +64,7 @@ spec:
         containers:
           *db :        
             image: 
-              repository: zulip/zulip-postgresql
+              repository: postgres
               tag: 14
             env:
               POSTGRES_DB: "zulip"
