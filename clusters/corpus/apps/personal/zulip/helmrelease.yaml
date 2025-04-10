@@ -141,7 +141,7 @@ spec:
       #   advancedMounts: { *redis : { *redis : [path: /etc/redis.conf, subPath: redis.conf] } }
 
     service:
-      main:
+      app:
         type: ClusterIP
         controller: app
         ports:
@@ -149,6 +149,30 @@ spec:
             port: 80
           https:
             port: 443
+      db:
+        type: ClusterIP
+        controller: db
+        ports:
+          postgres:
+            port: 5432
+      memcached:
+        type: ClusterIP
+        controller: memcached
+        ports:
+          memcached:
+            port: 11212
+      redis:
+        type: ClusterIP
+        controller: redis
+        ports:
+          redis:
+            port: 6379
+      rabbitmq:
+        type: ClusterIP
+        controller: rabbitmq
+        ports:
+          rabbitmq:
+            port: 15672
 
     ingress:
       main:
@@ -166,7 +190,7 @@ spec:
             paths:
               - path: "/"
                 service:
-                  identifier: main
+                  identifier: app
         tls:
           - hosts:
               - *host
