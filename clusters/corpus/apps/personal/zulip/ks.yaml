@@ -11,7 +11,7 @@ spec:
   wait: false
   prune: true
 
-  path: "./clusters/workbench/apps/personal/zulip"
+  path: "./clusters/corpus/apps/personal/zulip"
   sourceRef:
     kind: GitRepository
     name: flux-system
