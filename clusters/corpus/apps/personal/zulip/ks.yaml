@@ -20,8 +20,8 @@ spec:
   postBuild:
     substituteFrom:
       - kind: Secret
-        name: zulip
+        name: sensitive-values
         optional: false
       - kind: Secret
-        name: sensitive-values
+        name: zulip
         optional: false
