@@ -105,7 +105,7 @@ spec:
     extraArgs:
       provider: github
       github-org: "${blog_name}"
-      github-team: "super-admins,convert"
+      github-team: "super-admins,morphos"
       cookie-expire: 168h0m0s
     config:
       existingSecret: morphos-oauth2-proxy
