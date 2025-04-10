@@ -28,6 +28,7 @@ spec:
               tag: v0.12.1
             env:
               AUTO_DELETE_EVERY_N_HOURS: "72"
+              ALLOW_UNAUTHENTICATED: "true"
             resources:
               requests:
                 cpu: 100m
