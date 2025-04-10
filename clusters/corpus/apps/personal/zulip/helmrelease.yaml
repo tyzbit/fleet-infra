@@ -90,6 +90,8 @@ spec:
             image: 
               repository: redis
               tag: alpine
+            env:
+              REDIS_PASSWORD: ${zulip_redis_password}
 
       rabbitmq:
         <<: *common
