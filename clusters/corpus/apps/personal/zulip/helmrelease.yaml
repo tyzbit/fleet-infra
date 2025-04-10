@@ -141,7 +141,7 @@ spec:
     service:
       main:
         type: ClusterIP
-        controller: *app
+        controller: app
         ports:
           http:
             port: 80
