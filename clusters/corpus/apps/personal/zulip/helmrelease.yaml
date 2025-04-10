@@ -100,7 +100,7 @@ spec:
               tag: 4.0.7
             env:
               RABBITMQ_DEFAULT_USER: zulip
-              RABBITMQ_DEFAULT_PASSWORD: ${zulip_rabbitmq_password}
+              RABBITMQ_DEFAULT_PASS: ${zulip_rabbitmq_password}
 
     persistence:
       app-certs:
