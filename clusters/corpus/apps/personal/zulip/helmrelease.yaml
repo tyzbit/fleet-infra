@@ -36,6 +36,7 @@ spec:
               ###
               DB_HOST: zulip-db
               DB_USER: zulip
+              AUTO_BACKUP_ENABLED: "False" # Longhorn already backs up
               ZULIP_AUTH_BACKENDS: EmailAuthBackend
               SETTING_MEMCACHED_LOCATION: &memcached zulip-memcached
               SETTING_RABBITMQ_HOST: &rmq zulip-rabbitmq
