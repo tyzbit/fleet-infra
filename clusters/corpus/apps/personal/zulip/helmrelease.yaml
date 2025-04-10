@@ -111,7 +111,7 @@ spec:
                 subPath: tls.key
               - path: /data/certs/zulip.crt
                 subPath: tls.crt
-              - path: /data/zulip.combined-chain.crt
+              - path: /data/certs/zulip.combined-chain.crt
                 subPath: tls.crt
       app-data:
         existingClaim: zulip-app-longhorn-webapp
