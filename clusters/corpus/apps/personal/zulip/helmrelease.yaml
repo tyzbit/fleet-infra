@@ -30,27 +30,26 @@ spec:
               repository: zulip/docker-zulip
               tag: 10.1-0
             env:
-              # Required
-              SETTING_EXTERNAL_HOST: ${chat_domain}
-              SETTING_ZULIP_ADMINISTRATOR: ${personal_email}
-              ###
+              AUTO_BACKUP_ENABLED: "False" # Longhorn already backs up
               DB_HOST: zulip-db
               DB_USER: zulip
-              AUTO_BACKUP_ENABLED: "False" # Longhorn already backs up
-              ZULIP_AUTH_BACKENDS: EmailAuthBackend
-              SETTING_MEMCACHED_LOCATION: &memcached zulip-memcached
-              SETTING_RABBITMQ_HOST: &rmq zulip-rabbitmq
-              SETTING_EMAIL_HOST: email-smtp.us-east-1.amazonaws.com
+              SECRETS_email_password: ${zulip_smtp_password}
+              SECRETS_memcached_password: ${zulip_memcached_password}
+              SECRETS_postgres_password: ${zulip_postgres_password}
+              SECRETS_rabbitmq_password: ${zulip_rabbitmq_password}
+              SECRETS_redis_password: ${zulip_redis_password}
+              SECRETS_secret_key: ${zulip_secret_key}
               SETTING_EMAIL_HOST_USER: AKIA3NTKMLEAZCH3EGRK
+              SETTING_EMAIL_HOST: email-smtp.us-east-1.amazonaws.com
               SETTING_EMAIL_PORT: "587"
               SETTING_EMAIL_USE_SSL: "True"
               SETTING_EMAIL_USE_TLS: "True"
-              SECRETS_email_password: ${zulip_smtp_password}
-              SECRETS_rabbitmq_password: ${zulip_rabbitmq_password}
-              SECRETS_postgres_password: ${zulip_postgres_password}
-              SECRETS_memcached_password: ${zulip_memcached_password}
-              SECRETS_redis_password: ${zulip_redis_password}
-              SECRETS_secret_key: ${zulip_secret_key}
+              SETTING_EXTERNAL_HOST: ${chat_domain}
+              SETTING_MEMCACHED_LOCATION: &memcached zulip-memcached
+              SETTING_RABBITMQ_HOST: &rmq zulip-rabbitmq
+              SETTING_REDIS_HOST: &redis zulip-redis
+              SETTING_ZULIP_ADMINISTRATOR: ${personal_email}
+              ZULIP_AUTH_BACKENDS: EmailAuthBackend
 
             # resources:
             #   requests:
@@ -84,7 +83,7 @@ spec:
         <<: *common
         replicas: 1
         containers:
-          &redis zulip-redis:
+          *redis :
             image: 
               repository: redis
               tag: alpine
