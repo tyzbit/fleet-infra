@@ -106,7 +106,7 @@ spec:
       *app :
         type: secret
         name: ${chat_domain}
-        advancedMounts: { *rmq : { *rmq : [path: /opt/docker/zulip/zulip/certs/] } }
+        advancedMounts: { *app : { *app : [path: /opt/docker/zulip/zulip/certs/] } }
       app-data:
         existingClaim: zulip-app-longhorn-webapp
         advancedMounts: { *app : { *app : [path: /data] } }
