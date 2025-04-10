@@ -144,7 +144,7 @@ spec:
         advancedMounts:
           redis:
             *redis :
-              - path: /etc/redis.conf
+              - path: /usr/local/etc/redis/redis.conf
                 readOnly: true
                 subPath: redis.conf
 
