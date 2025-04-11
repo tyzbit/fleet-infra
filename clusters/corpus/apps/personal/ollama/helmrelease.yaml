@@ -40,12 +40,12 @@ spec:
               OLLAMA_MODELS: &modelPath /models
               OLLAMA_LOAD_TIMEOUT: "600"
               OLLAMA_CONTEXT_LENGTH: "8192"
-              OLLAMA_NUM_PARALLEL: "8"
+              OLLAMA_NUM_PARALLEL: "32"
             resources:
               requests:
                 cpu: 200m
               limits:
-                memory: 28Gi
+                memory: 24Gi
 
     persistence:
       ollama:
