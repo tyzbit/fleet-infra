@@ -52,6 +52,7 @@ spec:
               SETTING_REDIS_HOST: &redis zulip-redis
               SETTING_ZULIP_ADMINISTRATOR: ${personal_email}
               SETTING_ZULIP_SERVICE_PUSH_NOTIFICATIONS: "True"
+              SETTING_ZULIP_SERVICE_SUBMIT_USAGE_STATISTICS: "False"
               ZULIP_AUTH_BACKENDS: EmailAuthBackend
 
             # resources:
