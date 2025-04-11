@@ -7,6 +7,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 30m
+  releaseName: open-webui
   targetNamespace: personal
   chart:
     spec:
