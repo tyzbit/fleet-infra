@@ -261,6 +261,7 @@ spec:
               # FILTER_OLLAMA_URL: http://media2.home.arpa:11434
               FILTER_OLLAMA_URL: http://ollama:11434
               FILTER_OLLAMA_MODEL: gemma3:4b
+              # FILTER_OLLAMA_MAX_PREDICTION_TOKENS: "256" # not needed
               FILTER_OLLAMA_PROMPT: >-
                 You are an expert in natural language analysis, specializing in 
                 distinguishing between human-written text and 
