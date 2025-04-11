@@ -44,7 +44,7 @@ spec:
               SETTING_EMAIL_HOST_USER: AKIA3NTKMLEAZCH3EGRK
               SETTING_EMAIL_HOST: email-smtp.us-east-1.amazonaws.com
               SETTING_EMAIL_PORT: "587"
-              SETTING_EMAIL_USE_SSL: "True"
+              SETTING_EMAIL_USE_SSL: "False"
               SETTING_EMAIL_USE_TLS: "True"
               SETTING_EXTERNAL_HOST: ${chat_domain}
               SETTING_MEMCACHED_LOCATION: zulip-memcached:11211
