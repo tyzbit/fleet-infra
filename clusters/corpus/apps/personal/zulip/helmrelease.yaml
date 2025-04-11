@@ -54,12 +54,11 @@ spec:
               SETTING_ZULIP_SERVICE_PUSH_NOTIFICATIONS: "True"
               SETTING_ZULIP_SERVICE_SUBMIT_USAGE_STATISTICS: "False"
               ZULIP_AUTH_BACKENDS: EmailAuthBackend
-
-            # resources:
-            #   requests:
-            #     cpu: 10m
-            #   limits:
-            #     memory: 2Gi
+            resources:
+              requests:
+                cpu: 500m
+              limits:
+                memory: 6Gi
 
       db: 
         <<: *common
@@ -74,6 +73,11 @@ spec:
               POSTGRES_DB: "zulip"
               POSTGRES_USER: "zulip"
               POSTGRES_PASSWORD: ${zulip_postgres_password}
+            resources:
+              requests:
+                cpu: 200m
+              limits:
+                memory: 512Mi
 
       memcached:
         <<: *common
@@ -83,6 +87,11 @@ spec:
             image:
               repository: memcached
               tag: alpine
+            resources:
+              requests:
+                cpu: 10m
+              limits:
+                memory: 64Mi
 
       redis:
         <<: *common
@@ -100,6 +109,11 @@ spec:
               - |
                 echo "requirepass '$$REDIS_PASSWORD'" > /etc/redis.conf
                 exec redis-server /etc/redis.conf
+            resources:
+              requests:
+                cpu: 10m
+              limits:
+                memory: 64Mi
 
       rabbitmq:
         <<: *common
@@ -112,6 +126,11 @@ spec:
             env:
               RABBITMQ_DEFAULT_USER: zulip
               RABBITMQ_DEFAULT_PASS: ${zulip_rabbitmq_password}
+            resources:
+              requests:
+                cpu: 10m
+              limits:
+                memory: 512Mi
 
     persistence:
       app-certs:
