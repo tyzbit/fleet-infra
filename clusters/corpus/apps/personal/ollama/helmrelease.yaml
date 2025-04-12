@@ -43,13 +43,13 @@ spec:
               # OLLAMA_CONTEXT_LENGTH: "8192"
               # OLLAMA_CONTEXT_LENGTH: "512"
               # OLLAMA_NUM_PARALLEL: "16"
-            # probes:
-            #   liveness:
-            #     enabled: true
-            #     type: HTTP
-            #   readiness:
-            #     enabled: true
-            #     type: HTTP
+            probes:
+              liveness:
+                enabled: true
+                type: HTTP
+              readiness:
+                enabled: true
+                type: HTTP
             resources:
               requests:
                 cpu: 200m
