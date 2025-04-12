@@ -30,8 +30,8 @@ spec:
             image:
               repository: docker.io/ollama/ollama
               tag: 0.6.5
-            securityContext:
-              privileged: true
+            # securityContext:
+            #   privileged: true
             env:
               TZ: America/New_York
               OLLAMA_INTEL_GPU: "1" # doesn't work right now, experimental
