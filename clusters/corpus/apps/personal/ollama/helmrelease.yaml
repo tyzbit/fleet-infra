@@ -20,8 +20,8 @@ spec:
   values:
     controllers:
       ollama:
-        type: statefulset
-        replicas: 1
+        type: deployment
+        replicas: 2
         annotations:
           reloader.stakater.com/auto: "true"
 
@@ -42,6 +42,14 @@ spec:
               # OLLAMA_CONTEXT_LENGTH: "8192"
               # OLLAMA_CONTEXT_LENGTH: "512"
               # OLLAMA_NUM_PARALLEL: "16"
+            probes:
+              liveness: &probe
+                enabled: true
+                custom: true
+                spec: 
+                  exec: {command: [ollama run gemma3:4b ""]}
+              readiness:
+                <<: *probe
             resources:
               requests:
                 cpu: 200m
@@ -50,7 +58,13 @@ spec:
 
     persistence:
       ollama:
-        existingClaim: ollama-models-longhorn-objectstorage
+        # existingClaim: ollama-models-longhorn-objectstorage
+        # globalMounts:
+        #   - path: *modelPath
+        #     subPath: models
+        #   - path: /root/.ollama
+        #     subPath: config
+        existingClaim: ollama-data-nas
         globalMounts:
           - path: *modelPath
             subPath: models

@@ -11,3 +11,17 @@ spec:
   resources:
     requests:
       storage: 800Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ollama-data-nas
+  namespace: personal
+spec:
+  accessModes:
+    - ReadWriteMany
+  volumeMode: Filesystem
+  storageClassName: longhorn-nas
+  resources:
+    requests:
+      storage: 1Ti
