@@ -45,8 +45,10 @@ spec:
             probes:
               liveness:
                 enabled: true
+                type: HTTP
               readiness:
                 enabled: true
+                type: HTTP
             resources:
               requests:
                 cpu: 200m
