@@ -20,9 +20,9 @@ spec:
   values:
     controllers:
       ollama:
-        type: deployment
-        strategy: RollingUpdate
-        replicas: 2
+        type: statefulset
+        # strategy: RollingUpdate
+        replicas: 1
         annotations:
           reloader.stakater.com/auto: "true"
 
@@ -60,18 +60,18 @@ spec:
 
     persistence:
       ollama:
-        # existingClaim: ollama-models-longhorn-objectstorage
-        # globalMounts:
-        #   - path: *modelPath
-        #     subPath: models
-        #   - path: /root/.ollama
-        #     subPath: config
-        existingClaim: ollama-data-nas
+        existingClaim: ollama-models-longhorn-objectstorage
         globalMounts:
           - path: *modelPath
             subPath: models
           - path: /root/.ollama
             subPath: config
+        # existingClaim: ollama-data-nas
+        # globalMounts:
+        #   - path: *modelPath
+        #     subPath: models
+        #   - path: /root/.ollama
+        #     subPath: config
       dri:
         type: hostPath
         hostPath: /dev/dri
