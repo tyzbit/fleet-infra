@@ -49,7 +49,9 @@ spec:
                 type: HTTP
               readiness:
                 enabled: true
-                type: HTTP
+                custom: true
+                spec: 
+                  exec: {command: [sh,-c,/usr/bin/ollama run gemma3:4b ""]}
             resources:
               requests:
                 cpu: 200m
