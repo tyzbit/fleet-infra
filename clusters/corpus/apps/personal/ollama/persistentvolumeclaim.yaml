@@ -21,7 +21,7 @@ spec:
   accessModes:
     - ReadWriteMany
   volumeMode: Filesystem
-  storageClassName: longhorn-nas
+  storageClassName: nas
   resources:
     requests:
       storage: 1Ti
