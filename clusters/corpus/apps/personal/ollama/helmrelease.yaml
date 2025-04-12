@@ -47,7 +47,7 @@ spec:
                 enabled: true
                 custom: true
                 spec: 
-                  exec: {command: [/usr/bin/ollama,run,gemma3:4b,""]}
+                  exec: {command: [sh,-c,/usr/bin/ollama run gemma3:4b ""]}
               readiness:
                 <<: *probe
             resources:
