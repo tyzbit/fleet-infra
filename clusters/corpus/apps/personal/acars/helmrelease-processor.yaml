@@ -1,0 +1,144 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.7.3/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app acars-processor
+  namespace: flux-system
+spec:
+  targetNamespace: personal
+  releaseName: *app
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: "3.7.3"
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  values:
+    common_settings: &common_settings
+      type: statefulset
+      annotations:
+        reloader.stakater.com/auto: "true"
+
+    controllers:
+      acars-processor-1:
+        <<: *common_settings
+        replicas: 1 # active nas
+        containers:
+          acars-processor-1:
+            image:
+              repository: ghcr.io/tyzbit/acars-processor
+              tag: latest
+            env:
+              ACARSHUB_HOST: acars-acarshub
+              ACARSHUB_PORT: "15550"
+              ACARSHUB_VDLM2_HOST: acars-acarshub
+              ACARSHUB_VDLM2_PORT: "15555"
+              TAR1090_URL: &tar1090 http://adsb-ultrafeeder
+              ANNOTATE_ACARS: "true"
+              ANNOTATE_VDLM2: "true"
+              LOGLEVEL: debug
+              TAR1090_REFERENCE_GEOLOCATION: &location ${my_latitude},${my_longitude}
+            envFrom:
+              - secretRef:
+                  name: acars-processor
+            resources:
+              requests:
+                cpu: 10m
+                memory: 256Mi
+              limits:
+                memory: 256Mi
+
+      acars-processor-2:
+        <<: *common_settings
+        replicas: 1 # active nas
+        containers:
+          acars-processor-2:
+            image:
+              repository: ghcr.io/tyzbit/acars-processor
+              tag: latest
+            env:
+              ACARSHUB_HOST: acars-acarshub
+              ACARSHUB_PORT: "15550"
+              ACARSHUB_VDLM2_HOST: acars-acarshub
+              ACARSHUB_VDLM2_PORT: "15555"
+              ANNOTATE_ACARS: "true"
+              ANNOTATE_VDLM2: "true"
+              TAR1090_URL: *tar1090
+              LOGLEVEL: debug
+              TAR1090_REFERENCE_GEOLOCATION: *location
+              FILTER_CRITERIA_HAS_TEXT: "true"
+              NEW_RELIC_CUSTOM_EVENT_TYPE: CustomACARSHumanMessages
+              # FILTER_CRITERIA_DICTIONARY_PHRASE_LENGTH_MINIMUM: "2"
+              FILTER_OPENAI_MODEL: gpt-4o-mini
+              FILTER_OPENAI_PROMPT: >-
+                You are an expert in natural language analysis, specializing in 
+                distinguishing between human-written text and 
+                machine-generated text or reports. Was this message written 
+                by a person for another person to read?
+              # FILTER_OPENAI_APIKEY: (set in envFrom)
+              ACARS_ANNOTATOR_SELECTED_FIELDS: >-
+                acarsAircraftTailCode
+                acarsFrequencyMHz
+                acarsMessageText
+                acarsMessageFrom
+              VDLM2_ANNOTATOR_SELECTED_FIELDS: >-
+                vdlm2FrequencyHz
+                acarsAircraftTailCode
+                acarsMessageText
+                acarsMessageFrom
+              TAR1090_ANNOTATOR_SELECTED_FIELDS: >-
+                tar1090AircraftDistanceMi
+                tar1090AircraftAltimeterGeometricFeet
+            envFrom:
+              - secretRef:
+                  name: acars-processor2
+            resources:
+              requests:
+                cpu: 10m
+                memory: 128Mi
+              limits:
+                memory: 128Mi
+
+      acars-processor-3:
+        <<: *common_settings
+        replicas: 1 # active nas
+        containers:
+          acars-processor-3:
+            image:
+              repository: ghcr.io/tyzbit/acars-processor
+              tag: latest
+            env:
+              ACARSHUB_HOST: acars-acarshub
+              ACARSHUB_PORT: "15550"
+              ACARSHUB_VDLM2_HOST: acars-acarshub
+              ACARSHUB_VDLM2_PORT: "15555"
+              ANNOTATE_ACARS: "true"
+              ANNOTATE_VDLM2: "true"
+              LOGLEVEL: debug
+              FILTER_CRITERIA_HAS_TEXT: "true"
+              # FILTER_CRITERIA_DICTIONARY_PHRASE_LENGTH_MINIMUM: "2"
+              # FILTER_OLLAMA_URL: http://media2.home.arpa:11434
+              FILTER_OLLAMA_URL: http://ollama:11434
+              FILTER_OLLAMA_MODEL: gemma3:4b
+              # FILTER_OLLAMA_MAX_PREDICTION_TOKENS: "256" # not needed
+              FILTER_OLLAMA_PROMPT: >-
+                You are an expert in natural language analysis, specializing in 
+                distinguishing between human-written text and 
+                machine-generated text or reports. Was this message written 
+                by a person for another person to read?
+              ACARS_ANNOTATOR_SELECTED_FIELDS: >-
+                acarsMessageText
+              VDLM2_ANNOTATOR_SELECTED_FIELDS: >-
+                acarsMessageText
+            envFrom:
+              - secretRef:
+                  name: acars-processor3
+            resources:
+              requests:
+                cpu: 10m
+                memory: 128Mi
+              limits:
+                memory: 128Mi
