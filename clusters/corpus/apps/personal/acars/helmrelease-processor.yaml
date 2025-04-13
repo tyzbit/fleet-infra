@@ -6,6 +6,7 @@ metadata:
   namespace: flux-system
 spec:
   targetNamespace: personal
+  releaseName: *app
   interval: 15m
   chart:
     spec:
@@ -24,7 +25,7 @@ spec:
     controllers:
       acars-processor-1:
         <<: *common_settings
-        nameOverride: acars-processor-1
+        nameOverride: "1"
         replicas: 1 # active nas
         containers:
           acars-processor-1:
@@ -53,7 +54,7 @@ spec:
 
       acars-processor-2:
         <<: *common_settings
-        nameOverride: acars-processor-2
+        nameOverride: "2"
         replicas: 1 # active nas
         containers:
           acars-processor-2:
@@ -105,7 +106,7 @@ spec:
 
       acars-processor-3:
         <<: *common_settings
-        nameOverride: acars-processor-3
+        nameOverride: "3"
         replicas: 1 # active nas
         containers:
           acars-processor-3:
