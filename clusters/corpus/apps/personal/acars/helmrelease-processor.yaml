@@ -76,9 +76,10 @@ spec:
               # FILTER_CRITERIA_DICTIONARY_PHRASE_LENGTH_MINIMUM: "2"
               FILTER_OPENAI_MODEL: gpt-4o-mini
               FILTER_OPENAI_PROMPT: >-
-                You are an air-traffic controller, looking for requests and 
-                information from pilots, not reports generated from software.
-                Is this a message from a pilot?
+                Analyze this message and determine if all or the last section
+                was written by a person, most likely between a pilot and air
+                traffic control. Ignore errant characters such as newlines
+                or spaces interrupting words.
               # FILTER_OPENAI_APIKEY: (set in envFrom)
               ACARS_ANNOTATOR_SELECTED_FIELDS: >-
                 acarsAircraftTailCode
@@ -127,9 +128,10 @@ spec:
               FILTER_OLLAMA_MODEL: gemma3:4b
               # FILTER_OLLAMA_MAX_PREDICTION_TOKENS: "256" # not needed
               FILTER_OLLAMA_PROMPT: >-
-                You are an air-traffic controller, looking for requests and 
-                information from pilots, not reports generated from software.
-                Is this a message from a pilot?
+                Analyze this message and determine if all or the last section
+                was written by a person, most likely between a pilot and air
+                traffic control. Ignore errant characters such as newlines
+                or spaces interrupting words.
               ACARS_ANNOTATOR_SELECTED_FIELDS: >-
                 acarsMessageText
               VDLM2_ANNOTATOR_SELECTED_FIELDS: >-
