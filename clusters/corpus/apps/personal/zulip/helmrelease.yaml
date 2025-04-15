@@ -123,7 +123,7 @@ spec:
           *rmq :
             image: 
               repository: rabbitmq
-              tag: 4.0.8
+              tag: 4.0.9
             env:
               RABBITMQ_DEFAULT_USER: zulip
               RABBITMQ_DEFAULT_PASS: ${zulip_rabbitmq_password}
