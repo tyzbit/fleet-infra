@@ -160,7 +160,9 @@ spec:
                 The prefix of alphanumeric characters that are not English 
                 can make it seem like this is not a meaningful communication,
                 but with "HELLO", it is now clear that this message contains 
-                a person-to-person message. The author is reporting oil levels,
+                a person-to-person message. It is also a short message, which
+                is common because pilots and ATC want to minimize the amount of
+                time they spend typing. The author is reporting oil levels,
                 which is technical information but decided to inform dispatch
                 manually. We can infer that oil at 10.0/10.0 means it is 
                 completely topped off, and the aircraft does not need any more
