@@ -21,63 +21,21 @@ spec:
     controllers:
       ollama:
         type: deployment
-        # strategy: RollingUpdate
-        replicas: 1
+        replicas: 2
         annotations:
           reloader.stakater.com/auto: "true"
 
         containers:
           ollama:
             image:
-              repository: docker.io/ollama/ollama
-              tag: 0.6.5
-            # securityContext:
-            #   privileged: true
-            env:
-              TZ: America/New_York
-              OLLAMA_INTEL_GPU: "1" # doesn't work right now, experimental
-              HSA_OVERRIDE_GFX_VERSION: 11.0.1 # force to use graphics card
-              OLLAMA_HOST: 0.0.0.0
-              OLLAMA_ORIGINS: "*"
-              OLLAMA_MODELS: &modelPath /models
-              OLLAMA_LOAD_TIMEOUT: "600"
-              # OLLAMA_CONTEXT_LENGTH: "8192"
-              # OLLAMA_CONTEXT_LENGTH: "512"
-              # OLLAMA_NUM_PARALLEL: "16"
-            # probes:
-            #   liveness:
-            #     enabled: true
-            #     type: HTTP
-            #   readiness:
-            #     enabled: true
-            #     custom: true
-            #     spec: 
-            #       exec: {command: [sh,-c,/usr/bin/ollama run gemma3:4b ""]}
-            resources:
-              requests:
-                cpu: 200m
-              limits:
-                memory: 12Gi
-
-      ollama-intel:
-        type: deployment
-        # strategy: RollingUpdate
-        replicas: 1
-        annotations:
-          reloader.stakater.com/auto: "true"
-
-        containers:
-          ollama-intel:
-            # image:
-              # repository: docker.io/ollama/ollama
-              # tag: 0.6.5
-            image:
               repository: ghcr.io/tyzbit/ollama-intel-gpu
               tag: latest
+            # image:
+            #   repository: docker.io/ollama/ollama
+            #   tag: 0.6.5
             securityContext:
               privileged: true
             env:
-              TZ: America/New_York
               # --- Intel GPU
               DEVICE: Arc
               OLLAMA_MAX_LOADED_MODELS: 1
@@ -85,6 +43,7 @@ spec:
               OLLAMA_NUM_GPU: 1
               SYCL_CACHE_PERSITENT: 1
               # ---
+              TZ: America/New_York
               OLLAMA_INTEL_GPU: "1" # doesn't work right now, experimental
               HSA_OVERRIDE_GFX_VERSION: 11.0.1 # force to use graphics card
               OLLAMA_HOST: 0.0.0.0
