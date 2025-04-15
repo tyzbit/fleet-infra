@@ -36,6 +36,7 @@ spec:
             env:
               TZ: America/New_York
               OLLAMA_INTEL_GPU: "1" # doesn't work right now, experimental
+              HSA_OVERRIDE_GFX_VERSION: 11.0.1 # force to use graphics card
               OLLAMA_HOST: 0.0.0.0
               OLLAMA_ORIGINS: "*"
               OLLAMA_MODELS: &modelPath /models
