@@ -108,7 +108,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: radarr-3d-oauth2-proxy
-  namespace: media
+  namespace: flux-system
 spec:
   targetNamespace: media
   releaseName: radarr-3d-oauth2-proxy

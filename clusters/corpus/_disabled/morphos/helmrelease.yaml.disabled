@@ -85,7 +85,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: morphos-oauth2-proxy
-  namespace: media
+  namespace: flux-system
 spec:
   targetNamespace: media
   releaseName: morphos-oauth2-proxy

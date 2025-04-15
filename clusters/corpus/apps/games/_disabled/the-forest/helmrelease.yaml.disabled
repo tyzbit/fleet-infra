@@ -2,7 +2,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: the-forest-fb-oauth2-proxy
-  namespace: games
+  namespace: flux-system
 spec:
   targetNamespace: games
   releaseName: the-forest-fb-oauth2-proxy

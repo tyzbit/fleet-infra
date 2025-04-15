@@ -3,8 +3,9 @@ apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: &app sabnzbd
-  namespace: media
+  namespace: flux-system
 spec:
+  targetNamespace: media
   interval: 30m
   chart:
     spec:
@@ -123,7 +124,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: sabnzbd-oauth2-proxy
-  namespace: media
+  namespace: flux-system
 spec:
   targetNamespace: media
   releaseName: sabnzbd-oauth2-proxy

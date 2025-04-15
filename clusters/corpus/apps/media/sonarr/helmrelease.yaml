@@ -103,7 +103,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: sonarr-oauth2-proxy
-  namespace: media
+  namespace: flux-system
 spec:
   targetNamespace: media
   releaseName: sonarr-oauth2-proxy
