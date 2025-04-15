@@ -91,7 +91,6 @@ spec:
                 references "OPS" it definitely has a message meaningful to 
                 pilots or dispatch because DISP stands for DISPATCH and 
                 OPS stands for OPERATIONS.
-
                 
                 For example: 
                 ```
@@ -106,10 +105,10 @@ spec:
                 C314           3HELLO
                 OIL IS AT 10.0/10.0
                 THANK YOU
-
-
-
-
+                
+                
+                
+                
                 ```
 
                 The prefix of alphanumeric characters that are not English 
@@ -250,7 +249,6 @@ spec:
                 pilots or dispatch because DISP stands for DISPATCH and 
                 OPS stands for OPERATIONS.
 
-                
                 For example: 
                 ```
                 MSG FROM DISP WAS THAT A TYPO QM YOU WERE FILED FOR FL290
@@ -264,10 +262,10 @@ spec:
                 C314           3HELLO
                 OIL IS AT 10.0/10.0
                 THANK YOU
-
-
-
-
+                
+                
+                
+                
                 ```
 
                 The prefix of alphanumeric characters that are not English 
