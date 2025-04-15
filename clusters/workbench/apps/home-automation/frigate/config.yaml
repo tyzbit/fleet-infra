@@ -57,6 +57,10 @@ camera_groups:
     cameras: [doorbell]
     icon: LuBellRing
     order: 3
+  "Backyard and Garage":
+    cameras: [backdeck, garage]
+    icon: LuPawPrint
+    order: 4
 
 cameras:
   garage:
