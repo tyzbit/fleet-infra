@@ -158,7 +158,7 @@ spec:
                 ```
 
                 The prefix of alphanumeric characters that are not English 
-                can make it seem like this is not a meaninful communication,
+                can make it seem like this is not a meaningful communication,
                 but with "HELLO", it is now clear that this message contains 
                 a person-to-person message. The author is reporting oil levels,
                 which is technical information but decided to inform dispatch
@@ -180,7 +180,7 @@ spec:
                 are going to try to make some time. Since automatically 
                 generated messages don't use names, English shorthand (LOL) or
                 inform about planned actions, this is definitely a communication
-                meaninful to pilots or dispatch.
+                meaningful to pilots or dispatch.
 
                 With this message:
                 ```
@@ -201,7 +201,7 @@ spec:
                 format.
                 
 
-                Another message that does not have meaninful communication:
+                Another message that does not have meaningful communication:
                 ```
                 POSN 37.177W 75.729,  71,024200,29004,28040,  63,-39,031712,
                 KPHLN 371037W 754344,-------,024200,29004, ,      , ,M 39,
