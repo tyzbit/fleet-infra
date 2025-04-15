@@ -146,7 +146,7 @@ spec:
                 This is a meaningful message to an aircraft from dispatch,
                 asking about a typo in a previous message.
 
-                This is a harder message, but it is meaninful communication:
+                This is a harder message, but it is meaningful communication:
                 ```
                 C314           3HELLO
                 OIL IS AT 10.0/10.0
