@@ -55,6 +55,7 @@ spec:
               SETTING_ZULIP_SERVICE_SUBMIT_USAGE_STATISTICS: "False"
               ZULIP_ADMINISTRATOR: admin@${chat_domain}
               ZULIP_AUTH_BACKENDS: EmailAuthBackend
+              NOREPLY_EMAIL_ADDRESS: noreply@{chat_domain}
             resources:
               requests:
                 cpu: 500m
