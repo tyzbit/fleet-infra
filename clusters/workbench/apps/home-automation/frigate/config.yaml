@@ -58,7 +58,7 @@ camera_groups:
     icon: LuBellRing
     order: 3
   "Backyard and Garage":
-    cameras: [backdeck, garage]
+    cameras: [backdeck, garage, sidegarage]
     icon: LuDog
     order: 4
 
