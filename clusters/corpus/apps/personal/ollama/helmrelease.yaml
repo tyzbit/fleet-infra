@@ -20,7 +20,7 @@ spec:
   values:
     controllers:
       ollama:
-        type: deployment
+        type: statefulset
         replicas: 2
         annotations:
           reloader.stakater.com/auto: "true"
@@ -67,6 +67,15 @@ spec:
                 cpu: 200m
               limits:
                 memory: 12Gi
+        statefulset:
+          volumeClaimTemplates:
+            - enabled: true
+              name: ollama-config
+              size: 1Gi
+              storageClass: longhorn-objectstorage
+              advancedMounts:
+                ollama-config:
+                  - path: /root/.ollama
 
     persistence:
       ollama:
@@ -75,8 +84,8 @@ spec:
         globalMounts:
           - path: *modelPath
             subPath: models
-          - path: /root/.ollama
-            subPath: config
+          # - path: /root/.ollama
+          #   subPath: config
       dri:
         type: hostPath
         hostPath: /dev/dri
