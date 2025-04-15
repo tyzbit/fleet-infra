@@ -43,15 +43,15 @@ spec:
               # OLLAMA_CONTEXT_LENGTH: "8192"
               # OLLAMA_CONTEXT_LENGTH: "512"
               # OLLAMA_NUM_PARALLEL: "16"
-            probes:
-              liveness:
-                enabled: true
-                type: HTTP
-              readiness:
-                enabled: true
-                custom: true
-                spec: 
-                  exec: {command: [sh,-c,/usr/bin/ollama run gemma3:4b ""]}
+            # probes:
+            #   liveness:
+            #     enabled: true
+            #     type: HTTP
+            #   readiness:
+            #     enabled: true
+            #     custom: true
+            #     spec: 
+            #       exec: {command: [sh,-c,/usr/bin/ollama run gemma3:4b ""]}
             resources:
               requests:
                 cpu: 200m
