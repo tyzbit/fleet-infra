@@ -59,7 +59,7 @@ camera_groups:
     order: 3
   "Backyard and Garage":
     cameras: [backdeck, garage]
-    icon: LuPawPrint
+    icon: LuDog
     order: 4
 
 cameras:
