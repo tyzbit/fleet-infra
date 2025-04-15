@@ -16,6 +16,8 @@ spec:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
-  dependsOn:
-    - name: kubernetes-secrets
-      namespace: flux-system
+  postBuild:
+    substituteFrom:
+      - kind: Secret
+        name: sensitive-values
+        optional: false
