@@ -125,18 +125,20 @@ spec:
               # FILTER_OLLAMA_URL: http://media2.home.arpa:11434
               FILTER_OLLAMA_URL: http://ollama:11434
               FILTER_OLLAMA_MODEL: gemma3:4b
+              FILTER_OLLAMA_FILTER_ON_FAILURE: "true"
               # FILTER_OLLAMA_MAX_PREDICTION_TOKENS: "256" # not needed
               FILTER_OLLAMA_PROMPT: |
                 This message was sent between pilots and air traffic control.
-                Rarely, messages like these have communication that
-                is meaningful to pilots or air traffic control (which is also
-                called dispatch). They sometimes have acronyms, abbreviations
-                and technical terms, usually related to air travel. The 
-                communication may be included at the end of some kind of 
-                generated report. If the message starts out with "DISP" or 
-                "MSG FROM DISP" or references "OPS" it definitely has a message
-                meaningful to pilots or dispatch because DISP stands for 
-                DISPATCH and OPS stands for OPERATIONS.
+                Rarely, messages like these have sections with communication 
+                that is meaningful to pilots or air traffic control (which is 
+                also called dispatch). They sometimes have acronyms, 
+                abbreviations and technical terms, usually related to air 
+                travel. The communication may be included at the end of some 
+                kind of generated report or message header. If the message 
+                starts out with "DISP" or "MSG FROM DISP" or references "OPS" 
+                it definitely has a message meaningful to pilots or dispatch 
+                because DISP stands for DISPATCH and OPS stands for OPERATIONS.
+
                 
                 For example: 
                 ```
@@ -159,14 +161,23 @@ spec:
 
                 The prefix of alphanumeric characters that are not English 
                 can make it seem like this is not a meaningful communication,
-                but with "HELLO", it is now clear that this message contains 
-                a person-to-person message. It is also a short message, which
-                is common because pilots and ATC want to minimize the amount of
-                time they spend typing. The author is reporting oil levels,
-                which is technical information but decided to inform dispatch
-                manually. We can infer that oil at 10.0/10.0 means it is 
-                completely topped off, and the aircraft does not need any more
-                oil.
+                but if the message has any greetings or pleasantries such as 
+                "HELLO" or "THNAK YOU", it is now unambiguously clear that this
+                message contains a meaninful communication. It is also a short 
+                message, which is common because pilots and ATC want to minimize
+                the amount of time they spend typing due to the critical nature
+                of their jobs. The author is reporting oil levels, which is 
+                technical information but this message warranted informing 
+                dispatch manually. We can infer that oil at 10.0/10.0 means 
+                it is completely topped off, and the aircraft does not need any 
+                more oil.
+
+                Also, if the message sounds dramatic such as referring to an
+                emergency, life vests, passengers (the shorthand PAX is used),
+                comments or questions about weather (the shorthand WX is used),
+                or reads as a person reporting a serious situation, it is a
+                meaningful communication between an aircraft and air traffic 
+                control.
 
                 This is the last example of meaningful communication:
                 ```
@@ -182,9 +193,11 @@ spec:
                 are going to try to make some time. Since automatically 
                 generated messages don't use names, English shorthand (LOL) or
                 inform about planned actions, this is definitely a communication
-                meaningful to pilots or dispatch.
+                meaningful to pilots or air traffic control.
 
-                With this message:
+                This does not have a meaningful communication between an 
+                aircraft and air traffic control:
+
                 ```
                 POSN36188W077155,GUILD,022722,335,DEEEZ,023833,ESCHR,M49,27459,
                 154A785RESREQ/AK,1158AF6PER/PR1326,303,360,153,,0,53,,M56,180,,,
@@ -194,15 +207,13 @@ spec:
                 V:ESENT,,AA2800,5F52
                 ```
                 
-                It does not have a meaningful communication between an aircraft
-                and dispatch. It has data and occasional English words but the
-                words do not form a thought that conveys meaning.
+                It has data and occasional English words but the words do not 
+                form a thought that conveys meaning or personal communication.
 
                 Most messages will be automatically generated by software
                 intended to be ingested by other software familiar with the
                 format.
                 
-
                 Another message that does not have meaningful communication:
                 ```
                 POSN 37.177W 75.729,  71,024200,29004,28040,  63,-39,031712,
@@ -221,9 +232,9 @@ spec:
                 can be commas, periods and newlines in unusual places. Newlines
                 might also be in the middle of words.
                 
-                Now analyze this message based on the information provided and
-                decide: Does this have communication that is meaningful to
-                pilots or air traffic control (a.k.a. dispatch)?
+                Based on the information provided, does some or part of this
+                message have personal communication that is meaningful to 
+                pilots or air traffic control?
               ACARS_ANNOTATOR_SELECTED_FIELDS: >-
                 acarsMessageText
               VDLM2_ANNOTATOR_SELECTED_FIELDS: >-
