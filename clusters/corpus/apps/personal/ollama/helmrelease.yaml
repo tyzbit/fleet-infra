@@ -21,7 +21,7 @@ spec:
     controllers:
       ollama:
         type: deployment
-        replicas: 4
+        replicas: 3
         annotations:
           reloader.stakater.com/auto: "true"
 
@@ -40,7 +40,7 @@ spec:
               # --- Intel GPU
               DEVICE: Arc
               OLLAMA_MAX_LOADED_MODELS: "1"
-              OLLAMA_NUM_PARALLEL: "1"
+              OLLAMA_NUM_PARALLEL: "2"
               OLLAMA_NUM_GPU: "1"
               SYCL_CACHE_PERSITENT: "1"
               # ---
