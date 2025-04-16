@@ -28,7 +28,7 @@ spec:
           &app zulip-app :
             image:
               repository: zulip/docker-zulip
-              tag: 10.1-0
+              tag: 10.2-0
             env:
               AUTO_BACKUP_ENABLED: "False" # Longhorn already backs up
               DISABLE_HTTPS: "True" # ingress provides https
