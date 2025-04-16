@@ -243,7 +243,7 @@ spec:
               # FILTER_CRITERIA_DICTIONARY_PHRASE_LENGTH_MINIMUM: "2"
               # FILTER_OLLAMA_URL: http://media2.home.arpa:11434
               # FILTER_OLLAMA_URL: http://ollama:11434
-              FILTER_OLLAMA_URL: https://ollama.home.arpa
+              FILTER_OLLAMA_URL: http://ollama.home.arpa
               # FILTER_OLLAMA_MODEL: gemma3:4b
               FILTER_OLLAMA_MODEL: llama3.2
               FILTER_OLLAMA_FILTER_ON_FAILURE: "true"
