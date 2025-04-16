@@ -82,13 +82,17 @@ spec:
               FILTER_OPENAI_PROMPT: &prompt |
                 This message was sent between aircraft and air traffic control.
                 Rarely, messages like these have sections with communication 
-                that is interesting to air travel hobbyists. The communication 
-                may be included at the end of various types of generated report 
-                or message header. If the message starts out with "DISP" or 
-                "MSG FROM DISP" or references "OPS" it definitely has a message 
-                interesting to air travel hobbyists because DISP stands for 
-                DISPATCH and OPS stands for OPERATIONS. Air travel hobbyists
-                care about human-typed messages, not computer generated reports.
+                that is interesting to air travel enthusiasts. The communication 
+                may be included after various types of sort generated reports
+                or message headers. If the message starts out with "DISP",
+                "MSG FROM DISP" or references "OPS" or "OPSCTL" it definitely
+                has a message interesting to air travel enthusiasts because DISP
+                stands for DISPATCH and OPS stands for OPERATIONS. 
+                Likewise, "--FREETEXT--" means the message was typed by a 
+                person. Air travel enthusiasts care the most about human-typed 
+                messages, not computer generated reports. They know acronyms
+                that the general public might know, and probably won't know
+                most other terminology used in messages.
 
                 
                 For example: 
@@ -96,17 +100,19 @@ spec:
                 MSG FROM DISP WAS THAT A TYPO QM YOU WERE FILED FOR FL290
                 ```
 
-                This is interesting to air travel hobbyists because
+                This is interesting to air travel enthusiasts because
                 - The message is to or from dispatch, which is usually
                 important communication.
-                - The message concerns a typo. Air travel hobbyists are 
+                - The message concerns a typo. Air travel enthusiasts are 
                 interested in seeing "behind the scenes", which includes
                 mistakes or dramatic situations.
-                - Air travel hobbyists know some lingo, such as FL290 which
-                Flight Level 290 or 29,000 feet.
+                - Air travel enthusiasts may not know what FL290 means but
+                because there aren't many acronyms or technical lingo, they
+                can still understand what the message is saying.
 
-                This is a harder message, but it is still considered 
-                interesting:
+                This is a harder message, but it is still
+                considered interesting:
+
                 ```
                 C314           3HELLO
                 OIL IS AT 10.0/10.0
@@ -117,20 +123,20 @@ spec:
 
                 ```
 
-                Air travel hobbyistss wouldn't know what C314 means,
+                Air travel enthusiasts wouldn't know what C314 means,
                 but if the message has any greetings or pleasantries such as 
-                "HELLO" or "THNAK YOU", it is now unambiguously clear that this
-                message contains interesting communication. It is also a short 
-                message, which is common because pilots and ATC want to minimize
-                the amount of time they spend typing due to the critical nature
-                of their jobs. The author is reporting oil levels, which would
-                be familiar to an air travel hobbyist.
+                "HELLO", "HEY", or "THNAK YOU", it is now unambiguously clear 
+                that this message contains interesting communication. It is also
+                a short message, which is common because pilots and ATC want to
+                minimize the amount of time they spend typing due to the
+                critical nature of their jobs.
 
                 Also, if the message sounds dramatic such as referring to an
                 emergency, life vests, passengers (the shorthand PAX is used),
-                comments or questions about weather (the shorthand WX is used),
-                or reads as a person reporting a serious situation, it is 
-                definitely interesting to air travel hobbyists.
+                comments or questions about bad weather (known as SIGMET, 
+                weather in general is referred to as WX), or reads as a person
+                reporting a serious situation, it is definitely interesting to
+                air travel enthusiasts.
 
                 This is the last example of meaningful communication:
                 ```
@@ -141,14 +147,14 @@ spec:
                 ```
 
                 The message starts off with information that might be used to
-                route the message which hobbyists might not know what it means.
+                route the message which enthusiasts won't know what they mean.
                 The presence of OPS, though, means it's probably a message
                 to Operations, but it still might be computer generated. Then
                 the author writes a humorous and friendly message asking Roman
                 to slow down and adding that they are going to try to make some
                 time. Since automatically generated messages don't use names, 
                 English shorthand (LOL) or inform about planned actions, this is
-                definitely interesting to hobbyists.
+                definitely interesting to enthusiasts.
 
                 This does not have interesting information to a hobbyist:
 
@@ -161,7 +167,7 @@ spec:
                 V:ESENT,,AA2800,5F52
                 ```
                 
-                This is extremely technical information that requires
+                This is virtually entirely technical information that requires
                 software a hobbyist would not have to parse. Most messages will
                 be automatically generated by software intended to be ingested 
                 by other air travel related software familiar with the format.
@@ -177,10 +183,17 @@ spec:
                 prefer to see things pilots and air traffic controllers have
                 manually written.
 
-                Punctuation you might expect for English sentences is not a 
-                strong indicator whether an interesting message is present
-                because there may be commas, periods and newlines in unusual 
-                places. Personal communication will most likely be in ALL CAPS. 
+                Here are some examples of text that, if present, means the
+                message is not relevant to air traffic enthusiasts:
+                - ROB SLAT DIS PROX
+                - FPN/
+                - HOWGOZIT
+
+                Punctuation you might expect for English sentences being omitted
+                is not a strong indicator whether an interesting message is 
+                present. There may be commas, periods spaces and newlines in
+                unusual places or there might be a lot of extra whitespace.
+                Personal communication will most likely be in ALL CAPS. 
                 Newlines might also be in the middle of words.
                 
                 Based on the information provided, does this message have 
