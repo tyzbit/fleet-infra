@@ -82,14 +82,13 @@ spec:
               FILTER_OPENAI_PROMPT: &prompt |
                 This message was sent between aircraft and air traffic control.
                 Rarely, messages like these have sections with communication 
-                that is meaningful to pilots or air traffic controllers (which
-                are also called dispatch). They sometimes have acronyms, 
-                abbreviations and technical terms, usually related to air 
-                travel. The communication may be included at the end of some 
-                kind of generated report or message header. If the message 
-                starts out with "DISP" or "MSG FROM DISP" or references "OPS" 
-                it definitely has a message meaningful to pilots or dispatch 
-                because DISP stands for DISPATCH and OPS stands for OPERATIONS.
+                that is interesting to air travel hobbyists. The communication 
+                may be included at the end of various types of generated report 
+                or message header. If the message starts out with "DISP" or 
+                "MSG FROM DISP" or references "OPS" it definitely has a message 
+                interesting to air travel hobbyists because DISP stands for 
+                DISPATCH and OPS stands for OPERATIONS. Air travel hobbyists
+                care about human-typed messages, not computer generated reports.
 
                 
                 For example: 
@@ -97,10 +96,17 @@ spec:
                 MSG FROM DISP WAS THAT A TYPO QM YOU WERE FILED FOR FL290
                 ```
 
-                This is a meaningful message to an aircraft from dispatch,
-                asking about a typo in a previous message.
+                This is interesting to air travel hobbyists because
+                - The message is to or from dispatch, which is usually
+                important communication.
+                - The message concerns a typo. Air travel hobbyists are 
+                interested in seeing "behind the scenes", which includes
+                mistakes or dramatic situations.
+                - Air travel hobbyists know some lingo, such as FL290 which
+                Flight Level 290 or 29,000 feet.
 
-                This is a harder message, but it is meaningful communication:
+                This is a harder message, but it is still considered 
+                interesting:
                 ```
                 C314           3HELLO
                 OIL IS AT 10.0/10.0
@@ -111,25 +117,23 @@ spec:
 
                 ```
 
-                The prefix of alphanumeric characters that are not English 
-                can make it seem like this is not a meaningful communication,
+                Air travel hobbyistss wouldn't know what C314 means,
                 but if the message has any greetings or pleasantries such as 
                 "HELLO" or "THNAK YOU", it is now unambiguously clear that this
-                message contains a meaninful communication. It is also a short 
+                message contains interesting communication. It is also a short 
                 message, which is common because pilots and ATC want to minimize
                 the amount of time they spend typing due to the critical nature
                 of their jobs. The author is reporting oil levels, which is 
-                technical information but this message warranted informing 
-                dispatch manually. We can infer that oil at 10.0/10.0 means 
+                technical information that hobbyists would be familiar with.
+                We can infer that oil at 10.0/10.0 means 
                 it is completely topped off, and the aircraft does not need any 
                 more oil.
 
                 Also, if the message sounds dramatic such as referring to an
                 emergency, life vests, passengers (the shorthand PAX is used),
                 comments or questions about weather (the shorthand WX is used),
-                or reads as a person reporting a serious situation, it is a
-                meaningful communication between a pilot and air traffic 
-                controller.
+                or reads as a person reporting a serious situation, it is 
+                definitely interesting to air travel hobbyists.
 
                 This is the last example of meaningful communication:
                 ```
@@ -140,15 +144,16 @@ spec:
                 ```
 
                 The message starts off with information that might be used to
-                route the message. Then the author writes a humorous and
-                friendly message asking Roman to slow down and adding that they
-                are going to try to make some time. Since automatically 
-                generated messages don't use names, English shorthand (LOL) or
-                inform about planned actions, this is definitely a communication
-                meaningful to pilots or an air traffic controller.
+                route the message which hobbyists might not know what it means.
+                The presence of OPS, though, means it's probably a message
+                to Operations, but it still might be computer generated. Then
+                the author writes a humorous and friendly message asking Roman
+                to slow down and adding that they are going to try to make some
+                time. Since automatically generated messages don't use names, 
+                English shorthand (LOL) or inform about planned actions, this is
+                definitely interesting to hobbyists.
 
-                This does not have a meaningful communication between an 
-                aircraft and an air traffic controller:
+                This does not have interesting information to a hobbyist:
 
                 ```
                 POSN36188W077155,GUILD,022722,335,DEEEZ,023833,ESCHR,M49,27459,
@@ -159,35 +164,32 @@ spec:
                 V:ESENT,,AA2800,5F52
                 ```
                 
-                It has data and occasional English words but the words do not 
-                form a thought that conveys meaning or personal communication.
-
-                Most messages will be automatically generated by software
-                intended to be ingested by other software familiar with the
-                format.
+                A hobbyist might identify fragments of this message, such as GPS
+                coordinates, but this is technical information that requires
+                software a hobbyist would not have to parse. Most messages will
+                be automatically generated by software intended to be ingested 
+                by other air travel related software familiar with the format.
                 
-                Another message that does not have meaningful communication:
+                Another message that does not have interesting communication:
                 ```
                 POSN 37.177W 75.729,  71,024200,29004,28040,  63,-39,031712,
                 KPHLN 371037W 754344,-------,024200,29004, ,      , ,M 39,
                 28040  63,  71,
                 ```
 
-                This has positional data and it is true this is useful to pilots
-                and dispatch but there are also a lot of numbers with no context
-                or units, which is because the message was generated by software
-                and is intended to be ingested by other software or systems 
-                familiar with the format of the message.
+                This has positional data but there are also a lot of numbers 
+                with no context or units, which is because the message was 
+                generated by software and is intended to be ingested by other 
+                software or systems familiar with the format of the message.
 
                 Punctuation you might expect for English sentences is not a 
-                strong indicator whether a personal message is present as there 
-                can be commas, periods and newlines in unusual places. Personal
-                communication will most likely be in ALL CAPS. Newlines
-                might also be in the middle of words.
+                strong indicator whether an interesting message is present
+                because there may be commas, periods and newlines in unusual 
+                places. Personal communication will most likely be in ALL CAPS. 
+                Newlines might also be in the middle of words.
                 
-                Based on the information provided, does some or part of this
-                message have personal communication that is meaningful to 
-                pilots or an air traffic controller?
+                Based on the information provided, does this message have 
+                communication that is interesting to air travel enthusiasts?
               # FILTER_OPENAI_APIKEY: (set in envFrom)
               ACARS_ANNOTATOR_SELECTED_FIELDS: >-
                 acarsAircraftTailCode
