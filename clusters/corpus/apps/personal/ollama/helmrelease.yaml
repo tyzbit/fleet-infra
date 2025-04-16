@@ -112,6 +112,8 @@ spec:
         replicas: 1
         annotations:
           reloader.stakater.com/auto: "true"
+        nodeSelector:
+          node-role.kubernetes.io/control-plane: "true"
         pod:
           affinity:
             podAntiAffinity:
