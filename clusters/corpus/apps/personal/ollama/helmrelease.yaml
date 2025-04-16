@@ -89,7 +89,10 @@ spec:
         type: deployment
         nameOverride: "cpu"
         replicas: 1
-        identifier: ollama
+        labels:
+          app.kubernetes.io/component: ollama
+          app.kubernetes.io/instance: ollama
+          app.kubernetes.io/name: ollama
         annotations:
           reloader.stakater.com/auto: "true"
         pod:
