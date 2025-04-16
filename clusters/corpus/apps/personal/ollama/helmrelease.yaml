@@ -21,7 +21,7 @@ spec:
     controllers:
       ollama:
         type: deployment
-        replicas: 4
+        replicas: 3
         annotations:
           reloader.stakater.com/auto: "true"
         pod:
@@ -40,9 +40,6 @@ spec:
             image:
               repository: ghcr.io/tyzbit/ollama-intel-gpu
               tag: latest
-            # image:
-            #   repository: docker.io/ollama/ollama
-            #   tag: 0.6.5
             securityContext:
               privileged: true
             # command: [tail,-f,/dev/null]
@@ -87,6 +84,54 @@ spec:
         #       advancedMounts:
         #         ollama-config:
         #           - path: /root/.ollama
+
+      ollama-cpu:
+        type: deployment
+        replicas: 1
+        labels:
+          app.kubernetes.io/component: ollama
+        annotations:
+          reloader.stakater.com/auto: "true"
+        pod:
+          affinity:
+            podAntiAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                - topologyKey: "kubernetes.io/hostname"
+                  labelSelector:
+                    matchExpressions:
+                      - key: app.kubernetes.io/name
+                        operator: In
+                        values:
+                          - ollama
+        containers:
+          ollama:
+            image:
+              repository: docker.io/ollama/ollama
+              tag: 0.6.5
+            # command: [tail,-f,/dev/null]
+            env:
+              TZ: America/New_York
+              # OLLAMA_INTEL_GPU: "1" # doesn't work right now, experimental
+              OLLAMA_HOST: 0.0.0.0
+              OLLAMA_ORIGINS: "*"
+              OLLAMA_MODELS: &modelPath /models
+              OLLAMA_LOAD_TIMEOUT: "600"
+              OLLAMA_CONTEXT_LENGTH: "4096"
+              # OLLAMA_NUM_PARALLEL: "16"
+            # probes:
+            #   liveness:
+            #     enabled: true
+            #     type: HTTP
+            #   readiness:
+            #     enabled: true
+            #     custom: true
+            #     spec: 
+            #       exec: {command: [sh,-c,/usr/bin/ollama run gemma3:4b ""]}
+            resources:
+              requests:
+                cpu: 200m
+              limits:
+                memory: 12Gi
 
     persistence:
       ollama:
