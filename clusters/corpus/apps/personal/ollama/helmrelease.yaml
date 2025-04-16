@@ -21,10 +21,20 @@ spec:
     controllers:
       ollama:
         type: deployment
-        replicas: 3
+        replicas: 4
         annotations:
           reloader.stakater.com/auto: "true"
-
+        pod:
+          affinity:
+            podAntiAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                - topologyKey: "kubernetes.io/hostname"
+                  labelSelector:
+                    matchExpressions:
+                      - key: app.kubernetes.io/name
+                        operator: In
+                        values:
+                          - ollama
         containers:
           ollama:
             image:
