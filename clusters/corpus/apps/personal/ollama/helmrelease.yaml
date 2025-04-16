@@ -87,6 +87,7 @@ spec:
 
       ollama-cpu:
         type: deployment
+        nameOverride: "cpu"
         replicas: 1
         labels:
           app.kubernetes.io/component: ollama
