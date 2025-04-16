@@ -109,7 +109,7 @@ spec:
   values:
     controllers:
       ollama:
-        type: deployment
+        type: statefulset
         nameOverride: "cpu"
         replicas: 1
         annotations:
@@ -127,6 +127,7 @@ spec:
                         operator: In
                         values:
                           - ollama
+
         containers:
           ollama:
             image:
