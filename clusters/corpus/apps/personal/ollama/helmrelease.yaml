@@ -97,3 +97,22 @@ spec:
         ports:
           http:
             port: 11434
+
+    ingress:
+      main:
+        className: nginx
+        annotations:
+          nginx.ingress.kubernetes.io/proxy-connect-timeout: "20"
+          nginx.ingress.kubernetes.io/proxy-read-timeout: "14400"
+          nginx.ingress.kubernetes.io/proxy-send-timeout: "14400"
+          nginx.ingress.kubernetes.io/proxy-body-size: 1024m
+        hosts:
+          - host: ollama.home.arpa
+            paths:
+              - path: "/"
+                service:
+                  identifier: main
+        tls:
+          - hosts:
+              - "*.home.arpa"
+            secretName: internal-wildcard-tls
