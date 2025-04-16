@@ -181,7 +181,8 @@ spec:
 
                 Punctuation you might expect for English sentences is not a 
                 strong indicator whether a personal message is present as there 
-                can be commas, periods and newlines in unusual places. Newlines
+                can be commas, periods and newlines in unusual places. Personal
+                communication will most likely be in ALL CAPS. Newlines
                 might also be in the middle of words.
                 
                 Based on the information provided, does some or part of this
