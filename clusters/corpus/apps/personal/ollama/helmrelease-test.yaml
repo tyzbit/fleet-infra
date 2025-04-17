@@ -7,7 +7,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 30m
-  releaseName: ollama
+  releaseName: ollama-test
   targetNamespace: personal
   chart:
     spec:
