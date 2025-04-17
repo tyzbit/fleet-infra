@@ -85,9 +85,8 @@ spec:
                 that is interesting to air travel enthusiasts. The communication 
                 may be included after various types of sort generated reports
                 or message headers. If the message starts out with "DISP",
-                "MSG FROM DISP" or references "OPS" or "OPSCTL" it definitely
-                has a message interesting to air travel enthusiasts because DISP
-                stands for DISPATCH and OPS stands for OPERATIONS. 
+                "MSG FROM" it definitely has a message interesting to air travel
+                enthusiasts because automated systems don't output "MSG FROM"
                 Likewise, "--FREETEXT--" means the message was typed by a 
                 person. Air travel enthusiasts care the most about human-typed 
                 messages, not computer generated reports. They know acronyms
@@ -250,7 +249,7 @@ spec:
               # FILTER_OLLAMA_MODEL: gemma3:4b
               FILTER_OLLAMA_MODEL: llama3.2
               FILTER_OLLAMA_FILTER_ON_FAILURE: "true"
-              FILTER_OLLAMA_MAX_CONCURRENT_REQUESTS: "2"
+              ACARSHUB_MAX_CONCURRENT_REQUESTS_PER_SUBSCRIBER: "4"
               # FILTER_OLLAMA_MAX_PREDICTION_TOKENS: "256" # not needed
               FILTER_OLLAMA_PROMPT: *prompt
               ACARS_ANNOTATOR_SELECTED_FIELDS: >-
