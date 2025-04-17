@@ -64,6 +64,7 @@ spec:
             env:
               ACARSHUB_HOST: acars-acarshub
               ACARSHUB_PORT: "15550"
+              ACARSHUB_MAX_CONCURRENT_REQUESTS_PER_SUBSCRIBER: "4"
               ACARSHUB_VDLM2_HOST: acars-acarshub
               ACARSHUB_VDLM2_PORT: "15555"
               ANNOTATE_ACARS: "true"
@@ -71,15 +72,10 @@ spec:
               TAR1090_URL: *tar1090
               LOGLEVEL: debug
               TAR1090_REFERENCE_GEOLOCATION: *location
-              FILTER_CRITERIA_HAS_TEXT: "true"
-              NEW_RELIC_CUSTOM_EVENT_TYPE: CustomACARSHumanMessages
+              # FILTER_CRITERIA_HAS_TEXT: "true"
               # FILTER_CRITERIA_DICTIONARY_PHRASE_LENGTH_MINIMUM: "2"
-              FILTER_OPENAI_MODEL: gpt-4o-mini
-              # FILTER_OPENAI_PROMPT: >-
-              #   You are an expert in identifying natural language.
-              #   Does this message have a message at the end that was definitely
-              #   written by a person?
-              FILTER_OPENAI_PROMPT: &prompt |
+              NEW_RELIC_CUSTOM_EVENT_TYPE: CustomACARSHumanMessages
+              FILTER_OLLAMA_PROMPT: &prompt |
                 This message was sent between aircraft and air traffic control.
                 Rarely, messages like these have sections with communication 
                 that is interesting to air travel enthusiasts. The communication 
@@ -224,7 +220,13 @@ spec:
                 
                 Considering all of these factors, is this message something
                 that an air travel enthusiast would be interested to see?
-              # FILTER_OPENAI_APIKEY: (set in envFrom)
+              FILTER_OLLAMA_URL: http://ollama.home.arpa
+              # FILTER_OLLAMA_URL: http://media2.home.arpa:11434
+              FILTER_OLLAMA_MODEL: llama3.2
+              # FILTER_OLLAMA_MODEL: gemma3:4b
+              # FILTER_OLLAMA_MODEL: gemma3:1b # manual compat with intel https://github.com/intel/ipex-llm/blob/73198d5b80dd584de58fc3625ca0cdf78b4f8e42/docs/mddocs/Quickstart/ollama_portable_zip_quickstart.md?plain=1#L223C21-L223C42
+              # FILTER_OLLAMA_FILTER_ON_FAILURE: "true"
+              # FILTER_OLLAMA_MAX_PREDICTION_TOKENS: "256" # not needed
               ACARS_ANNOTATOR_SELECTED_FIELDS: >-
                 acarsAircraftTailCode
                 acarsFrequencyMHz
@@ -251,7 +253,7 @@ spec:
       acars-processor-3:
         <<: *common_settings
         nameOverride: "3"
-        replicas: 1 # active nas
+        replicas: 0 # active nas
         containers:
           acars-processor-3:
             image:
@@ -260,23 +262,21 @@ spec:
             env:
               ACARSHUB_HOST: acars-acarshub
               ACARSHUB_PORT: "15550"
+              ACARSHUB_MAX_CONCURRENT_REQUESTS_PER_SUBSCRIBER: "4"
               ACARSHUB_VDLM2_HOST: acars-acarshub
               ACARSHUB_VDLM2_PORT: "15555"
               ANNOTATE_ACARS: "true"
               ANNOTATE_VDLM2: "true"
               LOGLEVEL: debug
-              FILTER_CRITERIA_HAS_TEXT: "true"
+              # FILTER_CRITERIA_HAS_TEXT: "true"
               # FILTER_CRITERIA_DICTIONARY_PHRASE_LENGTH_MINIMUM: "2"
-              # FILTER_OLLAMA_URL: http://media2.home.arpa:11434
-              # FILTER_OLLAMA_URL: http://ollama:11434
-              FILTER_OLLAMA_URL: http://ollama.home.arpa
-              # FILTER_OLLAMA_MODEL: gemma3:4b
-              # FILTER_OLLAMA_MODEL: gemma3:1b # manual compat with intel https://github.com/intel/ipex-llm/blob/73198d5b80dd584de58fc3625ca0cdf78b4f8e42/docs/mddocs/Quickstart/ollama_portable_zip_quickstart.md?plain=1#L223C21-L223C42
-              FILTER_OLLAMA_MODEL: llama3.2
-              FILTER_OLLAMA_FILTER_ON_FAILURE: "true"
-              ACARSHUB_MAX_CONCURRENT_REQUESTS_PER_SUBSCRIBER: "4"
-              # FILTER_OLLAMA_MAX_PREDICTION_TOKENS: "256" # not needed
-              FILTER_OLLAMA_PROMPT: *prompt
+              FILTER_OPENAI_MODEL: gpt-4o-mini
+              # FILTER_OPENAI_PROMPT: >-
+              #   You are an expert in identifying natural language.
+              #   Does this message have a message at the end that was definitely
+              #   written by a person?
+              # FILTER_OPENAI_APIKEY: (set in envFrom)
+              FILTER_OPENAI_PROMPT: *prompt
               ACARS_ANNOTATOR_SELECTED_FIELDS: >-
                 acarsMessageText
               VDLM2_ANNOTATOR_SELECTED_FIELDS: >-
