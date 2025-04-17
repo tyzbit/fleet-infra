@@ -1,0 +1,104 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.7.3/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app ollama-test
+  namespace: flux-system
+spec:
+  interval: 30m
+  releaseName: ollama
+  targetNamespace: personal
+  chart:
+    spec:
+      chart: app-template
+      version: "3.7.3"
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  values:
+    controllers:
+      ollama-test:
+        type: deployment
+        replicas: 1
+        annotations:
+          reloader.stakater.com/auto: "true"
+        pod:
+          affinity:
+            podAntiAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                - topologyKey: "kubernetes.io/hostname"
+                  labelSelector:
+                    matchExpressions:
+                      - key: app.kubernetes.io/name
+                        operator: In
+                        values:
+                          - ollama
+        containers:
+          ollama-test:
+            image:
+              repository: docker.io/ollama/ollama
+              tag: 0.6.5
+            # image:
+            #   repository: docker.io/ollama/ollama
+            #   tag: 0.6.5
+            securityContext:
+              privileged: true
+            # command: [tail,-f,/dev/null]
+            env:
+              LIBVA_DRIVER_NAME: i965
+              TZ: America/New_York
+              # OLLAMA_INTEL_GPU: "1" # doesn't work right now, experimental
+              OLLAMA_GPU_ENABLED: "true"
+              # HSA_OVERRIDE_GFX_VERSION: 11.0.1 # force to use graphics card
+              OLLAMA_HOST: 0.0.0.0
+              OLLAMA_ORIGINS: "*"
+              OLLAMA_MODELS: &modelPath /models
+              OLLAMA_LOAD_TIMEOUT: "600"
+              OLLAMA_CONTEXT_LENGTH: "4096"
+              # OLLAMA_NUM_PARALLEL: "16"
+            # probes:
+            #   liveness:
+            #     enabled: true
+            #     type: HTTP
+            #   readiness:
+            #     enabled: true
+            #     custom: true
+            #     spec: 
+            #       exec: {command: [sh,-c,/usr/bin/ollama run gemma3:4b ""]}
+            resources:
+              requests:
+                cpu: 200m
+              limits:
+                memory: 12Gi
+        # statefulset:
+        #   volumeClaimTemplates:
+        #     - enabled: true
+        #       name: ollama-config
+        #       size: 1Gi
+        #       accessMode: ReadWriteOnce
+        #       storageClass: longhorn-objectstorage
+        #       advancedMounts:
+        #         ollama-config:
+        #           - path: /root/.ollama
+
+    persistence:
+      ollama:
+        # existingClaim: ollama-models-longhorn-objectstorage
+        existingClaim: ollama-data-nas
+        globalMounts:
+          - path: *modelPath
+            subPath: models
+          - path: /root/.ollama
+            subPath: config
+      dri:
+        type: hostPath
+        hostPath: /dev/dri
+
+    service:
+      main:
+        controller: *app
+        ports:
+          http:
+            port: 11434
