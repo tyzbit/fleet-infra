@@ -144,9 +144,9 @@ spec:
   values:
     controllers:
       ollama:
-        type: statefulset
+        type: deployment
         nameOverride: "cpu"
-        replicas: 1
+        replicas: 3
         annotations:
           reloader.stakater.com/auto: "true"
         pod:
