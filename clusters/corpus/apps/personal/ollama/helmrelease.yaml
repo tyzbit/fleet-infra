@@ -146,7 +146,7 @@ spec:
       ollama:
         type: deployment
         nameOverride: "cpu"
-        replicas: 3
+        replicas: 0
         annotations:
           reloader.stakater.com/auto: "true"
         pod:
