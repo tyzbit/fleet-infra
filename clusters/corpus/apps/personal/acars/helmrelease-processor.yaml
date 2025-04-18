@@ -264,8 +264,8 @@ spec:
                 newlines to make your decision. Ignore newlines, spaces or other
                 charaters in the middle of words.
                 
-                Based on what I've told you, is this message something that an 
-                air travel enthusiast would want to see?
+                Based on what I've told you, is this message something you're
+                certain that an air travel enthusiast would want to see?
               FILTER_OLLAMA_URL: http://ollama.home.arpa
               # FILTER_OLLAMA_URL: http://media2.home.arpa:11434
               FILTER_OLLAMA_MODEL: llama3.2
