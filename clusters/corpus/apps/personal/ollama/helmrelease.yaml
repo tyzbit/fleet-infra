@@ -53,7 +53,7 @@ spec:
               OLLAMA_NUM_GPU: "1"
               SYCL_CACHE_PERSITENT: "1"
               IPEX_LLM_NUM_CTX: "4096"
-              SYCL_PI_LEVEL_ZERO_USE_IMMEDIATE_COMMANDLISTS: "1"
+              SYCL_PI_LEVEL_ZERO_USE_IMMEDIATE_COMMANDLISTS: "0"
               IPEX_LLM_MODEL_SOURCE: modelscope
               # ---
               TZ: America/New_York
