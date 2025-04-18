@@ -32,7 +32,8 @@ spec:
               tag: v0.6.5
             env:
               - name: OLLAMA_BASE_URL
-                value: http://ollama.home.arpa
+                value: http://media2.home.arpa:11434
+                # value: http://ollama.home.arpa
               # - name: ENABLE_RAG_WEB_SEARCH
               #   value: "true"
               # - name: RAG_WEB_SEARCH_ENGINE
