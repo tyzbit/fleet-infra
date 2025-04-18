@@ -104,11 +104,12 @@ spec:
                 person reporting an important situation, air travel enthusiasts
                 definitely want to see that.
                 
-                If the message has any of these phrases, then air travel
+                If the message has any of these strings, then air travel
                 enthusiasts want to see it:
                 - DISP
                 - MSG FROM
                 - HELLO
+                - HEY
                 - FREETEXT
                 
                 Here's an example message air travel enthusiasts want to see: 
