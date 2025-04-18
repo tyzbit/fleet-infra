@@ -299,9 +299,9 @@ spec:
             resources:
               requests:
                 cpu: 10m
-                memory: 128Mi
+                memory: 512Mi
               limits:
-                memory: 128Mi
+                memory: 512Mi
 
       acars-processor-3:
         <<: *common_settings
@@ -340,6 +340,6 @@ spec:
             resources:
               requests:
                 cpu: 10m
-                memory: 128Mi
+                memory: 512Mi
               limits:
-                memory: 128Mi
+                memory: 512Mi
