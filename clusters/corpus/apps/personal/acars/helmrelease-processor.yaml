@@ -108,6 +108,7 @@ spec:
                 enthusiasts want to see it:
                 - DISP
                 - MSG FROM
+                - HELLO
                 - FREETEXT
                 
                 Here's an example message air travel enthusiasts want to see: 
