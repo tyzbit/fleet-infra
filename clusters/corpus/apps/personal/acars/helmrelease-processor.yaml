@@ -241,6 +241,16 @@ spec:
                 all of this message is in two columns which strongly indicates
                 a report rather than a bespoke message.
 
+                Another message that air traffic enthusiasts do not want to see:
+                ```
+                FPN/RP:DA:KLGA:AA:KMCO:CR:KLGAKMCO(35R)..MOXXY.Q85.LPERD:A:SNFLD3.LPERD:F:VECTOR..DISCO..FESHA:AP:ILS 35R:F:PRESKCC4E
+                ```
+
+                This message has a lot of words that when read as a 
+                sentence seems like gibberish or is in some code that
+                air traffic enthusiasts wouldn't know and therefore they
+                do not want to see it.
+
                 Here are some pieces of text that, if present, means the
                 message is NOT relevant to air traffic enthusiasts:
                 - ROB SLAT DIS PROX
