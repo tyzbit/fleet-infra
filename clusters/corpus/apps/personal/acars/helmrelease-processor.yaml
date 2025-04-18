@@ -93,13 +93,13 @@ spec:
                 
                 If prose in the message refers to a serious situation like an
                 emergency, life vests, passengers (the shorthand PAX is used),
-                comments or questions about bad weather (known as SIGMET, 
-                weather in general is referred to as WX), unusual situations
-                (an aircraft with only one passenger or a request that looks
-                like it's for a VIP), devices on the aircraft (such as coffee
-                makers or lavatories - shorthand: LAV) or otherwise reads as a
-                person reporting an important situation, air travel enthusiasts
-                definitely want to see it.
+                comments or questions about bad weather (known as SIGMET),
+                unusual situations (for example, an aircraft with only one
+                passenger or a request that looks like it's for a VIP), 
+                devices on the aircraft (such as coffee makers or lavatories - 
+                shorthand: LAV) or otherwise reads as a person reporting an 
+                important situation, air travel enthusiasts definitely want to
+                see it.
                 
                 If the message has any of these strings, then air travel
                 enthusiasts want to see it because automated systems don't
@@ -250,6 +250,19 @@ spec:
                 traffic controller and therefore is not interesting to
                 air travel enthusiasts.
 
+                This is part of a similar message that air travel enthusiats
+                do not want to see:
+                ```
+                L ITT                      880 C
+                R ITT                      874 C
+                L PS3                      292 PSI
+                R PS3                      297 PSI
+                ```
+
+                Any message that looks like it's listing out sensors and
+                values for the sensors for multiple lines or more is not what
+                air travel enthusiasts want to see.
+
                 Another message that air traffic enthusiasts do not want to see:
                 ```
                 FPN/RP:DA:KLGA:AA:KMCO:CR:KLGAKMCO(35R)..MOXXY.Q85.LPERD:A:SNFLD3.LPERD:F:VECTOR..DISCO..FESHA:AP:ILS 35R:F:PRESKCC4E
@@ -266,6 +279,7 @@ spec:
                 - FILENAME
                 - LRU SIGNAL CONDITIONER UNIT
                 - POSRPT
+                - PROX
                 
                 Do not consider punctuation like commas, periods spaces and 
                 newlines to make your decision. Ignore newlines, spaces or other
