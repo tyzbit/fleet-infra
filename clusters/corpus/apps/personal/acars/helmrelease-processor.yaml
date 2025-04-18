@@ -256,6 +256,7 @@ spec:
                 - ROB SLAT DIS PROX
                 - FPN/
                 - FILENAME
+                - LRU SIGNAL CONDITIONER UNIT
                 
                 Do not consider punctuation like commas, periods spaces and 
                 newlines to make your decision. Ignore newlines, spaces or other
