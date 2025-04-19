@@ -183,14 +183,6 @@ cameras:
     ui: {order: 4}
     birdseye: {order: 4}
     review: {alerts: {required_zones: [on_property]}}
-    zones:
-      on_property:
-        <<: *zonedefault
-        objects: [person, cat, dog]
-        coordinates: >-
-          0,0.712,0,1,1,1,1,0.546,0.945,0.57,0.868,
-          0.47,0.822,0.511,0.631,0.354,0.428,0.271,
-          0.283,0.286,0.089,0.467,0.125,0.539
     onvif:
       host: sidefence.home.arpa
       port: 8000
@@ -206,32 +198,18 @@ cameras:
         # A higher value will zoom in more on a tracked object, but Frigate may lose tracking more quickly.
         # The value should be between 0.1 and 0.75
         zoom_factor: 0.3
-        track:
-          - person
+        track: [person, cat, dog]
         required_zones:
           - on_property
         # Required: Name of ONVIF preset in camera's firmware to return to when tracking is over. (default: shown below)
         return_preset: home
         # Optional: Seconds to delay before returning to preset. (default: shown below)
         timeout: 10
-    # zones:
-    #   on_property:
-    #     <<: *zonedefault
-    #     objects: [person, cat, dog]
-    #     coordinates: >-
-    #       0,0.712,0,1,1,1,1,0.546,0.945,0.57,0.868,
-    #       0.47,0.822,0.511,0.631,0.354,0.428,0.271,
-    #       0.283,0.286,0.089,0.467,0.125,0.539
-    # objects:
-    #   filters:
-    #     person: &sidegaragemask
-    #       mask:
-    #         - >- # sky and neighbors
-    #           0.597,0.264,0.725,0.948,0.876,0.744,0.913,0.586,
-    #           1,0.73,1,0,0,0,-0.002,0.404,0,0.713,0.125,0.538,
-    #           0.108,0.461,0.192,0.374,0.285,0.288,0.442,0.241
-    #     car: *sidegaragemask
-
+    zones:
+      on_property:
+        <<: *zonedefault
+        objects: [person, cat, dog]
+        coordinates: 0,1,1,1,1,0.16,0,0.177
 
   backdeck:
     enabled: true
