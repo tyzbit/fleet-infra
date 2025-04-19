@@ -154,11 +154,7 @@ spec:
                 also clearly human-written since a generated report would not
                 include interpretation or commentary such as "STRONGER THAN
                 PLANNED". This is definitely a message air traffic enthusiasts
-                want to see. It is also a short message, which is typical of 
-                human-written prose in these messages because pilots and 
-                air traffic controllers want to minimize the amount of time 
-                they spend typing due to the critical, time-sensitive nature of
-                their jobs.
+                want to see.
                 
                 This is the last example of meaningful communication:
                 ```
@@ -259,8 +255,9 @@ spec:
                 ```
 
                 Any message that looks like it's listing out sensors and
-                values for the sensors for multiple lines or more is not what
-                air travel enthusiasts want to see.
+                values for the sensors with a lot of spaces like this message
+                has for multiple lines or more is not what air travel 
+                enthusiasts want to see.
 
                 Another message that air traffic enthusiasts do not want to see:
                 ```
@@ -279,6 +276,7 @@ spec:
                 - LRU SIGNAL CONDITIONER UNIT
                 - POSRPT
                 - PROX
+                - P/N
 
                 Messages with a lot of acronyms don't make sense to air travel
                 enthusiasts because they won't know what they mean so they
