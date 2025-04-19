@@ -35,6 +35,7 @@ go2rtc:
     garage: ["rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@garage.home.arpa/Preview_01_main"]
     sidegarage: ["rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@sidegarage.home.arpa/Preview_01_main"]
     backdeck: ["rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@backdeck.home.arpa/Preview_01_main"]
+    sidefence: ["rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@sidefence.home.arpa/Preview_01_main"]
 birdseye: {enabled: true,
   quality: 8, width: 1440, height: 1080, layout: {scaling_factor: 1.0},
   # -- objects, motion, continuous
@@ -46,7 +47,7 @@ camera_groups:
     icon: LuBird
     order: 0
   "All Cameras":
-    cameras: [doorbell, garage, sidegarage, backdeck]
+    cameras: [doorbell, garage, sidegarage, backdeck, sidefence]
     icon: LuRadar
     order: 1
   "Deliveries":
@@ -58,7 +59,7 @@ camera_groups:
     icon: LuBellRing
     order: 3
   "Backyard and Garage":
-    cameras: [backdeck, garage, sidegarage]
+    cameras: [backdeck, garage, sidegarage, sidefencee]
     icon: LuDog
     order: 4
 
@@ -100,7 +101,7 @@ cameras:
 
   doorbell:
     enabled: true
-    detect: {width: 1280, height: 960, fps: 5} # 2560x1920
+    detect: &doorbelldetect {width: 1280, height: 960, fps: 5} # 2560x1920
     ffmpeg: {inputs:
       [{path: rtsp://localhost:8554/doorbell, roles: *detectandrecord}]}
     mqtt: {height: 1920}
@@ -172,6 +173,57 @@ cameras:
               1,0.73,1,0,0,0,-0.002,0.404,0,0.713,0.125,0.538,
               0.108,0.461,0.192,0.374,0.285,0.288,0.442,0.241
         car: *sidegaragemask
+
+  sidefence:
+    enabled: true
+    detect: *doorbelldetect
+    ffmpeg: {inputs:
+      [{path: rtsp://localhost:8554/sidefence, roles: *detectandrecord}]}
+    mqtt: *mqttheight
+    ui: {order: 4}
+    birdseye: {order: 4}
+    review: {alerts: {required_zones: [on_property]}}
+    onvif:
+      host: sidefence.home.arpa
+      port: 8000
+      user: "{FRIGATE_CAMERA_USER}"
+      password: "{FRIGATE_CAMERA_PASSWORD}"
+      autotracking:
+        enabled: True
+        calibrate_on_startup: True
+        # Available options are: disabled, absolute, and relative
+        zooming: absolute
+        # Optional: A value to change the behavior of zooming on autotracked objects. (default: shown below)
+        # A lower value will keep more of the scene in view around a tracked object.
+        # A higher value will zoom in more on a tracked object, but Frigate may lose tracking more quickly.
+        # The value should be between 0.1 and 0.75
+        zoom_factor: 0.3
+        track:
+          - person
+        # required_zones:
+        #   - zone_name
+        # Required: Name of ONVIF preset in camera's firmware to return to when tracking is over. (default: shown below)
+        return_preset: home
+        # Optional: Seconds to delay before returning to preset. (default: shown below)
+        timeout: 10
+    # zones:
+    #   on_property:
+    #     <<: *zonedefault
+    #     objects: [person, cat, dog]
+    #     coordinates: >-
+    #       0,0.712,0,1,1,1,1,0.546,0.945,0.57,0.868,
+    #       0.47,0.822,0.511,0.631,0.354,0.428,0.271,
+    #       0.283,0.286,0.089,0.467,0.125,0.539
+    # objects:
+    #   filters:
+    #     person: &sidegaragemask
+    #       mask:
+    #         - >- # sky and neighbors
+    #           0.597,0.264,0.725,0.948,0.876,0.744,0.913,0.586,
+    #           1,0.73,1,0,0,0,-0.002,0.404,0,0.713,0.125,0.538,
+    #           0.108,0.461,0.192,0.374,0.285,0.288,0.442,0.241
+    #     car: *sidegaragemask
+
 
   backdeck:
     enabled: true
