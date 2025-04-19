@@ -296,6 +296,8 @@ spec:
               # FILTER_OLLAMA_MODEL: gemma3:4b
               # FILTER_OLLAMA_MODEL: gemma3:1b # manual compat with intel https://github.com/intel/ipex-llm/blob/73198d5b80dd584de58fc3625ca0cdf78b4f8e42/docs/mddocs/Quickstart/ollama_portable_zip_quickstart.md?plain=1#L223C21-L223C42
               FILTER_OLLAMA_FILTER_ON_FAILURE: "true"
+              FILTER_CRITERIA_ACARS_DUPLICATE_MESSAGE_SIMILARITY: "0.90"
+              FILTER_CRITERIA_VDLM2_DUPLICATE_MESSAGE_SIMILARITY: "0.90"
               # FILTER_OLLAMA_MAX_PREDICTION_TOKENS: "256" # NOT needed
               ACARS_ANNOTATOR_SELECTED_FIELDS: >-
                 acarsAircraftTailCode
