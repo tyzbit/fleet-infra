@@ -158,8 +158,7 @@ spec:
                 human-written prose in these messages because pilots and 
                 air traffic controllers want to minimize the amount of time 
                 they spend typing due to the critical, time-sensitive nature of
-                their jobs so they use slang, acronyms or shorthand related to
-                air travel.
+                their jobs.
                 
                 This is the last example of meaningful communication:
                 ```
@@ -280,6 +279,10 @@ spec:
                 - LRU SIGNAL CONDITIONER UNIT
                 - POSRPT
                 - PROX
+
+                Messages with a lot of acronyms don't make sense to air travel
+                enthusiasts because they won't know what they mean so they
+                do not want to see those messages.
                 
                 Do not consider punctuation like commas, periods spaces and 
                 newlines to make your decision. Ignore newlines, spaces or other
