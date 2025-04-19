@@ -193,7 +193,7 @@ cameras:
           0.283,0.286,0.089,0.467,0.125,0.539
     onvif:
       host: sidefence.home.arpa
-      port: 80
+      port: 8000
       user: "{FRIGATE_CAMERA_USER}"
       password: "{FRIGATE_CAMERA_PASSWORD}"
       autotracking:
