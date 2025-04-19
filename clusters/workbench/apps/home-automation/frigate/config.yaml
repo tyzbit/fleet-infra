@@ -197,7 +197,7 @@ cameras:
       user: "{FRIGATE_CAMERA_USER}"
       password: "{FRIGATE_CAMERA_PASSWORD}"
       autotracking:
-        enabled: True
+        enabled: False
         calibrate_on_startup: True
         # Available options are: disabled, absolute, and relative
         zooming: absolute
