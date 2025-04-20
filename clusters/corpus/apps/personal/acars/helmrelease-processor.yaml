@@ -112,6 +112,7 @@ spec:
                 - HEY
                 - PAX
                 - FREETEXT
+                - CHOP
                 
                 Here's an example message air travel enthusiasts want to see: 
                 ```
