@@ -287,6 +287,17 @@ spec:
                 the report has commentary (after "COMMENTS"), air travel 
                 enthusiasts want to see the message.
 
+                Air travel enthusiasts do not want to see a message that has a
+                long string of numbers and letters without spaces, even if
+                some of the groups of characters might resemble something, such
+                as: 
+                
+                ```
+                D3M721CLT ORF N36488W07618003480151P187151013G0009N36500W076170034
+                90106P180130016G0009N36510W07616003490063P165128023G0009N36521W076150
+                03500020P145113016G0009A2010
+                ```
+
                 Messages with a lot of acronyms don't make sense to air travel
                 enthusiasts because they won't know what they mean so they
                 do not want to see those messages.
