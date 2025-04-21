@@ -113,7 +113,6 @@ spec:
                 - PAX
                 - FREETEXT
                 - CHOP
-                - COMMENTS
                 
                 Here's an example message air travel enthusiasts want to see: 
                 ```
@@ -281,6 +280,12 @@ spec:
                 - P/N
                 - LRU
                 - ATA21-61 TEMPERATURE CONTROL
+                - BOARDING HELD
+
+                Air travel enthusiasts don't want to see departure delay reports
+                usually, which will have "BOARDING HELD" in the message but if
+                the report has commentary (after "COMMENTS"), air travel 
+                enthusiasts want to see the message.
 
                 Messages with a lot of acronyms don't make sense to air travel
                 enthusiasts because they won't know what they mean so they
