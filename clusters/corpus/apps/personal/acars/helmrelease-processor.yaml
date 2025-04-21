@@ -113,6 +113,7 @@ spec:
                 - PAX
                 - FREETEXT
                 - CHOP
+                - COMMENTS
                 
                 Here's an example message air travel enthusiasts want to see: 
                 ```
