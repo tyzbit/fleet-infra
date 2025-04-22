@@ -382,3 +382,59 @@ spec:
                 memory: 512Mi
               limits:
                 memory: 512Mi
+
+      acars-processor-4:
+        <<: *common_settings
+        nameOverride: "4"
+        replicas: 1 # active nas
+        containers:
+          acars-processor-4:
+            image:
+              repository: ghcr.io/tyzbit/acars-processor
+              tag: latest
+            env:
+              ACARSHUB_HOST: acars-acarshub
+              ACARSHUB_PORT: "15550"
+              ACARSHUB_MAX_CONCURRENT_REQUESTS_PER_SUBSCRIBER: "4"
+              ACARSHUB_VDLM2_HOST: acars-acarshub
+              ACARSHUB_VDLM2_PORT: "15555"
+              ANNOTATE_ACARS: "true"
+              ANNOTATE_VDLM2: "true"
+              TAR1090_URL: *tar1090
+              LOGLEVEL: debug
+              TAR1090_REFERENCE_GEOLOCATION: *location
+              # FILTER_CRITERIA_HAS_TEXT: "true"
+              # FILTER_CRITERIA_DICTIONARY_PHRASE_LENGTH_MINIMUM: "2"
+              NEW_RELIC_CUSTOM_EVENT_TYPE: CustomACARSHumanMessages
+              FILTER_OLLAMA_PROMPT: *prompt
+              FILTER_OLLAMA_URL: http://ollama.home.arpa
+              # FILTER_OLLAMA_URL: http://media2.home.arpa:11434
+              FILTER_OLLAMA_MODEL: gemma3:4b
+              # FILTER_OLLAMA_MODEL: gemma3:4b
+              # FILTER_OLLAMA_MODEL: gemma3:1b # manual compat with intel https://github.com/intel/ipex-llm/blob/73198d5b80dd584de58fc3625ca0cdf78b4f8e42/docs/mddocs/Quickstart/ollama_portable_zip_quickstart.md?plain=1#L223C21-L223C42
+              FILTER_OLLAMA_FILTER_ON_FAILURE: "true"
+              FILTER_CRITERIA_ACARS_DUPLICATE_MESSAGE_SIMILARITY: "0.90"
+              FILTER_CRITERIA_VDLM2_DUPLICATE_MESSAGE_SIMILARITY: "0.90"
+              # FILTER_OLLAMA_MAX_PREDICTION_TOKENS: "256" # NOT needed
+              ACARS_ANNOTATOR_SELECTED_FIELDS: >-
+                acarsAircraftTailCode
+                acarsFrequencyMHz
+                acarsMessageText
+                acarsMessageFrom
+              VDLM2_ANNOTATOR_SELECTED_FIELDS: >-
+                vdlm2FrequencyHz
+                acarsAircraftTailCode
+                acarsMessageText
+                acarsMessageFrom
+              TAR1090_ANNOTATOR_SELECTED_FIELDS: >-
+                tar1090AircraftDistanceMi
+                tar1090AircraftAltimeterGeometricFeet
+            envFrom:
+              - secretRef:
+                  name: acars-processor2
+            resources:
+              requests:
+                cpu: 10m
+                memory: 512Mi
+              limits:
+                memory: 512Mi
