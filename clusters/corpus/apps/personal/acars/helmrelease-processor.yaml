@@ -275,10 +275,12 @@ spec:
                 - FPN/
                 - FILENAME
                 - LRU SIGNAL CONDITIONER UNIT
+                - LRU
+                - LRU NAME
                 - POSRPT
                 - PROX
+                - SLATDISPROX
                 - P/N
-                - LRU
                 - ATA21-61 TEMPERATURE CONTROL
                 - BOARDING HELD
 
