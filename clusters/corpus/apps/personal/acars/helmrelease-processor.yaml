@@ -60,7 +60,7 @@ spec:
           acars-processor-2:
             image:
               repository: ghcr.io/tyzbit/acars-processor
-              tag: latest
+              tag: ipex-llm-v0.0.1-1
             env:
               ACARSHUB_HOST: acars-acarshub
               ACARSHUB_PORT: "15550"
