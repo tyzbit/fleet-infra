@@ -312,7 +312,7 @@ spec:
                 certain that an air travel enthusiast would want to see?
               FILTER_OLLAMA_URL: http://ollama.home.arpa
               # FILTER_OLLAMA_URL: http://media2.home.arpa:11434
-              FILTER_OLLAMA_MODEL: llama3.2
+              # FILTER_OLLAMA_MODEL: llama3.2
               FILTER_OLLAMA_MODEL: gemma3:4b
               # FILTER_OLLAMA_MODEL: gemma3:1b # manual compat with intel https://github.com/intel/ipex-llm/blob/73198d5b80dd584de58fc3625ca0cdf78b4f8e42/docs/mddocs/Quickstart/ollama_portable_zip_quickstart.md?plain=1#L223C21-L223C42
               FILTER_OLLAMA_FILTER_ON_FAILURE: "true"
