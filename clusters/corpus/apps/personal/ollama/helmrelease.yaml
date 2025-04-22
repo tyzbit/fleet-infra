@@ -81,7 +81,7 @@ spec:
               requests:
                 cpu: 200m
               limits:
-                memory: 16Gi
+                memory: 20Gi
         # statefulset:
         #   volumeClaimTemplates:
         #     - enabled: true
