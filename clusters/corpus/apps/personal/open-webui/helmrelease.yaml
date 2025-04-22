@@ -42,9 +42,9 @@ spec:
               #   value: http://searxng.services.svc.cluster.local:8080/search?q=<query>
             resources:
               requests:
-                cpu: 200m
+                cpu: 10m
               limits:
-                memory: 16Gi
+                memory: 1Gi
 
     service:
       main:

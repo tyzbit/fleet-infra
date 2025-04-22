@@ -62,9 +62,9 @@ spec:
                   name: nextcloud-config
             resources:
               requests:
-                cpu: 100m
+                cpu: &nccpurequest 100m
               limits:
-                memory: 6Gi
+                memory: &ncmemlimit 512Mi
 
           &cache nextcloud-cache:
             image:
@@ -107,9 +107,9 @@ spec:
                 while :; do /cron.sh; done
             resources:
               requests:
-                cpu: 1000m
+                cpu: *nccpurequest
               limits:
-                memory: 1Gi
+                memory: *ncmemlimit
 
     persistence:
       # MariaDB
