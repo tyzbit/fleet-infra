@@ -387,7 +387,7 @@ spec:
       acars-processor-4:
         <<: *common_settings
         nameOverride: "4"
-        replicas: 0 # active nas
+        replicas: 1 # active nas
         containers:
           acars-processor-4:
             image:
@@ -408,9 +408,10 @@ spec:
               # FILTER_CRITERIA_DICTIONARY_PHRASE_LENGTH_MINIMUM: "2"
               NEW_RELIC_CUSTOM_EVENT_TYPE: CustomACARSHumanMessages
               FILTER_OLLAMA_PROMPT: *prompt
-              FILTER_OLLAMA_URL: http://ollama.home.arpa
+              # FILTER_OLLAMA_URL: http://ollama.home.arpa
               # FILTER_OLLAMA_URL: http://media2.home.arpa:11434
-              FILTER_OLLAMA_MODEL: gemma3:4b
+              FILTER_OLLAMA_URL: http://172.23.23.15:11434
+              FILTER_OLLAMA_MODEL: gemma3:4b-it-fp16
               # FILTER_OLLAMA_MODEL: gemma3:4b
               # FILTER_OLLAMA_MODEL: gemma3:1b # manual compat with intel https://github.com/intel/ipex-llm/blob/73198d5b80dd584de58fc3625ca0cdf78b4f8e42/docs/mddocs/Quickstart/ollama_portable_zip_quickstart.md?plain=1#L223C21-L223C42
               FILTER_OLLAMA_FILTER_ON_FAILURE: "true"
