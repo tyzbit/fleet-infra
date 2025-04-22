@@ -40,8 +40,8 @@ spec:
           ollama:
             image:
               repository: ghcr.io/tyzbit/ollama-intel-gpu
-              tag: latest
-              # tag: ipex-llm-v.0.0.1-2
+              # tag: latest
+              tag: ipex-llm-v.0.0.1-2
               # tag: latest@sha256:36da76816d399b80127c043261df912cfa7ee73bde0b22f52a75178b236b1eea
             # image:
             #   repository: docker.io/ollama/ollama
@@ -55,13 +55,13 @@ spec:
               OLLAMA_NUM_PARALLEL: "1"
               # OLLAMA_NUM_GPU: "1"
               # SYCL_CACHE_PERSISTENT: "1"
-              IPEX_LLM_NUM_CTX: "4096"
+              # IPEX_LLM_NUM_CTX: "4096"
               SYCL_PI_LEVEL_ZERO_USE_IMMEDIATE_COMMANDLISTS: "0"
               IPEX_LLM_MODEL_SOURCE: modelscope
               # ---
               TZ: America/New_York
               # OLLAMA_INTEL_GPU: "1" # doesn't work right now, experimental
-              HSA_OVERRIDE_GFX_VERSION: 11.0.1 # force to use graphics card
+              # HSA_OVERRIDE_GFX_VERSION: 11.0.1 # force to use graphics card
               OLLAMA_HOST: 0.0.0.0
               OLLAMA_ORIGINS: "*"
               OLLAMA_MODELS: &modelPath /models
