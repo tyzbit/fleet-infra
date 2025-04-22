@@ -40,8 +40,8 @@ spec:
           ollama:
             image:
               repository: ghcr.io/tyzbit/ollama-intel-gpu
-              # tag: ipex-llm-v.0.0.1-1
-              tag: latest@sha256:36da76816d399b80127c043261df912cfa7ee73bde0b22f52a75178b236b1eea
+              tag: ipex-llm-v.0.0.1-1
+              # tag: latest@sha256:36da76816d399b80127c043261df912cfa7ee73bde0b22f52a75178b236b1eea
             # image:
             #   repository: docker.io/ollama/ollama
             #   tag: 0.6.5
@@ -65,7 +65,7 @@ spec:
               OLLAMA_ORIGINS: "*"
               OLLAMA_MODELS: &modelPath /models
               OLLAMA_LOAD_TIMEOUT: "600"
-              OLLAMA_CONTEXT_LENGTH: "3072"
+              # OLLAMA_CONTEXT_LENGTH: "3072"
               # OLLAMA_NUM_PARALLEL: "16"
             # probes:
             #   liveness:
