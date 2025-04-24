@@ -119,7 +119,7 @@ spec:
           &events revolt-events:
             image:
               repository: ghcr.io/revoltchat/bonfire
-              tag: 20250210-1
+              tag: 20250225-1
               pullPolicy: Always
             resources: {requests: {cpu: 10m},{limits: {memory: 128Mi}}}
 
