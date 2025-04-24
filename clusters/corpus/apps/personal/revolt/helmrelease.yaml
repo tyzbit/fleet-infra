@@ -1,0 +1,278 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.7.3/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app revolt
+  namespace: flux-system
+spec:
+  releaseName: *app
+  targetNamespace: personal
+  timeout: 15m
+  interval: 2m0s
+  chart:
+    spec:
+      chart: app-template
+      version: "3.7.3"
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  values:
+    # -- HAS NO EFFECT
+    reusable:
+      l: &longhorncontroller
+        type: statefulset
+        annotations: {reloader.stakater.com/auto: "true"}
+        pod: {nodeSelector: {longhorn: primary}}
+      d: &deploymentcontroller
+        type: deployment
+        annotations: {reloader.stakater.com/auto: "true"}
+      c: &configmount
+        - path: /revolt.toml
+          readOnly: true
+          subPath: revolt.toml
+    # -- END
+
+    controllers:
+      mongo:
+        <<: *longhorncontroller
+        replicas: 1 # active longhorn
+        containers:
+          &db revolt-mongo:
+            image:
+              repository: docker.io/mongo
+              tag: 8.0.8
+              pullPolicy: Always
+            envFrom: [{ "secretRef": { "name": *app}}]
+            resources: {requests: {cpu: 10m},{limits: {memory: 512Mi}}}
+
+      redis:
+        <<: *longhorncontroller
+        replicas: 1 # active longhorn
+        containers:
+          &redis revolt-redis:
+            image:
+              repository: docker.io/eqalpha/keydb
+              tag: alpine_x86_64_v6.3.4
+              pullPolicy: Always
+            envFrom: [{ "secretRef": { "name": *app}}]
+            resources: {requests: {cpu: 10m},{limits: {memory: 128Mi}}}
+
+      rabbit:
+        <<: *longhorncontroller
+        replicas: 1 # active longhorn
+        containers:
+          &rabbit revolt-rabbit:
+            image:
+              repository: docker.io/rabbitmq
+              tag: 4
+              pullPolicy: Always
+            envFrom: [{ "secretRef": { "name": *app}}]
+            env:
+              # # -- in the secret
+              # RABBITMQ_DEFAULT_PASS: password
+              RABBITMQ_DEFAULT_USER: rabbitmq
+            resources: {requests: {cpu: 10m},{limits: {memory: 512Mi}}}
+
+      minio:
+        <<: *longhorncontroller
+        replicas: 1 # active longhorn
+        containers:
+          &minio revolt-minio:
+            command:
+              - /bin/sh
+              - -c
+              - |
+                serve /data &
+                while ! /usr/bin/mc ready minio; do
+                  /usr/bin/mc config host add minio http://127.0.0.1:9000 minioautumn $(MINIO_ROOT_PASSWORD)
+                  echo 'Waiting minio...'
+                  sleep 1
+                done
+                /usr/bin/mc mb minio/revolt-uploads
+            image:
+              repository: docker.io/minio/minio
+              tag: latest
+              pullPolicy: Always
+            envFrom: [{ "secretRef": { "name": *app}}]
+            env:
+              # # -- in the secret
+              # MINIO_ROOT_PASSWORD: minioautumn
+              MINIO_ROOT_USER: minioautumn
+            resources: {requests: {cpu: 10m},{limits: {memory: 512Mi}}}
+
+      api:
+        <<: *deploymentcontroller
+        replicas: 1
+        containers:
+          &api revolt-api:
+            image:
+              repository: ghcr.io/revoltchat/server
+              tag: 20250210-1
+              pullPolicy: Always
+            resources: {requests: {cpu: 10m},{limits: {memory: 256Mi}}}
+
+      events:
+        <<: *deploymentcontroller
+        replicas: 1
+        containers:
+          &events revolt-events:
+            image:
+              repository: ghcr.io/revoltchat/bonfire
+              tag: 20250210-1
+              pullPolicy: Always
+            resources: {requests: {cpu: 10m},{limits: {memory: 128Mi}}}
+
+      web:
+        <<: *deploymentcontroller
+        replicas: 1
+        containers:
+          &web revolt-web:
+            image:
+              repository: ghcr.io/revoltchat/client
+              tag: master
+              pullPolicy: Always
+            resources: {requests: {cpu: 10m},{limits: {memory: 256Mi}}}
+
+      autumn:
+        <<: *deploymentcontroller
+        replicas: 1
+        containers:
+          &autumn revolt-autumn:
+            image:
+              repository: ghcr.io/revoltchat/autumn
+              tag: 20250210-1
+              pullPolicy: Always
+            resources: {requests: {cpu: 10m},{limits: {memory: 256Mi}}}
+
+      january:
+        <<: *deploymentcontroller
+        replicas: 1
+        containers:
+          &january revolt-january:
+            image:
+              repository: ghcr.io/revoltchat/january
+              tag: 20250210-1
+              pullPolicy: Always
+            resources: {requests: {cpu: 10m},{limits: {memory: 128Mi}}}
+
+      crond:
+        <<: *deploymentcontroller
+        replicas: 1
+        containers:
+          &crond revolt-cron:
+            image:
+              repository: ghcr.io/revoltchat/crond
+              tag: 20250210-1-debug
+              pullPolicy: Always
+            resources: {requests: {cpu: 10m},{limits: {memory: 512Mi}}}
+
+      pushd:
+        <<: *deploymentcontroller
+        replicas: 1
+        containers:
+          &pushd revolt-pushd:
+            image:
+              repository: ghcr.io/revoltchat/pushd
+              tag: 20250210-1
+              pullPolicy: Always
+            resources: {requests: {cpu: 10m},{limits: {memory: 512Mi}}}
+
+    persistence:
+      mongo:
+        existingClaim: revolt-mongo-longhorn-database
+        advancedMounts: { db: { *db : [path: /data/db] } }
+
+      rabbit:
+        existingClaim: revolt-rabbit-longhorn-database
+        advancedMounts: { rabbit: { *rabbit : [path: /var/lib/rabbitmq] } }
+
+      minio:
+        existingClaim: revolt-minio-longhorn-objectstorage
+        advancedMounts: { minio: { *minio : [path: /data] } }
+
+      config:
+        name: revolt
+        type: configMap
+        advancedMounts:
+          api: {*api : *configmount}
+          events: {*events : *configmount}
+          autumn: {*autumn : *configmount}
+          crond: {*crond : *configmount}
+          pushd: {*pushd : *configmount}
+
+    service:
+      mongo:
+        controller: mongo
+        type: ClusterIP
+        ports: {mongo: {port: 27017}}
+      redis:
+        controller: redis
+        type: ClusterIP
+        ports: {mongo: {port: 6379}}
+      rabbit:
+        controller: rabbit
+        type: ClusterIP
+        ports: {mongo: {port: 5672}}
+      web:
+        controller: web
+        type: ClusterIP
+        ports: {http: {port: 5000}}
+      api:
+        controller: api
+        type: ClusterIP
+        ports: {http: {port: 8000}}
+      events:
+        controller: events
+        type: ClusterIP
+        ports: {http: {port: 9000}}
+      autumn:
+        controller: autumn
+        type: ClusterIP
+        ports: {http: {port: 3000}}
+      january:
+        controller: autumn
+        type: ClusterIP
+        ports: {http: {port: 7000}}
+
+    # -- This is complex because it replaces Caddy
+    ingress:
+      revolt:
+        className: nginx
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt
+          nginx.ingress.kubernetes.io/use-regex: "true"
+          nginx.ingress.kubernetes.io/rewrite-target: /$2
+          external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+          external-dns.alpha.kubernetes.io/target: ${cloudflared_tunnel_uuid}.cfargotunnel.com
+        hosts:
+          - host: &host "revolt.${public_services_domain}"
+            paths:
+              - path: "/api(/|$)(.*)"
+                pathType: Prefix
+                service:
+                  identifier: api
+
+              - path: "/ws(/|$)(.*)"
+                pathType: Prefix
+                service:
+                  identifier: events
+
+              - path: "/autumn(/|$)(.*)"
+                pathType: Prefix
+                service:
+                  identifier: autumn
+
+              - path: "/january(/|$)(.*)"
+                pathType: Prefix
+                service:
+                  identifier: january
+
+              - path: "/(/|$)(.*)"
+                pathType: Prefix
+                service:
+                  identifier: web
+        tls:
+          - hosts:
+              - *host
+            secretName: *host

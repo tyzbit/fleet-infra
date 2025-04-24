@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+metadata:
+  name: revolt
+  namespace: flux-system
+namespace: personal
+resources:
+  - ks.yaml
+  - helmrelease.yaml
+  - persistentvolumeclaim.yaml
+configMapGenerator:
+  - name: revolt
+    files:
+      - Revolt.toml=Revolt.toml
+configurations:
+  - kustomizeconfig.yaml
