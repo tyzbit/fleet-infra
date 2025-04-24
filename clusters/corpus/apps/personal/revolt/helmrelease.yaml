@@ -44,7 +44,7 @@ spec:
               tag: 8.0.8
               pullPolicy: Always
             envFrom: [{ "secretRef": { "name": *app}}]
-            resources: {requests: {cpu: 10m},{limits: {memory: 512Mi}}}
+            resources: {{requests: {cpu: 10m}},{limits: {memory: 512Mi}}}
 
       redis:
         <<: *longhorncontroller
@@ -56,7 +56,7 @@ spec:
               tag: alpine_x86_64_v6.3.4
               pullPolicy: Always
             envFrom: [{ "secretRef": { "name": *app}}]
-            resources: {requests: {cpu: 10m},{limits: {memory: 128Mi}}}
+            resources: {{requests: {cpu: 10m}},{limits: {memory: 128Mi}}}
 
       rabbit:
         <<: *longhorncontroller
@@ -72,7 +72,7 @@ spec:
               # # -- in the secret
               # RABBITMQ_DEFAULT_PASS: password
               RABBITMQ_DEFAULT_USER: rabbitmq
-            resources: {requests: {cpu: 10m},{limits: {memory: 512Mi}}}
+            resources: {{requests: {cpu: 10m}},{limits: {memory: 512Mi}}}
 
       minio:
         <<: *longhorncontroller
@@ -99,7 +99,7 @@ spec:
               # # -- in the secret
               # MINIO_ROOT_PASSWORD: minioautumn
               MINIO_ROOT_USER: minioautumn
-            resources: {requests: {cpu: 10m},{limits: {memory: 512Mi}}}
+            resources: {{requests: {cpu: 10m}},{limits: {memory: 512Mi}}}
 
       api:
         <<: *deploymentcontroller
@@ -110,7 +110,7 @@ spec:
               repository: ghcr.io/revoltchat/server
               tag: 20250210-1
               pullPolicy: Always
-            resources: {requests: {cpu: 10m},{limits: {memory: 256Mi}}}
+            resources: {{requests: {cpu: 10m}},{limits: {memory: 256Mi}}}
 
       events:
         <<: *deploymentcontroller
@@ -121,7 +121,7 @@ spec:
               repository: ghcr.io/revoltchat/bonfire
               tag: 20250210-1
               pullPolicy: Always
-            resources: {requests: {cpu: 10m},{limits: {memory: 128Mi}}}
+            resources: {{requests: {cpu: 10m}},{limits: {memory: 128Mi}}}
 
       web:
         <<: *deploymentcontroller
@@ -132,7 +132,7 @@ spec:
               repository: ghcr.io/revoltchat/client
               tag: master
               pullPolicy: Always
-            resources: {requests: {cpu: 10m},{limits: {memory: 256Mi}}}
+            resources: {{requests: {cpu: 10m}},{limits: {memory: 256Mi}}}
 
       autumn:
         <<: *deploymentcontroller
@@ -143,7 +143,7 @@ spec:
               repository: ghcr.io/revoltchat/autumn
               tag: 20250210-1
               pullPolicy: Always
-            resources: {requests: {cpu: 10m},{limits: {memory: 256Mi}}}
+            resources: {{requests: {cpu: 10m}},{limits: {memory: 256Mi}}}
 
       january:
         <<: *deploymentcontroller
@@ -154,7 +154,7 @@ spec:
               repository: ghcr.io/revoltchat/january
               tag: 20250210-1
               pullPolicy: Always
-            resources: {requests: {cpu: 10m},{limits: {memory: 128Mi}}}
+            resources: {{requests: {cpu: 10m}},{limits: {memory: 128Mi}}}
 
       crond:
         <<: *deploymentcontroller
@@ -165,7 +165,7 @@ spec:
               repository: ghcr.io/revoltchat/crond
               tag: 20250210-1-debug
               pullPolicy: Always
-            resources: {requests: {cpu: 10m},{limits: {memory: 512Mi}}}
+            resources: {{requests: {cpu: 10m}},{limits: {memory: 512Mi}}}
 
       pushd:
         <<: *deploymentcontroller
@@ -176,7 +176,7 @@ spec:
               repository: ghcr.io/revoltchat/pushd
               tag: 20250210-1
               pullPolicy: Always
-            resources: {requests: {cpu: 10m},{limits: {memory: 512Mi}}}
+            # resources: {requests: {cpu: 10m},{limits: {memory: 512Mi}}}
 
     persistence:
       mongo:
