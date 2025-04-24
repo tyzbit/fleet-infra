@@ -39,7 +39,7 @@ spec:
 
     persistence:
       *app :
-        existingClaim: databag-database-longhorn-database
+        existingClaim: databag2-database-longhorn-database
         globalMounts: [path: /var/lib/databag]
 
     service:
