@@ -38,7 +38,7 @@ spec:
         << : *longhorncontroller
         replicas: 1 # active longhorn
         containers:
-          &db revolt-mongo:
+          revolt-mongo:
             image:
               repository: docker.io/mongo
               tag: 8.0.8
@@ -50,7 +50,7 @@ spec:
         << : *longhorncontroller
         replicas: 1 # active longhorn
         containers:
-          &redis revolt-redis:
+          revolt-redis:
             image:
               repository: docker.io/eqalpha/keydb
               tag: alpine_x86_64_v6.3.4
@@ -62,7 +62,7 @@ spec:
         << : *longhorncontroller
         replicas: 1 # active longhorn
         containers:
-          &rabbit revolt-rabbit:
+          revolt-rabbit:
             image:
               repository: docker.io/rabbitmq
               tag: 4
@@ -78,7 +78,7 @@ spec:
         << : *longhorncontroller
         replicas: 1 # active longhorn
         containers:
-          &minio revolt-minio:
+          revolt-minio:
             command:
               - /bin/sh
               - -c
@@ -105,7 +105,7 @@ spec:
         << : *deploymentcontroller
         replicas: 1
         containers:
-          &api revolt-api:
+          revolt-api:
             image:
               repository: ghcr.io/revoltchat/server
               tag: 20250210-1
@@ -116,7 +116,7 @@ spec:
         << : *deploymentcontroller
         replicas: 1
         containers:
-          &events revolt-events:
+          revolt-events:
             image:
               repository: ghcr.io/revoltchat/bonfire
               tag: 20250210-1
@@ -127,7 +127,7 @@ spec:
         << : *deploymentcontroller
         replicas: 1
         containers:
-          &web revolt-web:
+          revolt-web:
             image:
               repository: ghcr.io/revoltchat/client
               tag: master
@@ -138,7 +138,7 @@ spec:
         << : *deploymentcontroller
         replicas: 1
         containers:
-          &autumn revolt-autumn:
+          revolt-autumn:
             image:
               repository: ghcr.io/revoltchat/autumn
               tag: 20250210-1
@@ -149,7 +149,7 @@ spec:
         << : *deploymentcontroller
         replicas: 1
         containers:
-          &january revolt-january:
+          revolt-january:
             image:
               repository: ghcr.io/revoltchat/january
               tag: 20250210-1
@@ -160,7 +160,7 @@ spec:
         << : *deploymentcontroller
         replicas: 1
         containers:
-          &crond revolt-cron:
+          revolt-cron:
             image:
               repository: ghcr.io/revoltchat/crond
               tag: 20250210-1-debug
@@ -171,7 +171,7 @@ spec:
         << : *deploymentcontroller
         replicas: 1
         containers:
-          &pushd revolt-pushd:
+          revolt-pushd:
             image:
               repository: ghcr.io/revoltchat/pushd
               tag: 20250210-1
@@ -181,25 +181,25 @@ spec:
     persistence:
       mongo:
         existingClaim: revolt-mongo-longhorn-database
-        advancedMounts: { db: { *db : [path: /data/db] } }
+        advancedMounts: { db: { revolt-mongo : [path: /data/db] } }
 
       rabbit:
         existingClaim: revolt-rabbit-longhorn-database
-        advancedMounts: { rabbit: { *rabbit : [path: /var/lib/rabbitmq] } }
+        advancedMounts: { rabbit: { revolt-rabbitmq : [path: /var/lib/rabbitmq] } }
 
       minio:
         existingClaim: revolt-minio-longhorn-objectstorage
-        advancedMounts: { minio: { *minio : [path: /data] } }
+        advancedMounts: { minio: { revolt-minio : [path: /data] } }
 
       config:
         name: revolt
         type: configMap
         advancedMounts:
-          api: {*api : *configmount}
-          events: {*events : *configmount}
-          autumn: {*autumn : *configmount}
-          crond: {*crond : *configmount}
-          pushd: {*pushd : *configmount}
+          api: {revolt-api : *configmount}
+          events: {revolt-events : *configmount}
+          autumn: {revolt-autumn : *configmount}
+          crond: {revolt-crond : *configmount}
+          pushd: {revolt-pushd : *configmount}
 
     service:
       mongo:
