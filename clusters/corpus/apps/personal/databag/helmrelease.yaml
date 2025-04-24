@@ -58,7 +58,7 @@ spec:
           nginx.ingress.kubernetes.io/proxy-send-timeout: "14400"
           nginx.ingress.kubernetes.io/proxy-body-size: 1024m
         hosts:
-          - host: databag.home.arpa
+          - host: databag.${public_services_domain}
             paths:
               - path: "/"
                 service:
