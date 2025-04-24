@@ -35,7 +35,7 @@ spec:
 
     controllers:
       mongo:
-        << : *longhorncontroller
+        <<: *longhorncontroller
         replicas: 1 # active longhorn
         containers:
           revolt-mongo:
@@ -47,7 +47,7 @@ spec:
             resources: {{requests: {cpu: 10m}},{limits: {memory: 512Mi}}}
 
       redis:
-        << : *longhorncontroller
+        <<: *longhorncontroller
         replicas: 1 # active longhorn
         containers:
           revolt-redis:
@@ -59,7 +59,7 @@ spec:
             resources: {{requests: {cpu: 10m}},{limits: {memory: 128Mi}}}
 
       rabbit:
-        << : *longhorncontroller
+        <<: *longhorncontroller
         replicas: 1 # active longhorn
         containers:
           revolt-rabbit:
@@ -75,7 +75,7 @@ spec:
             resources: {{requests: {cpu: 10m}},{limits: {memory: 512Mi}}}
 
       minio:
-        << : *longhorncontroller
+        <<: *longhorncontroller
         replicas: 1 # active longhorn
         containers:
           revolt-minio:
@@ -102,7 +102,7 @@ spec:
             resources: {{requests: {cpu: 10m}},{limits: {memory: 512Mi}}}
 
       api:
-        << : *deploymentcontroller
+        <<: *deploymentcontroller
         replicas: 1
         containers:
           revolt-api:
@@ -113,7 +113,7 @@ spec:
             resources: {{requests: {cpu: 10m}},{limits: {memory: 256Mi}}}
 
       events:
-        << : *deploymentcontroller
+        <<: *deploymentcontroller
         replicas: 1
         containers:
           revolt-events:
@@ -124,7 +124,7 @@ spec:
             resources: {{requests: {cpu: 10m}},{limits: {memory: 128Mi}}}
 
       web:
-        << : *deploymentcontroller
+        <<: *deploymentcontroller
         replicas: 1
         containers:
           revolt-web:
@@ -135,7 +135,7 @@ spec:
             resources: {{requests: {cpu: 10m}},{limits: {memory: 256Mi}}}
 
       autumn:
-        << : *deploymentcontroller
+        <<: *deploymentcontroller
         replicas: 1
         containers:
           revolt-autumn:
@@ -146,7 +146,7 @@ spec:
             resources: {{requests: {cpu: 10m}},{limits: {memory: 256Mi}}}
 
       january:
-        << : *deploymentcontroller
+        <<: *deploymentcontroller
         replicas: 1
         containers:
           revolt-january:
@@ -157,7 +157,7 @@ spec:
             resources: {{requests: {cpu: 10m}},{limits: {memory: 128Mi}}}
 
       crond:
-        << : *deploymentcontroller
+        <<: *deploymentcontroller
         replicas: 1
         containers:
           revolt-cron:
@@ -168,7 +168,7 @@ spec:
             resources: {{requests: {cpu: 10m}},{limits: {memory: 512Mi}}}
 
       pushd:
-        << : *deploymentcontroller
+        <<: *deploymentcontroller
         replicas: 1
         containers:
           revolt-pushd:
