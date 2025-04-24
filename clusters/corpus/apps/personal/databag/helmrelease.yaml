@@ -53,10 +53,13 @@ spec:
       main:
         className: nginx
         annotations:
+          cert-manager.io/cluster-issuer: letsencrypt
           nginx.ingress.kubernetes.io/proxy-connect-timeout: "20"
           nginx.ingress.kubernetes.io/proxy-read-timeout: "14400"
           nginx.ingress.kubernetes.io/proxy-send-timeout: "14400"
           nginx.ingress.kubernetes.io/proxy-body-size: 1024m
+          external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+          external-dns.alpha.kubernetes.io/target: ${cloudflared_tunnel_uuid}.cfargotunnel.com
         hosts:
           - host: &host databag.${public_services_domain}
             paths:
