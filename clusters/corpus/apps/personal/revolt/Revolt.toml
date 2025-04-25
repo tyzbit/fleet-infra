@@ -6,10 +6,6 @@ events = "wss://${REVOLT_PUBLIC_SERVICES_URL}/ws"
 autumn = "https://${REVOLT_PUBLIC_SERVICES_URL}/autumn"
 january = "https://${REVOLT_PUBLIC_SERVICES_URL}/january"
 
-[pushd.vapid]
-private_key = "${PUSHD_VAPID_PRIVATE_KEY}"
-public_key = "${PUSHD_VAPID_PUBLIC_KEY}"
-
 [database]
 mongodb = "mongodb://revolt-mongodb:27017"
 redis = "redis://revolt-redis:6379/"
@@ -91,6 +87,10 @@ queue = "notifications.outbound.apn"
 pkcs8 = ""
 key_id = ""
 team_id = ""
+
+[pushd.vapid]
+private_key = "${PUSHD_VAPID_PRIVATE_KEY}"
+public_key = "${PUSHD_VAPID_PUBLIC_KEY}"
 
 [files]
 encryption_key = "${FILES_ENCRYPTION_KEY}"
