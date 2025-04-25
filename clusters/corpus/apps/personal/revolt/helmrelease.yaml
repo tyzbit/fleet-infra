@@ -216,6 +216,10 @@ spec:
         controller: rabbit
         type: ClusterIP
         ports: {mongo: {port: 5672}}
+      minio:
+        controller: minio
+        type: ClusterIP
+        ports: {mongo: {port: 9000}}
       web:
         controller: web
         type: ClusterIP
