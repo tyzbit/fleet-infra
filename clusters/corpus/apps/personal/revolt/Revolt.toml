@@ -10,9 +10,6 @@ january = "https://${REVOLT_PUBLIC_SERVICES_URL}/january"
 private_key = "${PUSHD_VAPID_PRIVATE_KEY}"
 public_key = "${PUSHD_VAPID_PUBLIC_KEY}"
 
-[files]
-encryption_key = "${FILES_ENCRYPTION_KEY}"
-
 [database]
 mongodb = "mongodb://revolt-mongodb:14017"
 redis = "redis://revolt-redis:14079/"
@@ -96,6 +93,7 @@ key_id = ""
 team_id = ""
 
 [files]
+encryption_key = "${FILES_ENCRYPTION_KEY}"
 # Quality used for lossy WebP previews (set to 100 for lossless)
 webp_quality = 80.0
 # Mime types that cannot be uploaded or served
