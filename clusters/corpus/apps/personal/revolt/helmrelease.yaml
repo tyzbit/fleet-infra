@@ -254,6 +254,11 @@ spec:
         hosts:
           - host: &host ${REVOLT_PUBLIC_URL}
             paths:
+              - path: "/assets"
+                pathType: Prefix
+                service:
+                  identifier: web
+
               - path: "/api(/|$)(.*)"
                 pathType: ImplementationSpecific
                 service:
@@ -279,10 +284,6 @@ spec:
                 service:
                   identifier: web
 
-              - path: "/assets"
-                pathType: Prefix
-                service:
-                  identifier: web
         tls:
           - hosts:
               - *host
