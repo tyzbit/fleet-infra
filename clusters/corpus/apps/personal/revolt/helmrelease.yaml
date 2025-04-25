@@ -181,7 +181,7 @@ spec:
     persistence:
       mongo:
         existingClaim: revolt-mongo-longhorn-database
-        advancedMounts: { db: { revolt-mongo : [path: /data/db] } }
+        advancedMounts: { mongo: { revolt-mongo : [path: /data/db] } }
 
       rabbit:
         existingClaim: revolt-rabbit-longhorn-database
