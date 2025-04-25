@@ -76,8 +76,8 @@ spec:
               # FILTER_CRITERIA_DICTIONARY_PHRASE_LENGTH_MINIMUM: "2"
               NEW_RELIC_CUSTOM_EVENT_TYPE: CustomACARSHumanMessages
               # -----------------------------------------
-              # 8,423 characters
-              # 2,291 tokens https://token-calculator.net
+              # 8,540 characters
+              # 2,315 tokens https://token-calculator.net
               # -----------------------------------------
               FILTER_OLLAMA_PROMPT: &prompt | 
                 This message was sent between an aircraft and air traffic
@@ -298,8 +298,11 @@ spec:
 
                 Air travel enthusiasts don't want to see departure delay reports
                 usually, which will have "BOARDING HELD" in the message but if
-                the report has commentary (after the phrase "COMMENTS"), air
-                travel enthusiasts do want to see the message.
+                the report has anything written after the phrase COMMENTS, those
+                are always written by a person and that means air travel
+                enthusiasts definitely want to see the message in this case even
+                though it's a departure delay report.
+                
 
                 Air travel enthusiasts do not want to see a message that has a
                 long string of numbers and letters without spaces, even if
