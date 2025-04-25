@@ -43,7 +43,6 @@ spec:
               repository: docker.io/mongo
               tag: 8.0.8
               pullPolicy: Always
-            envFrom: [{secretRef: {name: *app}}]
             resources: {requests: {cpu: 10m},limits: {memory: 512Mi}}
 
       redis:
@@ -55,7 +54,9 @@ spec:
               repository: docker.io/eqalpha/keydb
               tag: alpine_x86_64_v6.3.4
               pullPolicy: Always
-            envFrom: [{secretRef: {name: *app}}]
+            env: &envs
+              RABBITMQ_DEFAULT_PASS: ${revolt_rabbitmq_password}
+              MINIO_ROOT_PASSWORD: ${revolt_minio_password}
             resources: {requests: {cpu: 10m},limits: {memory: 128Mi}}
 
       rabbit:
@@ -67,10 +68,8 @@ spec:
               repository: docker.io/rabbitmq
               tag: 4
               pullPolicy: Always
-            envFrom: [{secretRef: {name: *app}}]
             env:
-              # # -- in the secret
-              # RABBITMQ_DEFAULT_PASS: password
+              <<: *envs
               RABBITMQ_DEFAULT_USER: rabbitmq
             resources: {requests: {cpu: 10m},limits: {memory: 256Mi}}
 
@@ -94,10 +93,8 @@ spec:
               repository: docker.io/minio/minio
               tag: latest
               pullPolicy: Always
-            envFrom: [{secretRef: {name: *app}}]
             env:
-              # # -- in the secret
-              # MINIO_ROOT_PASSWORD: minioautumn
+              <<: *env
               MINIO_ROOT_USER: minioautumn
             resources: {requests: {cpu: 10m},limits: {memory: 256Mi}}
 
@@ -133,6 +130,7 @@ spec:
               tag: master
               pullPolicy: Always
             env:
+              <<: *env
               REVOLT_PUBLIC_URL: ${REVOLT_PUBLIC_URL}
             resources: {requests: {cpu: 10m},limits: {memory: 256Mi}}
 
@@ -195,7 +193,7 @@ spec:
 
       config:
         name: revolt
-        type: configMap
+        type: secret
         advancedMounts:
           api: {revolt-api : *configmount}
           events: {revolt-events : *configmount}
