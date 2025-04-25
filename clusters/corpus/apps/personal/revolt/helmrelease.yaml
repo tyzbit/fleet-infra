@@ -211,15 +211,15 @@ spec:
       redis:
         controller: redis
         type: ClusterIP
-        ports: {mongo: {port: 6379}}
+        ports: {redis: {port: 6379}}
       rabbit:
         controller: rabbit
         type: ClusterIP
-        ports: {mongo: {port: 5672}}
+        ports: {rabbit: {port: 5672}}
       minio:
         controller: minio
         type: ClusterIP
-        ports: {mongo: {port: 9000}}
+        ports: {minio: {port: 9000}}
       web:
         controller: web
         type: ClusterIP

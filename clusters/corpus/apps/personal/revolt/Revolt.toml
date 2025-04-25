@@ -7,7 +7,7 @@ autumn = "https://${REVOLT_PUBLIC_SERVICES_URL}/autumn"
 january = "https://${REVOLT_PUBLIC_SERVICES_URL}/january"
 
 [database]
-mongodb = "mongodb://revolt-mongodb:27017"
+mongodb = "mongodb://revolt-mongo:27017"
 redis = "redis://revolt-redis:6379/"
 
 [api]
