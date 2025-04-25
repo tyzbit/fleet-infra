@@ -1,10 +1,10 @@
 # https://github.com/revoltchat/backend/blob/main/crates/core/config/Revolt.toml
 [hosts]
-app = "https://${REVOLT_PUBLIC_SERVICES_URL}"
-api = "https://${REVOLT_PUBLIC_SERVICES_URL}/api"
-events = "wss://${REVOLT_PUBLIC_SERVICES_URL}/ws"
-autumn = "https://${REVOLT_PUBLIC_SERVICES_URL}/autumn"
-january = "https://${REVOLT_PUBLIC_SERVICES_URL}/january"
+app = "https://${REVOLT_PUBLIC_URL}"
+api = "https://${REVOLT_PUBLIC_URL}/api"
+events = "wss://${REVOLT_PUBLIC_URL}/ws"
+autumn = "https://${REVOLT_PUBLIC_URL}/autumn"
+january = "https://${REVOLT_PUBLIC_URL}/january"
 
 [database]
 mongodb = "mongodb://revolt-mongo:27017"
