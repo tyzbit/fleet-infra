@@ -274,6 +274,11 @@ spec:
                 service:
                   identifier: january
 
+              - path: "/(/|$)(.*)"
+                pathType: ImplementationSpecific
+                service:
+                  identifier: web
+
               - path: "/"
                 pathType: Prefix
                 service:
