@@ -10,6 +10,12 @@ january = "https://${REVOLT_PUBLIC_SERVICES_URL}/january"
 mongodb = "mongodb://revolt-mongo:27017"
 redis = "redis://revolt-redis:6379/"
 
+[rabbit]
+host = "revolt-rabbit"
+port = 5672
+username = "rabbitmq"
+password = "${RABBITMQ_DEFAULT_PASS}"
+
 [api]
 
 [api.registration]
