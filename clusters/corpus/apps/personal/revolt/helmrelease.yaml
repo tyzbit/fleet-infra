@@ -277,11 +277,6 @@ spec:
                 service:
                   identifier: web
 
-              - path: "/invite(/|$)(.*)"
-                pathType: ImplementationSpecific
-                service:
-                  identifier: web
-
         tls:
           - hosts:
               - *host
