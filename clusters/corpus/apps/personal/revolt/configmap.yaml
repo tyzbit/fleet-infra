@@ -34,12 +34,12 @@ data:
     # Email server configuration for verification
     # Defaults to no email verification (host field is empty)
     host = "email-smtp.us-east-1.amazonaws.com"
-    username = ${SMTP_USERNAME}
-    password = ${SMTP_PASSWORD}
+    username = "${SMTP_USERNAME}"
+    password = "${SMTP_PASSWORD}"
     port = 587
     use_tls = true
-    from_address = noreply@${REVOLT_PUBLIC_URL}
-    reply_to = noreply@${REVOLT_PUBLIC_URL}
+    from_address = "noreply@${REVOLT_PUBLIC_URL}"
+    reply_to = "noreply@${REVOLT_PUBLIC_URL}"
 
     [api.security]
     # Authifier Shield API key
