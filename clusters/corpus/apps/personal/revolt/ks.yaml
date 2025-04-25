@@ -20,5 +20,8 @@ spec:
   postBuild:
     substituteFrom:
       - kind: Secret
+        name: sensitive-values
+        optional: false
+      - kind: Secret
         name: *app
         optional: false
