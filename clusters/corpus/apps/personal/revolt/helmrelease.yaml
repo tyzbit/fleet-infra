@@ -54,7 +54,7 @@ spec:
               repository: docker.io/eqalpha/keydb
               tag: alpine_x86_64_v6.3.4
               pullPolicy: Always
-            env: &envs
+            env: &env
               RABBITMQ_DEFAULT_PASS: ${revolt_rabbitmq_password}
               MINIO_ROOT_PASSWORD: ${revolt_minio_password}
             resources: {requests: {cpu: 10m},limits: {memory: 128Mi}}
@@ -69,7 +69,7 @@ spec:
               tag: 4
               pullPolicy: Always
             env:
-              <<: *envs
+              <<: *env
               RABBITMQ_DEFAULT_USER: rabbitmq
             resources: {requests: {cpu: 10m},limits: {memory: 256Mi}}
 
