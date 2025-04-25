@@ -11,8 +11,8 @@ private_key = "${PUSHD_VAPID_PRIVATE_KEY}"
 public_key = "${PUSHD_VAPID_PUBLIC_KEY}"
 
 [database]
-mongodb = "mongodb://revolt-mongodb:14017"
-redis = "redis://revolt-redis:14079/"
+mongodb = "mongodb://revolt-mongodb:27017"
+redis = "redis://revolt-redis:6379/"
 
 [api]
 
