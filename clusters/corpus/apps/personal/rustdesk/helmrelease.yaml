@@ -71,6 +71,7 @@ spec:
     service:
       *app :
         controller: *app
+        externalTrafficPolicy: Local
         externalIPs:
           - 172.23.128.100
         ports:
