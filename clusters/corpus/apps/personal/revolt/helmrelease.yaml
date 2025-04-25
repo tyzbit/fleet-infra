@@ -255,27 +255,27 @@ spec:
           - host: &host "${REVOLT_PUBLIC_URL}"
             paths:
               - path: "/api(/|$)(.*)"
-                pathType: Prefix
+                pathType: ImplementationSpecific
                 service:
                   identifier: api
 
               - path: "/ws(/|$)(.*)"
-                pathType: Prefix
+                pathType: ImplementationSpecific
                 service:
                   identifier: events
 
               - path: "/autumn(/|$)(.*)"
-                pathType: Prefix
+                pathType: ImplementationSpecific
                 service:
                   identifier: autumn
 
               - path: "/january(/|$)(.*)"
-                pathType: Prefix
+                pathType: ImplementationSpecific
                 service:
                   identifier: january
 
               - path: "/(/|$)(.*)"
-                pathType: Prefix
+                pathType: ImplementationSpecific
                 service:
                   identifier: web
         tls:
