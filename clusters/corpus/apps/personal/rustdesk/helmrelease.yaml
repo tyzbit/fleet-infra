@@ -71,7 +71,6 @@ spec:
     service:
       *app :
         controller: *app
-        internalTrafficPolicy: Local
         ports:
           rustdesk-1:
             port: 21114
