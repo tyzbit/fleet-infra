@@ -241,7 +241,7 @@ spec:
 
     # -- This is complex because it replaces Caddy
     ingress:
-      web:
+      revolt-web:
         className: nginx
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt
