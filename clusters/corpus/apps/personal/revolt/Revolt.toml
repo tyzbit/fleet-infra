@@ -26,13 +26,13 @@ invite_only = true
 [api.smtp]
 # Email server configuration for verification
 # Defaults to no email verification (host field is empty)
-host = ""
-username = ""
-password = ""
-from_address = "noreply@example.com"
-# reply_to = "noreply@example.com"
-# port = 587
-# use_tls = true
+host = "email-smtp.us-east-1.amazonaws.com"
+username = ${SMTP_USERNAME}
+password = ${SMTP_PASSWORD}
+port = 587
+use_tls = true
+from_address = noreply@${REVOLT_PUBLIC_URL}
+reply_to = noreply@${REVOLT_PUBLIC_URL}
 
 
 [api.security]
