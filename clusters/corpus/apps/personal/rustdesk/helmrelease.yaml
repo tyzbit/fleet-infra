@@ -71,6 +71,8 @@ spec:
     service:
       *app :
         controller: *app
+        externalIPs:
+          - 172.23.128.100
         ports:
           rustdesk-1:
             port: 21114
