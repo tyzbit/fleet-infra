@@ -34,7 +34,6 @@ use_tls = true
 from_address = noreply@${REVOLT_PUBLIC_URL}
 reply_to = noreply@${REVOLT_PUBLIC_URL}
 
-
 [api.security]
 # Authifier Shield API key
 authifier_shield_key = ""
