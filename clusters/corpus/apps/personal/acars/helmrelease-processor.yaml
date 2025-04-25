@@ -76,8 +76,8 @@ spec:
               # FILTER_CRITERIA_DICTIONARY_PHRASE_LENGTH_MINIMUM: "2"
               NEW_RELIC_CUSTOM_EVENT_TYPE: CustomACARSHumanMessages
               # -----------------------------------------
-              # 8,436 characters
-              # 2,298 tokens https://token-calculator.net
+              # 8,423 characters
+              # 2,291 tokens https://token-calculator.net
               # -----------------------------------------
               FILTER_OLLAMA_PROMPT: &prompt | 
                 This message was sent between an aircraft and air traffic
@@ -292,7 +292,6 @@ spec:
                 - LRU NAME
                 - POSRPT
                 - PROX
-                - SLATDISPROX
                 - P/N
                 - ATA21-61 TEMPERATURE CONTROL
                 - BOARDING HELD
