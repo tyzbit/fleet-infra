@@ -278,6 +278,11 @@ spec:
                 pathType: ImplementationSpecific
                 service:
                   identifier: web
+
+              - path: "/assets"
+                pathType: Prefix
+                service:
+                  identifier: web
         tls:
           - hosts:
               - *host
