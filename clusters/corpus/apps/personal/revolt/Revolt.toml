@@ -1,10 +1,10 @@
 # https://github.com/revoltchat/backend/blob/main/crates/core/config/Revolt.toml
 [hosts]
-app = "https://revolt.${public_services_domain}"
-api = "https://revolt.${public_services_domain}/api"
-events = "wss://revolt.${public_services_domain}/ws"
-autumn = "https://revolt.${public_services_domain}/autumn"
-january = "https://revolt.${public_services_domain}/january"
+app = "https://${REVOLT_PUBLIC_SERVICES_URL}"
+api = "https://${REVOLT_PUBLIC_SERVICES_URL}/api"
+events = "wss://${REVOLT_PUBLIC_SERVICES_URL}/ws"
+autumn = "https://${REVOLT_PUBLIC_SERVICES_URL}/autumn"
+january = "https://${REVOLT_PUBLIC_SERVICES_URL}/january"
 
 [pushd.vapid]
 private_key = "${PUSHD_VAPID_PRIVATE_KEY}"
