@@ -28,9 +28,9 @@ spec:
         type: deployment
         annotations: {reloader.stakater.com/auto: "true"}
       c: &configmount
-        - path: /revolt.toml
+        - path: /Revolt.toml
           readOnly: true
-          subPath: revolt.toml
+          subPath: Revolt.toml
     # -- END
 
     controllers:
