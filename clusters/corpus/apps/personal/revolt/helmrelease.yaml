@@ -225,7 +225,7 @@ spec:
       "january":
         controller: january
         type: ClusterIP
-        ports: {http: {port: 7000}}
+        ports: {http: {port: 14705}}
 
     # -- This is complex because it replaces Caddy
     ingress:
