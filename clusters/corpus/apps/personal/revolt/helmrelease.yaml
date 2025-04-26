@@ -193,7 +193,7 @@ spec:
 
       config:
         name: revolt
-        type: secret
+        type: configMap
         advancedMounts:
           api: {revolt-api : *configmount}
           events: {revolt-events : *configmount}
@@ -235,7 +235,7 @@ spec:
         type: ClusterIP
         ports: {http: {port: 3000}}
       january:
-        controller: autumn
+        controller: january
         type: ClusterIP
         ports: {http: {port: 7000}}
 
@@ -294,7 +294,6 @@ spec:
                 pathType: ImplementationSpecific
                 service:
                   identifier: web
-
         tls:
           - hosts:
               - *host
