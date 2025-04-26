@@ -151,7 +151,7 @@ spec:
         <<: *deploymentcontroller
         replicas: 1
         containers:
-          revolt-cron:
+          revolt-crond:
             image:
               repository: ghcr.io/revoltchat/crond
               tag: 20250210-1-debug
