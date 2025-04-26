@@ -82,7 +82,8 @@ spec:
               - /bin/sh
               - -c
               - |
-                minio server /data &; pid=$?
+                minio server /data &
+                pid=$?
                 while ! /usr/bin/mc ready minio; do
                   /usr/bin/mc config host add minio http://127.0.0.1:9000 minioautumn $(MINIO_ROOT_PASSWORD)
                   echo 'Waiting minio...'
