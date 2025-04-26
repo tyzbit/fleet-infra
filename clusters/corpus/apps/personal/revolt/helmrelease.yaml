@@ -34,7 +34,7 @@ spec:
     # -- END
 
     controllers:
-      mongo:
+      "mongo":
         <<: *longhorncontroller
         replicas: 1 # active longhorn
         containers:
@@ -44,8 +44,7 @@ spec:
               tag: 8.0.8
               pullPolicy: Always
             resources: {requests: {cpu: 10m},limits: {memory: 512Mi}}
-
-      redis:
+      "redis":
         <<: *longhorncontroller
         replicas: 1 # active longhorn
         containers:
@@ -58,8 +57,7 @@ spec:
               RABBITMQ_DEFAULT_PASS: ${revolt_rabbitmq_password}
               MINIO_ROOT_PASSWORD: ${revolt_minio_password}
             resources: {requests: {cpu: 10m},limits: {memory: 128Mi}}
-
-      rabbit:
+      "rabbit":
         <<: *longhorncontroller
         replicas: 1 # active longhorn
         containers:
@@ -72,8 +70,7 @@ spec:
               <<: *env
               RABBITMQ_DEFAULT_USER: rabbitmq
             resources: {requests: {cpu: 10m},limits: {memory: 256Mi}}
-
-      minio:
+      "minio":
         <<: *longhorncontroller
         replicas: 1 # active longhorn
         containers:
@@ -97,8 +94,7 @@ spec:
               <<: *env
               MINIO_ROOT_USER: minioautumn
             resources: {requests: {cpu: 10m},limits: {memory: 256Mi}}
-
-      api:
+      "api":
         <<: *deploymentcontroller
         replicas: 1
         containers:
@@ -108,8 +104,7 @@ spec:
               tag: 20250225-1
               pullPolicy: Always
             resources: {requests: {cpu: 10m},limits: {memory: 256Mi}}
-
-      events:
+      "events":
         <<: *deploymentcontroller
         replicas: 1
         containers:
@@ -119,8 +114,7 @@ spec:
               tag: 20250225-1
               pullPolicy: Always
             resources: {requests: {cpu: 10m},limits: {memory: 128Mi}}
-
-      web:
+      "web":
         <<: *deploymentcontroller
         replicas: 1
         containers:
@@ -133,8 +127,7 @@ spec:
               <<: *env
               REVOLT_PUBLIC_URL: ${REVOLT_PUBLIC_URL}
             resources: {requests: {cpu: 10m},limits: {memory: 256Mi}}
-
-      autumn:
+      "autumn":
         <<: *deploymentcontroller
         replicas: 1
         containers:
@@ -144,8 +137,7 @@ spec:
               tag: 20250225-1
               pullPolicy: Always
             resources: {requests: {cpu: 10m},limits: {memory: 256Mi}}
-
-      january:
+      "january":
         <<: *deploymentcontroller
         replicas: 1
         containers:
@@ -155,8 +147,7 @@ spec:
               tag: 20250225-1
               pullPolicy: Always
             resources: {requests: {cpu: 10m},limits: {memory: 128Mi}}
-
-      crond:
+      "crond":
         <<: *deploymentcontroller
         replicas: 1
         containers:
@@ -166,8 +157,7 @@ spec:
               tag: 20250210-1-debug
               pullPolicy: Always
             resources: {requests: {cpu: 10m},limits: {memory: 256Mi}}
-
-      pushd:
+      "pushd":
         <<: *deploymentcontroller
         replicas: 1
         containers:
@@ -179,19 +169,16 @@ spec:
             # resources: {{requests: {cpu: 10m,{limits: {memory: 512Mi}}}
 
     persistence:
-      mongo:
+      "mongo":
         existingClaim: revolt-mongo-longhorn-database
         advancedMounts: { mongo: { revolt-mongo : [path: /data/db] } }
-
-      rabbit:
+      "rabbit":
         existingClaim: revolt-rabbit-longhorn-database
         advancedMounts: { rabbit: { revolt-rabbitmq : [path: /var/lib/rabbitmq] } }
-
-      minio:
+      "minio":
         existingClaim: revolt-minio-longhorn-objectstorage
         advancedMounts: { minio: { revolt-minio : [path: /data] } }
-
-      config:
+      "config":
         name: revolt
         type: configMap
         advancedMounts:
@@ -203,46 +190,46 @@ spec:
           pushd: {revolt-pushd : *configmount}
 
     service:
-      mongo:
+      "mongo":
         controller: mongo
         type: ClusterIP
         ports: {mongo: {port: 27017}}
-      redis:
+      "redis":
         controller: redis
         type: ClusterIP
         ports: {redis: {port: 6379}}
-      rabbit:
+      "rabbit":
         controller: rabbit
         type: ClusterIP
         ports: {rabbit: {port: 5672}}
-      minio:
+      "minio":
         controller: minio
         type: ClusterIP
         ports: {minio: {port: 9000}}
-      web:
+      "web":
         controller: web
         type: ClusterIP
         ports: {http: {port: 5000}}
-      api:
+      "api":
         controller: api
         type: ClusterIP
         ports: {http: {port: 8000}}
-      events:
+      "events":
         controller: events
         type: ClusterIP
         ports: {http: {port: 9000}}
-      autumn:
+      "autumn":
         controller: autumn
         type: ClusterIP
         ports: {http: {port: 3000}}
-      january:
+      "january":
         controller: january
         type: ClusterIP
         ports: {http: {port: 7000}}
 
     # -- This is complex because it replaces Caddy
     ingress:
-      revolt-web:
+      "revolt-web":
         className: nginx
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt
@@ -259,8 +246,7 @@ spec:
           - hosts:
               - *host
             secretName: *host
-
-      revolt:
+      "revolt":
         className: nginx
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt
