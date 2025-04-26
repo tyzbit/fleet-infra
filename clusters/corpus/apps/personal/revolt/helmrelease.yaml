@@ -93,7 +93,7 @@ spec:
             env:
               <<: *env
               MINIO_ROOT_USER: minioautumn
-            resources: {requests: {cpu: 10m},limits: {memory: 256Mi}}
+            resources: {requests: {cpu: 10m},limits: {memory: 1Gi}}
       "api":
         <<: *deploymentcontroller
         replicas: 1
