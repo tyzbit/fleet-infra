@@ -332,7 +332,7 @@ spec:
               FILTER_OLLAMA_FILTER_ON_FAILURE: "true"
               FILTER_CRITERIA_ACARS_DUPLICATE_MESSAGE_SIMILARITY: "0.90"
               FILTER_CRITERIA_VDLM2_DUPLICATE_MESSAGE_SIMILARITY: "0.90"
-              # FILTER_OLLAMA_MAX_PREDICTION_TOKENS: "256" # NOT needed
+              FILTER_OLLAMA_MAX_PREDICTION_TOKENS: "100" # Consistent response times
               ACARS_ANNOTATOR_SELECTED_FIELDS: >-
                 acarsAircraftTailCode
                 acarsFrequencyMHz
