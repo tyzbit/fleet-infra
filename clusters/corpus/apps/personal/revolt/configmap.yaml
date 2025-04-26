@@ -4,6 +4,9 @@ metadata:
   name: revolt
   namespace: personal
 data:
+  invite_mongo_query: |
+    use revolt
+    db.invites.insertOne({ _id: "inviteidhere" })
   Revolt.toml: |
     # https://github.com/revoltchat/backend/blob/main/crates/core/config/Revolt.toml
     production = true
