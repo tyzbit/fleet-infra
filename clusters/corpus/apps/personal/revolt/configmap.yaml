@@ -40,7 +40,7 @@ data:
     port = 587
     use_tls = true
     from_address = "noreply@revolt.${public_services_domain}"
-    reply_to = "noreply@revolt.${public_services_domain}"
+    # reply_to = "noreply@revolt.${public_services_domain}"
 
     [api.security]
     # Authifier Shield API key
@@ -52,8 +52,8 @@ data:
 
     [api.security.captcha]
     # hCaptcha configuration
-    hcaptcha_key = ""
-    hcaptcha_sitekey = ""
+    hcaptcha_key = "${revolt_hcaptcha_key}"
+    hcaptcha_sitekey = "${revolt_hcaptcha_sitekey}"
 
     [api.workers]
     # Maximum concurrent connections (to proxy server)
