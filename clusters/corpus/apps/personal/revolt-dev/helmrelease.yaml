@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: &app revolt
+  name: &app revolt-dev
   namespace: flux-system
 spec:
   releaseName: *app
@@ -170,16 +170,16 @@ spec:
 
     persistence:
       "mongo":
-        existingClaim: revolt-mongo-longhorn-database
+        existingClaim: revolt-mongo-dev-longhorn-database
         advancedMounts: { mongo: { revolt-mongo : [path: /data/db] } }
       "rabbit":
-        existingClaim: revolt-rabbit-longhorn-database
+        existingClaim: revolt-rabbit-dev-longhorn-database
         advancedMounts: { rabbit: { revolt-rabbitmq : [path: /var/lib/rabbitmq] } }
       "minio":
-        existingClaim: revolt-minio-longhorn-objectstorage
+        existingClaim: revolt-minio-dev-longhorn-objectstorage
         advancedMounts: { minio: { revolt-minio : [path: /data] } }
       "config":
-        name: revolt
+        name: revolt-dev
         type: configMap
         advancedMounts:
           api: {revolt-api : *configmount}
@@ -236,7 +236,7 @@ spec:
           external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
           external-dns.alpha.kubernetes.io/target: ${cloudflared_tunnel_uuid}.cfargotunnel.com
         hosts:
-          - host: &host we.${public_services_domain}
+          - host: &host test.we.${public_services_domain}
             paths:
               - path: "/"
                 pathType: Prefix
@@ -255,7 +255,7 @@ spec:
           external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
           external-dns.alpha.kubernetes.io/target: ${cloudflared_tunnel_uuid}.cfargotunnel.com
         hosts:
-          - host: &host we.${public_services_domain}
+          - host: &host test.we.${public_services_domain}
             paths:
               - path: "/api(/|$)(.*)"
                 pathType: ImplementationSpecific

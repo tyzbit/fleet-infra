@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: revolt
+  name: revolt-dev
   namespace: personal
 data:
   invite_mongo_query: |
@@ -12,11 +12,11 @@ data:
     production = true
 
     [hosts]
-    app = "https://we.${public_services_domain}"
-    api = "https://we.${public_services_domain}/api"
-    events = "wss://we.${public_services_domain}/ws"
-    autumn = "https://we.${public_services_domain}/autumn"
-    january = "https://we.${public_services_domain}/january"
+    app = "https://test.we.${public_services_domain}"
+    api = "https://test.we.${public_services_domain}/api"
+    events = "wss://test.we.${public_services_domain}/ws"
+    autumn = "https://test.we.${public_services_domain}/autumn"
+    january = "https://test.we.${public_services_domain}/january"
 
     [database]
     mongodb = "mongodb://revolt-mongo:27017"
@@ -26,7 +26,7 @@ data:
     host = "revolt-rabbit"
     port = 5672
     username = "rabbitmq"
-    password = "${revolt_rabbitmq_password}"
+    password = "${revolt_dev_rabbitmq_password}"
 
     [api]
     [api.registration]
@@ -42,8 +42,8 @@ data:
     password = "${revolt_smtp_password}"
     port = 587
     use_tls = true
-    from_address = "noreply@we.${public_services_domain}"
-    # reply_to = "noreply@we.${public_services_domain}"
+    from_address = "noreply@test.we.${public_services_domain}"
+    # reply_to = "noreply@test.we.${public_services_domain}"
 
     [api.security]
     # Authifier Shield API key
@@ -75,7 +75,7 @@ data:
     # while resolving.
     mass_mention_chunk_size = 200
     # none of these should need changing
-    exchange = "we.notifications"
+    exchange = "test.we.notifications"
     message_queue = "notifications.origin.message"
     mass_mention_queue = "notifications.origin.mass_mention" # handles messages thatcontain role or everyone mentions
     fr_accepted_queue = "notifications.ingest.fr_accepted"   # friend request accepted
@@ -168,7 +168,7 @@ data:
     # S3 protocol key ID
     access_key_id = "minioautumn"
     # S3 protocol access key
-    secret_access_key = "${revolt_minio_password}"
+    secret_access_key = "${revolt_dev_minio_password}"
     default_bucket = "revolt-uploads"
 
     [features]
@@ -183,12 +183,12 @@ data:
     [features.limits]
     [features.limits.global]
     group_size = 100
-    message_embeds = 10
-    message_replies = 10
+    message_embeds = 5
+    message_replies = 5
     message_reactions = 20
-    server_emoji = 200
+    server_emoji = 100
     server_roles = 200
-    server_channels = 500
+    server_channels = 200
 
     # How many hours since creation a user is considered new
     new_user_hours = 72
@@ -211,34 +211,63 @@ data:
 
     [features.limits.new_user.file_upload_size_limit]
     # Maximum file size limits (in bytes)
-    attachments = 200_000_000
-    avatars = 8_000_000
-    backgrounds = 12_000_000
-    icons = 5_000_000
-    banners = 12_000_000
-    emojis = 1_000_000
+    attachments = 20_000_000
+    avatars = 4_000_000
+    backgrounds = 6_000_000
+    icons = 2_500_000
+    banners = 6_000_000
+    emojis = 500_000
 
     [features.limits.default]
     # Limits imposed on users by default
     # Number of outgoing friend requests permitted at any time
-    outgoing_friend_requests = 10
+    outgoing_friend_requests = 5
     # Maximum number of owned bots
-    bots = 5
+    bots = 2
     # Message content length
-    message_length = 4000
+    message_length = 2000
+
     # Number of attachments that can be included
     message_attachments = 5
+
+    # Maximum number of servers the user can create/join
+    servers = 50
+
+    [features.limits.new_user.file_upload_size_limit]
+    # Maximum file size limits (in bytes)
+    attachments = 20_000_000
+    avatars = 4_000_000
+    backgrounds = 6_000_000
+    icons = 2_500_000
+    banners = 6_000_000
+    emojis = 500_000
+
+    [features.limits.default]
+    # Limits imposed on users by default
+
+    # Number of outgoing friend requests permitted at any time
+    outgoing_friend_requests = 10
+
+    # Maximum number of owned bots
+    bots = 5
+
+    # Message content length
+    message_length = 2000
+
+    # Number of attachments that can be included
+    message_attachments = 5
+
     # Maximum number of servers the user can create/join
     servers = 100
 
     [features.limits.default.file_upload_size_limit]
     # Maximum file size limits (in bytes)
-    attachments = 200_000_000
-    avatars = 8_000_000
-    backgrounds = 12_000_000
-    icons = 5_000_000
-    banners = 12_000_000
-    emojis = 1_000_000
+    attachments = 20_000_000
+    avatars = 4_000_000
+    backgrounds = 6_000_000
+    icons = 2_500_000
+    banners = 6_000_000
+    emojis = 500_000
 
     [features.advanced]
     # The max amount of messages the rabbitmq provider/db mention adder job will delay for before forcing handling of a channel.
