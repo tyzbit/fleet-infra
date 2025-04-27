@@ -175,7 +175,7 @@ cameras:
         car: *sidegaragemask
 
   sidefence:
-    enabled: true
+    enabled: false
     detect: *doorbelldetect
     ffmpeg: {inputs:
       [{path: rtsp://localhost:8554/sidefence, roles: *detectandrecord}]}
