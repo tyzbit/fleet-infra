@@ -9,7 +9,7 @@ data:
     db.invites.insertOne({ _id: "inviteidhere" })
   Revolt.toml: |
     # https://github.com/revoltchat/backend/blob/main/crates/core/config/Revolt.toml
-    production = true
+    production = false
 
     [hosts]
     app = "https://test.we.${public_services_domain}"
