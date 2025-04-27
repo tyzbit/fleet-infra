@@ -75,7 +75,7 @@ data:
     # while resolving.
     mass_mention_chunk_size = 200
     # none of these should need changing
-    exchange = "we.notifications"
+    exchange = "revolt.notifications"
     message_queue = "notifications.origin.message"
     mass_mention_queue = "notifications.origin.mass_mention" # handles messages thatcontain role or everyone mentions
     fr_accepted_queue = "notifications.ingest.fr_accepted"   # friend request accepted

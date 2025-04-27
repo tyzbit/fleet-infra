@@ -75,7 +75,7 @@ data:
     # while resolving.
     mass_mention_chunk_size = 200
     # none of these should need changing
-    exchange = "test.we.notifications"
+    exchange = "revolt.notifications"
     message_queue = "notifications.origin.message"
     mass_mention_queue = "notifications.origin.mass_mention" # handles messages thatcontain role or everyone mentions
     fr_accepted_queue = "notifications.ingest.fr_accepted"   # friend request accepted
@@ -221,42 +221,14 @@ data:
     [features.limits.default]
     # Limits imposed on users by default
     # Number of outgoing friend requests permitted at any time
-    outgoing_friend_requests = 5
-    # Maximum number of owned bots
-    bots = 2
-    # Message content length
-    message_length = 2000
-
-    # Number of attachments that can be included
-    message_attachments = 5
-
-    # Maximum number of servers the user can create/join
-    servers = 50
-
-    [features.limits.new_user.file_upload_size_limit]
-    # Maximum file size limits (in bytes)
-    attachments = 20_000_000
-    avatars = 4_000_000
-    backgrounds = 6_000_000
-    icons = 2_500_000
-    banners = 6_000_000
-    emojis = 500_000
-
-    [features.limits.default]
-    # Limits imposed on users by default
-
-    # Number of outgoing friend requests permitted at any time
     outgoing_friend_requests = 10
-
     # Maximum number of owned bots
     bots = 5
-
     # Message content length
     message_length = 2000
 
     # Number of attachments that can be included
     message_attachments = 5
-
     # Maximum number of servers the user can create/join
     servers = 100
 
