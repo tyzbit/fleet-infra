@@ -179,6 +179,7 @@ spec:
               tag: 0.3.0-alpha.1
               pullPolicy: Always
             env:
+              MANAGE_TOKEN: ${revolt_vortex_manage_token}
               WS_URL: wss://vortex.we.${public_services_domain}
               RTC_MIN_PORT: 12301
               RTC_MAX_PORT: 12320
