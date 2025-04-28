@@ -304,6 +304,13 @@ spec:
                 service:
                   identifier: january
 
+              - path: "/vortex-ws(/)?(.*)"
+                pathType: ImplementationSpecific
+                service:
+                  identifier: vortex
+                  port: http
+
+
               - path: "/vortex(/)?(.*)"
                 pathType: ImplementationSpecific
                 service:

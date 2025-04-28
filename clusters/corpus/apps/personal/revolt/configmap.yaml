@@ -18,7 +18,7 @@ data:
     autumn = "https://we.${public_services_domain}/autumn"
     january = "https://we.${public_services_domain}/january"
     voso_legacy = "http://revolt-vortex:8080"
-    voso_legacy_ws = "wss://we.${public_services_domain}/vortex"
+    voso_legacy_ws = "wss://we.${public_services_domain}/vortex-ws"
 
     [database]
     mongodb = "mongodb://revolt-mongo:27017"
