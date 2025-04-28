@@ -91,15 +91,18 @@ spec:
                 which suggests a human wrote it and therefore is of interest.
                 Questions asked in natural language are definitely of interest
                 because automated systems will not ask questions using prose.
+                Air travel enthusiasts want to see friendly or casual messages
+                between pilots and ATC because 
                 
                 If a message has prose that comes across as dramatic, friendly,
                 angry, alarmed, scared, stressed, or otherwise seems emotional
                 then it is definitely something air travel enthusiasts
                 want to see because they are interested in the interactions of
-                people behind the scenes of air travel. Informal communication
-                is also of interest to air travel enthusiasts because that's a
-                behind-the-scenes peek into air travel that most people don't
-                get to see.
+                people behind the scenes of air travel. Informal, friendly,
+                jovial or casual communication is also of interest to air travel
+                enthusiasts because those messages show a behind-the-scenes peek
+                into the day-to-day interactions of the people who work in air
+                travel.
                 
                 If prose in the message discusses a situation notable to
                 the pilots, the crew, or the passengers, air travel enthusiasts
@@ -123,6 +126,7 @@ spec:
                 - PAX
                 - FREETEXT
                 - CHOP
+                - DEFECT
                 
                 Here's an example message air travel enthusiasts want to see:
                 ```
