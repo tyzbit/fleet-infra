@@ -17,8 +17,8 @@ data:
     events = "wss://test-we.${public_services_domain}/ws"
     autumn = "https://test-we.${public_services_domain}/autumn"
     january = "https://test-we.${public_services_domain}/january"
-    voso_legacy = "http://revolt-dev-vortex:8080"
-    voso_legacy_ws = "wss://vtest-we.${public_services_domain}/vortex-ws"
+    voso_legacy = "https://test-we.${public_services_domain}/vortex"
+    voso_legacy_ws = "wss://test-we.${public_services_domain}/vortex-ws"
 
 
     [database]
