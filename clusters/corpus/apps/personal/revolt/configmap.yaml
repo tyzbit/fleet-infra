@@ -163,7 +163,7 @@ data:
     endpoint = "http://revolt-minio:9000"
     # Whether to use path-style buckets
     # Generally true, except for MinIO
-    path_style_buckets = false
+    path_style_buckets = true
     # S3 region name
     region = "minio"
     # S3 protocol key ID
