@@ -258,27 +258,27 @@ spec:
         hosts:
           - host: &host test.we.${public_services_domain}
             paths:
-              - path: "/api(/|$)(.*)"
+              - path: "/api(/)?(.*)"
                 pathType: ImplementationSpecific
                 service:
                   identifier: api
 
-              - path: "/ws(/|$)(.*)"
+              - path: "/ws(/)?(.*)"
                 pathType: ImplementationSpecific
                 service:
                   identifier: events
 
-              - path: "/autumn(/|$)(.*)"
+              - path: "/autumn(/)?(.*)"
                 pathType: ImplementationSpecific
                 service:
                   identifier: autumn
 
-              - path: "/january(/|$)(.*)"
+              - path: "/january(/)?(.*)"
                 pathType: ImplementationSpecific
                 service:
                   identifier: january
 
-              - path: "/(/|$)(.*)"
+              - path: "/($)?(.*)"
                 pathType: ImplementationSpecific
                 service:
                   identifier: web
