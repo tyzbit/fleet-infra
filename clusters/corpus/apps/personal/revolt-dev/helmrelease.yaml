@@ -124,8 +124,9 @@ spec:
               tag: master
               pullPolicy: Always
             env:
-              <<: *env
-              REVOLT_PUBLIC_URL: ${REVOLT_PUBLIC_URL}
+              REVOLT_PUBLIC_URL: &host test.we.${public_services_domain}
+              VITE_API_URL=we.${public_services_domain}/api
+              VITE_THEMES_URL=https://themes.revolt.chat
             resources: {requests: {cpu: 10m},limits: {memory: 256Mi}}
       "autumn":
         <<: *deploymentcontroller
