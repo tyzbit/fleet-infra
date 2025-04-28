@@ -180,7 +180,7 @@ spec:
               pullPolicy: Always
             env:
               MANAGE_TOKEN: ${revolt_dev_vortex_manage_token}
-              WS_URL: wss://test-we.${public_services_domain}/vortex
+              WS_URL: wss://test-we.${public_services_domain}/vortex-ws
               RTC_MIN_PORT: 12321
               RTC_MAX_PORT: 12340
               RTC_IPS: ${home_ip}
@@ -309,7 +309,6 @@ spec:
                 service:
                   identifier: vortex
                   port: http
-
 
               - path: "/vortex-http(/)?(.*)"
                 pathType: ImplementationSpecific
