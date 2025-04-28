@@ -17,7 +17,7 @@ data:
     events = "wss://test-we.${public_services_domain}/ws"
     autumn = "https://test-we.${public_services_domain}/autumn"
     january = "https://test-we.${public_services_domain}/january"
-    voso_legacy = "https://test-we.${public_services_domain}/vortex"
+    voso_legacy = "https://test-we.${public_services_domain}/vortex-http"
     voso_legacy_ws = "wss://test-we.${public_services_domain}/vortex-ws"
 
 

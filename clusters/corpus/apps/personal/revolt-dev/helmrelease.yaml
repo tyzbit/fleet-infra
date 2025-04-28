@@ -311,7 +311,7 @@ spec:
                   port: http
 
 
-              - path: "/vortex(/)?(.*)"
+              - path: "/vortex-http(/)?(.*)"
                 pathType: ImplementationSpecific
                 service:
                   identifier: vortex
