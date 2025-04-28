@@ -12,13 +12,13 @@ data:
     production = true
 
     [hosts]
-    app = "https://test.we.${public_services_domain}"
-    api = "https://test.we.${public_services_domain}/api"
-    events = "wss://test.we.${public_services_domain}/ws"
-    autumn = "https://test.we.${public_services_domain}/autumn"
-    january = "https://test.we.${public_services_domain}/january"
-    voso_legacy = "https://vortex.test.we.${public_services_domain}"
-    voso_legacy_ws = "wss://vortex.test.we.${public_services_domain}"
+    app = "https://test-we.${public_services_domain}"
+    api = "https://test-we.${public_services_domain}/api"
+    events = "wss://test-we.${public_services_domain}/ws"
+    autumn = "https://test-we.${public_services_domain}/autumn"
+    january = "https://test-we.${public_services_domain}/january"
+    voso_legacy = "https://test-we.${public_services_domain}/vortex"
+    voso_legacy_ws = "wss://vtest-we.${public_services_domain}/vortex"
 
 
     [database]
@@ -43,8 +43,8 @@ data:
     host = "email-smtp.us-east-1.amazonaws.com"
     username = "${revolt_smtp_user}"
     password = "${revolt_smtp_password}"
-    from_address = "revolt@test.we.${public_services_domain}"
-    reply_to = "noreply@test.we.${public_services_domain}"
+    from_address = "revolt@test-we.${public_services_domain}"
+    reply_to = "noreply@test-we.${public_services_domain}"
 
     [api.security]
     # Authifier Shield API key
