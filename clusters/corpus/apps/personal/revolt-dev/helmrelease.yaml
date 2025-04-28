@@ -213,15 +213,15 @@ spec:
       "api":
         controller: api
         type: ClusterIP
-        ports: {http: {port: 8000}}
+        ports: {http: {port: 14702}}
       "events":
         controller: events
         type: ClusterIP
-        ports: {http: {port: 9000}}
+        ports: {http: {port: 14703}}
       "autumn":
         controller: autumn
         type: ClusterIP
-        ports: {http: {port: 3000}}
+        ports: {http: {port: 14704}}
       "january":
         controller: january
         type: ClusterIP
