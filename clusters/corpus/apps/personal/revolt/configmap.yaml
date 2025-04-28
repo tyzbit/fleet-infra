@@ -9,7 +9,7 @@ data:
     db.invites.insertOne({ _id: "inviteidhere" })
   Revolt.toml: |
     # https://github.com/revoltchat/backend/blob/main/crates/core/config/Revolt.toml
-    production = false
+    production = true
 
     [hosts]
     app = "https://we.${public_services_domain}"
@@ -51,7 +51,7 @@ data:
     # Legacy voice server management token
     voso_legacy_token = ""
     # Whether services are behind the Cloudflare network
-    trust_cloudflare = true
+    trust_cloudflare = false
 
     [api.security.captcha]
     # hCaptcha configuration
