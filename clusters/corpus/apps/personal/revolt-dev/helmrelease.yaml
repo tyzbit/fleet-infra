@@ -271,7 +271,7 @@ spec:
 
     # -- This is complex because it replaces Caddy
     ingress:
-      "revolt":
+      "revolt-dev":
         className: nginx
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt
@@ -311,7 +311,7 @@ spec:
               - *host
             secretName: *host
 
-      "vortex":
+      "vortex-dev":
         className: nginx
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt
