@@ -188,6 +188,7 @@ spec:
           january: {revolt-january : *configmount}
           crond: {revolt-crond : *configmount}
           pushd: {revolt-pushd : *configmount}
+          web: {revolt-web: *configmount}
 
     service:
       "mongo":
