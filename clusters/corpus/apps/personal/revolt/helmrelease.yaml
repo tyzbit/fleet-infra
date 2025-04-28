@@ -309,6 +309,7 @@ spec:
                 pathType: ImplementationSpecific
                 service:
                   identifier: vortex
+                  port: http
 
               - path: "/(/)?(.*)"
                 pathType: ImplementationSpecific
