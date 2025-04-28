@@ -182,6 +182,7 @@ data:
     mass_mentions_enabled = true
 
     [features.limits]
+
     [features.limits.global]
     group_size = 100
     message_embeds = 10
@@ -195,7 +196,7 @@ data:
     new_user_hours = 72
     # Maximum permissible body size in bytes for uploads
     # (should be greater than any one file upload limit)
-    body_limit_size = 20_000_000
+    body_limit_size = 250_000_000
 
     [features.limits.new_user]
     # Limits imposed on new users
