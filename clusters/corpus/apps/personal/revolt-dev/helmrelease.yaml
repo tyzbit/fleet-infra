@@ -311,7 +311,7 @@ spec:
               - *host
             secretName: *host
 
-      "vortex-dev":
+      "vortex":
         className: nginx
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt
