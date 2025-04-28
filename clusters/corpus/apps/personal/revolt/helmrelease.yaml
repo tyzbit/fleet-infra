@@ -277,7 +277,7 @@ spec:
                 service:
                   identifier: january
 
-              - path: "/"
+              - path: "/(/)?(.*)"
                 pathType: Prefix
                 service:
                   identifier: web
