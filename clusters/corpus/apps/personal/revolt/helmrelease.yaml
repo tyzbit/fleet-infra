@@ -278,7 +278,7 @@ spec:
                   identifier: january
 
               - path: "/(/)?(.*)"
-                pathType: Prefix
+                pathType: ImplementationSpecific
                 service:
                   identifier: web
         tls:
