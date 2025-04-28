@@ -262,7 +262,7 @@ spec:
                 service:
                   identifier: january
 
-              - path: "/($)?(.*)"
+              - path: "/(/)?(.*)"
                 pathType: ImplementationSpecific
                 service:
                   identifier: web
