@@ -180,7 +180,7 @@ spec:
               pullPolicy: Always
             env:
               MANAGE_TOKEN: ${revolt_dev_vortex_manage_token}
-              WS_URL: wss://vortex.test-we.${public_services_domain}
+              WS_URL: wss://test-we.${public_services_domain}/vortex
               RTC_MIN_PORT: 12321
               RTC_MAX_PORT: 12340
               RTC_IPS: ${home_ip}
@@ -304,6 +304,11 @@ spec:
                 service:
                   identifier: january
 
+              - path: "/vortex(/)?(.*)"
+                pathType: ImplementationSpecific
+                service:
+                  identifier: vortex
+
               - path: "/(/)?(.*)"
                 pathType: ImplementationSpecific
                 service:
@@ -312,23 +317,3 @@ spec:
           - hosts:
               - *host
             secretName: *host
-
-      "vortex":
-        className: nginx
-        annotations:
-          cert-manager.io/cluster-issuer: letsencrypt
-          external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
-          external-dns.alpha.kubernetes.io/target: ${home_domain_ddns}
-        hosts:
-          - host: &vortex test-we.${public_services_domain}
-            paths:
-              - path: "/"
-                pathType: Prefix
-                service:
-                  identifier: vortex
-                  port: http
-
-        tls:
-          - hosts:
-              - *vortex
-            secretName: *vortex
