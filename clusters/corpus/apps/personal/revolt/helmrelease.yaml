@@ -183,6 +183,7 @@ spec:
               WS_URL: wss://vortex.we.${public_services_domain}
               RTC_MIN_PORT: 12301
               RTC_MAX_PORT: 12320
+              RTC_IPS: ${home_ip}
               DISABLE_RTP: 0
             resources: {requests: {cpu: 10m},limits: {memory: 128Mi}}
 
