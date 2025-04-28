@@ -22,11 +22,11 @@ data:
 
 
     [database]
-    mongodb = "mongodb://revolt-mongo:27017"
-    redis = "redis://revolt-redis:6379/"
+    mongodb = "mongodb://revolt-dev-mongo:27017"
+    redis = "redis://revolt-dev-redis:6379/"
 
     [rabbit]
-    host = "revolt-rabbit"
+    host = "revolt-dev-rabbit"
     port = 5672
     username = "rabbitmq"
     password = "${revolt_dev_rabbitmq_password}"
@@ -85,8 +85,8 @@ data:
     ack_queue = "notifications.process.ack"                  # updates badges for apple devices
 
     [pushd.vapid]
-    private_key = "${revolt_private_key}"
-    public_key = "${revolt_public_key}"
+    private_key = "${revolt_dev_private_key}"
+    public_key = "${revolt_dev_public_key}"
 
     [pushd.fcm]
     queue = "notifications.outbound.fcm"
@@ -109,7 +109,7 @@ data:
     team_id = ""
 
     [files]
-    encryption_key = "${revolt_encryption_key}"
+    encryption_key = "${revolt_dev_encryption_key}"
     # Quality used for lossy WebP previews (set to 100 for lossless)
     webp_quality = 80.0
     # Mime types that cannot be uploaded or served
@@ -160,7 +160,7 @@ data:
 
     # S3 protocol endpoint
 
-    endpoint = "http://revolt-minio:9000"
+    endpoint = "http://revolt-dev-minio:9000"
     # Whether to use path-style buckets
     # Generally true, except for MinIO
     path_style_buckets = false
