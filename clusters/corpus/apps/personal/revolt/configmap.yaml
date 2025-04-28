@@ -42,8 +42,6 @@ data:
     password = "${revolt_smtp_password}"
     from_address = "revolt@we.${public_services_domain}"
     reply_to = "noreply@we.${public_services_domain}"
-    port = 587
-    use_tls = true
 
     [api.security]
     # Authifier Shield API key
