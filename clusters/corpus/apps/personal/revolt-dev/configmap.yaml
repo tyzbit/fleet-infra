@@ -40,10 +40,10 @@ data:
     host = "email-smtp.us-east-1.amazonaws.com"
     username = "${revolt_smtp_user}"
     password = "${revolt_smtp_password}"
-    port = 25
-    use_tls = false
-    from_address = "noreply@test.we.${public_services_domain}"
-    # reply_to = "noreply@test.we.${public_services_domain}"
+    from_address = "revolt@test.we.${public_services_domain}"
+    reply_to = "noreply@test.we.${public_services_domain}"
+    port = 587
+    use_tls = true
 
     [api.security]
     # Authifier Shield API key
