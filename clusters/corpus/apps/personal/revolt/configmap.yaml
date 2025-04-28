@@ -12,14 +12,14 @@ data:
     production = true
 
     [hosts]
-    app = "https://we.${public_services_domain}"
-    api = "https://we.${public_services_domain}/api"
-    events = "wss://we.${public_services_domain}/ws"
-    autumn = "https://we.${public_services_domain}/autumn"
-    january = "https://we.${public_services_domain}/january"
-    # voso_legacy = "https://we.${public_services_domain}/vortex-http"
+    app = "https://${chat_domain}"
+    api = "https://${chat_domain}/api"
+    events = "wss://${chat_domain}/ws"
+    autumn = "https://${chat_domain}/autumn"
+    january = "https://${chat_domain}/january"
+    # voso_legacy = "https://${chat_domain}/vortex-http"
     voso_legacy = "http://revolt-vortex:8080"
-    voso_legacy_ws = "wss://we.${public_services_domain}/vortex-ws"
+    voso_legacy_ws = "wss://${chat_domain}/vortex-ws"
 
     [database]
     mongodb = "mongodb://revolt-mongo:27017"
@@ -43,8 +43,8 @@ data:
     host = "email-smtp.us-east-1.amazonaws.com"
     username = "${revolt_smtp_user}"
     password = "${revolt_smtp_password}"
-    from_address = "revolt@we.${public_services_domain}"
-    reply_to = "noreply@we.${public_services_domain}"
+    from_address = "revolt@${chat_domain}"
+    reply_to = "noreply@${chat_domain}"
 
     [api.security]
     # Authifier Shield API key
