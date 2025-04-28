@@ -40,8 +40,8 @@ data:
     host = "email-smtp.us-east-1.amazonaws.com"
     username = "${revolt_smtp_user}"
     password = "${revolt_smtp_password}"
-    port = 587
-    use_tls = true
+    port = 25
+    use_tls = false
     from_address = "noreply@we.${public_services_domain}"
     # reply_to = "noreply@we.${public_services_domain}"
 
