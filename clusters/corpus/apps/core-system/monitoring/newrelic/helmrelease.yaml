@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: nri-bundle
-      version: "5.0.121"
+      version: "5.0.122"
       sourceRef:
         kind: HelmRepository
         name: newrelic
