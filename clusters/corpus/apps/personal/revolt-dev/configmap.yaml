@@ -217,7 +217,7 @@ data:
     [features.limits.new_user.file_upload_size_limit]
     # Maximum file size limits (in bytes)
     attachments = 20_000_000
-    avatars = 4_000_000
+    avatars = 8_000_000
     backgrounds = 12_000_000
     icons = 2_500_000
     banners = 6_000_000
@@ -240,7 +240,7 @@ data:
     [features.limits.default.file_upload_size_limit]
     # Maximum file size limits (in bytes)
     attachments = 20_000_000
-    avatars = 4_000_000
+    avatars = 8_000_000
     backgrounds = 12_000_000
     icons = 2_500_000
     banners = 6_000_000
