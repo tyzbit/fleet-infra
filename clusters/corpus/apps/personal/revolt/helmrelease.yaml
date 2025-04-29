@@ -207,14 +207,11 @@ spec:
         advancedMounts:
           api: {revolt-api: [*configmount]}
           events: {revolt-events: [*configmount]}
-          autumn:
-            revolt-autumn:
-              - *configmount
-              - *autumnmount
+          autumn: {revolt-autumn: [*configmount, *autumnmount]}
           january: {revolt-january: [*configmount]}
           crond: {revolt-crond: [*configmount]}
           pushd: {revolt-pushd: [*configmount]}
-          web: {revolt-web: [*configmount]}
+          web: {revolt-web: [*configmount, *autumnmount]}
 
     service:
       "mongo":
