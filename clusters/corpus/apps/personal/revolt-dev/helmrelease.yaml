@@ -28,9 +28,9 @@ spec:
         type: deployment
         annotations: {reloader.stakater.com/auto: "true"}
       c: &configmount
-        - path: /Revolt.toml
-          readOnly: true
-          subPath: Revolt.toml
+        path: /Revolt.toml
+        readOnly: true
+        subPath: Revolt.toml
     # -- END
 
     controllers:
@@ -198,17 +198,17 @@ spec:
         existingClaim: revolt-dev-minio-longhorn-objectstorage
         advancedMounts: { minio: { revolt-minio : [path: /data] } }
       "config":
-        name: revolt-dev
+        name: revolt
         type: configMap
         advancedMounts:
-          api: {revolt-api : *configmount}
-          events: {revolt-events: *configmount}
-          autumn: {revolt-autumn: 
-              [path: /Autumn.toml,readOnly: true,subPath: Autumn.toml]}
-          january: {revolt-january: *configmount}
-          crond: {revolt-crond: *configmount}
-          pushd: {revolt-pushd: *configmount}
-          web: {revolt-web: *configmount}
+          api: {revolt-api: [*configmount]}
+          events: {revolt-events: [*configmount]}
+          autumn: {revolt-autumn: [*configmount,
+              path: /Autumn.toml,readOnly: true,subPath: Autumn.toml]}
+          january: {revolt-january: [*configmount]}
+          crond: {revolt-crond: [*configmount]}
+          pushd: {revolt-pushd: [*configmount]}
+          web: {revolt-web: [*configmount]}
 
     service:
       "mongo":
