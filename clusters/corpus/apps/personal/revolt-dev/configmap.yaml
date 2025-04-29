@@ -178,11 +178,6 @@ data:
     [features]
     # Feature gate options
     webhooks_enabled = false
-    # Enable push notifications for mass pings (everyone, online, roles)
-    # When false this will still ping in-client but will not send notifications from pushd
-    mass_mentions_send_notifications = true
-    # Can role/everyone pings be used at all
-    mass_mentions_enabled = true
 
     [features.limits]
 
@@ -197,26 +192,32 @@ data:
 
     # How many hours since creation a user is considered new
     new_user_hours = 72
+
     # Maximum permissible body size in bytes for uploads
     # (should be greater than any one file upload limit)
-    body_limit_size = 250_000_000
+    body_limit_size = 100_000_000
 
     [features.limits.new_user]
     # Limits imposed on new users
+
     # Number of outgoing friend requests permitted at any time
     outgoing_friend_requests = 5
+
     # Maximum number of owned bots
     bots = 2
+
     # Message content length
     message_length = 2000
+
     # Number of attachments that can be included
     message_attachments = 5
+
     # Maximum number of servers the user can create/join
     servers = 50
 
     [features.limits.new_user.file_upload_size_limit]
     # Maximum file size limits (in bytes)
-    attachments = 20_000_000
+    attachments = 50_000_000
     avatars = 8_000_000
     backgrounds = 12_000_000
     icons = 2_500_000
@@ -225,28 +226,27 @@ data:
 
     [features.limits.default]
     # Limits imposed on users by default
+
     # Number of outgoing friend requests permitted at any time
     outgoing_friend_requests = 10
+
     # Maximum number of owned bots
     bots = 5
+
     # Message content length
     message_length = 2000
 
     # Number of attachments that can be included
     message_attachments = 5
+
     # Maximum number of servers the user can create/join
     servers = 100
 
     [features.limits.default.file_upload_size_limit]
     # Maximum file size limits (in bytes)
-    attachments = 20_000_000
+    attachments = 50_000_000
     avatars = 8_000_000
     backgrounds = 12_000_000
     icons = 2_500_000
     banners = 6_000_000
     emojis = 500_000
-
-    [features.advanced]
-    # The max amount of messages the rabbitmq provider/db mention adder job will delay for before forcing handling of a channel.
-    # default: 5
-    process_message_delay_limit = 5
