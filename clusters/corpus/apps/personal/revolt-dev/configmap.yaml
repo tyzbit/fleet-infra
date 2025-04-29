@@ -7,49 +7,6 @@ data:
   invite_mongo_query: |
     use revolt
     db.invites.insertOne({ _id: "inviteidhere" })
-  Autumn.toml: |
-    jpeg_quality = 80
-
-    [serve]
-        as = "WEBP"
-        quality = 90.0
-
-    [tags]
-        # File Uploads
-        [tags.attachments]
-            max_size = 200000000
-            serve_if_field_present = ["object_id", "message_id"]
-
-        # User Avatars
-        [tags.avatars]
-            max_size = 8000000
-            restrict_content_type = "Image"
-            serve_if_field_present = ["object_id", "user_id"]
-        
-        # User Profile Backgrounds
-        [tags.backgrounds]
-            max_size = 12000000
-            restrict_content_type = "Image"
-            serve_if_field_present = ["object_id", "user_id"]
-            
-        # Channel / Server Icons
-        [tags.icons]
-            max_size = 5000000
-            restrict_content_type = "Image"
-            serve_if_field_present = ["object_id"]
-        
-        # Banners
-        [tags.banners]
-            max_size = 12000000
-            restrict_content_type = "Image"
-            serve_if_field_present = ["object_id", "server_id"]
-
-        # Emoji
-        [tags.emojis]
-            use_ulid = true
-            max_size = 1000000
-            restrict_content_type = "Image"
-            serve_if_field_present = ["object_id"]
   Revolt.toml: |
     # https://github.com/revoltchat/backend/blob/main/crates/core/config/Revolt.toml
     production = true
@@ -261,7 +218,7 @@ data:
     # Maximum file size limits (in bytes)
     attachments = 20_000_000
     avatars = 4_000_000
-    backgrounds = 6_000_000
+    backgrounds = 12_000_000
     icons = 2_500_000
     banners = 6_000_000
     emojis = 500_000
@@ -284,7 +241,7 @@ data:
     # Maximum file size limits (in bytes)
     attachments = 20_000_000
     avatars = 4_000_000
-    backgrounds = 6_000_000
+    backgrounds = 12_000_000
     icons = 2_500_000
     banners = 6_000_000
     emojis = 500_000
