@@ -54,8 +54,12 @@ spec:
               tag: alpine_x86_64_v6.3.4
               pullPolicy: Always
             env: &env
-              RABBITMQ_DEFAULT_PASS: ${revolt_dev_rabbitmq_password}
-              MINIO_ROOT_PASSWORD: ${revolt_dev_minio_password}
+              # Kinda just got lazy here
+              RABBITMQ_DEFAULT_USER: rabbitmq
+              RABBITMQ_DEFAULT_PASS: ${revolt_rabbitmq_password}
+              ROCKET_ADDRESS: revolt-dev-api
+              MINIO_ROOT_USER: minioautumn
+              MINIO_ROOT_PASSWORD: ${revolt_minio_password}
             resources: {requests: {cpu: 10m},limits: {memory: 128Mi}}
       "rabbit":
         <<: *longhorncontroller
@@ -66,9 +70,7 @@ spec:
               repository: docker.io/rabbitmq
               tag: 4
               pullPolicy: Always
-            env:
-              <<: *env
-              RABBITMQ_DEFAULT_USER: rabbitmq
+            env: *env
             resources: {requests: {cpu: 10m},limits: {memory: 256Mi}}
       "minio":
         <<: *longhorncontroller
@@ -92,7 +94,6 @@ spec:
               pullPolicy: Always
             env:
               <<: *env
-              MINIO_ROOT_USER: minioautumn
             resources: {requests: {cpu: 10m},limits: {memory: 1Gi}}
       "api":
         <<: *deploymentcontroller
@@ -126,8 +127,6 @@ spec:
             env:
               HOSTNAME: :80
               REVOLT_PUBLIC_URL: https://test.${chat_domain}/api
-              # VITE_API_URL: https://test.${chat_domain}/api
-              VITE_THEMES_URL: https://themes.revolt.chat
             resources: {requests: {cpu: 10m},limits: {memory: 256Mi}}
       "autumn":
         <<: *deploymentcontroller
@@ -139,6 +138,7 @@ spec:
               tag: 20250402-2
               pullPolicy: Always
             resources: {requests: {cpu: 10m},limits: {memory: 256Mi}}
+            env: *env
       "january":
         <<: *deploymentcontroller
         replicas: 1
