@@ -34,7 +34,8 @@ spec:
       a: &autumnmount
         path: /Autumn.toml
         readOnly: true
-        subPath: /Autumn.toml
+        subPath: Autumn.toml
+        
     # -- END
 
     controllers:
