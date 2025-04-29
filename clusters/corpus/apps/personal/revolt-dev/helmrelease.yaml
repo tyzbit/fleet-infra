@@ -57,9 +57,9 @@ spec:
               # Kinda just got lazy here
               RABBITMQ_DEFAULT_USER: rabbitmq
               RABBITMQ_DEFAULT_PASS: ${revolt_rabbitmq_password}
-              ROCKET_ADDRESS: revolt-dev-api
               MINIO_ROOT_USER: minioautumn
               MINIO_ROOT_PASSWORD: ${revolt_minio_password}
+              RUST_LOG: debug
             resources: {requests: {cpu: 10m},limits: {memory: 128Mi}}
       "rabbit":
         <<: *longhorncontroller
