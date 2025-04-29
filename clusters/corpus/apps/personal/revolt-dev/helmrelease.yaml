@@ -32,9 +32,9 @@ spec:
         readOnly: true
         subPath: Revolt.toml
       a: &autumnmount
-        path: /Autumn.toml
+        path: /root/Autumn.toml
         readOnly: true
-        subPath: Revolt.toml
+        subPath: Autumn.toml
     # -- END
 
     controllers:
