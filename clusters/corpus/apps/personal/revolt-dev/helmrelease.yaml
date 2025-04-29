@@ -140,10 +140,9 @@ spec:
           revolt-autumn:
             image:
               repository: ghcr.io/revoltchat/autumn
-              tag: 20250225-1
+              tag: 20250402-2
               pullPolicy: Always
             resources: {requests: {cpu: 10m},limits: {memory: 256Mi}}
-            env: {AUTUMN_CONFIG: "./Autumn.toml"}
       "january":
         <<: *deploymentcontroller
         replicas: 1
