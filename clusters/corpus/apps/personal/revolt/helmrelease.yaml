@@ -204,7 +204,7 @@ spec:
           api: {revolt-api: [*configmount]}
           events: {revolt-events: [*configmount]}
           autumn: {revolt-autumn: [*configmount,
-              path: /Autumn.toml,readOnly: true,subPath: Autumn.toml]}
+              {path: /Autumn.toml,readOnly: true,subPath: Autumn.toml}]}
           january: {revolt-january: [*configmount]}
           crond: {revolt-crond: [*configmount]}
           pushd: {revolt-pushd: [*configmount]}
