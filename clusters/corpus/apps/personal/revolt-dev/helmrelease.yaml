@@ -56,9 +56,9 @@ spec:
             env: &env
               # Kinda just got lazy here
               RABBITMQ_DEFAULT_USER: rabbitmq
-              RABBITMQ_DEFAULT_PASS: ${revolt_rabbitmq_password}
+              RABBITMQ_DEFAULT_PASS: ${revolt_dev_rabbitmq_password}
               MINIO_ROOT_USER: minioautumn
-              MINIO_ROOT_PASSWORD: ${revolt_minio_password}
+              MINIO_ROOT_PASSWORD: ${revolt_dev_minio_password}
               RUST_LOG: debug
             resources: {requests: {cpu: 10m},limits: {memory: 128Mi}}
       "rabbit":
