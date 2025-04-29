@@ -203,17 +203,12 @@ spec:
         advancedMounts:
           api: {revolt-api : *configmount}
           events: {revolt-events: *configmount}
-          autumn: {revolt-autumn: *configmount}
+          autumn: {revolt-autumn: 
+              [path: /Autumn.toml,readOnly: true,subPath: Autumn.toml]}
           january: {revolt-january: *configmount}
           crond: {revolt-crond: *configmount}
           pushd: {revolt-pushd: *configmount}
           web: {revolt-web: *configmount}
-      "autumn":
-        name: revolt-dev
-        type: configMap
-        advancedMounts:
-          autumn: {revolt-autumn: 
-              [path: /Autumn.toml,readOnly: true,subPath: Autumn.toml]}
 
     service:
       "mongo":
