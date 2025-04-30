@@ -117,7 +117,7 @@ spec:
       "web":
         <<: *deploymentcontroller
         replicas: 1
-        initContainers:
+        containers:
           revolt-web-build:
             command:
               - /bin/sh
@@ -141,7 +141,7 @@ spec:
               VITE_API_URL: &apiurl https://test.${chat_domain}/api
               VITE_THEMES_URL: https://rvlt.gg
             resources: {requests: {cpu: 10m},limits: {memory: 12Gi}}
-        containers:
+
           revolt-web:
             image:
               repository: ghcr.io/revoltchat/client
