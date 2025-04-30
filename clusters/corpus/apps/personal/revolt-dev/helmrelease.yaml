@@ -125,9 +125,10 @@ spec:
               - |
                 cd /usr/src/app
                 git clone \
+                  --recurse-submodules \
                   --depth 1 \
                   -b master \
-                  https://github.com/revoltchat/revite .
+                  https://github.com/revoltchat/revite.git .
                 yarn install --frozen-lockfile
                 yarn build:deps
                 yarn build:highmem
