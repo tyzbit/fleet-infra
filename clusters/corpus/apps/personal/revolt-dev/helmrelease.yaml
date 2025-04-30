@@ -159,7 +159,7 @@ spec:
                   type=$(echo $setting|cut -d= -f1)
                   setting=$(echo $setting|cut -d= -f2)
                   echo "type: $type setting $setting"
-                  sed -i.bak -E "s/(\{[^\}]+fileType:\"${type}\"[^\}]+maxFileSize):[a-z0-6]+/\1:${setting}/g" ${filepath}
+                  sed -i.bak -E "s/(\{[^\}]+fileType:\"$type\"[^\}]+maxFileSize):[a-z0-6]+/\1:$setting/g" $filepath
                 done
                 yarn start:inject
             image:
@@ -249,12 +249,12 @@ spec:
           january: {revolt-january: [*configmount]}
           crond: {revolt-crond: [*configmount]}
           pushd: {revolt-pushd: [*configmount]}
-      "web":
-        type: emptyDir
-        advancedMounts:
-          web:
-            revolt-web: &webdir [path: /usr/src/app]
-            revolt-web-build: *webdir
+      # "web":
+      #   type: emptyDir
+      #   advancedMounts:
+      #     web:
+      #       revolt-web: &webdir [path: /usr/src/app]
+      #       revolt-web-build: *webdir
 
     service:
       "mongo":
