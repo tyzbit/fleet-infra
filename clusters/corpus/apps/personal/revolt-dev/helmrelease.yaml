@@ -119,6 +119,13 @@ spec:
         replicas: 1
         containers:
           revolt-web:
+            command:
+              - /bin/sh
+              - -c
+              - |
+                yarn
+                yarn build:deps
+                yarn start:inject
             image:
               repository: ghcr.io/revoltchat/client
               tag: master
