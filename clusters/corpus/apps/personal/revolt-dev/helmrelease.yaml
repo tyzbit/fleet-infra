@@ -53,13 +53,6 @@ spec:
               repository: docker.io/eqalpha/keydb
               tag: alpine_x86_64_v6.3.4
               pullPolicy: Always
-            env: &env
-              # Kinda just got lazy here
-              RABBITMQ_DEFAULT_USER: rabbitmq
-              RABBITMQ_DEFAULT_PASS: ${revolt_dev_rabbitmq_password}
-              MINIO_ROOT_USER: minioautumn
-              MINIO_ROOT_PASSWORD: ${revolt_dev_minio_password}
-              RUST_LOG: debug
             resources: {requests: {cpu: 10m},limits: {memory: 128Mi}}
       "rabbit":
         <<: *longhorncontroller
@@ -70,7 +63,13 @@ spec:
               repository: docker.io/rabbitmq
               tag: 4
               pullPolicy: Always
-            env: *env
+            env: &env
+              # Kinda just got lazy here
+              RABBITMQ_DEFAULT_USER: rabbitmq
+              RABBITMQ_DEFAULT_PASS: ${revolt_dev_rabbitmq_password}
+              MINIO_ROOT_USER: minioautumn
+              MINIO_ROOT_PASSWORD: ${revolt_dev_minio_password}
+              RUST_LOG: debug
             resources: {requests: {cpu: 10m},limits: {memory: 256Mi}}
       "minio":
         <<: *longhorncontroller
@@ -125,8 +124,8 @@ spec:
               tag: master
               pullPolicy: Always
             env:
-              HOSTNAME: :80
-              REVOLT_PUBLIC_URL: https://test.${chat_domain}/api
+              VITE_API_URL: https://test.${chat_domain}/api
+              VITE_THEMES_URL: https://rvlt.gg
             resources: {requests: {cpu: 10m},limits: {memory: 256Mi}}
       "autumn":
         <<: *deploymentcontroller
@@ -138,7 +137,8 @@ spec:
               tag: 20250402-2
               pullPolicy: Always
             resources: {requests: {cpu: 10m},limits: {memory: 256Mi}}
-            env: *env
+            env:
+              <<: *env
       "january":
         <<: *deploymentcontroller
         replicas: 1
@@ -207,7 +207,6 @@ spec:
           january: {revolt-january: [*configmount]}
           crond: {revolt-crond: [*configmount]}
           pushd: {revolt-pushd: [*configmount]}
-          web: {revolt-web: [*configmount]}
 
     service:
       "mongo":
