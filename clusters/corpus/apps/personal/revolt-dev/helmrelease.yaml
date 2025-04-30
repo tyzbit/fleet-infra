@@ -147,7 +147,8 @@ spec:
               - /bin/sh
               - -c
               - |
-                filepath=/usr/src/app/dist/assets/RevoltApp*.js
+                cd /usr/src/app
+                filepath=dist/assets/RevoltApp*.js
                 for setting in \
                   icons=5_000_000 \
                   emojis=500_000 \
@@ -158,10 +159,7 @@ spec:
                   type=$(echo $setting|cut -d= -f1)
                   setting=$(echo $setting|cut -d= -f2)
                   echo "type: $type setting $setting"
-                  sed \
-                    -i.bak \
-                    -E "s/(\{[^\}]+fileType:\"${type}\"[^\}]+maxFileSize):[a-z0-6]+/\1:${setting}/g" \
-                    ${filepath}
+                  sed -i.bak -E "s/(\{[^\}]+fileType:\"${type}\"[^\}]+maxFileSize):[a-z0-6]+/\1:${setting}/g" ${filepath}
                 done
                 yarn start:inject
             image:
