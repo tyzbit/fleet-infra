@@ -123,6 +123,11 @@ spec:
               - /bin/sh
               - -c
               - |
+                cd /usr/src/app
+                git clone \
+                  --depth 1 \
+                  -b master \
+                  https://github.com/revoltchat/revite .
                 yarn install --frozen-lockfile
                 yarn build:deps
                 yarn build:highmem
