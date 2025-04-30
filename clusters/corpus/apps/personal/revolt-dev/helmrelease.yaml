@@ -143,9 +143,12 @@ spec:
         containers:
           revolt-web: 
             image:
-              repository: ghcr.io/revoltchat/client
-              tag: master
-              pullPolicy: Always
+              # repository: ghcr.io/revoltchat/client
+              # tag: master
+              # pullPolicy: Always
+              repository: node
+              tag: 16-buster
+              pullPolicy: IfNotPresent
             env: {REVOLT_PUBLIC_URL: *apiurl}
             resources: {requests: {cpu: 10m},limits: {memory: 256Mi}}
       "autumn":
