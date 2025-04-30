@@ -124,6 +124,7 @@ spec:
               tag: master
               pullPolicy: Always
             env:
+              REVOLT_PUBLIC_URL: https://test.${chat_domain}/api
               VITE_API_URL: https://test.${chat_domain}/api
               VITE_THEMES_URL: https://rvlt.gg
             resources: {requests: {cpu: 10m},limits: {memory: 256Mi}}
