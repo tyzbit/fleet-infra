@@ -117,37 +117,59 @@ spec:
       "web":
         <<: *deploymentcontroller
         replicas: 1
-        initContainers:
-          revolt-web-build:
+        # initContainers:
+          # revolt-web-build:
+          #   command:
+          #     - /bin/sh
+          #     - -c
+          #     - |
+          #       cd /usr/src/app
+          #       git clone \
+          #         --recurse-submodules \
+          #         --depth 1 \
+          #         -b master \
+          #         https://github.com/revoltchat/revite.git .
+          #       yarn install --frozen-lockfile
+          #       yarn build:deps
+          #       yarn build:highmem
+          #       yarn workspaces focus --production --all
+          #   image: 
+          #     repository: node
+          #     tag: 16-buster
+          #     pullPolicy: IfNotPresent
+          #   env:
+          #     VITE_API_URL: &apiurl https://test.${chat_domain}/api
+          #     VITE_THEMES_URL: https://rvlt.gg
+          #   resources: {requests: {cpu: 10m},limits: {memory: 8Gi}} # seriously
+        containers:
+          revolt-web:
             command:
               - /bin/sh
               - -c
               - |
-                cd /usr/src/app
-                git clone \
-                  --recurse-submodules \
-                  --depth 1 \
-                  -b master \
-                  https://github.com/revoltchat/revite.git .
-                yarn install --frozen-lockfile
-                yarn build:deps
-                yarn build:highmem
-                yarn workspaces focus --production --all
-            image: 
-              repository: node
-              tag: 16-buster
-              pullPolicy: IfNotPresent
-            env:
-              VITE_API_URL: &apiurl https://test.${chat_domain}/api
-              VITE_THEMES_URL: https://rvlt.gg
-            resources: {requests: {cpu: 10m},limits: {memory: 8Gi}} # seriously
-        containers:
-          revolt-web:
+                filepath=./dist/assets/RevoltApp*.js
+                for setting in \
+                  icons=5_000_000 \
+                  emojis=500_000 \
+                  banners=12_000_000 \
+                  avatars=8_000_000 \
+                  backgrounds=12_000_000 \
+                ; do
+                  type=$(echo $setting|cut -d= -f1)
+                  setting=$(echo $setting|cut -d= -f2)
+                  echo "type: $type setting $setting"
+                  sed \
+                    -i.bak \
+                    -E "s/(\{[^\}]+fileType:\"${type}\"[^\}]+maxFileSize):[a-z0-6]+/\1:${setting}/g" \
+                    "${filepath}"
+                done
+                yarn:inject
             image:
               repository: ghcr.io/revoltchat/client
               tag: master
               pullPolicy: Always
-            env: {REVOLT_PUBLIC_URL: *apiurl}
+            env:
+              REVOLT_PUBLIC_URL: *apiurl
             resources: {requests: {cpu: 10m},limits: {memory: 256Mi}}
       "autumn":
         <<: *deploymentcontroller
