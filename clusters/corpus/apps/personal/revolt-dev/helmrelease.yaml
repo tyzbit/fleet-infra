@@ -227,11 +227,11 @@ spec:
         type: configMap
         advancedMounts:
           api: {revolt-api: [*configmount]}
-          events: {revolt-events: [*configmount]}
-          autumn: {revolt-autumn: [*configmount]}
-          january: {revolt-january: [*configmount]}
-          crond: {revolt-crond: [*configmount]}
-          pushd: {revolt-pushd: [*configmount]}
+          # events: {revolt-events: [*configmount]}
+          # autumn: {revolt-autumn: [*configmount]}
+          # january: {revolt-january: [*configmount]}
+          # crond: {revolt-crond: [*configmount]}
+          # pushd: {revolt-pushd: [*configmount]}
 
     service:
       "mongo":
