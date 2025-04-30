@@ -117,30 +117,6 @@ spec:
       "web":
         <<: *deploymentcontroller
         replicas: 1
-        # initContainers:
-          # revolt-web-build:
-          #   command:
-          #     - /bin/sh
-          #     - -c
-          #     - |
-          #       cd /usr/src/app
-          #       git clone \
-          #         --recurse-submodules \
-          #         --depth 1 \
-          #         -b master \
-          #         https://github.com/revoltchat/revite.git .
-          #       yarn install --frozen-lockfile
-          #       yarn build:deps
-          #       yarn build:highmem
-          #       yarn workspaces focus --production --all
-          #   image: 
-          #     repository: node
-          #     tag: 16-buster
-          #     pullPolicy: IfNotPresent
-          #   env:
-          #     VITE_API_URL: &apiurl https://test.${chat_domain}/api
-          #     VITE_THEMES_URL: https://rvlt.gg
-          #   resources: {requests: {cpu: 10m},limits: {memory: 8Gi}} # seriously
         containers:
           revolt-web:
             command:
@@ -153,7 +129,8 @@ spec:
                 echo "Change these in the command for the web container"
                 echo 
                 echo "NOTE: this is only for the frontend, backend config"
-                echo "      still needs to be set too."
+                echo "      still needs to be set and in sync too."
+                echo
                 for setting in \
                   icons=5_000_000 \
                   emojis=500_000 \
@@ -255,12 +232,6 @@ spec:
           january: {revolt-january: [*configmount]}
           crond: {revolt-crond: [*configmount]}
           pushd: {revolt-pushd: [*configmount]}
-      # "web":
-      #   type: emptyDir
-      #   advancedMounts:
-      #     web:
-      #       revolt-web: &webdir [path: /usr/src/app]
-      #       revolt-web-build: *webdir
 
     service:
       "mongo":
