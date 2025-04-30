@@ -169,7 +169,7 @@ spec:
               tag: master
               pullPolicy: Always
             env:
-              REVOLT_PUBLIC_URL: *apiurl
+              REVOLT_PUBLIC_URL: https://test.${chat_domain}/api
             resources: {requests: {cpu: 10m},limits: {memory: 256Mi}}
       "autumn":
         <<: *deploymentcontroller
