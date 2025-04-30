@@ -222,8 +222,9 @@ spec:
       "web":
         type: emptyDir
         advancedMounts:
-          web-build: &webdir {revolt-web: [path: /usr/src/app]}
-          web: *webdir
+          web:
+            revolt-web: &webdir [path: /usr/src/app]
+            revolt-web-build: *webdir
 
     service:
       "mongo":
