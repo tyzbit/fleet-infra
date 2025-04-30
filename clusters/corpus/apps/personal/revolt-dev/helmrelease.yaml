@@ -133,7 +133,7 @@ spec:
             env:
               VITE_API_URL: &apiurl https://test.${chat_domain}/api
               VITE_THEMES_URL: https://rvlt.gg
-            resources: {requests: {cpu: 10m},limits: {memory: 1Gi}}
+            resources: {requests: {cpu: 10m},limits: {memory: 12Gi}}
         containers:
           revolt-web: 
             image: *webimage
