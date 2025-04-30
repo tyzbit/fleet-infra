@@ -151,7 +151,7 @@ spec:
               pullPolicy: Always
             env:
               REVOLT_PUBLIC_URL: https://${chat_domain}/api
-            resources: {requests: {cpu: 10m},limits: {memory: 128Mi}}
+            resources: {requests: {cpu: 10m},limits: {memory: 256Mi}}
       "autumn":
         <<: *deploymentcontroller
         replicas: 1
