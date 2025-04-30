@@ -31,11 +31,6 @@ spec:
         path: /Revolt.toml
         readOnly: true
         subPath: Revolt.toml
-      a: &autumnmount
-        path: /Autumn.toml
-        readOnly: true
-        subPath: Autumn.toml
-        
     # -- END
 
     controllers:
@@ -59,8 +54,12 @@ spec:
               tag: alpine_x86_64_v6.3.4
               pullPolicy: Always
             env: &env
+              # Kinda just got lazy here
+              RABBITMQ_DEFAULT_USER: rabbitmq
               RABBITMQ_DEFAULT_PASS: ${revolt_rabbitmq_password}
+              MINIO_ROOT_USER: minioautumn
               MINIO_ROOT_PASSWORD: ${revolt_minio_password}
+              RUST_LOG: info
             resources: {requests: {cpu: 10m},limits: {memory: 128Mi}}
       "rabbit":
         <<: *longhorncontroller
@@ -71,9 +70,7 @@ spec:
               repository: docker.io/rabbitmq
               tag: 4
               pullPolicy: Always
-            env:
-              <<: *env
-              RABBITMQ_DEFAULT_USER: rabbitmq
+            env: *env
             resources: {requests: {cpu: 10m},limits: {memory: 256Mi}}
       "minio":
         <<: *longhorncontroller
@@ -97,7 +94,6 @@ spec:
               pullPolicy: Always
             env:
               <<: *env
-              MINIO_ROOT_USER: minioautumn
             resources: {requests: {cpu: 10m},limits: {memory: 1Gi}}
       "api":
         <<: *deploymentcontroller
@@ -106,7 +102,7 @@ spec:
           revolt-api:
             image:
               repository: ghcr.io/revoltchat/server
-              tag: 20250225-1
+              tag: 20250402-2
               pullPolicy: Always
             resources: {requests: {cpu: 10m},limits: {memory: 256Mi}}
       "events":
@@ -116,7 +112,7 @@ spec:
           revolt-events:
             image:
               repository: ghcr.io/revoltchat/bonfire
-              tag: 20250225-1
+              tag: 20250402-2
               pullPolicy: Always
             resources: {requests: {cpu: 10m},limits: {memory: 128Mi}}
       "web":
@@ -124,15 +120,38 @@ spec:
         replicas: 1
         containers:
           revolt-web:
+            command:
+              - /bin/sh
+              - -c
+              - |
+                cd /usr/src/app
+                filepath=dist/assets/RevoltApp*.js
+                echo "Doing find and replace for compiled constants"
+                echo "Change these in the command for the web container"
+                echo 
+                echo "NOTE: this is only for the frontend, backend config"
+                echo "      still needs to be set and in sync too."
+                echo
+                for setting in \
+                  icons=5_000_000 \
+                  emojis=500_000 \
+                  banners=12_000_000 \
+                  avatars=8_000_000 \
+                  backgrounds=12_000_000 \
+                ; do
+                  type=$(echo $setting|cut -d= -f1)
+                  setting=$(echo $setting|cut -d= -f2)
+                  echo "Setting all $type to $setting"
+                  sed -i.bak -E "s/(\{[^\}]+fileType:\"$type\"[^\}]+maxFileSize):[a-z0-6]+/\1:$setting/g" $filepath
+                done
+                echo "Done with find and replace, starting yarn..."
+                yarn start:inject
             image:
               repository: ghcr.io/revoltchat/client
               tag: master
               pullPolicy: Always
             env:
-              HOSTNAME: :80
               REVOLT_PUBLIC_URL: https://${chat_domain}/api
-              # VITE_API_URL: https://${chat_domain}/api
-              VITE_THEMES_URL: https://themes.revolt.chat
             resources: {requests: {cpu: 10m},limits: {memory: 256Mi}}
       "autumn":
         <<: *deploymentcontroller
@@ -141,9 +160,10 @@ spec:
           revolt-autumn:
             image:
               repository: ghcr.io/revoltchat/autumn
-              tag: 20250225-1
+              tag: 20250402-2
               pullPolicy: Always
             resources: {requests: {cpu: 10m},limits: {memory: 256Mi}}
+            env: {RUST_LOG: debug}
       "january":
         <<: *deploymentcontroller
         replicas: 1
@@ -171,7 +191,7 @@ spec:
           revolt-pushd:
             image:
               repository: ghcr.io/revoltchat/pushd
-              tag: 20250225-1
+              tag: 20250402-2
               pullPolicy: Always
             # resources: {{requests: {cpu: 10m,{limits: {memory: 512Mi}}}
       "vortex":
@@ -208,11 +228,10 @@ spec:
         advancedMounts:
           api: {revolt-api: [*configmount]}
           events: {revolt-events: [*configmount]}
-          autumn: {revolt-autumn: [*configmount, *autumnmount]}
+          autumn: {revolt-autumn: [*configmount]}
           january: {revolt-january: [*configmount]}
           crond: {revolt-crond: [*configmount]}
           pushd: {revolt-pushd: [*configmount]}
-          web: {revolt-web: [*configmount, *autumnmount]}
 
     service:
       "mongo":

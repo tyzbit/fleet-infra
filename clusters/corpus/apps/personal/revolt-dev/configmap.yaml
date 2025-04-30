@@ -220,7 +220,7 @@ data:
     attachments = 50_000_000
     avatars = 8_000_000
     backgrounds = 12_000_000
-    icons = 2_500_000
+    icons = 5_000_000
     banners = 12_000_000
     emojis = 500_000
 
@@ -247,6 +247,6 @@ data:
     attachments = 50_000_000
     avatars = 8_000_000
     backgrounds = 12_000_000
-    icons = 2_500_000
+    icons = 5_000_000
     banners = 12_000_000
     emojis = 500_000
