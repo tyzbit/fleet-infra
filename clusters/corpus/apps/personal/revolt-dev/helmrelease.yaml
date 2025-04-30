@@ -147,7 +147,7 @@ spec:
               - /bin/sh
               - -c
               - |
-                filepath=./dist/assets/RevoltApp*.js
+                filepath=/usr/src/app/dist/assets/RevoltApp*.js
                 for setting in \
                   icons=5_000_000 \
                   emojis=500_000 \
