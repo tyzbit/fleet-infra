@@ -135,7 +135,7 @@ spec:
                 yarn workspaces focus --production --all
             image: 
               repository: node
-              tag: 16-buster
+              tag: 20-buster
               pullPolicy: IfNotPresent
             env:
               VITE_API_URL: &apiurl https://test.${chat_domain}/api
