@@ -123,20 +123,24 @@ spec:
               - /bin/sh
               - -c
               - |
-                yarn
+                yarn install --frozen-lockfile
                 yarn build:deps
-                yarn start:inject
-            image: &webimage
-              repository: ghcr.io/revoltchat/client
-              tag: master
-              pullPolicy: Always
+                yarn build:highmem
+                yarn workspaces focus --production --all
+            image: 
+              repository: node
+              tag: 16-buster
+              pullPolicy: IfNotPresent
             env:
               VITE_API_URL: &apiurl https://test.${chat_domain}/api
               VITE_THEMES_URL: https://rvlt.gg
             resources: {requests: {cpu: 10m},limits: {memory: 12Gi}}
         containers:
           revolt-web: 
-            image: *webimage
+            image:
+              repository: ghcr.io/revoltchat/client
+              tag: master
+              pullPolicy: Always
             env: {REVOLT_PUBLIC_URL: *apiurl}
             resources: {requests: {cpu: 10m},limits: {memory: 256Mi}}
       "autumn":
