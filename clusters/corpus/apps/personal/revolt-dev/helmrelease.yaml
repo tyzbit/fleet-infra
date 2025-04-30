@@ -18,7 +18,7 @@ spec:
         name: bjw-s
         namespace: flux-system
   values:
-    # -- HAS NO EFFECT
+    # -- Used for anchor references further down, has no effect here
     reusable:
       l: &longhorncontroller
         type: statefulset
@@ -151,7 +151,7 @@ spec:
               pullPolicy: Always
             env:
               REVOLT_PUBLIC_URL: https://test.${chat_domain}/api
-            resources: {requests: {cpu: 10m},limits: {memory: 256Mi}}
+            resources: {requests: {cpu: 10m},limits: {memory: 128Mi}}
       "autumn":
         <<: *deploymentcontroller
         replicas: 1
@@ -161,7 +161,7 @@ spec:
               repository: ghcr.io/revoltchat/autumn
               tag: 20250402-2
               pullPolicy: Always
-            resources: {requests: {cpu: 10m},limits: {memory: 256Mi}}
+            resources: {requests: {cpu: 10m},limits: {memory: 128Mi}}
             env:
               <<: *env
       "january":
@@ -183,7 +183,7 @@ spec:
               repository: ghcr.io/revoltchat/crond
               tag: 20250210-1-debug
               pullPolicy: Always
-            resources: {requests: {cpu: 10m},limits: {memory: 256Mi}}
+            resources: {requests: {cpu: 10m},limits: {memory: 128Mi}}
       "pushd":
         <<: *deploymentcontroller
         replicas: 1
@@ -193,7 +193,7 @@ spec:
               repository: ghcr.io/revoltchat/pushd
               tag: 20250402-2
               pullPolicy: Always
-            # resources: {{requests: {cpu: 10m,{limits: {memory: 512Mi}}}
+            resources: {requests: {cpu: 10m},limits: {memory: 128Mi}}
       "vortex":
         <<: *deploymentcontroller
         replicas: 1
@@ -209,19 +209,19 @@ spec:
               RTC_MIN_PORT: 12321
               RTC_MAX_PORT: 12340
               RTC_IPS: 0.0.0.0,${home_ip}
-              DISABLE_RTP: 1
+              DISABLE_RTP: 0
             resources: {requests: {cpu: 10m},limits: {memory: 128Mi}}
 
     persistence:
       "mongo":
         existingClaim: revolt-dev-mongo-longhorn-database
-        advancedMounts: { mongo: { revolt-mongo : [path: /data/db] } }
+        advancedMounts: {mongo: {revolt-mongo: [path: /data/db] } }
       "rabbit":
         existingClaim: revolt-dev-rabbit-longhorn-database
-        advancedMounts: { rabbit: { revolt-rabbitmq : [path: /var/lib/rabbitmq] } }
+        advancedMounts: {rabbit: {revolt-rabbitmq: [path: /var/lib/rabbitmq]}}
       "minio":
         existingClaim: revolt-dev-minio-longhorn-objectstorage
-        advancedMounts: { minio: { revolt-minio : [path: /data] } }
+        advancedMounts: {minio: {revolt-minio: [path: /data]}}
       "config":
         name: revolt-dev
         type: configMap
