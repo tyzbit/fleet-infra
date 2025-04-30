@@ -117,8 +117,8 @@ spec:
       "web":
         <<: *deploymentcontroller
         replicas: 1
-        containers:
-          revolt-web:
+        initContainers:
+          revolt-web-build:
             command:
               - /bin/sh
               - -c
@@ -126,15 +126,19 @@ spec:
                 yarn
                 yarn build:deps
                 yarn start:inject
-            image:
+            image: &webimage
               repository: ghcr.io/revoltchat/client
               tag: master
               pullPolicy: Always
             env:
-              REVOLT_PUBLIC_URL: https://test.${chat_domain}/api
-              VITE_API_URL: https://test.${chat_domain}/api
+              VITE_API_URL: &apiurl https://test.${chat_domain}/api
               VITE_THEMES_URL: https://rvlt.gg
-            resources: {requests: {cpu: 10m},limits: {memory: 512Mi}}
+            resources: {requests: {cpu: 10m},limits: {memory: 1Gi}}
+        containers:
+          revolt-web: 
+            image: *webimage
+            env: {REVOLT_PUBLIC_URL: *apiurl}
+            resources: {requests: {cpu: 10m},limits: {memory: 256Mi}}
       "autumn":
         <<: *deploymentcontroller
         replicas: 1
@@ -215,6 +219,11 @@ spec:
           january: {revolt-january: [*configmount]}
           crond: {revolt-crond: [*configmount]}
           pushd: {revolt-pushd: [*configmount]}
+      "web":
+        type: emptyDir
+        advancedMounts:
+          web-build: &webdir {revolt-web: [path: /usr/src/app]}
+          web: *webdir
 
     service:
       "mongo":
