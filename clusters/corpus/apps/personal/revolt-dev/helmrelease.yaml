@@ -143,7 +143,6 @@ spec:
             resources: {requests: {cpu: 10m},limits: {memory: 12Gi}}
         containers:
           revolt-web:
-            command: ["sleep","infinity"]
             image:
               repository: ghcr.io/revoltchat/client
               tag: master
