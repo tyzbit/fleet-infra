@@ -179,6 +179,8 @@ spec:
             dumpvdl2:
               - path: *usbpath
                 readOnly: true
+
+      shm:
         type: hostPath
         hostPath: /dev/shm
       acarshub:
