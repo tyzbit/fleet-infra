@@ -114,7 +114,9 @@ spec:
     persistence:
       usb:
         type: hostPath
-        hostPath: /dev/bus/usb
+        hostPath: &usbpath /dev/bus/usb
+        advancedMounts:
+          ultrafeeder: {ultrafeeder: [path: *usbpath, readOnly: true]}
       diskstats:
         type: hostPath
         hostPath: /proc/diskstats
