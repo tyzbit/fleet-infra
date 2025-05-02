@@ -170,12 +170,15 @@ spec:
           acarsdec:
             acarsdec:
               - path: /dev/bus/usb
+                readOnly: true
           acarsdec2:
             acarsdec2:
               - path: /dev/bus/usb
+                readOnly: true
           dumpvdl2:
             dumpvld2:
               - path: /dev/bus/usb
+                readOnly: true
       shm:
         type: hostPath
         hostPath: /dev/shm
