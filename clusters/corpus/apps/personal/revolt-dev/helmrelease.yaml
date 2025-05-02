@@ -307,8 +307,8 @@ spec:
           cert-manager.io/cluster-issuer: letsencrypt
           nginx.ingress.kubernetes.io/proxy-body-size: 250m
           nginx.ingress.kubernetes.io/proxy-connect-timeout: "30"
-          nginx.ingress.kubernetes.io/proxy-read-timeout: "36000"
-          nginx.ingress.kubernetes.io/proxy-send-timeout: "36000"
+          nginx.ingress.kubernetes.io/proxy-read-timeout: "2592000" # 1 week
+          nginx.ingress.kubernetes.io/proxy-send-timeout: "2592000"
           nginx.ingress.kubernetes.io/use-regex: "true"
           nginx.ingress.kubernetes.io/rewrite-target: /$2
           external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
