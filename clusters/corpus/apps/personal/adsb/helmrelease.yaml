@@ -114,7 +114,6 @@ spec:
     persistence:
       usb:
         type: hostPath
-        hostPath: &usbpath /dev/bus/usb
         advancedMounts:
           ultrafeeder: {ultrafeeder: [path: *usbpath, readOnly: true]}
       shm:

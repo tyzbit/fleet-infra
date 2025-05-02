@@ -175,10 +175,7 @@ spec:
         hostPath: /dev/shm
       acarshub:
         existingClaim: acars-data-longhorn-webapp
-        advancedMounts:
-          acarshub:
-            acarshub:
-              - path: /run/acars
+        advancedMounts: {acarshub: {acarshub: [path: /run/acars]}}
 
     service:
       acarsrouter:
