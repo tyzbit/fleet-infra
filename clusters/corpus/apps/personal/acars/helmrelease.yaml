@@ -90,7 +90,7 @@ spec:
 
       dumpvdl2:
         <<: *common_settings
-        replicas: 0
+        replicas: 1
         containers:
           dumpvdl2:
             securityContext:
