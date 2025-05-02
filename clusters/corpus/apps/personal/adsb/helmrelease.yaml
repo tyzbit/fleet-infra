@@ -117,6 +117,9 @@ spec:
         hostPath: &usbpath /dev/bus/usb
         advancedMounts:
           ultrafeeder: {ultrafeeder: [path: *usbpath, readOnly: true]}
+      shm:
+        type: hostPath
+        hostPath: /dev/shm
       diskstats:
         type: hostPath
         hostPath: /proc/diskstats
