@@ -176,6 +176,9 @@ spec:
           dumpvdl2:
             dumpvld2:
               - path: /dev/bus/usb
+      shm:
+        type: hostPath
+        hostPath: /dev/shm
       acarshub:
         existingClaim: acars-data-longhorn-webapp
         advancedMounts:
