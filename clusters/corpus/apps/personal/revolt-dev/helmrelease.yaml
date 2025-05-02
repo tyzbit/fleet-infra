@@ -161,7 +161,7 @@ spec:
               repository: ghcr.io/revoltchat/autumn
               tag: 20250402-2
               pullPolicy: Always
-            resources: {requests: {cpu: 10m},limits: {memory: 128Mi}}
+            resources: {requests: {cpu: 10m},limits: {memory: 512Mi}}
             env:
               <<: *env
       "january":
