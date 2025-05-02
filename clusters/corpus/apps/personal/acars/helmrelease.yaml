@@ -168,12 +168,17 @@ spec:
         hostPath: &usbpath /dev/bus/usb
         advancedMounts:
           acarsdec:
-            acarsdec: [path: *usbpath, readOnly: true]
+            acarsdec:
+              - path: *usbpath
+                readOnly: true
           acarsdec2:
-            carsdec2: [path: *usbpath, readOnly: true]
+            acarsdec2:
+              - path: *usbpath
+                readOnly: true
           dumpvdl2:
-            dumpvdl2: [path: *usbpath, readOnly: true]
-      shm:
+            dumpvdl2:
+              - path: *usbpath
+                readOnly: true
         type: hostPath
         hostPath: /dev/shm
       acarshub:
