@@ -165,7 +165,7 @@ spec:
     persistence:
       usb:
         type: hostPath
-        hostPath: &uabpath /dev/bus/usb
+        hostPath: &usbpath /dev/bus/usb
         advancedMounts:
           acarsdec: {acarsdec: [path: *usbpath, readOnly: true]}
           acarsdec2: {acarsdec: [path: *usbpath, readOnly: true]}
