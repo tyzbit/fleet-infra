@@ -222,9 +222,6 @@ spec:
       "minio":
         existingClaim: revolt-dev-minio-nas
         advancedMounts: {minio: {revolt-minio: [path: /data]}}
-      # "minio-nas":
-      #   existingClaim: revolt-dev-minio-nas
-      #   advancedMounts: {minio: {revolt-minio: [path: /data-new]}}
       "redis":
         existingClaim: revolt-dev-redis-nas
         advancedMounts: {redis: {revolt-redis: [path: /data]}}
