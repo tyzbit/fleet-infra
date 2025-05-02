@@ -219,11 +219,11 @@ spec:
         existingClaim: revolt-rabbit-longhorn-database
         advancedMounts: {rabbit: {revolt-rabbitmq: [path: /var/lib/rabbitmq]}}
       "minio":
-        existingClaim: revolt-minio-longhorn-objectstorage
-        advancedMounts: {minio: {revolt-minio: [path: /data]}}
-      "minio-nas":
         existingClaim: revolt-minio-nas
-        advancedMounts: {minio: {revolt-minio: [path: /data-new]}}
+        advancedMounts: {minio: {revolt-minio: [path: /data]}}
+      # "minio-nas":
+      #   existingClaim: revolt-minio-nas
+      #   advancedMounts: {minio: {revolt-minio: [path: /data-new]}}
       "redis":
         existingClaim: revolt-redis-nas
         advancedMounts: {redis: {revolt-redis: [path: /data]}}
