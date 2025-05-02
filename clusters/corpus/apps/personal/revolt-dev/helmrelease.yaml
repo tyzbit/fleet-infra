@@ -222,6 +222,9 @@ spec:
       "minio":
         existingClaim: revolt-dev-minio-longhorn-objectstorage
         advancedMounts: {minio: {revolt-minio: [path: /data]}}
+      "redis":
+        existingClaim: revolt-dev-redis-nas
+        advancedMounts: {redis: {revolt-redis: [path: /data]}}
       "config":
         name: revolt-dev
         type: configMap
