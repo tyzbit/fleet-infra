@@ -108,7 +108,6 @@ data:
     key_id = ""
     team_id = ""
 
-    ##### THE REST OF THIS MIGHT BE USELESS. FILES ARE HANDLED BY AUTUMN. ######
     [files]
     encryption_key = "${revolt_encryption_key}"
     # Quality used for lossy WebP previews (set to 100 for lossless)
