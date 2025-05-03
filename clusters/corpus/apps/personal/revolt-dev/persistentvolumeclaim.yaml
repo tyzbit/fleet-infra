@@ -29,20 +29,6 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: revolt-dev-minio-longhorn-objectstorage
-  namespace: personal
-spec:
-  accessModes:
-    - ReadWriteOnce
-  volumeMode: Filesystem
-  storageClassName: longhorn-objectstorage
-  resources:
-    requests:
-      storage: 20Gi
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
   name: revolt-dev-minio-nas
   namespace: personal
 spec:
