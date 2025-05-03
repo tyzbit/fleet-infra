@@ -332,7 +332,17 @@ spec:
                   identifier: autumn
 
               - <<: *autumn
-                path: "/attachments(/)?(.*)"
+                path: "/(/)?(attachments.*)"
+              - <<: *autumn
+                path: "/(/)?(avatars.*)"
+              - <<: *autumn
+                path: "/(/)?(backgrounds.*)"
+              - <<: *autumn
+                path: "/(/)?(icons.*)"
+              - <<: *autumn
+                path: "/(/)?(banners.*)"
+              - <<: *autumn
+                path: "/(/)?(emojis.*)"
 
               - path: "/january(/)?(.*)"
                 pathType: ImplementationSpecific
