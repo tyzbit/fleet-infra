@@ -325,10 +325,14 @@ spec:
                 service:
                   identifier: events
 
-              - path: "/autumn(/)?(.*)"
+              - &autumn
+                path: "/autumn(/)?(.*)"
                 pathType: ImplementationSpecific
                 service:
                   identifier: autumn
+
+              - <<: *autumn
+                path: "/attachments(/)?(.*)"
 
               - path: "/january(/)?(.*)"
                 pathType: ImplementationSpecific
