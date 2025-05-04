@@ -20,26 +20,19 @@ spec:
   values:
     controllers:
       edgevpn:
-        initContainers:
-          tun:
-            securityContext:
-              capabilities:
-                # add:
-                #   - SYS_MODULE
-                #   - NET_ADMIN
-                # runAsUser: 0
-                # allowPrivilegeEscalation: false
-                privileged: true
-            image:
-              repository: quay.io/mudler/edgevpn
-              tag: v0.30.2
-            command: [modprobe,tun]
         containers:
           edgevpn:
+            securityContext:
+              privileged: true
             image:
               repository: quay.io/mudler/edgevpn
               tag: v0.30.2
-            args: [--address,10.10.10.2/24]
+            command:
+              - sh
+              - -c
+              - |
+                modprobe tun
+                edgevpn --address "10.10.10.2/24"
             env:
               EDGEVPNCONFIG: /config.yaml
               # IFACE: edgevpn0
