@@ -143,8 +143,8 @@ spec:
               tag: v3.8.0Build1379_nohealthcheck
             env:
               TZ: Etc/UTC
-              # ENABLE_ADSB: "true"
-              # ADSB_URL: http://172.23.98.157/data/aircraft.json
+              ENABLE_ADSB: "true"
+              ADSB_URL: http://adsb-ultrafeeder/data/aircraft.json
               ENABLE_ACARS: external
               ENABLE_VDLM: external
               QUIET_MESSAGES: "false" # This logs the messages themselves
