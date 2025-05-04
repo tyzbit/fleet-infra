@@ -24,15 +24,15 @@ spec:
           edgevpn:
             securityContext:
               privileged: true
+            image:
+              repository: quay.io/mudler/edgevpn
+              tag: v0.30.2
             command:
               - sh
               - -c
               - |
                 modprobe tun
                 edgevpn --address "10.10.10.1/24"
-            image:
-              repository: quay.io/mudler/edgevpn
-              tag: v0.30.2
             env:
               EDGEVPNCONFIG: /config.yaml
               # IFACE: edgevpn0
