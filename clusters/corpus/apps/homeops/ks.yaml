@@ -14,6 +14,29 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
+  name: homeops-revolt-prod-secrets
+  namespace: flux-system
+spec:
+  interval: 30m
+  retryInterval: 1m
+  timeout: 5m
+
+  wait: false
+  prune: true
+
+  path: "./prod-secrets"
+  sourceRef:
+    kind: GitRepository
+    name: homeops-revolt
+    namespace: flux-system
+  decryption:
+    provider: sops
+    secretRef:
+      name: homeops-revolt-prod
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
   name: homeops-revolt-prod
   namespace: flux-system
 spec:
@@ -29,10 +52,6 @@ spec:
     kind: GitRepository
     name: homeops-revolt
     namespace: flux-system
-  decryption:
-    provider: sops
-    secretRef:
-      name: homeops-revolt-prod
   patches:
     - patch: |-
         - op: add
