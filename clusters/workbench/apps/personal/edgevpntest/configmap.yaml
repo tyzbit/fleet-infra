@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: edgevpn-test
+  namespace: personal
+data:
+  config.yaml: ${edgevpn_test_config}

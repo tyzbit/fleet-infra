@@ -36,3 +36,13 @@ spec:
             image:
               repository: nginx
               tag: latest
+    persistence:
+      "config":
+        name: edgevpn-test
+        type: configMap
+        advancedMounts:
+          edgevpn:
+            edgevpn:
+              - path: /config.yaml
+                readOnly: true
+                subPath: config.yaml
