@@ -25,7 +25,7 @@ spec:
             securityContext:
               capabilities:
                 add:
-                  # - SYS_MODULE
+                  - SYS_MODULE
                   - NET_ADMIN
                 runAsUser: 0
                 allowPrivilegeEscalation: false
