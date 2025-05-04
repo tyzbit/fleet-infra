@@ -22,14 +22,14 @@ spec:
       edgevpn:
         containers:
           edgevpn:
-            securityContext:
-              privileged: true
+            # securityContext:
+            #   privileged: true
             command:
               - sh
               - -c
               - |
                 modprobe tun
-                edgevpn --address "10.10.10.1"
+                edgevpn --address "10.10.10.1/24"
             image:
               repository: quay.io/mudler/edgevpn
               tag: v0.30.2
