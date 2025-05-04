@@ -145,6 +145,8 @@ spec:
               TZ: Etc/UTC
               ENABLE_ADSB: "true"
               ADSB_URL: http://adsb-ultrafeeder/data/aircraft.json
+              ADSB_LAT: ${my_latitude}
+              ADSB_LON: ${my_longitude}
               ENABLE_ACARS: external
               ENABLE_VDLM: external
               QUIET_MESSAGES: "false" # This logs the messages themselves
