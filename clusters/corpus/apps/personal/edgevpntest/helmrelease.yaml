@@ -39,7 +39,7 @@ spec:
     persistence:
       "config":
         name: edgevpn-test
-        type: configMap
+        type: secret
         advancedMounts:
           edgevpn:
             edgevpn:
