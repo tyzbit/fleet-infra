@@ -22,8 +22,8 @@ spec:
       edgevpn:
         containers:
           edgevpn:
-            # securityContext:
-            #   privileged: true
+            securityContext:
+              privileged: true
             command:
               - sh
               - -c
