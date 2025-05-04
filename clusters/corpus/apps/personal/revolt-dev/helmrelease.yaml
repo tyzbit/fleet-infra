@@ -241,15 +241,15 @@ spec:
           crond: {revolt-crond: [*configmount]}
           pushd: {revolt-pushd: [*configmount]}
       edgevpn-config:
-        name: ollama-edgevpn-config
+        name: revolt-dev-edgevpn-config
         type: secret
-        advancedMounts: {ollama: {edgevpn: [
+        advancedMounts: {web: {edgevpn: [
           {path: /config.yaml,readOnly: true, subPath: config.yaml}
           ]}}
       edgevpn-modules:
         type: hostPath
         hostPath: /lib/modules
-        advancedMounts: {ollama: {edgevpn: [{path: /lib/modules}]}}
+        advancedMounts: {web: {edgevpn: [{path: /lib/modules}]}}
 
     service:
       "mongo":
