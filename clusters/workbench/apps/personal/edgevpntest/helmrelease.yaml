@@ -26,7 +26,7 @@ spec:
               capabilities:
                 add:
                   - SYS_MODULE
-                  # - NET_ADMIN
+                  - NET_ADMIN
             image:
               repository: quay.io/mudler/edgevpn
               tag: v0.30.2
