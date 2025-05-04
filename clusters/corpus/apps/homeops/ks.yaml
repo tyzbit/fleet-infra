@@ -128,6 +128,7 @@ spec:
     - <<: *naspatch
       target:
         name: revolt-homeops-redis
+  dependsOn: [{ name: homeops-revolt-prod-secrets }]
   postBuild:
     substituteFrom:
       - kind: Secret
