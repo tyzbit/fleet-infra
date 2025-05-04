@@ -44,11 +44,20 @@ spec:
               - bash
               - -c
               - |
+                good=0
+                function good() {
+                  let good=good+1
+                  echo "good: $good"
+                }
+                function bad() {
+                  let bad=bad+1
+                  echo "bad: $bad"
+                }
                 while :; do
                 sleep 60
                 curl -s http://10.10.10.1 && \
-                echo "good" || \
-                echo "curl failed"
+                good || \
+                bad
                 done
     persistence:
       "config":
