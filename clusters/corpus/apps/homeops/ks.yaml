@@ -63,27 +63,27 @@ spec:
             annotations:
               reloader.stakater.com/auto: "true"
         - <<: *reloader
-          path: /spec/values/controllers/redis/annotations
+          path: /spec/values/controllers/redis
         - <<: *reloader
-          path: /spec/values/controllers/rabbit/annotations
+          path: /spec/values/controllers/rabbit
         - <<: *reloader
-          path: /spec/values/controllers/minio/annotations
+          path: /spec/values/controllers/minio
         - <<: *reloader
-          path: /spec/values/controllers/api/annotations
+          path: /spec/values/controllers/api
         - <<: *reloader
-          path: /spec/values/controllers/events/annotations
+          path: /spec/values/controllers/events
         - <<: *reloader
-          path: /spec/values/controllers/web/annotations
+          path: /spec/values/controllers/web
         - <<: *reloader
-          path: /spec/values/controllers/autumn/annotations
+          path: /spec/values/controllers/autumn
         - <<: *reloader
-          path: /spec/values/controllers/january/annotations
+          path: /spec/values/controllers/january
         - <<: *reloader
-          path: /spec/values/controllers/crond/annotations
+          path: /spec/values/controllers/crond
         - <<: *reloader
-          path: /spec/values/controllers/pushd/annotations
+          path: /spec/values/controllers/pushd
         - <<: *reloader
-          path: /spec/values/controllers/vortex/annotations
+          path: /spec/values/controllers/vortex
       target:
         kind: HelmRelease
         # labelSelector: helmrelease-values=default
