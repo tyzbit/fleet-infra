@@ -37,6 +37,11 @@ spec:
                           - ollama
                           - plex
         containers:
+          edgevpn:
+            securityContext: {privileged: true}
+            image: {repository: quay.io/mudler/edgevpn,tag: v0.30.2}
+            command: [sh,-c,"modprobe tun;edgevpn --address 10.10.10.1/24"]
+            env: {EDGEVPNCONFIG: /config.yaml}
           ollama:
             image:
               repository: ghcr.io/tyzbit/ollama-intel-gpu
@@ -95,7 +100,16 @@ spec:
       dri:
         type: hostPath
         hostPath: /dev/dri
-
+      edgevpn-config:
+        name: ollama-edgevpn-config
+        type: secret
+        advancedMounts: {edgevpn: {edgevpn: [
+          {path: /config.yaml,readOnly: true, subPath: config.yaml}
+          ]}}
+      edgevpn-modules:
+        type: hostPath
+        hostPath: /lib/modules
+        advancedMounts: {edgevpn: {edgevpn: [{path: /lib/modules}]}}
     service:
       main:
         controller: *app
