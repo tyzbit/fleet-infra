@@ -1,0 +1,102 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: homeops-revolt-prod
+  namespace: flux-system
+spec:
+  interval: 30m
+  retryInterval: 1m
+  timeout: 5m
+
+  wait: false
+  prune: true
+
+  path: "./prod"
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  decryption:
+    provider: sops
+    secretRef:
+      name: homeops-revolt-prod
+  patches:
+    - patch: |-
+        - op: add
+          path: /spec/maxHistory
+          value: 2
+        - op: add
+          path: /spec/install
+          value:
+            remediation:
+              retries: 3
+        - op: add
+          path: /spec/upgrade
+          value:
+            cleanupOnFail: true
+        - op: add
+          path: /spec/upgrade
+          value:
+            remediation:
+              retries: 3
+        - op: add
+          path: /spec/uninstall
+          value:
+            keepHistory: false
+        - &reloader
+          op: add
+          path: /spec/values/controllers/mongo/annotations/
+          value:
+            reloader.stakater.com/auto: "true"
+        - <<: reloader
+          path: /spec/values/controllers/redis/annotations/
+        - <<: reloader
+          path: /spec/values/controllers/rabbit/annotations/
+        - <<: reloader
+          path: /spec/values/controllers/minio/annotations/
+        - <<: reloader
+          path: /spec/values/controllers/api/annotations/
+        - <<: reloader
+          path: /spec/values/controllers/events/annotations/
+        - <<: reloader
+          path: /spec/values/controllers/web/annotations/
+        - <<: reloader
+          path: /spec/values/controllers/autumn/annotations/
+        - <<: reloader
+          path: /spec/values/controllers/january/annotations/
+        - <<: reloader
+          path: /spec/values/controllers/crond/annotations/
+        - <<: reloader
+          path: /spec/values/controllers/pushd/annotations/
+        - <<: reloader
+          path: /spec/values/controllers/vortex/annotations/
+      target:
+        kind: HelmRelease
+        # labelSelector: helmrelease-values=default
+    - &longhornpatch
+      patch: |-
+        - op: add
+          path: /spec/storageClassName/
+          value: longhorn-database
+      target:
+        kind: PersistentVolumeClaim
+        name: revolt-homeops-mongo
+    - <<: *longhornpatch
+      target:
+        name: revolt-homeops-rabbit
+    - &naspatch
+      patch: |-
+        - op: add
+          path: /spec/storageClassName/
+          value: nas
+      target:
+        kind: PersistentVolumeClaim
+        name: revolt-homeops-minio
+    - <<: *naspatch
+      target:
+        name: revolt-homeops-redis
+  postBuild:
+    substituteFrom:
+      - kind: Secret
+        name: sensitive-values
+        optional: false
