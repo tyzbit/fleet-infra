@@ -44,7 +44,8 @@ spec:
               - bash
               - -c
               - |
-                while :; do 
+                while :; do
+                sleep 60
                 curl http://10.10.10.1 && \
                 echo "good" || \
                 echo "curl failed"
