@@ -58,9 +58,10 @@ spec:
             keepHistory: false
         - &reloader
           op: add
-          path: /spec/values/controllers/mongo/annotations
+          path: /spec/values/controllers/mongo
           value:
-            reloader.stakater.com/auto: "true"
+            annotations:
+              reloader.stakater.com/auto: "true"
         - <<: *reloader
           path: /spec/values/controllers/redis/annotations
         - <<: *reloader
