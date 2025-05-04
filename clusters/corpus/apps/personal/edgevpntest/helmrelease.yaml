@@ -25,7 +25,8 @@ spec:
             command:
               - sh
               - -c
-              - modprobe tun
+              - |
+                modprobe tun
                 edgevpn --address "10.10.10.1"
             image:
               repository: quay.io/mudler/edgevpn
