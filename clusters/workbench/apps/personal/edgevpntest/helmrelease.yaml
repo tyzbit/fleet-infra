@@ -20,8 +20,8 @@ spec:
   values:
     controllers:
       edgevpn:
-        containers:
-          edgevpn:
+        initContainers:
+          tun:
             securityContext:
               capabilities:
                 add:
@@ -32,12 +32,13 @@ spec:
             image:
               repository: quay.io/mudler/edgevpn
               tag: v0.30.2
-            command:
-              - sh
-              - -c
-              - |
-                modprobe tun
-                edgevpn --address "10.10.10.2/24"
+            command: [modprobe,tun]
+        containers:
+          edgevpn:
+            image:
+              repository: quay.io/mudler/edgevpn
+              tag: v0.30.2
+            command: [edgevpn,--address 10.10.10.2/24]
             env:
               EDGEVPNCONFIG: /config.yaml
               # IFACE: edgevpn0
