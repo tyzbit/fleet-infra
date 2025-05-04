@@ -55,7 +55,7 @@ spec:
                 }
                 while :; do
                 sleep 60
-                curl -s http://10.10.10.1 && \
+                curl -sf http://10.10.10.1 && \
                 good || \
                 bad
                 done
