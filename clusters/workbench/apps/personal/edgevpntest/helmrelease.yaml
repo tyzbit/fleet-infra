@@ -46,7 +46,7 @@ spec:
               - |
                 while :; do
                 sleep 60
-                curl http://10.10.10.1 && \
+                curl -s http://10.10.10.1 && \
                 echo "good" || \
                 echo "curl failed"
                 done
