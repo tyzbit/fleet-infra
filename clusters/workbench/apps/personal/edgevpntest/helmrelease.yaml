@@ -48,11 +48,9 @@ spec:
                 bad=0
                 function good() {
                   let good=good+1
-                  echo "good: $good"
                 }
                 function bad() {
                   let bad=bad+1
-                  echo "bad: $bad"
                 }
                 echo "sleeping for the vpn"
                 sleep 60
@@ -61,6 +59,7 @@ spec:
                 curl -s -f http://10.10.10.1 >/dev/null && \
                 good || \
                 bad
+                echo "good: $good | bad: $bad"
                 sleep 5
                 done
     persistence:
