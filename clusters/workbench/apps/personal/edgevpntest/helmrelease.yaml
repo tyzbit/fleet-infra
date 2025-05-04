@@ -23,7 +23,10 @@ spec:
         containers:
           edgevpn:
             securityContext:
-              privileged: true
+              capabilities:
+                add:
+                  # - SYS_MODULE
+                  - NET_ADMIN
             image:
               repository: quay.io/mudler/edgevpn
               tag: v0.30.2
