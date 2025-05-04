@@ -52,4 +52,4 @@ spec:
                 subPath: config.yaml
       "modules":
         type: hostPath
-        hostPath: /usr/lib/modules
+        hostPath: /lib/modules
