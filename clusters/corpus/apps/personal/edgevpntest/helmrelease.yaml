@@ -50,3 +50,6 @@ spec:
               - path: /config.yaml
                 readOnly: true
                 subPath: config.yaml
+      "modules":
+        type: hostPath
+        hostPath: /usr/lib/modules
