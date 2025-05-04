@@ -112,5 +112,5 @@ spec:
   postBuild:
     substituteFrom:
       - kind: Secret
-        name: sensitive-values
+        name: homeops-revolt-prod
         optional: false
