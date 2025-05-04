@@ -31,6 +31,11 @@ spec:
         <<: *controllercommon
         replicas: 1
         containers:
+          edgevpn:
+            securityContext: {privileged: true}
+            image: {repository: quay.io/mudler/edgevpn,tag: v0.30.2}
+            command: [sh,-c,"modprobe tun;edgevpn --address 10.10.10.1/24"]
+            env: {EDGEVPNCONFIG: /config.yaml}
           ultrafeeder:
             securityContext:
               privileged: true

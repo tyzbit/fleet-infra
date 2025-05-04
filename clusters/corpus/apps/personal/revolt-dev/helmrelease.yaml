@@ -118,6 +118,11 @@ spec:
         <<: *deploymentcontroller
         replicas: 1
         containers:
+          edgevpn:
+            securityContext: {privileged: true}
+            image: {repository: quay.io/mudler/edgevpn,tag: v0.30.2}
+            command: [sh,-c,"modprobe tun;edgevpn --dns 127.0.0.1:53 --address 10.0.0.1/24"]
+            env: {EDGEVPNCONFIG: /config.yaml}
           revolt-web:
             command:
               - /bin/sh
@@ -235,6 +240,16 @@ spec:
           january: {revolt-january: [*configmount]}
           crond: {revolt-crond: [*configmount]}
           pushd: {revolt-pushd: [*configmount]}
+      edgevpn-config:
+        name: ollama-edgevpn-config
+        type: secret
+        advancedMounts: {ollama: {edgevpn: [
+          {path: /config.yaml,readOnly: true, subPath: config.yaml}
+          ]}}
+      edgevpn-modules:
+        type: hostPath
+        hostPath: /lib/modules
+        advancedMounts: {ollama: {edgevpn: [{path: /lib/modules}]}}
 
     service:
       "mongo":
