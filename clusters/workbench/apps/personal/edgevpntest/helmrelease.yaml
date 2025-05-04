@@ -55,6 +55,7 @@ spec:
                 echo "sleeping for the vpn"
                 sleep 60
 
+                echo "starting checks"
                 while :; do
                 curl -s -f http://10.10.10.1 >/dev/null && \
                 good || \
