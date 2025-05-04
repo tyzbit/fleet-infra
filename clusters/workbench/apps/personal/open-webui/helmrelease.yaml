@@ -66,13 +66,13 @@ spec:
       edgevpn-config:
         name: ollama-edgevpn-config
         type: secret
-        advancedMounts: {edgevpn: {edgevpn: [
+        advancedMounts: {*app : {edgevpn: [
           {path: /config.yaml,readOnly: true, subPath: config.yaml}
           ]}}
       edgevpn-modules:
         type: hostPath
         hostPath: /lib/modules
-        advancedMounts: {edgevpn: {edgevpn: [{path: /lib/modules}]}}
+        advancedMounts: {*app : {edgevpn: [{path: /lib/modules}]}}
 
     ingress:
       *app :
