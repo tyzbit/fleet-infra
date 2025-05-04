@@ -58,31 +58,31 @@ spec:
             keepHistory: false
         - &reloader
           op: add
-          path: /spec/values/controllers/mongo/annotations/
+          path: /spec/values/controllers/mongo/annotations
           value:
             reloader.stakater.com/auto: "true"
         - <<: *reloader
-          path: /spec/values/controllers/redis/annotations/
+          path: /spec/values/controllers/redis/annotations
         - <<: *reloader
-          path: /spec/values/controllers/rabbit/annotations/
+          path: /spec/values/controllers/rabbit/annotations
         - <<: *reloader
-          path: /spec/values/controllers/minio/annotations/
+          path: /spec/values/controllers/minio/annotations
         - <<: *reloader
-          path: /spec/values/controllers/api/annotations/
+          path: /spec/values/controllers/api/annotations
         - <<: *reloader
-          path: /spec/values/controllers/events/annotations/
+          path: /spec/values/controllers/events/annotations
         - <<: *reloader
-          path: /spec/values/controllers/web/annotations/
+          path: /spec/values/controllers/web/annotations
         - <<: *reloader
-          path: /spec/values/controllers/autumn/annotations/
+          path: /spec/values/controllers/autumn/annotations
         - <<: *reloader
-          path: /spec/values/controllers/january/annotations/
+          path: /spec/values/controllers/january/annotations
         - <<: *reloader
-          path: /spec/values/controllers/crond/annotations/
+          path: /spec/values/controllers/crond/annotations
         - <<: *reloader
-          path: /spec/values/controllers/pushd/annotations/
+          path: /spec/values/controllers/pushd/annotations
         - <<: *reloader
-          path: /spec/values/controllers/vortex/annotations/
+          path: /spec/values/controllers/vortex/annotations
       target:
         kind: HelmRelease
         # labelSelector: helmrelease-values=default
