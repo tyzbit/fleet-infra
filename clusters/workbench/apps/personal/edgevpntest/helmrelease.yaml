@@ -45,6 +45,7 @@ spec:
               - -c
               - |
                 good=0
+                bad=0
                 function good() {
                   let good=good+1
                   echo "good: $good"
@@ -53,11 +54,13 @@ spec:
                   let bad=bad+1
                   echo "bad: $bad"
                 }
-                while :; do
                 sleep 60
+
+                while :; do
                 curl -sf http://10.10.10.1 && \
                 good || \
                 bad
+                sleep 5
                 done
     persistence:
       "config":
