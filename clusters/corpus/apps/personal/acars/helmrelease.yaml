@@ -167,7 +167,7 @@ spec:
     persistence:
       usb:
         type: hostPath
-        hostPath: &usbpath /dev/bus/usb
+        hostPath: &usbpath /dev/bus/usb/001
         advancedMounts:
           acarsdec:
             acarsdec:
