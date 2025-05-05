@@ -81,7 +81,7 @@ spec:
               OUTPUT_SERVER: acars-acarsrouter
               OUTPUT_SERVER_PORT: "5550"
               OUTPUT_SERVER_MODE: tcp
-              ACARSDEC_COMMAND_EXTRA: -r 58322450
+              ACARSDEC_COMMAND_EXTRA: --rtlsdr 58322450
             resources:
               requests:
                 cpu: 150m
