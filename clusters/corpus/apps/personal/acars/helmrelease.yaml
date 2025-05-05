@@ -70,7 +70,7 @@ spec:
             env:
               FEED_ID: TYZBIT-ACARS-2
               TZ: Etc/UTC
-              SOAPYSDR: driver=rtlsdr #,serial=58322450
+              SOAPYSDR: serial=58322450,driver=rtlsdr
               FREQUENCIES: 131.725;130.450
               # Enabling all frequencies to determine which are actually used
               # RTL-SDR can only scan 2MHz range
@@ -81,7 +81,6 @@ spec:
               OUTPUT_SERVER: acars-acarsrouter
               OUTPUT_SERVER_PORT: "5550"
               OUTPUT_SERVER_MODE: tcp
-              ACARSDEC_COMMAND_EXTRA: --rtlsdr 58322450
             resources:
               requests:
                 cpu: 150m
