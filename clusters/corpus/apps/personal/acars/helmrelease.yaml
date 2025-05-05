@@ -167,20 +167,20 @@ spec:
     persistence:
       usb:
         type: hostPath
-        hostPath: &usbpath /dev/bus/usb/001
+        hostPath: &usbpath /dev/bus/usb/
         advancedMounts:
-          acarsdec:
-            acarsdec:
-              - path: *usbpath
-                readOnly: true
-          acarsdec2:
-            acarsdec2:
-              - path: *usbpath
-                readOnly: true
-          dumpvdl2:
-            dumpvdl2:
-              - path: *usbpath
-                readOnly: true
+          acarsdec: {acarsdec:[path: *usbpath,readOnly: true]}
+          acarsdec2: {acarsdec2:[path: *usbpath,readOnly: true]}
+          dumpvdl2: {dumpvdl2:[path: *usbpath,readOnly: true]}
+
+      usb2:
+        type: hostPath
+        hostPath: &usb2path /sys/bus/usb/devices/
+        advancedMounts:
+          acarsdec: {acarsdec:[path: *usb2path,readOnly: true]}
+          acarsdec2: {acarsdec2:[path: *usb2path,readOnly: true]}
+          dumpvdl2: {dumpvdl2:[path: *usb2path,readOnly: true]}
+
 
       shm:
         type: hostPath
