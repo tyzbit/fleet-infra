@@ -194,12 +194,12 @@ spec:
         type: hostPath
         hostPath: /
         advancedMounts:
-          usb-watchdog: &sysdev {watchdog: [{path: /}]}
+          usb-watchdog: {usb-watchdog: [{path: /}]}
       script:
         type: configMap
         name: acars-scripts
         advancedMounts:
-          watchdog: {watchdog: [{path: /tmp/acars-usb-watchdog.sh,subPath: acars-usb-watchdog.sh}]}
+          usb-watchdog: {usb-watchdog: [{path: /tmp/acars-usb-watchdog.sh,subPath: acars-usb-watchdog.sh}]}
       acarsdec:
         type: hostPath
         hostPath: &acarsdecusb /dev/nooelec_sdr_13055074
