@@ -30,7 +30,7 @@ spec:
         enabled: true
         custom: true
         spec:
-          initialDelaySeconds: 30
+          initialDelaySeconds: 60
           periodSeconds: 10
           failureThreshold: 1
           exec: {command: [bash,-c,"if [[ -f /tmp/reset/$DEVICE ]]; then rm /tmp/reset/$DEVICE; exit 1; fi"]}
