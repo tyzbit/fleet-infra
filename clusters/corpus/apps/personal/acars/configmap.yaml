@@ -17,7 +17,7 @@ data:
     function bind() {
       echo -n $1 > /sys/bus/pci/drivers/xhci_hcd/bind
     }
-    log "Setting up udev for $SERIALS"
+    log "Setting up udev rules for serial numbers: $SERIALS"
 
     # Turn this into iterable
     SERIALS=$(echo $SERIALS | sed 's/,/\n/g')
@@ -31,7 +31,6 @@ data:
     log "Starting... there will be no further output if everything is working"
     while :; do
       udevadm control --reload-rules && udevadm trigger
-      sleep 10
       for SERIAL in $SERIALS; do
         fixed=0
         if [[ ! -c /dev/nooelec_sdr_$SERIAL ]]; then
