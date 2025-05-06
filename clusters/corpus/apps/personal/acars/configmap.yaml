@@ -27,7 +27,7 @@ data:
     fullreset=0
     log "Starting... there will be no further output if everything is working"
     while :; do
-      rm -rf /dev/nooelec_sdr_$SERIAL
+      rm -rf /dev/nooelec_sdr_*
       udevadm control --reload-rules && udevadm trigger
       sleep 10
       for SERIAL in $SERIALS; do
