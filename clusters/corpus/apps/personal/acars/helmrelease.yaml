@@ -198,14 +198,9 @@ spec:
         advancedMounts:
           usb-watchdog: {usb-watchdog: [{path: /tmp/acars-usb-watchdog.sh,subPath: acars-usb-watchdog.sh}]}
       reset:
-        type: emptyDir
-        medium: Memory
-        advancedMounts:
-          usb-watchdog: {usb-watchdog: [{path: /tmp/reset}]}
-          acarsdec: {acarsdec: [{path: /tmp/reset}]}
-          acarsdec2: {acarsdec2: [{path: /tmp/reset}]}
-          dumpvdl2: {dumpvdl2: [{path: /tmp/reset}]}
-
+        type: hostPath
+        hostPath: /tmp/reset
+        hostPathType: DirectoryOrCreate
       acarsdec:
         type: hostPath
         hostPath: &acarsdecusb /dev/nooelec_sdr_13055074
