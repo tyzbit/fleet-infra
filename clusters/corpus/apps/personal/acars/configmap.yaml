@@ -62,7 +62,6 @@ data:
           fi
         else
           log "$SERIAL: Everything looks good now"
-          sleep 60
         fi
       done
     done
