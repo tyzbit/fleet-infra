@@ -27,9 +27,10 @@ data:
     EOF
     done
 
-    log "Reloading rules..."
-    udevadm control --reload-rules
-    while udevadm trigger; do
+    while :; do
+      log "Reloading udev rules..."
+      udevadm control --reload-rules && udevadm trigger
+      sleep 10
       for SERIAL in $SERIALS; do
         if [[ ! -c /dev/nooelec_sdr_$SERIAL ]]; then
           log "$SERIAL: Device not found"
