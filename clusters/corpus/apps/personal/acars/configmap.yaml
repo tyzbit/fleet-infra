@@ -55,8 +55,8 @@ data:
               sleep 1
               log "Binding controller $controller"
               bind $controller
-              log "Sleeping 90 seconds..."
-              sleep 90
+              log "Sleeping for 5 minutes..."
+              sleep 300
               fixed=1
               fullreset=0
               continue
