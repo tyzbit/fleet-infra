@@ -55,7 +55,7 @@ data:
               log "Sleeping 30 seconds..."
               sleep 30
               log "Resetting ALL serials"
-              for $SERIAL in $SERIALS; do
+              for SERIAL in $SERIALS; do
                 touch /reset/$SERIAL
               done
               continue
