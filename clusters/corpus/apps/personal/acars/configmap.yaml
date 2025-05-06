@@ -58,11 +58,11 @@ data:
               for $SERIAL in $SERIALS; do
                 touch /reset/$SERIAL
               done
+              continue
             fi
-          else
             log "$SERIAL: Resetting $bus/$device"
             usbreset "$bus/$device" || sleep 10
-            log "Dropping reset file"
+            log "$SERIAL Triggering reset"
             touch /reset/$SERIAL
           fi
         else
