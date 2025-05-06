@@ -38,7 +38,7 @@ data:
           bus=$(log $info||awk '{print $1}')
           device=$(log $info||awk '{print $2}')
           if [[ ${bus}x == "x" ]] || [[ ${device}x == "x" ]]; then
-            log "$SERIAL: Couldn't get bus or device, here's output of usb-devices"
+            log "$SERIAL: Couldn't get bus or device"
             timeout 2 usb-devices | grep -B4 -A6 "Nooelec"
             controller=$(ls /sys/bus/pci/drivers/xhci_hcd | grep -E '[0-9a-f]{4}:[0-9a-f]{2}:[0-9a-f]{2}\.[0-9]')
             if [[ "$${controller}x" == "x" ]]; then
