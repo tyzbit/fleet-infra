@@ -32,15 +32,20 @@ spec:
         - bash
         - -c
         - |
-          sleep infinity
           cat <<EOF > /etc/udev/rules.d/20-nooelec-$(SERIAL)-sdr.rules
           SUBSYSTEM=="usb", ATTRS{idVendor}=="0bda", ATTRS{idProduct}=="2838", ATTRS{serial}=="$(SERIAL)", SYMLINK+="nooelec_sdr_$(SERIAL)"
           EOF
-          udevadm control --reload-rules && udevadm trigger
-          if [[ ! -c /dev/nooelec_sdr_$(SERIAL) ]]; then
-            echo "Symlink was not created"
-            exit 1
-          fi
+          while udevadm control --reload-rules && udevadm trigger; do
+            if [[ ! -c /dev/nooelec_sdr_$(SERIAL) ]]; then
+              info=$(usb-devices | grep -B 5 $(SERIAL) | grep -Eo "Bus=[0-9\s]+|Dev#=[0-9 ]+" | cut -d= -f2 | tr -d ' ')
+              bus=$(echo $info|head -n 1)
+              device=$(echo $info|tail -n 1)
+              echo "Resetting $bus/$device"
+              usbreset "$bus/$device"
+            else
+              break
+            fi
+          done
 
     controllers:
       acarsdec: 
@@ -182,18 +187,6 @@ spec:
                 memory: 512Mi
 
     persistence:
-      acarsdec:
-        type: hostPath
-        hostPath: &acarsdecusb /dev/nooelec_sdr_13055074
-        advancedMounts: {acarsdec: {acarsdec: [path: *acarsdecusb, readOnly: true]}}
-      acarsdec2:
-        type: hostPath
-        hostPath: &acarsdec2usb /dev/nooelec_sdr_58322450
-        advancedMounts: {acarsdec2: {acarsdec2: [path: *acarsdec2usb, readOnly: true]}}
-      dumpvdl2:
-        type: hostPath
-        hostPath: &dumpvdl2usb /dev/nooelec_sdr_00000001
-        advancedMounts: {dumpvdl2: {dumpvdl2: [path: *dumpvdl2usb, readOnly: true]}}
       dev:
         type: hostPath
         hostPath: /
@@ -201,6 +194,21 @@ spec:
           acarsdec: {udev: [&rudev {path: /}]}
           acarsdec2: {udev: [*rudev]}
           dumpvdl2: {udev: [*rudev]}
+      acarsdec:
+        type: hostPath
+        hostPath: &acarsdecusb /dev/nooelec_sdr_13055074
+        hostPathType: CharDevice
+        advancedMounts: {acarsdec: {acarsdec: [path: *acarsdecusb, readOnly: true]}}
+      acarsdec2:
+        type: hostPath
+        hostPathType: CharDevice
+        hostPath: &acarsdec2usb /dev/nooelec_sdr_58322450
+        advancedMounts: {acarsdec2: {acarsdec2: [path: *acarsdec2usb, readOnly: true]}}
+      dumpvdl2:
+        type: hostPath
+        hostPathType: CharDevice
+        hostPath: &dumpvdl2usb /dev/nooelec_sdr_00000001
+        advancedMounts: {dumpvdl2: {dumpvdl2: [path: *dumpvdl2usb, readOnly: true]}}
 
       # usb:
       #   type: hostPath
