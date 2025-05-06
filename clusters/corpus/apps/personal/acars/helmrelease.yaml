@@ -33,7 +33,7 @@ spec:
         - |
           SERIAL=$(SERIAL)
           cat <<EOF > /etc/udev/rules.d/20-nooelec-$SERIAL-sdr.rules
-          SUBSYSTEM=="usb", ATTRS{idVendor}=="0bda", ATTRS{idProduct}=="2838", ATTRS{serial}=="$SERIAL", MODE="0660", SYMLINK+="nooelec_sdr_$SERIAL"
+          SUBSYSTEM=="usb", ATTRS{idVendor}=="0bda", ATTRS{idProduct}=="2838", ATTRS{serial}=="$SERIAL", MODE="0666", SYMLINK+="nooelec_sdr_$SERIAL"
           EOF
           cat <<'EOF' > /tmp/udev-init.sh
           while udevadm control --reload-rules && udevadm trigger; do
@@ -224,7 +224,7 @@ spec:
         advancedMounts: {acarshub: {acarshub: [path: /run/acars]}}
       shm:
         type: emptyDir
-        globalMounts: {path: /dev/shm}
+        globalMounts: [path: /dev/shm]
 
     service:
       acarsrouter:
