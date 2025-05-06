@@ -158,6 +158,7 @@ spec:
 
       acarshub:
         <<: *common_settings
+        pod: {terminationGracePeriodSeconds: 10}
         replicas: 1 # active nas
         containers:
           acarshub:
