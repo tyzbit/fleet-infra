@@ -45,6 +45,7 @@ spec:
                 usbreset "$bus/$device"
               else
                 echo "Couldn't determine bus or device, we got '$bus/$device'"
+              fi
             else
               break
             fi
