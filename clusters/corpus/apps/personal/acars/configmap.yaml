@@ -8,7 +8,6 @@ data:
     SUBSYSTEM=="usb", ATTRS{idVendor}=="0bda", ATTRS{idProduct}=="2838", MODE="0666", SYMLINK+="nooelec_sdr_%s{serial}"
   acars-usb-watchdog.sh: |
     #!bin/bash
-
     function log() {
       echo "[$(date "+%F %T")][usb-watchdog] $1"
     }
@@ -20,19 +19,23 @@ data:
     function bind() {
       echo -n $1 > /sys/bus/pci/drivers/xhci_hcd/bind
     }
-    log "Watching USB for: $SERIALS"
+    log "Setting up udev rules for serial numbers: $SERIALS"
 
     # Turn this into iterable
     SERIALS=$(echo $SERIALS | sed 's/,/\n/g')
 
     fullreset=0
     log "Starting... there will be no further output if everything is working"
+    log "Reloading udev rules and then sleeping for 10 seconds..."
     while :; do
+      rm -rf /dev/nooelec_sdr_*
+      udevadm control --reload-rules && udevadm trigger
       sleep 10
       for SERIAL in $SERIALS; do
         fixed=0
-        if [[ ! $(usb-devices | grep -q SerialNumber=$SERIAL) ]]; then
+        if [[ ! -e /dev/nooelec_sdr_$SERIAL ]]; then
           log "$SERIAL: Device not found"
+          rm -rf /dev/nooelec_sdr_$SERIAL
           info=$(timeout 2 usb-devices | grep -B5 $SERIAL | grep -Eo "Bus=[0-9\s]+|Dev#=[0-9 ]+" | cut -d= -f2 | tr -d ' ')
           bus=$(echo $info||awk '{print $1}')
           device=$(echo $info||awk '{print $2}')
