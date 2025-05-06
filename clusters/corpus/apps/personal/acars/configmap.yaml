@@ -56,14 +56,14 @@ data:
               sleep 30
               log "Resetting ALL serials"
               for SERIAL in $SERIALS; do
-                touch /reset/$SERIAL
+                touch /tmp/reset/$SERIAL
               done
               continue
             fi
             log "$SERIAL: Resetting $bus/$device"
             usbreset "$bus/$device" || sleep 10
             log "$SERIAL Triggering reset"
-            touch /reset/$SERIAL
+            touch /tmp/reset/$SERIAL
           fi
         else
           log "$SERIAL: Everything looks good now"

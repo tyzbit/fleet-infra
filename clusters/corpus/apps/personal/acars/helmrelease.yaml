@@ -32,7 +32,7 @@ spec:
           initialDelaySeconds: 0
           periodSeconds: 10
           failureThreshold: 1
-          exec: {command: [bash,-c,"if [[ -f /reset/$(SERIAL) ]]; then rm /reset/$(SERIAL); exit 1; fi"]}
+          exec: {command: [bash,-c,"if [[ -f /tmp/reset/$(SERIAL) ]]; then rm /tmp/reset/$(SERIAL); exit 1; fi"]}
 
     controllers:
       usb-watchdog:
@@ -200,6 +200,7 @@ spec:
       reset:
         type: emptyDir
         medium: Memory
+        globalMounts: [{path: /tmp/reset}]
       acarsdec:
         type: hostPath
         hostPath: &acarsdecusb /dev/nooelec_sdr_13055074
