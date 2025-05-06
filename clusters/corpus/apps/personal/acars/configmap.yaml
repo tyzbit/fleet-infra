@@ -47,17 +47,16 @@ data:
               sleep 5
               continue
             else
+              log "Resetting ALL serials"
+              for SERIAL in $SERIALS; do
+                touch /tmp/reset/$SERIAL
+              done
+              sleep 11
               log "Unbinding controller $controller"
               unbind $controller
               sleep 1
               log "Binding controller $controller"
               bind $controller
-              log "Sleeping 60 seconds..."
-              sleep 60
-              log "Resetting ALL serials"
-              for SERIAL in $SERIALS; do
-                touch /tmp/reset/$SERIAL
-              done
               log "Sleeping 60 seconds..."
               sleep 60
             fi
