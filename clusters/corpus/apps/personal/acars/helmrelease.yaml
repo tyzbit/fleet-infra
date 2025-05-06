@@ -207,18 +207,18 @@ spec:
         type: hostPath
         hostPath: /tmp/reset
         hostPathType: DirectoryOrCreate
-      acarsdec:
-        type: hostPath
-        hostPath: &acarsdecusb /dev/nooelec_sdr_13055074
-        advancedMounts: {acarsdec: {acarsdec: [path: *acarsdecusb]}}
-      acarsdec2:
-        type: hostPath
-        hostPath: &acarsdec2usb /dev/nooelec_sdr_58322450
-        advancedMounts: {acarsdec2: {acarsdec2: [path: *acarsdec2usb]}}
-      dumpvdl2:
-        type: hostPath
-        hostPath: &dumpvdl2usb /dev/nooelec_sdr_00000001
-        advancedMounts: {dumpvdl2: {dumpvdl2: [path: *dumpvdl2usb]}}
+      # acarsdec:
+      #   type: hostPath
+      #   hostPath: &acarsdecusb /dev/nooelec_sdr_13055074
+      #   advancedMounts: {acarsdec: {acarsdec: [path: *acarsdecusb]}}
+      # acarsdec2:
+      #   type: hostPath
+      #   hostPath: &acarsdec2usb /dev/nooelec_sdr_58322450
+      #   advancedMounts: {acarsdec2: {acarsdec2: [path: *acarsdec2usb]}}
+      # dumpvdl2:
+      #   type: hostPath
+      #   hostPath: &dumpvdl2usb /dev/nooelec_sdr_00000001
+      #   advancedMounts: {dumpvdl2: {dumpvdl2: [path: *dumpvdl2usb]}}
       acarshub:
         existingClaim: acars-data-longhorn-webapp
         advancedMounts: {acarshub: {acarshub: [path: /run/acars]}}
