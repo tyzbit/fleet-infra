@@ -44,7 +44,9 @@ spec:
                 echo "Resetting $bus/$device"
                 usbreset "$bus/$device" || sleep 10
               else
-                echo "Couldn't determine bus or device, we got '$bus/$device'"
+                echo "Couldn't determine bus or device, here's output of usb-devices"
+                usb-devices
+                sleep 60
               fi
             else
               rmdir /dev/nooelec_sdr_$(SERIAL)
