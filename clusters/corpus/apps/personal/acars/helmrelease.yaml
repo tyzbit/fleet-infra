@@ -71,7 +71,7 @@ spec:
                 add: ["SYS_RAWIO"]
               runAsUser: 0
               runAsGroup: 0
-              allowPrivilegeEscalation: false
+              allowPrivilegeEscalation: true
             image:
               repository: ghcr.io/sdr-enthusiasts/docker-acarsdec
               tag: latest-build-412
