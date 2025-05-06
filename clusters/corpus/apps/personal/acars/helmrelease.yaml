@@ -31,7 +31,7 @@ spec:
         - /bin/bash
         - -c
         - |
-          cat <<EOF > /etc/udev/rules.d/20-nooelec-sdr.rules
+          cat <<EOF > /etc/udev/rules.d/20-nooelec-$(SERIAL)-sdr.rules
           SUBSYSTEM=="usb", ATTRS{idVendor}=="0bda", ATTRS{idProduct}=="2838", ATTRS{serial}=="$(SERIAL)", SYMLINK+="nooelec_sdr_$(SERIAL)"
           EOF
           sudo udevadm control --reload-rules && sudo udevadm trigger
