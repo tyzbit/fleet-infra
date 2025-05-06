@@ -8,7 +8,7 @@ data:
     SUBSYSTEM=="usb", ATTRS{idVendor}=="0bda", ATTRS{idProduct}=="2838", MODE="0666", SYMLINK+="nooelec_sdr_%s{serial}"
   acars-usb-watchdog.sh: |
     #!bin/bash
-    chroot /tmp/host
+    chroot /host
 
     function log() {
       echo "[$(date "+%F %T")][usb-watchdog] $1"
