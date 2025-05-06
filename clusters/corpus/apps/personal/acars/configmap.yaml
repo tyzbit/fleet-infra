@@ -23,9 +23,9 @@ data:
     SERIALS=$(echo $SERIALS | sed 's/,/\n/g')
     for SERIAL in $SERIALS; do
       cat <<EOF > /etc/udev/rules.d/20-nooelec-$SERIAL-sdr.rules
-      SUBSYSTEM=="usb", ATTRS{idVendor}=="0bda", ATTRS{idProduct}=="2838", ATTRS{serial}=="$SERIAL", MODE="0666", SYMLINK+="nooelec_sdr_$SERIAL"
+        SUBSYSTEM=="usb", ATTRS{idVendor}=="0bda", ATTRS{idProduct}=="2838", ATTRS{serial}=="$SERIAL", MODE="0666", SYMLINK+="nooelec_sdr_$SERIAL"
       EOF
-    DONE
+    done
 
     log "Reloading rules..."
     udevadm control --reload-rules
