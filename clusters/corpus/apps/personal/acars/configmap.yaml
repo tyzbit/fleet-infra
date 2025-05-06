@@ -6,8 +6,8 @@ metadata:
 data:
   setup-udev.sh: |
     #!bin/bash
-    func log() {
-      log "[$(date "+%F %T")] $1"
+    function log() {
+      echo "[$(date "+%F %T")] $1"
     }
 
     log "Setting up udev..."
