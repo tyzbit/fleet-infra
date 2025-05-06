@@ -33,7 +33,7 @@ spec:
         - |
           SERIAL=$(SERIAL)
           cat <<EOF > /etc/udev/rules.d/20-nooelec-$SERIAL-sdr.rules
-          SUBSYSTEM=="usb", ATTRS{idVendor}=="0bda", ATTRS{idProduct}=="2838", ATTRS{serial}=="$SERIAL", SYMLINK+="nooelec_sdr_$SERIAL"
+          SUBSYSTEM=="usb", ATTRS{idVendor}=="0bda", ATTRS{idProduct}=="2838", ATTRS{serial}=="$SERIAL", MODE="0660", SYMLINK+="nooelec_sdr_$SERIAL"
           EOF
           cat <<'EOF' > /tmp/udev-init.sh
           while udevadm control --reload-rules && udevadm trigger; do
@@ -66,13 +66,8 @@ spec:
         initContainers: {udev: {<<: *udev, env: {SERIAL: "13055074"}}}
         containers:
           acarsdec:
-            securityContext: &secopts
-              capabilities:
-                drop: ["ALL"]
-                add: ["SYS_RAWIO","SYS_FOWNER"]
-              runAsUser: 0
-              runAsGroup: 0
-              allowPrivilegeEscalation: true
+            # securityContext: &secopts
+            #   runAsUser: 1000
             image:
               repository: ghcr.io/sdr-enthusiasts/docker-acarsdec
               tag: latest-build-412
@@ -103,7 +98,7 @@ spec:
         initContainers: {udev: {<<: *udev, env: {SERIAL: "58322450"}}}
         containers:
           acarsdec2:
-            securityContext: *secopts
+            # securityContext: *secopts
             image:
               repository: ghcr.io/sdr-enthusiasts/docker-acarsdec
               tag: latest-build-412
@@ -134,7 +129,7 @@ spec:
         initContainers: {udev: {<<: *udev, env: {SERIAL: "00000001"}}}
         containers:
           dumpvdl2:
-            securityContext: *secopts
+            # securityContext: *secopts
             image:
               repository: ghcr.io/sdr-enthusiasts/docker-dumpvdl2
               tag: latest-build-348
