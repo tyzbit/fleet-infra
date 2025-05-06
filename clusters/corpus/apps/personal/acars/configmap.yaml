@@ -73,7 +73,7 @@ data:
         else
           log "$SERIAL: Everything looks good now"
         fi
-        log "Sleeping 20 seconds..."
-        sleep 20
       done
+      log "Sleeping 20 seconds..."
+      sleep 20
     done
