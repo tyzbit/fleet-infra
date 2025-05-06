@@ -36,6 +36,10 @@ spec:
           SUBSYSTEM=="usb", ATTRS{idVendor}=="0bda", ATTRS{idProduct}=="2838", ATTRS{serial}=="$(SERIAL)", SYMLINK+="nooelec_sdr_$(SERIAL)"
           EOF
           udevadm control --reload-rules && udevadm trigger
+          if [[ ! -f /dev/nooelec_sdr_$(SERIAL) ]]; then
+            echo "Symlink was not created"
+            exit 1
+          fi
 
     controllers:
       acarsdec: 
