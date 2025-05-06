@@ -5,18 +5,24 @@ metadata:
   namespace: personal
 data:
   setup-udev.sh: |
+    #!bin/bash
+    echo "Setting up udev..."
     cat <<EOF > /etc/udev/rules.d/20-nooelec-$SERIAL-sdr.rules
     SUBSYSTEM=="usb", ATTRS{idVendor}=="0bda", ATTRS{idProduct}=="2838", ATTRS{serial}=="$SERIAL", MODE="0666", SYMLINK+="nooelec_sdr_$SERIAL"
     EOF
 
+    rm /tmp/healthcheck
+    echo "Reloading rules..."
     udevadm control --reload-rules
     while udevadm trigger; do
       if [[ ! -c /dev/nooelec_sdr_$SERIAL ]]; then
-        rmdir /dev/nooelec_sdr_$SERIAL
+        echo "Device not found"
+        rm /tmp/healthcheck
+        rm -rf /dev/nooelec_sdr_$SERIAL
         info=$(usb-devices | grep -B5 $SERIAL | grep -Eo "Bus=[0-9\s]+|Dev#=[0-9 ]+" | cut -d= -f2 | tr -d ' ')
         bus=$(echo $info||awk '{print $1}')
         device=$(echo $info||awk '{print $2}')
-        if [[ $${bus}x == "x" ]] || [[ $${device}x == "x" ]]; then
+        if [[ ${bus}x == "x" ]] || [[ ${device}x == "x" ]]; then
           echo "Couldn't get bus or device for serial $SERIAL, here's output of usb-devices"
           usb-devices | grep -B4 -A6 "Nooelec"
           sleep 60
@@ -24,8 +30,9 @@ data:
           echo "Resetting $bus/$device"
           usbreset "$bus/$device" || sleep 10
         fi
-      else
-        break
+      else    
+        echo "Everything looks good now"
+        touch /tmp/healthcheck
+        sleep 60
       fi
     done
-    chmod 777 /dev/nooelec_sdr_$SERIAL

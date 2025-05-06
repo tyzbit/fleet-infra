@@ -27,7 +27,17 @@ spec:
     udev: &udev
       securityContext: {privileged: true}
       image: {repository: debian,tag: latest}
-      command: [sleep,infinity]
+      command: [bash,/tmp/setup-udev.sh]
+      probes:
+        liveness:
+          enabled: true
+          custom: true
+          spec:
+            initialDelaySeconds: 0
+            periodSeconds: 10
+            failureThreshold: 1
+            exec: {command: [stat,/tmp/healthcheck]}
+
 
     controllers:
       acarsdec: 
@@ -173,9 +183,9 @@ spec:
     persistence:
       system:
         type: hostPath
-        hostPath: /
+        hostPath: /dev
         advancedMounts:
-          acarsdec: &sysdev {udev: [{path: /}]}
+          acarsdec: &sysdev {udev: [{path: /dev}]}
           acarsdec2: *sysdev
           dumpvdl2: *sysdev
       script:
