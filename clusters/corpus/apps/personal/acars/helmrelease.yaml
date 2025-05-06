@@ -56,9 +56,9 @@ spec:
               tag: latest-build-412
             env:
               FEED_ID: TYZBIT-ACARS-1
-              SERIAL: 13055074
+              DEVICE: 13055074
               TZ: Etc/UTC
-              SOAPYSDR: &soapy serial=$(SERIAL),driver=rtlsdr
+              SOAPYSDR: &soapy serial=$(DEVICE),driver=rtlsdr
               FREQUENCIES: "130.025"
               # Enabling all frequencies to determine which are actually used
               # RTL-SDR can only scan 2MHz range
@@ -88,7 +88,7 @@ spec:
               tag: latest-build-412
             env:
               FEED_ID: TYZBIT-ACARS-2
-              SERIAL: 58322450
+              DEVICE: 58322450
               TZ: Etc/UTC
               SOAPYSDR: *soapy
               FREQUENCIES: 131.725;130.450
@@ -120,7 +120,7 @@ spec:
               tag: latest-build-348
             env:
               FEED_ID: TYZBIT-VDL2-1
-              SERIAL: 00000001
+              DEVICE: 00000001
               TZ: Etc/UTC
               SOAPYSDR: *soapy
               FREQUENCIES: 136.975;136.100;136.650
