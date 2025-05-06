@@ -199,7 +199,7 @@ spec:
           usb-watchdog: {usb-watchdog: [{path: /tmp/acars-usb-watchdog.sh,subPath: acars-usb-watchdog.sh}]}
       reset:
         type: emptyDir
-        medium: memory
+        medium: Memory
       acarsdec:
         type: hostPath
         hostPath: &acarsdecusb /dev/nooelec_sdr_13055074
