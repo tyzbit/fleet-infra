@@ -31,7 +31,7 @@ data:
       sleep 10
       for SERIAL in $SERIALS; do
         fixed=0
-        if [[ ! -c /dev/nooelec_sdr_$SERIAL ]]; then
+        if [[ ! -e /dev/nooelec_sdr_$SERIAL ]]; then
           log "$SERIAL: Device not found"
           rm -rf /dev/nooelec_sdr_$SERIAL
           info=$(timeout 2 usb-devices | grep -B5 $SERIAL | grep -Eo "Bus=[0-9\s]+|Dev#=[0-9 ]+" | cut -d= -f2 | tr -d ' ')
@@ -51,6 +51,8 @@ data:
               for SERIAL in $SERIALS; do
                 touch /tmp/reset/$SERIAL
               done
+              log "Waiting for apps to start exiting"
+              sleep 30
               log "Unbinding controller $controller"
               unbind $controller
               sleep 1
@@ -58,9 +60,6 @@ data:
               bind $controller
               log "Sleeping for 5 minutes..."
               sleep 300
-              # Exit to be restarted in order to remount devices
-              rm -rf /dev/nooelec_sdr_*
-              exit 0
             fi
           else
             log "$SERIAL: Resetting bus: $bus, device: $device"
