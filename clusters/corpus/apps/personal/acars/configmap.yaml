@@ -2,6 +2,7 @@ apiVersion: v1
 kind: ConfigMap 
 metadata:
   name: acars-scripts
+  namespace: personal
 data:
   setup-udev.sh: |
     cat <<EOF > /etc/udev/rules.d/20-nooelec-$SERIAL-sdr.rules
