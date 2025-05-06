@@ -52,18 +52,18 @@ data:
               sleep 1
               log "Binding controller $controller"
               bind $controller
-              log "Sleeping 30 seconds..."
-              sleep 30
+              log "Sleeping 60 seconds..."
+              sleep 60
               log "Resetting ALL serials"
               for SERIAL in $SERIALS; do
                 touch /tmp/reset/$SERIAL
               done
-              continue
+              log "Sleeping 60 seconds..."
+              sleep 60
             fi
             log "$SERIAL: Resetting $bus/$device"
             usbreset "$bus/$device" || sleep 10
             log "$SERIAL Triggering reset"
-            touch /tmp/reset/$SERIAL
           fi
         else
           log "$SERIAL: Everything looks good now"
