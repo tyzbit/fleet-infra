@@ -51,14 +51,19 @@ data:
               for SERIAL in $SERIALS; do
                 touch /tmp/reset/$SERIAL
               done
-              sleep 11
+              log "Sleeping 20 seconds..."
+              # Sleep long enough for apps to start terminating
+              sleep 20
+
               log "Unbinding controller $controller"
               unbind $controller
               sleep 1
               log "Binding controller $controller"
               bind $controller
+              
               log "Sleeping 60 seconds..."
               sleep 60
+              continue
             fi
             log "$SERIAL: Resetting bus: $bus, device: $device"
             usbreset "$bus/$device" || sleep 10
