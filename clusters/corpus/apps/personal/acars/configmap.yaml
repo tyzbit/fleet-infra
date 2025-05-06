@@ -34,13 +34,12 @@ data:
         if [[ ! -c /dev/nooelec_sdr_$SERIAL ]]; then
           log "$SERIAL: Device not found"
           rm -rf /dev/nooelec_sdr_$SERIAL
-          log "Getting USB devices, this is slow sometimes"
-          info=$(usb-devices | grep -B5 $SERIAL | grep -Eo "Bus=[0-9\s]+|Dev#=[0-9 ]+" | cut -d= -f2 | tr -d ' ')
+          info=$(timeout 2 usb-devices | grep -B5 $SERIAL | grep -Eo "Bus=[0-9\s]+|Dev#=[0-9 ]+" | cut -d= -f2 | tr -d ' ')
           bus=$(log $info||awk '{print $1}')
           device=$(log $info||awk '{print $2}')
           if [[ ${bus}x == "x" ]] || [[ ${device}x == "x" ]]; then
             log "$SERIAL: Couldn't get bus or device, here's output of usb-devices"
-            usb-devices | grep -B4 -A6 "Nooelec"
+            timeout 2 usb-devices | grep -B4 -A6 "Nooelec"
             controller=$(ls /sys/bus/pci/drivers/xhci_hcd | grep -E '[0-9a-f]{4}:[0-9a-f]{2}:[0-9a-f]{2}\.[0-9]')
             if [[ "$${controller}x" == "x" ]]; then
               log "$SERIAL: Couldn't determine controller, here's /sys/bus/pci/drivers/xhci_hcd"
