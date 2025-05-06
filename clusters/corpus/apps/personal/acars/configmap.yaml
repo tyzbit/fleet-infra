@@ -31,7 +31,7 @@ data:
       sleep 10
       for SERIAL in $SERIALS; do
         fixed=0
-        log "usb check $(usb-devices | grep SerialNumber=$SERIAL)"
+        log "usb check $(usb-devices)"
         if [[ ! $(usb-devices | grep -q SerialNumber=$SERIAL) ]]; then
           log "$SERIAL: Device not found"
           info=$(timeout 2 usb-devices | grep -B5 $SERIAL | grep -Eo "Bus=[0-9\s]+|Dev#=[0-9 ]+" | cut -d= -f2 | tr -d ' ')
