@@ -39,6 +39,8 @@ spec:
 
     controllers:
       usb-watchdog:
+        <<: *common_settings
+        replicas: 1
         containers:
           usb-watchdog:
             securityContext: {privileged: true}
