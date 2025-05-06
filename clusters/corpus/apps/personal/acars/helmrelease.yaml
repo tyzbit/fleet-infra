@@ -42,7 +42,7 @@ spec:
               device=$(echo $info||awk '{print $2}')
               if [[ $${bus}x != "x" ]] && [[ $${device}x != "x" ]]; then
                 echo "Resetting $bus/$device"
-                usbreset "$bus/$device"
+                usbreset "$bus/$device" || sleep 10
               else
                 echo "Couldn't determine bus or device, we got '$bus/$device'"
               fi
