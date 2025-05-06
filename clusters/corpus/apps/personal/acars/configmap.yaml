@@ -60,6 +60,8 @@ data:
               bind $controller
               log "Sleeping for 5 minutes..."
               sleep 300
+              log "Restarting watcher"
+              exit 0
             fi
           else
             log "$SERIAL: Resetting bus: $bus, device: $device"
