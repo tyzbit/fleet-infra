@@ -27,8 +27,8 @@ spec:
     udev: &udev
       securityContext: {privileged: true}
       image: {repository: ghcr.io/tyzbit/containers/debian-udev,tag: latest}
-      command: |
-        - /bin/bash
+      command:
+        - bash
         - -c
         - |
           cat <<EOF > /etc/udev/rules.d/20-nooelec-$(SERIAL)-sdr.rules
