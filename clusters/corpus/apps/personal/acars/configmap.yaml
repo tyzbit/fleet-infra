@@ -28,6 +28,7 @@ data:
     log "Starting... there will be no further output if everything is working"
     while :; do
       udevadm control --reload-rules && udevadm trigger
+      sleep 10
       for SERIAL in $SERIALS; do
         fixed=0
         if [[ ! -c /dev/nooelec_sdr_$SERIAL ]]; then
