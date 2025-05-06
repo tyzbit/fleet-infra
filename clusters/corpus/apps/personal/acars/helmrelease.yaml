@@ -24,11 +24,23 @@ spec:
       pod:
         nodeSelector:
           acars: "true"
+    udev: &udev
+      securityContext: {privileged: true}
+      image: {repository: ghcr.io/tyzbit/containers,tag: debian-udev}
+      command: |
+        - /bin/bash
+        - -c
+        - |
+          cat <<EOF > /etc/udev/rules.d/20-nooelec-sdr.rules
+          SUBSYSTEM=="usb", ATTRS{idVendor}=="0bda", ATTRS{idProduct}=="2838", ATTRS{serial}=="$(SERIAL)", SYMLINK+="nooelec_sdr_$(SERIAL)"
+          EOF
+          sudo udevadm control --reload-rules && sudo udevadm trigger
 
     controllers:
       acarsdec: 
         <<: *common_settings
         replicas: 1
+        initContainers: {udev: {<<: *udev, env: {SERIAL: "13055074"}}}
         containers:
           acarsdec:
             securityContext:
@@ -60,6 +72,7 @@ spec:
       acarsdec2:
         <<: *common_settings
         replicas: 1
+        initContainers: {udev: {<<: *udev, env: {SERIAL: "58322450"}}}
         containers:
           acarsdec2:
             securityContext:
@@ -91,6 +104,7 @@ spec:
       dumpvdl2:
         <<: *common_settings
         replicas: 1
+        initContainers: {udev: {<<: *udev, env: {SERIAL: "00000001"}}}
         containers:
           dumpvdl2:
             securityContext:
@@ -165,22 +179,40 @@ spec:
                 memory: 512Mi
 
     persistence:
-      usb:
+      acarsdec:
         type: hostPath
-        hostPath: &usbpath /dev/bus/usb/
-        advancedMounts:
-          acarsdec: {acarsdec:[path: *usbpath,readOnly: true]}
-          acarsdec2: {acarsdec2:[path: *usbpath,readOnly: true]}
-          dumpvdl2: {dumpvdl2:[path: *usbpath,readOnly: true]}
-
-      usb2:
+        hostPath: &acarsdecusb /dev/nooelec_sdr_13055074
+        advancedMounts: {acarsdec: {acarsdec: [path: *acarsdecusb, readOnly: true]}}
+      acarsdec2:
         type: hostPath
-        hostPath: &usb2path /sys/bus/usb/devices/
+        hostPath: &acarsdec2usb /dev/nooelec_sdr_58322450
+        advancedMounts: {acarsdec2: {acarsdec2: [path: *acarsdec2usb, readOnly: true]}}
+      dumpvdl2:
+        type: hostPath
+        hostPath: &dumpvdl2usb /dev/nooelec_sdr_00000001
+        advancedMounts: {dumpvdl2: {dumpvdl2: [path: *dumpvdl2usb, readOnly: true]}}
+      dev:
+        type: hostPath
+        hostPath: /dev
         advancedMounts:
-          acarsdec: {acarsdec:[path: *usb2path,readOnly: true]}
-          acarsdec2: {acarsdec2:[path: *usb2path,readOnly: true]}
-          dumpvdl2: {dumpvdl2:[path: *usb2path,readOnly: true]}
+          acarsdec: {udev: [&rudev {path: /dev}]}
+          acarsdec2: {udev: [*rudev]}
+          dumpvdl2: {udev: [*rudev]}
+      sys:
+        type: hostPath
+        hostPath: /sys
+        advancedMounts:
+          acarsdec: {udev: [&sys {path: /sys}]}
+          acarsdec2: {udev: [*sys]}
+          dumpvdl2: {udev: [*sys]}
 
+      # usb:
+      #   type: hostPath
+      #   hostPath: &usbpath /dev/bus/usb/
+      #   advancedMounts:
+      #     acarsdec: {acarsdec: [path: *usbpath,readOnly: true]}
+      #     acarsdec2: {acarsdec2: [path: *usbpath,readOnly: true]}
+      #     dumpvdl2: {dumpvdl2: [path: *usbpath,readOnly: true]}
 
       shm:
         type: hostPath
