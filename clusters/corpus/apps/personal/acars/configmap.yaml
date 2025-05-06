@@ -64,17 +64,16 @@ data:
           else
             log "$SERIAL: Resetting bus: $bus, device: $device"
             if usbreset "$bus/$device"; then
-              log "$SERIAL Triggering app reset"
+              log "$SERIAL Device reset, triggering app reset"
               touch /tmp/reset/$SERIAL
             else
               log "$SERIAL: usbreset failed"
             fi
-            # Sleep long enough for apps to start terminating
-            log "Sleeping 20 seconds..."
-            sleep 20
           fi
         else
           log "$SERIAL: Everything looks good now"
         fi
+        log "Sleeping 20 seconds..."
+        sleep 20
       done
     done
