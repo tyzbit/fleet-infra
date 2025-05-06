@@ -52,7 +52,7 @@ data:
                 log "$SERIAL Triggering app reset"
                 touch /tmp/reset/$SERIAL
               else
-                log "Reset of %SERIAL not successful, resetting hub"
+                log "Reset of $SERIAL not successful, resetting hub"
                 for SERIAL in $SERIALS; do
                   touch /tmp/reset/$SERIAL
                 done
