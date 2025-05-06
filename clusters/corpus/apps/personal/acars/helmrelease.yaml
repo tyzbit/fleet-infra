@@ -24,18 +24,15 @@ spec:
       pod:
         nodeSelector:
           acars: "true"
-    udev: &udev
-      securityContext: {privileged: true}
-      image: {repository: debian,tag: latest}
-      probes:
-        liveness:
-          enabled: true
-          custom: true
-          spec:
-            initialDelaySeconds: 0
-            periodSeconds: 10
-            failureThreshold: 1
-            exec: {command: [stat,/tmp/healthcheck]}
+    probe: &probes
+      liveness:
+        enabled: true
+        custom: true
+        spec:
+          initialDelaySeconds: 0
+          periodSeconds: 10
+          failureThreshold: 1
+          exec: {command: [bash,-c,"if [[ -f /tmp/$(SERIAL) ]]; then rm /tmp/$(SERIAL); exit 1; fi"]}
 
     controllers:
       usb-watchdog:
@@ -47,15 +44,6 @@ spec:
             image: {repository: debian,tag: latest}
             command: [bash,/tmp/acars-usb-watchdog.sh]
             env: {SERIALS: "13055074,58322450,00000001"}
-            probes:
-              liveness:
-                enabled: true
-                custom: true
-                spec:
-                  initialDelaySeconds: 0
-                  periodSeconds: 10
-                  failureThreshold: 1
-                  exec: {command: [stat,/tmp/healthcheck]}
       acarsdec: 
         <<: *common_settings
         replicas: 1
@@ -68,8 +56,9 @@ spec:
               tag: latest-build-412
             env:
               FEED_ID: TYZBIT-ACARS-1
+              SERIAL: 13055074
               TZ: Etc/UTC
-              SOAPYSDR: serial=13055074,driver=rtlsdr
+              SOAPYSDR: &soapy serial=$(SERIAL),driver=rtlsdr
               FREQUENCIES: "130.025"
               # Enabling all frequencies to determine which are actually used
               # RTL-SDR can only scan 2MHz range
@@ -80,6 +69,7 @@ spec:
               OUTPUT_SERVER: acars-acarsrouter
               OUTPUT_SERVER_PORT: "5550"
               OUTPUT_SERVER_MODE: tcp
+            probes: *probes
             resources:
               requests:
                 cpu: 150m
@@ -98,8 +88,9 @@ spec:
               tag: latest-build-412
             env:
               FEED_ID: TYZBIT-ACARS-2
+              SERIAL: 58322450
               TZ: Etc/UTC
-              SOAPYSDR: serial=58322450,driver=rtlsdr
+              SOAPYSDR: *soapy
               FREQUENCIES: 131.725;130.450
               # Enabling all frequencies to determine which are actually used
               # RTL-SDR can only scan 2MHz range
@@ -110,6 +101,7 @@ spec:
               OUTPUT_SERVER: acars-acarsrouter
               OUTPUT_SERVER_PORT: "5550"
               OUTPUT_SERVER_MODE: tcp
+            probes: *probes
             resources:
               requests:
                 cpu: 150m
@@ -128,12 +120,14 @@ spec:
               tag: latest-build-348
             env:
               FEED_ID: TYZBIT-VDL2-1
+              SERIAL: 00000001
               TZ: Etc/UTC
-              SOAPYSDR: serial=00000001,driver=rtlsdr
+              SOAPYSDR: *soapy
               FREQUENCIES: 136.975;136.100;136.650
               # FREQUENCIES: "136.100;136.650;136.700;136.800;136.975"
               ZMQ_MODE: server
               ZMQ_ENDPOINT: tcp://0.0.0.0:45555
+            probes: *probes
             resources:
               requests:
                 cpu: 10m
@@ -203,6 +197,9 @@ spec:
         name: acars-scripts
         advancedMounts:
           usb-watchdog: {usb-watchdog: [{path: /tmp/acars-usb-watchdog.sh,subPath: acars-usb-watchdog.sh}]}
+      reset:
+        type: emptyDir
+        medium: memory
       acarsdec:
         type: hostPath
         hostPath: &acarsdecusb /dev/nooelec_sdr_13055074

@@ -47,18 +47,23 @@ data:
               sleep 5
               continue
             else
-              log "$SERIAL: Unbinding controller $controller"
+              log "Unbinding controller $controller"
               unbind $controller
               sleep 1
-              log "$SERIAL: Binding controller $controller"
+              log "Binding controller $controller"
               bind $controller
-              sleep_sec=$(( $RANDOM / 1000 ))
-              log "$SERIAL: Sleeping $sleep_sec..."
-              sleep $sleep_sec
+              log "Sleeping 30 seconds..."
+              sleep 30
+              log "Resetting ALL serials"
+              for $SERIAL in $SERIALS; do
+                touch /reset/$SERIAL
+              done
             fi
           else
             log "$SERIAL: Resetting $bus/$device"
             usbreset "$bus/$device" || sleep 10
+            log "Dropping reset file"
+            touch /reset/$SERIAL
           fi
         else
           log "$SERIAL: Everything looks good now"
