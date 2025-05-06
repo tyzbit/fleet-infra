@@ -11,7 +11,7 @@ data:
     }
 
     function unbind() {
-      echo -n $1 > /sys/bus/pci/drivers/xhci_hcd/bind
+      echo -n $1 > /sys/bus/pci/drivers/xhci_hcd/unbind
     }
 
     function bind() {
