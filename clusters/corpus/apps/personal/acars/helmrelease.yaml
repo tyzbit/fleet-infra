@@ -182,7 +182,7 @@ spec:
         type: configMap
         name: acars-scripts
         advancedMounts:
-          acarsdec: &scripts {udev: [{path: /setup-udev.sh,subPath: setup-udev.sh}]}
+          acarsdec: &scripts {udev: [{path: /tmp/setup-udev.sh,subPath: setup-udev.sh}]}
           acarsdec2: *scripts
           dumpvdl2: *scripts
       acarsdec:
