@@ -193,25 +193,11 @@ spec:
         advancedMounts: {dumpvdl2: {dumpvdl2: [path: *dumpvdl2usb, readOnly: true]}}
       dev:
         type: hostPath
-        hostPath: /dev
+        hostPath: /
         advancedMounts:
-          acarsdec: {udev: [&rudev {path: /dev}]}
+          acarsdec: {udev: [&rudev {path: /}]}
           acarsdec2: {udev: [*rudev]}
           dumpvdl2: {udev: [*rudev]}
-      runudev:
-        type: hostPath
-        hostPath: /dev
-        advancedMounts:
-          acarsdec: {udev: [&rudev {path: /run/udev}]}
-          acarsdec2: {udev: [*rudev]}
-          dumpvdl2: {udev: [*rudev]}
-      sys:
-        type: hostPath
-        hostPath: /sys
-        advancedMounts:
-          acarsdec: {udev: [&sys {path: /sys}]}
-          acarsdec2: {udev: [*sys]}
-          dumpvdl2: {udev: [*sys]}
 
       # usb:
       #   type: hostPath
