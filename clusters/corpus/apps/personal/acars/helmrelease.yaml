@@ -53,6 +53,7 @@ spec:
               break
             fi
           done
+          chmod 777 /dev/nooelec_sdr_$(SERIAL)
           'EOF'
           chmod +x /tmp/udev-init.sh
           /tmp/udev-init.sh
