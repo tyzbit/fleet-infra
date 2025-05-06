@@ -34,7 +34,7 @@ spec:
           cat <<EOF > /etc/udev/rules.d/20-nooelec-$(SERIAL)-sdr.rules
           SUBSYSTEM=="usb", ATTRS{idVendor}=="0bda", ATTRS{idProduct}=="2838", ATTRS{serial}=="$(SERIAL)", SYMLINK+="nooelec_sdr_$(SERIAL)"
           EOF
-          cat <<EOF > /tmp/udev-init.sh
+          cat <<'EOF' > /tmp/udev-init.sh
           while udevadm control --reload-rules && udevadm trigger; do
             if [[ ! -c "/dev/nooelec_sdr_$(SERIAL)" ]]; then
               info=$(usb-devices | grep -B 5 "$(SERIAL)" | grep -Eo "Bus=[0-9\s]+|Dev#=[0-9 ]+" | cut -d= -f2 | tr -d ' ')
@@ -45,7 +45,7 @@ spec:
                 usbreset "$bus/$device" || sleep 10
               else
                 echo "Couldn't determine bus or device, here's output of usb-devices"
-                usb-devices
+                usb-devices | grep -B4 -A6 "Nooelec"
                 sleep 60
               fi
             else
@@ -53,7 +53,7 @@ spec:
               break
             fi
           done
-          EOF
+          'EOF'
           chmod +x /tmp/udev-init.sh
           /tmp/udev-init.sh
 
@@ -201,9 +201,9 @@ spec:
         type: hostPath
         hostPath: /
         advancedMounts:
-          acarsdec: {udev: [&rudev {path: /}]}
-          acarsdec2: {udev: [*rudev]}
-          dumpvdl2: {udev: [*rudev]}
+          acarsdec: &rudev {udev: [{path: /}]}
+          acarsdec2: *rudev
+          dumpvdl2: *rudev
       acarsdec:
         type: hostPath
         hostPath: &acarsdecusb /dev/nooelec_sdr_13055074
