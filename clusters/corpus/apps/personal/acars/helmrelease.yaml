@@ -40,8 +40,11 @@ spec:
               info=$(usb-devices | grep -B 5 $(SERIAL) | grep -Eo "Bus=[0-9\s]+|Dev#=[0-9 ]+" | cut -d= -f2 | tr -d ' ')
               bus=$(echo $info|head -n 1)
               device=$(echo $info|tail -n 1)
-              echo "Resetting $bus/$device"
-              usbreset "$bus/$device"
+              if [[ $${bus}x != "x" ]] && [[ $${device}x != "x" ]]; then
+                echo "Resetting $bus/$device"
+                usbreset "$bus/$device"
+              else
+                echo "Couldn't determine bus or device, we got '$bus/$device'"
             else
               break
             fi
