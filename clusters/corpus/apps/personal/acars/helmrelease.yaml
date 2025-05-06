@@ -37,7 +37,7 @@ spec:
             command:
               - bash
               - -c
-              - rtl_test | grep -q $(DEVICE) || exit 1
+              - rtl_test 2>&1 | grep -q $(DEVICE)
 
     controllers:
       usb-watchdog:
