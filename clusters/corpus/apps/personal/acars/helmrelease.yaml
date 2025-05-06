@@ -26,7 +26,6 @@ spec:
           acars: "true"
     udev: &udev
       securityContext: {privileged: true}
-      # image: {repository: ghcr.io/tyzbit/containers/debian-udev,tag: latest}
       image: {repository: debian,tag: latest}
       command:
         - bash
@@ -35,6 +34,7 @@ spec:
           cat <<EOF > /etc/udev/rules.d/20-nooelec-$(SERIAL)-sdr.rules
           SUBSYSTEM=="usb", ATTRS{idVendor}=="0bda", ATTRS{idProduct}=="2838", ATTRS{serial}=="$(SERIAL)", SYMLINK+="nooelec_sdr_$(SERIAL)"
           EOF
+          cat <<EOF > /tmp/udev-init.sh
           while udevadm control --reload-rules && udevadm trigger; do
             if [[ ! -c "/dev/nooelec_sdr_$(SERIAL)" ]]; then
               info=$(usb-devices | grep -B 5 "$(SERIAL)" | grep -Eo "Bus=[0-9\s]+|Dev#=[0-9 ]+" | cut -d= -f2 | tr -d ' ')
@@ -53,6 +53,9 @@ spec:
               break
             fi
           done
+          EOF
+          chmod +x /tmp/udev-init.sh
+          /tmp/udev-init.sh
 
     controllers:
       acarsdec: 
