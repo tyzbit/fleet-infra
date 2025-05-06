@@ -27,37 +27,7 @@ spec:
     udev: &udev
       securityContext: {privileged: true}
       image: {repository: debian,tag: latest}
-      command:
-        - bash
-        - -c
-        - |
-          SERIAL=$(SERIAL)
-          cat <<EOF > /etc/udev/rules.d/20-nooelec-$SERIAL-sdr.rules
-          SUBSYSTEM=="usb", ATTRS{idVendor}=="0bda", ATTRS{idProduct}=="2838", ATTRS{serial}=="$SERIAL", MODE="0666", SYMLINK+="nooelec_sdr_$SERIAL"
-          EOF
-          cat <<'EOF' > /tmp/udev-init.sh
-          while udevadm control --reload-rules && udevadm trigger; do
-            if [[ ! -c /dev/nooelec_sdr_$SERIAL ]]; then
-              rmdir /dev/nooelec_sdr_$(SERIAL)
-              info=$(usb-devices | grep -B5 $SERIAL | grep -Eo "Bus=[0-9\s]+|Dev#=[0-9 ]+" | cut -d= -f2 | tr -d ' ')
-              bus=$(echo $info||awk '{print $1}')
-              device=$(echo $info||awk '{print $2}')
-              if [[ $${bus}x != "x" ]] && [[ $${device}x != "x" ]]; then
-                echo "Resetting $bus/$device"
-                usbreset "$bus/$device" || sleep 10
-              else
-                echo "Couldn't determine bus or device, here's output of usb-devices"
-                usb-devices | grep -B4 -A6 "Nooelec"
-                sleep 60
-              fi
-            else
-              break
-            fi
-          done
-          chmod 777 /dev/nooelec_sdr_$(SERIAL)
-          EOF
-          chmod +x /tmp/udev-init.sh
-          /tmp/udev-init.sh
+      command: [sleep,infinity]
 
     controllers:
       acarsdec: 
@@ -126,8 +96,9 @@ spec:
       dumpvdl2:
         <<: *common_settings
         replicas: 1
-        initContainers: {udev: {<<: *udev, env: {SERIAL: "00000001"}}}
+        # initContainers: {udev: {<<: *udev, env: {SERIAL: "00000001"}}}
         containers:
+          udev: {<<: *udev, env: {SERIAL: "00000001"}}
           dumpvdl2:
             securityContext: *secopts
             image:
@@ -200,13 +171,20 @@ spec:
                 memory: 512Mi
 
     persistence:
-      dev:
+      system:
         type: hostPath
         hostPath: /
         advancedMounts:
-          acarsdec: &rudev {udev: [{path: /}]}
-          acarsdec2: *rudev
-          dumpvdl2: *rudev
+          acarsdec: &sysdev {udev: [{path: /}]}
+          acarsdec2: *sysdev
+          dumpvdl2: *sysdev
+      script:
+        type: configMap
+        name: acars-scripts
+        advancedMounts:
+          acarsdec: &scripts {udev: [{path: /bin/setup-udev.sh,subPath: setup-udev.sh,readOnly: true}]}
+          acarsdec2: *scripts
+          dumpvdl2: *scripts
       acarsdec:
         type: hostPath
         hostPath: &acarsdecusb /dev/nooelec_sdr_13055074
