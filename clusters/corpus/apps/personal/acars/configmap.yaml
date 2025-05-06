@@ -60,7 +60,8 @@ data:
               log "Sleeping 60 seconds..."
               sleep 60
             fi
-            log "$SERIAL: Resetting $bus/$device"
+            log "$SERIAL: Resetting"
+            echo "Bus: $bus / Device: $device"
             usbreset "$bus/$device" || sleep 10
             log "$SERIAL Triggering reset"
           fi
