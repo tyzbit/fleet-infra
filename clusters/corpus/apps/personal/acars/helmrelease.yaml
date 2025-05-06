@@ -64,7 +64,6 @@ spec:
         initContainers: {udev: {<<: *udev, env: {SERIAL: "13055074"}}}
         containers:
           acarsdec:
-            securityContext: {privileged: true}
             image:
               repository: ghcr.io/sdr-enthusiasts/docker-acarsdec
               tag: latest-build-412
@@ -95,7 +94,6 @@ spec:
         initContainers: {udev: {<<: *udev, env: {SERIAL: "58322450"}}}
         containers:
           acarsdec2:
-            securityContext: {privileged: true}
             image:
               repository: ghcr.io/sdr-enthusiasts/docker-acarsdec
               tag: latest-build-412
@@ -126,7 +124,6 @@ spec:
         initContainers: {udev: {<<: *udev, env: {SERIAL: "00000001"}}}
         containers:
           dumpvdl2:
-            securityContext: {privileged: true}
             image:
               repository: ghcr.io/sdr-enthusiasts/docker-dumpvdl2
               tag: latest-build-348
@@ -219,18 +216,6 @@ spec:
         # hostPathType: CharDevice
         hostPath: &dumpvdl2usb /dev/nooelec_sdr_00000001
         advancedMounts: {dumpvdl2: {dumpvdl2: [path: *dumpvdl2usb, readOnly: true]}}
-
-      # usb:
-      #   type: hostPath
-      #   hostPath: &usbpath /dev/bus/usb/
-      #   advancedMounts:
-      #     acarsdec: {acarsdec: [path: *usbpath,readOnly: true]}
-      #     acarsdec2: {acarsdec2: [path: *usbpath,readOnly: true]}
-      #     dumpvdl2: {dumpvdl2: [path: *usbpath,readOnly: true]}
-
-      shm:
-        type: hostPath
-        hostPath: /dev/shm
       acarshub:
         existingClaim: acars-data-longhorn-webapp
         advancedMounts: {acarshub: {acarshub: [path: /run/acars]}}
