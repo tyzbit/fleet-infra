@@ -26,7 +26,8 @@ spec:
           acars: "true"
     udev: &udev
       securityContext: {privileged: true}
-      image: {repository: ghcr.io/tyzbit/containers/debian-udev,tag: latest}
+      # image: {repository: ghcr.io/tyzbit/containers/debian-udev,tag: latest}
+      image: {repository: debian,tag: latest}
       command:
         - bash
         - -c
@@ -43,8 +44,7 @@ spec:
         initContainers: {udev: {<<: *udev, env: {SERIAL: "13055074"}}}
         containers:
           acarsdec:
-            securityContext:
-              privileged: true
+            # securityContext: {privileged: true}
             image:
               repository: ghcr.io/sdr-enthusiasts/docker-acarsdec
               tag: latest-build-412
@@ -75,8 +75,7 @@ spec:
         initContainers: {udev: {<<: *udev, env: {SERIAL: "58322450"}}}
         containers:
           acarsdec2:
-            securityContext:
-              privileged: true
+            # securityContext: {privileged: true}
             image:
               repository: ghcr.io/sdr-enthusiasts/docker-acarsdec
               tag: latest-build-412
@@ -107,8 +106,7 @@ spec:
         initContainers: {udev: {<<: *udev, env: {SERIAL: "00000001"}}}
         containers:
           dumpvdl2:
-            securityContext:
-              privileged: true
+            # securityContext: {privileged: true}
             image:
               repository: ghcr.io/sdr-enthusiasts/docker-dumpvdl2
               tag: latest-build-348
