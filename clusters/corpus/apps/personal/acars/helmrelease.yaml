@@ -198,7 +198,11 @@ spec:
         type: configMap
         name: acars-scripts
         advancedMounts:
-          usb-watchdog: {usb-watchdog: [{path: /tmp/acars-usb-watchdog.sh,subPath: acars-usb-watchdog.sh}]}
+          usb-watchdog: {usb-watchdog: [
+            {path: /tmp/acars-usb-watchdog.sh,subPath: acars-usb-watchdog.sh},
+            {path: /etc/udev/rules.d/20-nooelec-sdr.rules,subPath: nooelec-sdr.rules}
+            ]
+          }
       reset:
         type: hostPath
         hostPath: /tmp/reset
