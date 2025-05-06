@@ -47,29 +47,30 @@ data:
               sleep 5
               continue
             else
-              log "$SERIAL: Resetting bus: $bus, device: $device"
-              if usbreset "$bus/$device"; then
-                log "$SERIAL Triggering app reset"
+              log "Resetting hub"
+              for SERIAL in $SERIALS; do
                 touch /tmp/reset/$SERIAL
-              else
-                log "Reset of $SERIAL not successful, resetting hub"
-                for SERIAL in $SERIALS; do
-                  touch /tmp/reset/$SERIAL
-                done
-                log "Sleeping 20 seconds..."
-                # Sleep long enough for apps to start terminating
-                sleep 20
-
-                log "Unbinding controller $controller"
-                unbind $controller
-                sleep 1
-                log "Binding controller $controller"
-                bind $controller
-              fi
+              done
+              log "Unbinding controller $controller"
+              unbind $controller
+              sleep 1
+              log "Binding controller $controller"
+              bind $controller
               log "Sleeping 90 seconds..."
               sleep 90
               continue
             fi
+          else
+            log "$SERIAL: Resetting bus: $bus, device: $device"
+            if usbreset "$bus/$device"; then
+              log "$SERIAL Triggering app reset"
+              touch /tmp/reset/$SERIAL
+            else
+              log "$SERIAL: usbreset failed"
+            fi
+            # Sleep long enough for apps to start terminating
+            log "Sleeping 20 seconds..."
+            sleep 20
           fi
         else
           log "$SERIAL: Everything looks good now"
