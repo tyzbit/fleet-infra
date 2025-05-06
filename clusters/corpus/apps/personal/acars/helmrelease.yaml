@@ -191,9 +191,9 @@ spec:
     persistence:
       system:
         type: hostPath
-        hostPath: /sys
+        hostPath: /host
         advancedMounts:
-          usb-watchdog: {usb-watchdog: [{path: /sys}]}
+          usb-watchdog: {usb-watchdog: [{path: /host}]}
       script:
         type: configMap
         name: acars-scripts
