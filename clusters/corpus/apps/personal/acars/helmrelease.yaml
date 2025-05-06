@@ -22,6 +22,7 @@ spec:
       annotations:
         reloader.stakater.com/auto: "true"
       pod:
+        terminationGracePeriodSeconds: 1
         nodeSelector:
           acars: "true"
     probe: &probes
