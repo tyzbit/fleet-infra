@@ -43,7 +43,7 @@ spec:
           usb-watchdog:
             securityContext: {privileged: true}
             image: {repository: debian,tag: latest}
-            command: [bash,-c,"cp /tmp/acars-usb-watchdog.sh /host/tmp; chroot /host bash /tmp/acars-usb-watchdog.sh; sleep infinity"]
+            command: [bash,"/tmp/acars-usb-watchdog.sh"]
             env: {SERIALS: "13055074,58322450,00000001"}
       acarsdec: 
         <<: *common_settings
@@ -193,7 +193,7 @@ spec:
         type: hostPath
         hostPath: /
         advancedMounts:
-          usb-watchdog: {usb-watchdog: [{path: /host}]}
+          usb-watchdog: {usb-watchdog: [{path: /}]}
       script:
         type: configMap
         name: acars-scripts
