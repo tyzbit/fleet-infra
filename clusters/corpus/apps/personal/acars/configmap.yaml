@@ -28,7 +28,7 @@ data:
     done
 
     fullreset=0
-    log "Starting, there will be no further output if everything is working"
+    log "Starting... there will be no further output if everything is working"
     while :; do
       udevadm control --reload-rules && udevadm trigger
       sleep 10
