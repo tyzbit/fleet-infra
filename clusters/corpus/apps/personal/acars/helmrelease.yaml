@@ -66,8 +66,8 @@ spec:
         initContainers: {udev: {<<: *udev, env: {SERIAL: "13055074"}}}
         containers:
           acarsdec:
-            # securityContext: &secopts
-            #   runAsUser: 1000
+            securityContext: &secopts
+              privileged: true
             image:
               repository: ghcr.io/sdr-enthusiasts/docker-acarsdec
               tag: latest-build-412
@@ -98,7 +98,7 @@ spec:
         initContainers: {udev: {<<: *udev, env: {SERIAL: "58322450"}}}
         containers:
           acarsdec2:
-            # securityContext: *secopts
+            securityContext: *secopts
             image:
               repository: ghcr.io/sdr-enthusiasts/docker-acarsdec
               tag: latest-build-412
@@ -129,7 +129,7 @@ spec:
         initContainers: {udev: {<<: *udev, env: {SERIAL: "00000001"}}}
         containers:
           dumpvdl2:
-            # securityContext: *secopts
+            securityContext: *secopts
             image:
               repository: ghcr.io/sdr-enthusiasts/docker-dumpvdl2
               tag: latest-build-348
@@ -222,9 +222,6 @@ spec:
       acarshub:
         existingClaim: acars-data-longhorn-webapp
         advancedMounts: {acarshub: {acarshub: [path: /run/acars]}}
-      shm:
-        type: emptyDir
-        globalMounts: [path: /dev/shm]
 
     service:
       acarsrouter:
