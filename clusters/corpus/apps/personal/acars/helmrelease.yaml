@@ -183,9 +183,9 @@ spec:
     persistence:
       system:
         type: hostPath
-        hostPath: /dev
+        hostPath: /
         advancedMounts:
-          acarsdec: &sysdev {udev: [{path: /dev}]}
+          acarsdec: &sysdev {udev: [{path: /}]}
           acarsdec2: *sysdev
           dumpvdl2: *sysdev
       script:
