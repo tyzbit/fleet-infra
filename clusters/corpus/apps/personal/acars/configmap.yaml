@@ -34,6 +34,7 @@ data:
         if [[ ! -c /dev/nooelec_sdr_$SERIAL ]]; then
           log "$SERIAL: Device not found"
           rm -rf /dev/nooelec_sdr_$SERIAL
+          log "Getting USB devices, this is slow sometimes"
           info=$(usb-devices | grep -B5 $SERIAL | grep -Eo "Bus=[0-9\s]+|Dev#=[0-9 ]+" | cut -d= -f2 | tr -d ' ')
           bus=$(log $info||awk '{print $1}')
           device=$(log $info||awk '{print $2}')
