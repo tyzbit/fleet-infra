@@ -57,9 +57,8 @@ data:
               bind $controller
               log "Sleeping for 5 minutes..."
               sleep 300
-              fixed=1
-              fullreset=0
-              continue
+              # Exit to be restarted in order to remount devices
+              exit 0
             fi
           else
             log "$SERIAL: Resetting bus: $bus, device: $device"
