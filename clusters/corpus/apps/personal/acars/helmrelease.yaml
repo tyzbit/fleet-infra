@@ -198,6 +198,13 @@ spec:
           acarsdec: {udev: [&rudev {path: /dev}]}
           acarsdec2: {udev: [*rudev]}
           dumpvdl2: {udev: [*rudev]}
+      runudev:
+        type: hostPath
+        hostPath: /dev
+        advancedMounts:
+          acarsdec: {udev: [&rudev {path: /run/udev}]}
+          acarsdec2: {udev: [*rudev]}
+          dumpvdl2: {udev: [*rudev]}
       sys:
         type: hostPath
         hostPath: /sys
