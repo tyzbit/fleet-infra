@@ -218,7 +218,7 @@ spec:
       dumpvdl2:
         type: custom
         volumeSpec: {name: sdr, hostPath: {path: &dumpvdl2usb "/dev/nooelec_sdr_00000001"}}
-        advancedMounts: {dumpvdl2: {acarsdec: [path: *dumpvdl2usb, readOnly: true]}}
+        advancedMounts: {dumpvdl2: {dumpvdl2: [path: *dumpvdl2usb, readOnly: true]}}
       acarshub:
         existingClaim: acars-data-longhorn-webapp
         advancedMounts: {acarshub: {acarshub: [path: /run/acars]}}
