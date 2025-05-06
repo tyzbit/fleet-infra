@@ -32,7 +32,7 @@ spec:
           initialDelaySeconds: 0
           periodSeconds: 10
           failureThreshold: 1
-          exec: {command: [bash,-c,"if [[ -f /tmp/$(SERIAL) ]]; then rm /tmp/$(SERIAL); exit 1; fi"]}
+          exec: {command: [bash,-c,"if [[ -f /reset/$(SERIAL) ]]; then rm /reset/$(SERIAL); exit 1; fi"]}
 
     controllers:
       usb-watchdog:
