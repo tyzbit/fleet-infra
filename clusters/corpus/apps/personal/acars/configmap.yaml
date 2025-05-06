@@ -35,8 +35,8 @@ data:
           log "$SERIAL: Device not found"
           rm -rf /dev/nooelec_sdr_$SERIAL
           info=$(timeout 2 usb-devices | grep -B5 $SERIAL | grep -Eo "Bus=[0-9\s]+|Dev#=[0-9 ]+" | cut -d= -f2 | tr -d ' ')
-          bus=$(log $info||awk '{print $1}')
-          device=$(log $info||awk '{print $2}')
+          bus=$(echo $info||awk '{print $1}')
+          device=$(echo $info||awk '{print $2}')
           if [[ ${bus}x == "x" ]] || [[ ${device}x == "x" ]]; then
             log "$SERIAL: Couldn't get bus or device"
             timeout 2 usb-devices | grep -B4 -A6 "Nooelec"
@@ -60,8 +60,7 @@ data:
               log "Sleeping 60 seconds..."
               sleep 60
             fi
-            log "$SERIAL: Resetting"
-            echo "Bus: $bus / Device: $device"
+            log "$SERIAL: Resetting bus: $bus, device: $device"
             usbreset "$bus/$device" || sleep 10
             log "$SERIAL Triggering reset"
           fi
