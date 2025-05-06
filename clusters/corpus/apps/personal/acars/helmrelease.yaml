@@ -43,7 +43,7 @@ spec:
           usb-watchdog:
             securityContext: {privileged: true}
             image: {repository: debian,tag: latest}
-            command: [bash,-c,"chroot /host \"bash /tmp/acars-usb-watchdog.sh\" ;sleep infinity"]
+            command: [bash,-c,"cp /tmp/acars-usb-watchdog.sh /host/tmp; chroot /host \"bash /tmp/acars-usb-watchdog.sh\" ;sleep infinity"]
             env: {SERIALS: "13055074,58322450,00000001"}
       acarsdec: 
         <<: *common_settings
