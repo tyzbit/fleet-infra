@@ -66,8 +66,12 @@ spec:
         containers:
           acarsdec:
             securityContext: &secopts
-              runAsUser: 0
-              runAsGroup: 0
+              capabilities:
+                drop: ["ALL"]
+                add: ["SYS_RAWIO"]
+              runAsUser: 1000
+              runAsGroup: 1000
+              allowPrivilegeEscalation: false
             image:
               repository: ghcr.io/sdr-enthusiasts/docker-acarsdec
               tag: latest-build-412
