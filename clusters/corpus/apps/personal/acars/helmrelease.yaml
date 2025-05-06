@@ -36,8 +36,8 @@ spec:
           SUBSYSTEM=="usb", ATTRS{idVendor}=="0bda", ATTRS{idProduct}=="2838", ATTRS{serial}=="$(SERIAL)", SYMLINK+="nooelec_sdr_$(SERIAL)"
           EOF
           while udevadm control --reload-rules && udevadm trigger; do
-            if [[ ! -c /dev/nooelec_sdr_$(SERIAL) ]]; then
-              info=$(usb-devices | grep -B 5 $(SERIAL) | grep -Eo "Bus=[0-9\s]+|Dev#=[0-9 ]+" | cut -d= -f2 | tr -d ' ')
+            if [[ ! -c "/dev/nooelec_sdr_$(SERIAL)" ]]; then
+              info=$(usb-devices | grep -B 5 "$(SERIAL)" | grep -Eo "Bus=[0-9\s]+|Dev#=[0-9 ]+" | cut -d= -f2 | tr -d ' ')
               bus=$(echo $info|head -n 1)
               device=$(echo $info|tail -n 1)
               if [[ $${bus}x != "x" ]] && [[ $${device}x != "x" ]]; then
