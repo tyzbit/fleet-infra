@@ -47,10 +47,10 @@ spec:
                 echo "Couldn't determine bus or device, we got '$bus/$device'"
               fi
             else
+              rmdir /dev/nooelec_sdr_$(SERIAL)
               break
             fi
           done
-          rmdir /dev/nooelec_sdr_$(SERIAL)
 
     controllers:
       acarsdec: 
