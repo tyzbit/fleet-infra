@@ -27,18 +27,20 @@ data:
     EOF
     done
 
+    fullreset=0
+    log "Starting..."
     while :; do
-      log "Reloading udev rules..."
       udevadm control --reload-rules && udevadm trigger
       sleep 10
       for SERIAL in $SERIALS; do
+        fixed=0
         if [[ ! -c /dev/nooelec_sdr_$SERIAL ]]; then
           log "$SERIAL: Device not found"
           rm -rf /dev/nooelec_sdr_$SERIAL
           info=$(timeout 2 usb-devices | grep -B5 $SERIAL | grep -Eo "Bus=[0-9\s]+|Dev#=[0-9 ]+" | cut -d= -f2 | tr -d ' ')
           bus=$(echo $info||awk '{print $1}')
           device=$(echo $info||awk '{print $2}')
-          if [[ ${bus}x == "x" ]] || [[ ${device}x == "x" ]]; then
+          if [[ ${bus}x == "x" ]] || [[ ${device}x == "x" ]] || [[ $fullreset == 1 ]]; then
             log "$SERIAL: Couldn't get bus or device"
             timeout 2 usb-devices | grep -B4 -A6 "Nooelec"
             controller=$(ls /sys/bus/pci/drivers/xhci_hcd | grep -E '[0-9a-f]{4}:[0-9a-f]{2}:[0-9a-f]{2}\.[0-9]')
@@ -59,6 +61,8 @@ data:
               bind $controller
               log "Sleeping 90 seconds..."
               sleep 90
+              fixed=1
+              fullreset=0
               continue
             fi
           else
@@ -66,14 +70,14 @@ data:
             if usbreset "$bus/$device"; then
               log "$SERIAL Device reset, triggering app reset"
               touch /tmp/reset/$SERIAL
+              fixed=1
             else
               log "$SERIAL: usbreset failed"
+              fullreset=1
             fi
           fi
-        else
-          log "$SERIAL: Everything looks good now"
         fi
+        [[ $fixed == 1 ]] && log "$SERIAL: Everything looks good now"
       done
-      log "Sleeping 20 seconds..."
       sleep 20
     done
