@@ -54,7 +54,7 @@ spec:
             fi
           done
           chmod 777 /dev/nooelec_sdr_$(SERIAL)
-          'EOF'
+          EOF
           chmod +x /tmp/udev-init.sh
           /tmp/udev-init.sh
 
@@ -69,8 +69,8 @@ spec:
               capabilities:
                 drop: ["ALL"]
                 add: ["SYS_RAWIO"]
-              runAsUser: 1000
-              runAsGroup: 1000
+              runAsUser: 0
+              runAsGroup: 0
               allowPrivilegeEscalation: false
             image:
               repository: ghcr.io/sdr-enthusiasts/docker-acarsdec
