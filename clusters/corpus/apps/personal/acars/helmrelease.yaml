@@ -65,7 +65,9 @@ spec:
         initContainers: {udev: {<<: *udev, env: {SERIAL: "13055074"}}}
         containers:
           acarsdec:
-            securityContext: {privileged: true}
+            securityContext: &secopts
+              runAsUser: 0
+              runAsGroup: 0
             image:
               repository: ghcr.io/sdr-enthusiasts/docker-acarsdec
               tag: latest-build-412
@@ -96,7 +98,7 @@ spec:
         initContainers: {udev: {<<: *udev, env: {SERIAL: "58322450"}}}
         containers:
           acarsdec2:
-            securityContext: {privileged: true}
+            securityContext: *secopts
             image:
               repository: ghcr.io/sdr-enthusiasts/docker-acarsdec
               tag: latest-build-412
@@ -127,7 +129,7 @@ spec:
         initContainers: {udev: {<<: *udev, env: {SERIAL: "00000001"}}}
         containers:
           dumpvdl2:
-            securityContext: {privileged: true}
+            securityContext: *secopts
             image:
               repository: ghcr.io/sdr-enthusiasts/docker-dumpvdl2
               tag: latest-build-348
