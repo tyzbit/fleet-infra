@@ -31,13 +31,14 @@ spec:
         - bash
         - -c
         - |
-          cat <<EOF > /etc/udev/rules.d/20-nooelec-$(SERIAL)-sdr.rules
-          SUBSYSTEM=="usb", ATTRS{idVendor}=="0bda", ATTRS{idProduct}=="2838", ATTRS{serial}=="$(SERIAL)", SYMLINK+="nooelec_sdr_$(SERIAL)"
+          SERIAL=$(SERIAL)
+          cat <<EOF > /etc/udev/rules.d/20-nooelec-$SERIAL-sdr.rules
+          SUBSYSTEM=="usb", ATTRS{idVendor}=="0bda", ATTRS{idProduct}=="2838", ATTRS{serial}=="$SERIAL", SYMLINK+="nooelec_sdr_$SERIAL"
           EOF
           cat <<'EOF' > /tmp/udev-init.sh
           while udevadm control --reload-rules && udevadm trigger; do
-            if [[ ! -c /dev/nooelec_sdr_$(SERIAL) ]]; then
-              info=$(usb-devices | grep -B5 $(SERIAL) | grep -Eo "Bus=[0-9\s]+|Dev#=[0-9 ]+" | cut -d= -f2 | tr -d ' ')
+            if [[ ! -c /dev/nooelec_sdr_$SERIAL ]]; then
+              info=$(usb-devices | grep -B5 $SERIAL | grep -Eo "Bus=[0-9\s]+|Dev#=[0-9 ]+" | cut -d= -f2 | tr -d ' ')
               bus=$(echo $info||awk '{print $1}')
               device=$(echo $info||awk '{print $2}')
               if [[ $${bus}x != "x" ]] && [[ $${device}x != "x" ]]; then
@@ -68,7 +69,7 @@ spec:
             securityContext: &secopts
               capabilities:
                 drop: ["ALL"]
-                add: ["SYS_RAWIO"]
+                add: ["SYS_RAWIO","SYS_FOWNER"]
               runAsUser: 0
               runAsGroup: 0
               allowPrivilegeEscalation: true
