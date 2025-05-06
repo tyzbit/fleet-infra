@@ -31,19 +31,13 @@ spec:
         custom: true
         spec:
           initialDelaySeconds: 60
-          periodSeconds: 10
-          failureThreshold: 1
+          periodSeconds: 30
+          failureThreshold: 3
           exec:
             command:
               - bash
               - -c
               - rtl_test | grep -q $(DEVICE) || exit 1
-              # - |
-              #   if [[ -f /tmp/reset/$DEVICE ]]; then
-              #     rm /tmp/reset/$DEVICE
-              #     exit 1
-              #   fi
-              #   rtl_test | grep -q $(DEVICE) || exit 1
 
     controllers:
       usb-watchdog:
