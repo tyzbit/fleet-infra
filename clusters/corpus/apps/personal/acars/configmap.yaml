@@ -26,6 +26,7 @@ data:
 
     fullreset=0
     log "Starting... there will be no further output if everything is working"
+    log "Reloading udev rules and then sleeping for 10 seconds..."
     while :; do
       rm -rf /dev/nooelec_sdr_*
       udevadm control --reload-rules && udevadm trigger
@@ -45,14 +46,15 @@ data:
             if [[ "$${controller}x" == "x" ]]; then
               log "$SERIAL: Couldn't determine controller, here's /sys/bus/pci/drivers/xhci_hcd"
               ls /sys/bus/pci/drivers/xhci_hcd
-              sleep 5
+              log "Sleeping for 30 seconds"
+              sleep 30
               continue
             else
               log "Resetting hub"
               for SERIAL in $SERIALS; do
                 touch /tmp/reset/$SERIAL
               done
-              log "Waiting for apps to start exiting"
+              log "Waiting 30 seconds for apps to start exiting"
               sleep 30
               log "Unbinding controller $controller"
               unbind $controller
