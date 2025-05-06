@@ -222,6 +222,9 @@ spec:
       acarshub:
         existingClaim: acars-data-longhorn-webapp
         advancedMounts: {acarshub: {acarshub: [path: /run/acars]}}
+      shm:
+        type: emptyDir
+        globalMounts: {path: /dev/shm}
 
     service:
       acarsrouter:
