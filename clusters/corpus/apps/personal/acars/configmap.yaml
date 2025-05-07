@@ -130,7 +130,10 @@ data:
         fi
         sleep 5
       done
-      if [[ $fixed == 1 ]] || [[ $first == 1 ]]; then
+      if [[ $(activereplicas) < 3 ]] && [[ $fixed == 0 ]]; then
+        scale 1
+      fi
+      if [[ $first == 1 ]]; then
         log "Checked all devices, there will be no further output if everything is working"
       fi
       if [[ $(activereplicas) < 3 ]]; then
