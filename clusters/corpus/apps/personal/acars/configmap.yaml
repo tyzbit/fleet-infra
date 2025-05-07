@@ -7,6 +7,7 @@ data:
   acars-usb-watchdog.sh: |
     #!bin/bash
 
+    DEVICES=$SERIALS
     # Turn this into iterable
     SERIALS=$(echo $SERIALS | sed 's/,/\n/g')
     sts=(
@@ -69,7 +70,7 @@ data:
       done
     }
 
-    log "Watching USB for: $SERIALS"
+    log "Watching USB for: $DEVICES"
     fullreset=0
     first=1
     allgood=1
