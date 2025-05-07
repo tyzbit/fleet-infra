@@ -110,7 +110,7 @@ data:
             else
               scale 0
               waitforzero; status=$?
-              if [[ $status ==0 ]]; then
+              if [[ $status == 0 ]]; then
                 waitforzero
                 log "Resetting USB Hub: Unbinding controller $controller"
                 unbind $controller
