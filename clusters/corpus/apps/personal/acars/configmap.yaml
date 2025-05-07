@@ -55,7 +55,7 @@ data:
             let count++
           fi
         done
-      return $count
+      echo $count
     }
 
     function waitforzero() {
