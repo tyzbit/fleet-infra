@@ -77,7 +77,6 @@ data:
     log "Watching USB for: $DEVICES"
     fullreset=0
     first=1
-    allgood=1
     log "Starting..."
     while :; do
       for SERIAL in $SERIALS; do
@@ -95,7 +94,7 @@ data:
             else
               log "$SERIAL: usbreset failed"
               fullreset=1
-              allgood=0
+              fixed=1
             fi
           ##### We need to do a full reset #####
           else 
