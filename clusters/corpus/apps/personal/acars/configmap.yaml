@@ -37,7 +37,7 @@ data:
     function scale() {
       log "Scaling to $1"
       value=0
-      for s in $sts; do
+      for s in $${sts[@]}; do
         kubectl scale statefulset $s --replicas $1
         [[ $? != 0 ]] && value=1
       done
@@ -51,8 +51,8 @@ data:
       log "Waiting $(( limit * period )) seconds for pods to terminate..."
       while :; do
         waiting=0
-        for s in $sts; do
-          if [[ $(kubectl get statefulset $sts | grep "$s " | awk '{print $2}') != "0/0" ]]; then
+        for s in $${sts[@]}; do
+          if [[ $(kubectl get statefulset $s | grep "$s " | awk '{print $2}') != "0/0" ]]; then
             log "Waiting for $s to scale down"
             waiting=1
           fi
