@@ -126,7 +126,7 @@ data:
         if [[ $fixed == 1 ]]; then
           if [[ $(timeout 2 usb-devices | grep -q SerialNumber=$SERIAL; echo $?) == 0 ]]; then
             log "$SERIAL: Everything looks good now"
-            if [[ $scaled == 0 ]] && scale 1
+            [[ $scaled == 0 ]] && scale 1
           fi
         fi
       done
