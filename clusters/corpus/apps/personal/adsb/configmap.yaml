@@ -7,70 +7,136 @@ data:
   adsb-usb-watchdog.sh: |
     #!bin/bash
 
+    DEVICES=$SERIALS
+    # Turn this into iterable
+    SERIALS=$(echo $SERIALS | sed 's/,/\n/g')
+    sts=(
+      adsb-ultrafeeder
+    )
+    hub=/sys/bus/pci/drivers/xhci_hcd
+
     function log() {
       echo "[$(date "+%F %T")][usb-watchdog] $1"
     }
 
+    function idle() {
+      log "Sleeping for $1 seconds..."
+      sleep $1
+    }
+
     function unbind() {
-      echo -n $1 > /sys/bus/pci/drivers/xhci_hcd/unbind
+      echo -n $1 > $hub/unbind
+      idle 1
     }
 
     function bind() {
-      echo -n $1 > /sys/bus/pci/drivers/xhci_hcd/bind
+      echo -n $1 > $hub/bind
+      idle 120
     }
-    log "Watching USB for: $SERIALS"
 
-    # Turn this into iterable
-    SERIALS=$(echo $SERIALS | sed 's/,/\n/g')
+    scaled=1
+    function scale() {
+      log "Scaling to $1"
+      scaled=$1
+      value=0
+      for s in $${sts[@]}; do
+        kubectl scale statefulset $s --replicas $1
+        [[ $? != 0 ]] && value=1
+      done
+      return $value
+    }
 
+    function activereplicas() {
+      count=0
+        for s in $${sts[@]}; do
+          if [[ $(kubectl get statefulset $s | grep "$s " | awk '{print $2}') != "0/0" ]]; then
+            let count++
+          fi
+        done
+      echo $count
+    }
+
+    function waitforzero() {
+      limit=36 # 3 minutes with 5 second waits
+      period=5
+      count=0
+      log "Waiting $(( limit * period )) seconds for pods to terminate..."
+      while [[ $(activereplicas) > 0 ]]; do
+        if [[ $count == $limit ]]; then
+          log "Not all apps scaled down, but not waiting any longer"
+          return 1
+        fi
+        let count++
+        idle $period
+      done
+      log "Scaled down to zero"
+    }
+
+    log "Watching USB for: $DEVICES"
     fullreset=0
-    log "Starting... there will be no further output if everything is working"
+    first=1
+    log "Starting..."
     while :; do
-      sleep 10
       for SERIAL in $SERIALS; do
         fixed=0
-        if [[ $(timeout 2 usb-devices | grep -q SerialNumber=$SERIAL; echo $?) != 0 ]]; then
+        if [[ $(timeout 5 usb-devices | grep -q SerialNumber=$SERIAL; echo $?) != 0 ]]; then
           log "$SERIAL: Device not found"
-          info=$(timeout 2 usb-devices | grep -B5 $SERIAL | grep -Eo "Bus=[0-9\s]+|Dev#=[0-9 ]+" | cut -d= -f2 | tr -d ' ')
+          info=$(timeout 5 usb-devices | grep -B5 $SERIAL | grep -Eo "Bus=[0-9\s]+|Dev#=[0-9 ]+" | cut -d= -f2 | tr -d ' ')
           bus=$(echo $info||awk '{print $1}')
           device=$(echo $info||awk '{print $2}')
-          if [[ ${bus}x == "x" ]] || [[ ${device}x == "x" ]] || [[ $fullreset == 1 ]]; then
-            log "$SERIAL: Couldn't get bus or device"
-            timeout 2 usb-devices | grep -B4 -A6 "Nooelec"
-            controller=$(ls /sys/bus/pci/drivers/xhci_hcd | grep -E '[0-9a-f]{4}:[0-9a-f]{2}:[0-9a-f]{2}\.[0-9]')
-            if [[ "$${controller}x" == "x" ]]; then
-              log "$SERIAL: Couldn't determine controller, here's /sys/bus/pci/drivers/xhci_hcd"
-              ls /sys/bus/pci/drivers/xhci_hcd
-              log "Sleeping for 30 seconds"
-              sleep 30
-              continue
-            else
-              log "Resetting hub"
-              for SERIAL in $SERIALS; do
-                touch /tmp/reset/$SERIAL
-              done
-              log "Waiting 30 seconds for apps to start exiting"
-              sleep 30
-              log "Unbinding controller $controller"
-              unbind $controller
-              sleep 1
-              log "Binding controller $controller"
-              bind $controller
-              log "Sleeping for 5 minutes..."
-              sleep 300
-            fi
-          else
+          if [[ $${bus}x != "x" ]] && [[ ! $${device}x != "x" ]] && [[ $fullreset != 1 ]]; then
             log "$SERIAL: Resetting bus: $bus, device: $device"
             if usbreset "$bus/$device"; then
-              log "$SERIAL Device reset, triggering app reset"
-              touch /tmp/reset/$SERIAL
+              log "$SERIAL Device reset"
               fixed=1
             else
               log "$SERIAL: usbreset failed"
               fullreset=1
+              fixed=1
+            fi
+          ##### We need to do a full reset #####
+          else 
+            log "$SERIAL: Couldn't get bus or device, resetting the controller"
+            log "Here's the controllers present:"
+            timeout 5 usb-devices | grep -B4 -A6 "Nooelec"
+            controller=$(ls /sys/bus/pci/drivers/xhci_hcd | grep -E '[0-9a-f]{4}:[0-9a-f]{2}:[0-9a-f]{2}\.[0-9]')
+            if [[ "$${controller}x" == "x" ]]; then
+              log "$SERIAL: Couldn't determine controller, here's /sys/bus/pci/drivers/xhci_hcd"
+              ls /sys/bus/pci/drivers/xhci_hcd
+              log "Exiting with error"
+              exit 10
+            else
+              scale 0
+              waitforzero; status=$?
+              if [[ $status == 0 ]]; then
+                log "Resetting USB Hub: Unbinding controller $controller"
+                unbind $controller
+                log "Resetting USB Hub: Binding controller $controller"
+                bind $controller
+                fixed=1
+              else
+                log "Apps didn't scale down, exiting with error"
+                exit 30
+              fi
             fi
           fi
         fi
-        [[ $fixed == 1 ]] && log "$SERIAL: Everything looks good now"
+        if [[ $fixed == 1 ]]; then
+          if [[ $(timeout 5 usb-devices | grep -q SerialNumber=$SERIAL; echo $?) == 0 ]]; then
+            log "$SERIAL: Everything looks good now"
+          fi
+        fi
+        sleep 5
       done
+      if [[ $(activereplicas) < 3 ]] && [[ $fixed == 0 ]]; then
+        scale 1
+      fi
+      if [[ $first == 1 ]]; then
+        log "Checked all devices, there will be no further output if everything is working"
+      fi
+      if [[ $(activereplicas) < 3 ]]; then
+        scale 1
+        idle 120
+      fi
+      first=0
     done
