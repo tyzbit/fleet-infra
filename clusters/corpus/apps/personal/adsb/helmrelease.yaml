@@ -80,6 +80,7 @@ spec:
               TAR1090_RANGERINGSCOLORS: "'#FFFFFF','#AAAAAA','#222222','#000000'"
               TAR1090_USEROUTEAPI: "true"
               # GRAPHS1090 (Decoder and System Status Web Page) parameters:
+              GRAPHS1090_DISABLE: "true"
               GRAPHS1090_DARKMODE: "true"
             probes:
               liveness:
