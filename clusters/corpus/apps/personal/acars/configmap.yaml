@@ -64,7 +64,7 @@ data:
           log "Not all apps scaled down, but not waiting any longer"
           return 1
         fi
-        let count = count + 1
+        let count++
         idle $period
       done
     }
