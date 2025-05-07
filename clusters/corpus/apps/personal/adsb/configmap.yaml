@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: acars-scripts
+  name: adsb-scripts
   namespace: personal
 data:
-  acars-usb-watchdog.sh: |
+  adsb-usb-watchdog.sh: |
     #!bin/bash
 
     function log() {

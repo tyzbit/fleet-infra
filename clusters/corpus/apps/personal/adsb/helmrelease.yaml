@@ -22,25 +22,29 @@ spec:
       annotations:
         reloader.stakater.com/auto: "true"
         fr24-radar-id: ${fr24_radar_id}
-      pod:
-        nodeSelector:
-          adsb: "true"
+      pod: {nodeSelector: {adsb: "true"}}
       replicas: 1 # active longhorn-webapp
     controllers:
+      adsb-usb-watchdog:
+        <<: *common_settings
+        replicas: 1
+        containers:
+          adsb-usb-watchdog:
+            securityContext: {privileged: true}
+            image: {repository: debian,tag: latest}
+            command: [bash,"/tmp/adsb-usb-watchdog.sh"]
+            env: {SERIALS: "30275839"}
       ultrafeeder:
         <<: *controllercommon
         replicas: 1
         containers:
           ultrafeeder:
-            securityContext:
-              privileged: true
+            securityContext: {privileged: true}
             image:
               repository: ghcr.io/sdr-enthusiasts/docker-adsb-ultrafeeder
               tag: latest
               # tag: telegraf # for use with InfluxDB/Prometheus and Grafana
-            envFrom:
-              - secretRef:
-                  name: adsb-ultrafeeder
+            envFrom: [secretRef: {name: adsb-ultrafeeder}]
             env:
               # https://github.com/sdr-enthusiasts/docker-adsb-ultrafeeder?tab=readme-ov-file#basic-ultrafeeder-parameters
               LOGLEVEL: verbose
@@ -50,6 +54,7 @@ spec:
               ENABLE_978: "yes"
               # URL_978: http://dump978/skyaware978
               # READSB_RTLSDR_DEVICE: 00000001 # Serial number of device
+              DEVICE: "30275839"
               # readsb/decoder parameters: (these are in the secret)
               READSB_LAT: ${my_latitude}
               READSB_LON: ${my_longitude}
@@ -76,11 +81,15 @@ spec:
               TAR1090_USEROUTEAPI: "true"
               # GRAPHS1090 (Decoder and System Status Web Page) parameters:
               GRAPHS1090_DARKMODE: "true"
-            # probes:
-            #   liveness: &probe_enabled
-            #     enabled: true
-            #     port: 80
-            #   readiness: *probe_enabled
+            probes:
+              liveness:
+                enabled: true
+                custom: true
+                spec:
+                  initialDelaySeconds: 60
+                  periodSeconds: 30
+                  failureThreshold: 3
+                  exec: {command: [bash,-c,rtl_test 2>&1 | grep -q $(DEVICE)]}
             resources:
               requests:
                 cpu: 10m
@@ -110,16 +119,24 @@ spec:
               limits:
                 memory: 256Mi
                 
-
     persistence:
-      usb:
+      system:
         type: hostPath
-        hostPath: &usbpath /dev/bus/usb
+        hostPath: /
         advancedMounts:
-          ultrafeeder: {ultrafeeder: [path: *usbpath, readOnly: true]}
-      shm:
+          adsb-usb-watchdog: {adsb-usb-watchdog: [{path: /}]}
+      script:
+        type: configMap
+        name: adsb-scripts
+        advancedMounts:
+          adsb-usb-watchdog: {adsb-usb-watchdog: [
+            {path: /tmp/adsb-usb-watchdog.sh,subPath: adsb-usb-watchdog.sh}
+            ]
+          }
+      reset:
         type: hostPath
-        hostPath: /dev/shm
+        hostPath: /tmp/reset
+        hostPathType: DirectoryOrCreate
       diskstats:
         type: hostPath
         hostPath: /proc/diskstats

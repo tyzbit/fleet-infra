@@ -33,18 +33,14 @@ spec:
           initialDelaySeconds: 60
           periodSeconds: 30
           failureThreshold: 3
-          exec:
-            command:
-              - bash
-              - -c
-              - rtl_test 2>&1 | grep -q $(DEVICE)
+          exec: {command: [bash,-c,rtl_test 2>&1 | grep -q $(DEVICE)]}
 
     controllers:
-      usb-watchdog:
+      acars-usb-watchdog:
         <<: *common_settings
         replicas: 1
         containers:
-          usb-watchdog:
+          acars-usb-watchdog:
             securityContext: {privileged: true}
             image: {repository: debian,tag: latest}
             command: [bash,"/tmp/acars-usb-watchdog.sh"]
@@ -197,32 +193,19 @@ spec:
         type: hostPath
         hostPath: /
         advancedMounts:
-          usb-watchdog: {usb-watchdog: [{path: /}]}
+          acars-usb-watchdog: {acars-usb-watchdog: [{path: /}]}
       script:
         type: configMap
         name: acars-scripts
         advancedMounts:
-          usb-watchdog: {usb-watchdog: [
-            {path: /tmp/acars-usb-watchdog.sh,subPath: acars-usb-watchdog.sh},
-            {path: /etc/udev/rules.d/20-nooelec-sdr.rules,subPath: nooelec-sdr.rules}
+          acars-usb-watchdog: {acars-usb-watchdog: [
+            {path: /tmp/acars-usb-watchdog.sh,subPath: acars-usb-watchdog.sh}
             ]
           }
       reset:
         type: hostPath
         hostPath: /tmp/reset
         hostPathType: DirectoryOrCreate
-      # acarsdec:
-      #   type: hostPath
-      #   hostPath: &acarsdecusb /dev/nooelec_sdr_13055074
-      #   advancedMounts: {acarsdec: {acarsdec: [path: *acarsdecusb]}}
-      # acarsdec2:
-      #   type: hostPath
-      #   hostPath: &acarsdec2usb /dev/nooelec_sdr_58322450
-      #   advancedMounts: {acarsdec2: {acarsdec2: [path: *acarsdec2usb]}}
-      # dumpvdl2:
-      #   type: hostPath
-      #   hostPath: &dumpvdl2usb /dev/nooelec_sdr_00000001
-      #   advancedMounts: {dumpvdl2: {dumpvdl2: [path: *dumpvdl2usb]}}
       acarshub:
         existingClaim: acars-data-longhorn-webapp
         advancedMounts: {acarshub: {acarshub: [path: /run/acars]}}
