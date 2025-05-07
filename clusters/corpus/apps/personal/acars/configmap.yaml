@@ -51,11 +51,11 @@ data:
     function activereplicas() {
       count=0
         for s in $${sts[@]}; do
-          if [[ $(kubectl get statefulset $s | grep "$s " | awk '{print $2}') == "0/0" ]]; then
+          if [[ $(kubectl get statefulset $s | grep "$s " | awk '{print $2}') != "0/0" ]]; then
             let count++
           fi
         done
-      return count
+      return $count
     }
 
     function waitforzero() {
