@@ -7,26 +7,75 @@ data:
   acars-usb-watchdog.sh: |
     #!bin/bash
 
+    # Turn this into iterable
+    SERIALS=$(echo $SERIALS | sed 's/,/\n/g')
+    sts=(
+      acars-acarsdec
+      acars-acarsdec2
+      acars-dumpvdl2
+    )
+    hub=/sys/bus/pci/drivers/xhci_hcd
+
     function log() {
       echo "[$(date "+%F %T")][usb-watchdog] $1"
     }
 
+    function idle() {
+      log "Sleeping for $1 seconds..."
+      sleep $1
+    }
+
     function unbind() {
-      echo -n $1 > /sys/bus/pci/drivers/xhci_hcd/unbind
+      echo -n $1 > $hub/unbind
     }
 
     function bind() {
-      echo -n $1 > /sys/bus/pci/drivers/xhci_hcd/bind
+      echo -n $1 > $hub/bind
     }
+
+    function scale() {
+      log "Scaling to $1"
+      value=0
+      for s in $sts; do
+        kubectl scale statefulset $s --replicas $1
+        [[ $? != 0 ]] && value=1
+      done
+      return $value
+    }
+
+    function waitforzero() {
+      limit=24 # 2 minutes with 5 second waits
+      period=5
+      count=0
+      log "Waiting $(( limit * period )) for pods to terminate..."
+      while :; do
+        waiting=0
+        for s in $sts; do
+          if [[ $(kubectl get statefulset $sts | grep "$1 " | awk '${print $2}') != "0/0" ]]; then
+            log "Waiting for $1 to scale down"
+            waiting=1
+          fi
+        done
+        if [[ $waiting == 0 ]]; then
+          log "All apps scaled down"
+          return 0
+        fi
+        if [[ $count == $limit ]]; then
+          log "Not all apps scaled down, but not waiting any longer"
+          return 1
+        fi
+        let count = count + 1
+        idle $period
+      done
+    }
+
     log "Watching USB for: $SERIALS"
-
-    # Turn this into iterable
-    SERIALS=$(echo $SERIALS | sed 's/,/\n/g')
-
     fullreset=0
-    log "Starting... there will be no further output if everything is working"
+    first=1
+    allgood=1
+    log "Starting..."
     while :; do
-      sleep 10
+      idle 10
       for SERIAL in $SERIALS; do
         fixed=0
         if [[ $(timeout 2 usb-devices | grep -q SerialNumber=$SERIAL; echo $?) != 0 ]]; then
@@ -34,43 +83,54 @@ data:
           info=$(timeout 2 usb-devices | grep -B5 $SERIAL | grep -Eo "Bus=[0-9\s]+|Dev#=[0-9 ]+" | cut -d= -f2 | tr -d ' ')
           bus=$(echo $info||awk '{print $1}')
           device=$(echo $info||awk '{print $2}')
-          if [[ ${bus}x == "x" ]] || [[ ${device}x == "x" ]] || [[ $fullreset == 1 ]]; then
-            log "$SERIAL: Couldn't get bus or device"
+          if [[ ${bus}x != "x" ]] && [[ ! ${device}x != "x" ]] && [[ $fullreset != 1 ]]; then
+            log "$SERIAL: Resetting bus: $bus, device: $device"
+            if usbreset "$bus/$device"; then
+              log "$SERIAL Device reset"
+              fixed=1
+            else
+              log "$SERIAL: usbreset failed"
+              fullreset=1
+              allgood=0
+            fi
+          ##### We need to do a full reset #####
+          else 
+            log "$SERIAL: Couldn't get bus or device, resetting the controller"
             timeout 2 usb-devices | grep -B4 -A6 "Nooelec"
             controller=$(ls /sys/bus/pci/drivers/xhci_hcd | grep -E '[0-9a-f]{4}:[0-9a-f]{2}:[0-9a-f]{2}\.[0-9]')
             if [[ "$${controller}x" == "x" ]]; then
               log "$SERIAL: Couldn't determine controller, here's /sys/bus/pci/drivers/xhci_hcd"
               ls /sys/bus/pci/drivers/xhci_hcd
-              log "Sleeping for 30 seconds"
-              sleep 30
-              continue
+              log "Exiting with error"
+              exit 10
             else
-              log "Resetting hub"
-              for SERIAL in $SERIALS; do
-                touch /tmp/reset/$SERIAL
-              done
-              log "Waiting 30 seconds for apps to start exiting"
-              sleep 30
-              log "Unbinding controller $controller"
-              unbind $controller
-              sleep 1
-              log "Binding controller $controller"
-              bind $controller
-              log "Sleeping for 5 minutes..."
-              sleep 300
-            fi
-          else
-            log "$SERIAL: Resetting bus: $bus, device: $device"
-            if usbreset "$bus/$device"; then
-              log "$SERIAL Device reset, triggering app reset"
-              touch /tmp/reset/$SERIAL
-              fixed=1
-            else
-              log "$SERIAL: usbreset failed"
-              fullreset=1
+              scale 0; result=$?
+              if [[ $result == 0 ]]; then
+                waitforzero
+                log "Resetting USB Hub: Unbinding controller $controller"
+                unbind $controller
+                idle 1
+                log "Resetting USB Hub: Binding controller $controller"
+                bind $controller
+                idle 10
+                scale 1
+                idle 10
+                fixed=1
+              else
+                log "Apps didn't scale down, exiting with error"
+                exit 20
+              fi
             fi
           fi
         fi
-        [[ $fixed == 1 ]] && log "$SERIAL: Everything looks good now"
+        if [[ $fixed == 1 ]]; then
+          if [[ $(timeout 2 usb-devices | grep -q SerialNumber=$SERIAL; echo $?) 0= 0 ]]; then
+            log "$SERIAL: Everything looks good now"
+          fi
+        fi
       done
+      if [[ $fixed == 1 ]] || [[ $first == 1 ]]; then
+        log "Checked all devices, there will be no further output if everything is working"
+      fi
+      first=0
     done
