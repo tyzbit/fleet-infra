@@ -108,8 +108,8 @@ data:
               log "Exiting with error"
               exit 10
             else
-              scale 0; result=$?
-              if [[ $result == 0 ]]; then
+              if [[ scale 0 ]]; then
+                waitforzero
                 log "Resetting USB Hub: Unbinding controller $controller"
                 unbind $controller
                 log "Resetting USB Hub: Binding controller $controller"
