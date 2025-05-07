@@ -124,7 +124,7 @@ data:
           fi
         fi
         if [[ $fixed == 1 ]]; then
-          if [[ $(timeout 2 usb-devices | grep -q SerialNumber=$SERIAL; echo $?) 0= 0 ]]; then
+          if [[ $(timeout 2 usb-devices | grep -q SerialNumber=$SERIAL; echo $?) == 0 ]]; then
             log "$SERIAL: Everything looks good now"
           fi
         fi
