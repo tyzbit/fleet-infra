@@ -79,8 +79,8 @@ data:
     first=1
     allgood=1
     log "Starting..."
+    idle 10
     while :; do
-      idle 10
       for SERIAL in $SERIALS; do
         fixed=0
         if [[ $(timeout 2 usb-devices | grep -q SerialNumber=$SERIAL; echo $?) != 0 ]]; then
@@ -111,7 +111,10 @@ data:
             else
               scale 0; result=$?
               if [[ $result == 0 ]]; then
-                waitforzero
+                if [[ waitforzero != 0 ]]; then
+                  log "Pods didn't scale down in time, restarting"
+                  exit 20
+                fi
                 log "Resetting USB Hub: Unbinding controller $controller"
                 unbind $controller
                 log "Resetting USB Hub: Binding controller $controller"
@@ -119,7 +122,7 @@ data:
                 fixed=1
               else
                 log "Apps didn't scale down, exiting with error"
-                exit 20
+                exit 30
               fi
             fi
           fi
@@ -130,6 +133,7 @@ data:
             [[ activereplicas == 0 ]] && scale 1
           fi
         fi
+        idle 5
       done
       if [[ $fixed == 1 ]] || [[ $first == 1 ]]; then
         log "Checked all devices, there will be no further output if everything is working"
