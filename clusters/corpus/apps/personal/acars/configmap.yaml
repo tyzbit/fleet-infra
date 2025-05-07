@@ -126,10 +126,10 @@ data:
         if [[ $fixed == 1 ]]; then
           if [[ $(timeout 2 usb-devices | grep -q SerialNumber=$SERIAL; echo $?) == 0 ]]; then
             log "$SERIAL: Everything looks good now"
-            [[ activereplicas == 0 ]] && scale 1
           fi
         fi
-        idle 5
+        [[ activereplicas == 0 ]] && scale 1
+        sleep 5
       done
       if [[ $fixed == 1 ]] || [[ $first == 1 ]]; then
         log "Checked all devices, there will be no further output if everything is working"
