@@ -51,7 +51,7 @@ data:
       while :; do
         waiting=0
         for s in $sts; do
-          if [[ $(kubectl get statefulset $sts | grep "$1 " | awk '${print $2}') != "0/0" ]]; then
+          if [[ $(kubectl get statefulset $sts | grep "$1 " | awk '{print $2}') != "0/0" ]]; then
             log "Waiting for $1 to scale down"
             waiting=1
           fi
@@ -83,7 +83,7 @@ data:
           info=$(timeout 2 usb-devices | grep -B5 $SERIAL | grep -Eo "Bus=[0-9\s]+|Dev#=[0-9 ]+" | cut -d= -f2 | tr -d ' ')
           bus=$(echo $info||awk '{print $1}')
           device=$(echo $info||awk '{print $2}')
-          if [[ ${bus}x != "x" ]] && [[ ! ${device}x != "x" ]] && [[ $fullreset != 1 ]]; then
+          if [[ $${bus}x != "x" ]] && [[ ! $${device}x != "x" ]] && [[ $fullreset != 1 ]]; then
             log "$SERIAL: Resetting bus: $bus, device: $device"
             if usbreset "$bus/$device"; then
               log "$SERIAL Device reset"
