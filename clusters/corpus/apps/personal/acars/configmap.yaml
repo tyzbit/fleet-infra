@@ -34,8 +34,10 @@ data:
       echo -n $1 > $hub/bind
     }
 
+    scaled=1
     function scale() {
       log "Scaling to $1"
+      scaled=$1
       value=0
       for s in $${sts[@]}; do
         kubectl scale statefulset $s --replicas $1
@@ -45,7 +47,7 @@ data:
     }
 
     function waitforzero() {
-      limit=24 # 2 minutes with 5 second waits
+      limit=36 # 3 minutes with 5 second waits
       period=5
       count=0
       log "Waiting $(( limit * period )) seconds for pods to terminate..."
@@ -113,9 +115,6 @@ data:
                 idle 1
                 log "Resetting USB Hub: Binding controller $controller"
                 bind $controller
-                idle 10
-                scale 1
-                idle 10
                 fixed=1
               else
                 log "Apps didn't scale down, exiting with error"
@@ -127,6 +126,7 @@ data:
         if [[ $fixed == 1 ]]; then
           if [[ $(timeout 2 usb-devices | grep -q SerialNumber=$SERIAL; echo $?) == 0 ]]; then
             log "$SERIAL: Everything looks good now"
+            if [[ $scaled == 0 ]] && scale 1
           fi
         fi
       done
