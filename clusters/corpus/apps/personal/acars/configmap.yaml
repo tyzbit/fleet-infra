@@ -64,7 +64,7 @@ data:
       period=5
       count=0
       log "Waiting $(( limit * period )) seconds for pods to terminate..."
-      while [[ $activereplicas > 0 ]]; do
+      while [[ $(activereplicas) > 0 ]]; do
         if [[ $count == $limit ]]; then
           log "Not all apps scaled down, but not waiting any longer"
           return 1
@@ -129,6 +129,8 @@ data:
             log "$SERIAL: Everything looks good now"
           fi
         fi
+        log HERE
+        activereplicas
         [[ $(activereplicas) == 0 ]] && scale 1
         sleep 5
       done
