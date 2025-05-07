@@ -56,7 +56,7 @@ data:
           fi
         done
       log "$count active replicas"
-      return $count
+      echo $count
     }
 
     function waitforzero() {
@@ -129,13 +129,11 @@ data:
             log "$SERIAL: Everything looks good now"
           fi
         fi
-        log HERE
-        activereplicas
-        [[ $(activereplicas) == 0 ]] && scale 1
         sleep 5
       done
       if [[ $fixed == 1 ]] || [[ $first == 1 ]]; then
         log "Checked all devices, there will be no further output if everything is working"
       fi
+      [[ activereplicas == 0 ]] && scale 1
       first=0
     done
