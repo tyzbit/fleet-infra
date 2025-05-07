@@ -11,8 +11,8 @@ metadata:
   namespace: personal
 rules:
 - apiGroups: ["apps"]
-  resources: ["statefulsets/scale"]
-  verbs: ["get", "list", "create"]
+  resources: ["statefulsets/scale", "statefulsets"]
+  verbs: ["get", "update"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
