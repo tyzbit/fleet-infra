@@ -129,7 +129,7 @@ data:
             log "$SERIAL: Everything looks good now"
           fi
         fi
-        [[ activereplicas == 0 ]] && scale 1
+        [[ $(activereplicas) == 0 ]] && scale 1
         sleep 5
       done
       if [[ $fixed == 1 ]] || [[ $first == 1 ]]; then
