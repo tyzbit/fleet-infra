@@ -111,10 +111,6 @@ data:
             else
               scale 0; result=$?
               if [[ $result == 0 ]]; then
-                if [[ waitforzero != 0 ]]; then
-                  log "Pods didn't scale down in time, restarting"
-                  exit 20
-                fi
                 log "Resetting USB Hub: Unbinding controller $controller"
                 unbind $controller
                 log "Resetting USB Hub: Binding controller $controller"
