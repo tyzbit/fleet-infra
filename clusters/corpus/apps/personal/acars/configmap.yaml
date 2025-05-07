@@ -82,9 +82,9 @@ data:
     while :; do
       for SERIAL in $SERIALS; do
         fixed=0
-        if [[ $(timeout 2 usb-devices | grep -q SerialNumber=$SERIAL; echo $?) != 0 ]]; then
+        if [[ $(timeout 5 usb-devices | grep -q SerialNumber=$SERIAL; echo $?) != 0 ]]; then
           log "$SERIAL: Device not found"
-          info=$(timeout 2 usb-devices | grep -B5 $SERIAL | grep -Eo "Bus=[0-9\s]+|Dev#=[0-9 ]+" | cut -d= -f2 | tr -d ' ')
+          info=$(timeout 5 usb-devices | grep -B5 $SERIAL | grep -Eo "Bus=[0-9\s]+|Dev#=[0-9 ]+" | cut -d= -f2 | tr -d ' ')
           bus=$(echo $info||awk '{print $1}')
           device=$(echo $info||awk '{print $2}')
           if [[ $${bus}x != "x" ]] && [[ ! $${device}x != "x" ]] && [[ $fullreset != 1 ]]; then
@@ -101,7 +101,7 @@ data:
           else 
             log "$SERIAL: Couldn't get bus or device, resetting the controller"
             log "Here's the controllers present:"
-            timeout 2 usb-devices | grep -B4 -A6 "Nooelec"
+            timeout 5 usb-devices | grep -B4 -A6 "Nooelec"
             controller=$(ls /sys/bus/pci/drivers/xhci_hcd | grep -E '[0-9a-f]{4}:[0-9a-f]{2}:[0-9a-f]{2}\.[0-9]')
             if [[ "$${controller}x" == "x" ]]; then
               log "$SERIAL: Couldn't determine controller, here's /sys/bus/pci/drivers/xhci_hcd"
@@ -124,7 +124,7 @@ data:
           fi
         fi
         if [[ $fixed == 1 ]]; then
-          if [[ $(timeout 2 usb-devices | grep -q SerialNumber=$SERIAL; echo $?) == 0 ]]; then
+          if [[ $(timeout 5 usb-devices | grep -q SerialNumber=$SERIAL; echo $?) == 0 ]]; then
             log "$SERIAL: Everything looks good now"
           fi
         fi
