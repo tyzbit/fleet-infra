@@ -128,7 +128,7 @@ data:
         fi
         sleep 5
       done
-      if [[ $(activereplicas) < 1s ]] && [[ $fixed == 0 ]]; then
+      if [[ $(activereplicas) < 1 ]] && [[ $fixed == 0 ]]; then
         scale 1
       fi
       if [[ $first == 1 ]]; then
