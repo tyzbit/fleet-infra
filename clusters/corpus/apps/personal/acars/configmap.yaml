@@ -108,7 +108,9 @@ data:
               log "Exiting with error"
               exit 10
             else
-              if [[ $(scale 0) ]]; then
+              scale 0
+              waitforzero; status=$?
+              if [[ $status ==0 ]]; then
                 waitforzero
                 log "Resetting USB Hub: Unbinding controller $controller"
                 unbind $controller
