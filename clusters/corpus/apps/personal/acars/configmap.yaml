@@ -47,12 +47,12 @@ data:
       limit=24 # 2 minutes with 5 second waits
       period=5
       count=0
-      log "Waiting $(( limit * period )) for pods to terminate..."
+      log "Waiting $(( limit * period )) seconds for pods to terminate..."
       while :; do
         waiting=0
         for s in $sts; do
           if [[ $(kubectl get statefulset $sts | grep "$1 " | awk '{print $2}') != "0/0" ]]; then
-            log "Waiting for $1 to scale down"
+            log "Waiting for $s to scale down"
             waiting=1
           fi
         done
