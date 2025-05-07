@@ -118,7 +118,7 @@ spec:
                 memory: 64Mi
               limits:
                 memory: 256Mi
-                
+
     persistence:
       system:
         type: hostPath
