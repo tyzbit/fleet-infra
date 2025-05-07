@@ -38,6 +38,8 @@ spec:
     controllers:
       acars-usb-watchdog:
         <<: *common_settings
+        serviceAccount:
+          name: acars-usb-watchdog
         replicas: 1
         containers:
           acars-usb-watchdog:
