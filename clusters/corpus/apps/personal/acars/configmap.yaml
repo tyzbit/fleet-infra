@@ -52,7 +52,7 @@ data:
       while :; do
         waiting=0
         for s in $sts; do
-          if [[ $(kubectl get statefulset $sts | grep "$1 " | awk '{print $2}') != "0/0" ]]; then
+          if [[ $(kubectl get statefulset $sts | grep "$s " | awk '{print $2}') != "0/0" ]]; then
             log "Waiting for $s to scale down"
             waiting=1
           fi
