@@ -100,6 +100,7 @@ data:
           ##### We need to do a full reset #####
           else 
             log "$SERIAL: Couldn't get bus or device, resetting the controller"
+            log "Here's the controllers present:"
             timeout 2 usb-devices | grep -B4 -A6 "Nooelec"
             controller=$(ls /sys/bus/pci/drivers/xhci_hcd | grep -E '[0-9a-f]{4}:[0-9a-f]{2}:[0-9a-f]{2}\.[0-9]')
             if [[ "$${controller}x" == "x" ]]; then
