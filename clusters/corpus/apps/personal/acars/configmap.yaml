@@ -48,23 +48,22 @@ data:
       return $value
     }
 
+    function activereplicas() {
+      count=0
+        for s in $${sts[@]}; do
+          if [[ $(kubectl get statefulset $s | grep "$s " | awk '{print $2}') == "0/0" ]]; then
+            let count++
+          fi
+        done
+      return count
+    }
+
     function waitforzero() {
       limit=36 # 3 minutes with 5 second waits
       period=5
       count=0
       log "Waiting $(( limit * period )) seconds for pods to terminate..."
-      while :; do
-        waiting=0
-        for s in $${sts[@]}; do
-          if [[ $(kubectl get statefulset $s | grep "$s " | awk '{print $2}') != "0/0" ]]; then
-            log "Waiting for $s to scale down"
-            waiting=1
-          fi
-        done
-        if [[ $waiting == 0 ]]; then
-          log "All apps scaled down"
-          return 0
-        fi
+      while [[ $activereplicas > 0 ]]; do
         if [[ $count == $limit ]]; then
           log "Not all apps scaled down, but not waiting any longer"
           return 1
@@ -72,6 +71,7 @@ data:
         let count++
         idle $period
       done
+      log "Scaled down to zero"
     }
 
     log "Watching USB for: $DEVICES"
@@ -127,7 +127,7 @@ data:
         if [[ $fixed == 1 ]]; then
           if [[ $(timeout 2 usb-devices | grep -q SerialNumber=$SERIAL; echo $?) == 0 ]]; then
             log "$SERIAL: Everything looks good now"
-            [[ $scaled == 0 ]] && scale 1
+            [[ activereplicas == 0 ]] && scale 1
           fi
         fi
       done
