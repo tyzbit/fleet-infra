@@ -52,10 +52,10 @@ data:
       count=0
         for s in $${sts[@]}; do
           if [[ $(kubectl get statefulset $s | grep "$s " | awk '{print $2}') != "0/0" ]]; then
-            log "$count active replicas of $s"
             let count++
           fi
         done
+      log "$count active replicas"
       return $count
     }
 
