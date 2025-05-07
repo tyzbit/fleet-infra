@@ -33,7 +33,7 @@ data:
 
     function bind() {
       echo -n $1 > $hub/bind
-      idle 10
+      idle 30
     }
 
     scaled=1
