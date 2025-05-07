@@ -79,7 +79,6 @@ data:
     first=1
     allgood=1
     log "Starting..."
-    idle 10
     while :; do
       for SERIAL in $SERIALS; do
         fixed=0
