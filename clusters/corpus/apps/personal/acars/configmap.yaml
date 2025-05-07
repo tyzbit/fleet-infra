@@ -28,10 +28,12 @@ data:
 
     function unbind() {
       echo -n $1 > $hub/unbind
+      idle 1
     }
 
     function bind() {
       echo -n $1 > $hub/bind
+      idle 10
     }
 
     scaled=1
@@ -112,7 +114,6 @@ data:
                 waitforzero
                 log "Resetting USB Hub: Unbinding controller $controller"
                 unbind $controller
-                idle 1
                 log "Resetting USB Hub: Binding controller $controller"
                 bind $controller
                 fixed=1
