@@ -201,7 +201,7 @@ spec:
       # For resetting individual USB devices
       usbdevices:
         type: hostPath
-        hostPath: /dev/bus/usb/
+        hostPath: /dev/bus/usb
         advancedMounts:
           acars-usb-watchdog: {acars-usb-watchdog: [{path: /dev/bus/usb}]}
       # For resetting the USB Hub

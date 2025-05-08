@@ -29,7 +29,7 @@ spec:
       adsb-usb-watchdog:
         <<: *common_settings
         serviceAccount:
-          name: acars-usb-watchdog
+          name: adsb-usb-watchdog
         replicas: 1
         containers:
           adsb-usb-watchdog:
@@ -124,11 +124,24 @@ spec:
                 memory: 256Mi
 
     persistence:
-      system:
+      # For kubectl, usbreset and usb-devices
+      binaries:
         type: hostPath
-        hostPath: /
+        hostPath: /bin
         advancedMounts:
-          adsb-usb-watchdog: {adsb-usb-watchdog: [{path: /}]}
+          adsb-usb-watchdog: {adsb-usb-watchdog: [{path: /usr/local/sbin}]}
+      # For resetting individual USB devices
+      usbdevices:
+        type: hostPath
+        hostPath: /dev/bus/usb
+        advancedMounts:
+          adsb-usb-watchdog: {adsb-usb-watchdog: [{path: /dev/bus/usb}]}
+      # For resetting the USB Hub
+      usbhub:
+        type: hostPath
+        hostPath: /sys/bus/pci/drivers/xhci_hcd
+        advancedMounts:
+          adsb-usb-watchdog: {adsb-usb-watchdog: [{path: /sys/bus/pci/drivers/xhci_hcd}]}
       script:
         type: configMap
         name: adsb-scripts
@@ -137,18 +150,6 @@ spec:
             {path: /tmp/adsb-usb-watchdog.sh,subPath: adsb-usb-watchdog.sh}
             ]
           }
-      reset:
-        type: hostPath
-        hostPath: /tmp/reset
-        hostPathType: DirectoryOrCreate
-      diskstats:
-        type: hostPath
-        hostPath: /proc/diskstats
-        advancedMounts:
-          ultrafeeder:
-            ultrafeeder:
-              - path: /proc/diskstats
-                readOnly: true
       ultrafeeder:
         existingClaim: adsb-ultrafeeder-data-longhorn-webapp
         advancedMounts:
