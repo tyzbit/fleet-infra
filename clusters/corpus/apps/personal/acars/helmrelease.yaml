@@ -45,8 +45,8 @@ spec:
           acars-usb-watchdog:
             # securityContext: {privileged: true}
             securityContext:
-              runAsUser: 1000
-              runAsGroup: 3000
+              runAsUser: 0
+              runAsGroup: 0
             image: {repository: debian,tag: latest}
             # command: [bash,"/tmp/acars-usb-watchdog.sh"]
             command: [sleep,infinity]
