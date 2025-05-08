@@ -201,9 +201,9 @@ spec:
           acars-usb-watchdog: {acars-usb-watchdog: [{path: /usr/local/sbin}]}
       usbdevices:
         type: hostPath
-        hostPath: /sys
+        hostPath: /dev/bus/usb/
         advancedMounts:
-          acars-usb-watchdog: {acars-usb-watchdog: [{path: /sys}]}
+          acars-usb-watchdog: {acars-usb-watchdog: [{path: /dev/bus/usb}]}
       usbhub:
         type: hostPath
         hostPath: /sys/bus/pci/drivers/xhci_hcd
