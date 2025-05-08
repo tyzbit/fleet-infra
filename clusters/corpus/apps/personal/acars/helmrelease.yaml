@@ -52,7 +52,7 @@ spec:
             env: {SERIALS: "13055074,58322450,00000001"}
       acarsdec: 
         <<: *common_settings
-        replicas: 1
+        replicas: 0
         containers:
           acarsdec:
             securityContext: &secopts
@@ -85,7 +85,7 @@ spec:
 
       acarsdec2:
         <<: *common_settings
-        replicas: 1
+        replicas: 0
         containers:
           acarsdec2:
             securityContext: *secopts
@@ -117,7 +117,7 @@ spec:
 
       dumpvdl2:
         <<: *common_settings
-        replicas: 1
+        replicas: 0
         containers:
           dumpvdl2:
             securityContext: *secopts
@@ -194,11 +194,11 @@ spec:
                 memory: 512Mi
 
     persistence:
-      system:
+      binaries:
         type: hostPath
-        hostPath: /
+        hostPath: /bin
         advancedMounts:
-          acars-usb-watchdog: {acars-usb-watchdog: [{path: /host}]}
+          acars-usb-watchdog: {acars-usb-watchdog: [{path: /usr/local/sbin}]}
       usbhub:
         type: hostPath
         hostPath: /sys/bus/pci/drivers/xhci_hcd
