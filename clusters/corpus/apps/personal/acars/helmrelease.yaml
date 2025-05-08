@@ -48,7 +48,7 @@ spec:
               runAsUser: 0
               runAsGroup: 0
               capabilities:
-                add: [SYS_RAWIO]
+                add: [SYS_ADMIN]
             image: {repository: debian,tag: latest}
             # command: [bash,"/tmp/acars-usb-watchdog.sh"]
             command: [sleep,infinity]
