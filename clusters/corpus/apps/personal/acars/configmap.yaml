@@ -89,7 +89,7 @@ data:
           if [[ $${bus}x != "x" ]] && [[ ! $${device}x != "x" ]] && [[ $fullreset != 1 ]]; then
             log "$SERIAL: Resetting bus: $bus, device: $device"
             if usbreset "$bus/$device"; then
-              log "$SERIAL Device reset"
+              log "$SERIAL: Device reset"
               fixed=1
             else
               log "$SERIAL: usbreset failed"

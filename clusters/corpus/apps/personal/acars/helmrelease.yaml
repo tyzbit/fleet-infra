@@ -43,9 +43,12 @@ spec:
         replicas: 1
         containers:
           acars-usb-watchdog:
-            securityContext: {privileged: true}
+            # securityContext: {privileged: true}
+            securityContext:
+              runAsUser: 0
             image: {repository: debian,tag: latest}
-            command: [bash,"/tmp/acars-usb-watchdog.sh"]
+            # command: [bash,"/tmp/acars-usb-watchdog.sh"]
+            command: [sleep,infinity]
             env: {SERIALS: "13055074,58322450,00000001"}
       acarsdec: 
         <<: *common_settings
@@ -191,11 +194,16 @@ spec:
                 memory: 512Mi
 
     persistence:
+      # system:
+      #   type: hostPath
+      #   hostPath: /
+      #   advancedMounts:
+      #     acars-usb-watchdog: {acars-usb-watchdog: [{path: /}]}
       system:
         type: hostPath
-        hostPath: /
+        hostPath: /sys/bus/pci/drivers/xhci_hcd
         advancedMounts:
-          acars-usb-watchdog: {acars-usb-watchdog: [{path: /}]}
+          acars-usb-watchdog: {acars-usb-watchdog: [{path: /sys/bus/pci/drivers/xhci_hcd}]}
       script:
         type: configMap
         name: acars-scripts
@@ -204,10 +212,6 @@ spec:
             {path: /tmp/acars-usb-watchdog.sh,subPath: acars-usb-watchdog.sh}
             ]
           }
-      reset:
-        type: hostPath
-        hostPath: /tmp/reset
-        hostPathType: DirectoryOrCreate
       acarshub:
         existingClaim: acars-data-longhorn-webapp
         advancedMounts: {acarshub: {acarshub: [path: /run/acars]}}
