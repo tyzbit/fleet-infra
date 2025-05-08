@@ -199,11 +199,11 @@ spec:
         hostPath: /bin
         advancedMounts:
           acars-usb-watchdog: {acars-usb-watchdog: [{path: /usr/local/sbin}]}
-      usbhub:
+      sysbus:
         type: hostPath
-        hostPath: /sys/bus/pci/drivers/xhci_hcd
+        hostPath: /sys/bus/
         advancedMounts:
-          acars-usb-watchdog: {acars-usb-watchdog: [{path: /sys/bus/pci/drivers/xhci_hcd}]}
+          acars-usb-watchdog: {acars-usb-watchdog: [{path: /sys/bus/}]}
       script:
         type: configMap
         name: acars-scripts
