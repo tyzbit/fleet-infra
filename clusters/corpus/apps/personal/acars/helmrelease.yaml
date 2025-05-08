@@ -45,8 +45,8 @@ spec:
           acars-usb-watchdog:
             securityContext: {privileged: true}
             image: {repository: debian,tag: latest}
-            # command: [bash,"/tmp/acars-usb-watchdog.sh"]
-            command: [sleep,infinity]
+            # command: [sleep,infinity]
+            command: [bash,"/tmp/acars-usb-watchdog.sh"]
             env: {SERIALS: "13055074,58322450,00000001"}
       acarsdec: 
         <<: *common_settings
@@ -192,16 +192,19 @@ spec:
                 memory: 512Mi
 
     persistence:
+      # For kubectl, usbreset and usb-devices
       binaries:
         type: hostPath
         hostPath: /bin
         advancedMounts:
           acars-usb-watchdog: {acars-usb-watchdog: [{path: /usr/local/sbin}]}
+      # For resetting individual USB devices
       usbdevices:
         type: hostPath
         hostPath: /dev/bus/usb/
         advancedMounts:
           acars-usb-watchdog: {acars-usb-watchdog: [{path: /dev/bus/usb}]}
+      # For resetting the USB Hub
       usbhub:
         type: hostPath
         hostPath: /sys/bus/pci/drivers/xhci_hcd
