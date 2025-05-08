@@ -43,12 +43,7 @@ spec:
         replicas: 1
         containers:
           acars-usb-watchdog:
-            # securityContext: {privileged: true}
-            securityContext:
-              runAsUser: 0
-              runAsGroup: 0
-              capabilities:
-                add: [SYS_ADMIN]
+            securityContext: {privileged: true}
             image: {repository: debian,tag: latest}
             # command: [bash,"/tmp/acars-usb-watchdog.sh"]
             command: [sleep,infinity]
