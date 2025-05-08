@@ -194,12 +194,12 @@ spec:
                 memory: 512Mi
 
     persistence:
-      # system:
-      #   type: hostPath
-      #   hostPath: /
-      #   advancedMounts:
-      #     acars-usb-watchdog: {acars-usb-watchdog: [{path: /}]}
       system:
+        type: hostPath
+        hostPath: /
+        advancedMounts:
+          acars-usb-watchdog: {acars-usb-watchdog: [{path: /host}]}
+      usbhub:
         type: hostPath
         hostPath: /sys/bus/pci/drivers/xhci_hcd
         advancedMounts:
