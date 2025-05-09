@@ -35,7 +35,7 @@ data:
     [api.registration]
     # Whether an invite should be required for registration
     # See https://github.com/revoltchat/self-hosted#making-your-instance-invite-only
-    invite_only = false
+    invite_only = true
 
     [api.smtp]
     # Email server configuration for verification
