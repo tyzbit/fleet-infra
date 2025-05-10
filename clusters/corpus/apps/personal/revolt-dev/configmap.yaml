@@ -175,7 +175,7 @@ data:
 
     [features]
     # Feature gate options
-    webhooks_enabled = false
+    webhooks_enabled = true
 
     [features.limits]
 
