@@ -170,7 +170,7 @@ spec:
           revolt-january:
             image:
               repository: ghcr.io/revoltchat/january
-              tag: 20250225-1
+              tag: 20250510-1
               pullPolicy: Always
             resources: {requests: {cpu: 10m},limits: {memory: 128Mi}}
       "crond":
