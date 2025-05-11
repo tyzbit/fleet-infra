@@ -3,7 +3,7 @@ logger: {default: info}
 database: {path: /media/frigate/frigate.db}
 mqtt: {host: mosquitto}
 
-model: {path: plus://3add53fcd57ec1e41c2c2c9216b0845f} # 2025/04/16
+model: {path: plus://86c44ae617e0623e9a86cbd5371fa617} # 2025/05/10
 semantic_search: {enabled: true, model_size: "large", reindex: false}
 detectors: {coral: {type: edgetpu, device: usb}}
 
