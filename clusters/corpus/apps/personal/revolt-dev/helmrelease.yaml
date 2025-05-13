@@ -164,7 +164,7 @@ spec:
           revolt-autumn:
             image:
               repository: ghcr.io/revoltchat/autumn
-              tag: 20250402-2
+              tag: 20250513-2
               pullPolicy: Always
             resources: {requests: {cpu: 10m},limits: {memory: 512Mi}}
             env:
