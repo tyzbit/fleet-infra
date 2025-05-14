@@ -188,6 +188,7 @@ cameras:
       port: 8000
       user: "{FRIGATE_CAMERA_USER}"
       password: "{FRIGATE_CAMERA_PASSWORD}"
+      ignore_time_mismatch: true
       autotracking:
         enabled: True
         calibrate_on_startup: True
