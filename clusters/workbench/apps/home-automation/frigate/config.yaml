@@ -209,7 +209,7 @@ cameras:
       on_property:
         <<: *zonedefault
         objects: [person, cat, dog]
-        coordinates: 0,1,1,1,1,0.16,0,0.177
+        coordinates: 0,1,1,1,1,0,0,0 # Full screen
 
   backdeck:
     enabled: true
