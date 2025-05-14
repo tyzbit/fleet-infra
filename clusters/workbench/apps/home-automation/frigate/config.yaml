@@ -35,7 +35,7 @@ go2rtc:
     garage: ["rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@garage.home.arpa/Preview_01_main"]
     sidegarage: ["rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@sidegarage.home.arpa/Preview_01_main"]
     backdeck: ["rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@backdeck.home.arpa/Preview_01_main"]
-    sidefence: ["rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@sidefence.home.arpa/Preview_01_main"]
+    sunroom: ["rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@sunroom.home.arpa/Preview_01_main"]
 birdseye: {enabled: true,
   quality: 8, width: 1440, height: 1080, layout: {scaling_factor: 1.0},
   # -- objects, motion, continuous
@@ -47,7 +47,7 @@ camera_groups:
     icon: LuBird
     order: 0
   "All Cameras":
-    cameras: [doorbell, garage, sidegarage, backdeck, sidefence]
+    cameras: [doorbell, garage, sidegarage, backdeck, sunroom]
     icon: LuRadar
     order: 1
   "Deliveries":
@@ -59,7 +59,7 @@ camera_groups:
     icon: LuBellRing
     order: 3
   "Backyard and Garage":
-    cameras: [backdeck, garage, sidegarage, sidefence]
+    cameras: [backdeck, garage, sidegarage, sunroom]
     icon: LuDog
     order: 4
 
@@ -174,17 +174,17 @@ cameras:
               0.108,0.461,0.192,0.374,0.285,0.288,0.442,0.241
         car: *sidegaragemask
 
-  sidefence:
-    enabled: false
+  sunroom:
+    enabled: true
     detect: *doorbelldetect
     ffmpeg: {inputs:
-      [{path: rtsp://localhost:8554/sidefence, roles: *detectandrecord}]}
+      [{path: rtsp://localhost:8554/sunroom, roles: *detectandrecord}]}
     mqtt: *mqttheight
     ui: {order: 4}
     birdseye: {order: 4}
     review: {alerts: {required_zones: [on_property]}}
     onvif:
-      host: sidefence.home.arpa
+      host: sunroom.home.arpa
       port: 8000
       user: "{FRIGATE_CAMERA_USER}"
       password: "{FRIGATE_CAMERA_PASSWORD}"
