@@ -193,7 +193,7 @@ cameras:
         enabled: True
         calibrate_on_startup: True
         # Available options are: disabled, absolute, and relative
-        zooming: absolute
+        zooming: relative
         # Optional: A value to change the behavior of zooming on autotracked objects. (default: shown below)
         # A lower value will keep more of the scene in view around a tracked object.
         # A higher value will zoom in more on a tracked object, but Frigate may lose tracking more quickly.
