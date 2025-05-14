@@ -43,6 +43,8 @@ spec:
               repository: docker.io/mongo
               tag: 8.0.9
               pullPolicy: Always
+            args: [--replSet,rs0]
+            env: {HOSTNAME: revolt-mongo}
             resources: {requests: {cpu: 10m},limits: {memory: 512Mi}}
       "redis":
         <<: *longhorncontroller
@@ -101,7 +103,7 @@ spec:
           revolt-api:
             image:
               repository: ghcr.io/revoltchat/server
-              tag: 20250402-2
+              tag: 20250513-2
               pullPolicy: Always
             resources: {requests: {cpu: 10m},limits: {memory: 256Mi}}
       "events":
