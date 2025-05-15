@@ -12,6 +12,7 @@ data:
     SERIALS=$(echo $SERIALS | sed 's/,/\n/g')
     sts=(
       adsb-ultrafeeder
+      adsb-dump978
     )
     hub=/sys/bus/pci/drivers/xhci_hcd
 

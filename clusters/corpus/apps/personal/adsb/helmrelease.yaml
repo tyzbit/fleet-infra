@@ -36,7 +36,7 @@ spec:
             securityContext: {privileged: true}
             image: {repository: debian,tag: latest}
             command: [bash,"/tmp/adsb-usb-watchdog.sh"]
-            env: {SERIALS: "30275839"}
+            env: {SERIALS: "30275839,00001000"}
       ultrafeeder:
         <<: *common_settings
         replicas: 1
