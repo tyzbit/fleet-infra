@@ -45,7 +45,7 @@ spec:
             securityContext: {privileged: true}
             image:
               repository: ghcr.io/sdr-enthusiasts/docker-adsb-ultrafeeder
-              tag: latest
+              tag: latest-build-722
               # tag: telegraf # for use with InfluxDB/Prometheus and Grafana
             envFrom: [secretRef: {name: adsb-ultrafeeder}]
             env:
@@ -55,7 +55,7 @@ spec:
               # UUID: "568"
               READSB_DEVICE_TYPE: rtlsdr
               ENABLE_978: "yes"
-              # URL_978: http://dump978/skyaware978
+              URL_978: http://adsb-dump978/skyaware978
               # READSB_RTLSDR_DEVICE: 00000001 # Serial number of device
               DEVICE: "30275839"
               # readsb/decoder parameters: (these are in the secret)
@@ -101,6 +101,27 @@ spec:
               limits:
                 memory: 512Mi
 
+      dump978:
+        <<: *common_settings
+        containers:
+          dump978:
+            image:
+              repository: ghcr.io/sdr-enthusiasts/docker-dump978
+              tag: latest-build-744
+            env:
+              TZ: US/New_York
+              LAT: ${my_latitude}
+              LON: ${my_longitude}
+              DUMP978_RTLSDR_DEVICE: "00001000"
+              DUMP978_SDR_GAIN: autogain
+              DUMP978_SDR_PPM: "0"
+            resources:
+              requests:
+                cpu: 10m
+                memory: 64Mi
+              limits:
+                memory: 256Mi
+
       flightradar24:
         <<: *common_settings
         replicas: 1
@@ -113,9 +134,9 @@ spec:
             env:
               BEASTHOST: adsb-ultrafeeder
               FR24KEY: ${fr24_sharing_key}
-              # FR24KEY_UAT: ${fr24_uat_sharing_key}
-              # UATHOST: adsb-dump978
-              # UATPORT: "30978"
+              FR24KEY_UAT: ${fr24_uat_sharing_key}
+              UATHOST: adsb-dump978
+              UATPORT: "30978"
             resources:
               requests:
                 cpu: 10m
@@ -159,6 +180,13 @@ spec:
                 subPath: globe_history
               - path: /var/lib/collectd
                 subPath: collectd
+      dump978:
+        existingClaim: adsb-dump978-data-longhorn-webapp
+        advancedMounts:
+          ultrafeeder:
+            ultrafeeder:
+              - path: /var/globe_history
+                subPath: globe_history
 
     service:
       ultrafeeder:
@@ -171,12 +199,13 @@ spec:
             port: 30005
           uat:
             port: 30978
-      # dump978:
-      #   controller: dump978
-      #   type: ClusterIP
-      #   ports:
-      #     uat:
-      #       port: 30978
+      dump978:
+        controller: dump978
+        type: ClusterIP
+        ports:
+          http: {port: 80}
+          uat: {port: 30978}
+          json: {port: 30979}
       flightradar24:
         controller: flightradar24
         type: ClusterIP
