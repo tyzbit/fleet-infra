@@ -30,9 +30,7 @@ spec:
         replicas: 1
         containers:
           ultrafeeder:
-
-            securityContext:
-              privileged: true
+            securityContext: {privileged: true}
             image:
               repository: ghcr.io/sdr-enthusiasts/docker-adsb-ultrafeeder
               tag: latest
@@ -77,27 +75,27 @@ spec:
               limits:
                 memory: 512Mi
 
-      flightradar24:
-        <<: *controllercommon
-        replicas: 0
-        containers:
-          # https://github.com/sdr-enthusiasts/docker-flightradar24?tab=readme-ov-file#obtaining-a-flightradar24-sharing-key-for-adsb
-          flightradar24:
-            image:
-              repository: ghcr.io/sdr-enthusiasts/docker-flightradar24
-              tag: latest
-            env:
-              BEASTHOST: adsb-ultrafeeder
-              FR24KEY: ${fr24_sharing_key}
-              # FR24KEY_UAT: ${fr24_uat_sharing_key}
-              # UATHOST: adsb-dump978
-              # UATPORT: "30978"
-            resources:
-              requests:
-                cpu: 10m
-                memory: 64Mi
-              limits:
-                memory: 256Mi
+      # flightradar24:
+      #   <<: *controllercommon
+      #   replicas: 0
+      #   containers:
+      #     # https://github.com/sdr-enthusiasts/docker-flightradar24?tab=readme-ov-file#obtaining-a-flightradar24-sharing-key-for-adsb
+      #     flightradar24:
+      #       image:
+      #         repository: ghcr.io/sdr-enthusiasts/docker-flightradar24
+      #         tag: latest
+      #       env:
+      #         BEASTHOST: adsb-ultrafeeder
+      #         FR24KEY: ${fr24_sharing_key}
+      #         # FR24KEY_UAT: ${fr24_uat_sharing_key}
+      #         # UATHOST: adsb-dump978
+      #         # UATPORT: "30978"
+      #       resources:
+      #         requests:
+      #           cpu: 10m
+      #           memory: 64Mi
+      #         limits:
+      #           memory: 256Mi
 
     persistence:
       usb:

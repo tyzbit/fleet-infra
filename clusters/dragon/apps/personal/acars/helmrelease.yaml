@@ -28,8 +28,7 @@ spec:
         replicas: 1
         containers:
           acarsdec:
-            securityContext:
-              privileged: true
+            securityContext: {privileged: true}
             image:
               repository: ghcr.io/sdr-enthusiasts/docker-acarsdec
               tag: latest-build-412
@@ -91,8 +90,8 @@ spec:
               pullPolicy: IfNotPresent
             env:
               TZ: Etc/UTC
-              AR_SEND_UDP_ACARS: acars-acarshub:5550 #;feedthe.acarsdrama.com:5550
-              AR_SEND_UDP_VDLM2: acars-acarshub:5555 #;feedthe.acarsdrama.com:5555
+              AR_SEND_UDP_ACARS: acars-acarshub:5550;feedthe.acarsdrama.com:5550
+              AR_SEND_UDP_VDLM2: acars-acarshub:5555;feedthe.acarsdrama.com:5555
               AR_RECV_ZMQ_VDLM2: acars-dumpvdl2:45555
             resources:
               requests:
