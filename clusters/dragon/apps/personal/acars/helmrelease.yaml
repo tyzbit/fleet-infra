@@ -82,7 +82,7 @@ spec:
 
       acarsrouter:
         <<: *common_settings
-        replicas: 0
+        replicas: 1
         containers:
           acarsrouter:
             image:
