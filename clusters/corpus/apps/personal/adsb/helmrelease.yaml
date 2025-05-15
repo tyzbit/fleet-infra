@@ -112,6 +112,7 @@ spec:
               TZ: US/New_York
               LAT: ${my_latitude}
               LON: ${my_longitude}
+              DUMP978_DEVICE_TYPE: rtlsdr
               DUMP978_RTLSDR_DEVICE: "00001000"
               DUMP978_SDR_GAIN: autogain
               DUMP978_SDR_PPM: "0"
