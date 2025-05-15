@@ -176,7 +176,7 @@ spec:
           ollama:
             image:
               repository: docker.io/ollama/ollama
-              tag: 0.6.8
+              tag: 0.7.0
             # command: [tail,-f,/dev/null]
             env:
               TZ: America/New_York
