@@ -44,7 +44,8 @@ spec:
               # FREQUENCIES: >-
               #   130.025;130.425;130.450;130.825;130.850;131.125;131.425;
               #   131.450;131.475;131.525;131.550;131.725;131.825;131.850
-              OUTPUT_SERVER: acars-acarshub
+              # OUTPUT_SERVER: acars-acarshub
+              OUTPUT_SERVER: acars-acarsrouter
               OUTPUT_SERVER_PORT: "5550"
               OUTPUT_SERVER_MODE: tcp
             resources:
