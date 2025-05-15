@@ -103,8 +103,10 @@ spec:
 
       dump978:
         <<: *common_settings
+        replicas: 1
         containers:
           dump978:
+            securityContext: {privileged: true}
             image:
               repository: ghcr.io/sdr-enthusiasts/docker-dump978
               tag: latest-build-744
