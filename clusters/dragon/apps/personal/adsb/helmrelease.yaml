@@ -136,12 +136,12 @@ spec:
       #   ports:
       #     uat:
       #       port: 30978
-      flightradar24:
-        controller: flightradar24
-        type: NodePort
-        ports:
-          http:
-            port: 8754
+      # flightradar24:
+      #   controller: flightradar24
+      #   type: NodePort
+      #   ports:
+      #     http:
+      #       port: 8754
 
     ingress:
       ultrafeeder:
