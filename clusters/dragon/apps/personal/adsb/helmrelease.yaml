@@ -150,11 +150,11 @@ spec:
         hosts:
           - host: "adsb.internal"
             paths:
-              - path: /fr24
-                pathType: Prefix
-                service:
-                  identifier: flightradar24
-                  port: 8754
+              # - path: /fr24
+              #   pathType: Prefix
+              #   service:
+              #     identifier: flightradar24
+              #     port: 8754
               - path: /
                 pathType: Prefix
                 service:
