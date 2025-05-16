@@ -45,7 +45,7 @@ spec:
               ENABLE_978: "yes"
               # URL_978: http://dump978/skyaware978
               # READSB_RTLSDR_DEVICE: 00000001 # Serial number of device
-              READSB_RTLSDR_DEVICE: stx:978:0
+              READSB_RTLSDR_DEVICE: stx:1090:0
               # readsb/decoder parameters: (these are in the secret)
               READSB_ALT: 3m
               READSB_RX_LOCATION_ACCURACY: 2 

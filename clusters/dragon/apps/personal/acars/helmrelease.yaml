@@ -36,7 +36,7 @@ spec:
             env:
               FEED_ID: TYZBIT-MOBILE-ACARS-1
               TZ: Etc/UTC
-              SOAPYSDR: driver=rtlsdr,serial=stx:1090:0
+              SOAPYSDR: driver=rtlsdr,serial=stx:978:0
               FREQUENCIES: 130.025;130.450;131.550;131.725
               # Enabling all frequencies to determine which are actually used
               # RTL-SDR can only scan 2MHz range
