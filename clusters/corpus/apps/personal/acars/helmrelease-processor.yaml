@@ -311,6 +311,11 @@ spec:
                 contain the phrase "YOU HAVE INFO" because it is regular
                 periodic communication from ATC and does not have personal
                 remarks.
+
+                Air travel enthusiasts are not interested in messages that
+                contain the phrase "PLEASE S-E TAXI AND SHUTDOWN THE APU" 
+                because it is regular instruction communication from ATC and
+                does not have personal remarks.
                 
                 Air travel enthusiasts do not want to see a message that has a
                 long string of numbers and letters without spaces, even if
