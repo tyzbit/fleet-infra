@@ -285,8 +285,9 @@ spec:
                 informal prose) and therefore did not come from a person, air
                 travel enthusiasts do not want to see it.
 
-                Here are some pieces of text that, if present, means the
-                message is definitely NOT relevant to air traffic enthusiasts:
+                If the message has any of these strings, it is NOT relevant to
+                air traffic enthusiasts since these strings are only used in
+                routine communication:
 
                 - ROB SLAT DIS PROX
                 - FPN/
@@ -299,6 +300,8 @@ spec:
                 - P/N
                 - ATA21-61 TEMPERATURE CONTROL
                 - BOARDING HELD
+                - SHUTDOWN THE APU
+                - ADVS YOU HAVE INFO
 
                 Air travel enthusiasts don't want to see departure delay reports
                 usually, which will have "BOARDING HELD" in the message but if
@@ -306,16 +309,6 @@ spec:
                 are always written by a person and that means air travel
                 enthusiasts definitely want to see the message in this case even
                 though it's a departure delay report.
-
-                Air travel enthusiasts are not interested in messages that
-                contain the phrase "YOU HAVE INFO" because it is regular
-                periodic communication from ATC and does not have personal
-                remarks.
-
-                Air travel enthusiasts are not interested in messages that
-                contain the phrase "PLEASE S-E TAXI AND SHUTDOWN THE APU" 
-                because it is regular instruction communication from ATC and
-                does not have personal remarks.
                 
                 Air travel enthusiasts do not want to see a message that has a
                 long string of numbers and letters without spaces, even if
