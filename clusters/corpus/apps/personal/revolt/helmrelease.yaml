@@ -163,7 +163,7 @@ spec:
               repository: ghcr.io/revoltchat/autumn
               tag: 20250513-2
               pullPolicy: Always
-            resources: {requests: {cpu: 10m},limits: {memory: 512Mi}}
+            resources: {requests: {cpu: 10m},limits: {memory: 1Gi}}
             env: {RUST_LOG: debug}
       "january":
         <<: *deploymentcontroller
@@ -174,7 +174,7 @@ spec:
               repository: ghcr.io/revoltchat/january
               tag: 20250515-1
               pullPolicy: Always
-            resources: {requests: {cpu: 10m},limits: {memory: 128Mi}}
+            resources: {requests: {cpu: 10m},limits: {memory: 512Mi}}
       "crond":
         <<: *deploymentcontroller
         replicas: 1
