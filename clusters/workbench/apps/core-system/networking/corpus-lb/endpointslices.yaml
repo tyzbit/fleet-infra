@@ -15,22 +15,22 @@ endpoints:
       ready: true
     addresses:
       - "192.168.1.21"
-  - conditions:
-      ready: true
-    addresses:
-      - "192.168.1.22"
-  - conditions:
-      ready: true
-    addresses:
-      - "192.168.1.23"
-  - conditions:
-      ready: false
-    addresses:
-      - "192.168.1.51"
-  - conditions:
-      ready: true
-    addresses:
-      - "192.168.1.52"
+  # - conditions:
+  #     ready: true
+  #   addresses:
+  #     - "192.168.1.22"
+  # - conditions:
+  #     ready: true
+  #   addresses:
+  #     - "192.168.1.23"
+  # - conditions:
+  #     ready: false
+  #   addresses:
+  #     - "192.168.1.51"
+  # - conditions:
+  #     ready: true
+  #   addresses:
+  #     - "192.168.1.52"
   - conditions:
       ready: true
     addresses:
