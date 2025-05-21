@@ -31,7 +31,7 @@ endpoints:
   #     ready: true
   #   addresses:
   #     - "192.168.1.52"
-  - conditions:
-      ready: true
-    addresses:
-      - "192.168.1.53"
+  # - conditions:
+  #     ready: true
+  #   addresses:
+  #     - "192.168.1.53"
