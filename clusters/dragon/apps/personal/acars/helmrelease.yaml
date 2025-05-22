@@ -71,7 +71,8 @@ spec:
               FEED_ID: TYZBIT-MOBILE-VDL2-1
               TZ: Etc/UTC
               SOAPYSDR: driver=rtlsdr
-              FREQUENCIES: "136.975;136.650"
+              # FREQUENCIES: "136.975;136.650"
+              FREQUENCIES: "136.975"
               ZMQ_MODE: server
               ZMQ_ENDPOINT: tcp://0.0.0.0:45555
             resources:
