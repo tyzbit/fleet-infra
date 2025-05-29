@@ -57,7 +57,7 @@ spec:
                 cd "$IPATH"
 
                 for file in "$${files[@]}"; do
-                  echo "downloading $file if needed"
+                  echo "downloading $file"
                   curl -L --no-progress-meter \
                     --etag-save "$file.etag" \
                     --etag-compare "$file.etag" \
@@ -67,9 +67,7 @@ spec:
 
                 for file in "$${files[@]}"; do
                   echo "extracting $file"
-                  mkdir /tmp/$file
-                  tar -xf $file -C /tmp/$file
-                  rsync -auv /tmp/$file ./
+                  tar --skip-old-files -x -f "$file"
                   
                   ### commented out so files don't get downloaded every time
                   ### this uses double the space
