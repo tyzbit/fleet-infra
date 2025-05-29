@@ -84,7 +84,7 @@ spec:
 
       acarsrouter:
         <<: *common_settings
-        replicas: 1
+        replicas: 0
         containers:
           acarsrouter:
             image:
@@ -105,7 +105,7 @@ spec:
 
       acarshub:
         <<: *common_settings
-        replicas: 1 # active nas
+        replicas: 0 # active nas
         containers:
           acarshub:
             image:

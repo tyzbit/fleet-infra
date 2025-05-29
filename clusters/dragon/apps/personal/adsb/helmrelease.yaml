@@ -27,7 +27,7 @@ spec:
     controllers:
       ultrafeeder:
         <<: *controllercommon
-        replicas: 1
+        replicas: 0
         containers:
           ultrafeeder:
             securityContext: {privileged: true}
