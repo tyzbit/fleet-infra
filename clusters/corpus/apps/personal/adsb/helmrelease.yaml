@@ -67,7 +67,7 @@ spec:
 
                 for file in "$${files[@]}"; do
                   echo "extracting $file"
-                  tar --overwrite -u -v -x -f "$file"
+                  tar --overwrite -x -f "$file"
                   
                   ### commented out so files don't get downloaded every time
                   ### this uses double the space
@@ -76,7 +76,7 @@ spec:
 
                 echo "directory contents:"
                 ls -la "$IPATH"
-                
+
                 echo "updating tar1090"
                 /tar1090-install.sh
 
