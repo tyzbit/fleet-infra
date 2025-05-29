@@ -57,7 +57,7 @@ spec:
                 cd "$IPATH"
 
                 for file in "$${files[@]}"; do
-                  echo "downloading $file"
+                  echo "downloading $file if needed"
                   curl -L --no-progress-meter \
                     --etag-save "$file.etag" \
                     --etag-compare "$file.etag" \
@@ -78,7 +78,7 @@ spec:
                 ls -la "$IPATH"
 
                 echo "updating tar1090"
-                /tar1090-install.sh
+                /tar1090-install.sh || true
 
         containers:
           ultrafeeder:
