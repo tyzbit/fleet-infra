@@ -55,7 +55,7 @@ spec:
                 mkdir -p "$IPATH"
                 cd "$IPATH"
 
-                for file in ${files[@]}; do
+                for file in $${files[@]}; do
                   echo "downloading $file"
                   curl --no-progress-meter \
                   https://github.com/wiedehopf/adsb-scripts/releases/download/osm2022/$file \
@@ -63,7 +63,7 @@ spec:
                   -z $file
                 done
 
-                for file in ${files[@]}; do
+                for file in $${files[@]}; do
                   echo "extracting $file"
                   tar --overwrite -x -f $file
                   
