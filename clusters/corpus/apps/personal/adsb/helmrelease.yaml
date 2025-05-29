@@ -42,7 +42,6 @@ spec:
         replicas: 1
         initContainers:
           tar1090-map-updater:
-            securityContext: {privileged: true}
             image: &ultrafeeder-image
               repository: ghcr.io/sdr-enthusiasts/docker-adsb-ultrafeeder
               tag: latest-build-722
@@ -69,10 +68,8 @@ spec:
                 for file in "$${files[@]}"; do
                   echo "extracting $file"
                   tar --skip-old-files -x -f "$file"
-                  
-                  ### commented out so files don't get downloaded every time
-                  ### this uses double the space
-                  # rm -f $file
+                  # This is actually fine because we saved the etag
+                  rm -f $file
                 done
                 echo "updated offline maps"
 
