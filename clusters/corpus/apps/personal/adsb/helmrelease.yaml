@@ -49,39 +49,40 @@ spec:
             command:
               - bash
               - -c
-              - |
-                set -eo pipefail
-                files=("osm_tiles_0_9.tar.gz" "osm_tiles_10.tar.gz")
-                IPATH=/usr/local/share/osm_tiles_offline
-                mkdir -p "$IPATH"
-                cd "$IPATH"
-                ls -la "$IPATH"
+              - tail -f /dev/null
+              # - |
+              #   set -eo pipefail
+              #   files=("osm_tiles_0_9.tar.gz" "osm_tiles_10.tar.gz")
+              #   IPATH=/usr/local/share/osm_tiles_offline
+              #   mkdir -p "$IPATH"
+              #   cd "$IPATH"
+              #   ls -la "$IPATH"
 
-                for file in "$${files[@]}"; do
-                  if [ ! -s $file ]; then
-                    echo "removing empty file $file"
-                    rm "$IPATH/$file"
-                    rm "$IPATH/$file.etag"
-                  fi
-                  echo "downloading $file"
-                  curl \
-                    --etag-save "$IPATH/$file.etag" \
-                    --etag-compare "$IPATH/$file.etag" \
-                    "https://github.com/wiedehopf/adsb-scripts/releases/download/osm2022/$file" \
-                    -o "$IPATH/$file"
-                done
-                ls -la "$IPATH"
+              #   for file in "$${files[@]}"; do
+              #     if [ ! -s $file ]; then
+              #       echo "removing empty file $file"
+              #       rm "$IPATH/$file"
+              #       rm "$IPATH/$file.etag"
+              #     fi
+              #     echo "downloading $file"
+              #     curl \
+              #       --etag-save "$IPATH/$file.etag" \
+              #       --etag-compare "$IPATH/$file.etag" \
+              #       "https://github.com/wiedehopf/adsb-scripts/releases/download/osm2022/$file" \
+              #       -o "$IPATH/$file"
+              #   done
+              #   ls -la "$IPATH"
 
-                for file in "$${files[@]}"; do
-                  echo "extracting $file"
-                  tar --overwrite -x -f "$IPATH/$file"
+              #   for file in "$${files[@]}"; do
+              #     echo "extracting $file"
+              #     tar --overwrite -x -f "$IPATH/$file"
                   
-                  ### commented out so files don't get downloaded every time
-                  ### this uses double the space
-                  # rm -f $file
-                done
-                echo "updating tar1090"
-                ./tar1090-install.sh
+              #     ### commented out so files don't get downloaded every time
+              #     ### this uses double the space
+              #     # rm -f $file
+              #   done
+              #   echo "updating tar1090"
+              #   ./tar1090-install.sh
 
         containers:
           ultrafeeder:
