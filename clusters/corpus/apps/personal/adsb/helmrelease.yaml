@@ -40,9 +40,11 @@ spec:
       ultrafeeder:
         <<: *common_settings
         replicas: 1
-        initContainers:
-          tar1090-map-updater:
-            image: &ultrafeeder-image
+        containers:
+          ultrafeeder:
+            securityContext: {privileged: true}
+            envFrom: [secretRef: {name: adsb-ultrafeeder}]
+            image:
               repository: ghcr.io/sdr-enthusiasts/docker-adsb-ultrafeeder
               tag: latest-build-722
               # tag: telegraf # for use with InfluxDB/Prometheus and Grafana
@@ -72,12 +74,8 @@ spec:
                   fi
                 done
                 echo "updated offline maps"
-
-        containers:
-          ultrafeeder:
-            securityContext: {privileged: true}
-            image: *ultrafeeder-image
-            envFrom: [secretRef: {name: adsb-ultrafeeder}]
+                /tar1090-install.sh
+                /init
             env:
               # https://github.com/sdr-enthusiasts/docker-adsb-ultrafeeder?tab=readme-ov-file#basic-ultrafeeder-parameters
               LOGLEVEL: verbose
@@ -208,16 +206,13 @@ spec:
         existingClaim: adsb-ultrafeeder-data-longhorn-webapp
         advancedMounts:
           ultrafeeder:
-            tar1090-map-updater:
-              - &offlinemaps 
-                path: /usr/local/share/osm_tiles_offline
-                subPath: offline_maps
             ultrafeeder:
               - path: /var/globe_history
                 subPath: globe_history
               - path: /var/lib/collectd
                 subPath: collectd
-              - *offlinemaps
+              - path: /usr/local/share/osm_tiles_offline
+                subPath: offline_maps
       dump978:
         existingClaim: adsb-dump978-data-longhorn-webapp
         advancedMounts:

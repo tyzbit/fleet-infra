@@ -62,8 +62,6 @@ spec:
                   fi
                 done
                 echo "updated offline maps"
-                # /init &
-                # sleep 10 # to allow startup
                 /tar1090-install.sh
                 /init
             env:
@@ -148,7 +146,8 @@ spec:
                 subPath: globe_history
               - path: /var/lib/collectd
                 subPath: collectd
-
+              - path: /usr/local/share/osm_tiles_offline
+                subPath: offline_maps
     service:
       ultrafeeder:
         controller: ultrafeeder
