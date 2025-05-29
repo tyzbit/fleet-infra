@@ -58,11 +58,6 @@ spec:
                 ls -la "$IPATH"
 
                 for file in "$${files[@]}"; do
-                  if [ ! -s $file ]; then
-                    echo "removing empty file $file"
-                    rm "$file"
-                    rm "$file.etag"
-                  fi
                   echo "downloading $file"
                   curl \
                     --etag-save "$file.etag" \
