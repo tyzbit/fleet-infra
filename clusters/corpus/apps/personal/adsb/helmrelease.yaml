@@ -60,21 +60,21 @@ spec:
                 for file in "$${files[@]}"; do
                   if [ ! -s $file ]; then
                     echo "removing empty file $file"
-                    rm "$file"
-                    rm "$file.etag"
+                    rm "$IPATH/$file"
+                    rm "$IPATH/$file.etag"
                   fi
                   echo "downloading $file"
                   curl \
-                    --etag-save "$file.etag" \
-                    --etag-compare "$file.etag" \
+                    --etag-save "$IPATH/$file.etag" \
+                    --etag-compare "$IPATH/$file.etag" \
                     "https://github.com/wiedehopf/adsb-scripts/releases/download/osm2022/$file" \
-                    -o "$file"
+                    -o "$IPATH/$file"
                 done
                 ls -la "$IPATH"
 
                 for file in "$${files[@]}"; do
                   echo "extracting $file"
-                  tar --overwrite -x -f "$file"
+                  tar --overwrite -x -f "$IPATH/$file"
                   
                   ### commented out so files don't get downloaded every time
                   ### this uses double the space
