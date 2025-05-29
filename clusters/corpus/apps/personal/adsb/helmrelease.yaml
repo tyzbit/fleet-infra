@@ -64,9 +64,10 @@ spec:
                     "https://github.com/wiedehopf/adsb-scripts/releases/download/osm2022/$file" \
                     -o "$file"
                   if [ -f $file ]; then
-                    echo "extracting $file"
-                    tar --skip-old-files -x -f "$file"
+                    echo "updating maps from $file"
+                    tar -x -f "$file"
                     # With the etag saved, we don't need the original archive
+                    echo "cleaning up $file"
                     rm -f $file
                   fi
                 done
