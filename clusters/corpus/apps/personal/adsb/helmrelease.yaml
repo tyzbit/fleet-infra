@@ -58,7 +58,7 @@ spec:
 
                 for file in $${files[@]}; do
                   echo "downloading $file"
-                  curl --no-progress-meter \
+                  curl \
                     --etag-save $file.txt \
                     --etag-compare $file.txt \
                     https://github.com/wiedehopf/adsb-scripts/releases/download/osm2022/$file \
