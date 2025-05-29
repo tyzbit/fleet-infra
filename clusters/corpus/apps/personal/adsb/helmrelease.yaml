@@ -49,35 +49,34 @@ spec:
             command:
               - bash
               - -c
-              - tail -f /dev/null
-              # - |
-              #   set -eo pipefail
-              #   files=("osm_tiles_0_9.tar.gz" "osm_tiles_10.tar.gz")
-              #   IPATH=/usr/local/share/osm_tiles_offline
-              #   mkdir -p "$IPATH"
-              #   cd "$IPATH"
-              #   ls -la "$IPATH"
+              - |
+                set -eo pipefail
+                files=("osm_tiles_0_9.tar.gz" "osm_tiles_10.tar.gz")
+                IPATH=/usr/local/share/osm_tiles_offline
+                mkdir -p "$IPATH"
+                cd "$IPATH"
+                ls -la "$IPATH"
 
-              #   for file in "$${files[@]}"; do
-              #     echo "downloading $file"
-              #     curl \
-              #       --etag-save "$file.etag" \
-              #       --etag-compare "$file.etag" \
-              #       "https://github.com/wiedehopf/adsb-scripts/releases/download/osm2022/$file" \
-              #       -o "$file"
-              #   done
-              #   ls -la "$IPATH"
+                for file in "$${files[@]}"; do
+                  echo "downloading $file"
+                  curl -L --no-progress-meter \
+                    --etag-save "$file.etag" \
+                    --etag-compare "$file.etag" \
+                    "https://github.com/wiedehopf/adsb-scripts/releases/download/osm2022/$file" \
+                    -o "$file"
+                done
+                ls -la "$IPATH"
 
-              #   for file in "$${files[@]}"; do
-              #     echo "extracting $file"
-              #     tar --overwrite -x -f "$file"
+                for file in "$${files[@]}"; do
+                  echo "extracting $file"
+                  tar --overwrite -x -f "$file"
                   
-              #     ### commented out so files don't get downloaded every time
-              #     ### this uses double the space
-              #     # rm -f $file
-              #   done
-              #   echo "updating tar1090"
-              #   ./tar1090-install.sh
+                  ### commented out so files don't get downloaded every time
+                  ### this uses double the space
+                  # rm -f $file
+                done
+                echo "updating tar1090"
+                ./tar1090-install.sh
 
         containers:
           ultrafeeder:
