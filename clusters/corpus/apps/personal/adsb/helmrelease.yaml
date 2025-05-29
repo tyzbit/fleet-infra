@@ -53,14 +53,14 @@ spec:
                 mkdir -p "$IPATH"
                 cd "$IPATH"
 
-                for file in $files; do
+                for file in ${files[@]}; do
                   curl --no-progress-meter \
                   https://github.com/wiedehopf/adsb-scripts/releases/download/osm2022/$file \
                   -o $file \
                   -z $file
                 done
 
-                for file in $files; do
+                for file in ${files[@]}; do
                   tar --overwrite -x -f $file
                   
                   ### commented out so files don't get downloaded every time
