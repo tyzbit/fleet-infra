@@ -64,6 +64,7 @@ spec:
                     https://github.com/wiedehopf/adsb-scripts/releases/download/osm2022/$file \
                     -o $file
                 done
+                ls -la $IPATH
 
                 for file in $${files[@]}; do
                   echo "extracting $file"
