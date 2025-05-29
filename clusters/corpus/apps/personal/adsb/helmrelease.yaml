@@ -40,13 +40,39 @@ spec:
       ultrafeeder:
         <<: *common_settings
         replicas: 1
-        containers:
-          ultrafeeder:
-            securityContext: {privileged: true}
-            image:
+        initContainers:
+          tar1090-map-updater:
+            image: &ultrafeeder-image
               repository: ghcr.io/sdr-enthusiasts/docker-adsb-ultrafeeder
               tag: latest-build-722
               # tag: telegraf # for use with InfluxDB/Prometheus and Grafana
+            command:
+              - |
+                files=(osm_tiles_0_9.tar.gz osm_tiles_10.tar.gz)
+                IPATH=/usr/local/share/osm_tiles_offline
+                mkdir -p "$IPATH"
+                cd "$IPATH"
+
+                for file in $files; do
+                  curl --no-progress-meter \
+                  https://github.com/wiedehopf/adsb-scripts/releases/download/osm2022/$file \
+                  -o $file \
+                  -z $file
+                done
+
+                for file in $files; do
+                  tar --overwrite -x -f $file
+                  
+                  ### commented out so files don't get downloaded every time
+                  ### this uses double the space
+                  # rm -f $file
+                done
+                ./tar1090-install.sh
+
+        containers:
+          ultrafeeder:
+            securityContext: {privileged: true}
+            image: *ultrafeeder-image
             envFrom: [secretRef: {name: adsb-ultrafeeder}]
             env:
               # https://github.com/sdr-enthusiasts/docker-adsb-ultrafeeder?tab=readme-ov-file#basic-ultrafeeder-parameters
@@ -178,11 +204,16 @@ spec:
         existingClaim: adsb-ultrafeeder-data-longhorn-webapp
         advancedMounts:
           ultrafeeder:
+            tar1090-map-updater:
+              - &offlinemaps 
+                path: /usr/local/share/osm_tiles_offline
+                subPath: offline_maps
             ultrafeeder:
               - path: /var/globe_history
                 subPath: globe_history
               - path: /var/lib/collectd
                 subPath: collectd
+              - *offlinemaps
       dump978:
         existingClaim: adsb-dump978-data-longhorn-webapp
         advancedMounts:
