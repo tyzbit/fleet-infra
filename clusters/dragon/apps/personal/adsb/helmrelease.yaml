@@ -28,14 +28,44 @@ spec:
       ultrafeeder:
         <<: *controllercommon
         replicas: 0
-        containers:
-          ultrafeeder:
-            securityContext: {privileged: true}
-            image:
+        initContainers:
+          tar1090-map-updater:
+            image: &ultrafeeder-image
               repository: ghcr.io/sdr-enthusiasts/docker-adsb-ultrafeeder
               tag: latest
               # tag: telegraf # for use with InfluxDB/Prometheus and Grafana
               pullPolicy: IfNotPresent
+            command:
+              - bash
+              - -c
+              - |
+                set -eo pipefail
+                files=("osm_tiles_0_9.tar.gz" "osm_tiles_10.tar.gz")
+                IPATH=/usr/local/share/osm_tiles_offline
+                mkdir -p "$IPATH"
+                cd "$IPATH"
+
+                for file in "$${files[@]}"; do
+                  echo "downloading $file if needed"
+                  curl -L --no-progress-meter \
+                    --etag-save "$file.etag" \
+                    --etag-compare "$file.etag" \
+                    "https://github.com/wiedehopf/adsb-scripts/releases/download/osm2022/$file" \
+                    -o "$file" || echo "couldn't check for new maps, check internet"
+                  if [ -f $file ]; then
+                    echo "updating maps from $file"
+                    tar -x -f "$file"
+                    # With the etag saved, we don't need the original archive
+                    echo "cleaning up $file"
+                    rm -f $file
+                  fi
+                done
+                echo "updated offline maps"
+
+        containers:
+          ultrafeeder:
+            securityContext: {privileged: true}
+            image: *ultrafeeder-image
             env:
               # https://github.com/sdr-enthusiasts/docker-adsb-ultrafeeder?tab=readme-ov-file#basic-ultrafeeder-parameters
               LOGLEVEL: verbose

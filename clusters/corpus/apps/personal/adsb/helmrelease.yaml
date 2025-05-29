@@ -62,7 +62,7 @@ spec:
                     --etag-save "$file.etag" \
                     --etag-compare "$file.etag" \
                     "https://github.com/wiedehopf/adsb-scripts/releases/download/osm2022/$file" \
-                    -o "$file"
+                    -o "$file" || echo "couldn't check for new maps, check internet"
                   if [ -f $file ]; then
                     echo "updating maps from $file"
                     tar -x -f "$file"
