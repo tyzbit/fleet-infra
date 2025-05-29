@@ -42,6 +42,7 @@ spec:
         replicas: 1
         initContainers:
           tar1090-map-updater:
+            securityContext: {privileged: true}
             image: &ultrafeeder-image
               repository: ghcr.io/sdr-enthusiasts/docker-adsb-ultrafeeder
               tag: latest-build-722
