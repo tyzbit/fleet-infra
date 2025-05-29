@@ -28,8 +28,9 @@ spec:
       ultrafeeder:
         <<: *controllercommon
         replicas: 1
-        initContainers:
-          tar1090-map-updater:
+        containers:
+          ultrafeeder:
+            securityContext: {privileged: true}
             image: &ultrafeeder-image
               repository: ghcr.io/sdr-enthusiasts/docker-adsb-ultrafeeder
               tag: latest
@@ -61,11 +62,10 @@ spec:
                   fi
                 done
                 echo "updated offline maps"
-
-        containers:
-          ultrafeeder:
-            securityContext: {privileged: true}
-            image: *ultrafeeder-image
+                # /init &
+                # sleep 10 # to allow startup
+                /tar1090-install.sh
+                /init
             env:
               # https://github.com/sdr-enthusiasts/docker-adsb-ultrafeeder?tab=readme-ov-file#basic-ultrafeeder-parameters
               LOGLEVEL: verbose
