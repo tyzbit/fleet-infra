@@ -58,7 +58,7 @@ spec:
 
       dumpvdl2:
         <<: *common_settings
-        replicas: 0
+        replicas: 1
         containers:
           dumpvdl2:
             securityContext:
@@ -72,7 +72,7 @@ spec:
               TZ: Etc/UTC
               SOAPYSDR: driver=rtlsdr
               # FREQUENCIES: "136.975;136.650"
-              FREQUENCIES: "136.975"
+              FREQUENCIES: "136.975;136.650;136.100"
               ZMQ_MODE: server
               ZMQ_ENDPOINT: tcp://0.0.0.0:45555
             resources:
@@ -93,8 +93,8 @@ spec:
               pullPolicy: IfNotPresent
             env:
               TZ: Etc/UTC
-              AR_SEND_UDP_ACARS: acars-acarshub:5550;feedthe.acarsdrama.com:5550
-              AR_SEND_UDP_VDLM2: acars-acarshub:5555;feedthe.acarsdrama.com:5555
+              AR_SEND_UDP_ACARS: acars-acarshub:5550;feedthe.acarsdrama.com:5550;172.23.93.218:5550
+              AR_SEND_UDP_VDLM2: acars-acarshub:5555;feedthe.acarsdrama.com:5555;172.23.93.218:5555
               AR_RECV_ZMQ_VDLM2: acars-dumpvdl2:45555
             resources:
               requests:
