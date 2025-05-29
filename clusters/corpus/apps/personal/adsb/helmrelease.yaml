@@ -47,6 +47,8 @@ spec:
               tag: latest-build-722
               # tag: telegraf # for use with InfluxDB/Prometheus and Grafana
             command:
+              - bash
+              - -c
               - |
                 files=(osm_tiles_0_9.tar.gz osm_tiles_10.tar.gz)
                 IPATH=/usr/local/share/osm_tiles_offline
