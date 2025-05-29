@@ -59,9 +59,10 @@ spec:
                 for file in $${files[@]}; do
                   echo "downloading $file"
                   curl --no-progress-meter \
-                  https://github.com/wiedehopf/adsb-scripts/releases/download/osm2022/$file \
-                  -o $file \
-                  -z $file
+                    --etag-save $file.txt
+                    --etag-compare $file.txt
+                    https://github.com/wiedehopf/adsb-scripts/releases/download/osm2022/$file \
+                    -o $file
                 done
 
                 for file in $${files[@]}; do
