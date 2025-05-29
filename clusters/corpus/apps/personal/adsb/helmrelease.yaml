@@ -51,7 +51,7 @@ spec:
               - -c
               - |
                 set -eo pipefail
-                files=(osm_tiles_0_9.tar.gz osm_tiles_10.tar.gz)
+                files=("osm_tiles_0_9.tar.gz" "osm_tiles_10.tar.gz")
                 IPATH=/usr/local/share/osm_tiles_offline
                 mkdir -p "$IPATH"
                 cd "$IPATH"
