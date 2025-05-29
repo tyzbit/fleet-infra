@@ -58,9 +58,14 @@ spec:
 
                 for file in $${files[@]}; do
                   echo "downloading $file"
+                  if [ ! -s $file ]; then
+                    echo "removing empty file $file"
+                    rm $file
+                    rm $file.etag
+                  fi
                   curl \
-                    --etag-save $file.txt \
-                    --etag-compare $file.txt \
+                    --etag-save $file.etag \
+                    --etag-compare $file.etag \
                     https://github.com/wiedehopf/adsb-scripts/releases/download/osm2022/$file \
                     -o $file
                 done
