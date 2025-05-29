@@ -27,7 +27,7 @@ spec:
     controllers:
       ultrafeeder:
         <<: *controllercommon
-        replicas: 0
+        replicas: 1
         initContainers:
           tar1090-map-updater:
             image: &ultrafeeder-image
