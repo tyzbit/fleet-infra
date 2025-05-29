@@ -55,6 +55,7 @@ spec:
                 IPATH=/usr/local/share/osm_tiles_offline
                 mkdir -p "$IPATH"
                 cd "$IPATH"
+                ls -la "$IPATH"
 
                 for file in "$${files[@]}"; do
                   if [ ! -s $file ]; then
