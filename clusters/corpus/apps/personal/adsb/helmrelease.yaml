@@ -63,13 +63,12 @@ spec:
                     --etag-compare "$file.etag" \
                     "https://github.com/wiedehopf/adsb-scripts/releases/download/osm2022/$file" \
                     -o "$file"
-                done
-
-                for file in "$${files[@]}"; do
-                  echo "extracting $file"
-                  tar --skip-old-files -x -f "$file"
-                  # With the etag saved, we don't need the original archives
-                  rm -f $file
+                  if [ -f $file ]; then
+                    echo "extracting $file"
+                    tar --skip-old-files -x -f "$file"
+                    # With the etag saved, we don't need the original archive
+                    rm -f $file
+                  fi
                 done
                 echo "updated offline maps"
 
