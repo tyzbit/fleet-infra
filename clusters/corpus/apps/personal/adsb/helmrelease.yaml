@@ -68,7 +68,7 @@ spec:
                 for file in "$${files[@]}"; do
                   echo "extracting $file"
                   tar --skip-old-files -x -f "$file"
-                  # This is actually fine because we saved the etag
+                  # With the etag saved, we don't need the original archives
                   rm -f $file
                 done
                 echo "updated offline maps"
