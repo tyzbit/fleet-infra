@@ -31,7 +31,7 @@ spec:
         containers:
           ultrafeeder:
             securityContext: {privileged: true}
-            image: &ultrafeeder-image
+            image:
               repository: ghcr.io/sdr-enthusiasts/docker-adsb-ultrafeeder
               tag: latest
               # tag: telegraf # for use with InfluxDB/Prometheus and Grafana
