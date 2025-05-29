@@ -74,12 +74,7 @@ spec:
                   ### this uses double the space
                   # rm -f $file
                 done
-
-                echo "directory contents:"
-                ls -la "$IPATH"
-
-                echo "updating tar1090"
-                /tar1090-install.sh || true
+                echo "updated offline maps"
 
         containers:
           ultrafeeder:
