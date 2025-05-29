@@ -155,6 +155,7 @@ spec:
         ports:
           http:
             port: 80
+            nodePort: 32283
           beast:
             port: 30005
           uat:
