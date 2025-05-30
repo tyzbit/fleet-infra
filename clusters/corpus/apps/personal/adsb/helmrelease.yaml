@@ -74,7 +74,7 @@ spec:
                   fi
                 done
                 echo "updated offline maps"
-                /tar1090-install.sh
+                /tar1090-install.sh || true # we just need it to set up maps
                 /init
             env:
               # https://github.com/sdr-enthusiasts/docker-adsb-ultrafeeder?tab=readme-ov-file#basic-ultrafeeder-parameters
