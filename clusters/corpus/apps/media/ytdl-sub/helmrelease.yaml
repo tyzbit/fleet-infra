@@ -40,7 +40,7 @@ spec:
             image:
               pullPolicy: Always
               repository: ghcr.io/jmbannon/ytdl-sub
-              tag: "2025.05.31"
+              tag: "2025.06.01"
             command:
               - bash
               - -c
