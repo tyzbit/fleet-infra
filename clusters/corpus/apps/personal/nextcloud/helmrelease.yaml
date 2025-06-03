@@ -163,13 +163,13 @@ spec:
         advancedMounts:
           app:
             *app :
-              - &redispath path: /var/run/redis/
+              - path: &redispath /var/run/redis/
             *cache :
-              - *redispath
+              - path: *redispath
             *worker :
-              - *redispath
+              - path: *redispath
             *notify :
-              - *redispath
+              - path: *redispath
 
       # Redis-only
       cache:
