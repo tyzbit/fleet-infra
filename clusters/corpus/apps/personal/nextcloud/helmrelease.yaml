@@ -111,6 +111,7 @@ spec:
               limits:
                 memory: *ncmemlimit
 
+          # Requires https://github.com/nextcloud/notify_push to be installed
           &notify nextcloud-notify:
             image:
               repository: nextcloud
