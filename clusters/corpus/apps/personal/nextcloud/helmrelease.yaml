@@ -224,7 +224,7 @@ spec:
         ports:
           http:
             primary: true
-            port: 80
+            port: 7867
 
       db:
         controller: db
