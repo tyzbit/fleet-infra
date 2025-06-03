@@ -118,9 +118,6 @@ spec:
               tag: *nextcloudver
               pullPolicy: Always
             command: ["/bin/bash", "-c"]
-            env:
-              - name: NEXTCLOUD_URL
-                value: http://nextcloud-main
             args:
               - |
                 su www-data \
@@ -128,7 +125,7 @@ spec:
                   /var/www/html/config/config.php &
                 pid=$?
                 ops=(
-                  "notify_push:setup https://cloud.${personal_domain}/push"
+                  "notify_push:setup http://127.0.0.1/push"
                   "notify_push:self_test"
                 )
                 grey="\e[1;30m"
