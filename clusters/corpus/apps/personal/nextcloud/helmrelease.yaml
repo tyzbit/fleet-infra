@@ -125,7 +125,7 @@ spec:
                   /var/www/html/config/config.php &
                 pid=$?
                 ops=(
-                  "notify_push:setup http://127.0.0.1/push"
+                  "notify_push:setup http://cloud.${personal_domain}/push"
                   "notify_push:self_test"
                 )
                 grey="\e[1;30m"
