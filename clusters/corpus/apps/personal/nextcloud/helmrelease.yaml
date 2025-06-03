@@ -129,7 +129,7 @@ spec:
                 reset="\e[0m"
                 green="\e[1;32m"
                 red="\e[1;31m"
-                echo -e "$${grey}Waiting a few seconds for services to start"
+                echo -e "$${grey}Waiting a few seconds for services to start$${reset}"
                 sleep 10
                 echo -e "$${grey}Testing if push app is configured"
                 op="notify_push:setup https://cloud.${personal_domain}/push"
@@ -139,6 +139,7 @@ spec:
                     echo -e "$${red}$${op} operation failed, retrying...$${reset}"
                   fi
                 done
+                echo -e "$${green}Test passed$${reset}"
                 wait $pid
             resources:
               requests:
