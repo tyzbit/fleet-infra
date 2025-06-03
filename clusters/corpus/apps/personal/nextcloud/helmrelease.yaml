@@ -118,6 +118,7 @@ spec:
               tag: *nextcloudver
               pullPolicy: Always
             command: ["/bin/bash", "-c"]
+            env: [{name: NEXTCLOUD_URL, value: http://127.0.0.1}]
             args:
               - |
                 su www-data \
@@ -238,7 +239,6 @@ spec:
           nginx.ingress.kubernetes.io/proxy-connect-timeout: "20"
           nginx.ingress.kubernetes.io/proxy-read-timeout: "14400"
           nginx.ingress.kubernetes.io/proxy-send-timeout: "14400"
-          nginx.ingress.kubernetes.io/use-forwarded-headers: "true"
           cert-manager.io/cluster-issuer: letsencrypt
           external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
           external-dns.alpha.kubernetes.io/target: ${cloudflared_tunnel_uuid}.cfargotunnel.com
