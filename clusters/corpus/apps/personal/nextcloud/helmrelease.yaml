@@ -120,7 +120,7 @@ spec:
             command: ["/bin/bash", "-c"]
             env:
               - name: NEXTCLOUD_URL
-                value: http://localhost:7867
+                value: http://nextcloud-main
             args:
               - |
                 su www-data \
