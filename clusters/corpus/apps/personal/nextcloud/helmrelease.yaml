@@ -129,7 +129,7 @@ spec:
                 green="\e[1;32m"
                 red="\e[1;31m"
                 echo -e "$${grey}Testing if push app is configured"
-                op="notify_push:setup http://cloud.${personal_domain}/push"
+                op="notify_push:setup https://cloud.${personal_domain}/push"
                 while ! su www-data -s /usr/local/bin/php -- occ "notify_push:self-test"; do
                   echo -e "$${grey}Self-test failed, running php occ $op $reset"
                   if ! su www-data -s /usr/local/bin/php -- occ $op; then
