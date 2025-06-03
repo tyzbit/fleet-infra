@@ -118,6 +118,9 @@ spec:
               tag: *nextcloudver
               pullPolicy: Always
             command: ["/bin/bash", "-c"]
+            env:
+              - name: NEXTCLOUD_URL
+                value: http://localhost
             args:
               - |
                 su www-data \
@@ -126,7 +129,6 @@ spec:
                 pid=$?
                 ops=(
                   "notify_push:setup https://cloud.${personal_domain}/push"
-                  "notify_push:metrics"
                   "notify_push:self_test"
                 )
                 grey="\e[1;30m"
