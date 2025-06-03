@@ -132,7 +132,7 @@ spec:
                 for op in "$${ops[@]}" ; do
                   echo -e "$${grey}Running php occ $op $reset"
                   while ! su www-data -s /usr/local/bin/php -- occ $op; do
-                    echo -e "$${red}Command failed, retrying...$${reset}"
+                    echo -e "$${red}$${op} operation failed, retrying...$${reset}"
                   done
                   echo -e "Finished php occ $op $reset"
                 done &&
