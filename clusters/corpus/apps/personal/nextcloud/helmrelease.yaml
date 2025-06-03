@@ -112,7 +112,7 @@ spec:
                 memory: *ncmemlimit
 
           # Requires https://github.com/nextcloud/notify_push to be installed
-          &notify nextcloud-notify:
+          &push nextcloud-push:
             image:
               repository: nextcloud
               tag: *nextcloudver
@@ -169,7 +169,7 @@ spec:
               - path: &datamount /var/www/html
             *worker :
               - path: *datamount
-            *notify :
+            *push :
               - path: *datamount
       socket:
         type: emptyDir
@@ -183,7 +183,7 @@ spec:
               - path: *redispath
             *worker :
               - path: *redispath
-            *notify :
+            *push :
               - path: *redispath
 
       # Redis-only
