@@ -131,13 +131,8 @@ spec:
                 red="\e[1;31m"
                 for op in "$${ops[@]}" ; do
                   echo -e "$${grey}Running php occ $op $reset"
-                  while :; do
-                    su www-data -s /usr/local/bin/php -- occ $op && echo -en "$green" || echo -en "$red"
-                    if [[ $? != 0 ]]; then
-                      echo -e "$${grey}Command failed, retrying..."
-                      sleep 1
-                      continue
-                    fi
+                  while ! su www-data -s /usr/local/bin/php -- occ $op; do
+                    echo -e "$${red}Command failed, retrying...$${reset}"
                   done
                   echo -e "Finished php occ $op $reset"
                 done &&
