@@ -132,12 +132,12 @@ spec:
                 reset="\e[0m"
                 green="\e[1;32m"
                 red="\e[1;31m"
-                for op in "$${ops[@]}" ; do
-                  echo -e "$${grey}Running php occ $op $reset"
-                  while ! su www-data -s /usr/local/bin/php -- occ $op; do
+                op="notify_push:setup http://cloud.${personal_domain}/push"
+                while ! su www-data -s /usr/local/bin/php -- occ "notify_push:self_test"; do
+                  echo -e "$${grey}Self-test failed, running php occ $op $reset"
+                  if ! su www-data -s /usr/local/bin/php -- occ $op; then
                     echo -e "$${red}$${op} operation failed, retrying...$${reset}"
-                  done
-                  echo -e "Finished php occ $op $reset"
+                  fi
                 done
                 wait $pid
             resources:
