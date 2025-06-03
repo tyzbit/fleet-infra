@@ -124,7 +124,7 @@ spec:
                 su www-data \
                   -s /var/www/html/custom_apps/notify_push/bin/x86_64/notify_push -- \
                   /var/www/html/config/config.php &
-                pid=$?
+                pid=$!
                 grey="\e[1;30m"
                 reset="\e[0m"
                 green="\e[1;32m"
