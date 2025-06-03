@@ -133,7 +133,7 @@ spec:
                   echo -e "$${grey}Running php occ $op $reset"
                   while :; do
                     su www-data -s /usr/local/bin/php -- occ $op && echo -en "$green" || echo -en "$red"
-                    if [[] $? != 0 ]]; then
+                    if [[ $? != 0 ]]; then
                       echo -e "$${grey}Command failed, retrying..."
                       sleep 1
                       continue
