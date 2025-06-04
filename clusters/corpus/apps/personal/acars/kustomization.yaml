@@ -9,7 +9,7 @@ resources:
   - helmrelease.yaml
   - helmrelease-processor.yaml
   - persistentvolumeclaim.yaml
-configMapGenerator:
+secretGenerator:
   - name: acars-processor-1-config
     files:
       - config.yaml=acars-processor-1-config.yaml
