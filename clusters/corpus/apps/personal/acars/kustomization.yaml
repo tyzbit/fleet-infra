@@ -3,7 +3,7 @@ kind: Kustomization
 metadata:
   name: acars-processor
   namespace: flux-system
-namespace: personal
+namespace: flux-system
 resources:
   - ks.yaml
   - helmrelease.yaml
