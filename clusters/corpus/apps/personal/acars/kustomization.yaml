@@ -1,9 +1,9 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 metadata:
-  name: frigate
+  name: acars-processor
   namespace: flux-system
-namespace: home-automation
+namespace: personal
 resources:
   - ks.yaml
   - helmrelease.yaml
