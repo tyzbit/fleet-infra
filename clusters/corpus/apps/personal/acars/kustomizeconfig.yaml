@@ -1,0 +1,16 @@
+nameReference:
+  - kind: ConfigMap
+    version: v1
+    fieldSpecs:
+      - path: spec/values/controllers/acars-processor-1/containers/acars-processor-1/envFrom[0]/secretRef/name
+        kind: HelmRelease
+        metadata:
+          name: acars-processor
+      - path: spec/values/controllers/acars-processor-2/containers/acars-processor-2/envFrom[0]/secretRef/name
+        kind: HelmRelease
+        metadata:
+          name: acars-processor
+      - path: spec/values/controllers/acars-processor-3/containers/acars-processor-3/envFrom[0]/secretRef/name
+        kind: HelmRelease
+        metadata:
+          name: acars-processor

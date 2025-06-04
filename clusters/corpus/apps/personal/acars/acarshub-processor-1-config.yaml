@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/tyzbit/acars-processor/refs/heads/main/schema.json
+
+# Purpose: Forward all messages to New Relic
+LogLevel: debug
+ACARSHub:
+  ACARS:
+    Host: &acarshubhost acars-acarshub
+    Port: 15550
+  VDLM2:
+    Host: *acarshubhost
+    Port: 15555
+Annotators:
+  ACARS: {Enabled: true}
+  VDLM2: {Enabled: true}
+  Tar1090:
+    URL: http://adsb-ultrafeeder
+    ReferenceGeolocation: ${my_latitude},${my_longitude}
+Receivers:
+  NewRelic:
+    APIKey: ${new_relic_license_key}
+    CustomEventType: CustomACARS
