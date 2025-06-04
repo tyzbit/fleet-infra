@@ -16,7 +16,7 @@ spec:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
-  dependsOn: [{ name: imagepullsecret-patcher }, { name: kubernetes-secrets }]
+  dependsOn: [{ name: kubernetes-secrets }]
   postBuild:
     substituteFrom:
       - kind: Secret
