@@ -298,7 +298,7 @@ Annotators:
 
   Tar1090:
     URL: http://adsb-ultrafeeder
-    ReferenceGeolocation: ${my_latitude},${my_longitude}
+    ReferenceGeolocation: "${my_latitude},${my_longitude}"
     SelectedFields: |
       tar1090AircraftDistanceMi
       tar1090AircraftAltimeterGeometricFeet
@@ -312,7 +312,7 @@ Annotators:
     SelectedFields: ollamaProcessedText,ollamaEditActions
 Receivers:
   DiscordWebhook:
-    URL: ${acars_discord_webhook}
+    URL: "${acars_discord_webhook}"
   NewRelic:
-    APIKey: ${new_relic_license_key}
+    APIKey: "${new_relic_license_key}"
     CustomEventType: CustomACARSHumanMessages

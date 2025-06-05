@@ -15,8 +15,8 @@ Annotators:
   VDLM2: {Enabled: true}
   Tar1090:
     URL: http://adsb-ultrafeeder
-    ReferenceGeolocation: ${my_latitude},${my_longitude}
+    ReferenceGeolocation: "${my_latitude},${my_longitude}"
 Receivers:
   NewRelic:
-    APIKey: ${new_relic_license_key}
+    APIKey: "${new_relic_license_key}"
     CustomEventType: CustomACARS
