@@ -21,7 +21,6 @@ spec:
     storageClass:
       name: nas
       pathPattern: "$${.PVC.namespace}-$${.PVC.name}"
-      reclaimPolicy: Retain
       accessModes: ReadWriteMany
     nfs:
       server: nas.home.arpa
