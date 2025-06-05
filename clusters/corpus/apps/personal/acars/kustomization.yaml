@@ -4,10 +4,12 @@ metadata:
   name: acars-processor
   namespace: flux-system
 resources:
-  - ks.yaml
-  - helmrelease.yaml
+  - configmap.yaml
   - helmrelease-processor.yaml
+  - helmrelease.yaml
+  - ks.yaml
   - persistentvolumeclaim.yaml
+  - rbac.yaml
 secretGenerator:
   - name: acars-processor-1-config
     namespace: personal
