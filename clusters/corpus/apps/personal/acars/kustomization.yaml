@@ -11,12 +11,15 @@ resources:
   - persistentvolumeclaim.yaml
 secretGenerator:
   - name: acars-processor-1-config
+    namespace: personal
     files:
       - config.yaml=acars-processor-1-config.yaml
   - name: acars-processor-2-config
+    namespace: personal
     files:
       - config.yaml=acars-processor-2-config.yaml
   - name: acars-processor-3-config
+    namespace: personal
     files:
       - config.yaml=acars-processor-3-config.yaml
 configurations:
