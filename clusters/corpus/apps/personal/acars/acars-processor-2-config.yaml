@@ -14,7 +14,7 @@ ACARSHub:
 
 Filters:
   Ollama:
-    Model: qwen3:4b
+    Model: qwen3:8b
     URL: &ollamaurl http://ollama.home.arpa
     FilterOnFailure: true
     MaxPredictionTokens: 100
@@ -279,6 +279,7 @@ Filters:
     DuplicateMessageSimilarity: 0.9
   VDLM2:
     DuplicateMessageSimilarity: 0.9
+  
 
 Annotators:
   ACARS:
