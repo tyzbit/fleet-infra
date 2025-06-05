@@ -93,7 +93,7 @@ spec:
         name: acars-processor-1-config
         advancedMounts:
           acars-processor-1: 
-            acars-processor-1: &config [{path: /, readOnly: true, subPath: config.yaml}]
+            acars-processor-1: &config [{path: /config.yaml, readOnly: true, subPath: config.yaml}]
       config-2:
         type: secret
         name: acars-processor-2-config
