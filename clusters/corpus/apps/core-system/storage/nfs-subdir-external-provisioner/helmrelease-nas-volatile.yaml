@@ -23,6 +23,8 @@ spec:
     storageClass:
       name: nas-volatile
       pathPattern: "$${.PVC.namespace}-$${.PVC.name}"
+      reclaimPolicy: Retain
+      accessModes: ReadWriteMany
     nfs:
       server: nas.home.arpa
       path: /volume1/volatile_cluster_storage
