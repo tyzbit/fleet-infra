@@ -216,8 +216,8 @@ spec:
       dump978:
         existingClaim: adsb-dump978-data-longhorn-webapp
         advancedMounts:
-          ultrafeeder:
-            ultrafeeder:
+          dump978:
+            dump978:
               - path: /var/globe_history
                 subPath: globe_history
 
