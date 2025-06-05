@@ -22,7 +22,7 @@ Filters:
     # 9,101 characters
     # 2,371 tokens https://token-calculator.net
     # -----------------------------------------
-    UserPrompt: &prompt | 
+    UserPrompt: | 
       This message was sent between an aircraft and air traffic
       control. Rarely, messages like these have prose in them that
       is interesting to air travel enthusiasts because it was was
