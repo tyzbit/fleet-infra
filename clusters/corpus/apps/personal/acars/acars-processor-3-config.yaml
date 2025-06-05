@@ -2,6 +2,7 @@
 
 # Purpose: Testing with real messages and services, but 
 # development-labeled receivers
+# Environment variables are substituted at runtime by acars-processor
 LogLevel: debug
 ACARSHub:
   MaxConcurrentRequests: 4
@@ -291,7 +292,7 @@ Annotators:
 
   Tar1090:
     URL: http://adsb-ultrafeeder
-    ReferenceGeolocation: ${my_geolocation}
+    ReferenceGeolocation: ${my_latitude},${my_longitude}
     SelectedFields: |
       tar1090AircraftDistanceMi
       tar1090AircraftAltimeterGeometricFeet

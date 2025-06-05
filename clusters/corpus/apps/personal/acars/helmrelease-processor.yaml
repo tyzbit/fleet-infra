@@ -32,6 +32,7 @@ spec:
             image:
               repository: ghcr.io/tyzbit/acars-processor
               tag: latest
+            envFrom: &secret [secretRef: {name: acars-processor}]
             resources:
               requests:
                 cpu: 10m
@@ -48,6 +49,7 @@ spec:
             image:
               repository: ghcr.io/tyzbit/acars-processor
               tag: latest
+            envFrom: *secret
             resources:
               requests:
                 cpu: 10m
@@ -64,6 +66,7 @@ spec:
             image:
               repository: ghcr.io/tyzbit/acars-processor
               tag: latest
+            envFrom: *secret
             resources:
               requests:
                 cpu: 10m

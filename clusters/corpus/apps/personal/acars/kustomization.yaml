@@ -13,7 +13,6 @@ secretGenerator:
     namespace: personal
     options: {disableNameSuffixHash: true}
     files: [config.yaml=acars-processor-1-config.yaml]
-    envs: [.env]
   - name: acars-processor-2-config
     namespace: personal
     options: {disableNameSuffixHash: true}

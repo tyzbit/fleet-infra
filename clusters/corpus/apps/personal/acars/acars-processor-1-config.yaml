@@ -1,6 +1,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/tyzbit/acars-processor/refs/heads/main/schema.json
 
 # Purpose: Forward all messages to New Relic
+# Environment variables are substituted at runtime by acars-processor
 LogLevel: debug
 ACARSHub:
   ACARS:

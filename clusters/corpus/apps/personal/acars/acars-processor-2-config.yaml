@@ -1,6 +1,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/tyzbit/acars-processor/refs/heads/main/schema.json
 
 # Purpose: Forward all human-created messages to New Relic and Discord
+# Environment variables are substituted at runtime by acars-processor
 LogLevel: debug
 ACARSHub:
   MaxConcurrentRequests: 4
@@ -297,7 +298,7 @@ Annotators:
 
   Tar1090:
     URL: http://adsb-ultrafeeder
-    ReferenceGeolocation: ${my_geolocation}
+    ReferenceGeolocation: ${my_latitude},${my_longitude}
     SelectedFields: |
       tar1090AircraftDistanceMi
       tar1090AircraftAltimeterGeometricFeet
@@ -310,6 +311,8 @@ Annotators:
       of a message. Return any prose if found. Surround it with triple backticks.
     SelectedFields: ollamaProcessedText,ollamaEditActions
 Receivers:
+  DiscordWebhook:
+    URL: ${acars_discord_webhook}
   NewRelic:
     APIKey: ${new_relic_license_key}
     CustomEventType: CustomACARSHumanMessages
