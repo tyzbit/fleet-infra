@@ -32,7 +32,6 @@ spec:
             image:
               repository: ghcr.io/tyzbit/acars-processor
               tag: latest
-            envFrom: [{secretRef: {name: acars-processor-1-config}}]
             resources:
               requests:
                 cpu: 10m
@@ -49,7 +48,6 @@ spec:
             image:
               repository: ghcr.io/tyzbit/acars-processor
               tag: latest
-            envFrom: [{secretRef: {name: acars-processor-2-config}}]
             resources:
               requests:
                 cpu: 10m
@@ -66,7 +64,6 @@ spec:
             image:
               repository: ghcr.io/tyzbit/acars-processor
               tag: latest
-            envFrom: [{secretRef: {name: acars-processor-3-config}}]
             resources:
               requests:
                 cpu: 10m
@@ -83,12 +80,29 @@ spec:
             image:
               repository: ghcr.io/tyzbit/acars-processor
               tag: latest
-            envFrom:
-              - secretRef:
-                  name: acars-processor2
             resources:
               requests:
                 cpu: 10m
                 memory: 512Mi
               limits:
                 memory: 512Mi
+
+    persistence:
+      config-1:
+        type: secret
+        name: acars-processor-1-config
+        advancedMounts:
+          acars-processor-1: 
+            acars-processor-1: &config [{path: /, readOnly: true, subPath: /config.yaml}]
+      config-2:
+        type: secret
+        name: acars-processor-2-config
+        advancedMounts:
+          acars-processor-2: 
+            acars-processor-2: *config
+      config-3:
+        type: secret
+        name: acars-processor-3-config
+        advancedMounts:
+          acars-processor-3: 
+            acars-processor-3: *config
