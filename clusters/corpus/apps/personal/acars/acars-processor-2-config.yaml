@@ -307,9 +307,10 @@ Annotators:
     Model: llama3.2
     URL: *ollamaurl
     UserPrompt: >-
-      Is there prose in this message? If present, prose will be the last section
-      of a message. Return any prose if found. Surround it with triple backticks.
-    SelectedFields: ollamaProcessedText,ollamaEditActions
+      Is there conversational prose in this message? If present, prose will be
+      found in the last section of a message. Return any prose if found.
+      Surround it with triple backticks.
+    SelectedFields: ollamaProcessedText,ollamaEditActions,ollamaQuestion
 Receivers:
   DiscordWebhook:
     URL: "${acars_discord_webhook}"
