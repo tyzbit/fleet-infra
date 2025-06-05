@@ -297,7 +297,7 @@ Annotators:
 
   Tar1090:
     URL: http://adsb-ultrafeeder
-    ReferenceGeolocation: ${my_latitude},${my_longitude}
+    ReferenceGeolocation: ${my_geolocation}
     SelectedFields: |
       tar1090AircraftDistanceMi
       tar1090AircraftAltimeterGeometricFeet

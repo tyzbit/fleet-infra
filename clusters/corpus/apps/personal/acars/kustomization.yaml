@@ -8,25 +8,17 @@ resources:
   - helmrelease.yaml
   - helmrelease-processor.yaml
   - persistentvolumeclaim.yaml
-  - acars-processor-1-config.yaml
-  - acars-processor-2-config.yaml
-  - acars-processor-3-config.yaml
 secretGenerator:
   - name: acars-processor-1-config
     namespace: personal
-    options:
-      disableNameSuffixHash: true
-    files:
-      - config.yaml=acars-processor-1-config.yaml
+    options: {disableNameSuffixHash: true}
+    files: [config.yaml=acars-processor-1-config.yaml]
+    envs: [.env]
   - name: acars-processor-2-config
     namespace: personal
-    options:
-      disableNameSuffixHash: true
-    files:
-      - config.yaml=acars-processor-2-config.yaml
+    options: {disableNameSuffixHash: true}
+    files: [config.yaml=acars-processor-2-config.yaml]
   - name: acars-processor-3-config
     namespace: personal
-    options:
-      disableNameSuffixHash: true
-    files:
-      - config.yaml=acars-processor-3-config.yaml
+    options: {disableNameSuffixHash: true}
+    files: [config.yaml=acars-processor-3-config.yaml]
