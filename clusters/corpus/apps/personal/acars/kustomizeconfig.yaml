@@ -2,9 +2,9 @@ nameReference:
   - kind: Secret
     version: v1
     fieldSpecs:
-      - path: spec/values/controllers/acars-processor-1/containers/acars-processor-1/envFrom/[0]/secretRef/name
+      - path: spec/values/controllers/acars-processor-1/containers/acars-processor-1/envFrom[*]/secretRef/name
         kind: HelmRelease
-      - path: spec/values/controllers/acars-processor-2/containers/acars-processor-2/envFrom/[0]/secretRef/name
+      - path: spec/values/controllers/acars-processor-2/containers/acars-processor-2/envFrom[*]/secretRef/name
         kind: HelmRelease
-      - path: spec/values/controllers/acars-processor-3/containers/acars-processor-3/envFrom/[0]/secretRef/name
+      - path: spec/values/controllers/acars-processor-3/containers/acars-processor-3/envFrom[*]/secretRef/name
         kind: HelmRelease
