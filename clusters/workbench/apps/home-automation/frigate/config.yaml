@@ -176,13 +176,13 @@ cameras:
 
   sunroom:
     enabled: true
-    detect: *doorbelldetect
+    # detect: *doorbelldetect
     ffmpeg: {inputs:
       [{path: rtsp://localhost:8554/sunroom, roles: *detectandrecord}]}
     mqtt: *mqttheight
     ui: {order: 4}
     birdseye: {order: 4}
-#   review: {alerts: {required_zones: [on_property]}}
+    # review: {alerts: {required_zones: [on_property]}}
     onvif:
       host: sunroom.home.arpa
       port: 8000
