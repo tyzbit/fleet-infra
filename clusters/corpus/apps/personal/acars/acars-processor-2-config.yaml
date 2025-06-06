@@ -276,7 +276,6 @@ Filters:
       
       Based on what I've told you, is this message something you're
       certain that an air travel enthusiast would want to see?
-      /no_think
     Options: &ollamaopts [
       {Name: num_predict, Value: 100},
       {Name: enable_thinking, Value: false},
