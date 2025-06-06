@@ -15,7 +15,7 @@ ACARSHub:
 
 Filters:  
   Ollama:
-    Model: qwen3:8b
+    Model: qwen3:4b
     URL: &ollamaurl http://ollama.home.arpa
     FilterOnFailure: true
     MaxPredictionTokens: 100
@@ -274,6 +274,7 @@ Filters:
       
       Based on what I've told you, is this message something you're
       certain that an air travel enthusiast would want to see?
+
   ACARS:
     DuplicateMessageSimilarity: 0.9
   VDLM2:

@@ -14,7 +14,7 @@ ACARSHub:
 
 Filters:
   Ollama:
-    Model: qwen3:8b
+    Model: qwen3:4b
     URL: &ollamaurl http://ollama.home.arpa
     FilterOnFailure: true
     MaxPredictionTokens: 100
@@ -316,6 +316,7 @@ Annotators:
       Make very minor corrections for extra whitespace, excessive comma usage
       and words with errant spaces in them. 
     SelectedFields: ollamaProcessedText,ollamaEditActions,ollamaQuestion
+
 Receivers:
   DiscordWebhook:
     URL: "${acars_discord_webhook}"
