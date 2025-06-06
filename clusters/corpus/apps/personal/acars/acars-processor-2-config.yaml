@@ -23,7 +23,7 @@ Filters:
     Timeout: 30
     Options: &ollamaopts [
       {Name: num_predict, Value: 100},
-      {Name: enable_thinking, Value: False},
+      # {Name: enable_thinking, Value: False},
       {Name: temperature, Value: 0},
       {Name: top_p, Value: 0.8},
       {Name: top_k, Value: 20},
