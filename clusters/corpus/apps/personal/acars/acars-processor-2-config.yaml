@@ -274,7 +274,13 @@ Filters:
       Based on what I've told you, is this message something you're
       certain that an air travel enthusiast would want to see?
       /no_think
-
+    Options: &ollamaopts [
+      {Name: num_predict, Value: 100},
+      {Name: enable_thinking, Value: false},
+      {Name: temperature, Value: 0},
+      {Name: top_p, Value: 0.8},
+      {Name: top_k, Value: 20},
+    ]
   ACARS:
     DuplicateMessageSimilarity: 0.9
   VDLM2:
@@ -308,6 +314,7 @@ Annotators:
   Ollama:
     Model: llama3.2
     URL: *ollamaurl
+    Options: *ollamaopts
     UserPrompt: >-
       Is there conversational prose in this message? Return any conversational
       prose if found. If present, prose will be found in the last section of
