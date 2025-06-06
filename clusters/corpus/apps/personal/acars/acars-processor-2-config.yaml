@@ -311,10 +311,9 @@ Annotators:
     UserPrompt: >-
       Is there conversational prose in this message? Return any conversational
       prose if found. If present, prose will be found in the last section of
-      a message. Add triple backticks to the beginning and end of your response. 
+      a message. Your response must start with "```" and end with "```". 
       
-      Make very minor corrections for extra whitespace, excessive comma usage
-      and words with errant spaces in them. 
+      Add or remove characters ONLY.
     SelectedFields: ollamaProcessedText,ollamaEditActions,ollamaQuestion
 
 Receivers:
