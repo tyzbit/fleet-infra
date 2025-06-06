@@ -4,7 +4,7 @@
 # Environment variables are substituted at runtime by acars-processor
 LogLevel: debug
 ACARSHub:
-  MaxConcurrentRequests: 1
+  MaxConcurrentRequests: 2
   ACARS:
     Host: &acarshubhost acars-acarshub
     Port: 15550
@@ -20,7 +20,7 @@ Filters:
     MaxPredictionTokens: 100
     MaxRetryAttempts: 1
     MaxRetryDelaySeconds: 5
-    Timeout: 30
+    Timeout: 120
     Options: &ollamaopts [
       {Name: num_predict, Value: 100},
       {Name: temperature, Value: 0.6},
