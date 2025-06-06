@@ -319,9 +319,11 @@ Annotators:
     URL: *ollamaurl
     Options: *ollamaopts
     UserPrompt: >-
-      Is there conversational prose in this message? If so, respond with it and
-      add triple backticks "```" before and after the message. If present,
+      Question: Is there conversational prose in this message? If present,
       prose will be found at the end of the message.
+      
+      Return any conversational prose found and add triple backticks "```" 
+      before and after the prose.
       /no_think
     SelectedFields: ollamaProcessedText,ollamaEditActions,ollamaQuestion
 
