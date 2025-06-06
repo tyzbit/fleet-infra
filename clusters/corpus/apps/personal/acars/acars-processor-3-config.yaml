@@ -5,7 +5,7 @@
 # Environment variables are substituted at runtime by acars-processor
 LogLevel: debug
 ACARSHub:
-  MaxConcurrentRequests: 4
+  MaxConcurrentRequests: 1
   ACARS:
     Host: &acarshubhost acars-acarshub
     Port: 15550
@@ -15,7 +15,7 @@ ACARSHub:
 
 Filters:  
   Ollama:
-    Model: qwen3:4b
+    Model: qwen3:8b
     URL: &ollamaurl http://ollama.home.arpa
     FilterOnFailure: true
     MaxPredictionTokens: 100
