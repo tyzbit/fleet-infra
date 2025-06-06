@@ -319,11 +319,11 @@ Annotators:
     URL: *ollamaurl
     Options: *ollamaopts
     UserPrompt: >-
-      Is there conversational prose in this message? Return any conversational
-      prose if found. If present, prose will be found in the last section of
-      a message. Your response must start with "```" and end with "```". 
+      Is there conversational prose in this message? If present, prose will be
+      found at the end of the message.
       
-      Add or remove characters ONLY.
+      Return any conversational prose if found. 
+      Your response must start and end with triple backticks "```". 
     SelectedFields: ollamaProcessedText,ollamaEditActions,ollamaQuestion
 
 Receivers:
