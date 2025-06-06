@@ -317,6 +317,7 @@ Annotators:
   Ollama:
     Model: *ollamamodel
     URL: *ollamaurl
+    SurroundWithBackticks: true
     Options: *ollamaopts
     UserPrompt: >-
       Question: Is there conversational prose in this message? If present,
