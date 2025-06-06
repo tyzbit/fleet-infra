@@ -18,6 +18,9 @@ Filters:
     URL: &ollamaurl http://ollama.home.arpa
     FilterOnFailure: true
     MaxPredictionTokens: 100
+    MaxRetryAttempts: 1
+    MaxRetryDelaySeconds: 5
+    Timeout: 30
     # -----------------------------------------
     # 9,101 characters
     # 2,371 tokens https://token-calculator.net
