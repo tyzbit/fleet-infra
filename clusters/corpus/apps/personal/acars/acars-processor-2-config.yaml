@@ -14,13 +14,20 @@ ACARSHub:
 
 Filters:
   Ollama:
-    Model: qwen3:4b
+    Model: &ollamamodel qwen3:8b
     URL: &ollamaurl http://ollama.home.arpa
     FilterOnFailure: true
     MaxPredictionTokens: 100
     MaxRetryAttempts: 1
     MaxRetryDelaySeconds: 5
     Timeout: 30
+    Options: &ollamaopts [
+      {Name: num_predict, Value: 100},
+      {Name: enable_thinking, Value: false},
+      {Name: temperature, Value: 0},
+      {Name: top_p, Value: 0.8},
+      {Name: top_k, Value: 20},
+    ]
     # -----------------------------------------
     # 9,101 characters
     # 2,371 tokens https://token-calculator.net
@@ -276,13 +283,7 @@ Filters:
       
       Based on what I've told you, is this message something you're
       certain that an air travel enthusiast would want to see?
-    Options: &ollamaopts [
-      {Name: num_predict, Value: 100},
-      {Name: enable_thinking, Value: false},
-      {Name: temperature, Value: 0},
-      {Name: top_p, Value: 0.8},
-      {Name: top_k, Value: 20},
-    ]
+
   ACARS:
     DuplicateMessageSimilarity: 0.9
   VDLM2:
@@ -314,7 +315,7 @@ Annotators:
       tar1090AircraftAltimeterGeometricFeet
 
   Ollama:
-    Model: llama3.2
+    Model: *ollamamodel
     URL: *ollamaurl
     Options: *ollamaopts
     UserPrompt: >-
