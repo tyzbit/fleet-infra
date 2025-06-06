@@ -293,6 +293,7 @@ Filters:
 Annotators:
   ACARS:
     Enabled: true
+    SurroundWithBackticks: true
     SelectedFields: |
       acarsAircraftTailCode
       acarsFrequencyMHz
@@ -301,6 +302,7 @@ Annotators:
 
   VDLM2:
     Enabled: true
+    SurroundWithBackticks: true
     SelectedFields: |
       vdlm2FrequencyHz
       acarsAircraftTailCode
