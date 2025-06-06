@@ -21,7 +21,7 @@ spec:
     controllers:
       ollama:
         type: deployment
-        replicas: 2
+        replicas: 3
         annotations:
           reloader.stakater.com/auto: "true"
         pod:
