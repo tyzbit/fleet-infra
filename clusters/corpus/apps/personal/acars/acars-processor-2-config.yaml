@@ -14,7 +14,7 @@ ACARSHub:
 
 Filters:
   Ollama:
-    Model: qwen3:8b
+    Model: qwen3:4b
     URL: &ollamaurl http://ollama.home.arpa
     FilterOnFailure: true
     MaxPredictionTokens: 100
