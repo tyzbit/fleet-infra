@@ -283,20 +283,19 @@ Filters:
 Annotators:
   ACARS:
     Enabled: true
-    SelectedFields: |
-      acarsMessageText
+    SelectedFields: [acarsMessageText]
 
   VDLM2:
     Enabled: true
-    SelectedFields: |
-      acarsMessageText
+    SelectedFields: [acarsMessageText]
 
   Tar1090:
     URL: http://adsb-ultrafeeder
     ReferenceGeolocation: "${my_latitude},${my_longitude}"
-    SelectedFields: |
+    SelectedFields: [
       tar1090AircraftDistanceMi
       tar1090AircraftAltimeterGeometricFeet
+    ]
 
   Ollama:
     Model: llama3.2
@@ -305,7 +304,10 @@ Annotators:
       Is there prose in this message? If present, prose will be the last section
       of a message. Return only the prose if found. 
       Surround it with triple backticks.
-    SelectedFields: ollamaProcessedText,ollamaEditActions
+    SelectedFields: [
+      ollamaProcessedText
+      ollamaEditActions
+    ]
     
 Receivers:
   DiscordWebhook:

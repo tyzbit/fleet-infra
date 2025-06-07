@@ -293,26 +293,29 @@ Filters:
 Annotators:
   ACARS:
     Enabled: false
-    SelectedFields: |
+    SelectedFields: [
       acarsAircraftTailCode
       acarsFrequencyMHz
       acarsMessageText
       acarsMessageFrom
+    ]
 
   VDLM2:
     Enabled: false
-    SelectedFields: |
+    SelectedFields: [
       vdlm2FrequencyHz
       acarsAircraftTailCode
       acarsMessageText
       acarsMessageFrom
+    ]
 
   Tar1090:
     URL: http://adsb-ultrafeeder
     ReferenceGeolocation: "${my_latitude},${my_longitude}"
-    SelectedFields: |
+    SelectedFields: [
       tar1090AircraftDistanceMi
       tar1090AircraftAltimeterGeometricFeet
+    ]
 
   Ollama:
     Model: qwen3:8b
@@ -335,7 +338,11 @@ Annotators:
       Return any conversational prose found and add triple backticks "```" 
       before and after the prose.
       /no_think
-    SelectedFields: ollamaProcessedText,ollamaEditActions,ollamaQuestion
+    SelectedFields: [
+      ollamaProcessedText
+      ollamaEditActions
+      ollamaQuestion
+    ]
 
 Receivers:
   DiscordWebhook:
