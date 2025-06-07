@@ -326,10 +326,10 @@ Annotators:
       {Name: top_k, Value: 20},
     ]
     FilterWithQuestion: true
-    MaxPredictionTokens: 200
+   #  MaxPredictionTokens: 200
     MaxRetryAttempts: 1
     MaxRetryDelaySeconds: 5
-    Timeout: 120
+    Timeout: 60
     UserPrompt: >-
       This message was sent between an aircraft and air traffic
       control. Rarely, messages like these have prose in them that
