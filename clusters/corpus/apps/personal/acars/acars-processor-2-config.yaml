@@ -292,7 +292,7 @@ Filters:
 
 Annotators:
   ACARS:
-    Enabled: true
+    Enabled: false
     SelectedFields: |
       acarsAircraftTailCode
       acarsFrequencyMHz
@@ -300,7 +300,7 @@ Annotators:
       acarsMessageFrom
 
   VDLM2:
-    Enabled: true
+    Enabled: false
     SelectedFields: |
       vdlm2FrequencyHz
       acarsAircraftTailCode
@@ -341,6 +341,7 @@ Receivers:
   DiscordWebhook:
     URL: "${acars_discord_webhook}"
     FormatText: true
+    RequiredFields: ["ollamaProcessedText"]
   NewRelic:
     APIKey: "${new_relic_license_key}"
     CustomEventType: CustomACARSHumanMessages
