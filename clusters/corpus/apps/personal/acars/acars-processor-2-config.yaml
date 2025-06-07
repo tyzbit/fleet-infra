@@ -293,7 +293,6 @@ Filters:
 Annotators:
   ACARS:
     Enabled: true
-    SurroundWithBackticks: true
     SelectedFields: |
       acarsAircraftTailCode
       acarsFrequencyMHz
@@ -302,7 +301,6 @@ Annotators:
 
   VDLM2:
     Enabled: true
-    SurroundWithBackticks: true
     SelectedFields: |
       vdlm2FrequencyHz
       acarsAircraftTailCode
@@ -319,7 +317,6 @@ Annotators:
   Ollama:
     Model: *ollamamodel
     URL: *ollamaurl
-    SurroundWithBackticks: true
     Options: *ollamaopts
     UserPrompt: >-
       Question: Is there conversational prose in this message? If present,
@@ -333,6 +330,7 @@ Annotators:
 Receivers:
   DiscordWebhook:
     URL: "${acars_discord_webhook}"
+    FormatText: true
   NewRelic:
     APIKey: "${new_relic_license_key}"
     CustomEventType: CustomACARSHumanMessages
