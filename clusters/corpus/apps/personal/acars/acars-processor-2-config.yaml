@@ -324,7 +324,7 @@ Annotators:
       {Name: top_k, Value: 20},
     ]
     FilterWithQuestion: true
-    MaxPredictionTokens: 100
+    MaxPredictionTokens: 200
     MaxRetryAttempts: 1
     MaxRetryDelaySeconds: 5
     Timeout: 120
