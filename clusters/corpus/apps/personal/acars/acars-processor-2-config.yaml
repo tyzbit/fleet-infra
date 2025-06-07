@@ -288,7 +288,6 @@ Filters:
     DuplicateMessageSimilarity: 0.9
   VDLM2:
     DuplicateMessageSimilarity: 0.9
-  
 
 Annotators:
   ACARS:
@@ -582,7 +581,7 @@ Annotators:
       
       Based on what I've told you, is this message something you're
       certain that an air travel enthusiast would want to see?
-      /no_think
+#      /no_think
     SelectedFields: [
       ollamaProcessedText
       ollamaEditActions
