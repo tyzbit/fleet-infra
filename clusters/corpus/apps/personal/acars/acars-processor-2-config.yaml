@@ -580,8 +580,9 @@ Annotators:
       missing spaces between words which is due to human typos.
       
       Based on what I've told you, is this message something you're
-      certain that an air travel enthusiast would want to see?
-#      /no_think
+      certain that an air travel enthusiast would want to see? If so,
+      return only the prose and only remove extra whitespace characters.
+      /no_think
     SelectedFields: [
       ollamaProcessedText
       ollamaEditActions
