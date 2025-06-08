@@ -37,7 +37,6 @@ data:
       for i in ????:??:??.? ; do
         echo -n "$i" > bind
       done
-      idle 120
     }
 
     scaled=1
@@ -123,6 +122,7 @@ data:
                   unbind $controller
                   log "Resetting USB Hub: Binding controller $controller"
                   bind $controller
+                  idle 120
                   fixed=1
                 else
                   log "Apps didn't scale down, exiting with error"
