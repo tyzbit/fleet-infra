@@ -200,10 +200,10 @@ cameras:
         # The value should be between 0.1 and 0.75
         zoom_factor: 0.3
         track: [person, cat, dog]
-        required_zones:
-          - on_property
+        # required_zones:
+        #   - on_property
         # Required: Name of ONVIF preset in camera's firmware to return to when tracking is over. (default: shown below)
-        return_preset: home
+        # return_preset: home
         # Optional: Seconds to delay before returning to preset. (default: shown below)
         timeout: 10
     zones:
