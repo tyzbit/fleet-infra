@@ -3,6 +3,7 @@
 # Purpose: Forward all human-created messages to New Relic and Discord
 # Environment variables are substituted at runtime by acars-processor
 LogLevel: debug
+ColorOutput: true
 ACARSHub:
   MaxConcurrentRequests: 2
   ACARS:
@@ -315,37 +316,36 @@ Annotators:
       tar1090AircraftAltimeterGeometricFeet
     ]
 
-  Ollama:
-    Model: qwen3:8b
-    # URL: http://ollama.home.arpa
-    URL: http://media2.home.arpa:11434
-    Options: &ollamaopts [
-      {Name: num_predict, Value: 100},
-      {Name: temperature, Value: 0.6},
-      {Name: top_p, Value: 0.95},
-      {Name: top_k, Value: 20},
-    ]
-    FilterWithQuestion: false
-   #  MaxPredictionTokens: 200
-    MaxRetryAttempts: 1
-    MaxRetryDelaySeconds: 5
-    Timeout: 60
-    UserPrompt: >-
-      Is there human-written prose present in this message?
+  # Ollama:
+  #   Model: qwen3:8b
+  #   # URL: http://ollama.home.arpa
+  #   URL: http://media2.home.arpa:11434
+  #   Options: &ollamaopts [
+  #     {Name: num_predict, Value: 100},
+  #     {Name: temperature, Value: 0.6},
+  #     {Name: top_p, Value: 0.95},
+  #     {Name: top_k, Value: 20},
+  #   ]
+  #   FilterWithQuestion: false
+  #  #  MaxPredictionTokens: 200
+  #   MaxRetryAttempts: 1
+  #   MaxRetryDelaySeconds: 5
+  #   Timeout: 60
+  #   UserPrompt: >-
+  #     Is there human-written prose present in this message?
 
-      Return only any human-written prose found in this message.
-      /no_think
-    SelectedFields: [
-      ollamaProcessedText
-      ollamaEditActions
-      ollamaQuestion
-    ]
+  #     Return only any human-written prose found in this message.
+  #     /no_think
+  #   SelectedFields: [
+  #     ollamaProcessedText
+  #     ollamaEditActions
+  #     ollamaQuestion
+  #   ]
 
 Receivers:
   DiscordWebhook:
     URL: "${acars_discord_webhook}"
     FormatText: true
-    RequiredFields: ["acarsMessageText"]
   NewRelic:
     APIKey: "${new_relic_license_key}"
     CustomEventType: CustomACARSHumanMessages
