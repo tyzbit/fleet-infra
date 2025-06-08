@@ -11,9 +11,9 @@ data:
     # Turn this into iterable
     SERIALS=$(echo $SERIALS | sed 's/,/\n/g')
     sts=(
-      acars-acarsdec
-      acars-acarsdec2
-      acars-dumpvdl2
+      adsb-dump978
+      adsb-flightradar24
+      adsb-ultrafeeder
     )
     hub=/sys/bus/pci/drivers/xhci_hcd
 
