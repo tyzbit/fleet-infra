@@ -27,12 +27,16 @@ data:
     }
 
     function unbind() {
-      echo -n $1 > $hub/unbind
+      for i in ????:??:??.? ; do
+        echo -n "$i" > unbind
+      done
       idle 1
     }
 
     function bind() {
-      echo -n $1 > $hub/bind
+      for i in ????:??:??.? ; do
+        echo -n "$i" > bind
+      done
       idle 120
     }
 
@@ -101,26 +105,31 @@ data:
             log "$SERIAL: Couldn't get bus or device, resetting the controller"
             log "Here's the controllers present:"
             timeout 5 usb-devices | grep -B4 -A6 "Nooelec"
-            controller=$(ls /sys/bus/pci/drivers/xhci_hcd | grep -E '[0-9a-f]{4}:[0-9a-f]{2}:[0-9a-f]{2}\.[0-9]')
-            if [[ "$${controller}x" == "x" ]]; then
-              log "$SERIAL: Couldn't determine controller, here's /sys/bus/pci/drivers/xhci_hcd"
-              ls /sys/bus/pci/drivers/xhci_hcd
-              log "Exiting with error"
-              exit 10
-            else
-              scale 0
-              waitforzero; status=$?
-              if [[ $status == 0 ]]; then
-                log "Resetting USB Hub: Unbinding controller $controller"
-                unbind $controller
-                log "Resetting USB Hub: Binding controller $controller"
-                bind $controller
-                fixed=1
-              else
-                log "Apps didn't scale down, exiting with error"
-                exit 30
+            for controller in /sys/bus/pci/drivers/?hci_hcd; do
+              if ! cd $xhci ; then
+                echo Weird error. Failed to change directory to $xhci
+                exit 1
               fi
-            fi
+              if [[ "$${controller}x" == "x" ]]; then
+                log "$SERIAL: Couldn't determine controller, here's $controller"
+                ls $controller
+                log "Exiting with error"
+                exit 10
+              else
+                scale 0
+                waitforzero; status=$?
+                if [[ $status == 0 ]]; then
+                  log "Resetting USB Hub: Unbinding controller $controller"
+                  unbind $controller
+                  log "Resetting USB Hub: Binding controller $controller"
+                  bind $controller
+                  fixed=1
+                else
+                  log "Apps didn't scale down, exiting with error"
+                  exit 30
+                fi
+              fi
+            done
           fi
         fi
         if [[ $fixed == 1 ]]; then
