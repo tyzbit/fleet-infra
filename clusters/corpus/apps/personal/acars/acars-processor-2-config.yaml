@@ -292,24 +292,24 @@ Annotators:
   ACARS:
     Enabled: false
     SelectedFields: [
-      acarsAircraftTailCode
-      acarsFrequencyMHz
-      acarsMessageText
+      acarsAircraftTailCode,
+      acarsFrequencyMHz,
+      acarsMessageText,
       acarsMessageFrom
     ]
   VDLM2:
     Enabled: false
     SelectedFields: [
-      vdlm2FrequencyHz
-      acarsAircraftTailCode
-      acarsMessageText
+      vdlm2FrequencyHz,
+      acarsAircraftTailCode,
+      acarsMessageText,
       acarsMessageFrom
     ]
   Tar1090:
     URL: http://adsb-ultrafeeder
     ReferenceGeolocation: "${my_latitude},${my_longitude}"
     SelectedFields: [
-      tar1090AircraftDistanceMi
+      tar1090AircraftDistanceMi,
       tar1090AircraftAltimeterGeometricFeet
     ]
   # Ollama:
@@ -333,8 +333,8 @@ Annotators:
   #     Return only any human-written prose found in this message.
   #     /no_think
   #   SelectedFields: [
-  #     ollamaProcessedText
-  #     ollamaEditActions
+  #     ollamaProcessedText,
+  #     ollamaEditActions,
   #     ollamaQuestion
   #   ]
 
