@@ -23,7 +23,7 @@ Filters:
     MaxRetryDelaySeconds: 5
     Timeout: 120
     Options: &ollamaopts [
-      {Name: num_predict, Value: 100},
+      {Name: max_new_tokens, Value: 100},
       {Name: temperature, Value: 0.0},
       {Name: top_p, Value: 0.5},
       {Name: top_k, Value: 20},
