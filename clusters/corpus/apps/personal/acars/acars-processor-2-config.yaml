@@ -283,7 +283,6 @@ Filters:
       Based on what I've told you, is this message something you're
       certain that an air travel enthusiast would want to see?
 #      /no_think
-
   ACARS:
     DuplicateMessageSimilarity: 0.9
   VDLM2:
@@ -298,7 +297,6 @@ Annotators:
       acarsMessageText
       acarsMessageFrom
     ]
-
   VDLM2:
     Enabled: false
     SelectedFields: [
@@ -307,7 +305,6 @@ Annotators:
       acarsMessageText
       acarsMessageFrom
     ]
-
   Tar1090:
     URL: http://adsb-ultrafeeder
     ReferenceGeolocation: "${my_latitude},${my_longitude}"
@@ -315,7 +312,6 @@ Annotators:
       tar1090AircraftDistanceMi
       tar1090AircraftAltimeterGeometricFeet
     ]
-
   # Ollama:
   #   Model: qwen3:8b
   #   # URL: http://ollama.home.arpa

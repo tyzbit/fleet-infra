@@ -3,6 +3,7 @@
 # Purpose: Forward all messages to New Relic
 # Environment variables are substituted at runtime by acars-processor
 LogLevel: debug
+ColorOutput: true
 ACARSHub:
   ACARS:
     Host: &acarshubhost acars-acarshub
