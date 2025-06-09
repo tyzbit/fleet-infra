@@ -290,7 +290,7 @@ Filters:
 
 Annotators:
   ACARS:
-    Enabled: false
+    Enabled: true
     SelectedFields: [
       acarsAircraftTailCode,
       acarsFrequencyMHz,
@@ -298,7 +298,7 @@ Annotators:
       acarsMessageFrom
     ]
   VDLM2:
-    Enabled: false
+    Enabled: true
     SelectedFields: [
       vdlm2FrequencyHz,
       acarsAircraftTailCode,
