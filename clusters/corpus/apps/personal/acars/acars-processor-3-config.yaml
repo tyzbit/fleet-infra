@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/tyzbit/acars-processor/refs/heads/main/schema.json
 
-# Purpose: Testing with real messages and services, but 
+# Purpose: Testing with real messages and services, but
 # development-labeled receivers
 # Environment variables are substituted at runtime by acars-processor
 LogLevel: debug
@@ -13,7 +13,7 @@ ACARSHub:
     Host: *acarshubhost
     Port: 15555
 
-Filters:  
+Filters:
   Ollama:
     Model: qwen3:4b
     URL: &ollamaurl http://ollama.home.arpa
@@ -23,7 +23,7 @@ Filters:
     # 9,101 characters
     # 2,371 tokens https://token-calculator.net
     # -----------------------------------------
-    UserPrompt: | 
+    UserPrompt: |
       This message was sent between an aircraft and air traffic
       control. Rarely, messages like these have prose in them that
       is interesting to air travel enthusiasts because it was was
@@ -36,7 +36,7 @@ Filters:
       Questions asked in natural language are definitely of interest
       because automated systems will not ask questions using prose.
       Air travel enthusiasts want to see friendly or casual messages
-      between pilots and ATC because 
+      between pilots and ATC because
       
       If a message has prose that comes across as dramatic, friendly,
       angry, alarmed, scared, stressed, or otherwise seems emotional
@@ -52,7 +52,7 @@ Filters:
       the pilots, the crew, or the passengers, air travel enthusiasts
       want to see it because they care about people involved in
       air travel. Some examples of elements notable to pilots, the
-      crew or passengers are emergencies, life vests, wheelchairs, 
+      crew or passengers are emergencies, life vests, wheelchairs,
       passengers (the shorthand PAX is used), bad weather
       (known as SIGMET), special situations (for example, an aircraft
       with only one passenger or a request that looks like it's for a
@@ -302,7 +302,7 @@ Annotators:
     URL: *ollamaurl
     UserPrompt: >-
       Is there prose in this message? If present, prose will be the last section
-      of a message. Return only the prose if found. 
+      of a message. Return only the prose if found.
       Surround it with triple backticks.
     SelectedFields: [
       ollamaProcessedText

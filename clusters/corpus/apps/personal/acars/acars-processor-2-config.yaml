@@ -32,7 +32,7 @@ Filters:
     # 9,101 characters
     # 2,371 tokens https://token-calculator.net
     # -----------------------------------------
-    UserPrompt: | 
+    UserPrompt: |
       This message was sent between an aircraft and air traffic
       control. Rarely, messages like these have prose in them that
       is interesting to air travel enthusiasts because it was was
@@ -45,7 +45,7 @@ Filters:
       Questions asked in natural language are definitely of interest
       because automated systems will not ask questions using prose.
       Air travel enthusiasts want to see friendly or casual messages
-      between pilots and ATC because 
+      between pilots and ATC because
       
       If a message has prose that comes across as dramatic, friendly,
       angry, alarmed, scared, stressed, or otherwise seems emotional
@@ -61,7 +61,7 @@ Filters:
       the pilots, the crew, or the passengers, air travel enthusiasts
       want to see it because they care about people involved in
       air travel. Some examples of elements notable to pilots, the
-      crew or passengers are emergencies, life vests, wheelchairs, 
+      crew or passengers are emergencies, life vests, wheelchairs,
       passengers (the shorthand PAX is used), bad weather
       (known as SIGMET), special situations (for example, an aircraft
       with only one passenger or a request that looks like it's for a
