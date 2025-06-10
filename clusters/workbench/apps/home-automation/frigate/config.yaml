@@ -178,7 +178,7 @@ cameras:
     enabled: true
     detect: *doorbelldetect
     ffmpeg: {inputs:
-      [{path: rtsp://localhost:8554/sunroom, roles: *detectandrecord}]}
+      [{path: rtsp://localhost:8554/sunroom, roles: [record]}]}
     mqtt: *mqttheight
     ui: {order: 4}
     birdseye: {order: 4}
