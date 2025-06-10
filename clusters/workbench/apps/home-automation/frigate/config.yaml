@@ -206,11 +206,11 @@ cameras:
         # return_preset: home
         # Optional: Seconds to delay before returning to preset. (default: shown below)
         # timeout: 10
-    zones:
-      on_property:
-        <<: *zonedefault
-        objects: []
-        coordinates: 0,1,1,1,1,0,0,0 # Full screen
+    # zones:
+    #   on_property:
+    #     <<: *zonedefault
+    #     objects: []
+    #     coordinates: 0,1,1,1,1,0,0,0 # Full screen
 
   backdeck:
     enabled: true
