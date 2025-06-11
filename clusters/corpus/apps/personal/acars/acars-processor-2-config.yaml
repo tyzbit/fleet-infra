@@ -24,9 +24,9 @@ Filters:
     FilterOnFailure: true
     MaxRetryAttempts: 1
     MaxRetryDelaySeconds: 5
-    Timeout: 30
+    Timeout: 120
     Options: &ollamaopts [
-      {Name: num_predict, Value: 100},
+      {Name: num_predict, Value: 512},
       {Name: temperature, Value: 0.0},
       {Name: top_p, Value: 0.5},
       {Name: top_k, Value: 20},
