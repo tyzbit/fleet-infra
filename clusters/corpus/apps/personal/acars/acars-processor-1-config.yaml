@@ -2,15 +2,20 @@
 
 # Purpose: Forward all messages to New Relic
 # Environment variables are substituted at runtime by acars-processor
-LogLevel: debug
-ColorOutput: true
-ACARSHub:
-  ACARS:
-    Host: &acarshubhost acars-acarshub
-    Port: 15550
-  VDLM2:
-    Host: *acarshubhost
-    Port: 15555
+ACARSProcessorSettings:
+  ColorOutput: true
+  SaveMessages: false
+  SQLiteDatabasePath: ./messages.db
+  LogLevel: debug
+  ACARSHub:
+    MaxConcurrentRequests: 2
+    ACARS:
+      Host: &acarshubhost acars-acarshub
+      Port: 15550
+    VDLM2:
+      Host: *acarshubhost
+      Port: 15555
+
 Annotators:
   ACARS: {Enabled: true}
   VDLM2: {Enabled: true}

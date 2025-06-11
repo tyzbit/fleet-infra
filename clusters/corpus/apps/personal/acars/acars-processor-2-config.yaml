@@ -2,16 +2,19 @@
 
 # Purpose: Forward all human-created messages to New Relic and Discord
 # Environment variables are substituted at runtime by acars-processor
-LogLevel: debug
-ColorOutput: true
-ACARSHub:
-  MaxConcurrentRequests: 2
-  ACARS:
-    Host: &acarshubhost acars-acarshub
-    Port: 15550
-  VDLM2:
-    Host: *acarshubhost
-    Port: 15555
+ACARSProcessorSettings:
+  ColorOutput: true
+  SaveMessages: true
+  SQLiteDatabasePath: /data/messages.db
+  LogLevel: debug
+  ACARSHub:
+    MaxConcurrentRequests: 2
+    ACARS:
+      Host: &acarshubhost acars-acarshub
+      Port: 15550
+    VDLM2:
+      Host: *acarshubhost
+      Port: 15555
 
 Filters:
   Ollama:
