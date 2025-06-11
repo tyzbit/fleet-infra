@@ -22,11 +22,11 @@ Filters:
     Model: &ollamamodel qwen3:8b
     URL: &ollamaurl http://ollama.home.arpa
     FilterOnFailure: true
-    MaxRetryAttempts: 1
+    MaxRetryAttempts: 3
     MaxRetryDelaySeconds: 5
     Timeout: 120
     Options: &ollamaopts [
-      {Name: num_predict, Value: 512},
+      {Name: num_predict, Value: 128},
       {Name: temperature, Value: 0.0},
       {Name: top_p, Value: 0.5},
       {Name: top_k, Value: 20},
