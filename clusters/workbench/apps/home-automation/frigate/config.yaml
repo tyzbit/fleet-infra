@@ -182,7 +182,7 @@ cameras:
     mqtt: *mqttheight
     ui: {order: 4}
     birdseye: {order: 4}
-    # review: {alerts: {required_zones: [on_property]}}
+    review: {alerts: {required_zones: [on_property]}}
     onvif:
       host: sunroom.home.arpa
       port: 8000
@@ -206,11 +206,11 @@ cameras:
         # return_preset: home
         # Optional: Seconds to delay before returning to preset. (default: shown below)
         # timeout: 10
-    # zones:
-    #   on_property:
-    #     <<: *zonedefault
-    #     objects: []
-    #     coordinates: 0,1,1,1,1,0,0,0 # Full screen
+    zones:
+      on_property:
+        <<: *zonedefault
+        objects: [person]
+        coordinates: 0,1,1,1,1,0,0,0 # Full screen
 
   backdeck:
     enabled: true
