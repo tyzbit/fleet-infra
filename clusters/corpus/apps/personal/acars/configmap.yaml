@@ -13,6 +13,7 @@ data:
     sts=(
       acars-acarsdec
       acars-acarsdec2
+      acars-acarsdec3
       acars-dumpvdl2
     )
     hub=/sys/bus/pci/drivers/xhci_hcd
