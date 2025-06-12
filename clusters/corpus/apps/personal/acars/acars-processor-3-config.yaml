@@ -302,6 +302,7 @@ Annotators:
     SelectedFields: [acarsMessageText]
 
   Tar1090:
+    Enabled: true
     URL: http://adsb-ultrafeeder
     ReferenceGeolocation: "${my_latitude},${my_longitude}"
     SelectedFields: 
@@ -324,8 +325,11 @@ Annotators:
     
 Receivers:
   DiscordWebhook:
+    Enabled: true
     URL: "${acars_development_discord_webhook}"
+    FormatText: true
 
   NewRelic:
+    Enabled: true
     APIKey: "${new_relic_license_key}"
     CustomEventType: CustomACARSTestingMessages
