@@ -37,7 +37,7 @@ spec:
             image: {repository: debian,tag: latest}
             command: [bash,"/tmp/adsb-usb-watchdog.sh"]
             # env: {SERIALS: "30275839,98941503"}
-            env: {SERIALS: "30275839,stx:1090:0"} # Nano SDR
+            env: {SERIALS: "98941503,stx:1090:0"} # Naked SDR + Nano SDR
       ultrafeeder:
         <<: *common_settings
         replicas: 1
@@ -145,8 +145,8 @@ spec:
               LAT: ${my_latitude}
               LON: ${my_longitude}
               DUMP978_DEVICE_TYPE: rtlsdr
-              # DUMP978_RTLSDR_DEVICE: "98941503"
-              DUMP978_RTLSDR_DEVICE: "30275839" # Original Nooelect SDR
+              DUMP978_RTLSDR_DEVICE: "98941503"
+              # DUMP978_RTLSDR_DEVICE: "30275839" # Original Nooelect SDR
               # DUMP978_RTLSDR_DEVICE: "stx:1090:0" # Nooelec Nano SDR
               DUMP978_SDR_GAIN: autogain
               DUMP978_SDR_PPM: "0"
