@@ -3,22 +3,36 @@
 # Purpose: Testing with real messages and services, but
 # development-labeled receivers
 # Environment variables are substituted at runtime by acars-processor
-LogLevel: debug
-ACARSHub:
-  MaxConcurrentRequests: 1
-  ACARS:
-    Host: &acarshubhost acars-acarshub
-    Port: 15550
-  VDLM2:
-    Host: *acarshubhost
-    Port: 15555
+ACARSProcessorSettings:
+  ColorOutput: true
+  SaveMessages: true # messages saved but no persistence in HR, lost on restart
+  SQLiteDatabasePath: ./messages.db
+  LogLevel: debug
+  ACARSHub:
+    MaxConcurrentRequests: 1
+    ACARS:
+      Host: &acarshubhost acars-acarshub
+      Port: 15550
+    VDLM2:
+      Host: *acarshubhost
+      Port: 15555
+
 
 Filters:
   Ollama:
-    Model: qwen3:4b
-    URL: &ollamaurl http://ollama.home.arpa
+    Enabled: true
+    Model: &ollamamodel qwen3:8b
+    URL: &ollamaurl http://media2.home.arpa:11434
     FilterOnFailure: true
-    MaxPredictionTokens: 100
+    MaxRetryAttempts: 1
+    MaxRetryDelaySeconds: 5
+    Timeout: 30
+    Options: &ollamaopts [
+      {Name: num_predict, Value: 128},
+      {Name: temperature, Value: 0.0},
+      {Name: top_p, Value: 0.5},
+      {Name: top_k, Value: 20},
+    ]
     # -----------------------------------------
     # 9,101 characters
     # 2,371 tokens https://token-calculator.net
@@ -274,7 +288,7 @@ Filters:
       
       Based on what I've told you, is this message something you're
       certain that an air travel enthusiast would want to see?
-
+#      /no_think
   ACARS:
     DuplicateMessageSimilarity: 0.9
   VDLM2:
@@ -292,22 +306,23 @@ Annotators:
   Tar1090:
     URL: http://adsb-ultrafeeder
     ReferenceGeolocation: "${my_latitude},${my_longitude}"
-    SelectedFields: [
-      tar1090AircraftDistanceMi
-      tar1090AircraftAltimeterGeometricFeet
-    ]
+    SelectedFields: 
+      - tar1090AircraftAltimeterBarometerFeet
+      - tar1090AircraftDistanceMi
+      - tar1090ReferenceGeolocation    
 
   Ollama:
+    Enabled: false
     Model: llama3.2
     URL: *ollamaurl
     UserPrompt: >-
       Is there prose in this message? If present, prose will be the last section
       of a message. Return only the prose if found.
       Surround it with triple backticks.
-    SelectedFields: [
-      ollamaProcessedText
-      ollamaEditActions
-    ]
+    SelectedFields: 
+      - OllamaEditActions
+      - OllamaProcessedText
+      - OllamaQuestion    
     
 Receivers:
   DiscordWebhook:
