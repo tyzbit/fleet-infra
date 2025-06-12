@@ -86,8 +86,8 @@ spec:
               ENABLE_978: "yes"
               URL_978: http://adsb-dump978/skyaware978
               # READSB_RTLSDR_DEVICE: 00000001 # Serial number of device
-              DEVICE: "30275839"
-              # DEVICE: "stx:1090:0" # Nano SDR
+              # DEVICE: "30275839"
+              DEVICE: "stx:1090:0" # Nano SDR
               # readsb/decoder parameters: (these are in the secret)
               READSB_LAT: ${my_latitude}
               READSB_LON: ${my_longitude}
@@ -146,8 +146,8 @@ spec:
               LON: ${my_longitude}
               DUMP978_DEVICE_TYPE: rtlsdr
               # DUMP978_RTLSDR_DEVICE: "98941503"
-              # DUMP978_RTLSDR_DEVICE: "30275839" # Original Nooelect SDR
-              DUMP978_RTLSDR_DEVICE: "stx:1090:0" # Nooelec Nano SDR
+              DUMP978_RTLSDR_DEVICE: "30275839" # Original Nooelect SDR
+              # DUMP978_RTLSDR_DEVICE: "stx:1090:0" # Nooelec Nano SDR
               DUMP978_SDR_GAIN: autogain
               DUMP978_SDR_PPM: "0"
             resources:
