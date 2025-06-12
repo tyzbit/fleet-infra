@@ -8,6 +8,7 @@ ACARSProcessorSettings:
   SaveMessages: true # messages saved but no persistence in HR, lost on restart
   SQLiteDatabasePath: ./messages.db
   LogLevel: debug
+  LogHideTimestamps: true
   ACARSHub:
     MaxConcurrentRequests: 1
     ACARS:
