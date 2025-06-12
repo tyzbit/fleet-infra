@@ -112,3 +112,6 @@ spec:
       data-2:
         existingClaim: acars-processor-2-data-longhorn-database
         advancedMounts: {acars-processor-2: {acars-processor-2: [path: /data]}}
+      data-3:
+        existingClaim: acars-processor-3-nas
+        advancedMounts: {acars-processor-3: {acars-processor-3: [path: /data]}}

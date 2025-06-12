@@ -5,8 +5,8 @@
 # Environment variables are substituted at runtime by acars-processor
 ACARSProcessorSettings:
   ColorOutput: true
-  SaveMessages: true # messages saved but no persistence in HR, lost on restart
-  SQLiteDatabasePath: ./messages.db
+  SaveMessages: true
+  SQLiteDatabasePath: /data/messages.db
   LogLevel: debug
   LogHideTimestamps: true
   ACARSHub:
@@ -86,6 +86,7 @@ Filters:
       - FREETEXT
       - CHOP
       - DEFECT
+      - THX
       
       Here's an example message air travel enthusiasts want to see:
       ```
@@ -157,8 +158,7 @@ Filters:
       that a hobbyist would NOT care about. Air travel enthusiasts
       want to see messages from people and messages written by people
       are more free-form, may contain errors and read more like a
-      natural conversation or prose. This is highly structural as
-      evidenced by the large amount of commas, slashes and colons, so
+      natural conversation or prose. This message is highly structural so
       air travel enthusiasts don't want to see this message.
       
       This is another example of a message that air travel enthusiasts

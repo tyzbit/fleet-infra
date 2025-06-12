@@ -25,3 +25,17 @@ spec:
   resources:
     requests:
       storage: 5Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: acars-processor-3-data-nas
+  namespace: personal
+spec:
+  accessModes:
+    - ReadWriteOnce
+  volumeMode: Filesystem
+  storageClassName: nas
+  resources:
+    requests:
+      storage: 5Gi
