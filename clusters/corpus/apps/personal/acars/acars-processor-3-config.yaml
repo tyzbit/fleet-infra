@@ -80,6 +80,15 @@ Filters:
       so the pilots can relay them to their passengers. This is the type of
       message air travel enthusiasts will want to know about because it is air
       travel communication not related to air travel.
+
+      If a message has FL and then 3 numbers and talks about "SMOOTH" or "CHOP",
+      it's referring to the smoothness of the flight level and is communication
+      from a pilot to other pilots. Since the message comes from a pilot,
+      air travel enthusiasts are interested in seeing it.
+
+      If the message talks about gate assignments, that was sent by a pilot
+      because pilots need to know which gate to bring their aircraft to and air
+      travel enthusiasts want to see those kinds of messages.
       
       If the message has any of these strings, then air travel enthusiasts
       definitely want to see it because only humans will use these terms.
@@ -93,6 +102,9 @@ Filters:
       - CHOP
       - DEFECT
       - THX
+      - THANKS
+      - EVENING
+      - POTABLE
       
       Here's an example message air travel enthusiasts want to see:
       ```
@@ -112,8 +124,8 @@ Filters:
       enthusiasts like drama.
       - It has "CHEERS ALEX" which is a friendly phrase written by a person.
       Any friendly greetings or closings such as "THANKS", "GOOD MORNING",
-      "HELLO", or others were definitely written by a person and air travel
-      enthusiasts want to see those messages.
+      "GOOD EVENING", "HELLO", or others were definitely written by a person and
+      air travel enthusiasts want to see those messages.
       
       This is a harder message because it is extremely short, but it is still
       something air travel enthusiasts are interested in seeing:
@@ -271,18 +283,8 @@ Filters:
       in this case even though it's a departure delay report because the
       additional comments will always be noteworthy and of interest.
       
-      Air travel enthusiasts do not want to see a message that has a long string
-      of numbers and letters without spaces, even if some of the groups of
-      characters might resemble something such as:
-
-      ```
-      D3M721CLT ORF N36488W07618003480151P187151013G0009N36500W0761700
-      3490106P180130016G0009N36510W07616003490063P165128023G0009N36521
-      W07615003500020P145113016G0009A2010
-      ```
-
-      Air travel enthusiasts don't want to see messages with mostly acronyms
-      because they won't know what they mean.
+      Air travel enthusiasts do not want to see a message that looks like data
+      rather than conversational prose.
       
       Based on what I've told you, is this message something you're certain that
       an air travel enthusiast would want to see?
