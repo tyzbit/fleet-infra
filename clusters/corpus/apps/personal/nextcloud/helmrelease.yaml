@@ -53,7 +53,7 @@ spec:
           &app nextcloud-app:
             image:
               repository: nextcloud
-              tag: &nextcloudver "31.0.5"
+              tag: &nextcloudver "31.0.6"
               pullPolicy: Always
             securityContext:
               privileged: true
