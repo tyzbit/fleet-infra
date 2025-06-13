@@ -29,7 +29,7 @@ Filters:
     Timeout: 30
     Options: &ollamaopts [
       {Name: num_predict, Value: 100}, # Maximum number of tokens (words, kinda) to generate
-      {Name: max_tokens, Value: 100}, # Same as above?
+      {Name: max_tokens, Value: 20}, # Same as above?
       {Name: temperature, Value: 0.0}, # Creativity (0.0-2.0)
       {Name: top_p, Value: 0.1}, # Answer diversity with top_k (0.0-1.0)
       {Name: top_k, Value: 20}, # Answer diversity (ex 0-100)
