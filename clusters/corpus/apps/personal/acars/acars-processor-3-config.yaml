@@ -18,7 +18,6 @@ ACARSProcessorSettings:
       Host: *acarshubhost
       Port: 15555
 
-
 Filters:
   Ollama:
     Enabled: true
@@ -29,10 +28,12 @@ Filters:
     MaxRetryDelaySeconds: 5
     Timeout: 30
     Options: &ollamaopts [
-      {Name: num_predict, Value: 128},
-      {Name: temperature, Value: 0.0},
-      {Name: top_p, Value: 0.5},
-      {Name: top_k, Value: 20},
+      {Name: num_predict, Value: 40}, # Maximum number of tokens (words, kinda) to generate
+      {Name: max_tokens, Value: 40}, # Same as above?
+      {Name: temperature, Value: 0.0}, # Creativity (0.0-2.0)
+      {Name: top_p, Value: 0.1}, # Answer diversity with top_k (0.0-1.0)
+      {Name: top_k, Value: 20}, # Answer diversity (ex 0-100)
+      {Name: frequency_penalty, Value: 1.5}, # Penalize repeated tokens (0-2.0)
     ]
     # -----------------------------------------
     # 9,101 characters
