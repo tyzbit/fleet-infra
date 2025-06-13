@@ -36,7 +36,7 @@ Filters:
     ]
     # -----------------------------------------
     # 9,101 characters
-    # 2,371 tokens https://token-calculator.net
+    # 2,495 tokens https://token-calculator.net
     # -----------------------------------------
     UserPrompt: |
       This message was sent between an aircraft and air traffic control. Rarely,
