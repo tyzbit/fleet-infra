@@ -26,8 +26,8 @@ Filters:
     FilterOnFailure: true
     # URL: &ollamaurl http://media2.home.arpa:11434
     # URL: &ollamaurl http://172.23.97.210:11434    FilterOnFailure: true
-    MaxRetryAttempts: 1
-    MaxRetryDelaySeconds: 5
+    MaxRetryAttempts: 2
+    MaxRetryDelaySeconds: 30
     Timeout: 30
     Options: &ollamaopts [
       {Name: num_predict, Value: 100}, # Maximum number of tokens (words, kinda) to generate

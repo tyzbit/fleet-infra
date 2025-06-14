@@ -8,7 +8,7 @@ ACARSProcessorSettings:
   SQLiteDatabasePath: /data/messages.db
   LogLevel: debug
   ACARSHub:
-    MaxConcurrentRequests: 2
+    MaxConcurrentRequests: 1
     ACARS:
       Host: &acarshubhost acars-acarshub
       Port: 15550
@@ -25,7 +25,7 @@ Filters:
     # URL: &ollamaurl http://172.23.97.210:11434
     FilterOnFailure: true
     MaxRetryAttempts: 5
-    MaxRetryDelaySeconds: 10
+    MaxRetryDelaySeconds: 30
     Timeout: 30
     Options: &ollamaopts [
       {Name: num_predict, Value: 100}, # Maximum number of tokens (words, kinda) to generate
