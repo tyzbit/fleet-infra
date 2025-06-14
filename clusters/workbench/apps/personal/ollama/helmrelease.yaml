@@ -1,0 +1,202 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.7.3/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app ollama
+  namespace: flux-system
+spec:
+  interval: 30m
+  releaseName: *app
+  targetNamespace: personal
+  chart:
+    spec:
+      chart: app-template
+      version: "3.7.3"
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  values:
+    controllers:
+      ollama:
+        type: deployment
+        replicas: 3
+        annotations:
+          reloader.stakater.com/auto: "true"
+        pod:
+          nodeSelector:
+            longhorn: primary
+          affinity:
+            podAntiAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                - topologyKey: "kubernetes.io/hostname"
+                  labelSelector:
+                    matchExpressions:
+                      - key: app.kubernetes.io/name
+                        operator: In
+                        values:
+                          - ollama
+                          # - plex
+        containers:
+          ollama:
+            image:
+              repository: ghcr.io/tyzbit/ollama-intel-gpu
+              # tag: latest
+              tag: ipex-llm-v.0.0.1-2
+              # tag: latest@sha256:36da76816d399b80127c043261df912cfa7ee73bde0b22f52a75178b236b1eea
+            # image:
+            #   repository: docker.io/ollama/ollama
+            #   tag: 0.6.5
+            securityContext:
+              privileged: true
+            # command: [tail,-f,/dev/null]
+            env:
+              # --- Intel GPU
+              OLLAMA_MAX_LOADED_MODELS: "1"
+              OLLAMA_NUM_PARALLEL: "1"
+              OLLAMA_NUM_GPU: "40"
+              SYCL_CACHE_PERSISTENT: "1"
+              IPEX_LLM_NUM_CTX: "4096"
+              SYCL_PI_LEVEL_ZERO_USE_IMMEDIATE_COMMANDLISTS: "0"
+              IPEX_LLM_MODEL_SOURCE: modelscope
+              # ---
+              TZ: America/New_York
+              # OLLAMA_INTEL_GPU: "1" # doesn't work right now, experimental
+              HSA_OVERRIDE_GFX_VERSION: 11.0.1 # force to use graphics card
+              OLLAMA_HOST: 0.0.0.0
+              OLLAMA_ORIGINS: "*"
+              OLLAMA_MODELS: &modelPath /models
+              OLLAMA_LOAD_TIMEOUT: "600"
+              OLLAMA_CONTEXT_LENGTH: "4096"
+              # OLLAMA_NUM_PARALLEL: "16"
+            # probes:
+            #   liveness:
+            #     enabled: true
+            #     type: HTTP
+            #   readiness:
+            #     enabled: true
+            #     custom: true
+            #     spec: 
+            #       exec: {command: [sh,-c,/usr/bin/ollama run gemma3:4b ""]}
+            resources:
+              requests:
+                cpu: 200m
+              limits:
+                memory: 12Gi
+
+    persistence:
+      ollama:
+        existingClaim: ollama-data-nas
+        globalMounts:
+          - path: *modelPath
+            subPath: models
+          - path: /root/.ollama
+            subPath: config
+      dri:
+        type: hostPath
+        hostPath: /dev/dri
+    service:
+      main:
+        controller: *app
+        ports:
+          http:
+            port: 11434
+
+    ingress:
+      main:
+        className: nginx
+        annotations:
+          nginx.ingress.kubernetes.io/proxy-connect-timeout: "20"
+          nginx.ingress.kubernetes.io/proxy-read-timeout: "14400"
+          nginx.ingress.kubernetes.io/proxy-send-timeout: "14400"
+          nginx.ingress.kubernetes.io/proxy-body-size: 1024m
+        hosts:
+          - host: ollama.home.arpa
+            paths:
+              - path: "/"
+                service:
+                  identifier: main
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.7.3/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app ollama-cpu
+  namespace: personal
+spec:
+  interval: 30m
+  releaseName: ollama
+  targetNamespace: personal
+  chart:
+    spec:
+      chart: app-template
+      version: "3.7.3"
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  values:
+    controllers:
+      ollama:
+        type: deployment
+        nameOverride: "cpu"
+        replicas: 0
+        annotations:
+          reloader.stakater.com/auto: "true"
+        pod:
+          nodeSelector:
+            node-role.kubernetes.io/control-plane: "true"
+          affinity:
+            podAntiAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                - topologyKey: "kubernetes.io/hostname"
+                  labelSelector:
+                    matchExpressions:
+                      - key: app.kubernetes.io/name
+                        operator: In
+                        values:
+                          - ollama
+
+        containers:
+          ollama:
+            image:
+              repository: docker.io/ollama/ollama
+              tag: 0.9.0
+            # command: [tail,-f,/dev/null]
+            env:
+              TZ: America/New_York
+              # OLLAMA_INTEL_GPU: "1" # doesn't work right now, experimental
+              OLLAMA_HOST: 0.0.0.0
+              OLLAMA_ORIGINS: "*"
+              OLLAMA_MODELS: &modelPath /models
+              OLLAMA_LOAD_TIMEOUT: "600"
+              OLLAMA_CONTEXT_LENGTH: "4096"
+              OLLAMA_NUM_PARALLEL: "1"
+
+            # probes:
+            #   liveness:
+            #     enabled: true
+            #     type: HTTP
+            #   readiness:
+            #     enabled: true
+            #     custom: true
+            #     spec: 
+            #       exec: {command: [sh,-c,/usr/bin/ollama run gemma3:4b ""]}
+            resources:
+              requests:
+                cpu: 200m
+              limits:
+                memory: 12Gi
+
+    persistence:
+      ollama:
+        existingClaim: ollama-data-nas
+        globalMounts:
+          - path: *modelPath
+            subPath: models
+          - path: /root/.ollama
+            subPath: config
+      dri:
+        type: hostPath
+        hostPath: /dev/dri
