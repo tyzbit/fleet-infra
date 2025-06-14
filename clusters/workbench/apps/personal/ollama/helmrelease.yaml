@@ -25,8 +25,6 @@ spec:
         annotations:
           reloader.stakater.com/auto: "true"
         pod:
-          nodeSelector:
-            longhorn: primary
           affinity:
             podAntiAffinity:
               requiredDuringSchedulingIgnoredDuringExecution:
