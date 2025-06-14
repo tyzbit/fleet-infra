@@ -20,9 +20,9 @@ Filters:
   Ollama:
     Enabled: true
     Model: &ollamamodel qwen3:8b
-    # URL: &ollamaurl http://ollama.home.arpa
+    URL: &ollamaurl http://ollama.home.arpa
     # URL: &ollamaurl http://media2.home.arpa:11434
-    URL: &ollamaurl http://172.23.97.210:11434
+    # URL: &ollamaurl http://172.23.97.210:11434
     FilterOnFailure: true
     MaxRetryAttempts: 5
     MaxRetryDelaySeconds: 10
