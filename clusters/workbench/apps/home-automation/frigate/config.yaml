@@ -176,7 +176,7 @@ cameras:
 
   sunroom:
     enabled: true
-    detect: *doorbelldetect
+    detect: {width: 1280, height: 960, fps: 6}
     ffmpeg: {inputs:
       [{path: rtsp://localhost:8554/sunroom, roles: [record]}]}
     mqtt: *mqttheight
