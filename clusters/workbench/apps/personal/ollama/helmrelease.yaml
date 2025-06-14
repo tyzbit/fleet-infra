@@ -185,7 +185,7 @@ spec:
               requests:
                 cpu: 200m
               limits:
-                memory: 8Gi
+                memory: 6Gi
 
     persistence:
       ollama:
