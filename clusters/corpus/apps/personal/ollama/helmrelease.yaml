@@ -127,10 +127,10 @@ spec:
           nginx.ingress.kubernetes.io/proxy-read-timeout: "14400"
           nginx.ingress.kubernetes.io/proxy-send-timeout: "14400"
           nginx.ingress.kubernetes.io/proxy-body-size: 1024m
-          # nginx.ingress.kubernetes.io/affinity-mode: balanced
-          nginx.ingress.kubernetes.io/affinity: "cookie"
-          nginx.ingress.kubernetes.io/session-cookie-name: "route"
-          nginx.ingress.kubernetes.io/session-cookie-hash: "sha1"
+          nginx.ingress.kubernetes.io/affinity-mode: balanced
+          # nginx.ingress.kubernetes.io/affinity: "cookie"
+          # nginx.ingress.kubernetes.io/session-cookie-name: "route"
+          # nginx.ingress.kubernetes.io/session-cookie-hash: "sha1"
         hosts:
           - host: ollama.home.arpa
             paths:
