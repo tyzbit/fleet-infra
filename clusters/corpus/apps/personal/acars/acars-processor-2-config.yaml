@@ -26,7 +26,7 @@ Filters:
     # URL: &ollamaurl http://172.23.97.210:11434
     FilterOnFailure: true
     MaxRetryAttempts: 5
-    MaxRetryDelaySeconds: 30
+    MaxRetryDelaySeconds: 2
     Timeout: 30
     Options: &ollamaopts [
       {Name: num_predict, Value: 100}, # Maximum number of tokens (words, kinda) to generate
