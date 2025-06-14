@@ -22,8 +22,8 @@ Filters:
     Model: &ollamamodel qwen3:8b
     URL: &ollamaurl http://ollama.home.arpa
     FilterOnFailure: true
-    MaxRetryAttempts: 1
-    MaxRetryDelaySeconds: 5
+    MaxRetryAttempts: 5
+    MaxRetryDelaySeconds: 10
     Timeout: 30
     Options: &ollamaopts [
       {Name: num_predict, Value: 100}, # Maximum number of tokens (words, kinda) to generate
