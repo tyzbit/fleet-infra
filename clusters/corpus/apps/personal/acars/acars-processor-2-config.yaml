@@ -24,7 +24,7 @@ Filters:
     FilterOnFailure: true
     MaxRetryAttempts: 5
     MaxRetryDelaySeconds: 10
-    Timeout: 30
+    Timeout: 120
     Options: &ollamaopts [
       {Name: num_predict, Value: 100}, # Maximum number of tokens (words, kinda) to generate
       {Name: temperature, Value: 0.4}, # Creativity (0.0-2.0)
