@@ -123,11 +123,11 @@ spec:
       main:
         className: nginx
         annotations:
-          nginx.ingress.kubernetes.io/proxy-connect-timeout: "20"
-          nginx.ingress.kubernetes.io/proxy-read-timeout: "14400"
-          nginx.ingress.kubernetes.io/proxy-send-timeout: "14400"
-          nginx.ingress.kubernetes.io/proxy-body-size: 1024m
-          nginx.ingress.kubernetes.io/affinity-mode: balanced
+          nginx.ingress.kubernetes.io/proxy-connect-timeout: "600"
+          nginx.ingress.kubernetes.io/proxy-read-timeout: "10"
+          nginx.ingress.kubernetes.io/proxy-send-timeout: "10"
+          nginx.ingress.kubernetes.io/proxy-body-size: 10m
+          # nginx.ingress.kubernetes.io/affinity-mode: balanced
           # nginx.ingress.kubernetes.io/affinity: "cookie"
           # nginx.ingress.kubernetes.io/session-cookie-name: "route"
           # nginx.ingress.kubernetes.io/session-cookie-hash: "sha1"
