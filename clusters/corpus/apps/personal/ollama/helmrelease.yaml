@@ -60,7 +60,7 @@ spec:
               # --- Intel GPU
               OLLAMA_MAX_LOADED_MODELS: "1"
               OLLAMA_NUM_PARALLEL: "1"
-              OLLAMA_NUM_GPU: "40"
+              # OLLAMA_NUM_GPU: "40"
               SYCL_CACHE_PERSISTENT: "1"
               IPEX_LLM_NUM_CTX: "4096"
               SYCL_PI_LEVEL_ZERO_USE_IMMEDIATE_COMMANDLISTS: "0"
