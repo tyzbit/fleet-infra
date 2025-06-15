@@ -20,7 +20,7 @@ ACARSProcessorSettings:
 
 Filters:
   Ollama:
-    Enabled: true
+    Enabled: False
     Model: &ollamamodel qwen3:8b # 37 layers
     URL: &ollamaurl http://media2.home.arpa:11434
     # URL: &ollamaurl http://ollama.home.arpa
@@ -41,7 +41,7 @@ Filters:
     # 9,101 characters
     # 2,495 tokens https://token-calculator.net
     # -----------------------------------------
-    UserPrompt: |
+    UserPrompt: &FilterPrompt |
       This message was sent between an aircraft and air traffic control. Rarely,
       messages like these have prose at the end is interesting to air travel
       enthusiasts because it was was written by a pilot or air traffic
@@ -292,6 +292,13 @@ Filters:
       Based on what I've told you, is this message something you're certain that
       an air travel enthusiast would want to see?
 #      /no_think
+  OpenAI:
+    Enabled: False
+    Model: gpt-4o
+    Timeout: 30
+    APIKey: ${openai_api_key}
+    UserPrompt: *FilterPrompt
+
   ACARS:
     DuplicateMessageSimilarity: 0.9
   VDLM2:
@@ -300,12 +307,22 @@ Filters:
 Annotators:
   ACARS:
     Enabled: true
-    SelectedFields: [acarsMessageText]
-
+    SelectedFields: [
+      acarsAircraftTailCode,
+      acarsFrequencyMHz,
+      acarsExtraURL,
+      acarsMessageText,
+      acarsMessageFrom,
+    ]
   VDLM2:
     Enabled: true
-    SelectedFields: [acarsMessageText]
-
+    SelectedFields: [
+      acarsAircraftTailCode,
+      acarsExtraURL,
+      acarsMessageText,
+      acarsMessageFrom
+      vdlm2FrequencyHz,
+    ]
   Tar1090:
     Enabled: true
     URL: http://adsb-ultrafeeder
