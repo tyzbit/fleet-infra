@@ -10,7 +10,7 @@ ACARSProcessorSettings:
   LogLevel: debug
   LogHideTimestamps: true
   ACARSHub:
-    MaxConcurrentRequests: 2
+    MaxConcurrentRequests: 4
     ACARS:
       Host: &acarshubhost acars-acarshub
       Port: 15550
