@@ -293,7 +293,7 @@ Filters:
       an air travel enthusiast would want to see?
 #      /no_think
   OpenAI:
-    Enabled: False
+    Enabled: true
     Model: gpt-4o
     Timeout: 30
     APIKey: ${openai_api_key}
