@@ -10,7 +10,7 @@ ACARSProcessorSettings:
   LogLevel: debug
   LogHideTimestamps: true
   ACARSHub:
-    MaxConcurrentRequests: 4
+    MaxConcurrentRequests: 1
     ACARS:
       Host: &acarshubhost acars-acarshub
       Port: 15550
@@ -20,7 +20,7 @@ ACARSProcessorSettings:
 
 Filters:
   Ollama:
-    Enabled: False
+    Enabled: true
     Model: &ollamamodel qwen3:8b # 37 layers
     URL: &ollamaurl http://media2.home.arpa:11434
     # URL: &ollamaurl http://ollama.home.arpa
@@ -293,7 +293,7 @@ Filters:
       an air travel enthusiast would want to see?
 #      /no_think
   OpenAI:
-    Enabled: true
+    Enabled: false
     Model: gpt-4o
     Timeout: 30
     APIKey: ${openai_api_key}
