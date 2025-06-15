@@ -6,6 +6,7 @@ ACARSProcessorSettings:
   ColorOutput: true
   SaveMessages: true
   SQLiteDatabasePath: /data/messages.db
+  LogHideTimestamps: true
   LogLevel: debug
   ACARSHub:
     MaxConcurrentRequests: 2
