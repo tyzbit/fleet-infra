@@ -161,8 +161,8 @@ spec:
               SOAPYSDR: *soapy
               FREQUENCIES: 136.975;136.100;136.650
               # FREQUENCIES: "136.100;136.650;136.700;136.800;136.975"
-              ZMQ_MODE: server
-              ZMQ_ENDPOINT: tcp://0.0.0.0:45555
+              ZMQ_MODE: client
+              ZMQ_ENDPOINT: tcp://acars-acarsrouter:5555
             probes: *probes
             resources:
               requests:
@@ -183,7 +183,6 @@ spec:
               TZ: Etc/UTC
               AR_SEND_UDP_ACARS: acars-acarshub:5550;feedthe.acarsdrama.com:5550
               AR_SEND_UDP_VDLM2: acars-acarshub:5555;feedthe.acarsdrama.com:5555
-              AR_RECV_ZMQ_VDLM2: acars-dumpvdl2:45555
             resources:
               requests:
                 cpu: 10m
@@ -262,7 +261,7 @@ spec:
           acars:
             port: 5550
           vdlm2:
-            port: 15555
+            port: 5555
       dumpvdl2:
         controller: dumpvdl2
         type: ClusterIP
