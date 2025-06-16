@@ -162,7 +162,7 @@ spec:
               FREQUENCIES: 136.975;136.100;136.650
               # FREQUENCIES: "136.100;136.650;136.700;136.800;136.975"
               ZMQ_MODE: client
-              ZMQ_ENDPOINT: tcp://acars-acarsrouter:5555
+              ZMQ_ENDPOINT: tcp://acars-acarsrouter:35555
             probes: *probes
             resources:
               requests:
@@ -260,8 +260,8 @@ spec:
         ports:
           acars:
             port: 5550
-          vdlm2:
-            port: 5555
+          vdlm2-zmq:
+            port: 35555
       dumpvdl2:
         controller: dumpvdl2
         type: ClusterIP
