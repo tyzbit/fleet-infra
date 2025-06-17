@@ -21,7 +21,7 @@ spec:
     controllers:
       ollama:
         type: deployment
-        replicas: 1
+        replicas: 3
         annotations:
           reloader.stakater.com/auto: "true"
         pod:
@@ -67,6 +67,7 @@ spec:
               # SYCL_PI_LEVEL_ZERO_USE_IMMEDIATE_COMMANDLISTS: "0"
               # IPEX_LLM_MODEL_SOURCE: modelscope
               # ---
+              DEVICE: Arc
               TZ: America/New_York
               # HSA_OVERRIDE_GFX_VERSION: 11.0.1 # force to use graphics card
               OLLAMA_CONTEXT_LENGTH: "6144"
