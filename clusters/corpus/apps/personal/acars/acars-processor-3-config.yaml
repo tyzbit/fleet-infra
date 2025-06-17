@@ -21,7 +21,7 @@ ACARSProcessorSettings:
 Filters:
   Ollama:
     Enabled: true
-    Model: &ollamamodel qwen3:8b # 37 layers
+    Model: &ollamamodel qwen3:4b # 37 layers
     # Model: &ollamamodel qwen3:4b
     URL: &ollamaurl http://ollama:11434
     # URL: &ollamaurl http://sophie.home.arpa:11434
@@ -31,7 +31,7 @@ Filters:
     FilterOnFailure: true
     MaxRetryAttempts: 4
     MaxRetryDelaySeconds: 2
-    Timeout: 
+    Timeout: 30
     Options: &ollamaopts [
       {Name: num_predict, Value: 100}, # Maximum number of tokens (words, kinda) to generate
       {Name: temperature, Value: 0.4}, # Creativity (0.0-2.0)
