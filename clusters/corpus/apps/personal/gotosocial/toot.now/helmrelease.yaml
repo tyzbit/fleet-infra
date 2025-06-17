@@ -37,7 +37,8 @@ spec:
               # SMTP settings
               - secretRef:
                   name: *app
-            # env:
+            env:
+              GTS_CONFIG_PATH: /gotosocial/config.yaml
             #   TZ: America/New_York
             #   GTS_APPLICATION_NAME: "Toot Now"
             #   GTS_HOST: &host toot.now
