@@ -91,7 +91,7 @@ spec:
 
     service:
       app:
-        nameOverride: tdarr
+        forceRename: tdarr
         controller: *app
         ports:
           http:
