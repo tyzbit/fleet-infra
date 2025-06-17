@@ -23,14 +23,15 @@ Filters:
     Enabled: true
     Model: &ollamamodel qwen3:8b # 37 layers
     # Model: &ollamamodel qwen3:4b
-    URL: &ollamaurl http://sophie.home.arpa:11434
+    URL: &ollamaurl http://ollama:11434
+    # URL: &ollamaurl http://sophie.home.arpa:11434
     # URL: &ollamaurl http://media2.home.arpa:11434
     # URL: &ollamaurl http://ollama.home.arpa
     # URL: &ollamaurl http://172.23.97.210:11434
     FilterOnFailure: true
     MaxRetryAttempts: 4
     MaxRetryDelaySeconds: 2
-    Timeout: 30
+    Timeout: 
     Options: &ollamaopts [
       {Name: num_predict, Value: 100}, # Maximum number of tokens (words, kinda) to generate
       {Name: temperature, Value: 0.4}, # Creativity (0.0-2.0)
