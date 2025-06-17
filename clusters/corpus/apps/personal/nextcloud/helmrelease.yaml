@@ -137,6 +137,7 @@ spec:
                   echo -e "$${grey}Self-test failed, running php occ $op $reset"
                   if ! su www-data -s /usr/local/bin/php -- occ $op; then
                     echo -e "$${red}$${op} operation failed, retrying...$${reset}"
+                    sleep 5
                   fi
                 done
                 echo -e "$${green}Test passed$${reset}"
