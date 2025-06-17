@@ -69,7 +69,7 @@ spec:
             *app :
               - path: /gotosocial/db
                 subPath: db
-              - path: *storagepath
+              - path: /gotosocial/storage
                 subPath: storage
               - path: /gotosocial/.cache
                 subPath: cache
@@ -79,10 +79,10 @@ spec:
         advancedMounts:
           *app :
             *app :
-              - path: *chain
+              - path: /tls/fullchain.pem
                 subPath: tls.crt
                 readOnly: true
-              - path: *key
+              - path: /tls/privkey.pem
                 subPath: tls.key
                 readOnly: true
       config:
@@ -128,7 +128,7 @@ spec:
           nginx.ingress.kubernetes.io/proxy-body-size: 4096m
           nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
         hosts:
-          - host: toot.now
+          - host: &host toot.now
             paths:
               - path: /
                 pathType: Prefix
@@ -136,6 +136,6 @@ spec:
                   identifier: main
         tls:
           - hosts:
-              - toot.now
+              - *host
               - web.toot.now
             secretName: *secret
