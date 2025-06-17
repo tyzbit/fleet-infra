@@ -53,7 +53,7 @@ spec:
                 enabled: false
 
     serviceAccount:
-      name: *app
+      imagepullsecret-patcher: {}
 
     persistence:
       secret:
