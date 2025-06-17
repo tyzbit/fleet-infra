@@ -160,7 +160,7 @@ spec:
     controllers:
       ollama:
         type: deployment
-        nameOverride: "cpu"
+        forceRename: cpu
         replicas: 0
         annotations:
           reloader.stakater.com/auto: "true"
