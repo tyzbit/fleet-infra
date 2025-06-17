@@ -24,6 +24,8 @@ spec:
     controllers:
       acars-processor-1:
         <<: *common_settings
+        prefix: ""
+        suffix: ""
         replicas: 1
         containers:
           acars-processor-1:
