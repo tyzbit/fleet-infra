@@ -38,6 +38,8 @@ spec:
     persistence:
       tmp:
         type: emptyDir
+      data:
+        type: emptyDir
 
     service:
       *app :
