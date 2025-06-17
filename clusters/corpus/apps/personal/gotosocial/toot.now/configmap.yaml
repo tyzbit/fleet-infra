@@ -23,5 +23,5 @@ data:
     accounts-registration-open: false
     accounts-reason-required: true
 
-    tls-certificate-chain: "/tls/fullchain.pem"
-    tls-certificate-key: "/tls/fullchain.pem"
+    tls-certificate-chain: /tls/fullchain.pem
+    tls-certificate-key: /tls/privkey.pem
