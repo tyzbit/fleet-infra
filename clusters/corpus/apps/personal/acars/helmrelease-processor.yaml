@@ -6,7 +6,6 @@ metadata:
   namespace: flux-system
 spec:
   targetNamespace: personal
-  releaseName: *app
   interval: 15m
   chart:
     spec:
