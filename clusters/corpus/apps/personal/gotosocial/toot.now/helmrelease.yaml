@@ -107,7 +107,7 @@ spec:
             scheme: HTTPS
             httpHeaders:
               - name: Host
-                value: *host
+                value: &host toot.now
       liveness: *probe
       startup: *probe
 
@@ -128,7 +128,7 @@ spec:
           nginx.ingress.kubernetes.io/proxy-body-size: 4096m
           nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
         hosts:
-          - host: &host toot.now
+          - host: *host
             paths:
               - path: /
                 pathType: Prefix
