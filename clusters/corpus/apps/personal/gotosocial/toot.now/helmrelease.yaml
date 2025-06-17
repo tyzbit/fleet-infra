@@ -37,24 +37,24 @@ spec:
               # SMTP settings
               - secretRef:
                   name: *app
-            env:
-              TZ: America/New_York
-              GTS_APPLICATION_NAME: "Toot Now"
-              GTS_HOST: &host toot.now
-              GTS_ACCOUNT_DOMAIN: *host
-              GTS_PROTOCOL: "https"
-              GTS_PORT: "8080"
-              GTS_TRUSTED_PROXIES: 172.23.0.0/16
-              GTS_ACCOUNTS_APPROVAL_REQUIRED: "true"
-              GTS_ACCOUNTS_REASON_REQUIRED: "true"
-              GTS_TLS_CERTIFICATE_CHAIN: &chain "/tls/fullchain.pem"
-              GTS_TLS_CERTIFICATE_KEY: &key "/tls/privkey.pem"
-              GTS_DB_TYPE: sqlite
-              GTS_DB_ADDRESS: /gotosocial/db/database.sqlite
-              GTS_STORAGE_LOCAL_BASE_PATH: &storagepath "/gotosocial/storage"
-              GTS_SEMAPHORE_URL: https://web.toot.now
-              GTS_ADVANCED_RATE_LIMIT_REQUESTS: "0"
-              # GTS_LANDING_PAGE_USER: "tyzbit"
+            # env:
+            #   TZ: America/New_York
+            #   GTS_APPLICATION_NAME: "Toot Now"
+            #   GTS_HOST: &host toot.now
+            #   GTS_ACCOUNT_DOMAIN: *host
+            #   GTS_PROTOCOL: "https"
+            #   GTS_PORT: "8080"
+            #   GTS_TRUSTED_PROXIES: 172.23.0.0/16
+            #   GTS_ACCOUNTS_APPROVAL_REQUIRED: "true"
+            #   GTS_ACCOUNTS_REASON_REQUIRED: "true"
+            #   GTS_TLS_CERTIFICATE_CHAIN: &chain "/tls/fullchain.pem"
+            #   GTS_TLS_CERTIFICATE_KEY: &key "/tls/privkey.pem"
+            #   GTS_DB_TYPE: sqlite
+            #   GTS_DB_ADDRESS: /gotosocial/db/database.sqlite
+            #   GTS_STORAGE_LOCAL_BASE_PATH: &storagepath "/gotosocial/storage"
+            #   GTS_SEMAPHORE_URL: https://web.toot.now
+            #   GTS_ADVANCED_RATE_LIMIT_REQUESTS: "0"
+            #   # GTS_LANDING_PAGE_USER: "tyzbit"
             resources:
               requests:
                 cpu: 10m
@@ -71,6 +71,8 @@ spec:
                 subPath: db
               - path: *storagepath
                 subPath: storage
+              - path: /gotosocial/.cache
+                subPath: cache
       tls:
         type: secret
         name: &secret toot-now-gotosocial-tls
@@ -83,15 +85,15 @@ spec:
               - path: *key
                 subPath: tls.key
                 readOnly: true
-      # web-template-overrides:
-      #   type: configMap
-      #   name: toot-now-web-templates
-      #   advancedMounts:
-      #     *app :
-      #       *app :
-      #         - path: /gotosocial/web/template/index_apps.tmpl
-      #           subPath: index_apps.tmpl
-      #           readOnly: true
+      config:
+        type: configMap
+        name: toot-now-config
+        advancedMounts:
+          *app :
+            *app :
+              - path: /gotosocial/config.yaml
+                subPath: config.yaml
+                readOnly: true
 
     probes:
       # this is mostly to get rid of the "TLS handshake error: EOF" logs, more than getting more precise healthchecks lol
