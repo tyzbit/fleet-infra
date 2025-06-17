@@ -190,7 +190,7 @@ spec:
           ollama:
             image:
               repository: docker.io/ollama/ollama
-              tag: 0.9.1
+              tag: 0.9.2
             # command: [tail,-f,/dev/null]
             env:
               TZ: America/New_York
