@@ -21,7 +21,7 @@ spec:
     controllers:
       ollama:
         type: deployment
-        replicas: 0
+        replicas: 1
         annotations:
           reloader.stakater.com/auto: "true"
         pod:
@@ -39,16 +39,13 @@ spec:
                           - ollama
                           # - plex
         containers:
-          # edgevpn:
-          #   securityContext: {privileged: true}
-          #   image: {repository: quay.io/mudler/edgevpn,tag: v0.30.2}
-          #   command: [sh,-c,"modprobe tun;edgevpn --address 10.10.10.1/24"]
-          #   env: {EDGEVPNCONFIG: /config.yaml}
           ollama:
             image:
-              repository: ghcr.io/tyzbit/ollama-intel-gpu
+              # repository: ghcr.io/tyzbit/ollama-intel-gpu
+              repository: intelanalytics/ipex-llm-inference-cpp-xpu
+              tag: 2.3.0-SNAPSHOT
               # tag: latest
-              tag: ipex-llm-v.0.0.1-2
+              # tag: ipex-llm-v.0.0.1-2
               # tag: latest@sha256:36da76816d399b80127c043261df912cfa7ee73bde0b22f52a75178b236b1eea
             # image:
             #   repository: docker.io/ollama/ollama
@@ -58,23 +55,23 @@ spec:
             # command: [tail,-f,/dev/null]
             env:
               # --- Intel GPU
-              OLLAMA_MAX_LOADED_MODELS: "1"
-              OLLAMA_NUM_PARALLEL: "1"
-              # OLLAMA_NUM_GPU: "40"
               SYCL_CACHE_PERSISTENT: "1"
-              IPEX_LLM_NUM_CTX: "4096"
               SYCL_PI_LEVEL_ZERO_USE_IMMEDIATE_COMMANDLISTS: "0"
               IPEX_LLM_MODEL_SOURCE: modelscope
               # ---
               TZ: America/New_York
-              # OLLAMA_INTEL_GPU: "1" # doesn't work right now, experimental
               HSA_OVERRIDE_GFX_VERSION: 11.0.1 # force to use graphics card
-              OLLAMA_HOST: 0.0.0.0
-              OLLAMA_ORIGINS: "*"
-              OLLAMA_MODELS: &modelPath /models
-              OLLAMA_LOAD_TIMEOUT: "600"
               OLLAMA_CONTEXT_LENGTH: "6144"
-              # OLLAMA_NUM_PARALLEL: "16"
+              OLLAMA_HOST: 0.0.0.0
+              OLLAMA_LOAD_TIMEOUT: "600"
+              OLLAMA_MAX_LOADED_MODELS: "1"
+              OLLAMA_MODELS: &modelPath /models
+              OLLAMA_NUM_CTX: "6144"
+              # OLLAMA_NUM_GPU: "40"
+              OLLAMA_NUM_PARALLEL: "1"
+              OLLAMA_ORIGINS: "*"
+              OLLAMA_SET_OT: "exps=CPU"
+
             # probes:
             #   liveness:
             #     enabled: true
@@ -160,8 +157,8 @@ spec:
     controllers:
       ollama:
         type: deployment
-        forceRename: cpu
-        replicas: 1
+        forceRename: ollama-cpu
+        replicas: 0
         annotations:
           reloader.stakater.com/auto: "true"
         pod:
@@ -186,7 +183,6 @@ spec:
             # command: [tail,-f,/dev/null]
             env:
               TZ: America/New_York
-              OLLAMA_INTEL_GPU: "1" # doesn't work right now, experimental
               OLLAMA_HOST: 0.0.0.0
               OLLAMA_ORIGINS: "*"
               OLLAMA_MODELS: &modelPath /models
