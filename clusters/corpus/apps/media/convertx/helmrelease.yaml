@@ -19,6 +19,7 @@ spec:
   values:
     controllers:
       *app :
+        replicas: 0
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
@@ -37,8 +38,6 @@ spec:
 
     persistence:
       tmp:
-        type: emptyDir
-      data:
         type: emptyDir
 
     service:
