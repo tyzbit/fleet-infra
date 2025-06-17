@@ -49,7 +49,7 @@ camera_groups:
     icon: LuBird
     order: 0
   "All Cameras":
-    cameras: [doorbell, garage, sidegarage, backdeck, sunroom]
+    cameras: [doorbell, garage, sidegarage, backdeck, sunroom, sidefence]
     icon: LuRadar
     order: 1
   "Deliveries":
@@ -61,7 +61,7 @@ camera_groups:
     icon: LuBellRing
     order: 3
   "Backyard and Garage":
-    cameras: [backdeck, garage, sidegarage, sunroom]
+    cameras: [backdeck, garage, sidegarage, sunroom, sidefence]
     icon: LuDog
     order: 4
 
