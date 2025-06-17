@@ -36,6 +36,8 @@ go2rtc:
     sidegarage: ["rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@sidegarage.home.arpa/Preview_01_main"]
     backdeck: ["rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@backdeck.home.arpa/Preview_01_main"]
     sunroom: ["rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@sunroom.home.arpa/Preview_01_main"]
+    sidefence: ["rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@sidefence.home.arpa/1"]
+
 birdseye: {enabled: true,
   quality: 8, width: 1440, height: 1080, layout: {scaling_factor: 1.0},
   # -- objects, motion, continuous
@@ -238,3 +240,18 @@ cameras:
         - >- # neighbors
           1,0.464,0.977,0.552,0.894,0.437,0.909,0.357,
           0.759,0.196,0.424,0.181,0.419,0,0.73,0,1,0
+
+  sidefence:
+    enabled: true
+    detect: *doorbelldetect
+    ffmpeg: {inputs:
+      [{path: rtsp://localhost:8554/sidefence, roles: [detect,record]}]}
+    mqtt: *mqttheight
+    ui: {order: 5}
+    birdseye: {order: 5}
+    review: {alerts: {required_zones: [on_property]}}
+    zones:
+      on_property:
+        <<: *zonedefault
+        objects: [person]
+        coordinates: 0,1,1,1,1,0,0,0 # Full screen
