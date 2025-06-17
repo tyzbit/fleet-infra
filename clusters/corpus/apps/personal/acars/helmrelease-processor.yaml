@@ -25,7 +25,7 @@ spec:
     controllers:
       acars-processor-1:
         <<: *common_settings
-        forceRename: "1"
+        forceRename: "acars-processor-1"
         replicas: 1
         containers:
           acars-processor-1:
@@ -42,7 +42,7 @@ spec:
 
       acars-processor-2:
         <<: *common_settings
-        forceRename: "2"
+        forceRename: "acars-processor-2"
         replicas: 1
         containers:
           acars-processor-2:
@@ -59,7 +59,7 @@ spec:
 
       acars-processor-3:
         <<: *common_settings
-        forceRename: "3"
+        forceRename: "acars-processor-3"
         replicas: 1
         containers:
           acars-processor-3:
@@ -76,7 +76,7 @@ spec:
 
       acars-processor-4:
         <<: *common_settings
-        forceRename: "4"
+        forceRename: "acars-processor-4"
         replicas: 0
         containers:
           acars-processor-4:
