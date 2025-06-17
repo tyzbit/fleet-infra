@@ -60,7 +60,7 @@ spec:
                 mkdir -p /llm/ollama && 
                 cd /llm/ollama && 
                 init-ollama && 
-                exec ./ollama serve'
+                exec ./ollama serve
             env:
               # --- Intel GPU
               SYCL_CACHE_PERSISTENT: "1"
