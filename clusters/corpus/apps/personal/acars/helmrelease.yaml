@@ -47,7 +47,7 @@ spec:
             image: {repository: debian,tag: latest}
             # command: [sleep,infinity]
             command: [bash,"/tmp/acars-usb-watchdog.sh"]
-            env: {SERIALS: "00000001,13055074,30275839,58322450"} # 30275839
+            env: {SERIALS: "00000001,13055074,30275839,58322450"}
       acarsdec: 
         <<: *common_settings
         replicas: 1
