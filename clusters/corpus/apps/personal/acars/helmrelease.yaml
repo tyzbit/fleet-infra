@@ -47,7 +47,7 @@ spec:
             image: {repository: debian,tag: latest}
             # command: [sleep,infinity]
             command: [bash,"/tmp/acars-usb-watchdog.sh"]
-            env: {SERIALS: "30275839,13055074,58322450"}
+            env: {SERIALS: "00000001,13055074,58322450"} # 30275839
       acarsdec: 
         <<: *common_settings
         replicas: 1
@@ -124,7 +124,7 @@ spec:
               tag: latest-build-412
             env:
               FEED_ID: TYZBIT-ACARS-3
-              DEVICE: "30275839"
+              DEVICE: "00000001"
               TZ: Etc/UTC
               SOAPYSDR: *soapy
               FREQUENCIES: "131.725"
