@@ -37,7 +37,12 @@ spec:
             image: {repository: debian,tag: latest}
             command: [bash,"/tmp/adsb-usb-watchdog.sh"]
             # env: {SERIALS: "30275839,98941503"}
-            env: {SERIALS: "98941503,stx:1090:0"} # Naked SDR + Nano SDR
+            env:
+              SERIALS: "98941503,stx:1090:0" # Naked SDR + Nano SDR
+              STATEFULSETS: >-
+                adsb-dump978,
+                adsb-flightradar24,
+                adsb-ultrafeeder
       ultrafeeder:
         <<: *common_settings
         replicas: 1

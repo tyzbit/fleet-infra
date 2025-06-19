@@ -10,11 +10,7 @@ data:
     DEVICES=$SERIALS
     # Turn this into iterable
     SERIALS=$(echo $SERIALS | sed 's/,/\n/g')
-    sts=(
-      adsb-dump978
-      adsb-flightradar24
-      adsb-ultrafeeder
-    )
+    STS=$(echo $STATEFULSETS | sed 's/,/\n/g')
     hub=/sys/bus/pci/drivers/xhci_hcd
 
     function log() {
@@ -30,7 +26,6 @@ data:
       for i in ????:??:??.? ; do
         echo -n "$i" > unbind
       done
-      idle 1
     }
 
     function bind() {
@@ -77,77 +72,52 @@ data:
       log "Scaled down to zero"
     }
 
+    function bounce() {
+      kubectl rollout restart sts ${HOSTNAME%-0}
+    }
+
     log "Watching USB for: $DEVICES"
-    fullreset=0
-    first=1
     log "Starting..."
     while :; do
       for SERIAL in $SERIALS; do
-        fixed=0
         if [[ $(timeout 5 usb-devices | grep -q SerialNumber=$SERIAL; echo $?) != 0 ]]; then
-          log "$SERIAL: Device not found"
-          info=$(timeout 5 usb-devices | grep -B5 $SERIAL | grep -Eo "Bus=[0-9\s]+|Dev#=[0-9 ]+" | cut -d= -f2 | tr -d ' ')
-          bus=$(echo $info||awk '{print $1}')
-          device=$(echo $info||awk '{print $2}')
-          if [[ $${bus}x != "x" ]] && [[ ! $${device}x != "x" ]] && [[ $fullreset != 1 ]]; then
-            log "$SERIAL: Resetting bus: $bus, device: $device"
-            if usbreset "$bus/$device"; then
-              log "$SERIAL: Device reset"
-              fixed=1
-            else
-              log "$SERIAL: usbreset failed"
-              fullreset=1
-              fixed=1
+          log "$SERIAL: Couldn't get bus or device, resetting the controller"
+          log "Here's the controllers present:"
+          timeout 5 usb-devices | grep -A2 "Nooelec"
+          for controller in /sys/bus/pci/drivers/?hci_hcd; do
+            if ! cd $xhci ; then
+              echo Weird error. Failed to change directory to $xhci
+              exit 1
             fi
-          ##### We need to do a full reset #####
-          else 
-            log "$SERIAL: Couldn't get bus or device, resetting the controller"
-            log "Here's the controllers present:"
-            timeout 5 usb-devices | grep -B2 SerialNumber
-            for controller in /sys/bus/pci/drivers/?hci_hcd; do
-              if [[ "$${controller}x" == "x" ]]; then
-                log "$SERIAL: Couldn't determine controller, here's $controller"
-                ls $controller
-                log "Exiting with error"
-                exit 10
+            if [[ "$${controller}x" == "x" ]]; then
+              log "$SERIAL: Couldn't determine controller, here's $controller dir"
+              ls $controller
+              log "Exiting with error"
+              exit 10
+            else
+              scale 0
+              waitforzero; status=$?
+              if [[ $status == 0 ]]; then
+                log "Resetting USB Hub: Unbinding controller $controller"
+                unbind $controller
+                idle 5
+                log "Resetting USB Hub: Binding controller $controller"
+                bind $controller
+                idle 30
+                log "Restarting pod to remount filesystem"
+                bounce
               else
-                if ! cd $xhci ; then
-                  echo Weird error. Failed to change directory to $xhci
-                  exit 1
-                fi
-                scale 0
-                waitforzero; status=$?
-                if [[ $status == 0 ]]; then
-                  log "Resetting USB Hub: Unbinding controller $controller"
-                  unbind $controller
-                  log "Resetting USB Hub: Binding controller $controller"
-                  bind $controller
-                  idle 120
-                  fixed=1
-                else
-                  log "Apps didn't scale down, exiting with error"
-                  exit 30
-                fi
+                log "Apps didn't scale down, exiting with error"
+                exit 30
               fi
             done
           fi
         fi
-        if [[ $fixed == 1 ]]; then
-          if [[ $(timeout 5 usb-devices | grep -q SerialNumber=$SERIAL; echo $?) == 0 ]]; then
-            log "$SERIAL: Everything looks good now"
-          fi
-        fi
-        sleep 5
       done
-      if [[ $(activereplicas) < 1 ]] && [[ $fixed == 0 ]]; then
+      sleep 5
+      if [[ $(activereplicas) < 3 ]]; then
         scale 1
       fi
-      if [[ $first == 1 ]]; then
-        log "Checked all devices, there will be no further output if everything is working"
-      fi
-      if [[ $(activereplicas) < 1 ]]; then
-        scale 1
-        idle 120
-      fi
-      first=0
+      log "All devices present."
+      idle 30
     done
