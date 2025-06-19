@@ -28,6 +28,7 @@ spec:
     controllers:
       adsb-usb-watchdog:
         <<: *common_settings
+        forceRename: adsb-usb-watchdog
         serviceAccount:
           name: adsb-usb-watchdog
         replicas: 1
