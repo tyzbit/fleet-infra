@@ -60,7 +60,7 @@ data:
       limit=36 # 3 minutes with 5 second waits
       period=5
       count=0
-      log "Waiting $(( limit * period )) seconds for pods to terminate..."
+      log "Waiting up to $(( limit * period )) seconds for pods to terminate..."
       while [[ $(activereplicas) > 0 ]]; do
         if [[ $count == $limit ]]; then
           log "Not all apps scaled down, but not waiting any longer"
@@ -73,7 +73,7 @@ data:
     }
 
     function bounce() {
-      kubectl rollout restart sts ${HOSTNAME%-0}
+      kubectl rollout restart sts $${HOSTNAME%-0}
     }
 
     log "Watching USB for: $DEVICES"
