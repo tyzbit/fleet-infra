@@ -106,9 +106,10 @@ data:
                 idle 5
                 log "Resetting USB Hub: Binding controller $controller"
                 bind $controller
-                idle 30
+                idle 60
                 log "Restarting pod to remount filesystem"
                 bounce
+                sleep 10
               else
                 log "Apps didn't scale down, exiting with error"
                 exit 30
