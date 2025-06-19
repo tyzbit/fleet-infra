@@ -82,7 +82,7 @@ data:
       for SERIAL in $SERIALS; do
         if [[ $(timeout 5 usb-devices | grep -q SerialNumber=$SERIAL; echo $?) != 0 ]]; then
           log "$SERIAL: Couldn't get bus or device, resetting the controller"
-          log "Here's the controllers present:"
+          log "Here's the devices present:"
           timeout 5 usb-devices | grep -A2 "Nooelec"
           for controller in /sys/bus/pci/drivers/?hci_hcd; do
             if ! cd $xhci ; then
