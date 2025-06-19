@@ -78,9 +78,12 @@ data:
 
     log "Watching USB for: $DEVICES"
     log "Starting..."
+    sleep 5
     while :; do
+      missing=0
       for SERIAL in $SERIALS; do
         if [[ $(timeout 5 usb-devices | grep -q SerialNumber=$SERIAL; echo $?) != 0 ]]; then
+          missing=1
           log "$SERIAL: Couldn't get bus or device, resetting the controller"
           log "Here's the devices present:"
           timeout 5 usb-devices | grep -A2 "Nooelec"
@@ -114,10 +117,11 @@ data:
           done
         fi
       done
-      sleep 5
-      if [[ $(activereplicas) < 3 ]]; then
-        scale 1
+      if [[ $missing == 0 ]]; then
+        log "All devices present."
+        if [[ $(activereplicas) < 3 ]]; then
+          scale 1
+        fi
       fi
-      log "All devices present."
       idle 30
     done
