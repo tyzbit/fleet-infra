@@ -110,8 +110,8 @@ data:
                 log "Apps didn't scale down, exiting with error"
                 exit 30
               fi
-            done
-          fi
+            fi
+          done
         fi
       done
       sleep 5
