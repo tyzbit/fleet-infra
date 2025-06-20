@@ -148,9 +148,8 @@ spec:
                 echo "Done with find and replace, starting yarn..."
                 yarn start:inject
             image:
-              repository: ghcr.io/revoltchat/client@sha256
-              # tag: master
-              tag: b4e2497ef6f7bec4faf1461a791de26a253c53f233ad0128eb4842a9cd31da86
+              repository: ghcr.io/revoltchat/client
+              tag: master
               pullPolicy: Always
             env:
               REVOLT_PUBLIC_URL: https://${chat_domain}/api
