@@ -149,7 +149,8 @@ spec:
                 yarn start:inject
             image:
               repository: ghcr.io/revoltchat/client
-              tag: master
+              # tag: master
+              tag: sha256:b4e2497ef6f7bec4faf1461a791de26a253c53f233ad0128eb4842a9cd31da86
               pullPolicy: Always
             env:
               REVOLT_PUBLIC_URL: https://${chat_domain}/api
