@@ -93,7 +93,8 @@ spec:
               URL_978: http://adsb-dump978/skyaware978
               # READSB_RTLSDR_DEVICE: 00000001 # Serial number of device
               # DEVICE: "30275839"
-              DEVICE: "stx:1090:0" # Nano SDR
+              # DEVICE: "stx:1090:0" # Nano SDR
+              DEVICE: "98941503" #Naked SDR
               # readsb/decoder parameters: (these are in the secret)
               READSB_LAT: ${my_latitude}
               READSB_LON: ${my_longitude}
