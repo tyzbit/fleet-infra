@@ -46,8 +46,8 @@ spec:
           acars-usb-watchdog:
             securityContext: {privileged: true}
             image: {repository: debian,tag: latest}
-            # command: [sleep,infinity]
-            command: [bash,"/tmp/acars-usb-watchdog.sh"]
+            command: [sleep,infinity]
+            # command: [bash,"/tmp/acars-usb-watchdog.sh"]
             env:
               SERIALS: "00000001,13055074,30275839,58322450"
               STATEFULSETS: >-
