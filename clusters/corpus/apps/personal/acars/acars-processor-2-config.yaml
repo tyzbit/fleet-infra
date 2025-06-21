@@ -101,6 +101,7 @@ Filters:
       - INOP
       - MSG FROM
       - MEET
+      - CONFIRM
       - PAX
       - FREETEXT
       - CHOP
