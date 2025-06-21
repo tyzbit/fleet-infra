@@ -110,6 +110,7 @@ Filters:
       - THANKS
       - EVENING
       - POTABLE
+      - FREETEXT
       
       Here's an example message air travel enthusiasts want to see:
       ```
