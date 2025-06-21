@@ -122,7 +122,7 @@ spec:
 
       acarsdec3:
         <<: *common_settings
-        replicas: 0
+        replicas: 1
         containers:
           acarsdec2:
             securityContext: *secopts
