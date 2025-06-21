@@ -73,6 +73,7 @@ spec:
               OLLAMA_CONTEXT_LENGTH: "6144"
               OLLAMA_HOST: 0.0.0.0
               OLLAMA_INTEL_GPU: "true"
+              OLLAMA_KEEP_ALIVE: "-1" # Never unload models except to load new
               OLLAMA_LOAD_TIMEOUT: "600"
               OLLAMA_MAX_LOADED_MODELS: "1"
               OLLAMA_MODELS: &modelPath /models
@@ -195,6 +196,7 @@ spec:
             env:
               TZ: America/New_York
               OLLAMA_HOST: 0.0.0.0
+              OLLAMA_KEEP_ALIVE: "-1" # Never unload models except to load new
               OLLAMA_ORIGINS: "*"
               OLLAMA_MODELS: &modelPath /models
               OLLAMA_LOAD_TIMEOUT: "600"

@@ -33,8 +33,8 @@ Filters:
     Options: &ollamaopts [
       {Name: num_predict, Value: 100}, # Maximum number of tokens (words, kinda) to generate
       {Name: temperature, Value: 0.4}, # Creativity (0.0-2.0)
-      {Name: top_p, Value: 0.2}, # Answer diversity with top_k (0.0-1.0)
       {Name: top_k, Value: 20}, # Answer diversity (ex 0-100)
+      {Name: top_p, Value: 0.2}, # Answer diversity with top_k (0.0-1.0)
       {Name: frequency_penalty, Value: 1.1}, # Penalize repeated tokens (0-2.0)
       {Name: num_gpu, Value: 40}, # Number of layers to offload to GPU
     ]
