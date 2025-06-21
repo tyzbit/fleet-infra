@@ -111,6 +111,7 @@ Filters:
       - EVENING
       - POTABLE
       - FREETEXT
+      - COMMENTS
       
       Here's an example message air travel enthusiasts want to see:
       ```
