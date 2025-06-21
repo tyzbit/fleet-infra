@@ -294,7 +294,7 @@ Filters:
       
       Based on what I've told you, is this message something you're certain that
       an air travel enthusiast would want to see?
-#      /no_think
+      /no_think
   OpenAI:
     Enabled: false
     Model: gpt-4o
