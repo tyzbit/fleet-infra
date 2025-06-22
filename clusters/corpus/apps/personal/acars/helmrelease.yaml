@@ -39,11 +39,11 @@ spec:
               - -c
               - >-
                 netstat -punt |
-                awk 'NR > 2 &&
+                awk "NR > 2 &&
                   !/127\.0\.0\.1/ && !/::1/
                   { found=1 }
                   END
-                  { if (!found) exit 1 }'
+                  { if (!found) exit 1 }"
 
     controllers:
       acars-usb-watchdog:
