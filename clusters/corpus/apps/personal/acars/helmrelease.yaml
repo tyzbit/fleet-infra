@@ -33,7 +33,17 @@ spec:
           initialDelaySeconds: 60
           periodSeconds: 30
           failureThreshold: 3
-          exec: {command: [bash,-c,rtl_test 2>&1 | grep -q $(DEVICE)]}
+          exec:
+            command:
+              - bash
+              - -c
+              - >-
+                netstat -punt |
+                awk 'NR > 2 &&
+                  !/127\.0\.0\.1/ && !/::1/
+                  { found=1 }
+                  END
+                  { if (!found) exit 1 }'
 
     controllers:
       acars-usb-watchdog:
@@ -55,6 +65,7 @@ spec:
                 acars-acarsdec2,
                 acars-acarsdec3,
                 acars-dumpvdl2
+
       acarsdec: 
         <<: *common_settings
         replicas: 1
