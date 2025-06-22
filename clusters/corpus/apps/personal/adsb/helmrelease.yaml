@@ -44,6 +44,7 @@ spec:
                 adsb-flightradar24,
                 adsb-ultrafeeder
 #                adsb-dump978,
+
       ultrafeeder:
         <<: *common_settings
         replicas: 1
