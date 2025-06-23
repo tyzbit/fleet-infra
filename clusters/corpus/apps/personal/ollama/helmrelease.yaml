@@ -21,7 +21,7 @@ spec:
     controllers:
       ollama:
         type: deployment
-        replicas: 0
+        replicas: 1
         annotations:
           reloader.stakater.com/auto: "true"
         pod:
@@ -41,15 +41,8 @@ spec:
         containers:
           ollama:
             image:
-              # repository: ghcr.io/tyzbit/ollama-intel-gpu
               repository: intelanalytics/ipex-llm-inference-cpp-xpu
               tag: 2.3.0-SNAPSHOT
-              # tag: latest
-              # tag: ipex-llm-v.0.0.1-2
-              # tag: latest@sha256:36da76816d399b80127c043261df912cfa7ee73bde0b22f52a75178b236b1eea
-            # image:
-            #   repository: docker.io/ollama/ollama
-            #   tag: 0.6.5
             securityContext:
               privileged: true
             # command: [tail,-f,/dev/null]
@@ -101,7 +94,6 @@ spec:
 
     persistence:
       ollama:
-        # existingClaim: ollama-models-longhorn-objectstorage
         existingClaim: ollama-data-nas
         globalMounts:
           - path: *modelPath
@@ -111,16 +103,6 @@ spec:
       dri:
         type: hostPath
         hostPath: /dev/dri
-      # edgevpn-config:
-      #   name: ollama-edgevpn-config
-      #   type: secret
-      #   advancedMounts: {ollama: {edgevpn: [
-      #     {path: /config.yaml,readOnly: true, subPath: config.yaml}
-      #     ]}}
-      # edgevpn-modules:
-      #   type: hostPath
-      #   hostPath: /lib/modules
-      #   advancedMounts: {ollama: {edgevpn: [{path: /lib/modules}]}}
     service:
       main:
         controller: *app
@@ -136,10 +118,6 @@ spec:
           nginx.ingress.kubernetes.io/proxy-read-timeout: "14400"
           nginx.ingress.kubernetes.io/proxy-send-timeout: "14400"
           nginx.ingress.kubernetes.io/proxy-body-size: 128m
-          # nginx.ingress.kubernetes.io/affinity-mode: balanced
-          # nginx.ingress.kubernetes.io/affinity: "cookie"
-          # nginx.ingress.kubernetes.io/session-cookie-name: "route"
-          # nginx.ingress.kubernetes.io/session-cookie-hash: "sha1"
         hosts:
           - host: ollama.home.arpa
             paths:
