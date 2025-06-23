@@ -13,7 +13,8 @@ data:
     protocol: "https"
     bind-address: "0.0.0.0"
     trusted-proxies:
-    - "172.23.0.0/16"
+      - 172.23.0.0/16
+      - 172.23.50.100/16
 
     db-type: "sqlite"
     db-address: "/gotosocial/db/database.sqlite"
