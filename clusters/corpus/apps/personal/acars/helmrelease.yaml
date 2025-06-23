@@ -72,7 +72,7 @@ spec:
               tag: latest-build-412
             env:
               FEED_ID: TYZBIT-ACARS-1
-              DEVICE: "00000001"
+              DEVICE: "58322450"
               TZ: Etc/UTC
               SOAPYSDR: &soapy serial=$(DEVICE),driver=rtlsdr
               FREQUENCIES: "130.025"
@@ -104,7 +104,7 @@ spec:
               tag: latest-build-412
             env:
               FEED_ID: TYZBIT-ACARS-2
-              DEVICE: "13055074"
+              DEVICE: "30275839"
               TZ: Etc/UTC
               SOAPYSDR: *soapy
               FREQUENCIES: "130.450;131.725"
@@ -136,7 +136,7 @@ spec:
               tag: latest-build-412
             env:
               FEED_ID: TYZBIT-ACARS-3
-              DEVICE: "30275839"
+              DEVICE: "13055074"
               TZ: Etc/UTC
               SOAPYSDR: *soapy
               FREQUENCIES: "131.725"
@@ -168,8 +168,7 @@ spec:
               tag: latest-build-348
             env:
               FEED_ID: TYZBIT-VDL2-1
-              # DEVICE: "00000001"
-              DEVICE: "58322450"
+              DEVICE: "00000001"
               TZ: Etc/UTC
               SOAPYSDR: *soapy
               FREQUENCIES: 136.975;136.100;136.650
