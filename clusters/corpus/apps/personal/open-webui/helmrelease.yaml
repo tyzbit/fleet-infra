@@ -34,6 +34,8 @@ spec:
               - name: OLLAMA_BASE_URL
                 # value: http://sophie.home.arpa:11434
                 value: http://ollama:11434
+              - name: WEBUI_SECRET_KEY
+                value: ${opens_webui_secret_key}
                 # value: http://172.24.83.130:11434
                 # value: http://media2.home.arpa:11434
               # - name: ENABLE_RAG_WEB_SEARCH
