@@ -112,6 +112,7 @@ Filters:
       - POTABLE
       - FREETEXT
       - COMMENTS
+      - BINGO
       
       Here's an example message air travel enthusiasts want to see:
       ```
