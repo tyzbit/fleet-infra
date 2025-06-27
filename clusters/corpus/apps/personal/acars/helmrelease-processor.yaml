@@ -23,6 +23,28 @@ spec:
         reloader.stakater.com/auto: "true"
 
     controllers:
+      mariadb:
+        replicas: 1 # active longhorn
+        type: statefulset
+        annotations:
+          reloader.stakater.com/auto: "true"
+        pod:
+          nodeSelector:
+            longhorn: primary
+        containers:
+          mariadb:
+            image:
+              repository: mariadb
+              tag: "10.8"
+            envFrom:
+              - secretRef:
+                  name: acars-processor-db
+            resources:
+              requests:
+                cpu: 10m
+              limits:
+                memory: 512Mi
+
       acars-processor-1:
         <<: *common_settings
         forceRename: "acars-processor-1"
@@ -115,3 +137,14 @@ spec:
       data-3:
         existingClaim: acars-processor-3-data-nas
         advancedMounts: {acars-processor-3: {acars-processor-3: [path: /data]}}
+      db:
+        existingClaim: acars-processor-mariadb-longhorn-database
+        advancedMounts: {mariadb: {mariadb: [{path: /var/lib/mysql}]}}
+
+    service:
+      main:
+        controller: mariadb
+        type: ClusterIP
+        ports:
+          sql:
+            port: 3306

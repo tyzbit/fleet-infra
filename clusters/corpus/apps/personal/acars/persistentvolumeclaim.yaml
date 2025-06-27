@@ -39,3 +39,17 @@ spec:
   resources:
     requests:
       storage: 5Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: acars-processor-mariadb-longhorn-database
+  namespace: personal
+spec:
+  accessModes:
+    - ReadWriteOnce
+  volumeMode: Filesystem
+  storageClassName: longhorn-database
+  resources:
+    requests:
+      storage: 50Gi
