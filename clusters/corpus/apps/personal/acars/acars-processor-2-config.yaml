@@ -4,8 +4,10 @@
 # Environment variables are substituted at runtime by acars-processor
 ACARSProcessorSettings:
   ColorOutput: true
-  SaveMessages: true
-  SQLiteDatabasePath: /data/messages.db
+  Database:
+    Enabled: true
+    ConnectionString: "${acars_proc_2_db_dsn}"
+    Type: mariadb
   LogHideTimestamps: true
   LogLevel: debug
   ACARSHub:

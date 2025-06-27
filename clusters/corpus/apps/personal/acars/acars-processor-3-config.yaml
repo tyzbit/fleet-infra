@@ -5,8 +5,10 @@
 # Environment variables are substituted at runtime by acars-processor
 ACARSProcessorSettings:
   ColorOutput: true
-  SaveMessages: true
-  SQLiteDatabasePath: /data/messages.db
+  Database:
+    Enabled: true
+    SQLiteDatabasePath: /data/messages.db
+    Type: sqlite
   LogLevel: debug
   LogHideTimestamps: true
   ACARSHub:
