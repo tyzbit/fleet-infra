@@ -143,6 +143,7 @@ spec:
 
     service:
       main:
+        forceRename: acars-processor-db
         controller: mariadb
         type: ClusterIP
         ports:
