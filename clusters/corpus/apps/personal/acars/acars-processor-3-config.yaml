@@ -7,8 +7,8 @@ ACARSProcessorSettings:
   ColorOutput: true
   Database:
     Enabled: true
-    SQLiteDatabasePath: /data/messages.db
-    Type: sqlite
+    ConnectionString: "${acars_proc_3_db_dsn}"
+    Type: postgres
   LogLevel: debug
   LogHideTimestamps: true
   ACARSHub:

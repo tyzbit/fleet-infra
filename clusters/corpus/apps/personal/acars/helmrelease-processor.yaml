@@ -19,26 +19,35 @@ spec:
   values:
     common_settings: &common_settings
       type: statefulset
-      annotations:
-        reloader.stakater.com/auto: "true"
+      annotations: {reloader.stakater.com/auto: "true"}
 
     controllers:
       mariadb:
+        <<: *common_settings
         replicas: 1 # active longhorn
-        type: statefulset
-        annotations:
-          reloader.stakater.com/auto: "true"
-        pod:
-          nodeSelector:
-            longhorn: primary
+        pod: {nodeSelector: {longhorn: primary}}
         containers:
           mariadb:
             image:
               repository: mariadb
               tag: "10.8"
-            envFrom:
-              - secretRef:
-                  name: acars-processor-db
+            envFrom: [{secretRef: {name: acars-processor-db}}]
+            resources:
+              requests:
+                cpu: 10m
+              limits:
+                memory: 512Mi
+
+      postgres:
+        <<: *common_settings
+        replicas: 1 # active longhorn
+        pod: {nodeSelector: {longhorn: primary}}
+        containers:
+          mariadb:
+            image:
+              repository: postgres
+              tag: "17.5"
+            envFrom: [{secretRef: {name: acars-processor-db}}]
             resources:
               requests:
                 cpu: 10m
@@ -139,10 +148,17 @@ spec:
         advancedMounts: {mariadb: {mariadb: [{path: /var/lib/mysql}]}}
 
     service:
-      main:
+      mariadb:
         forceRename: acars-processor-db
         controller: mariadb
         type: ClusterIP
         ports:
           sql:
             port: 3306
+      postgres:
+        forceRename: acars-processor-db-2
+        controller: postgres
+        type: ClusterIP
+        ports:
+          sql:
+            port: 5432
