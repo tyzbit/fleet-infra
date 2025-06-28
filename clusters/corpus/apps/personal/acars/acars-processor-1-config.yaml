@@ -5,7 +5,7 @@
 ACARSProcessorSettings:
   ColorOutput: true
   LogHideTimestamps: true
-  LogLevel: debug
+  LogLevel: info
   ACARSHub:
     MaxConcurrentRequests: 2
     ACARS:
