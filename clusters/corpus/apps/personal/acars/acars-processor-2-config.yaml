@@ -23,7 +23,8 @@ Filters:
   Ollama:
     Enabled: true
     # Model: &ollamamodel qwen3:4b
-    Model: &ollamamodel qwen3:8b
+    # Model: &ollamamodel qwen3:8b
+    Model: &ollamamodel qwen3:30b-a3b
     URL: &ollamaurl http://media2.home.arpa:11434
     # URL: &ollamaurl http://sophie.home.arpa:11434
     # URL: &ollamaurl http://ollama:11434
