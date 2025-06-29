@@ -129,7 +129,7 @@ spec:
         <<: *common_settings
         replicas: 1
         containers:
-          acarsdec2:
+          acarsdec3:
             securityContext: *secopts
             image:
               repository: ghcr.io/sdr-enthusiasts/docker-acarsdec
