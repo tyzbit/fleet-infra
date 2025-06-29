@@ -107,7 +107,7 @@ spec:
               DEVICE: "30275839"
               TZ: Etc/UTC
               SOAPYSDR: *soapy
-              FREQUENCIES: "130.450;131.725"
+              FREQUENCIES: "131.725"
               # Enabling all frequencies to determine which are actually used
               # RTL-SDR can only scan 2MHz range
               # See https://app.airframes.io/about
@@ -139,7 +139,7 @@ spec:
               DEVICE: "13055074"
               TZ: Etc/UTC
               SOAPYSDR: *soapy
-              FREQUENCIES: "131.725"
+              FREQUENCIES: "130.450;131.125;131.475;131.550;131.825"
               # Enabling all frequencies to determine which are actually used
               # RTL-SDR can only scan 2MHz range
               # See https://app.airframes.io/about
