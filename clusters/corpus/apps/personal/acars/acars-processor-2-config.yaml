@@ -319,7 +319,8 @@ Annotators:
       acarsAircraftTailCode,
       acarsFrequencyMHz,
       acarsMessageText,
-      acarsMessageFrom
+      acarsMessageFrom,
+      acarsTimestamp
     ]
   VDLM2:
     Enabled: true
@@ -327,7 +328,8 @@ Annotators:
       vdlm2FrequencyHz,
       acarsAircraftTailCode,
       acarsMessageText,
-      acarsMessageFrom
+      acarsMessageFrom,
+      vdlm2Timestamp
     ]
   Tar1090:
     URL: http://adsb-ultrafeeder
