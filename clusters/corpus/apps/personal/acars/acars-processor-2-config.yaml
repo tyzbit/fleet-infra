@@ -332,6 +332,7 @@ Annotators:
       vdlm2Timestamp
     ]
   Tar1090:
+    Enabled: true
     URL: http://adsb-ultrafeeder
     ReferenceGeolocation: "${my_latitude},${my_longitude}"
     SelectedFields: [
@@ -361,8 +362,10 @@ Annotators:
 
 Receivers:
   DiscordWebhook:
+    Enabled: true
     URL: "${acars_discord_webhook}"
     FormatText: true
   NewRelic:
+    Enabled: true
     APIKey: "${new_relic_license_key}"
     CustomEventType: CustomACARSHumanMessages
