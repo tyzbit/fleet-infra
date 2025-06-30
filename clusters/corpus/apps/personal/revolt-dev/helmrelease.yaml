@@ -78,7 +78,7 @@ spec:
         replicas: 1 # active longhorn
         containers:
           revolt-minio:
-            # command:
+            command: [minio,server,/data]
             #   - /bin/sh
             #   - -c
             #   - |
@@ -88,7 +88,7 @@ spec:
             #       sleep 1
             #     done && \
             #     /usr/bin/mc mb minio/revolt-uploads &
-            #     minio server /data
+                # minio server /data
             image:
               repository: docker.io/minio/minio
               tag: latest
