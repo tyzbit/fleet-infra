@@ -57,8 +57,8 @@ spec:
               STATEFULSETS: >-
                 acars-acarsdec,
                 acars-acarsdec2,
-                acars-acarsdec3,
-                acars-dumpvdl2
+                acars-dumpvdl2,
+                acars-dumpvdl2-2
 
       acarsdec: 
         <<: *common_settings
@@ -75,7 +75,7 @@ spec:
               DEVICE: "58322450"
               TZ: Etc/UTC
               SOAPYSDR: &soapy serial=$(DEVICE),driver=rtlsdr
-              FREQUENCIES: "130.025"
+              FREQUENCIES: "130.025;130.450"
               # Enabling all frequencies to determine which are actually used
               # RTL-SDR can only scan 2MHz range
               # See https://app.airframes.io/about
@@ -107,7 +107,7 @@ spec:
               DEVICE: "30275839"
               TZ: Etc/UTC
               SOAPYSDR: *soapy
-              FREQUENCIES: "131.725"
+              FREQUENCIES: "131.725;131.550;131.125"
               # Enabling all frequencies to determine which are actually used
               # RTL-SDR can only scan 2MHz range
               # See https://app.airframes.io/about
@@ -127,7 +127,7 @@ spec:
 
       acarsdec3:
         <<: *common_settings
-        replicas: 1
+        replicas: 0
         containers:
           acarsdec3:
             securityContext: *secopts
@@ -139,7 +139,7 @@ spec:
               DEVICE: "13055074"
               TZ: Etc/UTC
               SOAPYSDR: *soapy
-              FREQUENCIES: "130.450;131.125;131.475;131.550;131.825"
+              FREQUENCIES: "130.450;131.125;131.550"
               # Enabling all frequencies to determine which are actually used
               # RTL-SDR can only scan 2MHz range
               # See https://app.airframes.io/about
@@ -171,7 +171,33 @@ spec:
               DEVICE: "00000001"
               TZ: Etc/UTC
               SOAPYSDR: *soapy
-              FREQUENCIES: 136.975;136.100;136.650
+              FREQUENCIES: "136.650"
+              # FREQUENCIES: "136.100;136.650;136.700;136.800;136.975"
+              ZMQ_MODE: client
+              ZMQ_ENDPOINT: tcp://acars-acarsrouter:35555
+            probes: *probes
+            resources:
+              requests:
+                cpu: 10m
+                memory: 128Mi
+              limits:
+                memory: 256Mi
+
+      dumpvdl2-2:
+        <<: *common_settings
+        replicas: 1
+        containers:
+          dumpvdl2-2:
+            securityContext: *secopts
+            image:
+              repository: ghcr.io/sdr-enthusiasts/docker-dumpvdl2
+              tag: latest-build-348
+            env:
+              FEED_ID: TYZBIT-VDL2-2
+              DEVICE: "13055074"
+              TZ: Etc/UTC
+              SOAPYSDR: *soapy
+              FREQUENCIES: 136.975;136.100
               # FREQUENCIES: "136.100;136.650;136.700;136.800;136.975"
               ZMQ_MODE: client
               ZMQ_ENDPOINT: tcp://acars-acarsrouter:35555
