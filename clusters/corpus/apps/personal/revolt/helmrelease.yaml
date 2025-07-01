@@ -43,7 +43,7 @@ spec:
               repository: docker.io/mongo
               tag: 8.0.9
               pullPolicy: Always
-            args: [--replSet,rs0]
+            # args: [--replSet,rs0]
             env: {HOSTNAME: revolt-mongo}
             resources: {requests: {cpu: 10m},limits: {memory: 512Mi}}
       "redis":
