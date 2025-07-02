@@ -326,6 +326,14 @@ spec:
                 Exclude  log /level=info msg="Changing record." action=UPDATE/
                 Exclude  $kubernetes['container_name'] /external.dns/
 
+            # Filter spurious external-dns errors
+            [FILTER]
+                Name     grep
+                Match    kube.*
+                Logical_Op and
+                Exclude  log /idna: disallowed rune/
+                Exclude  $kubernetes['container_name'] /external.dns/
+
             # Filter Unifi DEBUG lines
             [FILTER]
                 Name     grep
