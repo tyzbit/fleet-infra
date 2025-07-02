@@ -225,13 +225,6 @@ spec:
                 subPath: collectd
               - path: /usr/local/share/osm_tiles_offline
                 subPath: offline_maps
-      dump978:
-        existingClaim: adsb-dump978-data-longhorn-webapp
-        advancedMounts:
-          dump978:
-            dump978:
-              - path: /var/globe_history
-                subPath: globe_history
 
     service:
       ultrafeeder:

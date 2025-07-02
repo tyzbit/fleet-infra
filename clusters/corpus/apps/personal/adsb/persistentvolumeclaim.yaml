@@ -11,17 +11,3 @@ spec:
   resources:
     requests:
       storage: 40Gi
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: adsb-dump978-data-longhorn-webapp
-  namespace: personal
-spec:
-  accessModes:
-    - ReadWriteOnce
-  volumeMode: Filesystem
-  storageClassName: longhorn-webapp
-  resources:
-    requests:
-      storage: 40Gi
