@@ -334,6 +334,12 @@ spec:
                 Exclude  log /idna: disallowed rune/
                 Exclude  $kubernetes['container_name'] /external.dns/
 
+            # Filter common frigate access logs
+            [FILTER]
+                Name     grep
+                Match    kube.*
+                Exclude  log /GET.*frigate/
+
             # Filter Unifi DEBUG lines
             [FILTER]
                 Name     grep
