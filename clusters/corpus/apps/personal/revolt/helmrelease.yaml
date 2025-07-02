@@ -78,17 +78,18 @@ spec:
         replicas: 1 # active longhorn
         containers:
           revolt-minio:
-            command:
-              - /bin/sh
-              - -c
-              - |
-                while ! /usr/bin/mc ready minio; do
-                  /usr/bin/mc config host add minio http://127.0.0.1:9000 minioautumn $(MINIO_ROOT_PASSWORD)
-                  echo 'Waiting minio...'
-                  sleep 1
-                done && \
-                /usr/bin/mc mb minio/revolt-uploads &
-                minio server /data
+            command: [minio,server,/data]
+            # command:
+            #   - /bin/sh
+            #   - -c
+            #   - |
+            #     while ! /usr/bin/mc ready minio; do
+            #       /usr/bin/mc config host add minio http://127.0.0.1:9000 minioautumn $(MINIO_ROOT_PASSWORD)
+            #       echo 'Waiting minio...'
+            #       sleep 1
+            #     done && \
+            #     /usr/bin/mc mb minio/revolt-uploads &
+            #     minio server /data
             image:
               repository: docker.io/minio/minio
               tag: latest
