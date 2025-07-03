@@ -120,7 +120,7 @@ data:
       done
       if [[ $missing == 0 ]]; then
         log "All devices present."
-        if [[ $(activereplicas) < 3 ]]; then
+        if [[ $(activereplicas) < 2 ]]; then
           scale 1
         fi
       fi
