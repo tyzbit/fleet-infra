@@ -358,6 +358,7 @@ Receivers:
     Enabled: true
     URL: "${acars_development_discord_webhook}"
     FormatText: true
+    FormatTimestamps: true
 
   NewRelic:
     Enabled: true
