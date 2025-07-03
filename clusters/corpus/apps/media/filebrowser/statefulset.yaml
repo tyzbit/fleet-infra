@@ -28,8 +28,8 @@ spec:
           #   unrar
           #   util-linux
           #   &&
-          #   /filebrowser -d /db/database.db
-          command: ["/filebrowser", "-d", "/db/database.db"]
+          #   /bin/filebrowser -d /db/database.db
+          command: ["/bin/filebrowser", "-d", "/db/database.db"]
           env:
             - name: TZ
               value: America/New_York
