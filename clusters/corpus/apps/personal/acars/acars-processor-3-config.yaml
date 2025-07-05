@@ -356,6 +356,8 @@ Annotators:
 Receivers:
   DiscordWebhook:
     Enabled: true
+    Embed: true
+    EmbedColorFacetField: acarsAircraftTailCode
     URL: "${acars_development_discord_webhook}"
     FormatText: true
     FormatTimestamps: true
