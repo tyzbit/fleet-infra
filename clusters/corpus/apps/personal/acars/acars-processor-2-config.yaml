@@ -320,7 +320,8 @@ Annotators:
       acarsFrequencyMHz,
       acarsMessageText,
       acarsMessageFrom,
-      acarsTimestamp
+      acarsTimestamp,
+      acarsExtraThumbnail
     ]
   VDLM2:
     Enabled: true
@@ -329,7 +330,8 @@ Annotators:
       acarsAircraftTailCode,
       acarsMessageText,
       acarsMessageFrom,
-      vdlm2Timestamp
+      vdlm2Timestamp,
+      acarsExtraThumbnail
     ]
   Tar1090:
     Enabled: true

@@ -321,6 +321,7 @@ Annotators:
       acarsExtraURL,
       acarsMessageText,
       acarsMessageFrom,
+      acarsExtraThumbnail
     ]
   VDLM2:
     Enabled: true
@@ -330,6 +331,7 @@ Annotators:
       acarsMessageText,
       acarsMessageFrom
       vdlm2FrequencyHz,
+      acarsExtraThumbnail
     ]
   Tar1090:
     Enabled: true
