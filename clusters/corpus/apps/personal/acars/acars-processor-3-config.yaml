@@ -321,7 +321,11 @@ Annotators:
       acarsExtraURL,
       acarsMessageText,
       acarsMessageFrom,
-      acarsExtraThumbnail
+      acarsExtraImageLink,
+      acarsExtraPhotosLink,
+      acarsExtraThumbnailLink,
+      acarsExtraTrackingLink,
+      acarsExtraTranslateLink,
     ]
   VDLM2:
     Enabled: true
@@ -331,7 +335,11 @@ Annotators:
       acarsMessageText,
       acarsMessageFrom
       vdlm2FrequencyHz,
-      acarsExtraThumbnail
+      acarsExtraImageLink,
+      acarsExtraPhotosLink,
+      acarsExtraThumbnailLink,
+      acarsExtraTrackingLink,
+      acarsExtraTranslateLink,
     ]
   Tar1090:
     Enabled: true
