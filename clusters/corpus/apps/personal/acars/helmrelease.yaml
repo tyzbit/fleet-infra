@@ -168,7 +168,7 @@ spec:
               tag: latest-build-348
             env:
               FEED_ID: TYZBIT-VDL2-1
-              DEVICE: "00000001"
+              DEVICE: "13055074"
               TZ: Etc/UTC
               SOAPYSDR: *soapy
               FREQUENCIES: "136.650"
@@ -194,7 +194,7 @@ spec:
               tag: latest-build-348
             env:
               FEED_ID: TYZBIT-VDL2-2
-              DEVICE: "13055074"
+              DEVICE: "00000001"
               TZ: Etc/UTC
               SOAPYSDR: *soapy
               FREQUENCIES: 136.975;136.100
