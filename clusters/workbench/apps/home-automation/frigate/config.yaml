@@ -36,7 +36,7 @@ go2rtc:
     sidegarage: ["rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@sidegarage.home.arpa/Preview_01_main"]
     backdeck: ["rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@backdeck.home.arpa/Preview_01_main"]
     sunroom: ["rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@sunroom.home.arpa/Preview_01_main"]
-    sidefence: ["ffmpeg:rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@sidefence.home.arpa/1#video=copy#audio=copy"]
+    sidefence: ["ffmpeg:rtsp://{FRIGATE_CAMERA_USER}:{FRIGATE_CAMERA_PASSWORD}@sidefence.home.arpa/1"]
 
 birdseye: {enabled: true,
   quality: 8, width: 1440, height: 1080, layout: {scaling_factor: 1.0},
