@@ -40,9 +40,9 @@ spec:
               TZ: America/New_York
             resources:
               requests:
-                cpu: 1000m
+                cpu: 2000m
               limits:
-                memory: 12Gi
+                memory: 8Gi
 
     persistence:
       data:
@@ -71,13 +71,15 @@ spec:
         hostPath: /dev/shm
       cache:
         type: emptyDir
-        advancedMounts:
-          *app :
-            *app :
-              - path: /tmp/cache
-              - path: /config/model_cache
-        # medium: Memory
-        # sizeLimit: 2Gi
+        advancedMounts: {*app : { *app : [path: /tmp/cache]}}
+        medium: Memory
+        sizeLimit: 4Gi
+      model_cache:
+        existingClaim: frigate-data-nas
+        advancedMounts: {*app : { *app : [
+            path: /config/model_cache,
+            subPath: model_cache
+          ]}}
 
     service:
       main:
