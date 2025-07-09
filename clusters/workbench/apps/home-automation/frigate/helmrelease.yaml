@@ -51,7 +51,7 @@ spec:
           *app :
             *app :
               - path: /media/frigate
-              - path: /config/model_cache,
+              - path: /config/model_cache
                 subPath: model_cache
       config:
         name: frigate-config
