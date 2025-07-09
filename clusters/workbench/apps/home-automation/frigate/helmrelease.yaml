@@ -51,6 +51,8 @@ spec:
           *app :
             *app :
               - path: /media/frigate
+              - path: /config/model_cache,
+                subPath: model_cache
       config:
         name: frigate-config
         type: configMap
@@ -74,12 +76,6 @@ spec:
         advancedMounts: {*app : { *app : [path: /tmp/cache]}}
         medium: Memory
         sizeLimit: 4Gi
-      model-cache:
-        existingClaim: frigate-data-nas
-        advancedMounts: {*app : { *app : [
-            path: /config/model_cache,
-            subPath: model_cache
-          ]}}
 
     service:
       main:
