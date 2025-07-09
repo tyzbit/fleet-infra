@@ -74,11 +74,11 @@ spec:
         advancedMounts: {*app : { *app : [path: /tmp/cache]}}
         medium: Memory
         sizeLimit: 4Gi
-      model_cache:
+      model-cache:
         existingClaim: frigate-data-nas
         advancedMounts: {*app : { *app : [
             path: /config/model_cache,
-            subPath: model-cache
+            subPath: model_cache
           ]}}
 
     service:
