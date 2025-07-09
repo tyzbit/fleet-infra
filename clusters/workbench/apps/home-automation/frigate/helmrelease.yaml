@@ -78,7 +78,7 @@ spec:
         existingClaim: frigate-data-nas
         advancedMounts: {*app : { *app : [
             path: /config/model_cache,
-            subPath: model_cache
+            subPath: model-cache
           ]}}
 
     service:
