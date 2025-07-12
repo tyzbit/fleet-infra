@@ -21,6 +21,8 @@ objects:
       license_plate, # attribute label, these don't generate events
     ]
 review: {detections: {labels: *trackedobjects}}
+detect:
+  enabled: true
 
 ffmpeg:
   hwaccel_args: preset-vaapi
