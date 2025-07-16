@@ -32,7 +32,8 @@ spec:
               tag: 0.6.16
             env:
               - name: OLLAMA_BASE_URL
-                value: http://sophie.home.arpa:11434
+                value: http://media2.home.arpa:11434
+                # value: http://sophie.home.arpa:11434
                 # value: http://ollama:11434
               - name: WEBUI_SECRET_KEY
                 value: "${open_webui_secret_key}"
