@@ -121,6 +121,8 @@ Filters:
       - TEXT
       - TXT
       - FREETEXT
+      - PAN-PAN
+      - PAN PAN
       
       Here's an example message air travel enthusiasts want to see:
       ```
