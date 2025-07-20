@@ -333,6 +333,7 @@ Annotators:
       acarsExtraThumbnailLink,
       acarsExtraTrackingLink,
       acarsExtraTranslateLink,
+      acarsExtraACARSDramaTailNumberLink,
     ]
   VDLM2:
     Enabled: true
@@ -347,6 +348,7 @@ Annotators:
       acarsExtraThumbnailLink,
       acarsExtraTrackingLink,
       acarsExtraTranslateLink,
+      acarsExtraACARSDramaTailNumberLink,
     ]
   Tar1090:
     Enabled: true
