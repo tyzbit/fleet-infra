@@ -19,6 +19,6 @@ spec:
     replicaCount: 1
     extraArgs:
       provider: google
-      cookie-expire: 168h
+      cookie-expire: 1y
     config:
       existingSecret: frigate-oauth2-proxy
