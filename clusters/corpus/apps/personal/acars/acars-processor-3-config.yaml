@@ -314,6 +314,9 @@ Filters:
   VDLM2:
     DuplicateMessageSimilarity: 0.9
 
+  Generic:
+    DictionaryPhraseLengthMinimum: 3
+
 Annotators:
   ACARS:
     Enabled: true
