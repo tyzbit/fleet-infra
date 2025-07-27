@@ -91,7 +91,7 @@ spec:
       acars-processor-3:
         <<: *common_settings
         forceRename: "acars-processor-3"
-        replicas: 1
+        replicas: 0
         containers:
           acars-processor-3:
             image:
