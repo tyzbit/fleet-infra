@@ -7,8 +7,8 @@ ACARSProcessorSettings:
   ColorOutput: true
   Database:
     Enabled: true
-    ConnectionString: "${acars_proc_3_db_dsn}"
-    Type: postgres
+    # ConnectionString: "${acars_proc_3_db_dsn}"
+    # Type: postgres
   LogLevel: debug
   LogHideTimestamps: true
   ACARSHub:
