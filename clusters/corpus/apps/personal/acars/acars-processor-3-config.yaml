@@ -22,18 +22,13 @@ ACARSProcessorSettings:
 
 Filters:
   Ollama:
-    Enabled: true
-    Model: &ollamamodel qwen3:8b # 37 layers
-    # Model: &ollamamodel qwen3:4b
-    URL: &ollamaurl http://sophie.home.arpa:11434
-    # URL: &ollamaurl http://media2.home.arpa:11434
-    # URL: &ollamaurl http://ollama:11434
-    # URL: &ollamaurl http://ollama.home.arpa
-    # URL: &ollamaurl http://172.23.97.210:11434
+    Enabled: false
+    Model: &ollamamodel qwen3:30b-a3b
+    URL: &ollamaurl http://media2.home.arpa:11434
     FilterOnFailure: true
-    MaxRetryAttempts: 4
-    MaxRetryDelaySeconds: 10
-    Timeout: 120
+    MaxRetryAttempts: 5
+    MaxRetryDelaySeconds: 2
+    Timeout: 60
     Options: &ollamaopts [
       {Name: num_predict, Value: 100}, # Maximum number of tokens (words, kinda) to generate
       {Name: temperature, Value: 0.4}, # Creativity (0.0-2.0)
@@ -325,9 +320,9 @@ Annotators:
     SelectedFields: [
       acarsAircraftTailCode,
       acarsFrequencyMHz,
-      acarsExtraURL,
       acarsMessageText,
       acarsMessageFrom,
+      acarsTimestamp,
       acarsExtraImageLink,
       acarsExtraPhotosLink,
       acarsExtraThumbnailLink,
@@ -338,11 +333,11 @@ Annotators:
   VDLM2:
     Enabled: true
     SelectedFields: [
-      acarsAircraftTailCode,
-      acarsExtraURL,
-      acarsMessageText,
-      acarsMessageFrom
       vdlm2FrequencyHz,
+      acarsAircraftTailCode,
+      acarsMessageText,
+      acarsMessageFrom,
+      vdlm2Timestamp,
       acarsExtraImageLink,
       acarsExtraPhotosLink,
       acarsExtraThumbnailLink,
@@ -354,34 +349,93 @@ Annotators:
     Enabled: true
     URL: http://adsb-ultrafeeder
     ReferenceGeolocation: "${my_latitude},${my_longitude}"
-    SelectedFields: 
-      - tar1090AircraftAltimeterBarometerFeet
-      - tar1090AircraftDistanceMi
-      - tar1090ReferenceGeolocation    
+    SelectedFields: [
+      tar1090AircraftDistanceMi,
+      tar1090AircraftAltimeterGeometricFeet
+    ]
 
   Ollama:
-    Enabled: false
-    Model: llama3.2
+    Enabled: true
+    Model: *ollamamodel
     URL: *ollamaurl
+    Options: *ollamaopts
+    FilterWithQuestion: false
+    MaxRetryAttempts: 1
+    MaxRetryDelaySeconds: 5
+    Timeout: 30
+    FilterLessThan: 10
+    # FilterGreaterThan: 50
     UserPrompt: >-
-      Is there prose in this message? If present, prose will be the last section
-      of a message. Return only the prose if found.
-      Surround it with triple backticks.
-    SelectedFields: 
-      - OllamaEditActions
-      - OllamaProcessedText
-      - OllamaQuestion    
-    
+      This message is a communication from a pilot or air traffic control.
+      Evaluate the amount of danger, distress or sense of emergency in this
+      message and return a value between 1 and 100 where 1 is no distress
+      or danger detected and 100 is a high amount of danger or an emergency.
+      Consider the whole message and be precise with the calculation, for
+      example, do not round to nearest numbers like 10, 50 or 75.
+
+      A message that would evaluate to 0 is:
+
+      REQUEST WEATHER REPORT FOR ORF.
+
+      This is routine and boring, frankly. Therefore, there is no emergency or
+      danger.
+
+      Another that would evaluate to 0 is:
+
+      ETA 14:05
+
+      This is informational and without any other information, there's no reason
+      to believe danger, urgency or emergency.
+
+      A message that would evaluate to 50 is:
+
+      FO SUN SHADE BROKE OFF
+
+      This is certainly a situation where there could be some danger, since
+      the FO (First Officer) needs to be able to block out the sun in order to
+      effectrively pilot the aircraft. However, the captain's sun shade should
+      be working and there are enough tools, sensors and controls that the
+      pilots should be able to operate the aircraft in any situation just as
+      effectively.
+
+      A message that would evaluate to 90 is:
+
+      LEFT ENGINE FAILURE
+
+      This is a dangerous emergency as an aircraft with left and right engines
+      likely only have two engines total. Aircraft can be piloted with one
+      engine normally, but they are always immediately piloted to the nearest
+      safe runway to land immediately. Sometimes failures like this could
+      result in a loss of life.
+
+      A message that would evaluate to 100 is:
+
+      FULL LANDING GEAR FAILURE
+      
+      This is about the most dangerous emergency an aircraft could encounter.
+      Without landing gear, the aircraft must land by scraping the hull against
+      the ground, which will produce sparks and massive damage to the aircraft.
+      Landings like this have a dangerously high chance to result in the loss of
+      life.
+    SelectedFields: [
+      ollamaProcessedText,
+      ollamaProcessedValue,
+      ollamaModelFeedbackText,
+      ollamaQuestion
+    ]  
+
 Receivers:
   DiscordWebhook:
     Enabled: true
     Embed: true
     EmbedColorFacetFields: [acarsAircraftTailCode]
-    URL: "${acars_development_discord_webhook}"
+    # URL: "${acars_development_discord_webhook}"
+    URL: "${acars_danger_discord_webhook}"
     FormatText: true
     FormatTimestamps: true
+    RequiredFields: [ollamaProcessedValue]
 
   NewRelic:
     Enabled: true
     APIKey: "${new_relic_license_key}"
-    CustomEventType: CustomACARSTestingMessages
+    CustomEventType: CustomACARSDangerousMessages
