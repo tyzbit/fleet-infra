@@ -315,7 +315,7 @@ Filters:
     DuplicateMessageSimilarity: 0.9
 
   Generic:
-    DictionaryPhraseLengthMinimum: 3
+    DictionaryPhraseLengthMinimum: 1
 
 Annotators:
   ACARS:
