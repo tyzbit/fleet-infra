@@ -100,28 +100,26 @@ Filters:
       If the message has any of these strings, then air travel enthusiasts
       definitely want to see it because only humans will use these terms.
 
-      - DISP
-      - INOP
-      - MSG FROM
-      - MEET
-      - CONFIRM
-      - PAX
-      - FREETEXT
-      - CHOP
-      - DEFECT
-      - THX
-      - THANKS
-      - EVENING
-      - POTABLE
-      - FREETEXT
-      - COMMENTS
       - BINGO
-      - FTM
-      - TEXT
-      - TXT
+      - CHOP
+      - COMMENTS
+      - CONFIRM
+      - DEFECT
+      - DISP
+      - EVENING
       - FREETEXT
-      - PAN-PAN
+      - FTM
+      - INOP
+      - MEET
+      - MSG FROM
       - PAN PAN
+      - PAN-PAN
+      - PAX
+      - POTABLE
+      - TEXT
+      - THANKS
+      - THX
+      - TXT
       
       Here's an example message air travel enthusiasts want to see:
       ```
