@@ -99,7 +99,7 @@ spec:
           external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
           external-dns.alpha.kubernetes.io/target: ${home_domain_ddns}
           nginx.ingress.kubernetes.io/proxy-body-size: 4096m
-          nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+          nginx.ingress.kubernetes.io/backend-protocol: HTTPS
         labels:
           use-cloudflare-dns-solver: "true"
         hosts:
@@ -116,7 +116,7 @@ spec:
       internal:
         className: nginx
         annotations:
-          nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+          nginx.ingress.kubernetes.io/backend-protocol: HTTPS
           external-dns.alpha.kubernetes.io/exclude: "true"
         hosts:
           - host: "unifi.home.arpa"
