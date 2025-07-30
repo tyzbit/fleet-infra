@@ -6,6 +6,8 @@ metadata:
   namespace: default
   annotations:
     nginx.ingress.kubernetes.io/proxy-body-size: 256m
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
     # nginx.ingress.kubernetes.io/auth-type: basic
     # nginx.ingress.kubernetes.io/auth-secret: router-credentials
     # nginx.ingress.kubernetes.io/auth-realm: "Authentication Required"
