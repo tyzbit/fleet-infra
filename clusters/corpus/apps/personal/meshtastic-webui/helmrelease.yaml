@@ -43,7 +43,8 @@ spec:
           http:
             port: 8080
       froggy:
-        externalName: froggy.home.arpa
+        externalIPs:
+          - 192.168.1.145
         ports:
           https:
             port: 443
