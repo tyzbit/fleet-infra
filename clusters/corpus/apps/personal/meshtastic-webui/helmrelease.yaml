@@ -110,10 +110,13 @@ spec:
         hosts:
           - host: &host "meshui.${personal_domain}"
             paths:
-              - path: /messages/broadcast/0
+              - &redirect
+                path: /messages/broadcast/0
                 pathType: Prefix
                 service:
                   identifier: main
+              - <<: *redirect
+                path: /config
         tls:
           - hosts:
               - *host
