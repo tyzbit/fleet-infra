@@ -62,14 +62,6 @@ spec:
                 pathType: Prefix
                 service:
                   identifier: main
-              - path: /api
-                pathType: Prefix
-                service:
-                  identifier: froggy
-              - path: /json
-                pathType: Prefix
-                service:
-                  identifier: froggy
         tls:
           - hosts:
               - *host
