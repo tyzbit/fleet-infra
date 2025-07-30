@@ -61,11 +61,29 @@ spec:
           - hosts:
               - *host
             secretName: *host
+
+      oauth:
+        className: nginx
+        annotations:
+          external-dns.alpha.kubernetes.io/exclude: "true"
+        labels:
+          use-cloudflare-dns-solver: "true"
+        hosts:
+          - host: *host
+            paths:
+              - path: "/oauth2"
+                service:
+                  name: meshui-oauth2-proxy
+                  port: 80
+        tls:
+          - hosts:
+              - *host
+            secretName: *host
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: &name acars-oauth2-proxy
+  name: &name meshui-oauth2-proxy
   namespace: flux-system
 spec:
   targetNamespace: personal
