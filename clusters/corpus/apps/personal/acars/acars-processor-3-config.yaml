@@ -324,34 +324,18 @@ Annotators:
     Enabled: true
     SelectedFields: [
       acarsAircraftTailCode,
-      acarsFrequencyMHz,
       acarsMessageText,
-      acarsMessageFrom,
       acarsTimestamp,
-      acarsExtraImageLink,
-      acarsExtraPhotosLink,
-      acarsExtraThumbnailLink,
-      acarsExtraTrackingLink,
-      acarsExtraTranslateLink,
-      acarsExtraACARSDramaTailNumberLink,
     ]
   VDLM2:
     Enabled: true
     SelectedFields: [
-      vdlm2FrequencyHz,
       acarsAircraftTailCode,
       acarsMessageText,
-      acarsMessageFrom,
       vdlm2Timestamp,
-      acarsExtraImageLink,
-      acarsExtraPhotosLink,
-      acarsExtraThumbnailLink,
-      acarsExtraTrackingLink,
-      acarsExtraTranslateLink,
-      acarsExtraACARSDramaTailNumberLink,
     ]
   Tar1090:
-    Enabled: true
+    Enabled: false
     URL: http://adsb-ultrafeeder
     ReferenceGeolocation: "${my_latitude},${my_longitude}"
     SelectedFields: [
@@ -422,6 +406,8 @@ Annotators:
       the ground, which will produce sparks and massive damage to the aircraft.
       Landings like this have a dangerously high chance to result in the loss of
       life.
+
+      Make the message easier to read and include that as processed text.
     SelectedFields: [
       ollamaProcessedText,
       ollamaProcessedValue,
