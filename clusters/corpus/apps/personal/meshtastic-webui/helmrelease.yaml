@@ -46,7 +46,7 @@ spec:
         externalIPs:
           - 192.168.1.145
         ports:
-          https:
+          http:
             port: 443
 
     ingress:
