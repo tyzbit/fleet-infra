@@ -78,7 +78,7 @@ spec:
           - host: &host "meshui.${personal_domain}"
             paths:
               - &frog
-                path: /api
+                path: /apia
                 pathType: Prefix
                 service:
                   name: froggy
