@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: froggy
+  namespace: default
+spec:
+  ports:
+    - name: http
+      port: 443
+      protocol: TCP
+      targetPort: 443
+  clusterIP: None
+  type: ClusterIP
+---
+apiVersion: discovery.k8s.io/v1
+kind: EndpointSlice
+metadata:
+  name: froggy
+  namespace: default
+  labels:
+    kubernetes.io/service-name: froggy
+addressType: IPv4
+ports:
+  - name: http
+    port: 443
+    protocol: TCP
+endpoints:
+  - addresses:
+      # list all external ips for this service
+      - 192.168.1.145
