@@ -42,6 +42,12 @@ spec:
         ports:
           http:
             port: 8080
+      froggy:
+        externalIPs:
+          - 192.168.1.145
+        ports:
+          https:
+            port: 443
 
     ingress:
       main:
@@ -57,6 +63,14 @@ spec:
                 pathType: Prefix
                 service:
                   identifier: main
+              - path: /api
+                pathType: Prefix
+                service:
+                  identifier: froggy
+              - path: /json
+                pathType: Prefix
+                service:
+                  identifier: froggy
         tls:
           - hosts:
               - *host
