@@ -359,55 +359,29 @@ Annotators:
       Evaluate the amount of danger, distress or sense of emergency in this
       message and return a value between 1 and 100 where 1 is no distress
       or danger detected and 100 is a high amount of danger or an emergency.
-      Consider the whole message and be precise with the calculation, for
-      example, do not round to nearest numbers like 10, 50 or 75.
+      Consider the situation and use your knowledge of aircraft and air traffic
+      communication terms to understand the situation that promped this message.
+      Rate issues that would probably occur with regularity lower, such as
+      lavatories being out of order, WiFi being inoperable or things in the
+      cabin that are not used to pilot the aircraft breaking. Rate issues
+      regarding important parts of the aircraft failing or medical issues (such
+      as when the crew must use MedLink) higher.
 
-      A message that would evaluate to 0 is:
-
-      REQUEST WEATHER REPORT FOR ORF.
-
-      This is routine and boring, frankly. Therefore, there is no emergency or
-      danger.
-
-      Another that would evaluate to 0 is:
-
-      ETA 14:05
-
-      This is informational and without any other information, there's no reason
-      to believe danger, urgency or emergency.
-
-      A message that would evaluate to 50 is:
-
-      FO SUN SHADE BROKE OFF
-
-      This is certainly a situation where there could be some danger, since
-      the FO (First Officer) needs to be able to block out the sun in order to
-      effectrively pilot the aircraft. However, the captain's sun shade should
-      be working and there are enough tools, sensors and controls that the
-      pilots should be able to operate the aircraft in any situation just as
-      effectively.
-
-      A message that would evaluate to 90 is:
-
-      LEFT ENGINE FAILURE
-
-      This is a dangerous emergency as an aircraft with left and right engines
-      likely only have two engines total. Aircraft can be piloted with one
-      engine normally, but they are always immediately piloted to the nearest
-      safe runway to land immediately. Sometimes failures like this could
-      result in a loss of life.
-
-      A message that would evaluate to 100 is:
-
-      FULL LANDING GEAR FAILURE
-      
-      This is about the most dangerous emergency an aircraft could encounter.
-      Without landing gear, the aircraft must land by scraping the hull against
-      the ground, which will produce sparks and massive damage to the aircraft.
-      Landings like this have a dangerously high chance to result in the loss of
-      life.
+      As guide, a rating of 1 would mean there is no known danger, distress
+      or emergency. A rating of 20 would mean there might be a problem, but it
+      is a routine issue. 50 would mean that something has gone wrong
+      such as if a useful but not critical part of the aircraft breaks, an
+      example being a backup VHF system. 80 would mean there is a major problem,
+      one that would give this aircraft priority over others in terms of
+      priority to land and attention from ATC. An example is any part of the
+      flight controls being degraded, such as an alieron sticking or not
+      responding. If the issue might be reported in the news as a major
+      event, even if there was no loss of life, it would be rated above 100. An
+      example is if a passenger tried to enter the cockpit unauthorized.
 
       Make the message easier to read and include that as processed text.
+
+      Your feedback should be terse.
     SelectedFields: [
       ollamaProcessedText,
       ollamaProcessedValue,
