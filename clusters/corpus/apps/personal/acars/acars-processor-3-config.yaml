@@ -385,6 +385,8 @@ Annotators:
       Make the message easier to read and include that as processed text.
 
       Your feedback should be terse.
+
+      Append "@tyzbit" after any rating above 50.
     SelectedFields: [
       ollamaProcessedText,
       ollamaProcessedValue,
