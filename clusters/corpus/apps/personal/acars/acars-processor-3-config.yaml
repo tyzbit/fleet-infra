@@ -359,8 +359,11 @@ Annotators:
       Evaluate the amount of danger, distress or sense of emergency in this
       message and return a value between 1 and 100 where 1 is no distress
       or danger detected and 100 is a high amount of danger or an emergency.
-      Consider the situation and use your knowledge of aircraft and air traffic
-      communication terms to understand the situation that promped this message.
+      Consider only the information you have from the message and use your
+      knowledge of aircraft and air traffic communication terms to understand
+      the situation that prompted this message. Do not assume, but you may
+      infer.
+      
       Rate issues that would probably occur with regularity lower, such as
       lavatories being out of order, WiFi being inoperable or things in the
       cabin that are not used to pilot the aircraft breaking. Rate issues
