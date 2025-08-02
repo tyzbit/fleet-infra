@@ -384,9 +384,8 @@ Annotators:
 
       Make the message easier to read and include that as processed text.
 
-      Your feedback should be terse.
-
-      Append "@tyzbit" in the feedback section if the rating is 50 or higher.
+      Your feedback should be terse and mention "@tyzbit" to the end in the
+      feedback section if the rating is 50 or higher.
     SelectedFields: [
       ollamaProcessedText,
       ollamaProcessedValue,
@@ -399,10 +398,10 @@ Receivers:
     Enabled: true
     Embed: true
     # EmbedColorFacetFields: [acarsAircraftTailCode]
-    EmbedColorGradientSteps:
-      - {R: 0, G: 255, B: 0}
-      # - {R: 255, G: 255, B: 0}
-      - {R: 255, G: 0, B: 0}
+    # EmbedColorGradientSteps:
+    #   - {R: 0, G: 255, B: 0}
+    #   # - {R: 255, G: 255, B: 0}
+    #   - {R: 255, G: 0, B: 0}
     # URL: "${acars_development_discord_webhook}"
     URL: "${acars_danger_discord_webhook}"
     FormatText: true
