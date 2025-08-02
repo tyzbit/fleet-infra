@@ -398,10 +398,10 @@ Receivers:
   DiscordWebhook:
     Enabled: true
     Embed: true
-    EmbedColorFacetFields: [acarsAircraftTailCode]
+    # EmbedColorFacetFields: [acarsAircraftTailCode]
     EmbedColorGradientSteps:
       - {R: 0, G: 255, B: 0}
-      - {R: 255, G: 255, B: 0}
+      # - {R: 255, G: 255, B: 0}
       - {R: 255, G: 0, B: 0}
     # URL: "${acars_development_discord_webhook}"
     URL: "${acars_danger_discord_webhook}"
