@@ -125,7 +125,7 @@ spec:
 
       acarsdec3:
         <<: *common_settings
-        replicas: 0
+        replicas: 1
         containers:
           acarsdec3:
             securityContext: *secopts
@@ -134,16 +134,14 @@ spec:
               tag: latest-build-412
             env:
               FEED_ID: TYZBIT-ACARS-3
-              DEVICE: "13055074"
+              DEVICE: "00000001"
               TZ: Etc/UTC
               SOAPYSDR: *soapy
-              FREQUENCIES: "130.450;131.125;131.550"
               # Enabling all frequencies to determine which are actually used
               # RTL-SDR can only scan 2MHz range
               # See https://app.airframes.io/about
-              # FREQUENCIES: >-
-              #   130.025;130.425;130.450;130.825;130.850;131.125;131.425;
-              #   131.450;131.475;131.525;131.550;131.725;131.825;131.850
+              FREQUENCIES: >-
+                136.725;136.775;136.825;136.875;136.975
               OUTPUT_SERVER: acars-acarsrouter
               OUTPUT_SERVER_PORT: "5550"
               OUTPUT_SERVER_MODE: tcp
@@ -170,7 +168,7 @@ spec:
               TZ: Etc/UTC
               SOAPYSDR: *soapy
               # FREQUENCIES: "136.650"
-              FREQUENCIES: "136.100;136.650;136.700;136.800;136.675"
+              FREQUENCIES: 136.100;136.650;136.700;136.800;136.675;136.725;136.775;136.825;136.875;136.975
               ZMQ_MODE: client
               ZMQ_ENDPOINT: tcp://acars-acarsrouter:35555
             probes: *probes
@@ -183,7 +181,7 @@ spec:
 
       dumpvdl2-2:
         <<: *common_settings
-        replicas: 1
+        replicas: 0
         containers:
           dumpvdl2-2:
             securityContext: *secopts
