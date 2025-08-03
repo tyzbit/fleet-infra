@@ -384,8 +384,7 @@ Annotators:
 
       Make the message easier to read and include that as processed text.
 
-      Your feedback should be terse and mention "@tyzbit" to the end in the
-      feedback section if the rating is 50 or higher.
+      Your feedback should be terse.
     SelectedFields: [
       ollamaProcessedText,
       ollamaProcessedValue,
@@ -398,6 +397,7 @@ Receivers:
     Enabled: true
     Embed: true
     # EmbedColorFacetFields: [acarsAircraftTailCode]
+    EmbedColorGradientField: ollamaProcessedValue
     # EmbedColorGradientSteps:
     #   - {R: 0, G: 255, B: 0}
     #   # - {R: 255, G: 255, B: 0}

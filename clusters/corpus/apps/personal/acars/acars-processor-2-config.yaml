@@ -380,7 +380,8 @@ Receivers:
   DiscordWebhook:
     Enabled: true
     Embed: true
-    EmbedColorFacetFields: [acarsAircraftTailCode]
+    # EmbedColorFacetFields: [acarsAircraftTailCode]
+    EmbedColorFacetFields: [acarsMessageFrom]
     URL: "${acars_discord_webhook}"
     FormatText: true
     FormatTimestamps: true
