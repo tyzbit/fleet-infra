@@ -39,7 +39,7 @@ spec:
             env:
               TZ: America/New_York
               # Remove when https://github.com/home-assistant/core/issues/127966 is closed
-              PYTHONPATH: /config/deps
+              # PYTHONPATH: /config/deps
             resources:
               requests:
                 cpu: 10m
