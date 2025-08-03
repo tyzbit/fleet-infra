@@ -40,8 +40,8 @@ spec:
               TZ: America/New_York
               # Remove when https://github.com/home-assistant/core/issues/127966 is closed
               # PYTHONPATH: /config/deps
-            securityContext:
-              privileged: true # FIXME
+            # securityContext:
+            #   privileged: true # FIXME
             resources:
               requests:
                 cpu: 10m
@@ -92,14 +92,14 @@ spec:
           *app :
             *app :
               - path: *dbus
-      ttyacm0:
-        type: hostPath
-        hostPath: &ttyacm0 /dev/ttyACM0
-        hostPathType: CharDevice
-        advancedMounts:
-          *app :
-            *app :
-              - path: *ttyacm0
+      # ttyacm0:
+      #   type: hostPath
+      #   hostPath: &ttyacm0 /dev/ttyACM0
+      #   hostPathType: CharDevice
+      #   advancedMounts:
+      #     *app :
+      #       *app :
+      #         - path: *ttyacm0
       config:
         existingClaim: home-assistant-config-nas
         advancedMounts:
