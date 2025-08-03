@@ -93,6 +93,7 @@ spec:
       ttyacm0:
         type: hostPath
         hostPath: &ttyacm0 /dev/ttyACM0
+        hostPathType: CharDevice
         advancedMounts:
           *app :
             *app :
