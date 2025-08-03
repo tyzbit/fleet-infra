@@ -80,7 +80,7 @@ spec:
               # RTL-SDR can only scan 2MHz range
               # See https://app.airframes.io/about
               FREQUENCIES: >-
-                129.125;129.350;129.525;130.025;130.450;130.825;131.125
+                129.125;129.350;129.525;130.025;130.450;130.825
               OUTPUT_SERVER: acars-acarsrouter
               OUTPUT_SERVER_PORT: "5550"
               OUTPUT_SERVER_MODE: tcp
@@ -111,7 +111,7 @@ spec:
               # RTL-SDR can only scan 2MHz range
               # See https://app.airframes.io/about
               FREQUENCIES: >-
-                131.425;131.550;131.725;131.850
+                131.125;131.425;131.550;131.725;131.850
               OUTPUT_SERVER: acars-acarsrouter
               OUTPUT_SERVER_PORT: "5550"
               OUTPUT_SERVER_MODE: tcp
