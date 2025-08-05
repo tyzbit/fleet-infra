@@ -64,9 +64,11 @@ spec:
               TZ: America/New_York
               # HSA_OVERRIDE_GFX_VERSION: 11.0.1 # force to use graphics card
               OLLAMA_CONTEXT_LENGTH: "6144"
+              OLLAMA_FLASH_ATTENTION: "true"
               OLLAMA_HOST: 0.0.0.0
               OLLAMA_INTEL_GPU: "true"
               OLLAMA_KEEP_ALIVE: "-1" # Never unload models except to load new
+              OLLAMA_KV_CACHE_TYPE: q8_0
               OLLAMA_LOAD_TIMEOUT: "600"
               OLLAMA_MAX_LOADED_MODELS: "1"
               OLLAMA_MODELS: &modelPath /models
