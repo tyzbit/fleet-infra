@@ -440,6 +440,14 @@ spec:
                 Match    kube.*
                 Exclude  log /skipping re-verifying ACME account/
 
+            # Filter home assistant messages
+            [FILTER]
+                Name     grep
+                Match    kube.*
+                Logical_Op and
+                Exclude  log /does not generate unique IDs./
+                Exclude  $kubernetes['container_name'] home-assistant
+
             # Filter kube metrics adapter messages
             [FILTER]
                 Name     grep
