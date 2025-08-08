@@ -40,8 +40,8 @@ spec:
               TZ: America/New_York
               # Remove when https://github.com/home-assistant/core/issues/127966 is closed
               # PYTHONPATH: /config/deps
-            # securityContext:
-            #   privileged: true # FIXME
+            securityContext:
+              privileged: true # FIXME
             resources:
               requests:
                 cpu: 10m
