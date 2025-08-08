@@ -322,6 +322,7 @@ Annotators:
     SelectedFields: [
       acarsAircraftTailCode,
       acarsFrequencyMHz,
+      acarsLabel,
       acarsMessageText,
       acarsMessageFrom,
       acarsTimestamp,
@@ -337,6 +338,7 @@ Annotators:
     SelectedFields: [
       vdlm2FrequencyHz,
       acarsAircraftTailCode,
+      acarsLabel,
       acarsMessageText,
       acarsMessageFrom,
       vdlm2Timestamp,
