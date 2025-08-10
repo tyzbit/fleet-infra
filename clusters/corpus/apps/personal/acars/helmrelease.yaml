@@ -107,7 +107,7 @@ spec:
               # See https://app.airframes.io/about
               # See also https://gist.github.com/tyzbit/8df46263085b0f3d9e2dd09069438f89
               FREQUENCIES: >-
-                130.025;129.350;130.450;129.525;129.125;130.825
+                130.025;130.450;130.825
               OUTPUT_SERVER: acars-acarsrouter
               OUTPUT_SERVER_PORT: "5550"
               OUTPUT_SERVER_MODE: tcp
@@ -136,7 +136,7 @@ spec:
               # See https://app.airframes.io/about
               # See also https://gist.github.com/tyzbit/8df46263085b0f3d9e2dd09069438f89
               FREQUENCIES: >-
-                136.575;136.650;136.700;136.750;136.800;136.850;136.975
+                129.350;129.525;129.125
               OUTPUT_SERVER: acars-acarsrouter
               OUTPUT_SERVER_PORT: "5550"
               OUTPUT_SERVER_MODE: tcp
