@@ -18,7 +18,8 @@ objects:
       car,bicycle,motorcycle,bus,airplane,
       cat,dog,bird,
       package,amazon,usps,ups,dhl,fedex,
-      license_plate, # attribute label, these don't generate events
+      baby,possum,rodent,chicken,tractor,golf cart,garbage truck,bus 
+      face,license_plate, # attribute label, these don't generate events
     ]
 review: {detections: {labels: *trackedobjects}}
 detect:
