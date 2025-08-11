@@ -289,6 +289,7 @@ Filters:
       - BOARDING HELD
       - SHUTDOWN THE APU
       - ADVS YOU HAVE INFO
+      - GATE REQ
 
       Air travel enthusiasts don't want to see departure delay reports usually
       because they are common and often unremarkable in air travel. They will
