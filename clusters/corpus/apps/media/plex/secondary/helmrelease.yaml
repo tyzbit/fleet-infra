@@ -42,7 +42,7 @@ spec:
           *app :
             image:
               repository: plexinc/pms-docker
-              tag: 1.42.1.10054-f333bdaa8
+              tag: 1.42.1.10060-4e8b05daf
             envFrom:
               - configMapRef:
                   name: plex-secondary-config
