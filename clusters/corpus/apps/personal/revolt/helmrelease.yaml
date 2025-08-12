@@ -165,7 +165,7 @@ spec:
               tag: 20250513-2
               pullPolicy: Always
             resources: {requests: {cpu: 10m},limits: {memory: 1Gi}}
-            env: {RUST_LOG: debug}
+            env: {RUST_LOG: info}
       "january":
         <<: *deploymentcontroller
         replicas: 1
