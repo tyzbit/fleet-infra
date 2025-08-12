@@ -90,7 +90,7 @@ spec:
               TZ: US/New_York
               # UUID: "568"
               READSB_DEVICE_TYPE: rtlsdr
-              ENABLE_978: "yes"
+              ENABLE_978: "no"
               URL_978: http://adsb-dump978/skyaware978
               # READSB_RTLSDR_DEVICE: 00000001 # Serial number of device
               # DEVICE: "30275839"

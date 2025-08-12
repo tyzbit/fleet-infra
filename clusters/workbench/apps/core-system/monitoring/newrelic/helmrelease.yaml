@@ -267,6 +267,22 @@ spec:
                 Match    kube.*
                 Exclude  log /PROPFIND/ 
 
+            # Filter ElectrumX ipv6 messages
+            [FILTER]
+                Name     grep
+                Match    kube.*
+                Logical_Op and
+                Exclude  log /Network unreachable/
+                Exclude  $kubernetes['container_name'] /(electrumx)/
+
+            # Filter nextcloud GET messages on login
+            [FILTER]
+                Name     grep
+                Match    kube.*
+                Logical_Op and
+                Exclude  log /index\.php\/login/
+                Exclude  $kubernetes['container_name'] /(controller)/
+
             # Filter New Relic event truncated messages
             [FILTER]
                 Name     grep
@@ -325,6 +341,26 @@ spec:
                 Logical_Op and
                 Exclude  log /level=info msg="Changing record." action=UPDATE/
                 Exclude  $kubernetes['container_name'] /external.dns/
+
+            # Filter spurious external-dns errors
+            [FILTER]
+                Name     grep
+                Match    kube.*
+                Logical_Op and
+                Exclude  log /disallowed rune/
+                Exclude  $kubernetes['container_name'] /external.dns/
+
+            # Filter tar1090 traffic
+            [FILTER]
+                Name     grep
+                Match    kube.*
+                Exclude  log /GET /data/aircraft\.binCraft\.zst\.*200/
+
+            # Filter tar1090 errors
+            [FILTER]
+                Name     grep
+                Match    kube.*
+                Exclude  log /978\.json.* No such file or directory/
 
             # Filter Unifi DEBUG lines
             [FILTER]
@@ -447,6 +483,18 @@ spec:
                 Logical_Op and
                 Exclude  log /does not generate unique IDs./
                 Exclude  $kubernetes['container_name'] home-assistant
+
+            # Filter common frigate access logs
+            [FILTER]
+                Name     grep
+                Match    kube.*
+                Exclude  log /GET.*frigate/
+                
+            # Filter common frigate camera logs
+            [FILTER]
+                Name     grep
+                Match    kube.*
+                Exclude  log /GET.*latest\.webp.*200/
 
             # Filter kube metrics adapter messages
             [FILTER]
