@@ -323,6 +323,6 @@ spec:
       provider: github
       github-org: "${blog_name}"
       github-team: "super-admins,adsb-ultrafeeder"
-      cookie-expire: 168h0m0s
+      cookie-expire: 8760h # one year
     config:
       existingSecret: adsb-ultrafeeder-oauth2-proxy
