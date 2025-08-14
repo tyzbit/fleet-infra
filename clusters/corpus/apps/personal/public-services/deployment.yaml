@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: public-services-home
-          image: docker.io/nginx:1.29.0
+          image: docker.io/nginx:1.29.1
           ports:
             - containerPort: 80
               name: http
