@@ -28,7 +28,7 @@ detect:
 ffmpeg:
   hwaccel_args: preset-vaapi
   input_args: preset-rtsp-restream-low-latency
-  output_args: {record: preset-record-generic-audio-copy}
+  output_args: {record: preset-record-generic-audio-aac}
 go2rtc:
   streams:
     doorbell:
