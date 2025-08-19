@@ -55,7 +55,7 @@ Steps:
         # -----------------------------------------
         UserPrompt: &FilterPrompt |
           Decide if this ACARS/VDL message should be forwarded.
-          
+
           Forward (“YES”) only if it contains natural-language sentences or clear human prose
           (greetings/sign-offs or a clause with a verb), even if mixed with technical terms.
 
@@ -84,7 +84,7 @@ Steps:
         #   - {R: 0, G: 255, B: 0}
         #   - {R: 255, G: 255, B: 0}
         #   - {R: 255, G: 0, B: 0}
-        URL: "${acars_discord_webhook}"
+        URL: "${acars_discord_dev_webhook}"
         FormatText: true
         FormatTimestamps: true
         # RequiredFields: ["model_processed_text"]
