@@ -31,8 +31,8 @@ Steps:
   - Filter: {Builtin: {FromAircraft: true}}
   - Annotate:
       Tar1090:
-        URL: http://172.23.93.229
-        ReferenceGeolocation: ${reference_geolocation}
+        URL: http://adsb-ultrafeeder
+        ReferenceGeolocation: "${my_latitude},${my_longitude}"
   - Filter:
       Ollama:
         Model: &ollamamodel qwen3:30b-a3b
