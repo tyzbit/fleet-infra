@@ -84,7 +84,7 @@ Steps:
         #   - {R: 0, G: 255, B: 0}
         #   - {R: 255, G: 255, B: 0}
         #   - {R: 255, G: 0, B: 0}
-        URL: "${acars_discord_dev_webhook}"
+        URL: "${acars_development_discord_webhook}"
         FormatText: true
         FormatTimestamps: true
         # RequiredFields: ["model_processed_text"]
