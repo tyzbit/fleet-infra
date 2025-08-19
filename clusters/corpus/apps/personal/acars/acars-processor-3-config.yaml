@@ -21,14 +21,18 @@ ACARSProcessorSettings:
       Port: 15555
 
 Steps:
-  - Filter: {Builtin: {HasText: true}}
+  - Send:
+      NewRelic:
+        APIKey: "${new_relic_license_key}"
+        CustomEventType: CustomACARSDevALLMessages
+  - Filter: {Builtin: {DictionaryPhraseLengthMinimum: 2}}
   - Filter:
       Builtin:
         PreviousMessageSimilarity:
           Similarity: 0.9
           MaximumLookBehind: 10000
           DontFilterIfLonger: true
-  - Filter: {Builtin: {FromAircraft: true}}
+  - Filter: {Builtin: {FreetextTermPresent: true}}
   - Annotate:
       Tar1090:
         URL: http://adsb-ultrafeeder
@@ -78,12 +82,7 @@ Steps:
   - Send:
       Discord:
         Embed: true
-        EmbedColorFacetFields: [acarsMessageFrom]
-        # EmbedColorGradientField: ollamaProcessedValue
-        # EmbedColorGradientSteps:
-        #   - {R: 0, G: 255, B: 0}
-        #   - {R: 255, G: 255, B: 0}
-        #   - {R: 255, G: 0, B: 0}
+        EmbedColorFacetFields: [from]
         URL: "${acars_development_discord_webhook}"
         FormatText: true
         FormatTimestamps: true
