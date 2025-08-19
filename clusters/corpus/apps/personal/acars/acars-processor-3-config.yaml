@@ -26,7 +26,7 @@ Steps:
       Builtin:
         PreviousMessageSimilarity:
           Similarity: 0.9
-          MaximumLookBehind: 100
+          MaximumLookBehind: 10000
           DontFilterIfLonger: true
   - Filter: {Builtin: {FromAircraft: true}}
   - Annotate:
