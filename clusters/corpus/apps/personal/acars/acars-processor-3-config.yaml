@@ -16,9 +16,25 @@ ACARSProcessorSettings:
     ACARS:
       Host: &acarshubhost acars-acarshub
       Port: 15550
+      SelectedFields: &selectedfields
+        - ACARSProcessor.acars_drama_tail_number_link
+        - ACARSProcessor.flight_number
+        - ACARSProcessor.frequency_mhz
+        - ACARSProcessor.from
+        - ACARSProcessor.image_link
+        - ACARSProcessor.message_text
+        - ACARSProcessor.photos_link
+        - ACARSProcessor.signal_level_dbm
+        - ACARSProcessor.tail_code
+        - ACARSProcessor.thumbnail_link
+        - ACARSProcessor.tracking_link
+        - ACARSProcessor.translate_link
+        - ACARSProcessor.unix_timestamp
+      
     VDLM2:
       Host: *acarshubhost
       Port: 15555
+      SelectedFields: *selectedfields      
 
 Steps:
   - Send:
@@ -37,48 +53,67 @@ Steps:
       Tar1090:
         URL: http://adsb-ultrafeeder
         ReferenceGeolocation: "${my_latitude},${my_longitude}"
-  # - Filter:
-  #     Ollama:
-  #       Model: &ollamamodel qwen3:30b-a3b
-  #       URL: &ollamaurl http://media2.home.arpa:11434
-  #       FilterOnFailure: true
-  #       MaxRetryAttempts: 1
-  #       MaxRetryDelaySeconds: 5
-  #       Timeout: 30
-  #       Options: &ollamaopts [
-  #         {Name: num_predict, Value: 150}, # Maximum number of tokens (words, kinda) to generate
-  #         {Name: temperature, Value: 0.4}, # Creativity (0.0-2.0)
-  #         {Name: top_p, Value: 0.2}, # Answer diversity with top_k (0.0-1.0)
-  #         {Name: top_k, Value: 20}, # Answer diversity (ex 0-100)
-  #         {Name: frequency_penalty, Value: 1.1}, # Penalize repeated tokens (0-2.0)
-  #         {Name: num_gpu, Value: 40}, # Number of layers to offload to GPU
-  #       ]
-  #       # -----------------------------------------
-  #       # 9,101 characters
-  #       # 2,495 tokens https://token-calculator.net
-  #       # -----------------------------------------
-  #       UserPrompt: &FilterPrompt |
-  #         Decide if this ACARS/VDL message should be forwarded.
+  - Filter:
+      Ollama:
+        Model: &ollamamodel qwen3:30b-a3b
+        URL: &ollamaurl http://media2.home.arpa:11434
+        FilterOnFailure: true
+        MaxRetryAttempts: 1
+        MaxRetryDelaySeconds: 5
+        Timeout: 30
+        Options: &ollamaopts [
+          {Name: num_predict, Value: 150}, # Maximum number of tokens (words, kinda) to generate
+          {Name: temperature, Value: 0.4}, # Creativity (0.0-2.0)
+          {Name: top_p, Value: 0.2}, # Answer diversity with top_k (0.0-1.0)
+          {Name: top_k, Value: 20}, # Answer diversity (ex 0-100)
+          {Name: frequency_penalty, Value: 1.1}, # Penalize repeated tokens (0-2.0)
+          {Name: num_gpu, Value: 40}, # Number of layers to offload to GPU
+        ]
+        # -----------------------------------------
+        # 9,101 characters
+        # 2,495 tokens https://token-calculator.net
+        # -----------------------------------------
+        UserPrompt: &FilterPrompt |
+          Decide if this ACARS/VDL message should be forwarded.
 
-  #         Forward (“YES”) only if it contains natural-language sentences or clear human prose
-  #         (greetings/sign-offs or a clause with a verb), even if mixed with technical terms.
+          Forward (“YES”) only if it contains natural-language sentences or clear human prose
+          (greetings/sign-offs or a clause with a verb), even if mixed with technical terms.
 
-  #         Do NOT forward (“NO”) if:
-  #         - The message is purely structured (comma/slash-separated codes) with no spaces between alphabetic words.
-  #         - Contains multiple segments like /M, /N, /P, /Q, /R, /S, /T, /V followed by numbers, without any human prose.
-  #         - Starts with A01/, A02/, etc., followed by telemetry-style segments.
+          Do NOT forward (“NO”) if:
+          - The message is purely structured (comma/slash-separated codes) with no spaces between alphabetic words.
+          - Contains multiple segments like /M, /N, /P, /Q, /R, /S, /T, /V followed by numbers, without any human prose.
+          - Starts with A01/, A02/, etc., followed by telemetry-style segments.
 
-  #         Auto-YES indicators (any one is enough):
-  #         - Greetings/sign-offs: HI, HELLO, BONJOUR, GOOD MORNING/EVENING, THANKS, THX, BRGRDS, CHEERS.
-  #         - A clear sentence/clause with a verb (e.g., WILL/IS/ARE/HAVE/NEED/CAN/PLEASE/QUESTION MARK).
-  #         - Operational prose about passengers/crew/medical/rebooking/ramp-gate or faults with narrative text.
+          Auto-YES indicators (any one is enough):
+          - Greetings/sign-offs: HI, HELLO, BONJOUR, GOOD MORNING/EVENING, THANKS, THX, BRGRDS, CHEERS.
+          - A clear sentence/clause with a verb (e.g., WILL/IS/ARE/HAVE/NEED/CAN/PLEASE/QUESTION MARK).
+          - Operational prose about passengers/crew/medical/rebooking/ramp-gate or faults with narrative text.
 
-  #         Auto-NO (unless followed by clear prose as above):
-  #         - Starts with or is dominated by system headers/codes: FLR/, FDR/, FPN/, POSRPT, POSN, CFDS, ACMS, AIDS,
-  #           ATSU, MDC REPORT, ACARS AUTO, ENGINE TREND, ECAM 1/2, ECAM only lines, LRU, P/N.
-  #         - Pure telemetry: comma/slash-separated numbers/codes, or blocks like /M /N /P /Q /R /S with no prose.
-  #         - No clause with a verb and fewer than 4 alphabetic words separated by spaces. 
-  #   #      /no_think
+          Auto-NO (unless followed by clear prose as above):
+          - Starts with or is dominated by system headers/codes: FLR/, FDR/, FPN/, POSRPT, POSN, CFDS, ACMS, AIDS,
+            ATSU, MDC REPORT, ACARS AUTO, ENGINE TREND, ECAM 1/2, ECAM only lines, LRU, P/N.
+          - Pure telemetry: comma/slash-separated numbers/codes, or blocks like /M /N /P /Q /R /S with no prose.
+          - No clause with a verb and fewer than 4 alphabetic words separated by spaces. 
+    #      /no_think
+  - Annotate:
+      Ollama:
+        Model: *ollamamodel
+        URL: *ollamaurl
+        MaxRetryAttempts: 1
+        MaxRetryDelaySeconds: 5
+        Timeout: 30
+        Options: *ollamaopts
+        UserPrompt: |
+          Read this message and rate it on a scale of 1-100 for
+          unprofessionalism with 1 being a professional-looking message
+          and 100 featuring many or egregious displays of unprofessional
+          language, behavior or subject matter.
+        SelectedFields: 
+          - OllamaAnnotatorResponse.ModelFeedback
+          - OllamaAnnotatorResponse.ProcessedNumber
+          - OllamaAnnotatorResponse.ProcessedText
+          - OllamaAnnotatorResponse.Question
+
   - Send:
       Discord:
         Embed: true
