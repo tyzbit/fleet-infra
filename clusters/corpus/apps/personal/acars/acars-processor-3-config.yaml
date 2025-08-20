@@ -106,8 +106,8 @@ Steps:
         UserPrompt: |
           Read this message and rate it on a scale of 1-100 for
           unprofessionalism with 1 being a professional-looking message
-          and 100 featuring many or egregious displays of unprofessional
-          language, behavior or subject matter.
+          and 100 featuring one or many or egregious displays of unprofessional
+          or informal language, behavior or subject matter.
         SelectedFields: 
           - OllamaAnnotatorResponse.ModelFeedback
           - OllamaAnnotatorResponse.ProcessedNumber
@@ -117,7 +117,8 @@ Steps:
   - Send:
       Discord:
         Embed: true
-        EmbedColorFacetFields: [from]
+        # EmbedColorFacetFields: [from]
+        EmbedColorGradientField: OllamaAnnotatorResponse.ProcessedNumber
         URL: "${acars_development_discord_webhook}"
         FormatText: true
         FormatTimestamps: true
