@@ -96,7 +96,7 @@ spec:
           acars-processor-3:
             image:
               repository: ghcr.io/tyzbit/acars-processor
-              tag: 22-25-processing-steps-17
+              tag: 22-25-processing-steps-18
             envFrom: *secret
             resources:
               requests:
