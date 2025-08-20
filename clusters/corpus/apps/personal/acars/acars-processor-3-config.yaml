@@ -42,7 +42,7 @@ Steps:
         APIKey: "${new_relic_license_key}"
         CustomEventType: CustomACARSDevALLMessages
   - Filter: {Builtin: {DictionaryPhraseLengthMinimum: 2}}
-  - Filter: {Builtin: {FreetextTermPresent: true}}
+  # - Filter: {Builtin: {FreetextTermPresent: true}}
   - Filter:
       Builtin:
         PreviousMessageSimilarity:
