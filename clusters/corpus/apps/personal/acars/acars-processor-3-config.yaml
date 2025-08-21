@@ -113,7 +113,24 @@ Steps:
           - OllamaAnnotatorResponse.ProcessedNumber
           - OllamaAnnotatorResponse.ProcessedText
           - OllamaAnnotatorResponse.Question
-
+  - Annotate:
+      SelectedFields:
+        - ACARSProcessor.acars_drama_tail_number_link
+        - ACARSProcessor.aircraft_distance_mi
+        - ACARSProcessor.aircraft_geolocation
+        - ACARSProcessor.frequency_mhz
+        - ACARSProcessor.from
+        - ACARSProcessor.image_link
+        - ACARSProcessor.llm_number_result
+        - ACARSProcessor.llm_question
+        - ACARSProcessor.llm_response
+        - ACARSProcessor.llm_string_result
+        - ACARSProcessor.photos_link
+        - ACARSProcessor.signal_level_dbm
+        - ACARSProcessor.tail_code
+        - ACARSProcessor.thumbnail_link
+        - ACARSProcessor.tracking_link
+        - ACARSProcessor.translate_link
   - Send:
       Discord:
         Embed: true
