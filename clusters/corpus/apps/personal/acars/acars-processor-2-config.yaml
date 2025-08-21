@@ -346,8 +346,6 @@ Steps:
         - ACARSProcessor.FrequencyMhz
         - ACARSProcessor.From
         - ACARSProcessor.ImageLink
-        - ACARSProcessor.LLMNumberResult
-        - ACARSProcessor.LLMText
         - ACARSProcessor.MessageText
         - ACARSProcessor.PhotosLink
         - ACARSProcessor.SignalLeveldBm
