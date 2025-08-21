@@ -37,28 +37,31 @@ ACARSProcessorSettings:
       SelectedFields: *selectedfields      
 
 Steps:
-  - Send:
+  - Send: &newrelic
       NewRelic:
         APIKey: "${new_relic_license_key}"
         CustomEventType: CustomACARSDevALLMessages
   - Filter: {Builtin: {DictionaryPhraseLengthMinimum: 2}}
   # - Filter: {Builtin: {FreetextTermPresent: true}}
+
   - Filter:
       Builtin:
         PreviousMessageSimilarity:
           Similarity: 0.95
           MaximumLookBehind: 10000
           DontFilterIfLonger: true
+
   - Annotate:
       Tar1090:
         URL: http://adsb-ultrafeeder
         ReferenceGeolocation: "${my_latitude},${my_longitude}"
+
   - Filter:
       Ollama:
         Model: &ollamamodel qwen3:30b-a3b
         URL: &ollamaurl http://media2.home.arpa:11434
         FilterOnFailure: true
-        MaxRetryAttempts: 1
+        MaxRetryAttempts: 2
         MaxRetryDelaySeconds: 5
         Timeout: 30
         Options: &ollamaopts [
@@ -74,32 +77,43 @@ Steps:
         # 2,495 tokens https://token-calculator.net
         # -----------------------------------------
         UserPrompt: &FilterPrompt |
-          Decide if this ACARS/VDL message should be forwarded.
+          You are reviewing messages from both humans and programatically
+          generated messages to decide if they should be forwarded on because
+          they were written by a person.
 
-          Forward (“YES”) only if it contains natural-language sentences or clear human prose
-          (greetings/sign-offs or a clause with a verb), even if mixed with technical terms.
+          DO NOT forward if the message matches any of these rules:
+          - Is uniformly structured like a table, or comma separated.
+          - Contains multiple segments with /M, /N, /P, /Q, /R, /S, /T, /V
+            and numbers, without any human prose.
+          - Starts with or is dominated by system headers/codes: FLR/, FDR/, 
+            FPN/, POSRPT, POSN, CFDS, ACMS, AIDS, ATSU, MDC REPORT, ACARS AUTO,
+            ENGINE TREND, ECAM 1/2, ECAM only lines, LRU, P/N.
+          - Pure telemetry: comma/slash-separated numbers/codes, or blocks like
+            /M /N /P /Q /R /S with no prose.
+          - No clause with a verb and fewer than 4 alphabetic words separated by
+            spaces. 
 
-          Do NOT forward (“NO”) if:
-          - The message is purely structured (comma/slash-separated codes) with no spaces between alphabetic words.
-          - Contains multiple segments like /M, /N, /P, /Q, /R, /S, /T, /V followed by numbers, without any human prose.
-          - Starts with A01/, A02/, etc., followed by telemetry-style segments.
+          DO forward if the message matches any of these rules:
+          - Contains natural-language sentences or human prose.
+            Human prose may contain technical terms or acronyms but will always
+            include a human-meaningful question or statement.
+          - Greetings/sign-offs, for example: HI, HELLO, BONJOUR,
+            GOOD MORNING/EVENING, THANKS, THX, BRGRDS, CHEERS
+          - A clear sentence/clause like WILL/IS/ARE/HAVE/NEED/CAN/PLEASE/
+            QUESTION MARK followed by a verb, for example: PLEASE SEND WX.
+          - Has /Q/ which is shorthand for asking a question in this context.
+          - Operational prose about passengers,crew,med,medical,booking,
+            rebooking/ramp-gate with at least some text that communicates
+            a narrative.
 
-          Auto-YES indicators (any one is enough):
-          - Greetings/sign-offs: HI, HELLO, BONJOUR, GOOD MORNING/EVENING, THANKS, THX, BRGRDS, CHEERS.
-          - A clear sentence/clause with a verb (e.g., WILL/IS/ARE/HAVE/NEED/CAN/PLEASE/QUESTION MARK).
-          - Operational prose about passengers/crew/medical/rebooking/ramp-gate or faults with narrative text.
-
-          Auto-NO (unless followed by clear prose as above):
-          - Starts with or is dominated by system headers/codes: FLR/, FDR/, FPN/, POSRPT, POSN, CFDS, ACMS, AIDS,
-            ATSU, MDC REPORT, ACARS AUTO, ENGINE TREND, ECAM 1/2, ECAM only lines, LRU, P/N.
-          - Pure telemetry: comma/slash-separated numbers/codes, or blocks like /M /N /P /Q /R /S with no prose.
-          - No clause with a verb and fewer than 4 alphabetic words separated by spaces. 
+          Based on these rules, should this message be forwarded?
     #      /no_think
+
   - Annotate:
       Ollama:
         Model: *ollamamodel
         URL: *ollamaurl
-        MaxRetryAttempts: 1
+        MaxRetryAttempts: 2
         MaxRetryDelaySeconds: 5
         Timeout: 30
         Options: *ollamaopts
@@ -108,6 +122,7 @@ Steps:
           unprofessionalism with 1 being a professional-looking message
           and 100 featuring one or many or egregious displays of unprofessional
           or informal language, behavior or subject matter.
+
   - Annotate:
       SelectedFields:
       - ACARSProcessor.ACARSDramaTailNumberLink
@@ -133,7 +148,7 @@ Steps:
         URL: "${acars_development_discord_webhook}"
         FormatText: true
         FormatTimestamps: true
-        # RequiredFields: ["model_processed_text"]
-      NewRelic:
-        APIKey: "${new_relic_license_key}"
-        CustomEventType: CustomACARSDevMessages
+
+  - Send:
+      <<: *newrelic
+      NewRelic: {CustomEventType: CustomACARSDevALLMessages}
