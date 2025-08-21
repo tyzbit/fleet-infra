@@ -57,12 +57,12 @@ spec:
       acars-processor-1:
         <<: *common_settings
         forceRename: "acars-processor-1"
-        replicas: 0
+        replicas: 1
         containers:
           acars-processor-1:
             image:
               repository: ghcr.io/tyzbit/acars-processor
-              tag: latest
+              tag: 22-25-processing-steps-43
             envFrom: &secret [secretRef: { name: acars-processor }]
             resources:
               requests:
@@ -81,39 +81,6 @@ spec:
               repository: ghcr.io/tyzbit/acars-processor
               tag: 22-25-processing-steps-43
             envFrom: *secret
-            resources:
-              requests:
-                cpu: 10m
-                memory: 512Mi
-              limits:
-                memory: 512Mi
-
-      acars-processor-3:
-        <<: *common_settings
-        forceRename: "acars-processor-3"
-        replicas: 1
-        containers:
-          acars-processor-3:
-            image:
-              repository: ghcr.io/tyzbit/acars-processor
-              tag: latest
-            envFrom: *secret
-            resources:
-              requests:
-                cpu: 10m
-                memory: 512Mi
-              limits:
-                memory: 512Mi
-
-      acars-processor-4:
-        <<: *common_settings
-        forceRename: "acars-processor-4"
-        replicas: 0
-        containers:
-          acars-processor-4:
-            image:
-              repository: ghcr.io/tyzbit/acars-processor
-              tag: latest
             resources:
               requests:
                 cpu: 10m
