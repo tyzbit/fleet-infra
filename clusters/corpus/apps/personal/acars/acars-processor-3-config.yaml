@@ -109,12 +109,6 @@ Steps:
           and 100 featuring one or many or egregious displays of unprofessional
           or informal language, behavior or subject matter.
         SelectedFields:
-          - OllamaAnnotatorResponse.ModelFeedback
-          - OllamaAnnotatorResponse.ProcessedNumber
-          - OllamaAnnotatorResponse.ProcessedText
-          - OllamaAnnotatorResponse.Question
-  - Annotate:
-      SelectedFields:
         - ACARSProcessor.ACARSDramaTailNumberLink
         - ACARSProcessor.AircraftDistanceMi
         - ACARSProcessor.AircraftGeolocation
@@ -137,7 +131,6 @@ Steps:
         - OllamaAnnotatorResponse.ProcessedNumber
         - OllamaAnnotatorResponse.ProcessedText
         - OllamaAnnotatorResponse.Question
-
   - Send:
       Discord:
         Embed: true
@@ -150,3 +143,12 @@ Steps:
       NewRelic:
         APIKey: "${new_relic_license_key}"
         CustomEventType: CustomACARSDevMessages
+  - Annotate:
+      SelectedFields:
+        - ACARSProcessor.UnixTimestamp
+  - Send:
+      Discord:
+        Embed: true
+        URL: "${acars_development_discord_webhook}"
+        FormatText: true
+        FormatTimestamps: true
