@@ -340,20 +340,6 @@ Steps:
       #      /no_think
 
   - Annotate:
-      Ollama:
-        Model: *ollamamodel
-        URL: *ollamaurl
-        MaxRetryAttempts: 2
-        MaxRetryDelaySeconds: 5
-        Timeout: 30
-        Options: *ollamaopts
-        UserPrompt:
-          Rate this message on a scale of 1-100 for emotionality with 1 meaning
-          it reads as unemotional and/or neutral with no positive or negative
-          emotions and 100 meaning it reads as extremely emotional in either a
-          positive or negative way.
-
-  - Annotate:
       SelectedFields:
         - ACARSProcessor.ACARSDramaTailNumberLink
         - ACARSProcessor.AircraftDistanceMi
@@ -382,3 +368,49 @@ Steps:
   - Send:
       <<: *newrelic
       NewRelic: { CustomEventType: CustomACARSHumanMessages }
+
+  - Annotate:
+      Ollama:
+        Model: *ollamamodel
+        URL: *ollamaurl
+        MaxRetryAttempts: 2
+        MaxRetryDelaySeconds: 5
+        Timeout: 30
+        Options: *ollamaopts
+        UserPrompt: |
+          Rate the prose found in this message on a scale of 1-100 for
+          emotionality with 1 meaning it reads as unemotional and/or neutral
+          with no positive or negative emotions and 100 meaning it reads as
+          extremely emotional in either a positive or negative way. Ignore any
+          parts of the message that don't have natural prose.
+
+          Examples and suggested ratings:
+          ```
+          211530 KMCO KDCA7
+          /FN 2370
+          A      
+          MOSTLY SMOOTH ALL DAY
+          ```
+          This message would be about a 10 since there are no emotional words
+          used, but the situation being reported is a positive one (MOSTLY
+          SMOOTH ALL DAY)
+
+          Is the result greater than 20?
+        SelectedFields: 
+          - ACARSProcessor.LLMNumberResult
+          - ACARSProcessor.LLMQuestion
+          - ACARSProcessor.LLMStringResult
+          - ACARSProcessor.LLMText
+          - OllamaAnnotatorResponse.ModelFeedback
+          - OllamaAnnotatorResponse.ProcessedNumber
+          - OllamaAnnotatorResponse.ProcessedText
+          - OllamaAnnotatorResponse.Question
+        
+  - Send:
+      Discord:
+        Embed: true
+        # EmbedColorFacetFields: [ACARSProcessor.From]
+        EmbedColorGradientField: ACARSProcessor.LLMNumberResult
+        URL: "${acars_anger_discord_webhook}"
+        FormatText: true
+        FormatTimestamps: true
