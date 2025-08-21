@@ -120,7 +120,7 @@ Steps:
         UserPrompt: |
           Read this message and rate it on a scale of 1-100 for
           unprofessionalism with 1 being a professional-looking message
-          and 100 featuring one or many or egregious displays of unprofessional
+          and 100 featuring one or many or displays of unprofessional
           or informal language, behavior or subject matter.
 
   - Annotate:
