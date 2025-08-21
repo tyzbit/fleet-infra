@@ -42,8 +42,8 @@ Filters:
         { Name: num_gpu, Value: 40 }, # Number of layers to offload to GPU
       ]
     # -----------------------------------------
-    # 9,101 characters
-    # 2,495 tokens https://token-calculator.net
+    # 1,244 characters
+    # 416 tokens https://token-calculator.net
     # -----------------------------------------
     UserPrompt: &FilterPrompt |
       You are reviewing messages from both humans and programatically
