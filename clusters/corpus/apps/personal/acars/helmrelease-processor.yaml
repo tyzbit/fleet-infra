@@ -19,19 +19,19 @@ spec:
   values:
     common_settings: &common_settings
       type: statefulset
-      annotations: {reloader.stakater.com/auto: "true"}
+      annotations: { reloader.stakater.com/auto: "true" }
 
     controllers:
       mariadb:
         <<: *common_settings
         replicas: 1 # active longhorn
-        pod: {nodeSelector: {longhorn: primary}}
+        pod: { nodeSelector: { longhorn: primary } }
         containers:
           mariadb:
             image:
               repository: mariadb
               tag: "10.8"
-            envFrom: [{secretRef: {name: acars-processor-db}}]
+            envFrom: [{ secretRef: { name: acars-processor-db } }]
             resources:
               requests:
                 cpu: 10m
@@ -57,13 +57,13 @@ spec:
       acars-processor-1:
         <<: *common_settings
         forceRename: "acars-processor-1"
-        replicas: 1
+        replicas: 0
         containers:
           acars-processor-1:
             image:
               repository: ghcr.io/tyzbit/acars-processor
               tag: latest
-            envFrom: &secret [secretRef: {name: acars-processor}]
+            envFrom: &secret [secretRef: { name: acars-processor }]
             resources:
               requests:
                 cpu: 10m
@@ -79,7 +79,7 @@ spec:
           acars-processor-2:
             image:
               repository: ghcr.io/tyzbit/acars-processor
-              tag: latest
+              tag: 22-25-processing-steps-34
             envFrom: *secret
             resources:
               requests:
@@ -96,7 +96,7 @@ spec:
           acars-processor-3:
             image:
               repository: ghcr.io/tyzbit/acars-processor
-              tag: 22-25-processing-steps-34
+              tag: latest
             envFrom: *secret
             resources:
               requests:
@@ -126,26 +126,30 @@ spec:
         type: secret
         name: acars-processor-1-config
         advancedMounts:
-          acars-processor-1: 
-            acars-processor-1: &config [{path: /config.yaml, readOnly: true, subPath: config.yaml}]
+          acars-processor-1:
+            acars-processor-1:
+              &config [
+                { path: /config.yaml, readOnly: true, subPath: config.yaml },
+              ]
       config-2:
         type: secret
         name: acars-processor-2-config
         advancedMounts:
-          acars-processor-2: 
+          acars-processor-2:
             acars-processor-2: *config
       config-3:
         type: secret
         name: acars-processor-3-config
         advancedMounts:
-          acars-processor-3: 
+          acars-processor-3:
             acars-processor-3: *config
       data-3:
         existingClaim: acars-processor-3-data-nas
-        advancedMounts: {acars-processor-3: {acars-processor-3: [path: /data]}}
+        advancedMounts:
+          { acars-processor-3: { acars-processor-3: [path: /data] } }
       db:
         existingClaim: acars-processor-mariadb-longhorn-database
-        advancedMounts: {mariadb: {mariadb: [{path: /var/lib/mysql}]}}
+        advancedMounts: { mariadb: { mariadb: [{ path: /var/lib/mysql }] } }
 
     service:
       mariadb:

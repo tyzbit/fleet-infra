@@ -1,153 +1,161 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/tyzbit/acars-processor/refs/heads/22-25-processing-steps/schema.json
-##### yaml-language-server: $schema=https://raw.githubusercontent.com/tyzbit/acars-processor/refs/heads/main/schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/tyzbit/acars-processor/refs/heads/main/schema.json
 
-# Purpose: Testing with real messages and services, but
-# development-labeled receivers
+# Purpose: Forward all human-created messages to New Relic and Discord
+# Environment variables are substituted at runtime by acars-processor
 ACARSProcessorSettings:
   ColorOutput: true
-  LogLevel: debug
-  LogHideTimestamps: false
   Database:
     Enabled: true
-    SQLiteDatabasePath: "./data/messages.db"
-    Type: sqlite
+    ConnectionString: "${acars_proc_2_db_dsn}"
+    Type: mariadb
+  LogHideTimestamps: true
+  LogLevel: debug
   ACARSHub:
-    MaxConcurrentRequests: 1
+    MaxConcurrentRequests: 2
     ACARS:
       Host: &acarshubhost acars-acarshub
       Port: 15550
-      SelectedFields: &selectedfields
-        - ACARSProcessor.ACARSDramaTailNumberLink
-        - ACARSProcessor.FlightNumber
-        - ACARSProcessor.FrequencyMhz
-        - ACARSProcessor.From
-        - ACARSProcessor.ImageLink
-        - ACARSProcessor.MessageText
-        - ACARSProcessor.PhotosLink
-        - ACARSProcessor.SignalLeveldBm
-        - ACARSProcessor.TailCode
-        - ACARSProcessor.ThumbnailLink
-        - ACARSProcessor.TrackingLink
-        - ACARSProcessor.TranslateLink
-        - ACARSProcessor.UnixTimestamp
-      
     VDLM2:
       Host: *acarshubhost
       Port: 15555
-      SelectedFields: *selectedfields      
 
-Steps:
-  - Send: &newrelic
-      NewRelic:
-        APIKey: "${new_relic_license_key}"
-        CustomEventType: CustomACARSDevALLMessages
-  - Filter: {Builtin: {DictionaryPhraseLengthMinimum: 2}}
-  # - Filter: {Builtin: {FreetextTermPresent: true}}
+Filters:
+  Ollama:
+    Enabled: true
+    # Model: &ollamamodel qwen3:4b
+    # Model: &ollamamodel qwen3:8b
+    Model: &ollamamodel qwen3:30b-a3b
+    # URL: &ollamaurl http://media2.home.arpa:11434
+    URL: &ollamaurl http://media2.home.arpa:11434
+    # URL: &ollamaurl http://ollama:11434
+    # URL: &ollamaurl http://172.23.97.210:11434
+    FilterOnFailure: true
+    MaxRetryAttempts: 5
+    MaxRetryDelaySeconds: 2
+    Timeout: 60
+    Options: &ollamaopts [
+        { Name: num_predict, Value: 100 }, # Maximum number of tokens (words, kinda) to generate
+        { Name: temperature, Value: 0.4 }, # Creativity (0.0-2.0)
+        { Name: top_k, Value: 20 }, # Answer diversity (ex 0-100)
+        { Name: top_p, Value: 0.2 }, # Answer diversity with top_k (0.0-1.0)
+        { Name: frequency_penalty, Value: 1.1 }, # Penalize repeated tokens (0-2.0)
+        { Name: num_gpu, Value: 40 }, # Number of layers to offload to GPU
+      ]
+    # -----------------------------------------
+    # 9,101 characters
+    # 2,495 tokens https://token-calculator.net
+    # -----------------------------------------
+    UserPrompt: &FilterPrompt |
+      You are reviewing messages from both humans and programatically
+      generated messages to decide if they should be forwarded on because
+      they were written by a person.
 
-  - Filter:
-      Builtin:
-        PreviousMessageSimilarity:
-          Similarity: 0.95
-          MaximumLookBehind: 10000
-          DontFilterIfLonger: true
+      DO NOT forward if the message matches any of these rules:
+      - Is uniformly structured like a table, or comma separated.
+      - Contains multiple segments with /M, /N, /P, /Q, /R, /S, /T, /V
+        and numbers, without any human prose.
+      - Starts with or is dominated by system headers/codes: FLR/, FDR/, 
+        FPN/, POSRPT, POSN, CFDS, ACMS, AIDS, ATSU, MDC REPORT, ACARS AUTO,
+        ENGINE TREND, ECAM 1/2, ECAM only lines, LRU, P/N.
+      - Pure telemetry: comma/slash-separated numbers/codes, or blocks like
+        /M /N /P /Q /R /S with no prose.
+      - No clause with a verb and fewer than 4 alphabetic words separated by
+        spaces. 
 
-  - Annotate:
-      Tar1090:
-        URL: http://adsb-ultrafeeder
-        ReferenceGeolocation: "${my_latitude},${my_longitude}"
+      DO forward if the message matches any of these rules:
+      - Contains natural-language sentences or human prose.
+        Human prose may contain technical terms or acronyms but will always
+        include a human-meaningful question or statement.
+      - Greetings/sign-offs, for example: HI, HELLO, BONJOUR,
+        GOOD MORNING/EVENING, THANKS, THX, BRGRDS, CHEERS
+      - A clear sentence/clause like WILL/IS/ARE/HAVE/NEED/CAN/PLEASE/
+        QUESTION MARK followed by a verb, for example: PLEASE SEND WX.
+      - Has /Q/ which is shorthand for asking a question in this context.
+      - Operational prose about passengers,crew,med,medical,booking,
+        rebooking/ramp-gate with at least some text that communicates a
+        narrative.
 
-  - Filter:
-      Ollama:
-        Model: &ollamamodel qwen3:30b-a3b
-        URL: &ollamaurl http://media2.home.arpa:11434
-        FilterOnFailure: true
-        MaxRetryAttempts: 2
-        MaxRetryDelaySeconds: 5
-        Timeout: 30
-        Options: &ollamaopts [
-          {Name: num_predict, Value: 150}, # Maximum number of tokens (words, kinda) to generate
-          {Name: temperature, Value: 0.4}, # Creativity (0.0-2.0)
-          {Name: top_p, Value: 0.2}, # Answer diversity with top_k (0.0-1.0)
-          {Name: top_k, Value: 20}, # Answer diversity (ex 0-100)
-          {Name: frequency_penalty, Value: 1.1}, # Penalize repeated tokens (0-2.0)
-          {Name: num_gpu, Value: 40}, # Number of layers to offload to GPU
-        ]
-        # -----------------------------------------
-        # 9,101 characters
-        # 2,495 tokens https://token-calculator.net
-        # -----------------------------------------
-        UserPrompt: &FilterPrompt |
-          You are reviewing messages from both humans and programatically
-          generated messages to decide if they should be forwarded on because
-          they were written by a person.
-
-          DO NOT forward if the message matches any of these rules:
-          - Is uniformly structured like a table, or comma separated.
-          - Contains multiple segments with /M, /N, /P, /Q, /R, /S, /T, /V
-            and numbers, without any human prose.
-          - Starts with or is dominated by system headers/codes: FLR/, FDR/, 
-            FPN/, POSRPT, POSN, CFDS, ACMS, AIDS, ATSU, MDC REPORT, ACARS AUTO,
-            ENGINE TREND, ECAM 1/2, ECAM only lines, LRU, P/N.
-          - Pure telemetry: comma/slash-separated numbers/codes, or blocks like
-            /M /N /P /Q /R /S with no prose.
-          - No clause with a verb and fewer than 4 alphabetic words separated by
-            spaces. 
-
-          DO forward if the message matches any of these rules:
-          - Contains natural-language sentences or human prose.
-            Human prose may contain technical terms or acronyms but will always
-            include a human-meaningful question or statement.
-          - Greetings/sign-offs, for example: HI, HELLO, BONJOUR,
-            GOOD MORNING/EVENING, THANKS, THX, BRGRDS, CHEERS
-          - A clear sentence/clause like WILL/IS/ARE/HAVE/NEED/CAN/PLEASE/
-            QUESTION MARK followed by a verb, for example: PLEASE SEND WX.
-          - Has /Q/ which is shorthand for asking a question in this context.
-          - Operational prose about passengers,crew,med,medical,booking,
-            rebooking/ramp-gate with at least some text that communicates
-            a narrative.
-
-          Based on these rules, should this message be forwarded?
+      Based on these rules, should this message be forwarded?
     #      /no_think
+  OpenAI:
+    Enabled: false
+    Model: gpt-4o
+    Timeout: 30
+    APIKey: ${openai_api_key}
+    UserPrompt: *FilterPrompt
 
-  - Annotate:
-      Ollama:
-        Model: *ollamamodel
-        URL: *ollamaurl
-        MaxRetryAttempts: 2
-        MaxRetryDelaySeconds: 5
-        Timeout: 30
-        Options: *ollamaopts
-        UserPrompt: |
-          Rate this message on a scale of 1-100 for
-          emotionality with 1 meaning it reads as unemotional and/or neutral with no positive or negative emotions
-          and 100 meaning it reads as extremely emotional in either a positive or negative way.
+  ACARS:
+    DuplicateMessageSimilarity: 0.9
+  VDLM2:
+    DuplicateMessageSimilarity: 0.9
 
-  - Annotate:
-      SelectedFields:
-      - ACARSProcessor.ACARSDramaTailNumberLink
-      - ACARSProcessor.AircraftDistanceMi
-      - ACARSProcessor.FrequencyMhz
-      - ACARSProcessor.From
-      - ACARSProcessor.ImageLink
-      - ACARSProcessor.LLMNumberResult
-      - ACARSProcessor.LLMText
-      - ACARSProcessor.MessageText
-      - ACARSProcessor.PhotosLink
-      - ACARSProcessor.SignalLeveldBm
-      - ACARSProcessor.ThumbnailLink
-      - ACARSProcessor.TrackingLink
-      - ACARSProcessor.TranslateLink
-      - ACARSProcessor.UnixTimestamp
+Annotators:
+  ACARS:
+    Enabled: true
+    SelectedFields:
+      [
+        acarsAircraftTailCode,
+        acarsFrequencyMHz,
+        acarsLabel,
+        acarsMessageText,
+        acarsMessageFrom,
+        acarsTimestamp,
+        acarsExtraImageLink,
+        acarsExtraPhotosLink,
+        acarsExtraThumbnailLink,
+        acarsExtraTrackingLink,
+        acarsExtraTranslateLink,
+        acarsExtraACARSDramaTailNumberLink,
+      ]
+  VDLM2:
+    Enabled: true
+    SelectedFields:
+      [
+        vdlm2FrequencyHz,
+        acarsAircraftTailCode,
+        acarsLabel,
+        acarsMessageText,
+        acarsMessageFrom,
+        vdlm2Timestamp,
+        acarsExtraImageLink,
+        acarsExtraPhotosLink,
+        acarsExtraThumbnailLink,
+        acarsExtraTrackingLink,
+        acarsExtraTranslateLink,
+        acarsExtraACARSDramaTailNumberLink,
+      ]
+  Tar1090:
+    Enabled: true
+    URL: http://adsb-ultrafeeder
+    ReferenceGeolocation: "${my_latitude},${my_longitude}"
+    SelectedFields:
+      [tar1090AircraftDistanceMi, tar1090AircraftAltimeterGeometricFeet]
+  Ollama:
+    Enabled: false
+    Model: *ollamamodel
+    URL: *ollamaurl
+    Options: *ollamaopts
+    FilterWithQuestion: false
+    #  MaxPredictionTokens: 200
+    MaxRetryAttempts: 1
+    MaxRetryDelaySeconds: 5
+    Timeout: 60
+    UserPrompt: >-
+      Is there human-written prose present in this message?
 
-  - Send:
-      Discord:
-        Embed: true
-        # EmbedColorFacetFields: [ACARSProcessor.From]
-        EmbedColorGradientField: ACARSProcessor.LLMNumberResult
-        URL: "${acars_development_discord_webhook}"
-        FormatText: true
-        FormatTimestamps: true
+      Return only any human-written prose found in this message. /no_think
+    SelectedFields: [ollamaProcessedText, ollamaEditActions, ollamaQuestion]
 
-  - Send:
-      <<: *newrelic
-      NewRelic: {CustomEventType: CustomACARSDevALLMessages}
+Receivers:
+  DiscordWebhook:
+    Enabled: true
+    Embed: true
+    # EmbedColorFacetFields: [acarsAircraftTailCode]
+    EmbedColorFacetFields: [acarsMessageFrom]
+    URL: "${acars_development_discord_webhook}"
+    FormatText: true
+    FormatTimestamps: true
+  NewRelic:
+    Enabled: true
+    APIKey: "${new_relic_license_key}"
+    CustomEventType: CustomACARSOldVersionMessages
