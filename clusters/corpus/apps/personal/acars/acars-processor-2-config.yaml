@@ -115,6 +115,7 @@ Steps:
         - ACARSProcessor.PhotosLink
         - ACARSProcessor.SignalLeveldBm
         - ACARSProcessor.ThumbnailLink
+        - ACARSProcessor.TailCode
         - ACARSProcessor.TrackingLink
         - ACARSProcessor.TranslateLink
         - ACARSProcessor.UnixTimestamp
