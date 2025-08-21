@@ -1,5 +1,5 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/tyzbit/acars-processor/refs/heads/22-25-processing-steps/schema.json
-##### yaml-language-server: $schema=https://raw.githubusercontent.com/tyzbit/acars-processor/refs/heads/22-25-processing-steps-1/schema.json
+##### yaml-language-server: $schema=https://raw.githubusercontent.com/tyzbit/acars-processor/refs/heads/main/schema.json
 
 # Purpose: Testing with real messages and services, but
 # development-labeled receivers
@@ -17,19 +17,19 @@ ACARSProcessorSettings:
       Host: &acarshubhost acars-acarshub
       Port: 15550
       SelectedFields: &selectedfields
-        - ACARSProcessor.acars_drama_tail_number_link
-        - ACARSProcessor.flight_number
-        - ACARSProcessor.frequency_mhz
-        - ACARSProcessor.from
-        - ACARSProcessor.image_link
-        - ACARSProcessor.message_text
-        - ACARSProcessor.photos_link
-        - ACARSProcessor.signal_level_dbm
-        - ACARSProcessor.tail_code
-        - ACARSProcessor.thumbnail_link
-        - ACARSProcessor.tracking_link
-        - ACARSProcessor.translate_link
-        - ACARSProcessor.unix_timestamp
+        - ACARSProcessor.ACARSDramaTailNumberLink
+        - ACARSProcessor.FlightNumber
+        - ACARSProcessor.FrequencyMhz
+        - ACARSProcessor.From
+        - ACARSProcessor.ImageLink
+        - ACARSProcessor.MessageText
+        - ACARSProcessor.PhotosLink
+        - ACARSProcessor.SignalLeveldBm
+        - ACARSProcessor.TailCode
+        - ACARSProcessor.ThumbnailLink
+        - ACARSProcessor.TrackingLink
+        - ACARSProcessor.TranslateLink
+        - ACARSProcessor.UnixTimestamp
       
     VDLM2:
       Host: *acarshubhost
@@ -115,24 +115,24 @@ Steps:
           - OllamaAnnotatorResponse.Question
   - Annotate:
       SelectedFields:
-        - ACARSProcessor.acars_drama_tail_number_link
-        - ACARSProcessor.aircraft_distance_mi
-        - ACARSProcessor.aircraft_geolocation
-        - ACARSProcessor.frequency_mhz
-        - ACARSProcessor.from
-        - ACARSProcessor.image_link
-        - ACARSProcessor.llm_number_result
-        - ACARSProcessor.llm_question
-        - ACARSProcessor.llm_response
-        - ACARSProcessor.llm_string_result
-        - ACARSProcessor.message_text
-        - ACARSProcessor.photos_link
-        - ACARSProcessor.signal_level_dbm
-        - ACARSProcessor.tail_code
-        - ACARSProcessor.thumbnail_link
-        - ACARSProcessor.tracking_link
-        - ACARSProcessor.translate_link
-        - ACARSProcessor.unix_timestamp
+        - ACARSProcessor.ACARSDramaTailNumberLink
+        - ACARSProcessor.AircraftDistanceMi
+        - ACARSProcessor.AircraftGeolocation
+        - ACARSProcessor.FrequencyMhz
+        - ACARSProcessor.From
+        - ACARSProcessor.ImageLink
+        - ACARSProcessor.LLMNumberResult
+        - ACARSProcessor.LLMQuestion
+        - ACARSProcessor.LLMResponseText
+        - ACARSProcessor.LLMStringResult
+        - ACARSProcessor.MessageText
+        - ACARSProcessor.PhotosLink
+        - ACARSProcessor.SignalLeveldBm
+        - ACARSProcessor.TailCode
+        - ACARSProcessor.ThumbnailLink
+        - ACARSProcessor.TrackingLink
+        - ACARSProcessor.TranslateLink
+        - ACARSProcessor.UnixTimestamp
   - Send:
       Discord:
         Embed: true
