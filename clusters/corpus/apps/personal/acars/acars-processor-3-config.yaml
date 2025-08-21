@@ -132,6 +132,7 @@ Steps:
         - ACARSProcessor.thumbnail_link
         - ACARSProcessor.tracking_link
         - ACARSProcessor.translate_link
+        - ACARSProcessor.unix_timestamp
   - Send:
       Discord:
         Embed: true
