@@ -118,10 +118,9 @@ Steps:
         Timeout: 30
         Options: *ollamaopts
         UserPrompt: |
-          Read this message and rate it on a scale of 1-100 for
-          unprofessionalism with 1 being a professional-looking message
-          and 100 featuring one or many or displays of unprofessional
-          or informal language, behavior or subject matter.
+          Rate this message on a scale of 1-100 for
+          emotionality with 1 meaning it reads as unemotional and/or neutral with no positive or negative emotions
+          and 100 meaning it reads as extremely emotional in either a positive or negative way.
 
   - Annotate:
       SelectedFields:
