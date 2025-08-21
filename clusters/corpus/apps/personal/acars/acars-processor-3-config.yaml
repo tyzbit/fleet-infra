@@ -108,34 +108,28 @@ Steps:
           unprofessionalism with 1 being a professional-looking message
           and 100 featuring one or many or egregious displays of unprofessional
           or informal language, behavior or subject matter.
-        SelectedFields:
-        - ACARSProcessor.ACARSDramaTailNumberLink
-        - ACARSProcessor.AircraftDistanceMi
-        - ACARSProcessor.AircraftGeolocation
-        - ACARSProcessor.FrequencyMhz
-        - ACARSProcessor.From
-        - ACARSProcessor.ImageLink
-        - ACARSProcessor.LLMNumberResult
-        - ACARSProcessor.LLMQuestion
-        - ACARSProcessor.LLMResponseText
-        - ACARSProcessor.LLMStringResult
-        - ACARSProcessor.MessageText
-        - ACARSProcessor.PhotosLink
-        - ACARSProcessor.SignalLeveldBm
-        - ACARSProcessor.TailCode
-        - ACARSProcessor.ThumbnailLink
-        - ACARSProcessor.TrackingLink
-        - ACARSProcessor.TranslateLink
-        - ACARSProcessor.UnixTimestamp
-        - OllamaAnnotatorResponse.ModelFeedback
-        - OllamaAnnotatorResponse.ProcessedNumber
-        - OllamaAnnotatorResponse.ProcessedText
-        - OllamaAnnotatorResponse.Question
+  - Annotate:
+      SelectedFields:
+      - ACARSProcessor.ACARSDramaTailNumberLink
+      - ACARSProcessor.AircraftDistanceMi
+      - ACARSProcessor.FrequencyMhz
+      - ACARSProcessor.From
+      - ACARSProcessor.ImageLink
+      - ACARSProcessor.LLMNumberResult
+      - ACARSProcessor.LLMText
+      - ACARSProcessor.MessageText
+      - ACARSProcessor.PhotosLink
+      - ACARSProcessor.SignalLeveldBm
+      - ACARSProcessor.ThumbnailLink
+      - ACARSProcessor.TrackingLink
+      - ACARSProcessor.TranslateLink
+      - ACARSProcessor.UnixTimestamp
+
   - Send:
       Discord:
         Embed: true
-        # EmbedColorFacetFields: [from]
-        EmbedColorGradientField: OllamaAnnotatorResponse.ProcessedNumber
+        # EmbedColorFacetFields: [ACARSProcessor.From]
+        EmbedColorGradientField: ACARSProcessor.LLMNumberResult
         URL: "${acars_development_discord_webhook}"
         FormatText: true
         FormatTimestamps: true
@@ -143,12 +137,3 @@ Steps:
       NewRelic:
         APIKey: "${new_relic_license_key}"
         CustomEventType: CustomACARSDevMessages
-  - Annotate:
-      SelectedFields:
-        - ACARSProcessor.UnixTimestamp
-  - Send:
-      Discord:
-        Embed: true
-        URL: "${acars_development_discord_webhook}"
-        FormatText: true
-        FormatTimestamps: true
