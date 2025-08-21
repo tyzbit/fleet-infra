@@ -363,8 +363,9 @@ Steps:
         FormatTimestamps: true
 
   - Send:
-      <<: *newrelic
-      NewRelic: { CustomEventType: CustomACARSHumanMessages }
+      NewRelic:
+        APIKey: "${new_relic_license_key}"
+        CustomEventType: CustomACARSHumanMessages
 
   - Annotate:
       Ollama:
