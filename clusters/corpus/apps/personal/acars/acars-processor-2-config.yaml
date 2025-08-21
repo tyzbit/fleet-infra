@@ -357,8 +357,8 @@ Steps:
   - Send:
       Discord:
         Embed: true
-        # EmbedColorFacetFields: [ACARSProcessor.From]
-        EmbedColorGradientField: ACARSProcessor.LLMProcessedNumber
+        EmbedColorFacetFields: [ACARSProcessor.From]
+        # EmbedColorGradientField: ACARSProcessor.LLMProcessedNumber
         URL: "${acars_discord_webhook}"
         FormatText: true
         FormatTimestamps: true
