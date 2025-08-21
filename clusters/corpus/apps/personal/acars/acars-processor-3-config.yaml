@@ -125,6 +125,7 @@ Steps:
         - ACARSProcessor.llm_question
         - ACARSProcessor.llm_response
         - ACARSProcessor.llm_string_result
+        - ACARSProcessor.message_text
         - ACARSProcessor.photos_link
         - ACARSProcessor.signal_level_dbm
         - ACARSProcessor.tail_code
