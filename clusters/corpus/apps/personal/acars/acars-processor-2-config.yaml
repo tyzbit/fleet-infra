@@ -405,6 +405,8 @@ Steps:
         - ACARSProcessor.LLMProcessedNumber
         - ACARSProcessor.LLMQuestionAnswer
         - ACARSProcessor.LLMFeedbackText
+        - ACARSProcessor.MessageText
+        - ACARSProcessor.UnixTimestamp
 
   - Send:
       Discord:
