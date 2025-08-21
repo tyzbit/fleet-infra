@@ -6,7 +6,7 @@
 ACARSProcessorSettings:
   ColorOutput: true
   LogLevel: debug
-  LogHideTimestamps: false
+  LogHideTimestamps: true
   Database:
     Enabled: true
     ConnectionString: "${acars_proc_2_db_dsn}"
