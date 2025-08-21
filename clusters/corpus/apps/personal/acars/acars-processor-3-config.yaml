@@ -108,7 +108,7 @@ Steps:
           unprofessionalism with 1 being a professional-looking message
           and 100 featuring one or many or egregious displays of unprofessional
           or informal language, behavior or subject matter.
-        SelectedFields: 
+        SelectedFields:
           - OllamaAnnotatorResponse.ModelFeedback
           - OllamaAnnotatorResponse.ProcessedNumber
           - OllamaAnnotatorResponse.ProcessedText
@@ -133,11 +133,16 @@ Steps:
         - ACARSProcessor.TrackingLink
         - ACARSProcessor.TranslateLink
         - ACARSProcessor.UnixTimestamp
+        - OllamaAnnotatorResponse.ModelFeedback
+        - OllamaAnnotatorResponse.ProcessedNumber
+        - OllamaAnnotatorResponse.ProcessedText
+        - OllamaAnnotatorResponse.Question
+
   - Send:
       Discord:
         Embed: true
         # EmbedColorFacetFields: [from]
-        EmbedColorGradientField: ACARSProcessor.LLMNumberResult
+        EmbedColorGradientField: OllamaAnnotatorResponse.ProcessedNumber
         URL: "${acars_development_discord_webhook}"
         FormatText: true
         FormatTimestamps: true
