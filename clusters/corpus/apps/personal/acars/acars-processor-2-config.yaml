@@ -397,20 +397,22 @@ Steps:
 
           Is the result greater than 20?
         SelectedFields: 
-          - ACARSProcessor.LLMNumberResult
-          - ACARSProcessor.LLMQuestion
-          - ACARSProcessor.LLMStringResult
-          - ACARSProcessor.LLMText
-          - OllamaAnnotatorResponse.ModelFeedback
-          - OllamaAnnotatorResponse.ProcessedNumber
-          - OllamaAnnotatorResponse.ProcessedText
-          - OllamaAnnotatorResponse.Question
-        
+          - ACARSProcessor.LLMProcessedNumber
+          - ACARSProcessor.LLMQuestionAnswer
+          - ACARSProcessor.LLMProcessedText
+          - ACARSProcessor.LLMFeedbackText
+
+  - Filter:
+      SelectedFields: 
+        - ACARSProcessor.LLMProcessedNumber
+        - ACARSProcessor.LLMQuestionAnswer
+        - ACARSProcessor.LLMFeedbackText
+
   - Send:
       Discord:
         Embed: true
         # EmbedColorFacetFields: [ACARSProcessor.From]
-        EmbedColorGradientField: ACARSProcessor.LLMNumberResult
+        EmbedColorGradientField: ACARSProcessor.LLMProcessedNumber
         URL: "${acars_anger_discord_webhook}"
         FormatText: true
         FormatTimestamps: true
