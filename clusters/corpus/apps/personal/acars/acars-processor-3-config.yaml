@@ -43,9 +43,13 @@ Steps:
         CustomEventType: CustomACARSDevALLMessages
   - Filter: {Builtin: {DictionaryPhraseLengthMinimum: 2}}
   # - Filter: {Builtin: {FreetextTermPresent: true}}
+
   - Send:
-      <<: *newrelic
-      NewRelic: {CustomEventType: CustomACARSDevALLMessages}
+      Discord:
+        Embed: true
+        URL: "${acars_development_discord_webhook}"
+        FormatText: true
+        FormatTimestamps: true
 
   - Filter:
       Builtin:
