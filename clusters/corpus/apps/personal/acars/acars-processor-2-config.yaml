@@ -403,7 +403,7 @@ Steps:
           - ACARSProcessor.LLMFeedbackText
 
   - Filter:
-      SelectedFields: 
+      SelectedFields:
         - ACARSProcessor.LLMProcessedNumber
         - ACARSProcessor.LLMQuestionAnswer
         - ACARSProcessor.LLMFeedbackText
