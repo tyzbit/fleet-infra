@@ -137,7 +137,7 @@ Steps:
       Discord:
         Embed: true
         # EmbedColorFacetFields: [from]
-        EmbedColorGradientField: OllamaAnnotatorResponse.ProcessedNumber
+        EmbedColorGradientField: ACARSProcessor.LLMNumberResult
         URL: "${acars_development_discord_webhook}"
         FormatText: true
         FormatTimestamps: true
