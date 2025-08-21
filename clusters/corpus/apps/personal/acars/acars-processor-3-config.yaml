@@ -6,8 +6,8 @@ ACARSProcessorSettings:
   ColorOutput: true
   Database:
     Enabled: true
-    ConnectionString: "${acars_proc_2_db_dsn}"
-    Type: mariadb
+    SQLiteDatabasePath: "./data/messages.db"
+    Type: sqlite
   LogHideTimestamps: true
   LogLevel: debug
   ACARSHub:

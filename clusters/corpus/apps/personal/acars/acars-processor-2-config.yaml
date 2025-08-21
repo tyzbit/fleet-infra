@@ -9,8 +9,8 @@ ACARSProcessorSettings:
   LogHideTimestamps: false
   Database:
     Enabled: true
-    SQLiteDatabasePath: "./data/messages.db"
-    Type: sqlite
+    ConnectionString: "${acars_proc_2_db_dsn}"
+    Type: mariadb
   ACARSHub:
     MaxConcurrentRequests: 1
     ACARS:
