@@ -1,6 +1,6 @@
 {
   "[yaml]": {
-    "editor.defaultFormatter": null
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[clusters/workbench/home-automation/frigate/config.yaml]": {
     "editor.defaultFormatter": null,

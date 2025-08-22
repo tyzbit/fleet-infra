@@ -69,8 +69,8 @@ Steps:
             { Name: num_gpu, Value: 40 }, # Number of layers to offload to GPU
           ]
         # -----------------------------------------
-        # 1,405 characters
-        # 460 tokens https://token-calculator.net
+        # 1,439 characters
+        # 458 tokens https://token-calculator.net
         # -----------------------------------------
         UserPrompt: |
           You are reviewing messages from both humans and programatically
@@ -78,23 +78,24 @@ Steps:
           humans.
 
           DO NOT forward if the message matches ANY of these rules:
-          - Is uniformly structured like a table.
-          - Contains multiple segments with /M, /N, /P, /Q, /R, /S, /T, /V
-            and numbers or blocks like /M /N /P /Q /R /S with no prose.
+          - Is uniformly structured with tables or extra spaces for formatting.
+          - Contains multiple segments with /M, /N, /P, /Q, /R, /S, /T, /V with
+            no prose.
           - Starts with or is dominated by automated terms such as FLR/, FDR/, 
             FPN/, POSRPT, POSN, CFDS, ACMS, AIDS, ATSU, MDC/EXCEEDANCE REPORT,
             ACARS AUTO, ENGINE TREND, ECAM 1/2, ECAM only lines, ATA, LRU, P/N,
-            NOTAMS, SYSTEM PARAMETERS, ARQ, PREFLIGHT BRIEF
+            NOTAMS, SYSTEM PARAMETERS, ARQ, PREFLIGHT BRIEF, TAXI
           - Informational notices with no narrative, such as ARRIVAL GATE
             INFORMATION notices, ATIS INFO notices, CREW/PAX CONNECTION notices
             and messages that end in YOU HAVE INFO.
 
           DO forward if the message matches ANY of these rules:
           - Contains natural-language sentences or human prose which may 
-            contain technical terms, acronyms or single data value but will
+            contain technical terms, acronyms but will
             always include a human-meaningful question or statement intended for
             another person. Human messages might have misspellings or
-            abbreviations like one would see in cell phone text messages.
+            abbreviations like one would see in cell phone text messages. The
+            sentences commonly have commas or periods separating them.
           - Greetings/sign-offs, for example: HI, HELLO, BONJOUR,
             GOOD MORNING/EVENING, THANKS, THX, BRGRDS, CHEERS.
           - A clear sentence/clause like WILL/IS/ARE/HAVE/NEED/CAN/PLEASE/
