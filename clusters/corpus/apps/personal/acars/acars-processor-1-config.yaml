@@ -385,23 +385,19 @@ Steps:
           prose.
 
           Is the result greater than 40?
-        # SelectedFields: 
-        #   - ACARSProcessor.LLMProcessedNumber
-        #   - ACARSProcessor.LLMQuestionAnswer
-        #   - ACARSProcessor.LLMProcessedText
-        #   - ACARSProcessor.LLMFeedbackText
+        SelectedFields: 
+          - ACARSProcessor.LLMProcessedNumber
+          - ACARSProcessor.LLMQuestionAnswer
+          - ACARSProcessor.LLMProcessedText
+          - ACARSProcessor.LLMFeedbackText
 
-  # - Filter:
-  #     SelectedFields:
-  #       - ACARSProcessor.LLMProcessedNumber
-  #       - ACARSProcessor.LLMQuestionAnswer
-  #       - ACARSProcessor.LLMProcessedText
-  #       - ACARSProcessor.LLMFeedbackText
-  #       - OllamaAnnotator.ModelFeedback
-  #       - OllamaAnnotator.ProcessedNumber
-  #       - OllamaAnnotator.QuestionAnswer
-  #       - ACARSProcessor.MessageText
-  #       - ACARSProcessor.UnixTimestamp
+  - Filter:
+      SelectedFields:
+        - ACARSProcessor.LLMProcessedNumber
+        - ACARSProcessor.LLMQuestionAnswer
+        - ACARSProcessor.LLMFeedbackText
+        - ACARSProcessor.MessageText
+        - ACARSProcessor.UnixTimestamp
 
   - Send:
       Discord:
