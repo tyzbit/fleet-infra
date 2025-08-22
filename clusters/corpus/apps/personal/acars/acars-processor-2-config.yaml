@@ -84,7 +84,7 @@ Steps:
           - Starts with or is dominated by automated terms such as FLR/, FDR/, 
             FPN/, POSRPT, POSN, CFDS, ACMS, AIDS, ATSU, MDC/EXCEEDANCE REPORT,
             ACARS AUTO, ENGINE TREND, ECAM 1/2, ECAM only lines, ATA, LRU, P/N,
-            NOTAMS, SYSTEM PARAMETERS.
+            NOTAMS, SYSTEM PARAMETERS, ARQ, PREFLIGHT BRIEF
           - Informational notices with no narrative, such as ARRIVAL GATE
             INFORMATION notices, ATIS INFO notices, CREW/PAX CONNECTION notices
             and messages that end in YOU HAVE INFO.
