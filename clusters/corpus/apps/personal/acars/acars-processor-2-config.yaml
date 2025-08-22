@@ -69,38 +69,40 @@ Steps:
             { Name: num_gpu, Value: 40 }, # Number of layers to offload to GPU
           ]
         # -----------------------------------------
-        # 7,907 characters
-        # 1,543 tokens https://token-calculator.net
+        # 1,206 characters
+        # 396 tokens https://token-calculator.net
         # -----------------------------------------
         UserPrompt: |
           You are reviewing messages from both humans and programatically
-          generated messages to decide if they should be forwarded on because
-          they were written by a person.
+          generated messages and must choose to forward only the messages from
+          humans.
 
-          DO NOT forward if the message matches any of these rules:
-          - Is uniformly structured like a table, or comma separated.
+          DO NOT forward if the message matches ANY of these rules:
+          - Is uniformly structured like a table.
           - Contains multiple segments with /M, /N, /P, /Q, /R, /S, /T, /V
-            and numbers, without any human prose.
-          - Starts with or is dominated by system headers/codes: FLR/, FDR/, 
-            FPN/, POSRPT, POSN, CFDS, ACMS, AIDS, ATSU, MDC REPORT, ACARS AUTO,
-            ENGINE TREND, ECAM 1/2, ECAM only lines, LRU, P/N.
-          - Pure telemetry: comma/slash-separated numbers/codes, or blocks like
-            /M /N /P /Q /R /S with no prose.
-          - No clause with a verb and fewer than 4 alphabetic words separated by
-            spaces. 
+            and numbers or blocks like /M /N /P /Q /R /S with no prose.
+          - Starts with or is dominated by automated terms such as FLR/, FDR/, 
+            FPN/, POSRPT, POSN, CFDS, ACMS, AIDS, ATSU, MDC/EXCEEDANCE REPORT,
+            ACARS AUTO, ENGINE TREND, ECAM 1/2, ECAM only lines, ATA, LRU, P/N,
+            NOTAMS, SYSTEM PARAMETERS.
+          - Informational notices with no narrative, such as ARRIVAL GATE
+            INFORMATION notices, ATIS INFO notices, CREW/PAX CONNECTION notices
+            and messages that end in YOU HAVE INFO.
 
-          DO forward if the message matches any of these rules:
-          - Contains natural-language sentences or human prose.
-            Human prose may contain technical terms or acronyms but will always
-            include a human-meaningful question or statement.
+          DO forward if the message matches ANY of these rules:
+          - Contains natural-language sentences or human prose which may 
+            contain technical terms, acronyms or single data value but will
+            always include a human-meaningful question or statement intended for
+            another person. Human messages might have misspellings or
+            abbreviations like one would see in cell phone text messages.
           - Greetings/sign-offs, for example: HI, HELLO, BONJOUR,
-            GOOD MORNING/EVENING, THANKS, THX, BRGRDS, CHEERS
+            GOOD MORNING/EVENING, THANKS, THX, BRGRDS, CHEERS.
           - A clear sentence/clause like WILL/IS/ARE/HAVE/NEED/CAN/PLEASE/
             QUESTION MARK followed by a verb, for example: PLEASE SEND WX.
-          - Has /Q/ which is shorthand for asking a question in this context.
+          - Has /Q/ which is shorthand for asking a question in this messages.
           - Operational prose about passengers,crew,med,medical,booking,
-            rebooking/ramp-gate with at least some text that communicates a
-            narrative.
+            rebooking/ramp-gate or other situations with a narrative.
+          - Lists a desk number.
 
           Based on these rules, should this message be forwarded?
 
