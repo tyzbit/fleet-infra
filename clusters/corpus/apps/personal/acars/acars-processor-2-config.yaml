@@ -123,8 +123,8 @@ Steps:
   - Send:
       Discord:
         Embed: true
-       # EmbedColorFacetFields: [ACARSProcessor.From]
-        EmbedColorGradientField: ACARSProcessor.TailCode
+        EmbedColorFacetFields: [ACARSProcessor.TailCode]
+        # EmbedColorGradientField: ACARSProcessor.TailCode
         URL: "${acars_development_discord_webhook}"
         FormatText: true
         FormatTimestamps: true
