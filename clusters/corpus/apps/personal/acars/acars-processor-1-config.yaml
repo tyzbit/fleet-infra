@@ -72,8 +72,8 @@ Steps:
             { Name: num_gpu, Value: 40 }, # Number of layers to offload to GPU
           ]
         # -----------------------------------------
-        # 7,907 characters
-        # 1,543 tokens https://token-calculator.net
+        # 1,552 characters
+        # 500 tokens https://token-calculator.net
         # -----------------------------------------
         UserPrompt: |
           You are reviewing messages from both humans and programatically
