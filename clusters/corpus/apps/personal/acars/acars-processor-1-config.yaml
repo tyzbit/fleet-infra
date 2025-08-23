@@ -46,8 +46,8 @@ Steps:
   - Filter:
       Builtin:
         PreviousMessageSimilarity:
-          Similarity: 0.95
-          MaximumLookBehind: 10000
+          Similarity: 0.90
+          MaximumLookBehind: 100
           DontFilterIfLonger: true
 
   - Annotate:
