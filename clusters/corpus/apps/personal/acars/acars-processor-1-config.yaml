@@ -77,21 +77,20 @@ Steps:
         # -----------------------------------------
         UserPrompt: |
           You are reviewing messages from both humans and programatically
-          generated messages and must choose to forward only the messages from
-          humans.
+          generated sources and must forward only the messages from humans.
 
           DO NOT forward if the message matches ANY of these rules:
-          - Is uniformly structured with tables or extra spaces for formatting.
+          - Is uniformly structured with tables or extra spaces for formatting
+            or has more than 10 periods, commas or other punctuation in a row.
           - Contains multiple segments with /M, /N, /P, /Q, /R, /S, /T, /V with
             no prose.
-          - Starts with or is dominated by automated terms such as FLR/, FDR/, 
-            FPN/, POSRPT, POSN, CFDS, ACMS, AIDS, ATSU, MDC/EXCEEDANCE REPORT,
-            ACARS AUTO, ENGINE TREND, ECAM 1/2, ECAM only lines, ATA, LRU, P/N,
-            NOTAMS, SYSTEM PARAMETERS, ARQ, PREFLIGHT BRIEF, TAXI, CAROUSEL,
-            FILENAME
-          - Informational notices with no narrative, such as ARRIVAL GATE
-            INFORMATION notices, ATIS INFO notices, CREW/PAX CONNECTION notices
-            and messages that end in YOU HAVE INFO.
+          - Starts with or contains more than one automated terms such as FLR/,
+            FDR/, FPN/, POSRPT, POSN, CFDS, ACMS, AIDS, ATSU, MDC REPORT,
+            EXCEEDANCE REPORT, ACARS AUTO, ENGINE TREND, ECAM 1/2, ECAM only
+            lines, ATA, LRU, P/N, NOTAMS, SYSTEM PARAMETERS, ARQ, PREFLIGHT
+            BRIEF, TAXI, CAROUSEL, FILENAME
+          - Informational notices, such as ARRIVAL GATE INFORMATION, ATIS INFO,
+            CREW/PAX CONNECTION notices and YOU HAVE INFO.
           - Almost entirely numerical data in a long sequence.
 
           DO forward if the message matches ANY of these rules:
