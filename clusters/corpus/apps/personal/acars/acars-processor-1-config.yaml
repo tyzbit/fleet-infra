@@ -37,7 +37,7 @@ ACARSProcessorSettings:
       SelectedFields: *selectedfields
 
 Steps:
-  - Send: &newrelic
+  - Send:
       NewRelic:
         APIKey: "${new_relic_license_key}"
         CustomEventType: CustomACARS
@@ -92,6 +92,7 @@ Steps:
           - Informational notices with no narrative, such as ARRIVAL GATE
             INFORMATION notices, ATIS INFO notices, CREW/PAX CONNECTION notices
             and messages that end in YOU HAVE INFO.
+          - Almost entirely numerical data in a long sequence.
 
           DO forward if the message matches ANY of these rules:
           - Contains natural-language sentences or human prose which may 
@@ -161,19 +162,21 @@ Steps:
           prose.
 
           Is the result greater than 40?
-        SelectedFields:
-          - ACARSProcessor.LLMModelFeedbackText
-          - ACARSProcessor.LLMProcessedNumber
-          - ACARSProcessor.LLMProcessedText
-          - ACARSProcessor.LLMYesNoQuestionAnswer
 
   - Filter:
       SelectedFields:
+        - ACARSProcessor.ACARSDramaTailNumberLink
+        - ACARSProcessor.From
+        - ACARSProcessor.ImageLink
         - ACARSProcessor.LLMModelFeedbackText
         - ACARSProcessor.LLMProcessedNumber
-        - ACARSProcessor.LLMProcessedText
         - ACARSProcessor.LLMYesNoQuestionAnswer
         - ACARSProcessor.MessageText
+        - ACARSProcessor.PhotosLink
+        - ACARSProcessor.SignalLeveldBm
+        - ACARSProcessor.ThumbnailLink
+        - ACARSProcessor.TrackingLink
+        - ACARSProcessor.TranslateLink
         - ACARSProcessor.UnixTimestamp
 
   - Send:
