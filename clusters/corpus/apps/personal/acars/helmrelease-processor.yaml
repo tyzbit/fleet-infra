@@ -62,7 +62,7 @@ spec:
           acars-processor-1:
             image:
               repository: ghcr.io/tyzbit/acars-processor
-              tag: 22-25-processing-steps-55
+              tag: &tag v1.0.0-rc1
             envFrom: &secret [secretRef: { name: acars-processor }]
             resources:
               requests:
@@ -79,7 +79,7 @@ spec:
           acars-processor-2:
             image:
               repository: ghcr.io/tyzbit/acars-processor
-              tag: 22-25-processing-steps-55
+              tag: *tag
             envFrom: *secret
             resources:
               requests:
