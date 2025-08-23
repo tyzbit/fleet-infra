@@ -62,7 +62,7 @@ spec:
           acars-processor-1:
             image:
               repository: ghcr.io/tyzbit/acars-processor
-              tag: &tag v1.0.0-rc1
+              tag: &tag latest
             envFrom: &secret [secretRef: { name: acars-processor }]
             resources:
               requests:
