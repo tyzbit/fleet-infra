@@ -84,7 +84,7 @@ Steps:
             or has more than 10 periods, commas or other punctuation in a row.
           - Contains multiple segments with /M, /N, /P, /Q, /R, /S, /T, /V with
             no prose.
-          - Starts with or contains more than one automated terms such as FLR/,
+          - Starts with or contains two or more automated terms such as FLR/,
             FDR/, FPN/, POSRPT, POSN, CFDS, ACMS, AIDS, ATSU, MDC REPORT,
             EXCEEDANCE REPORT, ACARS AUTO, ENGINE TREND, ECAM 1/2, ECAM only
             lines, ATA, LRU, P/N, NOTAMS, SYSTEM PARAMETERS, ARQ, PREFLIGHT
@@ -107,9 +107,9 @@ Steps:
             QUESTION MARK followed by a verb, for example: PLEASE SEND WX.
           - Has /Q/ which is shorthand for asking a question in this messages.
           - Operational prose about passengers,crew,med,medical,booking,
-            rebooking/ramp-gate or other situations with a narrative.
+            rebooking/ramp-gate, lavatories (abbreviatin: LAV), seats or other
+            situations with a narrative.
           - Lists a desk number.
-          - Talks about LAV/SEAT
 
           Based on these rules, should this message be forwarded?
       #      /no_think
