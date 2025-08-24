@@ -85,11 +85,12 @@ Steps:
           - Contains multiple segments with /M, /N, /P, /Q, /R, /S, /T, /V with
             no prose.
           - Starts with or contains two or more automated terms such as FLR/,
-            FDR/, FPN/, POSRPT, POSN, CFDS, ACMS, AIDS, ATSU, MDC REPORT,
-            EXCEEDANCE REPORT, ACARS AUTO, ENGINE TREND, ECAM 1/2, ECAM only
-            lines, ATA, LRU, P/N, NOTAMS, SYSTEM PARAMETERS, ARQ, PREFLIGHT
-            BRIEF, TAXI, CAROUSEL, FILENAME
-          - Informational notices, such as ARRIVAL GATE INFORMATION, ATIS INFO,
+            FDR/, FPN/, POSRPT, POSN, CFDS, ACMS, AIDS, ATSU, ACARS AUTO, ECAM
+            1/2, ECAM only lines, ATA, LRU, P/N, NOTAMS, ARQ, PREFLIGHT BRIEF,
+            TAXI
+          - Has terms found on a standard automated report such as PAGE (with a
+            number after it), MDC REPORT, EXCEEDANCE REPORT, ENGINE TREND, SYSTEM
+            PARAMETERS,CAROUSEL, FILENAME, ARRIVAL GATE INFORMATION, ATIS INFO,
             CREW/PAX CONNECTION notices and YOU HAVE INFO.
           - Almost entirely numerical data in a long sequence.
 
