@@ -197,18 +197,17 @@ Steps:
         UserPrompt: |
           Rate the prose from found in this message from pilots and ATC between
           1-100 for any negative emotions such as anger, frustration,
-          complaining, confusion or negative situations such as if MEDLINK has
-          to be used or any other aircraft-related emergency. Ignore any parts
+          complaining, confusion or negative situations such as if MEDLINK  is 
+          mentioned or any other aircraft-related emergency. Ignore any parts
           of the message that doesn't have communication prose.
 
-          As a general guide:
           - 1-20 should indicate the message reads as neutral or positive.
           - 20-40 should indicate the message has a hint of negativity or
             describes an undesirable situation.
           - 40-60 should indicate the message tone is clearly negative or
-            describes a bad or unwanted situation.
+            describes a bad situation.
           - 60-80 should indicate the message is complaining or expressing any
-          negative emotion clearly.
+            negative emotion clearly and strongly.
           - 80-100 should indicate the message expresses very clear and very
             strong negative feelings of any type.
 
