@@ -220,7 +220,7 @@ Steps:
 
           From [{{ index . "ACARSProcessor.TailCode" }}]({{ index . "ACARSProcessor.TrackingLink" }}) <t:{{ index . "ACARSProcessor.UnixTimestamp" }}:R>
 
-          -# This message rated a {{ index . "ACARSProcessor.LLMProcessedNumber" }} in terms of negative emotional content.
+          -# This message rated a {{ index . "ACARSProcessor.LLMProcessedNumber" }} in terms of emotional content.
 
           ```
           {{ index . "ACARSProcessor.MessageText" }}
