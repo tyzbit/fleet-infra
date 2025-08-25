@@ -132,7 +132,7 @@ Steps:
 
           DO NOT forward if the message matches ANY of these rules:
           - Is uniformly structured with one or more tables or by using spaces
-            to format.
+            to format without comments at the end of the message.
           - Mostly numerical data with no prose.
 
           DO forward if the message matches ANY of these rules:
