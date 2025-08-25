@@ -162,6 +162,7 @@ Steps:
         - ACARSProcessor.MessageText
         - ACARSProcessor.PhotosLink
         - ACARSProcessor.SignalLeveldBm
+        - ACARSProcessor.TailCodeLink
         - ACARSProcessor.ThumbnailLink
         - ACARSProcessor.TrackingLink
         - ACARSProcessor.TranslateLink
@@ -222,7 +223,7 @@ Steps:
         MessageGoTemplate: |
           # Emotional ({{ index . "ACARSProcessor.From" }}) ACARS Message
 
-          From [{{ index . "ACARSProcessor.TailCode" }}]({{ index . "ACARSProcessor.TrackingLink" }})
+          From [{{ index . "ACARSProcessor.TailCode" }}]({{ index . "ACARSProcessor.TrackingLink" }}) <t:{{ index . "ACARSProcessor.UnixTimestamp" }}:R>
 
           -# This message rated a {{ index . "ACARSProcessor.LLMProcessedNumber" }} in terms of negative emotional content.
 
@@ -231,11 +232,6 @@ Steps:
           ```
 
           **Links**:
-
-          ([Translate]({{ index . "ACARSProcessor.TranslateLink" }}))
-
+          [Translate this message]({{ index . "ACARSProcessor.TranslateLink" }})
           [ACARSDrama messages from this aircraft]({{ index . "ACARSProcessor.ACARSDramaTailNumberLink" }})
-
           [Aircraft Photos]({{ index . "ACARSProcessor.PhotosLink" }})
-
-          <t:{{ index . "ACARSProcessor.UnixTimestamp" }}:R>
