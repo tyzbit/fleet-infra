@@ -167,7 +167,7 @@ Steps:
         - ACARSProcessor.MessageText
         - ACARSProcessor.PhotosLink
         - ACARSProcessor.SignalLeveldBm
-        - ACARSProcessor.TailCodeLink
+        - ACARSProcessor.TailCode
         - ACARSProcessor.ThumbnailLink
         - ACARSProcessor.TrackingLink
         - ACARSProcessor.TranslateLink
