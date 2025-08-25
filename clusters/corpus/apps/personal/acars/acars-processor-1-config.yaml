@@ -38,7 +38,41 @@ Steps:
       NewRelic:
         APIKey: "${new_relic_license_key}"
         CustomEventType: CustomACARS
-  - Filter: { Builtin: { DictionaryPhraseLengthMinimum: 2 } }
+  # - Filter: { Builtin: { DictionaryPhraseLengthMinimum: 2 } }
+
+  - Filter:
+      Builtin:
+        Invert: true
+        RequireTerms:
+          Count: 1
+          Terms:
+            - "="
+            - TAXI AND SHUTDOWN THE APU
+            - APU SHUTDOWN
+            - ADVS YOU HAVE INFO
+            - BIRDS IN THE VICINITY
+            - BIRD ACTIVITY
+            - READBACK ALL
+            - NOTICE TO AIRMEN
+            - CODE BLEED STATUS
+            - PREFLIGHT BRIEF
+            - MDC REPORT
+            - SYSTEM PARAMETERS
+            - EXCEEDANCE REPORT
+            - ENGINE TREND
+            - CAROUSEL
+            - FILENAME
+            - ARRIVAL GATE INFORMATION
+            - ATIS INFO
+            - CREW/PAX CONNECTION
+            - CREW CONNECTING GATE INFO
+            - MUST LAND ON RWY
+            - REQUEST GATE ASSIGNMENT
+
+  - Send:
+      NewRelic:
+        APIKey: "${new_relic_license_key}"
+        CustomEventType: CustomACARSRequireTermsResults
 
   - Filter:
       Builtin:
@@ -81,14 +115,6 @@ Steps:
             or has more than 10 periods, commas or other punctuation in a row.
           - Contains multiple segments with /M, /N, /P, /Q, /R, /S, /T, /V with
             no prose.
-          - Starts with or contains two or more automated terms such as FLR/,
-            FDR/, FPN/, POSRPT, POSN, CFDS, ACMS, AIDS, ATSU, ACARS AUTO, ECAM
-            1/2, ECAM only lines, ATA, LRU, P/N, NOTAMS, ARQ, PREFLIGHT BRIEF,
-            TAXI
-          - Has terms found on a standard automated report such as PAGE (with a
-            number after it), MDC REPORT, EXCEEDANCE REPORT, ENGINE TREND, SYSTEM
-            PARAMETERS,CAROUSEL, FILENAME, ARRIVAL GATE INFORMATION, ATIS INFO,
-            CREW/PAX CONNECTION notices and YOU HAVE INFO.
           - Almost entirely numerical data in a long sequence.
 
           DO forward if the message matches ANY of these rules:
