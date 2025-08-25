@@ -85,19 +85,19 @@ Steps:
       NewRelic:
         APIKey: "${new_relic_license_key}"
         CustomEventType: CustomACARSRequireTermsResults
-      Discord:
-        Embed: true
-        EmbedColorFacetFields: [ACARSProcessor.ACARSDramaTailNumberLink]
-        # EmbedColorGradientField: ACARSProcessor.LLMProcessedNumber
-        URL: "${acars_development_discord_webhook}"
-        FormatText: true
-        FormatTimestamps: true
+      # Discord:
+      #   Embed: true
+      #   EmbedColorFacetFields: [ACARSProcessor.ACARSDramaTailNumberLink]
+      #   # EmbedColorGradientField: ACARSProcessor.LLMProcessedNumber
+      #   URL: "${acars_development_discord_webhook}"
+      #   FormatText: true
+      #   FormatTimestamps: true
 
   - Filter:
       Builtin:
         PreviousMessageSimilarity:
           Similarity: 0.90
-          MaximumLookBehind: 100
+          MaximumLookBehind: 1000
           DontFilterIfLonger: true
 
   - Annotate:
