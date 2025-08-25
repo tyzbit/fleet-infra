@@ -131,11 +131,9 @@ Steps:
           generated sources and must forward only the messages from humans.
 
           DO NOT forward if the message matches ANY of these rules:
-          - Is uniformly structured with tables or extra spaces for formatting
-            or has more than 10 periods, commas or other punctuation in a row.
-          - Contains multiple segments with /M, /N, /P, /Q, /R, /S, /T, /V with
-            no prose.
-          - Almost entirely numerical data in a long sequence.
+          - Is uniformly structured with one or more tables or by using spaces
+            to format.
+          - Almost entirely numerical data in a long sequence with no prose.
 
           DO forward if the message matches ANY of these rules:
           - Contains natural-language sentences or human prose which may 
