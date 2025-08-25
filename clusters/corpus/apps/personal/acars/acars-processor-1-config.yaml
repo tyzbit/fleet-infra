@@ -169,7 +169,7 @@ Steps:
 
   - Filter:
       Builtin:
-        LLMProcessedNumberAbove: 50
+        LLMProcessedNumberAbove: 10
 
   - Send:
       Discord:
