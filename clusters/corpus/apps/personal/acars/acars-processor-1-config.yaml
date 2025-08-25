@@ -133,7 +133,7 @@ Steps:
           DO NOT forward if the message matches ANY of these rules:
           - Is uniformly structured with one or more tables or by using spaces
             to format without comments at the end of the message.
-          - Mostly numerical data with no prose.
+          - Has mostly numerical data without prose comments after it.
 
           DO forward if the message matches ANY of these rules:
           - Contains natural-language sentences or human prose which may 
