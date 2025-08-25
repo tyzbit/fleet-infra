@@ -73,6 +73,13 @@ Steps:
       NewRelic:
         APIKey: "${new_relic_license_key}"
         CustomEventType: CustomACARSRequireTermsResults
+      Discord:
+        Embed: true
+        EmbedColorFacetFields: [ACARSProcessor.ACARSDramaTailNumberLink]
+        # EmbedColorGradientField: ACARSProcessor.LLMProcessedNumber
+        URL: "${acars_development_discord_webhook}"
+        FormatText: true
+        FormatTimestamps: true
 
   - Filter:
       Builtin:
