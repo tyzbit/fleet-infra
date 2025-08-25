@@ -39,6 +39,7 @@ Steps:
         APIKey: "${new_relic_license_key}"
         CustomEventType: CustomACARS
   # - Filter: { Builtin: { DictionaryPhraseLengthMinimum: 2 } }
+  - Filter: { Builtin: { HasText: true } }
 
   - Filter:
       Builtin:
@@ -57,6 +58,7 @@ Steps:
             - USADCXA
             - ET EXP TIME
             - AGFSR
+            - PRG/
             - TAXI AND SHUTDOWN THE APU
             - APU SHUTDOWN
             - ADVS YOU HAVE INFO
