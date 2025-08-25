@@ -47,6 +47,13 @@ Steps:
           Count: 1
           Terms:
             - "="
+            - /FTMLDR
+            - "RDU "
+            - RESREQ/
+            - POSN
+            - UNFCTRD
+            - /USADCXA
+            - "#DFREQ"
             - TAXI AND SHUTDOWN THE APU
             - APU SHUTDOWN
             - ADVS YOU HAVE INFO
