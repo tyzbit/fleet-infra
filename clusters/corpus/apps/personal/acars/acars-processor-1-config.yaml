@@ -134,11 +134,6 @@ Steps:
           like you might see in cell phone text messages. The words in these
           messages may have commas or periods separating them instead of spaces.
 
-          DO NOT forward if the message matches ANY of these rules:
-          - Is uniformly structured with one or more tables or by using spaces
-            to format and does not have any prose in the message.
-          - Has mostly numerical data without prose after it.
-
           DO forward if the message matches ANY of these rules:
           - Contains natural-language sentences or human prose which may 
             contain technical terms or acronyms but 
@@ -152,6 +147,11 @@ Steps:
             rebooking/ramp-gate, lavatories (abbreviatin: LAV), seats or other
             situations with a narrative.
           - Lists a desk number.
+
+          DO NOT forward if the message matches ANY of these rules:
+          - Is uniformly structured with one or more tables or by using spaces
+            to format and does not have any prose in the message.
+          - Has mostly numerical data without prose after it.
 
           Based on these rules, should this message be forwarded?
       #      /no_think
