@@ -54,6 +54,9 @@ Steps:
             - UNFCTRD
             - /USADCXA
             - "#DFREQ"
+            - USADCXA
+            - ET EXP TIME
+            - AGFSR
             - TAXI AND SHUTDOWN THE APU
             - APU SHUTDOWN
             - ADVS YOU HAVE INFO
