@@ -191,7 +191,7 @@ Steps:
         FormatText: true
         FormatTimestamps: true
         MessageGoTemplate: |
-          -# From [{{ index . "ACARSProcessor.TailCode" }}]({{ index . "ACARSProcessor.TrackingLink" }}){{ if ne "" (index . "ACARSProcessor.FlightNumber") }} on flight number {{ index . "ACARSProcessor.FlightNumber" }}{{ else }}{{ end }} <t:{{ index . "ACARSProcessor.UnixTimestamp" }}:R>{{ if ne 0.0 (index . "ACARSProcessor.AircraftDistanceMi") }}from {{ printf "%.2f" (index . "ACARSProcessor.AircraftDistanceMi") }} miles away{{ else }}{{ end }}.
+          -# From [{{ index . "ACARSProcessor.TailCode" }}]({{ index . "ACARSProcessor.TrackingLink" }}){{ if ne "" (index . "ACARSProcessor.FlightNumber") }} on flight {{ index . "ACARSProcessor.FlightNumber" }}{{ else }}{{ end }} <t:{{ index . "ACARSProcessor.UnixTimestamp" }}:R>{{ if ne 0.0 (index . "ACARSProcessor.AircraftDistanceMi") }}from {{ printf "%.2f" (index . "ACARSProcessor.AircraftDistanceMi") }} miles away{{ else }}{{ end }}.
           ```
           {{ index . "ACARSProcessor.MessageText" }}
           ```
