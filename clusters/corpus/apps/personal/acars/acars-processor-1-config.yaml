@@ -90,6 +90,7 @@ Steps:
             - CREW CONNECTING GATE INFO
             - MUST LAND ON RWY
             - REQUEST GATE ASSIGNMENT ETA
+            - Equation ID
 
   - Send:
       NewRelic:
