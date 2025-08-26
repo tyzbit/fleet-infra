@@ -130,14 +130,16 @@ Steps:
         # -----------------------------------------
         UserPrompt: |
           You are reviewing messages from both humans and programatically
-          generated sources and must forward only the messages from humans that
-          contains prose. Human messages might have misspellings or abbreviations
-          like you might see in cell phone text messages. The words in these
-          messages may have commas or periods separating them instead of spaces.
+          generated sources and must forward only the messages from a human.
+
+          Human messages will have natural language and might have misspellings
+          or abbreviations like you might see in cell phone text messages. The
+          words in these messages may have commas or periods separating them
+          instead of spaces. The sentences may be very brief.
 
           DO forward if the message matches ANY of these rules:
-          - Contains natural-language sentences or human prose which may 
-            contain technical terms or acronyms but 
+          - Contains natural or colloquial language or prose which may contain
+            technical terms or acronyms.
           - Greetings/sign-offs, for example: HI, HELLO, BONJOUR,
             GOOD MORNING/EVENING, THANK YOU/THANKS/THX, BRGRDS, CHEERS,
             COPY/COPY THAT
@@ -147,12 +149,12 @@ Steps:
           - Operational prose about passengers,crew,med,medical,booking,
             rebooking/ramp-gate, lavatories (abbreviatin: LAV), seats or other
             situations with a narrative.
-          - Lists a desk number.
+          - Lists a desk number or has "DISPATCHER MSG"
 
           DO NOT forward if the message matches ANY of these rules:
           - Is uniformly structured with one or more tables or by using spaces
             to format and does not have any prose in the message.
-          - Has mostly numerical data without prose after it.
+          - Has raw data with no natural language or prose.
 
           Based on these rules, should this message be forwarded?
       #      /no_think
