@@ -142,12 +142,12 @@ Steps:
           Human messages will have natural language and might have misspellings
           or abbreviations like you might see in cell phone text messages. The
           words in these messages may have commas or periods separating them
-          instead of spaces. The sentences may be very brief.
+          instead of spaces or interrupting them.
 
           DO NOT forward if the message matches ANY of these rules:
-          - Is uniformly structured with one or more tables or by using spaces
-            to format and does not have ANY prose in the message.
-          - Has raw data with NO natural language or prose.
+          - Is a uniformly structured report.
+          - Has ONLY raw data.
+          - Does NOT end with any amount of natural language prose.
 
           DO forward if the message matches ANY of these rules:
           - Contains natural or colloquial language or prose which may contain
