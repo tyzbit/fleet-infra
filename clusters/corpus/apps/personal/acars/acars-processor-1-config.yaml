@@ -52,6 +52,9 @@ Steps:
             - "RDU "
             - RESREQ/
             - POSN
+            - POSRPT
+            - " EO"
+            - AUTOMATED FLT OPS
             - UNFCTRD
             - /USADCXA
             - "#DFREQ"
@@ -61,6 +64,8 @@ Steps:
             - PRG/
             - "APU START   "
             - ">        "
+            - ORFKORF
+            - /HDQ
             - ------------
             - TAXI AND SHUTDOWN THE APU
             - YOUR HELP IS APPRECIATED.
