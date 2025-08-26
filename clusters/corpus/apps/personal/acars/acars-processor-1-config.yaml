@@ -16,12 +16,16 @@ ACARSProcessorSettings:
       SelectedFields: &selectedfields
         - ACARSProcessor.ACARSDramaTailNumberLink
         - ACARSProcessor.FlightNumber
-        - ACARSProcessor.FrequencyMhz
+        - ACARSProcessor.FrequencyHz
+        - ACARSProcessor.FrequencyMHz
         - ACARSProcessor.From
         - ACARSProcessor.ImageLink
+        - ACARSProcessor.Label
         - ACARSProcessor.MessageText
+        - ACARSProcessor.Mode
         - ACARSProcessor.PhotosLink
         - ACARSProcessor.SignalLeveldBm
+        - ACARSProcessor.StationId
         - ACARSProcessor.TailCode
         - ACARSProcessor.ThumbnailLink
         - ACARSProcessor.TrackingLink
@@ -47,26 +51,25 @@ Steps:
         RequireTerms:
           Count: 1
           Terms:
-            - "="
             - /FTMLDR
-            - "RDU "
-            - RESREQ/
-            - POSN
+            - RESREQ
             - POSRPT
-            - " EO"
             - AUTOMATED FLT OPS
             - UNFCTRD
-            - /USADCXA
-            - "#DFREQ"
             - USADCXA
+            - "#DFREQ"
             - ET EXP TIME
             - AGFSR
             - PRG/
-            - "APU START   "
-            - ">        "
-            - ORFKORF
-            - /HDQ
+            - APU START <
+            - "<"
+            - ">"
+            - +++
+            - TAKEOFF_
+            - .CSV
             - ------------
+            # Airport DISP messages
+            - ATIS INFO
             - TAXI AND SHUTDOWN THE APU
             - YOUR HELP IS APPRECIATED.
             - ADVS YOU HAVE INFO
@@ -74,20 +77,19 @@ Steps:
             - BIRD ACTIVITY
             - READBACK ALL
             - NOTICE TO AIRMEN
+            ###################
             - CODE BLEED STATUS
             - PREFLIGHT BRIEF
             - MDC REPORT
-            - SYSTEM PARAMETERS
             - EXCEEDANCE REPORT
+            - SNAPSHOT REPORT
+            - SYSTEM PARAMETERS
             - ENGINE TREND
-            - CAROUSEL
+            - "CAROUSEL:"
             - FILENAME
-            - ARRIVAL GATE INFORMATION
-            - ATIS INFO
-            - CREW/PAX CONNECTION
             - CREW CONNECTING GATE INFO
             - MUST LAND ON RWY
-            - REQUEST GATE ASSIGNMENT
+            - REQUEST GATE ASSIGNMENT ETA
 
   - Send:
       NewRelic:
