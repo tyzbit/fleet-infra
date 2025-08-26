@@ -191,10 +191,7 @@ Steps:
         FormatText: true
         FormatTimestamps: true
         MessageGoTemplate: |
-          # ACARS Message from {{ index . "ACARSProcessor.From" }}
-
           From [{{ index . "ACARSProcessor.TailCode" }}]({{ index . "ACARSProcessor.TrackingLink" }}){{ if ne "" (index . "ACARSProcessor.FlightNumber") }} on flight number {{ index . "ACARSProcessor.FlightNumber" }}{{ else }}{{ end }} <t:{{ index . "ACARSProcessor.UnixTimestamp" }}:R>{{ if ne 0.0 (index . "ACARSProcessor.AircraftDistanceMi") }}from {{ printf "%.2f" (index . "ACARSProcessor.AircraftDistanceMi") }} miles away{{ else }}{{ end }}.
-          -# This message rated a {{ index . "ACARSProcessor.LLMProcessedNumber" }} in terms of emotional content.
           ```
           {{ index . "ACARSProcessor.MessageText" }}
           ```
