@@ -146,12 +146,13 @@ Steps:
 
           DO NOT forward if the message matches ANY of these rules:
           - Is uniformly structured with one or more tables or by using spaces
-            to format and does not have any prose in the message.
-          - Has raw data with no natural language or prose.
+            to format and does not have ANY prose in the message.
+          - Has raw data with NO natural language or prose.
 
           DO forward if the message matches ANY of these rules:
           - Contains natural or colloquial language or prose which may contain
-            technical terms or acronyms.
+            technical terms or acronyms or might start with airport codes and a
+            small amount of numerical data.
           - Greetings/sign-offs, for example: HI, HELLO, BONJOUR,
             GOOD MORNING/EVENING, THANK YOU/THANKS/THX, BRGRDS, CHEERS,
             COPY/COPY THAT
