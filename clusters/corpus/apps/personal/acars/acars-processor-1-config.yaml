@@ -166,30 +166,43 @@ Steps:
           Based on these rules, should this message be forwarded?
       #      /no_think
 
-  - Filter:
-      SelectedFields:
-        - ACARSProcessor.ACARSDramaTailNumberLink
-        - ACARSProcessor.AircraftDistanceMi
-        - ACARSProcessor.FrequencyMhz
-        - ACARSProcessor.From
-        - ACARSProcessor.ImageLink
-        - ACARSProcessor.MessageText
-        - ACARSProcessor.PhotosLink
-        - ACARSProcessor.SignalLeveldBm
-        - ACARSProcessor.TailCode
-        - ACARSProcessor.ThumbnailLink
-        - ACARSProcessor.TrackingLink
-        - ACARSProcessor.TranslateLink
-        - ACARSProcessor.UnixTimestamp
+  # - Filter:
+  #     SelectedFields:
+  #       - ACARSProcessor.ACARSDramaTailNumberLink
+  #       - ACARSProcessor.AircraftDistanceMi
+  #       - ACARSProcessor.FrequencyMhz
+  #       - ACARSProcessor.From
+  #       - ACARSProcessor.ImageLink
+  #       - ACARSProcessor.MessageText
+  #       - ACARSProcessor.PhotosLink
+  #       - ACARSProcessor.SignalLeveldBm
+  #       - ACARSProcessor.TailCode
+  #       - ACARSProcessor.ThumbnailLink
+  #       - ACARSProcessor.TrackingLink
+  #       - ACARSProcessor.TranslateLink
+  #       - ACARSProcessor.UnixTimestamp
 
   - Send:
       Discord:
         Embed: true
-        EmbedColorFacetFields: [ACARSProcessor.ACARSDramaTailNumberLink]
+        EmbedColorFacetFields: [ACARSProcessor.From]
         # EmbedColorGradientField: ACARSProcessor.LLMProcessedNumber
         URL: "${acars_discord_webhook}"
         FormatText: true
         FormatTimestamps: true
+        MessageGoTemplate: |
+          # ACARS Message from {{ index . "ACARSProcessor.From" }}
+
+          From [{{ index . "ACARSProcessor.TailCode" }}]({{ index . "ACARSProcessor.TrackingLink" }}){{ if ne "" (index . "ACARSProcessor.FlightNumber") }} on flight number {{ index . "ACARSProcessor.FlightNumber" }}{{ else }}{{ end }} <t:{{ index . "ACARSProcessor.UnixTimestamp" }}:R>{{ if ne 0.0 (index . "ACARSProcessor.AircraftDistanceMi") }}from {{ printf "%.2f" (index . "ACARSProcessor.AircraftDistanceMi") }} miles away{{ else }}{{ end }}.
+          -# This message rated a {{ index . "ACARSProcessor.LLMProcessedNumber" }} in terms of emotional content.
+          ```
+          {{ index . "ACARSProcessor.MessageText" }}
+          ```
+          **Links**:
+          [Translate this message]({{ index . "ACARSProcessor.TranslateLink" }})
+          [ACARSDrama messages from this aircraft]({{ index . "ACARSProcessor.ACARSDramaTailNumberLink" }})
+          [Aircraft Photos]({{ index . "ACARSProcessor.PhotosLink" }})
+
 
   - Send:
       NewRelic:
@@ -229,7 +242,6 @@ Steps:
           # Emotional ({{ index . "ACARSProcessor.From" }}) ACARS Message
 
           From [{{ index . "ACARSProcessor.TailCode" }}]({{ index . "ACARSProcessor.TrackingLink" }}) <t:{{ index . "ACARSProcessor.UnixTimestamp" }}:R>
-
           -# This message rated a {{ index . "ACARSProcessor.LLMProcessedNumber" }} in terms of emotional content.
 
           ```
