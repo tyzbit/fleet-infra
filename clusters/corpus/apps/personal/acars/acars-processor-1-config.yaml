@@ -137,6 +137,11 @@ Steps:
           words in these messages may have commas or periods separating them
           instead of spaces. The sentences may be very brief.
 
+          DO NOT forward if the message matches ANY of these rules:
+          - Is uniformly structured with one or more tables or by using spaces
+            to format and does not have any prose in the message.
+          - Has raw data with no natural language or prose.
+
           DO forward if the message matches ANY of these rules:
           - Contains natural or colloquial language or prose which may contain
             technical terms or acronyms.
@@ -150,11 +155,6 @@ Steps:
             rebooking/ramp-gate, lavatories (abbreviatin: LAV), seats or other
             situations with a narrative.
           - Lists a desk number or has "DISPATCHER MSG"
-
-          DO NOT forward if the message matches ANY of these rules:
-          - Is uniformly structured with one or more tables or by using spaces
-            to format and does not have any prose in the message.
-          - Has raw data with no natural language or prose.
 
           Based on these rules, should this message be forwarded?
       #      /no_think
