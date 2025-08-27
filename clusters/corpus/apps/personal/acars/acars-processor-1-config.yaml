@@ -202,7 +202,6 @@ Steps:
           [ACARSDrama messages from this aircraft]({{ index . "ACARSProcessor.ACARSDramaTailNumberLink" }})
           [Aircraft Photos]({{ index . "ACARSProcessor.PhotosLink" }})
 
-
   - Send:
       NewRelic:
         APIKey: "${new_relic_license_key}"
@@ -227,7 +226,7 @@ Steps:
 
   - Filter:
       Builtin:
-        LLMProcessedNumberAbove: 10
+        LLMProcessedNumberAbove: 40
 
   - Send:
       Discord:
