@@ -243,6 +243,10 @@ Steps:
           ```
           {{ index . "ACARSProcessor.MessageText" }}
           ```
+          The LLM had this to say:
+          ```
+          {{ index . "ACARSProcessor.LLMModelFeedbackText"}}
+          ```
 
           **Links**:
           [Translate this message]({{ index . "ACARSProcessor.TranslateLink" }})
