@@ -193,14 +193,14 @@ Steps:
         FormatText: true
         FormatTimestamps: true
         MessageGoTemplate: |
-          -# From [{{ index . "ACARSProcessor.TailCode" }}]({{ index . "ACARSProcessor.TrackingLink" }}){{ if ne "" (index . "ACARSProcessor.FlightNumber") }} on flight {{ index . "ACARSProcessor.FlightNumber" }}{{ else }}{{ end }} <t:{{ index . "ACARSProcessor.UnixTimestamp" }}:R>{{ if ne 0.0 (index . "ACARSProcessor.AircraftDistanceMi") }} from {{ printf "%.2f" (index . "ACARSProcessor.AircraftDistanceMi") }} miles away{{ else }}{{ end }}.
+          -# From [{{index . "ACARSProcessor.TailCode"}}]({{index . "ACARSProcessor.TrackingLink"}}){{if ne "" (index . "ACARSProcessor.FlightNumber")}} on flight {{index . "ACARSProcessor.FlightNumber"}}{{else}}{{end}} <t:{{index . "ACARSProcessor.UnixTimestamp"}}:R>{{if ne 0.0 (index . "ACARSProcessor.AircraftDistanceMi")}} from {{printf "%.2f" (index . "ACARSProcessor.AircraftDistanceMi")}} miles away{{else}}{{end}}.
           ```
-          {{ index . "ACARSProcessor.MessageText" }}
+          {{index . "ACARSProcessor.MessageText"}}
           ```
           **Links**:
-          [Translate this message]({{ index . "ACARSProcessor.TranslateLink" }})
-          [ACARSDrama messages from this aircraft]({{ index . "ACARSProcessor.ACARSDramaTailNumberLink" }})
-          [Aircraft Photos]({{ index . "ACARSProcessor.PhotosLink" }})
+          [Translate this message]({{index . "ACARSProcessor.TranslateLink"}})
+          [ACARSDrama messages from this aircraft]({{index . "ACARSProcessor.ACARSDramaTailNumberLink"}})
+          [Aircraft Photos]({{index . "ACARSProcessor.PhotosLink"}})
 
   - Send:
       NewRelic:
@@ -237,18 +237,18 @@ Steps:
         # FormatText: true
         # FormatTimestamps: true
         MessageGoTemplate: |
-          From [{{ index . "ACARSProcessor.TailCode" }}]({{ index . "ACARSProcessor.TrackingLink" }}){{ if ne "" (index . "ACARSProcessor.FlightNumber") }} on flight {{ index . "ACARSProcessor.FlightNumber" }}{{ else }}{{ end }} <t:{{ index . "ACARSProcessor.UnixTimestamp" }}:R>{{ if ne 0.0 (index . "ACARSProcessor.AircraftDistanceMi") }} from {{ printf "%.2f" (index . "ACARSProcessor.AircraftDistanceMi") }} miles away{{ else }}{{ end }}.
-          -# This message rated a {{ index . "ACARSProcessor.LLMProcessedNumber" }} in terms of emotional content.
+          {{if eq (index . "ACARSProcessor.From") "Aircraft"}}From{{else}}To{{end}} {{index . "ACARSProcessor.TrackingLink"}}[{{index . "ACARSProcessor.TailCode"}}]({{index . "ACARSProcessor.TrackingLink"}}){{if ne "" (index . "ACARSProcessor.FlightNumber")}} on flight {{index . "ACARSProcessor.FlightNumber"}}{{else}}{{end}} <t:{{index . "ACARSProcessor.UnixTimestamp"}}:R>{{if ne 0.0 (index . "ACARSProcessor.AircraftDistanceMi")}} from {{printf "%.2f" (index . "ACARSProcessor.AircraftDistanceMi")}} miles away{{else}}{{end}}.
+          -# This message rated a {{index . "ACARSProcessor.LLMProcessedNumber"}} in terms of emotional content.
 
           ```
-          {{ index . "ACARSProcessor.MessageText" }}
+          {{index . "ACARSProcessor.MessageText"}}
           ```
           The LLM had this to say:
           ```
-          {{ index . "ACARSProcessor.LLMModelFeedbackText"}}
+          {{index . "ACARSProcessor.LLMModelFeedbackText"}}
           ```
 
           **Links**:
-          [Translate this message]({{ index . "ACARSProcessor.TranslateLink" }})
-          [ACARSDrama messages from this aircraft]({{ index . "ACARSProcessor.ACARSDramaTailNumberLink" }})
-          [Aircraft Photos]({{ index . "ACARSProcessor.PhotosLink" }})
+          [Translate this message]({{index . "ACARSProcessor.TranslateLink"}})
+          [ACARSDrama messages from this aircraft]({{index . "ACARSProcessor.ACARSDramaTailNumberLink"}})
+          [Aircraft Photos]({{index . "ACARSProcessor.PhotosLink"}})
