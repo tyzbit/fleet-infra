@@ -133,8 +133,8 @@ Steps:
             { Name: num_gpu, Value: 40 }, # Number of layers to offload to GPU
           ]
         # -----------------------------------------
-        # 1,202 characters
-        # 358 tokens https://token-calculator.net
+        # 1,245 characters
+        # 369 tokens https://token-calculator.net
         # -----------------------------------------
         UserPrompt: |
           You are reviewing messages from both humans and programatically
@@ -144,7 +144,8 @@ Steps:
           or abbreviations like you might see in cell phone text messages. The
           words in these messages may have commas or periods separating them
           instead of spaces; or interrupting the middle of them. Rarely messages
-          will only be a couple words.
+          will only have a couple human-written words that follow a small amount
+          of data.
 
           DO NOT forward if the message matches ANY of these rules:
           - Is a uniformly structured report.
