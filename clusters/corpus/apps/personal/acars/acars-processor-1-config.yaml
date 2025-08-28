@@ -13,7 +13,25 @@ ACARSProcessorSettings:
     ACARS:
       Host: &acarshubhost acars-acarshub
       Port: 15550
-      SelectedFields: &selectedfields
+
+    VDLM2:
+      Host: *acarshubhost
+      Port: 15555
+
+Steps:
+  - Annotate:
+      Tar1090:
+        URL: http://adsb-ultrafeeder
+        ReferenceGeolocation: "${my_latitude},${my_longitude}"
+
+  - Send:
+      NewRelic:
+        APIKey: "${new_relic_license_key}"
+        CustomEventType: CustomACARS
+
+  - Filter:
+      SelectedFields:
+        # Only common convenience fields
         - ACARSProcessor.ACARSDramaTailNumberLink
         - ACARSProcessor.FlightNumber
         - ACARSProcessor.FrequencyHz
@@ -32,21 +50,6 @@ ACARSProcessorSettings:
         - ACARSProcessor.TranslateLink
         - ACARSProcessor.UnixTimestamp
 
-    VDLM2:
-      Host: *acarshubhost
-      Port: 15555
-      SelectedFields: *selectedfields
-
-Steps:
-  - Annotate:
-      Tar1090:
-        URL: http://adsb-ultrafeeder
-        ReferenceGeolocation: "${my_latitude},${my_longitude}"
-
-  - Send:
-      NewRelic:
-        APIKey: "${new_relic_license_key}"
-        CustomEventType: CustomACARS
   # - Filter: { Builtin: { DictionaryPhraseLengthMinimum: 2 } }
   - Filter: { Builtin: { HasText: true } }
 
