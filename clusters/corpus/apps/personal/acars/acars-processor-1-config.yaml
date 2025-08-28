@@ -33,6 +33,7 @@ Steps:
       SelectedFields:
         # Only common convenience fields
         - ACARSProcessor.ACARSDramaTailNumberLink
+        - ACARSProcessor.AircraftDistanceMi
         - ACARSProcessor.FlightNumber
         - ACARSProcessor.FrequencyHz
         - ACARSProcessor.FrequencyMHz
