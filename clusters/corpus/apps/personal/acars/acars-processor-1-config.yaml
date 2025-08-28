@@ -145,7 +145,8 @@ Steps:
           words in these messages may have commas or periods separating them
           instead of spaces; or interrupting the middle of them. Rarely messages
           will only have a couple human-written words that follow a small amount
-          of data.
+          of data, like an implicit command for OPS to schedule service for
+          areas of the aircraft (PTBL WATER FWD/AFT).
 
           DO NOT forward if the message matches ANY of these rules:
           - Is a uniformly structured report.
