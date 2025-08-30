@@ -142,8 +142,9 @@ Steps:
         # 369 tokens https://token-calculator.net
         # -----------------------------------------
         UserPrompt: |
-          You are reviewing messages from both humans and programatically
-          generated sources and must forward only messages from humans.
+          You are reviewing air travel related messages from both humans and
+          programatically generated sources and must forward only messages from
+          humans.
 
           Human messages will have natural language and might have misspellings
           or abbreviations like you might see in cell phone text messages. The
