@@ -143,34 +143,26 @@ Steps:
         # -----------------------------------------
         UserPrompt: |
           You are reviewing messages from both humans and programatically
-          generated sources and must forward only the messages from a human.
+          generated sources and must forward only messages from humans.
 
           Human messages will have natural language and might have misspellings
           or abbreviations like you might see in cell phone text messages. The
-          words in these messages may have commas or periods separating them
-          instead of spaces; or interrupting the middle of them. Rarely messages
-          will only have a couple human-written words that follow a small amount
-          of data, like an implicit command for OPS to schedule service for
-          areas of the aircraft (PTBL WATER FWD/AFT).
-
-          DO NOT forward if the message matches ANY of these rules:
-          - Is a uniformly structured report.
-          - Has ONLY raw data.
-          - Does NOT end with any amount of natural language prose.
+          words in these messages may have commas, periods or spaces separating
+          words or might be missing spaces between words.
 
           DO forward if the message matches ANY of these rules:
           - Contains natural or colloquial language or prose which may contain
-            technical terms or acronyms or might start with airport codes and a
-            small amount of numerical data.
+            technical terms or acronyms.
           - Greetings/sign-offs, for example: HI, HELLO, BONJOUR,
             GOOD MORNING/EVENING, THANK YOU/THANKS/THNKS/THX, BRGRDS, CHEERS,
             COPY/COPY THAT
           - A clear sentence/clause like WILL/IS/ARE/HAVE/NEED/CAN/PLEASE/
             QUESTION MARK followed by a verb, for example: PLEASE SEND WX.
-          - Has /Q/ which is shorthand for asking a question in this messages.
-          - Operational prose about passengers,crew,med,medical,booking,
-            rebooking/ramp-gate, lavatories (abbreviatin: LAV), seats or other
-            situations with a narrative.
+          - Has /Q/ or QQ which is shorthand for asking a question in this 
+            context.
+          - Operational commentary or questions about passengers,crew,med,
+            medical,booking,rebooking/ramp-gate,lavatories (abbreviation: LAV),
+            seats or any other situation with a narrative or question.
           - Lists a desk number or has "DISPATCHER MSG"
 
           Based on these rules, should this message be forwarded?
