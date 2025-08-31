@@ -66,6 +66,6 @@ spec:
             - name: *name
               mountPath: /data
       volumes:
-        - name: data
+        - name: *name
           persistentVolumeClaim:
             claimName: frigate-db-local-path
