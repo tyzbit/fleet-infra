@@ -146,10 +146,11 @@ Steps:
           programatically generated sources and must forward only messages from
           humans.
 
-          Human messages will have natural language and might have misspellings
-          or abbreviations like you might see in cell phone text messages. The
-          words in these messages may have commas, periods or spaces separating
-          words or might be missing spaces between words.
+          Human messages will have natural language (in English, Spanish, French
+          and might have misspellings or abbreviations like you might see in
+          cell phone text messages. The words in these messages may have commas,
+          periods or spaces separating words or might be missing spaces between
+          words.
 
           DO forward if the message matches ANY of these rules:
           - Contains natural or colloquial language or prose which may contain
