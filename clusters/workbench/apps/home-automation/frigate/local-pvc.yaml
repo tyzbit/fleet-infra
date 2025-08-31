@@ -62,6 +62,7 @@ spec:
         - name: *name
           image: debian
           imagePullPolicy: Always
+          command: [tail, -f, /dev/null]
           volumeMounts:
             - name: *name
               mountPath: /data
