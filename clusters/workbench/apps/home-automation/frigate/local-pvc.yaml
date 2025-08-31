@@ -41,3 +41,31 @@ spec:
     requests:
       storage: 10Gi
   storageClassName: local-path
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: &name test-volsync
+  namespace: home-automation
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: *name
+  serviceName: *name
+  template:
+    metadata:
+      labels:
+        app: *name
+    spec:
+      containers:
+        - name: *name
+          image: debian
+          imagePullPolicy: Always
+          volumeMounts:
+            - name: *name
+              mountPath: /data
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: frigate-db-local-path
