@@ -144,15 +144,15 @@ Steps:
         # 369 tokens https://token-calculator.net
         # -----------------------------------------
         UserPrompt: |
-          You are reviewing air travel related messages from both humans and
-          programatically generated sources and must forward only messages from
-          humans.
+          You are reviewing messages from both humans and programatically
+          generated sources and must forward only the messages from humans.
 
           Human messages will have natural language (in English, Spanish,
           French) and might have misspellings or abbreviations like you might
           see in cell phone text messages. The words in these messages may have
           commas, periods or spaces separating words or might be missing spaces
-          between words.
+          between words. It will likely relate to air travel, but some human
+          messages will be off-topic.
 
           DO forward if the message matches ANY of these rules:
           - Contains natural or colloquial language or prose which may also 
