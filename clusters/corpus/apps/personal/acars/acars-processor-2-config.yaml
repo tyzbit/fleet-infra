@@ -173,6 +173,7 @@ Steps:
           ```
           {{index . "ACARSProcessor.MessageText"}}
           ```
+          Label: {{index . "ACARSProcessor.Label"}}
           **Links**:
           [Translate this message]({{index . "ACARSProcessor.TranslateLink"}})
           [ACARSDrama messages from this aircraft]({{index . "ACARSProcessor.ACARSDramaTailNumberLink"}})
