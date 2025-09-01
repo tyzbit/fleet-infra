@@ -21,7 +21,7 @@ ACARSProcessorSettings:
       Port: 15555
 
 Steps:
-  - Filter: { Builtin: { FreetextTermPresent: true } }
+  - Filter: { Builtin: { HasText: true } }
 
   - Filter:
       Builtin:
