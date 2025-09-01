@@ -29,30 +29,15 @@ Steps:
         APIKey: "${new_relic_license_key}"
         CustomEventType: CustomACARS
 
-  # - Filter:
-  #     SelectedFields:
-  #       # Only common convenience fields
-  #       - ACARSProcessor.ACARSDramaTailNumberLink
-  #       - ACARSProcessor.AircraftDistanceMi
-  #       - ACARSProcessor.FlightNumber
-  #       - ACARSProcessor.FrequencyHz
-  #       - ACARSProcessor.FrequencyMHz
-  #       - ACARSProcessor.From
-  #       - ACARSProcessor.ImageLink
-  #       - ACARSProcessor.Label
-  #       - ACARSProcessor.MessageText
-  #       - ACARSProcessor.Mode
-  #       - ACARSProcessor.PhotosLink
-  #       - ACARSProcessor.SignalLeveldBm
-  #       - ACARSProcessor.StationId
-  #       - ACARSProcessor.TailCode
-  #       - ACARSProcessor.ThumbnailLink
-  #       - ACARSProcessor.TrackingLink
-  #       - ACARSProcessor.TranslateLink
-  #       - ACARSProcessor.UnixTimestamp
-
   # - Filter: { Builtin: { DictionaryPhraseLengthMinimum: 2 } }
   - Filter: { Builtin: { HasText: true } }
+
+  - Filter:
+      Builtin:
+        PreviousMessageSimilarity:
+          Similarity: 0.90
+          MaximumLookBehind: 1000
+          DontFilterIfLonger: false
 
   - Filter:
       Builtin:
@@ -169,20 +154,6 @@ Steps:
       NewRelic:
         APIKey: "${new_relic_license_key}"
         CustomEventType: CustomACARSRequireTermsResults
-      # Discord:
-      #   Embed: true
-      #   EmbedColorFacetFields: [ACARSProcessor.ACARSDramaTailNumberLink]
-      #   # EmbedColorGradientField: ACARSProcessor.LLMProcessedNumber
-      #   URL: "${acars_development_discord_webhook}"
-      #   FormatText: true
-      #   FormatTimestamps: true
-
-  - Filter:
-      Builtin:
-        PreviousMessageSimilarity:
-          Similarity: 0.90
-          MaximumLookBehind: 1000
-          DontFilterIfLonger: true
 
   - Filter:
       Ollama:
@@ -201,8 +172,8 @@ Steps:
             { Name: num_gpu, Value: 40 }, # Number of layers to offload to GPU
           ]
         # -----------------------------------------
-        # 1,245 characters
-        # 369 tokens https://token-calculator.net
+        # 1,169 characters
+        # 348 tokens https://token-calculator.net
         # -----------------------------------------
         UserPrompt: |
           You are reviewing messages from both humans and programatically

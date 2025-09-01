@@ -74,7 +74,7 @@ spec:
       acars-processor-2:
         <<: *common_settings
         forceRename: "acars-processor-2"
-        replicas: 0
+        replicas: 1
         containers:
           acars-processor-2:
             image:
@@ -83,7 +83,7 @@ spec:
             envFrom: *secret
             resources:
               requests:
-                cpu: 100m
+                cpu: 200m
                 memory: 512Mi
               limits:
                 memory: 512Mi
