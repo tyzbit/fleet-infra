@@ -60,21 +60,22 @@ Steps:
         Labels:
           - "_d"
           - ""
-          - "SQ"
-          - "Q0"
-          - "BA"
+          - "12"
+          - "16"
           - "21"
           - "22"
-          - "B9"
-          - "44"
-          - "SA"
           - "32"
-          - "12"
-          - "36"
           - "33"
-          - "16"
+          - "36"
+          - "44"
           - "4N"
           - "5V"
+          - "B9"
+          - "BA"
+          - "H1"
+          - "Q0"
+          - "SA"
+          - "SQ"
 
   - Filter:
       Builtin:
@@ -182,7 +183,7 @@ Steps:
             contain some technical terms or acronyms.
           - Greetings/sign-offs, for example: HI, HELLO, BONJOUR,
             GOOD MORNING/EVENING, THANK YOU/THANKS/THNKS/THX, BRGRDS, CHEERS,
-            COPY/COPY THAT
+            COPY/COPY THAT or if it has the term FREETEXT.
           - A clear sentence/clause like WILL/IS/ARE/HAVE/NEED/CAN/PLEASE/
             QUESTION MARK followed by a verb, for example: PLEASE SEND WX.
           - Has /Q/ or QQ which is shorthand for asking a question in this 
@@ -190,7 +191,7 @@ Steps:
           - Operational commentary or questions about passengers,crew,med,
             medical,booking,rebooking/ramp-gate,lavatories (abbreviation: LAV),
             seats or any other situation with a narrative or question.
-          - Lists a desk number or has "DISPATCHER MSG"
+          - Lists a desk number or has "DISPATCHER MSG".
 
           Based on these rules, should this message be forwarded?
       #      /no_think
