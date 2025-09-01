@@ -69,4 +69,4 @@ spec:
       volumes:
         - name: *name
           persistentVolumeClaim:
-            claimName: frigate-db-local-path
+            claimName: volsync-frigate-db-nas-dst
