@@ -29,27 +29,27 @@ Steps:
         APIKey: "${new_relic_license_key}"
         CustomEventType: CustomACARS
 
-  - Filter:
-      SelectedFields:
-        # Only common convenience fields
-        - ACARSProcessor.ACARSDramaTailNumberLink
-        - ACARSProcessor.AircraftDistanceMi
-        - ACARSProcessor.FlightNumber
-        - ACARSProcessor.FrequencyHz
-        - ACARSProcessor.FrequencyMHz
-        - ACARSProcessor.From
-        - ACARSProcessor.ImageLink
-        - ACARSProcessor.Label
-        - ACARSProcessor.MessageText
-        - ACARSProcessor.Mode
-        - ACARSProcessor.PhotosLink
-        - ACARSProcessor.SignalLeveldBm
-        - ACARSProcessor.StationId
-        - ACARSProcessor.TailCode
-        - ACARSProcessor.ThumbnailLink
-        - ACARSProcessor.TrackingLink
-        - ACARSProcessor.TranslateLink
-        - ACARSProcessor.UnixTimestamp
+  # - Filter:
+  #     SelectedFields:
+  #       # Only common convenience fields
+  #       - ACARSProcessor.ACARSDramaTailNumberLink
+  #       - ACARSProcessor.AircraftDistanceMi
+  #       - ACARSProcessor.FlightNumber
+  #       - ACARSProcessor.FrequencyHz
+  #       - ACARSProcessor.FrequencyMHz
+  #       - ACARSProcessor.From
+  #       - ACARSProcessor.ImageLink
+  #       - ACARSProcessor.Label
+  #       - ACARSProcessor.MessageText
+  #       - ACARSProcessor.Mode
+  #       - ACARSProcessor.PhotosLink
+  #       - ACARSProcessor.SignalLeveldBm
+  #       - ACARSProcessor.StationId
+  #       - ACARSProcessor.TailCode
+  #       - ACARSProcessor.ThumbnailLink
+  #       - ACARSProcessor.TrackingLink
+  #       - ACARSProcessor.TranslateLink
+  #       - ACARSProcessor.UnixTimestamp
 
   # - Filter: { Builtin: { DictionaryPhraseLengthMinimum: 2 } }
   - Filter: { Builtin: { HasText: true } }
