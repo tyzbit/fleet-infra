@@ -16,14 +16,14 @@
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationDestination
 metadata:
-  name: frigate-db-nas
+  name: frigate-db-local-path
   namespace: home-automation
 spec:
-  rsync:
+  rsyncTLS:
     copyMethod: Snapshot
     capacity: 10Gi
     accessModes: ["ReadWriteOnce"]
-    storageClassName: nas
+    storageClassName: democratic-local
     volumeSnapshotClassName: democratic-local
 ---
 apiVersion: v1
