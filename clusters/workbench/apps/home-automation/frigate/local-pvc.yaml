@@ -24,7 +24,7 @@ spec:
     capacity: 10Gi
     accessModes: ["ReadWriteOnce"]
     storageClassName: local-path
-    volumeSnapshotClassName: local-path
+    volumeSnapshotClassName: democratic-local
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -40,7 +40,7 @@ spec:
   resources:
     requests:
       storage: 10Gi
-  storageClassName: local-path
+  storageClassName: democratic-local
 ---
 apiVersion: apps/v1
 kind: StatefulSet
