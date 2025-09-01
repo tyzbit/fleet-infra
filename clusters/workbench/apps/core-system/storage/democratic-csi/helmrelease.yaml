@@ -78,7 +78,7 @@ spec:
       config:
         driver: local-hostpath
         local-hostpath:
-          shareBasePath: &storagePath ${STORAGE_PATH}
+          shareBasePath: &storagePath /var/lib/rook
           controllerBasePath: *storagePath
           dirPermissionsMode: "0770"
           dirPermissionsUser: 0
