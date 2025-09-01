@@ -23,7 +23,7 @@ spec:
     copyMethod: Snapshot
     capacity: 10Gi
     accessModes: ["ReadWriteOnce"]
-    storageClassName: local-path
+    storageClassName: nas
     volumeSnapshotClassName: democratic-local
 ---
 apiVersion: v1
