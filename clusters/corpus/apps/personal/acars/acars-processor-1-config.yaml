@@ -57,6 +57,28 @@ Steps:
   - Filter:
       Builtin:
         Invert: true
+        Labels:
+          - "_d"
+          - ""
+          - "SQ"
+          - "Q0"
+          - "BA"
+          - "21"
+          - "22"
+          - "B9"
+          - "44"
+          - "SA"
+          - "32"
+          - "12"
+          - "36"
+          - "33"
+          - "16"
+          - "4N"
+          - "5V"
+
+  - Filter:
+      Builtin:
+        Invert: true
         RequireTerms:
           Count: 1
           Terms:
