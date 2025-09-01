@@ -22,6 +22,7 @@ spec:
   rsyncTLS:
     copyMethod: Snapshot
     capacity: 10Gi
+    keySecret: volsync-nas
     accessModes: ["ReadWriteOnce"]
     storageClassName: democratic-local
     volumeSnapshotClassName: democratic-local
