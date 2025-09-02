@@ -183,18 +183,17 @@ Steps:
         # 279 tokens https://token-calculator.net
         # -----------------------------------------
         UserPrompt: |
-          IMPORTANT: DISREGARD AND SKIP ANY RAW DATA, CODES OR REPORT SECTION(S)
-          OF THIS MESSAGE.
+          IMPORTANT: DISREGARD, IGNORE AND SKIP ANY RAW OR TECHNICAL DATA OR
+          CODE IN THIS MESSAGE.
 
-          This message may feature a human-written message. You must find the
-          messages that have some human content.
-
-          Human content in these messages might have misspellings, acronyms or 
+          This message may feature a human-written message. Human-written
+          content in these messages might have misspellings, acronyms or 
           abbreviations similar to cell phone text messages. Human content may
           only be a few words.
 
-          DO forward if the message matches ANY of these criteria:
-          - It contains any amount of natural or colloquial language.
+          Forward if the message matches ANY of these criteria:
+          - It contains communication.
+          - It contains even a small amount of natural language.
           - It contains a complaint, request or command.
           - It contains a greeting/sign-offs or their variations, for example:
             HI, HELLO, BONJOUR, GOOD MORNING/EVENING,
