@@ -13,25 +13,28 @@ ACARSProcessorSettings:
     ACARS:
       Host: &acarshubhost acars-acarshub
       Port: 15550
-
     VDLM2:
       Host: *acarshubhost
       Port: 15555
 
 Steps:
+  # Add geolocation if my local ADS-B receiver has information for the aircraft
   - Annotate:
       Tar1090:
         URL: http://adsb-ultrafeeder
         ReferenceGeolocation: "${my_latitude},${my_longitude}"
 
+  # Used for overall metrics and improving filters
   - Send:
       NewRelic:
         APIKey: "${new_relic_license_key}"
         CustomEventType: CustomACARS
 
-  # - Filter: { Builtin: { DictionaryPhraseLengthMinimum: 2 } }
   - Filter: { Builtin: { HasText: true } }
+  # - Filter: { Builtin: { DictionaryPhraseLengthMinimum: 2 } }
 
+  # The decoders often submit duplicate messages as they're able to reassemble
+  # the messages
   - Filter:
       Builtin:
         PreviousMessageSimilarity:
@@ -39,6 +42,7 @@ Steps:
           MaximumLookBehind: 1000
           DontFilterIfLonger: false
 
+  # These labels have not had a human-written message in the last 30 days
   - Filter:
       Builtin:
         Invert: true
@@ -66,7 +70,7 @@ Steps:
           - "SA"
           - "SQ"
 
-  # # Labels known to have human communication
+  # # These labels have had human-written messages in the last 30 days
   # - Filter:
   #     Builtin:
   #       Labels:
@@ -100,6 +104,7 @@ Steps:
   #         # Suggest filtering
   #         - "H1" # 0.002% human (human messages were validated)
 
+  # These terms are present in routine messages that can be filtered
   - Filter:
       Builtin:
         Invert: true
@@ -150,11 +155,13 @@ Steps:
             - REQUEST GATE ASSIGNMENT ETA
             - Equation ID
 
+  # This is to analyze and improve my built-in filtering rules
   - Send:
       NewRelic:
         APIKey: "${new_relic_license_key}"
-        CustomEventType: CustomACARSRequireTermsResults
+        CustomEventType: CustomACARSBuiltinOnly
 
+  # Have local Ollama model look only for human-written messages
   - Filter:
       Ollama:
         Model: &ollamamodel qwen3:30b-a3b
@@ -172,40 +179,40 @@ Steps:
             { Name: num_gpu, Value: 40 }, # Number of layers to offload to GPU
           ]
         # -----------------------------------------
-        # 1,169 characters
-        # 348 tokens https://token-calculator.net
+        # 1,116 characters
+        # 329 tokens https://token-calculator.net
         # -----------------------------------------
         UserPrompt: |
-          You are reviewing messages from both humans and programatically
-          generated sources and must forward only the messages from humans.
+          You are reviewing messages from both humans sources and must forward
+          only the messages with content written by humans.
 
-          Human messages will have natural language (in English, Spanish,
-          French) and might have misspellings or abbreviations like you might
-          see in cell phone text messages. The words in these messages may have
-          commas, periods or spaces separating words or might be missing spaces
-          between words. It will likely relate to air travel, but some human
-          messages will be off-topic. Some might be short, such as a sentence
-          fragment.
+          Human content will always be the end of the message, typically after
+          a limited amount of information like airport codes and arrival times.
+          They may also contain some technical terms or acronyms.
+
+          Human content might have misspellings, abbreviations or typos similar
+          to cell phone text messages and may be only a few words.
 
           DO forward if the message matches ANY of these rules:
-          - Contains natural or colloquial language or prose which may also 
-            contain some technical terms or acronyms.
-          - Greetings/sign-offs, for example: HI, HELLO, BONJOUR,
-            GOOD MORNING/EVENING, THANK YOU/THANKS/THNKS/THX, BRGRDS, CHEERS,
-            COPY/COPY THAT or if it has the term FREETEXT.
-          - A clear sentence/clause like WILL/IS/ARE/HAVE/NEED/CAN/PLEASE/
-            QUESTION MARK followed by a verb, for example: PLEASE SEND WX.
-          - Has /Q/ or QQ which is shorthand for asking a question in this 
+          - Contains natural or colloquial language, including informal.
+          - Greetings/sign-offs or their variations, for example: HI, HELLO, 
+            BONJOUR, GOOD MORNING/EVENING, THANK YOU/THANKS/THNKS/THX, BRGRDS, 
+            CHEERS, COPY/COPY THAT.
+          - It has content after the term FREETEXT.
+          - A clear sentence/clause such as WILL/IS/ARE/HAVE/NEED/CAN/PLEASE
+            followed by a verb, for example: PLEASE SEND WX.
+          - Has /Q/ or QQ or QUESTION MARK which signifies a question in this 
             context.
-          - Operational commentary or questions about passengers,crew,med,
-            medical,booking,rebooking/ramp-gate,lavatories (abbreviation: LAV),
-            seats or any other situation with a narrative or question.
+          - Operational commentary or questions about aircraft passengers,crew,
+            med,medical,medlink,booking,lavatories (abbreviation: LAV), seats, 
+            or any other situation or event regarding people and aircraft.
           - Writeups or complaints about issues relating to aircraft.
-          - Lists a desk number or has "DISPATCHER MSG".
+          - Lists a desk number or has DISPATCHER MSG.
 
           Based on these rules, should this message be forwarded?
-      #      /no_think
 
+  # This should be a human message, so send to my private Discord channel, with
+  # fancy templating.
   - Send:
       Discord:
         Embed: true
@@ -224,11 +231,14 @@ Steps:
           [ACARSDrama messages from this aircraft]({{index . "ACARSProcessor.ACARSDramaTailNumberLink"}})
           [Aircraft Photos]({{index . "ACARSProcessor.PhotosLink"}})
 
+  # Also send to New Relic as a human message
   - Send:
       NewRelic:
         APIKey: "${new_relic_license_key}"
         CustomEventType: CustomACARSHumanMessages
 
+  # Use Ollama again to evaluate the emotion of the message and filter in one
+  # step
   - Annotate:
       Ollama:
         Model: *ollamamodel
@@ -247,6 +257,7 @@ Steps:
           - 80-100 should indicate the message is very emotional.
     Filter: { Builtin: { LLMProcessedNumberAbove: 40 } }
 
+  # Send emotional messages to a different Discord channel
   - Send:
       Discord:
         Embed: true
