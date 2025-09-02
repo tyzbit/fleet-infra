@@ -200,7 +200,7 @@ Steps:
           - Operational commentary or questions about passengers,crew,med,
             medical,booking,rebooking/ramp-gate,lavatories (abbreviation: LAV),
             seats or any other situation with a narrative or question.
-          - Writeups or complaints about issues.
+          - Writeups or complaints about issues relating to aircraft.
           - Lists a desk number or has "DISPATCHER MSG".
 
           Based on these rules, should this message be forwarded?
