@@ -179,8 +179,8 @@ Steps:
             { Name: num_gpu, Value: 40 }, # Number of layers to offload to GPU
           ]
         # -----------------------------------------
-        # 877 characters
-        # 271 tokens https://token-calculator.net
+        # 890 characters
+        # 273 tokens https://token-calculator.net
         # -----------------------------------------
         UserPrompt: |
           IMPORTANT: DISREGARD, IGNORE AND SKIP ANY RAW OR TECHNICAL DATA OR
@@ -201,8 +201,8 @@ Steps:
           - Has ANY content after the term FREETEXT or /TXT
           - Has /Q/ or QQ or QUESTION MARK.
           - Commentary or questions about aircraft passengers,crew,med,medical,
-            medlink,booking,lavatories (abbreviation: LAV), seats, or other
-            situations or events relating to air travel.
+            medlink,booking,lavatories (abbreviation: LAV), aircraft seats or 
+            rows or other situations or events relating to air travel.
           - Lists a desk number or has DISPATCHER MSG.
 
           Based on these rules, should this message be forwarded?
