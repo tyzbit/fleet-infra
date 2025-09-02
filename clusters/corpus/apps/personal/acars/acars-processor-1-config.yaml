@@ -179,8 +179,8 @@ Steps:
             { Name: num_gpu, Value: 40 }, # Number of layers to offload to GPU
           ]
         # -----------------------------------------
-        # 1,116 characters
-        # 329 tokens https://token-calculator.net
+        # 1,121 characters
+        # 332 tokens https://token-calculator.net
         # -----------------------------------------
         UserPrompt: |
           You are reviewing messages from both humans sources and must forward
@@ -198,7 +198,7 @@ Steps:
           - Greetings/sign-offs or their variations, for example: HI, HELLO, 
             BONJOUR, GOOD MORNING/EVENING, THANK YOU/THANKS/THNKS/THX, BRGRDS, 
             CHEERS, COPY/COPY THAT.
-          - It has content after the term FREETEXT.
+          - It has content after the term FREETEXT or /TXT
           - A clear sentence/clause such as WILL/IS/ARE/HAVE/NEED/CAN/PLEASE
             followed by a verb, for example: PLEASE SEND WX.
           - Has /Q/ or QQ or QUESTION MARK which signifies a question in this 
