@@ -179,27 +179,28 @@ Steps:
             { Name: num_gpu, Value: 40 }, # Number of layers to offload to GPU
           ]
         # -----------------------------------------
-        # 955 characters
-        # 283 tokens https://token-calculator.net
+        # 898 characters
+        # 279 tokens https://token-calculator.net
         # -----------------------------------------
         UserPrompt: |
-          This message is either completely automatically generated or features
-          a human-written message after some data. You must find the messages
-          that have some human content.
+          IMPORTANT: DISREGARD AND SKIP ANY RAW DATA, CODES OR REPORT SECTION(S)
+          OF THIS MESSAGE.
 
-          Human content in these messages might have misspellings, abbreviations
-          or typos similar to cell phone text messages and may only be a few
-          words. Human content will often have acronyms.
+          This message may feature a human-written message. You must find the
+          messages that have some human content.
+
+          Human content in these messages might have misspellings, acronyms or 
+          abbreviations similar to cell phone text messages. Human content may
+          only be a few words.
 
           DO forward if the message matches ANY of these criteria:
-          - Contains any amount of natural or colloquial language or prose.
-          - Contains a complaint, request or command.
-          - Contains a greeting/sign-offs or their variations, for example: HI,
-            HELLO, BONJOUR, GOOD MORNING/EVENING, THANK YOU/THANKS/THNKS/THX,
-            BRGRDS/RGRDS, CHEERS, COPY/COPY THAT.
-          - Has any prose content after the term FREETEXT or /TXT
-          - Has /Q/ or QQ or QUESTION MARK which signifies a person is asking a
-            question in this context.
+          - It contains any amount of natural or colloquial language.
+          - It contains a complaint, request or command.
+          - It contains a greeting/sign-offs or their variations, for example:
+            HI, HELLO, BONJOUR, GOOD MORNING/EVENING,
+            THANK YOU/THANKS/THNKS/THX, BRGRDS/RGRDS, CHEERS, COPY/COPY THAT.
+          - Has ANY content after the term FREETEXT or /TXT
+          - Has /Q/ or QQ or QUESTION MARK.
           - Commentary or questions about aircraft passengers,crew,med,medical,
             medlink,booking,lavatories (abbreviation: LAV), seats, or other
             situations or events relating to air travel.
