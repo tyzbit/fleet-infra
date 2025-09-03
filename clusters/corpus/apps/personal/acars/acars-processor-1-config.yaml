@@ -112,6 +112,7 @@ Steps:
           Count: 1
           Terms:
             - /FTMLDR
+            - /ACKFLT
             - RESREQ
             - POSRPT
             - AUTOMATED FLT OPS
