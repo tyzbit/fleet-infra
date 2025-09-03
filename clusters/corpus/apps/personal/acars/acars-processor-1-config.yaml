@@ -158,6 +158,7 @@ Steps:
             - REQUEST GATE ASSIGNMENT ETA
             - Equation ID
             - HOWGOZIT
+            - RAMP FREQ
 
   # This is to analyze and improve my built-in filtering rules
   - Send:
