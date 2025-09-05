@@ -1,47 +1,49 @@
-# ---
-# apiVersion: volsync.backube/v1alpha1
-# kind: ReplicationSource
-# metadata:
-#   name: frigate-db-local-path
-#   namespace: source
-# spec:
-#   sourcePVC: frigate-db-local-path
-#   trigger:
-#     schedule: "*/5 * * * *"
-#   rsync:
-#     sshKeys: volsync-nas
-#     address: nas.home.arpa:/volume1/workbench_backups/frigate/
-#     copyMethod: Snapshot
-# ---
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationSource
+metadata:
+  name: frigate-db-local-path
+  namespace: source
+spec:
+  sourcePVC: frigate-db-local-path
+  trigger:
+    manual: {}
+    # schedule: "*/5 * * * *"
+  rsync:
+    sshKeys: volsync-nas
+    address: nas.home.arpa
+    copyMethod: Snapshot
+---
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationDestination
 metadata:
   name: frigate-db-local-path
   namespace: home-automation
 spec:
-  rsyncTLS:
+  rsync:
+    sshKeys: volsync-nas
+    address: nas.home.arpa
     copyMethod: Snapshot
     capacity: 10Gi
     keySecret: volsync-nas
     accessModes: ["ReadWriteOnce"]
     storageClassName: democratic-local
     volumeSnapshotClassName: democratic-local
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: frigate-db-local-path
-  namespace: home-automation
-spec:
-  accessModes: [ReadWriteOnce]
-  dataSourceRef:
-    kind: ReplicationDestination
-    apiGroup: volsync.backube
-    name: frigate-db-nas
-  resources:
-    requests:
-      storage: 10Gi
-  storageClassName: democratic-local
+# ---
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: frigate-db-local-path
+#   namespace: home-automation
+# spec:
+#   accessModes: [ReadWriteOnce]
+#   dataSourceRef:
+#     kind: ReplicationDestination
+#     apiGroup: volsync.backube
+#     name: frigate-db-nas
+#   resources:
+#     requests:
+#       storage: 10Gi
+#   storageClassName: democratic-local
 ---
 apiVersion: apps/v1
 kind: StatefulSet
