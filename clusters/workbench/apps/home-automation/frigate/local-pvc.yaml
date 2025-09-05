@@ -6,8 +6,7 @@ metadata:
 spec:
   sourcePVC: frigate-db-local-path
   trigger:
-    manual: {}
-    # schedule: "*/5 * * * *"
+    schedule: "*/5 * * * *"
   rsync:
     sshKeys: volsync-nas
     address: nas.home.arpa
