@@ -9,7 +9,7 @@ spec:
     schedule: "*/5 * * * *"
   rsync:
     sshKeys: volsync-nas
-    address: nas.home.arpa
+    address: nas.home.arpa:/volume1/workbench_backups/frigate-db/
     copyMethod: Snapshot
 ---
 apiVersion: volsync.backube/v1alpha1
@@ -20,7 +20,7 @@ metadata:
 spec:
   rsync:
     sshKeys: volsync-nas
-    address: nas.home.arpa
+    address: nas.home.arpa:/volume1/workbench_backups/frigate-db/
     copyMethod: Snapshot
     capacity: 10Gi
     accessModes: ["ReadWriteOnce"]
