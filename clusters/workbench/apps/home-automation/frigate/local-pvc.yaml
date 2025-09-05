@@ -4,7 +4,7 @@ metadata:
   name: frigate-db-local-path
   namespace: source
 spec:
-  sourcePVC: frigate-db-local-path
+  sourcePVC: volsync-frigate-db-local-path-dst
   trigger:
     schedule: "*/5 * * * *"
   rsync:
