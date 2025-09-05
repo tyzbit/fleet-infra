@@ -145,6 +145,10 @@ Steps:
             - NEXT FLT SUBJECT
             - NEW MRD IS REQUIRED
             - SEND AN OPS CONTROL
+            - FLIGHT OPS AUTOMATED MESSAGE
+            - RECEIVED FOR OVER 60 MINUTES
+            - "LANDING PILOT:"
+            - CONFIRM THE BELOW SOULS
             ###################
             - CODE BLEED STATUS
             - PREFLIGHT BRIEF
