@@ -7,8 +7,8 @@ spec:
   sourcePVC: volsync-frigate-db-local-path-dst
   trigger:
     schedule: "*/5 * * * *"
-  rsync:
-    sshKeys: volsync-nas
+  rsyncTLS:
+    keySecret: volsync-nas
     address: nas.home.arpa:/volume1/workbench_backups/frigate-db/
     copyMethod: Snapshot
 ---
@@ -18,8 +18,8 @@ metadata:
   name: frigate-db-local-path
   namespace: home-automation
 spec:
-  rsync:
-    sshKeys: volsync-nas
+  rsyncTLS:
+    keySecret: volsync-nas
     address: nas.home.arpa:/volume1/workbench_backups/frigate-db/
     copyMethod: Snapshot
     capacity: 10Gi
