@@ -131,6 +131,7 @@ Steps:
             - .CSV
             - "LOC:"
             - TO 1)
+            - PDC
             - ------------
             # Airport DISP messages
             - ATIS INFO
