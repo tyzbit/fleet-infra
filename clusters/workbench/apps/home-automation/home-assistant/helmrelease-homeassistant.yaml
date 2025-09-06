@@ -134,6 +134,13 @@ spec:
           matter:
             port: *matterport
 
+      meshtastic-tcp:
+        primary: false
+        controller: *app
+        ports:
+          meshtastic:
+            port: 4403
+
     ingress:
       main:
         className: nginx
