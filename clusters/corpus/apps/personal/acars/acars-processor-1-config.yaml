@@ -132,6 +132,7 @@ Steps:
             - "LOC:"
             - TO 1)
             - PDC
+            - DEPARTS TO
             - ------------
             # Airport DISP messages
             - ATIS INFO
