@@ -129,6 +129,8 @@ Steps:
             - +++
             - TAKEOFF_
             - .CSV
+            - "LOC:"
+            - TO 1)
             - ------------
             # Airport DISP messages
             - ATIS INFO
