@@ -64,7 +64,7 @@ spec:
               requests:
                 cpu: &nccpurequest 100m
               limits:
-                memory: &ncmemlimit 2Gi
+                memory: &ncmemlimit 4Gi
 
           &cache nextcloud-cache:
             image:
@@ -118,7 +118,7 @@ spec:
               tag: *nextcloudver
               pullPolicy: Always
             command: ["/bin/bash", "-c"]
-            env: [{name: NEXTCLOUD_URL, value: http://127.0.0.1}]
+            env: [{ name: NEXTCLOUD_URL, value: http://127.0.0.1 }]
             args:
               - |
                 while :; do su www-data \
