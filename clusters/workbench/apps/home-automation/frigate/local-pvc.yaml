@@ -9,7 +9,7 @@ spec:
     schedule: "*/5 * * * *"
   rsyncTLS:
     keySecret: volsync-nas
-    address: nas.home.arpa:/volume1/workbench_backups/frigate-db/
+    address: nas.home.arpa
     copyMethod: Snapshot
 ---
 apiVersion: volsync.backube/v1alpha1
