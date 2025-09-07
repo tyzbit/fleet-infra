@@ -217,8 +217,9 @@ Steps:
           - Has ANY content after the term FREETEXT or /TXT
           - Has /Q/ or QQ or QUESTION MARK.
           - Commentary or questions about aircraft passengers,crew,med,medical,
-            medlink,booking,lavatories (abbreviation: LAV), aircraft seats or 
-            rows or other situations or events relating to air travel.
+            medlink,booking,lavatories (abbreviation: LAV), mechanics 
+            (abbreviation: MX), aircraft seats/rows or other situations or
+            events relating to air travel.
           - Lists a desk number or has DISPATCHER MSG.
 
           Based on these rules, should this message be forwarded?
