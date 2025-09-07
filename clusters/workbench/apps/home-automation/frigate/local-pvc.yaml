@@ -1,17 +1,17 @@
-apiVersion: volsync.backube/v1alpha1
-kind: ReplicationSource
-metadata:
-  name: frigate-db-local-path
-  namespace: source
-spec:
-  sourcePVC: volsync-frigate-db-local-path-dst
-  trigger:
-    schedule: "*/5 * * * *"
-  rsyncTLS:
-    keySecret: volsync-nas
-    address: nas.home.arpa:/volume1/workbench_backups/frigate-db/
-    copyMethod: Snapshot
----
+# apiVersion: volsync.backube/v1alpha1
+# kind: ReplicationSource
+# metadata:
+#   name: frigate-db-local-path
+#   namespace: source
+# spec:
+#   sourcePVC: volsync-frigate-db-local-path-dst
+#   trigger:
+#     schedule: "*/5 * * * *"
+#   rsyncTLS:
+#     keySecret: volsync-nas
+#     address: nas.home.arpa:/volume1/workbench_backups/frigate-db/
+#     copyMethod: Snapshot
+# ---
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationDestination
 metadata:
