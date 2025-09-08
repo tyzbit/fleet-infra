@@ -135,6 +135,7 @@ Steps:
             - YOW FROM
             - PART 01
             - ------------
+            - "*** REMINDER MESSAGE ***"
             # Airport DISP messages
             - ATIS INFO
             - TAXI AND SHUTDOWN THE APU
