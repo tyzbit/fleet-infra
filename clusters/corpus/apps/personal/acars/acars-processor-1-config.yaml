@@ -136,6 +136,7 @@ Steps:
             - PART 01
             - ------------
             - "*** REMINDER MESSAGE ***"
+            - AUTO CLOSEOUT
             # Airport DISP messages
             - ATIS INFO
             - TAXI AND SHUTDOWN THE APU
