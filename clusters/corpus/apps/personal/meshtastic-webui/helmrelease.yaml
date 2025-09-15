@@ -116,6 +116,8 @@ spec:
                   identifier: main
               - <<: *redirect
                 path: /config
+              - <<: *redirect
+                path: /nodes
         tls:
           - hosts:
               - *host
