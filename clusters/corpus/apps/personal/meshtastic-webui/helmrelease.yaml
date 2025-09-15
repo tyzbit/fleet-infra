@@ -118,6 +118,8 @@ spec:
                 path: /config
               - <<: *redirect
                 path: /nodes
+              - <<: *redirect
+                path: /channels
         tls:
           - hosts:
               - *host
