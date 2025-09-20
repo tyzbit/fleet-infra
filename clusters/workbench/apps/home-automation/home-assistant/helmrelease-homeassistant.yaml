@@ -45,6 +45,8 @@ spec:
                 cpu: 10m
               limits:
                 memory: 2Gi
+            securityContext:
+              privileged: true
 
           filebrowser:
             image:
@@ -83,7 +85,6 @@ spec:
       meshtty:
         type: hostPath
         hostPath: &tty /dev/ttyACM0
-        hostPathType: CharDevice
         advancedMounts: { *app : { *app : [path: *tty] } }
       dbus:
         type: hostPath
