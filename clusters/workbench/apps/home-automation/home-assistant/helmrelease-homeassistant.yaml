@@ -79,17 +79,15 @@ spec:
       bluetoothusb:
         type: hostPath
         hostPath: &usb /dev/bus/usb/003/
-        advancedMounts:
-          *app :
-            *app :
-              - path: *usb
+        advancedMounts: { *app : { *app : [path: *usb] } }
+      meshtty:
+        type: hostPath
+        hostPath: &tty /dev/ttyACM0
+        advancedMounts: { *app : { *app : [path: *tty] } }
       dbus:
         type: hostPath
         hostPath: &dbus /run/dbus
-        advancedMounts:
-          *app :
-            *app :
-              - path: *dbus
+        advancedMounts: { *app : { *app : [path: *dbus] } }
       config:
         existingClaim: home-assistant-config-nas
         advancedMounts:
@@ -104,10 +102,7 @@ spec:
         type: emptyDir
       data:
         existingClaim: matter-config-nas
-        advancedMounts:
-          *app :
-            matter-server:
-              - path: /data
+        advancedMounts: { *app : { matter-server: [path: /data] } }
 
     service:
       main:
