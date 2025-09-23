@@ -5,7 +5,7 @@ metadata:
   namespace: personal
 data:
   acars-usb-watchdog.sh: |
-    #!bin/bash
+    #!/bin/bash
 
     DEVICES=$SERIALS
     # Turn this into iterable
