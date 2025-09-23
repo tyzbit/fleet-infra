@@ -5,7 +5,7 @@ metadata:
   namespace: personal
 data:
   adsb-usb-watchdog.sh: |
-    #!bin/bash
+    #!/bin/bash
 
     DEVICES=$SERIALS
     # Turn this into iterable
