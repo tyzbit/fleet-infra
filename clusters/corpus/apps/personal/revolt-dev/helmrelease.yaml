@@ -103,7 +103,7 @@ spec:
           revolt-api:
             image:
               repository: ghcr.io/revoltchat/server
-              tag: 20250513-2
+              tag: 20250930-2
               pullPolicy: Always
             resources: {requests: {cpu: 10m},limits: {memory: 256Mi}}
       "events":
