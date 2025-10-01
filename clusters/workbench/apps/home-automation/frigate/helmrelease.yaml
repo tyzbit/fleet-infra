@@ -51,7 +51,7 @@ spec:
           multi-frigate:
             image:
               repository: docker.io/oncharterliz/multi-frigate
-              tag: "0.1.9"
+              tag: "0.2.1"
               pullPolicy: Always
             env:
               FRIGATE_PROXY: http://frigate:5000
