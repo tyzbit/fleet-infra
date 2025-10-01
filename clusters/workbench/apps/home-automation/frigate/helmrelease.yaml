@@ -44,23 +44,6 @@ spec:
               limits:
                 memory: 10Gi
 
-      multi-frigate:
-        replicas: 1
-        type: statefulset
-        containers:
-          multi-frigate:
-            image:
-              repository: docker.io/oncharterliz/multi-frigate
-              tag: "0.1.9"
-              pullPolicy: Always
-            env:
-              FRIGATE_PROXY: http://frigate:5000
-            # resources:
-            #   requests:
-            #     cpu: 2000m
-            #   limits:
-            #     memory: 10Gi
-
     persistence:
       data:
         existingClaim: frigate-data-nas
@@ -182,29 +165,6 @@ spec:
                 service:
                   name: frigate-oauth2-proxy
                   port: 80
-        tls:
-          - hosts:
-              - *host
-            secretName: *host
-
-      multi-frigate:
-        className: nginx
-        annotations:
-          nginx.ingress.kubernetes.io/proxy-body-size: 1024m
-          nginx.ingress.kubernetes.io/proxy-connect-timeout: "20"
-          nginx.ingress.kubernetes.io/proxy-read-timeout: "14400"
-          nginx.ingress.kubernetes.io/proxy-send-timeout: "14400"
-          nginx.ingress.kubernetes.io/auth-url: "http://frigate-oauth2-proxy.home-automation.svc.cluster.local/oauth2/auth"
-          nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
-          cert-manager.io/cluster-issuer: letsencrypt
-          external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
-          external-dns.alpha.kubernetes.io/target: ${cloudflared_tunnel_uuid}.cfargotunnel.com
-        hosts:
-          - host: &host "multifrigate.${personal_domain}"
-            paths:
-              - path: "/"
-                service:
-                  identifier: multi-frigate
         tls:
           - hosts:
               - *host
