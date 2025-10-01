@@ -44,6 +44,10 @@ spec:
               limits:
                 memory: 10Gi
 
+      multi-frigate:
+        replicas: 1
+        type: statefulset
+        containers:
           multi-frigate:
             image:
               repository: docker.io/oncharterliz/multi-frigate
