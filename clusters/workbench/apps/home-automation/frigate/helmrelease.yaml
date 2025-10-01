@@ -51,11 +51,12 @@ spec:
               pullPolicy: Always
             env:
               FRIGATE_PROXY: http://frigate:5000
-            resources:
-              requests:
-                cpu: 2000m
-              limits:
-                memory: 10Gi
+            # resources:
+            #   requests:
+            #     cpu: 2000m
+            #   limits:
+            #     memory: 10Gi
+
     persistence:
       data:
         existingClaim: frigate-data-nas
@@ -104,6 +105,14 @@ spec:
           webrtc:
             port: &webrtc 8555
             targetPort: *webrtc
+      multi-frigate:
+        controller: multi-frigate
+        type: ClusterIP
+        ports:
+          http:
+            primary: true
+            port: 80
+            targetPort: 80
 
     ingress:
       *app :
@@ -188,7 +197,10 @@ spec:
           external-dns.alpha.kubernetes.io/target: ${cloudflared_tunnel_uuid}.cfargotunnel.com
         hosts:
           - host: &host "multifrigate.${personal_domain}"
-            paths: *frigatepath
+            paths:
+              - path: "/"
+                service:
+                  identifier: multi-frigate
         tls:
           - hosts:
               - *host
