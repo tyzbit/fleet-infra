@@ -291,7 +291,8 @@ Steps:
           - 1-40 should indicate the message reads as neutral.
           - 40-80 should indicate the message is emotional in some way.
           - 80-100 should indicate the message is very emotional.
-    Filter: { Builtin: { LLMProcessedNumberAbove: 40 } }
+
+  - Filter: { Builtin: { LLMProcessedNumberAbove: 40 } }
 
   # Send emotional messages to a different Discord channel
   - Send:
