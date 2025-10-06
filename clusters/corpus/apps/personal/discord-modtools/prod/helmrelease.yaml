@@ -26,7 +26,7 @@ spec:
           *app:
             image:
               repository: ghcr.io/tyzbit/go-discord-modtools
-              tag: "v0.3.0" # {"$imagepolicy": "flux-system:go-discord-modtools:tag"}
+              tag: "v0.3.1" # {"$imagepolicy": "flux-system:go-discord-modtools:tag"}
             envFrom:
               - secretRef:
                   name: *app
