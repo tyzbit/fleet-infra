@@ -26,7 +26,7 @@ spec:
           *app:
             image:
               repository: ghcr.io/tyzbit/go-discord-archiver
-              tag: "3.1.2" # {"$imagepolicy": "flux-system:go-discord-archiver:tag"}
+              tag: "3.1.3" # {"$imagepolicy": "flux-system:go-discord-archiver:tag"}
             envFrom:
               - secretRef:
                   name: *app
