@@ -26,7 +26,7 @@ spec:
           *app :
             image:
               repository: ghcr.io/tyzbit/go-discord-modtools
-              tag: "v0.3.0"
+              tag: "v0.3.1"
             envFrom:
               - secretRef:
                   name: *app
