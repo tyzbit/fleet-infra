@@ -21,10 +21,8 @@ spec:
       type: statefulset
       annotations:
         reloader.stakater.com/auto: "true"
-      pod:
-        terminationGracePeriodSeconds: 1
-        nodeSelector:
-          acars: "true"
+      pod: {nodeSelector: {k3s.io/hostname: myocyte1}}
+
     probe: &probes
       liveness:
         enabled: true
@@ -62,6 +60,7 @@ spec:
 
       acarsdec: 
         <<: *common_settings
+        pod: {terminationGracePeriodSeconds: 1}
         replicas: 00
         containers:
           acarsdec:
@@ -92,6 +91,7 @@ spec:
 
       acarsdec2:
         <<: *common_settings
+        pod: {terminationGracePeriodSeconds: 1}
         replicas: 00
         containers:
           acarsdec2:
@@ -121,6 +121,7 @@ spec:
 
       acarsdec3:
         <<: *common_settings
+        pod: {terminationGracePeriodSeconds: 1}
         replicas: 00
         containers:
           acarsdec3:
@@ -150,6 +151,7 @@ spec:
 
       dumpvdl2:
         <<: *common_settings
+        pod: {terminationGracePeriodSeconds: 1}
         replicas: 00
         containers:
           dumpvdl2:
@@ -177,6 +179,7 @@ spec:
 
       dumpvdl2-2:
         <<: *common_settings
+        pod: {terminationGracePeriodSeconds: 1}
         replicas: 0
         containers:
           dumpvdl2-2:
@@ -204,6 +207,7 @@ spec:
 
       acarsrouter:
         <<: *common_settings
+        pod: {terminationGracePeriodSeconds: 1}
         replicas: 00
         containers:
           acarsrouter:
@@ -224,7 +228,6 @@ spec:
 
       acarshub:
         <<: *common_settings
-        pod: {terminationGracePeriodSeconds: 10}
         replicas: 00 # active nas
         containers:
           acarshub:
