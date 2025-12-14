@@ -16,7 +16,7 @@ spec:
   interval: 2m0s
   values:
     fullnameOverride: grav-${game_name}
-    replicaCount: 1 # active longhorn
+    replicaCount: 0 # active longhorn
     grav:
       image:
         repository: dsavell/grav
