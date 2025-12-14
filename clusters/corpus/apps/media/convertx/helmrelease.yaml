@@ -26,7 +26,7 @@ spec:
           *app :
             image:
               repository: ghcr.io/c4illin/convertx
-              tag: v0.15.1
+              tag: v0.16.1
             env:
               AUTO_DELETE_EVERY_N_HOURS: "72"
               ALLOW_UNAUTHENTICATED: "true"
