@@ -11,7 +11,7 @@ spec:
   wait: false
   prune: true
 
-  path: "./clusters/corpus/apps/core-system/storage/longhorn"
+  path: "./clusters/corpus/crds/longhorn"
   sourceRef:
     kind: GitRepository
     name: flux-system
