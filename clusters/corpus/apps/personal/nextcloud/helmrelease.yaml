@@ -20,7 +20,7 @@ spec:
   values:
     controllers:
       db:
-        replicas: 1 # active longhorn
+        replicas: 00 # active longhorn
         type: statefulset
         annotations:
           reloader.stakater.com/auto: "true"
@@ -44,7 +44,7 @@ spec:
                 memory: 1Gi
 
       app:
-        replicas: 1
+        replicas: 00
         type: statefulset
         annotations:
           reloader.stakater.com/auto: "true"

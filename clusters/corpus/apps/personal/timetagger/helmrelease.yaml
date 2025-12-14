@@ -24,7 +24,7 @@ spec:
   values:
     controllers:
       *app :
-        replicas: 1
+        replicas: 00
         type: statefulset
         annotations:
           reloader.stakater.com/auto: "true"

@@ -45,7 +45,7 @@ spec:
         forceRename: acars-usb-watchdog
         serviceAccount:
           name: acars-usb-watchdog
-        replicas: 1
+        replicas: 00
         containers:
           acars-usb-watchdog:
             securityContext: {privileged: true}
@@ -62,7 +62,7 @@ spec:
 
       acarsdec: 
         <<: *common_settings
-        replicas: 1
+        replicas: 00
         containers:
           acarsdec:
             securityContext: &secopts
@@ -92,7 +92,7 @@ spec:
 
       acarsdec2:
         <<: *common_settings
-        replicas: 1
+        replicas: 00
         containers:
           acarsdec2:
             securityContext: *secopts
@@ -121,7 +121,7 @@ spec:
 
       acarsdec3:
         <<: *common_settings
-        replicas: 1
+        replicas: 00
         containers:
           acarsdec3:
             securityContext: *secopts
@@ -150,7 +150,7 @@ spec:
 
       dumpvdl2:
         <<: *common_settings
-        replicas: 1
+        replicas: 00
         containers:
           dumpvdl2:
             securityContext: *secopts
@@ -204,7 +204,7 @@ spec:
 
       acarsrouter:
         <<: *common_settings
-        replicas: 1
+        replicas: 00
         containers:
           acarsrouter:
             image:
@@ -225,7 +225,7 @@ spec:
       acarshub:
         <<: *common_settings
         pod: {terminationGracePeriodSeconds: 10}
-        replicas: 1 # active nas
+        replicas: 00 # active nas
         containers:
           acarshub:
             image:

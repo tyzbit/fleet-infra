@@ -20,7 +20,7 @@ spec:
   values:
     controllers:
       app: &common
-        replicas: 1
+        replicas: 00
         type: statefulset
         annotations:
           reloader.stakater.com/auto: "true"
@@ -62,7 +62,7 @@ spec:
 
       db: 
         <<: *common
-        replicas: 1
+        replicas: 00
         containers:
           &db zulip-db:        
             image:
@@ -81,7 +81,7 @@ spec:
 
       memcached:
         <<: *common
-        replicas: 1
+        replicas: 00
         containers:
           &memcached zulip-memcached:
             image:
@@ -95,7 +95,7 @@ spec:
 
       redis:
         <<: *common
-        replicas: 1
+        replicas: 00
         containers:
           *redis :
             image: 
@@ -117,7 +117,7 @@ spec:
 
       rabbitmq:
         <<: *common
-        replicas: 1
+        replicas: 00
         containers:
           *rmq :
             image: 

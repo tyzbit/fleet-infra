@@ -10,7 +10,7 @@ spec:
   selector:
     matchLabels:
       app: qdirstat
-  replicas: 1 # active nas
+  replicas: 00 # active nas
   template:
     metadata:
       labels:

@@ -6,7 +6,7 @@ metadata:
   labels:
     app: btc-rpc-explorer-cache
 spec:
-  replicas: 1
+  replicas: 00
   selector:
     matchLabels:
       app: btc-rpc-explorer-cache

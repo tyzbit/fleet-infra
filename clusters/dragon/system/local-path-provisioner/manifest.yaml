@@ -76,7 +76,7 @@ metadata:
   name: local-path-provisioner
   namespace: local-path-storage
 spec:
-  replicas: 1
+  replicas: 00
   selector:
     matchLabels:
       app: local-path-provisioner

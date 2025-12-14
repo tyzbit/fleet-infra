@@ -20,7 +20,7 @@ spec:
   values:
     controllers:
       *app :
-        replicas: 1
+        replicas: 00
         type: statefulset
         labels:
           kube-image-keeper.enix.io/image-cache: disabled

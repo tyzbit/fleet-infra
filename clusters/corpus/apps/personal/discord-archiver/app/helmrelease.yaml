@@ -19,7 +19,7 @@ spec:
   values:
     controllers:
       *app:
-        replicas: 1
+        replicas: 00
         annotations:
           reloader.stakater.com/auto: "true"
         containers:

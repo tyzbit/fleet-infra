@@ -36,7 +36,7 @@ spec:
     controllers:
       "mongo":
         <<: *longhorncontroller
-        replicas: 1 # active longhorn
+        replicas: 00 # active longhorn
         containers:
           revolt-mongo:
             image:
@@ -48,7 +48,7 @@ spec:
             resources: {requests: {cpu: 10m},limits: {memory: 512Mi}}
       "redis":
         <<: *longhorncontroller
-        replicas: 1 # active longhorn
+        replicas: 00 # active longhorn
         containers:
           revolt-redis:
             image:
@@ -58,7 +58,7 @@ spec:
             resources: {requests: {cpu: 10m},limits: {memory: 128Mi}}
       "rabbit":
         <<: *longhorncontroller
-        replicas: 1 # active longhorn
+        replicas: 00 # active longhorn
         containers:
           revolt-rabbit:
             image:
@@ -75,7 +75,7 @@ spec:
             resources: {requests: {cpu: 10m},limits: {memory: 256Mi}}
       "minio":
         <<: *longhorncontroller
-        replicas: 1 # active longhorn
+        replicas: 00 # active longhorn
         containers:
           revolt-minio:
             command: [minio,server,/data]
@@ -98,7 +98,7 @@ spec:
             resources: {requests: {cpu: 10m},limits: {memory: 1Gi}}
       "api":
         <<: *deploymentcontroller
-        replicas: 1
+        replicas: 00
         containers:
           revolt-api:
             image:
@@ -108,7 +108,7 @@ spec:
             resources: {requests: {cpu: 10m},limits: {memory: 256Mi}}
       "events":
         <<: *deploymentcontroller
-        replicas: 1
+        replicas: 00
         containers:
           revolt-events:
             image:
@@ -118,7 +118,7 @@ spec:
             resources: {requests: {cpu: 10m},limits: {memory: 128Mi}}
       "web":
         <<: *deploymentcontroller
-        replicas: 1
+        replicas: 00
         containers:
           edgevpn:
             securityContext: {privileged: true}
@@ -161,7 +161,7 @@ spec:
             resources: {requests: {cpu: 10m},limits: {memory: 256Mi}}
       "autumn":
         <<: *deploymentcontroller
-        replicas: 1
+        replicas: 00
         containers:
           revolt-autumn:
             image:
@@ -173,7 +173,7 @@ spec:
               <<: *env
       "january":
         <<: *deploymentcontroller
-        replicas: 1
+        replicas: 00
         containers:
           revolt-january:
             image:
@@ -183,7 +183,7 @@ spec:
             resources: {requests: {cpu: 10m},limits: {memory: 512Mi}}
       "crond":
         <<: *deploymentcontroller
-        replicas: 1
+        replicas: 00
         containers:
           revolt-crond:
             image:
@@ -193,7 +193,7 @@ spec:
             resources: {requests: {cpu: 10m},limits: {memory: 128Mi}}
       "pushd":
         <<: *deploymentcontroller
-        replicas: 1
+        replicas: 00
         containers:
           revolt-pushd:
             image:
@@ -203,7 +203,7 @@ spec:
             resources: {requests: {cpu: 10m},limits: {memory: 128Mi}}
       "vortex":
         <<: *deploymentcontroller
-        replicas: 1
+        replicas: 00
         containers:
           revolt-vortex:
             image:

@@ -24,7 +24,7 @@ spec:
     controllers:
       mariadb:
         <<: *common_settings
-        replicas: 1 # active longhorn
+        replicas: 00 # active longhorn
         pod: { nodeSelector: { longhorn: primary } }
         containers:
           mariadb:
@@ -40,7 +40,7 @@ spec:
 
       # postgres:
       #   <<: *common_settings
-      #   replicas: 1 # active longhorn
+      #   replicas: 00 # active longhorn
       #   pod: {nodeSelector: {longhorn: primary}}
       #   containers:
       #     mariadb:
@@ -57,7 +57,7 @@ spec:
       acars-processor-1:
         <<: *common_settings
         forceRename: "acars-processor-1"
-        replicas: 1
+        replicas: 00
         containers:
           acars-processor-1:
             image:

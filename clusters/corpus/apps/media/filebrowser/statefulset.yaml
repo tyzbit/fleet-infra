@@ -5,7 +5,7 @@ metadata:
   namespace: media
 spec:
   serviceName: filebrowser
-  replicas: 1 # active nas
+  replicas: 00 # active nas
   selector:
     matchLabels:
       app: filebrowser

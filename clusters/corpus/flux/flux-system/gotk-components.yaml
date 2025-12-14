@@ -5262,7 +5262,7 @@ metadata:
   name: source-controller
   namespace: flux-system
 spec:
-  replicas: 1
+  replicas: 00
   selector:
     matchLabels:
       app: source-controller
@@ -7169,7 +7169,7 @@ metadata:
   name: kustomize-controller
   namespace: flux-system
 spec:
-  replicas: 1
+  replicas: 00
   selector:
     matchLabels:
       app: kustomize-controller
@@ -10971,7 +10971,7 @@ metadata:
   name: helm-controller
   namespace: flux-system
 spec:
-  replicas: 1
+  replicas: 00
   selector:
     matchLabels:
       app: helm-controller
@@ -12945,7 +12945,7 @@ metadata:
   name: notification-controller
   namespace: flux-system
 spec:
-  replicas: 1
+  replicas: 00
   selector:
     matchLabels:
       app: notification-controller
@@ -14058,7 +14058,7 @@ metadata:
   name: image-reflector-controller
   namespace: flux-system
 spec:
-  replicas: 1
+  replicas: 00
   selector:
     matchLabels:
       app: image-reflector-controller
@@ -14893,7 +14893,7 @@ metadata:
   name: image-automation-controller
   namespace: flux-system
 spec:
-  replicas: 1
+  replicas: 00
   selector:
     matchLabels:
       app: image-automation-controller

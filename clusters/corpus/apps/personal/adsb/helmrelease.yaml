@@ -23,7 +23,7 @@ spec:
         reloader.stakater.com/auto: "true"
         fr24-radar-id: ${fr24_radar_id}
       pod: {nodeSelector: {adsb: "true"}}
-      replicas: 1 # active longhorn-webapp
+      replicas: 00 # active longhorn-webapp
 
     controllers:
       adsb-usb-watchdog:
@@ -31,7 +31,7 @@ spec:
         forceRename: adsb-usb-watchdog
         serviceAccount:
           name: adsb-usb-watchdog
-        replicas: 1
+        replicas: 00
         containers:
           adsb-usb-watchdog:
             securityContext: {privileged: true}
@@ -47,7 +47,7 @@ spec:
 
       ultrafeeder:
         <<: *common_settings
-        replicas: 1
+        replicas: 00
         containers:
           ultrafeeder:
             securityContext: {privileged: true}
@@ -167,7 +167,7 @@ spec:
 
       flightradar24:
         <<: *common_settings
-        replicas: 1
+        replicas: 00
         containers:
           # https://github.com/sdr-enthusiasts/docker-flightradar24?tab=readme-ov-file#obtaining-a-flightradar24-sharing-key-for-adsb
           flightradar24:
