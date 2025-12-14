@@ -1,0 +1,24 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cert-manager-clusterissuer
+  namespace: flux-system
+spec:
+  interval: 30m
+  retryInterval: 1m
+  timeout: 5m
+
+  wait: true
+  prune: true
+
+  path: "./clusters/corpus/apps/core-system/networking/cert-manager/cluster-issuer"
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  dependsOn: [{ name: kubernetes-secrets }, { name: cert-manager }]
+  postBuild:
+    substituteFrom:
+      - kind: Secret
+        name: sensitive-values
+        optional: false
