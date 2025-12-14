@@ -11,7 +11,7 @@ spec:
   wait: false
   prune: true
 
-  path: "./clusters/corpus/apps/core-system/networking/cert-manager/app"
+  path: "./clusters/corpus/crds/cert-manager"
   healthChecks:
     - apiVersion: apps/v1
       kind: Deployment
