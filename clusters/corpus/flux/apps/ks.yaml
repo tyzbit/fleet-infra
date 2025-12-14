@@ -16,7 +16,7 @@ spec:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
-  dependsOn: [{ name: kubernetes-secret }, { name: crds }]
+  dependsOn: [{ name: kubernetes-secrets }, { name: crds }]
   patches:
     - patch: |-
         - op: add
