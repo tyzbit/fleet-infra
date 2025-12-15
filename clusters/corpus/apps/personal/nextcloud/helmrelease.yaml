@@ -78,75 +78,75 @@ spec:
               limits:
                 memory: 256Mi
 
-          # &worker nextcloud-worker:
-          #   image:
-          #     repository: nextcloud
-          #     tag: *nextcloudver
-          #     pullPolicy: Always
-          #   command: ["/bin/bash", "-c"]
-          #   args:
-          #     - |
-          #       ops=(
-          #         "db:add-missing-primary-keys"
-          #         "db:add-missing-indices"
-          #         "db:add-missing-columns"
-          #         "files:cleanup"
-          #       )
-          #       grey="\e[1;30m"
-          #       reset="\e[0m"
-          #       green="\e[1;32m"
-          #       red="\e[1;31m"
-          #       for op in "$${ops[@]}" ; do
-          #         echo -e "$${grey}Running php occ $op $reset"
-          #         su www-data -s /usr/local/bin/php -- occ $op && echo -en "$green" || echo -en "$red"
-          #         echo -e "Finished php occ $op $reset"
-          #       done &&
-          #       echo -e "$${grey}Running php occ maintenance:repair --include-expensive $reset"
-          #       su www-data -s /usr/local/bin/php -- occ maintenance:repair --include-expensive && echo -en "$green" || echo -en "$red"
-          #       echo -e "Finished php occ maintenance:repair --include-expensive $reset"
-          #       while :; do /cron.sh; done
-          #   resources:
-          #     requests:
-          #       cpu: *nccpurequest
-          #     limits:
-          #       memory: *ncmemlimit
+          &worker nextcloud-worker:
+            image:
+              repository: nextcloud
+              tag: *nextcloudver
+              pullPolicy: Always
+            command: ["/bin/bash", "-c"]
+            args:
+              - |
+                ops=(
+                  "db:add-missing-primary-keys"
+                  "db:add-missing-indices"
+                  "db:add-missing-columns"
+                  "files:cleanup"
+                )
+                grey="\e[1;30m"
+                reset="\e[0m"
+                green="\e[1;32m"
+                red="\e[1;31m"
+                for op in "$${ops[@]}" ; do
+                  echo -e "$${grey}Running php occ $op $reset"
+                  su www-data -s /usr/local/bin/php -- occ $op && echo -en "$green" || echo -en "$red"
+                  echo -e "Finished php occ $op $reset"
+                done &&
+                echo -e "$${grey}Running php occ maintenance:repair --include-expensive $reset"
+                su www-data -s /usr/local/bin/php -- occ maintenance:repair --include-expensive && echo -en "$green" || echo -en "$red"
+                echo -e "Finished php occ maintenance:repair --include-expensive $reset"
+                while :; do /cron.sh; done
+            resources:
+              requests:
+                cpu: *nccpurequest
+              limits:
+                memory: *ncmemlimit
 
-          # # Requires https://github.com/nextcloud/notify_push to be installed
-          # &push nextcloud-push:
-          #   image:
-          #     repository: nextcloud
-          #     tag: *nextcloudver
-          #     pullPolicy: Always
-          #   command: ["/bin/bash", "-c"]
-          #   env: [{ name: NEXTCLOUD_URL, value: http://127.0.0.1 }]
-          #   args:
-          #     - |
-          #       while :; do su www-data \
-          #         -s /var/www/html/custom_apps/notify_push/bin/x86_64/notify_push -- \
-          #         /var/www/html/config/config.php; done &
-          #       pid=$!
-          #       grey="\e[1;30m"
-          #       reset="\e[0m"
-          #       green="\e[1;32m"
-          #       red="\e[1;31m"
-          #       echo -e "$${grey}Waiting a few seconds for services to start$${reset}"
-          #       sleep 10
-          #       echo -e "$${grey}Testing if push app is configured"
-          #       op="notify_push:setup https://cloud.${personal_domain}/push"
-          #       while ! su www-data -s /usr/local/bin/php -- occ "notify_push:self-test"; do
-          #         echo -e "$${grey}Self-test failed, running php occ $op $reset"
-          #         if ! su www-data -s /usr/local/bin/php -- occ $op; then
-          #           echo -e "$${red}$${op} operation failed, retrying...$${reset}"
-          #           sleep 5
-          #         fi
-          #       done
-          #       echo -e "$${green}Test passed$${reset}"
-          #       wait $pid
-          #   resources:
-          #     requests:
-          #       cpu: *nccpurequest
-          #     limits:
-          #       memory: *ncmemlimit
+          # Requires https://github.com/nextcloud/notify_push to be installed
+          &push nextcloud-push:
+            image:
+              repository: nextcloud
+              tag: *nextcloudver
+              pullPolicy: Always
+            command: ["/bin/bash", "-c"]
+            env: [{ name: NEXTCLOUD_URL, value: http://127.0.0.1 }]
+            args:
+              - |
+                while :; do su www-data \
+                  -s /var/www/html/custom_apps/notify_push/bin/x86_64/notify_push -- \
+                  /var/www/html/config/config.php; done &
+                pid=$!
+                grey="\e[1;30m"
+                reset="\e[0m"
+                green="\e[1;32m"
+                red="\e[1;31m"
+                echo -e "$${grey}Waiting a few seconds for services to start$${reset}"
+                sleep 10
+                echo -e "$${grey}Testing if push app is configured"
+                op="notify_push:setup https://cloud.${personal_domain}/push"
+                while ! su www-data -s /usr/local/bin/php -- occ "notify_push:self-test"; do
+                  echo -e "$${grey}Self-test failed, running php occ $op $reset"
+                  if ! su www-data -s /usr/local/bin/php -- occ $op; then
+                    echo -e "$${red}$${op} operation failed, retrying...$${reset}"
+                    sleep 5
+                  fi
+                done
+                echo -e "$${green}Test passed$${reset}"
+                wait $pid
+            resources:
+              requests:
+                cpu: *nccpurequest
+              limits:
+                memory: *ncmemlimit
 
     persistence:
       # MariaDB
@@ -172,10 +172,10 @@ spec:
           app:
             *app :
               - path: &datamount /var/www/html
-            # *worker :
-            #   - path: *datamount
-            # *push :
-            #   - path: *datamount
+            *worker :
+              - path: *datamount
+            *push :
+              - path: *datamount
       socket:
         type: emptyDir
         medium: Memory
@@ -186,10 +186,10 @@ spec:
               - path: &redispath /var/run/redis/
             *cache :
               - path: *redispath
-            # *worker :
-            #   - path: *redispath
-            # *push :
-            #   - path: *redispath
+            *worker :
+              - path: *redispath
+            *push :
+              - path: *redispath
 
       # Redis-only
       cache:
