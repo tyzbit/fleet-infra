@@ -19,7 +19,7 @@ spec:
   values:
     controllers:
       *app :
-        replicas: 00 # active longhorn-webapp
+        replicas: 1 # active longhorn-webapp
         type: statefulset
         annotations:
           reloader.stakater.com/auto: "true"

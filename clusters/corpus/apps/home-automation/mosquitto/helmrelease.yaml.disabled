@@ -19,7 +19,7 @@ spec:
   values:
     controllers:
       *app :
-        replicas: 00
+        replicas: 1
         strategy: RollingUpdate
         annotations:
           reloader.stakater.com/auto: "true"

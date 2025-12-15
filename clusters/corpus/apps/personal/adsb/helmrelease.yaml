@@ -23,7 +23,7 @@ spec:
         reloader.stakater.com/auto: "true"
         fr24-radar-id: ${fr24_radar_id}
       pod: {nodeSelector: {k3s.io/hostname: myocyte4}}
-      replicas: 00 # active longhorn-webapp
+      replicas: 1 # active longhorn-webapp
 
     controllers:
       adsb-usb-watchdog:
@@ -31,7 +31,7 @@ spec:
         forceRename: adsb-usb-watchdog
         serviceAccount:
           name: adsb-usb-watchdog
-        replicas: 00
+        replicas: 1
         containers:
           adsb-usb-watchdog:
             securityContext: {privileged: true}
@@ -47,7 +47,7 @@ spec:
 
       ultrafeeder:
         <<: *common_settings
-        replicas: 00
+        replicas: 1
         containers:
           ultrafeeder:
             securityContext: {privileged: true}
@@ -92,7 +92,7 @@ spec:
               READSB_DEVICE_TYPE: rtlsdr
               ENABLE_978: "no"
               URL_978: http://adsb-dump978/skyaware978
-              # READSB_RTLSDR_DEVICE: 00000001 # Serial number of device
+              # READSB_RTLSDR_DEVICE: 1000001 # Serial number of device
               # DEVICE: "30275839"
               # DEVICE: "stx:1090:0" # Nano SDR
               DEVICE: "98941503" #Naked SDR
@@ -167,7 +167,7 @@ spec:
 
       flightradar24:
         <<: *common_settings
-        replicas: 00
+        replicas: 1
         containers:
           # https://github.com/sdr-enthusiasts/docker-flightradar24?tab=readme-ov-file#obtaining-a-flightradar24-sharing-key-for-adsb
           flightradar24:
