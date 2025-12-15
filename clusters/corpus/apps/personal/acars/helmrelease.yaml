@@ -21,7 +21,7 @@ spec:
       type: statefulset
       annotations:
         reloader.stakater.com/auto: "true"
-      pod: {nodeSelector: {k3s.io/hostname: myocyte1}}
+      pod: {nodeSelector: {acars: "true"}}
 
     probe: &probes
       liveness:

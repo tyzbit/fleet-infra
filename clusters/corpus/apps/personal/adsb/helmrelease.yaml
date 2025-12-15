@@ -22,7 +22,7 @@ spec:
       annotations:
         reloader.stakater.com/auto: "true"
         fr24-radar-id: ${fr24_radar_id}
-      pod: {nodeSelector: {k3s.io/hostname: myocyte4}}
+      pod: {nodeSelector: {adsb: "true"}}
       replicas: 1 # active longhorn-webapp
 
     controllers:
