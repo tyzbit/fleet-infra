@@ -104,7 +104,7 @@ spec:
         namespace: flux-system
   interval: 2m0s
   values:
-    replicaCount: 0
+    replicaCount: 1
     extraArgs:
       provider: github
       github-org: "${blog_name}"
