@@ -44,7 +44,7 @@ spec:
                 memory: 1Gi
 
       app:
-        replicas: 1
+        replicas: 0
         type: statefulset
         annotations:
           reloader.stakater.com/auto: "true"
