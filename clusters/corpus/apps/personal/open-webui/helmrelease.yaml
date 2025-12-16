@@ -29,7 +29,7 @@ spec:
           *app :
             image:
               repository: ghcr.io/open-webui/open-webui
-              tag: 0.6.33
+              tag: 0.6.41
             env:
               - name: OLLAMA_BASE_URL
                 # value: http://media2.home.arpa:11434
