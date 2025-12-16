@@ -53,7 +53,7 @@ spec:
           &ui tdarr-app:
             image:
               repository: ghcr.io/haveagitgat/tdarr
-              tag: "2.49.01"
+              tag: "2.58.02"
           &node tdarr-node:
             image:
               repository: ghcr.io/haveagitgat/tdarr_node
