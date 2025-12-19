@@ -21,7 +21,7 @@ spec:
     controllers:
       ollama:
         type: deployment
-        replicas: 1
+        replicas: 0
         annotations:
           reloader.stakater.com/auto: "true"
         pod:
@@ -46,7 +46,7 @@ spec:
             securityContext:
               privileged: true
             # command: [tail,-f,/dev/null]
-            command: 
+            command:
               - sh
               - -c
               - |
@@ -86,7 +86,7 @@ spec:
             #   readiness:
             #     enabled: true
             #     custom: true
-            #     spec: 
+            #     spec:
             #       exec: {command: [sh,-c,/usr/bin/ollama run gemma3:4b ""]}
             resources:
               requests:
@@ -190,7 +190,7 @@ spec:
             #   readiness:
             #     enabled: true
             #     custom: true
-            #     spec: 
+            #     spec:
             #       exec: {command: [sh,-c,/usr/bin/ollama run gemma3:4b ""]}
             resources:
               requests:
