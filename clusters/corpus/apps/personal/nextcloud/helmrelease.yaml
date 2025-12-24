@@ -245,6 +245,8 @@ spec:
           nginx.ingress.kubernetes.io/proxy-send-timeout: "14400"
           nginx.ingress.kubernetes.io/use-forwarded-headers: "true"
           nginx.ingress.kubernetes.io/use-proxy-protocol: "true"
+          nginx.ingress.kubernetes.io/proxy-real-ip-cidr:
+            "172.23.0.0/16, 192.168.0.0/24"
           cert-manager.io/cluster-issuer: letsencrypt
           external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
           external-dns.alpha.kubernetes.io/target: ${cloudflared_tunnel_uuid}.cfargotunnel.com
