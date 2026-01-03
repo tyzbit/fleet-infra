@@ -313,7 +313,7 @@ spec:
                 service:
                   identifier: ultrafeeder
                   port: 80
-          - host: &host "adsb3d.${personal_domain}"
+          - host: &host3d "adsb3d.${personal_domain}"
             paths:
               - path: /
                 pathType: Prefix
@@ -323,6 +323,7 @@ spec:
         tls:
           - hosts:
               - *host
+              - *host3d
             secretName: *host
 
       oauth:
@@ -338,9 +339,16 @@ spec:
                 service:
                   name: adsb-ultrafeeder-oauth2-proxy
                   port: 80
+          - host: *host3d
+            paths:
+              - path: "/oauth2"
+                service:
+                  name: adsb-ultrafeeder-oauth2-proxy
+                  port: 80
         tls:
           - hosts:
               - *host
+              - *host3d
             secretName: *host
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
