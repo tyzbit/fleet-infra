@@ -308,15 +308,17 @@ spec:
                 service:
                   identifier: flightradar24
                   port: 8754
-              - path: /3d
-                pathType: Prefix
-                service:
-                  identifier: adsb3d
-                  port: 80
               - path: /
                 pathType: Prefix
                 service:
                   identifier: ultrafeeder
+                  port: 80
+          - host: &host "adsb3d.${personal_domain}"
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: adsb3d
                   port: 80
         tls:
           - hosts:
