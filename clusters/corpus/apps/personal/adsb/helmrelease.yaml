@@ -280,6 +280,12 @@ spec:
         ports:
           http:
             port: 8754
+      adsb3d:
+        controller: adsb3d
+        type: ClusterIP
+        ports:
+          http:
+            port: 8086
 
     ingress:
       ultrafeeder:
