@@ -206,10 +206,10 @@ spec:
             probes:
               liveness:
                 enabled: true
-                port: 8086
+                port: 80
               readiness:
                 enabled: true
-                port: 8086
+                port: 80
             resources:
               requests:
                 cpu: 10m
