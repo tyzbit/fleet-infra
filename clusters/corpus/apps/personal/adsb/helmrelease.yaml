@@ -320,6 +320,8 @@ spec:
                 path: "/images(/)?(.*)"
               - <<: *3dpath
                 path: "/api(/)?(.*)"
+              - <<: *3dpath
+                path: "/timelapse(/)?(.*)"
               - path: "/(/)?(.*)"
                 pathType: ImplementationSpecific
                 service:
