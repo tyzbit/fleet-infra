@@ -233,7 +233,7 @@ spec:
               DB_PORT: "5432"
               DB_NAME: adsb_tracks
               DB_USER: adsb
-              DB_PASSWORD: ${ADSB3DDB_PASSWORD}
+              DB_PASSWORD: ${adsb3ddb_password}
             probes:
               liveness:
                 enabled: true
@@ -260,7 +260,7 @@ spec:
               TZ: Etc/UTC
               POSTGRES_DB: adsb_tracks
               POSTGRES_USER: adsb
-              POSTGRES_PASSWORD: ${ADSB3DDB_PASSWORD}
+              POSTGRES_PASSWORD: ${adsb3ddb_password}
             probes:
               liveness:
                 enabled: true
