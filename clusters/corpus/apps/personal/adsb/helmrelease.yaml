@@ -310,11 +310,16 @@ spec:
                 service:
                   identifier: flightradar24
                   port: 8754
-              - path: "/3d(/)?(.*)"
+              - &3dpath
+                path: "/3d(/)?(.*)"
                 pathType: ImplementationSpecific
                 service:
                   identifier: adsb3d
                   port: 80
+              - <<: *3dpath
+                path: "/images(/)?(.*)"
+              - <<: *3dpath
+                path: "/api(/)?(.*)"
               - path: "/(/)?(.*)"
                 pathType: ImplementationSpecific
                 service:
