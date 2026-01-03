@@ -315,6 +315,11 @@ spec:
                 service:
                   identifier: adsb3d
                   port: 80
+              - path: "/api(/)?(.*)"
+                pathType: ImplementationSpecific
+                service:
+                  identifier: adsb3d
+                  port: 80
               - path: "/(/)?(.*)"
                 pathType: ImplementationSpecific
                 service:
