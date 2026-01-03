@@ -200,7 +200,7 @@ spec:
               TZ: Etc/UTC
               ALTITUDE: "0"
               LOCATION_NAME: "Origin"
-              FEEDER_URL: http://adsb-ultrafeeder/data/aircraft.json
+              FEEDER_URL: http://adsb-ultrafeeder
               LATITUDE: ${my_latitude}
               LONGITUDE: ${my_longitude}
             probes:
@@ -311,11 +311,6 @@ spec:
                   identifier: flightradar24
                   port: 8754
               - path: "/3d(/)?(.*)"
-                pathType: ImplementationSpecific
-                service:
-                  identifier: adsb3d
-                  port: 80
-              - path: "/api(/)?(.*)"
                 pathType: ImplementationSpecific
                 service:
                   identifier: adsb3d
