@@ -285,7 +285,7 @@ spec:
         type: ClusterIP
         ports:
           http:
-            port: 8086
+            port: 80
 
     ingress:
       ultrafeeder:
@@ -312,7 +312,7 @@ spec:
                 pathType: Prefix
                 service:
                   identifier: adsb3d
-                  port: 8086
+                  port: 80
               - path: /
                 pathType: Prefix
                 service:
