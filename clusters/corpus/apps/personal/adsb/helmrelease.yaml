@@ -349,6 +349,18 @@ spec:
         ports:
           http:
             port: 80
+      adsb3dtrack:
+        controller: adsb3dtrack
+        type: ClusterIP
+        ports:
+          http:
+            port: 8000
+      adsb3ddb:
+        controller: adsb3ddb
+        type: ClusterIP
+        ports:
+          http:
+            port: 5432
 
     ingress:
       ultrafeeder:
@@ -383,8 +395,9 @@ spec:
                 path: "/images(/)?(.*)"
               - <<: *3dpath
                 path: "/api(/)?(.*)"
-              - <<: *3dpath
-                path: "/timelapse(/)?(.*)"
+                service:
+                  identifier: adsb3dtrack
+                  port: 8000
               - path: "/(/)?(.*)"
                 pathType: ImplementationSpecific
                 service:
