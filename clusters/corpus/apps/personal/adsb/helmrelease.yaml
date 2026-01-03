@@ -249,8 +249,11 @@ spec:
                 memory: 512Mi
 
       adsb3ddb:
-        <<: *common_settings
-        replicas: 1
+        type: statefulset
+        annotations:
+          reloader.stakater.com/auto: "true"
+        pod: {nodeSelector: {adsb: "true"}}
+        replicas: 1 # active longhorn-database
         containers:
           adsbadsb3ddb3dtrack:
             image:
