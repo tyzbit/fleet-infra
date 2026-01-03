@@ -150,8 +150,12 @@ spec:
                 memory: 256Mi
 
       dumpvdl2:
-        <<: *common_settings
-        pod: {terminationGracePeriodSeconds: 1}
+        type: statefulset
+        annotations:
+          reloader.stakater.com/auto: "true"
+        pod:
+          nodeSelector: {acars: "true"}
+          terminationGracePeriodSeconds: 1
         replicas: 1
         containers:
           dumpvdl2:
@@ -178,8 +182,8 @@ spec:
                 memory: 256Mi
 
       dumpvdl2-2:
-        <<: *common_settings
         pod: {terminationGracePeriodSeconds: 1}
+        <<: *common_settings
         replicas: 0
         containers:
           dumpvdl2-2:
