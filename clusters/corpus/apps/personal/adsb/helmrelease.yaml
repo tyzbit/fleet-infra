@@ -260,7 +260,7 @@ spec:
               TZ: Etc/UTC
               POSTGRES_DB: adsb_tracks
               POSTGRES_USER: adsb
-              DB_PASSWORD: ${ADSB3DDB_PASSWORD}
+              POSTGRES_PASSWORD: ${ADSB3DDB_PASSWORD}
             probes:
               liveness:
                 enabled: true
