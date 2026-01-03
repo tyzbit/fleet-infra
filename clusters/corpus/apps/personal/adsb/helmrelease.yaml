@@ -187,6 +187,36 @@ spec:
               limits:
                 memory: 256Mi
 
+
+      adsb3d:
+        <<: *common_settings
+        replicas: 1
+        containers:
+          adsb3d:
+            image:
+              repository: ghcr.io/hook-365/adsb-3d
+              tag: latest # nothing else is available
+            env:
+              TZ: Etc/UTC
+              ALTITUDE: "0"
+              LOCATION_NAME: "Origin"
+              FEEDER_URL: http://adsb-ultrafeeder/data/aircraft.json
+              LATITUDE: ${my_latitude}
+              LONGITUDE: ${my_longitude}
+            probes:
+              liveness:
+                enabled: true
+                port: 8086
+              readiness:
+                enabled: true
+                port: 8086
+            resources:
+              requests:
+                cpu: 10m
+                memory: 128Mi
+              limits:
+                memory: 512Mi
+
     persistence:
       # For kubectl, usbreset and usb-devices
       binaries:
@@ -272,6 +302,11 @@ spec:
                 service:
                   identifier: flightradar24
                   port: 8754
+              - path: /3d
+                pathType: Prefix
+                service:
+                  identifier: adsb3d
+                  port: 8086
               - path: /
                 pathType: Prefix
                 service:
