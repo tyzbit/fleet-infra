@@ -229,7 +229,7 @@ spec:
               TZ: Etc/UTC
               FEEDER_URL: http://adsb-ultrafeeder
               COLLECTION_INTERVAL: "5"
-              DB_HOST: adsb3ddb
+              DB_HOST: adsb-adsb3ddb
               DB_PORT: "5432"
               DB_NAME: adsb_tracks
               DB_USER: adsb
