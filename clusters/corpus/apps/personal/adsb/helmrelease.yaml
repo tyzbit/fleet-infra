@@ -315,8 +315,8 @@ spec:
                 service:
                   identifier: adsb3d
                   port: 80
-              - path: /
-                pathType: Prefix
+              - path: "/(/)?(.*)"
+                pathType: ImplementationSpecific
                 service:
                   identifier: ultrafeeder
                   port: 80
