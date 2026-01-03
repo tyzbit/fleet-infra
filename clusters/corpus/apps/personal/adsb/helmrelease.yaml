@@ -213,7 +213,65 @@ spec:
             resources:
               requests:
                 cpu: 10m
-                memory: 128Mi
+                memory: 64Mi
+              limits:
+                memory: 64Mi
+
+      adsb3dtrack:
+        <<: *common_settings
+        replicas: 1
+        containers:
+          adsb3dtrack:
+            image:
+              repository: ghcr.io/hook-365/adsb-track-service
+              tag: latest # nothing else is available
+            env:
+              TZ: Etc/UTC
+              FEEDER_URL: http://adsb-ultrafeeder
+              COLLECTION_INTERVAL: "5"
+              DB_HOST: adsb3ddb
+              DB_PORT: "5432"
+              DB_NAME: adsb_tracks
+              DB_USER: adsb
+              DB_PASSWORD: ${ADSB3DDB_PASSWORD}
+            probes:
+              liveness:
+                enabled: true
+                port: 8000
+              readiness:
+                enabled: true
+                port: 8000
+            resources:
+              requests:
+                cpu: 10m
+                memory: 512Mi
+              limits:
+                memory: 512Mi
+
+      adsb3ddb:
+        <<: *common_settings
+        replicas: 1
+        containers:
+          adsbadsb3ddb3dtrack:
+            image:
+              repository: timescale/timescaledb
+              tag: 2.24.0-pg17
+            env:
+              TZ: Etc/UTC
+              POSTGRES_DB: adsb_tracks
+              POSTGRES_USER: adsb
+              DB_PASSWORD: ${ADSB3DDB_PASSWORD}
+            probes:
+              liveness:
+                enabled: true
+                port: 5432
+              readiness:
+                enabled: true
+                port: 5432
+            resources:
+              requests:
+                cpu: 10m
+                memory: 512Mi
               limits:
                 memory: 512Mi
 
@@ -255,6 +313,11 @@ spec:
                 subPath: collectd
               - path: /usr/local/share/osm_tiles_offline
                 subPath: offline_maps
+      adsb3ddb:
+        existingClaim: adsb-3d-timescaledb-longhorn-database
+        advancedMounts:
+          adsb3ddb:
+            adsb3ddb: [path: /var/lib/postgresql/data]
 
     service:
       ultrafeeder:
