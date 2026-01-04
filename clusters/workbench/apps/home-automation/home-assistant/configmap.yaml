@@ -6,7 +6,7 @@ metadata:
 data:
   my.cnf: |
     [mysqld]
-    skip-name-resolve
+    # skip-name-resolve
     explicit_defaults_for_timestamp
     basedir=/var/lib/mysql
     # plugin_dir=/var/lib/mysql/plugin
