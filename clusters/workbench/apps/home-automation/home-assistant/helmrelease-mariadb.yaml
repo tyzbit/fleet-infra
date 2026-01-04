@@ -92,6 +92,7 @@ spec:
           db:
             *db :
               - path: /var/lib/mysql
+                subPath: mysql
       # db-config:
       #   name: home-assistant-db-config
       #   type: configMap
