@@ -34,6 +34,8 @@ spec:
             envFrom:
               - secretRef:
                   name: home-assistant-values
+            ports:
+              - containerPort: 3306
             resources:
               requests:
                 cpu: 100m
