@@ -1,48 +1,3 @@
-# apiVersion: helm.toolkit.fluxcd.io/v2
-# kind: HelmRelease
-# metadata:
-#   name: home-assistant-mariadb
-#   namespace: flux-system
-# spec:
-#   releaseName: home-assistant-mariadb
-#   targetNamespace: home-automation
-#   timeout: 15m
-#   interval: 2m0s
-#   chart:
-#     spec:
-#       chart: mariadb
-#       version: "11.4.5"
-#       sourceRef:
-#         kind: HelmRepository
-#         name: bitnami
-#         namespace: flux-system
-#   valuesFrom:
-#     - kind: Secret
-#       name: home-assistant-values
-#       valuesKey: username
-#       targetPath: auth.username
-#     - kind: Secret
-#       name: home-assistant-values
-#       valuesKey: password
-#       targetPath: auth.password
-#     - kind: Secret
-#       name: home-assistant-values
-#       valuesKey: rootPassword
-#       targetPath: auth.rootPassword
-#   values:
-#     enabled: true
-#     auth:
-#       database: home-assistant
-#     primary:
-#       existingConfigmap: home-assistant-db-config
-#       persistence:
-#         existingClaim: home-assistant-data-nas
-#       resources:
-#         requests:
-#           cpu: 100m
-#         limits:
-#           memory: 4Gi
-# ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-4.1.1/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
@@ -91,8 +46,7 @@ spec:
         advancedMounts:
           db:
             *db :
-              - path: /var/lib/mysql
-                subPath: mysql
+              - path: /var/lib
       # db-config:
       #   name: home-assistant-db-config
       #   type: configMap
