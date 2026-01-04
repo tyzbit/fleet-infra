@@ -92,14 +92,14 @@ spec:
           db:
             *db :
               - path: /var/lib/mysql
-      db-config:
-        name: home-assistant-db-config
-        type: configMap
-        advancedMounts:
-          db:
-            *db :
-              - path: /etc/mysql/conf.d
-                readOnly: true
+      # db-config:
+      #   name: home-assistant-db-config
+      #   type: configMap
+      #   advancedMounts:
+      #     db:
+      #       *db :
+      #         - path: /etc/mysql/conf.d
+      #           readOnly: true
 
     service:
       db:
