@@ -52,7 +52,7 @@ spec:
             image:
               repository: filebrowser/filebrowser
               tag: "v2"
-            args: ["-d", "/db/database.db"]
+            args: ["-d", "/db/database.db", "-p", "8383"]
             env:
               - name: TZ
                 value: America/New_York
@@ -122,7 +122,7 @@ spec:
         controller: *app
         ports:
           fbhttp:
-            port: 80
+            port: 8383
 
       matter-server:
         primary: false
