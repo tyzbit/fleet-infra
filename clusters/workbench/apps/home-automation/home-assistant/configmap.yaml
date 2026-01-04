@@ -9,14 +9,14 @@ data:
     skip-name-resolve
     explicit_defaults_for_timestamp
     basedir=/var/lib/mysql
-    plugin_dir=/var/lib/mysql/plugin
+    # plugin_dir=/var/lib/mysql/plugin
     port=3306
-    socket=/var/lib/mysql/tmp/mysql.sock
-    tmpdir=/var/lib/mysql/tmp
+    # socket=/var/lib/mysql/tmp/mysql.sock
+    # tmpdir=/var/lib/mysql/tmp
     max_allowed_packet=16M
     bind-address=0.0.0.0
-    pid-file=/var/lib/mysql/tmp/mysqld.pid
-    log-error=/var/lib/mysql/logs/mysqld.log
+    # pid-file=/var/lib/mysql/tmp/mysqld.pid
+    # log-error=/var/lib/mysql/logs/mysqld.log
     character-set-server=UTF8
     collation-server=utf8_general_ci
     # https://help.nextcloud.com/t/nextcloud-performance-optimizations-please-contribute/5136/10
@@ -25,10 +25,10 @@ data:
 
     [client]
     port=3306
-    socket=/var/lib/mysql/tmp/mysql.sock
+    # socket=/var/lib/mysql/tmp/mysql.sock
     default-character-set=UTF8
-    plugin_dir=/var/lib/mysql/plugin
+    # plugin_dir=/var/lib/mysql/plugin
 
     [manager]
     port=3306
-    socket=/var/lib/mysql/tmp/mysql.sock
+    # socket=/var/lib/mysql/tmp/mysql.sock
