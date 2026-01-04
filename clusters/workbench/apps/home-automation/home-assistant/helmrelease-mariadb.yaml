@@ -47,10 +47,10 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: &app home-assistant-mariadb
+  name: &db home-assistant-mariadb
   namespace: flux-system
 spec:
-  releaseName: *app
+  releaseName: *db
   targetNamespace: personal
   timeout: 15m
   interval: 2m0s
@@ -71,7 +71,7 @@ spec:
           reloader.stakater.com/auto: "true"
 
         containers:
-          *app :
+          *db :
             image:
               repository: mariadb
               tag: "10.8"
