@@ -92,14 +92,6 @@ spec:
           webrtc:
             port: &webrtc 8555
             targetPort: *webrtc
-      multi-frigate:
-        controller: multi-frigate
-        type: ClusterIP
-        ports:
-          http:
-            primary: true
-            port: 80
-            targetPort: 80
 
     ingress:
       *app :
