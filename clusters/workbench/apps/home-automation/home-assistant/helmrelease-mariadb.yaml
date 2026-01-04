@@ -51,7 +51,7 @@ metadata:
   namespace: flux-system
 spec:
   releaseName: *db
-  targetNamespace: personal
+  targetNamespace: home-automation
   timeout: 15m
   interval: 2m0s
   chart:
