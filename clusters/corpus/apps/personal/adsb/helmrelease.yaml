@@ -187,7 +187,6 @@ spec:
               limits:
                 memory: 256Mi
 
-
       adsb3d:
         <<: *common_settings
         replicas: 1
@@ -443,8 +442,8 @@ spec:
                 service:
                   identifier: ultrafeeder
                   port: 80
-              - path: "/(/)?(.*)"
-                pathType: ImplementationSpecific
+              - path: "/"
+                pathType: Prefix
                 service:
                   identifier: adsb3d
                   port: 80
@@ -498,7 +497,6 @@ spec:
       cookie-expire: 8760h # one year
     config:
       existingSecret: adsb-ultrafeeder-oauth2-proxy
----
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
