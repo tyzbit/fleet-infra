@@ -30,7 +30,7 @@ spec:
       #       topologyKey: kubernetes.io/hostname
       containers:
         - name: electrumx
-          image: lukechilds/electrumx:v1.16.0
+          image: lukechilds/electrumx:v1.18.0
           # command: ["tail", "-f", "/dev/null"]
           imagePullPolicy: Always
           env:
