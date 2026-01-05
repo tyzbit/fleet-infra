@@ -242,8 +242,8 @@ spec:
         advancedMounts:
           api: {revolt-api: [*configmount]}
           events: {revolt-events: [*configmount]}
-          autumn: {revolt-autumn: [*configmount]}
-          january: {revolt-january: [*configmount]}
+          file-server: {revolt-file-server: [*configmount]}
+          proxy: {revolt-proxy: [*configmount]}
           crond: {revolt-crond: [*configmount]}
           pushd: {revolt-pushd: [*configmount]}
           livekit:
@@ -357,7 +357,7 @@ spec:
               - path: "/proxy(/)?(.*)"
                 pathType: ImplementationSpecific
                 service:
-                  identifier: january
+                  identifier: proxy
 
               - path: "/(/)?(.*)"
                 pathType: ImplementationSpecific
