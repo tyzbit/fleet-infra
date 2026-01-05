@@ -251,16 +251,6 @@ spec:
               -  path: /etc/livekit.yaml
                  readOnly: true
                  subPath: livekit.yaml
-      edgevpn-config:
-        name: revolt-dev-edgevpn-config
-        type: secret
-        advancedMounts: {web: {edgevpn: [
-          {path: /config.yaml,readOnly: true, subPath: config.yaml}
-          ]}}
-      edgevpn-modules:
-        type: hostPath
-        hostPath: /lib/modules
-        advancedMounts: {web: {edgevpn: [{path: /lib/modules}]}}
 
     service:
       "mongo":
@@ -291,16 +281,16 @@ spec:
         controller: events
         type: ClusterIP
         ports: {http: {port: 14703}}
-      "autumn":
-        controller: autumn
+      "file-server":
+        controller: file-server
         type: ClusterIP
         ports: {http: {port: 14704}}
-      "january":
-        controller: january
+      "proxy":
+        controller: proxy
         type: ClusterIP
         ports: {http: {port: 14705}}
-      "vortex":
-        controller: vortex
+      "livekit":
+        controller: livekit
         type: ClusterIP
         ports:
           http: {port: 8080}
@@ -356,7 +346,7 @@ spec:
                 path: "/autumn(/)?(.*)"
                 pathType: ImplementationSpecific
                 service:
-                  identifier: autumn
+                  identifier: file-server
               - {<<: *autumn, path: "/(/)?(attachments.*)"}
               - {<<: *autumn, path: "/(/)?(avatars.*)"}
               - {<<: *autumn, path: "/(/)?(backgrounds.*)"}
@@ -364,7 +354,7 @@ spec:
               - {<<: *autumn, path: "/(/)?(banners.*)"}
               - {<<: *autumn, path: "/(/)?(emojis.*)"}
 
-              - path: "/january(/)?(.*)"
+              - path: "/proxy(/)?(.*)"
                 pathType: ImplementationSpecific
                 service:
                   identifier: january
