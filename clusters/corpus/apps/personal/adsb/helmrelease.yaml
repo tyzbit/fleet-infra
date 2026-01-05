@@ -396,6 +396,24 @@ spec:
               - *host
             secretName: *host
 
+      oauth:
+        className: nginx
+        annotations:
+          external-dns.alpha.kubernetes.io/exclude: "true"
+        labels:
+          use-cloudflare-dns-solver: "true"
+        hosts:
+          - host: *host
+            paths:
+              - path: "/oauth2"
+                service:
+                  name: adsb-ultrafeeder-oauth2-proxy
+                  port: 80
+        tls:
+          - hosts:
+              - *host
+            secretName: *host
+
       adsb3d:
         className: nginx
         annotations:
@@ -427,7 +445,7 @@ spec:
               - *3dhost
             secretName: *3dhost
 
-      oauth:
+      oauth3d:
         className: nginx
         annotations:
           external-dns.alpha.kubernetes.io/exclude: "true"
@@ -438,12 +456,12 @@ spec:
             paths:
               - path: "/oauth2"
                 service:
-                  name: adsb-ultrafeeder-oauth2-proxy
+                  name: adsb-adsb3d-oauth2-proxy
                   port: 80
         tls:
           - hosts:
-              - *host
-            secretName: *host
+              - *3dhost
+            secretName: *3dhost
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
