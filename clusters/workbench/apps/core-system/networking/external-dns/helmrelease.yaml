@@ -16,7 +16,7 @@ spec:
   interval: 2m0s
   values:
     image:
-      repository: ghcr.io/kubernetes-sigs/external-dns/external-dns
+      repository: registry.k8s.io/external-dns/external-dns
       tag: "v0.20.0"
     # logLevel: debug
     provider:
@@ -27,7 +27,8 @@ spec:
     txtPrefix: "k8s."
     sources: [ingress]
     extraArgs:
-      - --annotation-filter=external-dns.alpha.kubernetes.io/exclude notin (true)
+      - --annotation-filter=external-dns.alpha.kubernetes.io/exclude notin
+        (true)
       - --cloudflare-dns-records-per-page=5000
       - --txt-wildcard-replacement=dummy
       - --ignore-ingress-tls-spec
