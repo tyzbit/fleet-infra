@@ -452,7 +452,7 @@ spec:
         labels:
           use-cloudflare-dns-solver: "true"
         hosts:
-          - host: *host
+          - host: *3dhost
             paths:
               - path: "/oauth2"
                 service:
