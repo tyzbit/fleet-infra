@@ -430,20 +430,18 @@ spec:
         hosts:
           - host: &3dhost "adsb3d.${personal_domain}"
             paths:
-              - &3dapi
+              - &3dpath
                 path: "/api(/)?(.*)"
-                pathType: ImplementationSpecific
                 service:
                   identifier: adsb3dtrack
                   port: 8000
-              - <<: *3dapi
-                path: "/images(/)?(.*)"
-              - path: "/data(/)?(.*)"
+              - <<: *3dpath
+                path: "/data(/)?(.*)"
                 service:
                   identifier: ultrafeeder
                   port: 80
-              - path: "/"
-                pathType: Prefix
+              - path: "/(/)?(.*)"
+                pathType: ImplementationSpecific
                 service:
                   identifier: adsb3d
                   port: 80
