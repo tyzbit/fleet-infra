@@ -13,7 +13,7 @@ spec:
       author:
         name: fluxcdbot
         email: fluxcdbot@users.noreply.github.com
-      messageTemplate: "{{range .Updated.Images}}{{println .}}{{end}}"
+      messageTemplate: "{{range .Changed.Images}}{{println .}}{{end}}"
   interval: 2m0s
   update:
     path: ./clusters/corpus
