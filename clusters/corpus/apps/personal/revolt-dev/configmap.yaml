@@ -265,4 +265,4 @@ data:
     logging:
       level: debug
     keys:
-      worldwide: ${revolt_dev_livekit_worldwide_key:}
+      worldwide: ${revolt_dev_livekit_worldwide_key}
