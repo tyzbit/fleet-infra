@@ -430,6 +430,11 @@ spec:
         hosts:
           - host: &3dhost "adsb3d.${personal_domain}"
             paths:
+              - path: "/"
+                pathType: Prefix
+                service:
+                  identifier: adsb3d
+                  port: 80
               - path: "/data"
                 pathType: Prefix
                 service:
@@ -443,11 +448,6 @@ spec:
                   port: 8000
               - <<: *3dtrack
                 path: "/images(/)?(.*)"
-              - path: "/"
-                pathType: Prefix
-                service:
-                  identifier: adsb3d
-                  port: 80
 
         tls:
           - hosts:
