@@ -401,8 +401,8 @@ spec:
                 service:
                   identifier: adsb3dtrack
                   port: 8000
-              - path: "/(/)?(.*)"
-                pathType: ImplementationSpecific
+              - path: "/"
+                pathType: Prefix
                 service:
                   identifier: ultrafeeder
                   port: 80
