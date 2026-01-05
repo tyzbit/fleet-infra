@@ -429,11 +429,14 @@ spec:
         hosts:
           - host: &3dhost "adsb3d.${personal_domain}"
             paths:
-              - path: "/api"
+              - &3dapi
+                path: "/api"
                 pathType: Prefix
                 service:
                   identifier: adsb3dtrack
                   port: 8000
+              - <<: *3dapi
+                path: "/images"
               - path: "/"
                 pathType: Prefix
                 service:
