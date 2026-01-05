@@ -102,7 +102,7 @@ spec:
         containers:
           revolt-api:
             image:
-              repository: ghcr.io/revoltchat/server
+              repository: ghcr.io/stoatchat/api
               tag: 20250930-2
               pullPolicy: Always
             resources: {requests: {cpu: 10m},limits: {memory: 256Mi}}
@@ -112,7 +112,7 @@ spec:
         containers:
           revolt-events:
             image:
-              repository: ghcr.io/revoltchat/bonfire
+              repository: ghcr.io/stoatchat/events
               tag: 20250930-2
               pullPolicy: Always
             resources: {requests: {cpu: 10m},limits: {memory: 128Mi}}
@@ -153,32 +153,42 @@ spec:
                 echo "Done with find and replace, starting yarn..."
                 yarn start:inject
             image:
-              repository: ghcr.io/revoltchat/client
+              repository: ghcr.io/revoltchat/base
               tag: master
               pullPolicy: Always
             env:
               REVOLT_PUBLIC_URL: https://test.${chat_domain}/api
             resources: {requests: {cpu: 10m},limits: {memory: 256Mi}}
-      "autumn":
+      "file-server":
         <<: *deploymentcontroller
         replicas: 1
         containers:
-          revolt-autumn:
+          revolt-file-server:
             image:
-              repository: ghcr.io/revoltchat/autumn
+              repository: ghcr.io/revoltchat/file-server
               tag: 20250930-2
               pullPolicy: Always
             resources: {requests: {cpu: 10m},limits: {memory: 1Gi}}
             env:
               <<: *env
-      "january":
+      "proxy":
         <<: *deploymentcontroller
         replicas: 1
         containers:
-          revolt-january:
+          revolt-proxy:
             image:
-              repository: ghcr.io/revoltchat/january
+              repository: ghcr.io/revoltchat/proxy
               tag: 20250807-1
+              pullPolicy: Always
+            resources: {requests: {cpu: 10m},limits: {memory: 512Mi}}
+      "gifbox":
+        <<: *deploymentcontroller
+        replicas: 1
+        containers:
+          revolt-gifbox:
+            image:
+              repository: ghcr.io/stoatchat/gifbox
+              tag: 20250930-2
               pullPolicy: Always
             resources: {requests: {cpu: 10m},limits: {memory: 512Mi}}
       "crond":
@@ -201,22 +211,16 @@ spec:
               tag: 20250930-2
               pullPolicy: Always
             resources: {requests: {cpu: 10m},limits: {memory: 128Mi}}
-      "vortex":
+      "livekit":
         <<: *deploymentcontroller
         replicas: 1
         containers:
-          revolt-vortex:
+          revolt-livekit:
             image:
-              repository: ghcr.io/revoltchat/vortex
-              tag: 0.3.0-alpha.1
+              repository: ghcr.io/stoatchat/livekit-server
+              tag: v1.9.9
               pullPolicy: Always
-            env:
-              MANAGE_TOKEN: ${revolt_dev_vortex_manage_token}
-              WS_URL: wss://test.${chat_domain}/vortex-ws
-              RTC_MIN_PORT: 12321
-              RTC_MAX_PORT: 12340
-              RTC_IPS: 0.0.0.0,${home_ip}
-              DISABLE_RTP: 0
+            command: ["--config","/etc/livekit.yaml"]
             resources: {requests: {cpu: 10m},limits: {memory: 128Mi}}
 
     persistence:
@@ -242,6 +246,11 @@ spec:
           january: {revolt-january: [*configmount]}
           crond: {revolt-crond: [*configmount]}
           pushd: {revolt-pushd: [*configmount]}
+          livekit:
+            revolt-livekit:
+              -  path: /etc/livekit.yaml
+                 readOnly: true
+                 subPath: livekit.yaml
       edgevpn-config:
         name: revolt-dev-edgevpn-config
         type: secret
@@ -295,26 +304,26 @@ spec:
         type: ClusterIP
         ports:
           http: {port: 8080}
-          rtc-1: {port: 12301}
-          rtc-2: {port: 12302}
-          rtc-3: {port: 12303}
-          rtc-4: {port: 12304}
-          rtc-5: {port: 12305}
-          rtc-6: {port: 12306}
-          rtc-7: {port: 12307}
-          rtc-8: {port: 12308}
-          rtc-9: {port: 12309}
-          rtc-10: {port: 12310}
-          rtc-11: {port: 12311}
-          rtc-12: {port: 12312}
-          rtc-13: {port: 12313}
-          rtc-14: {port: 12314}
-          rtc-15: {port: 12315}
-          rtc-16: {port: 12316}
-          rtc-17: {port: 12317}
-          rtc-18: {port: 12318}
-          rtc-19: {port: 12319}
-          rtc-20: {port: 12320}
+          rtc-1: {port: 12321}
+          rtc-2: {port: 12322}
+          rtc-3: {port: 12323}
+          rtc-4: {port: 12324}
+          rtc-5: {port: 12325}
+          rtc-6: {port: 12326}
+          rtc-7: {port: 12327}
+          rtc-8: {port: 12328}
+          rtc-9: {port: 12329}
+          rtc-10: {port: 12330}
+          rtc-11: {port: 12331}
+          rtc-12: {port: 12332}
+          rtc-13: {port: 12333}
+          rtc-14: {port: 12334}
+          rtc-15: {port: 12335}
+          rtc-16: {port: 12336}
+          rtc-17: {port: 12337}
+          rtc-18: {port: 12338}
+          rtc-19: {port: 12339}
+          rtc-20: {port: 12340}
 
     # -- This is complex because it replaces Caddy
     ingress:
@@ -359,18 +368,6 @@ spec:
                 pathType: ImplementationSpecific
                 service:
                   identifier: january
-
-              - path: "/vortex-ws(/)?(.*)"
-                pathType: ImplementationSpecific
-                service:
-                  identifier: vortex
-                  port: http
-
-              - path: "/vortex-http(/)?(.*)"
-                pathType: ImplementationSpecific
-                service:
-                  identifier: vortex
-                  port: http
 
               - path: "/(/)?(.*)"
                 pathType: ImplementationSpecific

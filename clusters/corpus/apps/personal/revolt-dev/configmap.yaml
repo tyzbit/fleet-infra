@@ -248,3 +248,21 @@ data:
     icons = 5_000_000
     banners = 12_000_000
     emojis = 500_000
+  livekit.yaml: |
+    port: 7880
+    redis:
+        address: redis://revolt-redis:6379/
+        username: ""
+        password: ""
+    rtc:
+      port_range_start: 12321
+      port_range_end: 12340
+      use_external_ip: true
+    webhook:
+      api_key: worldwide
+      urls:
+        - 'http://localhost:8500/worldwide'
+    logging:
+      level: debug
+    keys:
+      worldwide: ${revolt_dev_livekit_worldwide_key:}
