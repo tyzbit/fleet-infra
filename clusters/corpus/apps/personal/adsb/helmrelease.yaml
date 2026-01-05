@@ -435,19 +435,19 @@ spec:
                 service:
                   identifier: ultrafeeder
                   port: 80
-              - &3dtrack
-                path: "/api(/)?(.*)"
+              - &3dpath
+                path: "/(/)?(.*)"
                 pathType: ImplementationSpecific
-                service:
-                  identifier: adsb3dtrack
-                  port: 8000
-              - <<: *3dtrack
-                path: "/images(/)?(.*)"
-              - path: "/"
-                pathType: Prefix
                 service:
                   identifier: adsb3d
                   port: 80
+              - <<: *3dpath
+                path: "/images(/)?(.*)"
+              - <<: *3dpath
+                path: "/api(/)?(.*)"
+                service:
+                  identifier: adsb3dtrack
+                  port: 8000
 
         tls:
           - hosts:
