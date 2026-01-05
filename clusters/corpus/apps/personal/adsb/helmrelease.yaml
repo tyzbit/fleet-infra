@@ -399,7 +399,7 @@ spec:
       adsb3d:
         className: nginx
         annotations:
-          nginx.ingress.kubernetes.io/auth-url: "http://adsb3d-ultrafeeder-oauth2-proxy.personal.svc.cluster.local/oauth2/auth"
+          nginx.ingress.kubernetes.io/auth-url: "http://adsb-adsb3d-oauth2-proxy.personal.svc.cluster.local/oauth2/auth"
           nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
           cert-manager.io/cluster-issuer: letsencrypt
           external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
@@ -476,7 +476,7 @@ spec:
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: &name adsb3d-ultrafeeder-oauth2-proxy
+  name: &name adsb-adsb3d-oauth2-proxy
   namespace: flux-system
 spec:
   targetNamespace: personal
