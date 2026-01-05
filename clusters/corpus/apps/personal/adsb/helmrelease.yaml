@@ -463,6 +463,10 @@ spec:
         hosts:
           - host: *3dhost
             paths:
+              - path: "/api/health"
+                service:
+                  name: adsb3d
+                  port: 80
               - path: "/oauth2"
                 service:
                   name: adsb-adsb3d-oauth2-proxy
