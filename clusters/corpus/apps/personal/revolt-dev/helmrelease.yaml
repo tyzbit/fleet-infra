@@ -293,7 +293,7 @@ spec:
         controller: livekit
         type: ClusterIP
         ports:
-          http: {port: 7880}
+          connect: {port: 7880}
           rtc-1: {port: 12321}
           rtc-2: {port: 12322}
           rtc-3: {port: 12323}
