@@ -213,7 +213,7 @@ spec:
           revolt-livekit:
             image:
               repository: ghcr.io/stoatchat/livekit-server
-              tag: v1.9.6
+              tag: v1.9.9
               pullPolicy: Always
             args: ["--config","/etc/livekit.yaml"]
             resources: {requests: {cpu: 10m},limits: {memory: 128Mi}}
