@@ -153,7 +153,7 @@ spec:
                 echo "Done with find and replace, starting yarn..."
                 yarn start:inject
             image:
-              repository: ghcr.io/revoltchat/base
+              repository: ghcr.io/stoatchat/base
               tag: latest
               pullPolicy: Always
             env:
@@ -165,7 +165,7 @@ spec:
         containers:
           revolt-file-server:
             image:
-              repository: ghcr.io/revoltchat/file-server
+              repository: ghcr.io/stoatchat/file-server
               tag: 20251023-1
               pullPolicy: Always
             resources: {requests: {cpu: 10m},limits: {memory: 1Gi}}
@@ -177,7 +177,7 @@ spec:
         containers:
           revolt-proxy:
             image:
-              repository: ghcr.io/revoltchat/proxy
+              repository: ghcr.io/stoatchat/proxy
               tag: 20251023-1
               pullPolicy: Always
             resources: {requests: {cpu: 10m},limits: {memory: 512Mi}}
@@ -197,7 +197,7 @@ spec:
         containers:
           revolt-crond:
             image:
-              repository: ghcr.io/revoltchat/crond
+              repository: ghcr.io/stoatchat/crond
               tag: 20251023-1
               pullPolicy: Always
             resources: {requests: {cpu: 10m},limits: {memory: 128Mi}}
@@ -207,7 +207,7 @@ spec:
         containers:
           revolt-pushd:
             image:
-              repository: ghcr.io/revoltchat/pushd
+              repository: ghcr.io/stoatchat/pushd
               tag: 20251023-1
               pullPolicy: Always
             resources: {requests: {cpu: 10m},limits: {memory: 128Mi}}
