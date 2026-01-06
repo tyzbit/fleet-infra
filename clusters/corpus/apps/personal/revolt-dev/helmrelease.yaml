@@ -220,7 +220,7 @@ spec:
               repository: ghcr.io/stoatchat/livekit-server
               tag: v1.9.9
               pullPolicy: Always
-            command: ["--config","/etc/livekit.yaml"]
+            args: ["--config","/etc/livekit.yaml"]
             resources: {requests: {cpu: 10m},limits: {memory: 128Mi}}
 
     persistence:
