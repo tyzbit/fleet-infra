@@ -193,7 +193,7 @@ spec:
           revolt-crond:
             image:
               repository: ghcr.io/stoatchat/crond
-              tag: 20250210-1-debug
+              tag: 20251023-1
               pullPolicy: Always
             resources: {requests: {cpu: 10m},limits: {memory: 128Mi}}
       "pushd":
