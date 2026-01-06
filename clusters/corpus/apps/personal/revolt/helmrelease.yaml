@@ -341,7 +341,7 @@ spec:
                 path: "/file-server(/)?(.*)"
                 pathType: ImplementationSpecific
                 service:
-                  identifier: autumn
+                  identifier: file-server
               - {<<: *autumn, path: "/(/)?(attachments.*)"}
               - {<<: *autumn, path: "/(/)?(avatars.*)"}
               - {<<: *autumn, path: "/(/)?(backgrounds.*)"}
@@ -352,7 +352,7 @@ spec:
               - path: "/proxy(/)?(.*)"
                 pathType: ImplementationSpecific
                 service:
-                  identifier: january
+                  identifier: proxy
 
               - path: "/(/)?(.*)"
                 pathType: ImplementationSpecific
