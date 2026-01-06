@@ -277,15 +277,15 @@ spec:
         type: ClusterIP
         ports: {http: {port: 14703}}
       "file-server":
-        controller: autumn
+        controller: file-server
         type: ClusterIP
         ports: {http: {port: 14704}}
       "proxy":
-        controller: january
+        controller: proxy
         type: ClusterIP
         ports: {http: {port: 14705}}
       "livekit":
-        controller: vortex
+        controller: livekit
         type: ClusterIP
         ports:
           connect: {port: 7880}
