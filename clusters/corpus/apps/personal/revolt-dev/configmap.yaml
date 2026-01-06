@@ -15,12 +15,25 @@ data:
     app = "https://test.${chat_domain}"
     api = "https://test.${chat_domain}/api"
     events = "wss://test.${chat_domain}/ws"
-    autumn = "https://test.${chat_domain}/autumn"
-    january = "https://test.${chat_domain}/january"
+    autumn = "https://test.${chat_domain}/file-server"
+    january = "https://test.${chat_domain}/proxy"
     # voso_legacy = "https://test.${chat_domain}/vortex-http"
     voso_legacy = "http://revolt-dev-vortex:8080"
     voso_legacy_ws = "wss://test.${chat_domain}/vortex-ws"
 
+    [hosts.livekit]
+    worldwide = "ws://home_domain_ddns:7890"
+
+    [api.livekit]
+    # Config for livekit nodes
+    # Make sure to change the secret when deploying
+    # The key and secret should match the values livekit is using
+    [api.livekit.nodes.worldwide]
+    url = "http://revolt-dev-livekit"
+    lat = 0.0
+    lon = 0.0
+    key = "worldwide"
+    secret = "${revolt_dev_livekit_worldwide_key}"
 
     [database]
     mongodb = "mongodb://revolt-dev-mongo:27017"

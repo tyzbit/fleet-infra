@@ -103,7 +103,7 @@ spec:
           revolt-api:
             image:
               repository: ghcr.io/stoatchat/api
-              tag: 20250930-2
+              tag: 20251023-1
               pullPolicy: Always
             resources: {requests: {cpu: 10m},limits: {memory: 256Mi}}
       "events":
@@ -113,7 +113,7 @@ spec:
           revolt-events:
             image:
               repository: ghcr.io/stoatchat/events
-              tag: 20250930-2
+              tag: 20251023-1
               pullPolicy: Always
             resources: {requests: {cpu: 10m},limits: {memory: 128Mi}}
       "web":
@@ -154,7 +154,7 @@ spec:
                 yarn start:inject
             image:
               repository: ghcr.io/revoltchat/base
-              tag: master
+              tag: latest
               pullPolicy: Always
             env:
               REVOLT_PUBLIC_URL: https://test.${chat_domain}/api
@@ -166,7 +166,7 @@ spec:
           revolt-file-server:
             image:
               repository: ghcr.io/revoltchat/file-server
-              tag: 20250930-2
+              tag: 20251023-1
               pullPolicy: Always
             resources: {requests: {cpu: 10m},limits: {memory: 1Gi}}
             env:
@@ -178,7 +178,7 @@ spec:
           revolt-proxy:
             image:
               repository: ghcr.io/revoltchat/proxy
-              tag: 20250807-1
+              tag: 20251023-1
               pullPolicy: Always
             resources: {requests: {cpu: 10m},limits: {memory: 512Mi}}
       "gifbox":
@@ -188,7 +188,7 @@ spec:
           revolt-gifbox:
             image:
               repository: ghcr.io/stoatchat/gifbox
-              tag: 20250930-2
+              tag: 20251023-1
               pullPolicy: Always
             resources: {requests: {cpu: 10m},limits: {memory: 512Mi}}
       "crond":
@@ -198,7 +198,7 @@ spec:
           revolt-crond:
             image:
               repository: ghcr.io/revoltchat/crond
-              tag: 20250210-1-debug
+              tag: 20251023-1
               pullPolicy: Always
             resources: {requests: {cpu: 10m},limits: {memory: 128Mi}}
       "pushd":
@@ -208,7 +208,7 @@ spec:
           revolt-pushd:
             image:
               repository: ghcr.io/revoltchat/pushd
-              tag: 20250930-2
+              tag: 20251023-1
               pullPolicy: Always
             resources: {requests: {cpu: 10m},limits: {memory: 128Mi}}
       "livekit":
@@ -293,7 +293,7 @@ spec:
         controller: livekit
         type: ClusterIP
         ports:
-          http: {port: 8080}
+          http: {port: 7880}
           rtc-1: {port: 12321}
           rtc-2: {port: 12322}
           rtc-3: {port: 12323}
