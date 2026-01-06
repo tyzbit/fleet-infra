@@ -238,6 +238,7 @@ spec:
           api: {revolt-api: [*configmount]}
           events: {revolt-events: [*configmount]}
           file-server: {revolt-file-server: [*configmount]}
+          gifbox: {revolt-gifbox: [*configmount]}
           proxy: {revolt-proxy: [*configmount]}
           crond: {revolt-crond: [*configmount]}
           pushd: {revolt-pushd: [*configmount]}

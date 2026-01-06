@@ -270,3 +270,21 @@ data:
     pushd = ""
     crond = ""
     gifbox = ""
+  livekit.yaml: |
+    port: 7880
+    redis:
+        address: revolt-redis:6379
+        username: ""
+        password: ""
+    rtc:
+      port_range_start: 12301
+      port_range_end: 12320
+      use_external_ip: true
+    webhook:
+      api_key: worldwide
+      urls:
+        - 'http://revolt-livekit:7880/worldwide'
+    logging:
+      level: debug
+    keys:
+      worldwide: ${revolt_livekit_worldwide_key}

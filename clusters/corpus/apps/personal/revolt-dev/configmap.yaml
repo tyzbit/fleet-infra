@@ -264,7 +264,7 @@ data:
   livekit.yaml: |
     port: 7880
     redis:
-        address: revolt-redis:6379
+        address: revolt-dev-redis:6379
         username: ""
         password: ""
     rtc:
@@ -274,7 +274,7 @@ data:
     webhook:
       api_key: worldwide
       urls:
-        - 'http://localhost:8500/worldwide'
+        - 'http://revolt-dev-livekit:7880/worldwide'
     logging:
       level: debug
     keys:

@@ -103,8 +103,8 @@ spec:
         containers:
           revolt-api:
             image:
-              repository: ghcr.io/revoltchat/server
-              tag: 20250930-2
+              repository: ghcr.io/stoatchat/api
+              tag: 20251023-1
               pullPolicy: Always
             resources: {requests: {cpu: 10m},limits: {memory: 256Mi}}
       "events":
@@ -113,8 +113,8 @@ spec:
         containers:
           revolt-events:
             image:
-              repository: ghcr.io/revoltchat/bonfire
-              tag: 20250930-2
+              repository: ghcr.io/stoatchat/events
+              tag: 20251023-1
               pullPolicy: Always
             resources: {requests: {cpu: 10m},limits: {memory: 128Mi}}
       "web":
@@ -155,25 +155,35 @@ spec:
             env:
               REVOLT_PUBLIC_URL: https://${chat_domain}/api
             resources: {requests: {cpu: 10m},limits: {memory: 256Mi}}
-      "autumn":
+      "file-server":
         <<: *deploymentcontroller
         replicas: 1
         containers:
-          revolt-autumn:
+          revolt-file-server:
             image:
-              repository: ghcr.io/revoltchat/autumn
-              tag: 20250930-2
+              repository: ghcr.io/stoatchat/file-server
+              tag: 20251023-1
               pullPolicy: Always
             resources: {requests: {cpu: 10m},limits: {memory: 1Gi}}
             env: {RUST_LOG: info}
-      "january":
+      "proxy":
         <<: *deploymentcontroller
         replicas: 1
         containers:
-          revolt-january:
+          revolt-proxy:
             image:
-              repository: ghcr.io/revoltchat/january
-              tag: 20250807-1
+              repository: ghcr.io/stoatchat/proxy
+              tag: 20251023-1
+              pullPolicy: Always
+            resources: {requests: {cpu: 10m},limits: {memory: 512Mi}}
+      "gifbox":
+        <<: *deploymentcontroller
+        replicas: 1
+        containers:
+          revolt-gifbox:
+            image:
+              repository: ghcr.io/stoatchat/gifbox
+              tag: 20251023-1
               pullPolicy: Always
             resources: {requests: {cpu: 10m},limits: {memory: 512Mi}}
       "crond":
@@ -182,7 +192,7 @@ spec:
         containers:
           revolt-crond:
             image:
-              repository: ghcr.io/revoltchat/crond
+              repository: ghcr.io/stoatchat/crond
               tag: 20250210-1-debug
               pullPolicy: Always
             resources: {requests: {cpu: 10m},limits: {memory: 128Mi}}
@@ -192,26 +202,20 @@ spec:
         containers:
           revolt-pushd:
             image:
-              repository: ghcr.io/revoltchat/pushd
-              tag: 20250930-2
+              repository: ghcr.io/stoatchat/pushd
+              tag: 20251023-1
               pullPolicy: Always
             resources: {requests: {cpu: 10m},limits: {memory: 128Mi}}
-      "vortex":
+      "livekit":
         <<: *deploymentcontroller
         replicas: 1
         containers:
-          revolt-vortex:
+          revolt-livekit:
             image:
-              repository: ghcr.io/revoltchat/vortex
-              tag: 0.3.0-alpha.1
+              repository: ghcr.io/stoatchat/livekit-server
+              tag: v1.9.6
               pullPolicy: Always
-            env:
-              MANAGE_TOKEN: ${revolt_vortex_manage_token}
-              WS_URL: wss://${chat_domain}/vortex-ws
-              RTC_MIN_PORT: 12301
-              RTC_MAX_PORT: 12320
-              RTC_IPS: 0.0.0.0,${home_ip}
-              DISABLE_RTP: 0
+            args: ["--config","/etc/livekit.yaml"]
             resources: {requests: {cpu: 10m},limits: {memory: 128Mi}}
 
     persistence:
@@ -235,9 +239,14 @@ spec:
           events: {revolt-events: [*configmount]}
           autumn: {revolt-autumn: [*configmount]}
           january: {revolt-january: [*configmount]}
+          gifbox: {revolt-gifbox: [*configmount]}
           crond: {revolt-crond: [*configmount]}
           pushd: {revolt-pushd: [*configmount]}
-
+          livekit:
+            revolt-livekit:
+              -  path: /etc/livekit.yaml
+                 readOnly: true
+                 subPath: livekit.yaml
     service:
       "mongo":
         controller: mongo
@@ -267,19 +276,19 @@ spec:
         controller: events
         type: ClusterIP
         ports: {http: {port: 14703}}
-      "autumn":
+      "file-server":
         controller: autumn
         type: ClusterIP
         ports: {http: {port: 14704}}
-      "january":
+      "proxy":
         controller: january
         type: ClusterIP
         ports: {http: {port: 14705}}
-      "vortex":
+      "livekit":
         controller: vortex
         type: ClusterIP
         ports:
-          http: {port: 8080}
+          connect: {port: 7880}
           rtc-1: {port: 12301}
           rtc-2: {port: 12302}
           rtc-3: {port: 12303}
@@ -329,7 +338,7 @@ spec:
                   identifier: events
 
               - &autumn
-                path: "/autumn(/)?(.*)"
+                path: "/file-server(/)?(.*)"
                 pathType: ImplementationSpecific
                 service:
                   identifier: autumn
@@ -340,22 +349,10 @@ spec:
               - {<<: *autumn, path: "/(/)?(banners.*)"}
               - {<<: *autumn, path: "/(/)?(emojis.*)"}
 
-              - path: "/january(/)?(.*)"
+              - path: "/proxy(/)?(.*)"
                 pathType: ImplementationSpecific
                 service:
                   identifier: january
-
-              - path: "/vortex-ws(/)?(.*)"
-                pathType: ImplementationSpecific
-                service:
-                  identifier: vortex
-                  port: http
-
-              - path: "/vortex-http(/)?(.*)"
-                pathType: ImplementationSpecific
-                service:
-                  identifier: vortex
-                  port: http
 
               - path: "/(/)?(.*)"
                 pathType: ImplementationSpecific
