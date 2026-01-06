@@ -264,7 +264,7 @@ data:
   livekit.yaml: |
     port: 7880
     redis:
-        address: redis://revolt-redis:6379/
+        address: revolt-redis:6379
         username: ""
         password: ""
     rtc:
