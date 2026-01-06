@@ -237,8 +237,8 @@ spec:
         advancedMounts:
           api: {revolt-api: [*configmount]}
           events: {revolt-events: [*configmount]}
-          autumn: {revolt-autumn: [*configmount]}
-          january: {revolt-january: [*configmount]}
+          file-server: {revolt-file-server: [*configmount]}
+          proxy: {revolt-proxy: [*configmount]}
           gifbox: {revolt-gifbox: [*configmount]}
           crond: {revolt-crond: [*configmount]}
           pushd: {revolt-pushd: [*configmount]}
