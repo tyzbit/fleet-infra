@@ -438,8 +438,8 @@ spec:
         hosts:
           - host: &3dhost "adsb3d.${personal_domain}"
             paths:
-              - path: "/()(oauth.*)"
-                pathType: ImplementationSpecific
+              - path: "/oauth2"
+                pathType: Prefix
                 service:
                   name: adsb-adsb3d-oauth2-proxy
                   port: 80
@@ -472,24 +472,24 @@ spec:
               - *3dhost
             secretName: *3dhost
 
-      # oauth3d:
-      #   className: nginx
-      #   annotations:
-      #     external-dns.alpha.kubernetes.io/exclude: "true"
-      #   labels:
-      #     use-cloudflare-dns-solver: "true"
-      #   hosts:
-      #     - host: *3dhost
-      #       paths:
-      #         - path: "/oauth2"
-      #           pathType: Prefix
-      #           service:
-      #             name: adsb-adsb3d-oauth2-proxy
-      #             port: 80
-      #   tls:
-      #     - hosts:
-      #         - *3dhost
-      #       secretName: *3dhost
+      oauth3d:
+        className: nginx
+        annotations:
+          external-dns.alpha.kubernetes.io/exclude: "true"
+        labels:
+          use-cloudflare-dns-solver: "true"
+        hosts:
+          - host: *3dhost
+            paths:
+              - path: "/oauth2"
+                pathType: Prefix
+                service:
+                  name: adsb-adsb3d-oauth2-proxy
+                  port: 80
+        tls:
+          - hosts:
+              - *3dhost
+            secretName: *3dhost
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
