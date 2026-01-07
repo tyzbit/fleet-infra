@@ -22,7 +22,7 @@ spec:
       annotations:
         reloader.stakater.com/auto: "true"
         fr24-radar-id: ${fr24_radar_id}
-      pod: {nodeSelector: {adsb: "true"}}
+      pod: { nodeSelector: { adsb: "true" } }
       replicas: 1 # active longhorn-webapp
 
     controllers:
@@ -34,24 +34,22 @@ spec:
         replicas: 1
         containers:
           adsb-usb-watchdog:
-            securityContext: {privileged: true}
-            image: {repository: debian,tag: latest}
-            command: [bash,"/tmp/adsb-usb-watchdog.sh"]
+            securityContext: { privileged: true }
+            image: { repository: debian, tag: latest }
+            command: [bash, "/tmp/adsb-usb-watchdog.sh"]
             # env: {SERIALS: "30275839,98941503"}
             env:
               SERIALS: "98941503" # Naked SDR
               STATEFULSETS: >-
-                adsb-flightradar24,
-                adsb-ultrafeeder
-#                adsb-dump978,
-
+                adsb-flightradar24, adsb-ultrafeeder
+      #                adsb-dump978,
       ultrafeeder:
         <<: *common_settings
         replicas: 1
         containers:
           ultrafeeder:
-            securityContext: {privileged: true}
-            envFrom: [secretRef: {name: adsb-ultrafeeder}]
+            securityContext: { privileged: true }
+            envFrom: [secretRef: { name: adsb-ultrafeeder }]
             image:
               repository: ghcr.io/sdr-enthusiasts/docker-adsb-ultrafeeder
               tag: latest-build-722
@@ -100,7 +98,7 @@ spec:
               READSB_LAT: ${my_latitude}
               READSB_LON: ${my_longitude}
               READSB_ALT: 3m
-              READSB_RX_LOCATION_ACCURACY: 2 
+              READSB_RX_LOCATION_ACCURACY: 2
               READSB_STATS_RANGE: "true"
               READSB_NET_BEAST_OUTPUT_PORT: "30005"
               READSB_JSON_TRACE_INTERVAL: "5"
@@ -131,7 +129,8 @@ spec:
                   initialDelaySeconds: 60
                   periodSeconds: 30
                   failureThreshold: 3
-                  exec: {command: [bash,-c,rtl_test 2>&1 | grep -q $(DEVICE)]}
+                  exec:
+                    { command: [bash, -c, rtl_test 2>&1 | grep -q $(DEVICE)] }
             resources:
               requests:
                 cpu: 10m
@@ -144,7 +143,7 @@ spec:
         replicas: 0
         containers:
           dump978:
-            securityContext: {privileged: true}
+            securityContext: { privileged: true }
             image:
               repository: ghcr.io/sdr-enthusiasts/docker-dump978
               tag: latest-build-744
@@ -251,7 +250,7 @@ spec:
         type: statefulset
         annotations:
           reloader.stakater.com/auto: "true"
-        pod: {nodeSelector: {adsb: "true"}}
+        pod: { nodeSelector: { adsb: "true" } }
         replicas: 1 # active longhorn-database
         containers:
           adsbadsb3ddb3dtrack:
@@ -283,27 +282,34 @@ spec:
         type: hostPath
         hostPath: /bin
         advancedMounts:
-          adsb-usb-watchdog: {adsb-usb-watchdog: [{path: /usr/local/sbin}]}
+          adsb-usb-watchdog: { adsb-usb-watchdog: [{ path: /usr/local/sbin }] }
       # For resetting individual USB devices
       usbdevices:
         type: hostPath
         hostPath: /dev/bus/usb
         advancedMounts:
-          adsb-usb-watchdog: {adsb-usb-watchdog: [{path: /dev/bus/usb}]}
+          adsb-usb-watchdog: { adsb-usb-watchdog: [{ path: /dev/bus/usb }] }
       # For resetting the USB Hub
       usbhub:
         type: hostPath
         hostPath: /sys/bus/pci/drivers/xhci_hcd
         advancedMounts:
-          adsb-usb-watchdog: {adsb-usb-watchdog: [{path: /sys/bus/pci/drivers/xhci_hcd}]}
+          adsb-usb-watchdog:
+            { adsb-usb-watchdog: [{ path: /sys/bus/pci/drivers/xhci_hcd }] }
       script:
         type: configMap
         name: adsb-scripts
         advancedMounts:
-          adsb-usb-watchdog: {adsb-usb-watchdog: [
-            {path: /tmp/adsb-usb-watchdog.sh,subPath: adsb-usb-watchdog.sh}
-            ]
-          }
+          adsb-usb-watchdog:
+            {
+              adsb-usb-watchdog:
+                [
+                  {
+                    path: /tmp/adsb-usb-watchdog.sh,
+                    subPath: adsb-usb-watchdog.sh,
+                  },
+                ],
+            }
       ultrafeeder:
         existingClaim: adsb-ultrafeeder-data-longhorn-webapp
         advancedMounts:
@@ -336,9 +342,9 @@ spec:
         controller: dump978
         type: ClusterIP
         ports:
-          http: {port: 80}
-          uat: {port: 30978}
-          json: {port: 30979}
+          http: { port: 80 }
+          uat: { port: 30978 }
+          json: { port: 30979 }
       flightradar24:
         controller: flightradar24
         type: ClusterIP
@@ -464,6 +470,7 @@ spec:
           - host: *3dhost
             paths:
               - path: "/oauth2"
+                pathType: Prefix
                 service:
                   name: adsb-adsb3d-oauth2-proxy
                   port: 80
