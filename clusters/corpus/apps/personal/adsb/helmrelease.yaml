@@ -438,11 +438,6 @@ spec:
         hosts:
           - host: &3dhost "adsb3d.${personal_domain}"
             paths:
-              - path: "/{0}()(/oauth2.*)"
-                pathType: ImplementationSpecific
-                service:
-                  name: adsb-adsb3d-oauth2-proxy
-                  port: 80
               - path: "/data/"
                 pathType: Prefix
                 service:
