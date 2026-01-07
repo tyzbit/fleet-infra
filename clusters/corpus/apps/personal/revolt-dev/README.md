@@ -1,12 +1,14 @@
-# Revolt
+# Stoat (formerly Revolt)
 
-Revolt is a community-oriented chat app with the official instance at
-https://revolt.chat.
+Stoat (formerly Revolt) is a community-oriented chat app with the official instance at
+https://stoat.chat.
 
 THIS IS NOT ASSOCIATED WITH REVOLT IN ANY WAY, OFFICIAL OR UNOFFICIAL.
 USE AT YOUR OWN RISK.
 
-Borrowed heavily from https://github.com/revoltchat/self-hosted/ with gratitude.
+Borrowed heavily from https://github.com/stoatchat/self-hosted/ with gratitude.
+
+Revolt is referenced many times and I may not rename things like PVCs due to it not being worth the effort to me.
 
 ## Architecture
 
@@ -15,19 +17,21 @@ Borrowed heavily from https://github.com/revoltchat/self-hosted/ with gratitude.
 - Web: Web frontend built with yarn (this imlementation does a find&replace for
   hardcoded values). Backends are Mongo, Redis and RabbitMQ
 - Delta(API): Standard API
-- Autumn: User content, uploads. Backend is Minio/S3
-- January: Proxy service - embeds, resizing
-- Vortex: Voice. Being rewritten
-- Bonfire(Events): Realtime events via websocket
+- File-server: User content, uploads. Backend is Minio/S3
+- Proxy: Proxy service - embeds, resizing
+- ~~Vortex: Voice. Being rewritten~~
+- LiveKit - The new voice & multimedia service (still self-hostable). Not operational for self-hosters as far as I know
+- (Events): Realtime events via websocket
+- Gifbox: Relatively new, appears to be a proxy specifically for gifs
 - Crond: Periodic tasks
 - Pushd: Push notifications
 
 ### Standard backends
 
-- Mongo: Standard database usage. Used by Delta
-- Minio: Asset storage (emojis, uploads etc). Used by Autumn
-- Redis: Session tracking. Used by Delta
-- RabbitMQ: User interactions - mentions, friend requests etc. Used by Delta
+- Mongo: Standard database usage. Used by the API
+- Minio: Asset storage (emojis, uploads etc). Used by File-server
+- Redis: Session tracking. Used by API
+- RabbitMQ: User interactions - mentions, friend requests etc. Used by API
 
 ## Prerequisites
 
@@ -39,9 +43,12 @@ Borrowed heavily from https://github.com/revoltchat/self-hosted/ with gratitude.
 
 #### UPDATE CONFIG
 
+- `livekit.yaml` needs to be reviewed
 - The config, located at `configmap.yaml`, is opinionated and customized.
 - Opinionated things you'll want to consider changing/checking:
   - `[hosts]`
+  - `[hosts.livekit]`
+  - `[api.livekit]`
   - `[database]`
   - `[rabbit]`
   - `[api.registration]`
@@ -90,6 +97,7 @@ Borrowed heavily from https://github.com/revoltchat/self-hosted/ with gratitude.
 
 - This will almost definitely need changing, unless you use `ingress-nginx` and `external-dns` like I do. The key parts are rewriting the request for the backend services by chopping off the first stub. You might have to re-implement this in Traefik, ALB Ingress Controller or whatever you use.
   - Example: `/api/settings` from the client needs to be transformed to a request for `/settings` to the API backend.
+- **Paths and microservices are not static, be prepared to adjust or update these over time.**
 
 #### TLS
 
