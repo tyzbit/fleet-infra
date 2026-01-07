@@ -194,8 +194,8 @@ spec:
             image:
               repository: ghcr.io/hook-365/adsb-3d
               # only `latest` available
-              # tag: sha256:e714d9eaa4395d54859788de82cea73830a1fa2b9df1dc64c84aa8defa48cca7
-              tag: sha256:6316e1be67a2d091e5dcd6d1c7112533be0c57c48719ba191971c4269159b89b
+              # tag: latest@sha256:e714d9eaa4395d54859788de82cea73830a1fa2b9df1dc64c84aa8defa48cca7
+              tag: latest@sha256:6316e1be67a2d091e5dcd6d1c7112533be0c57c48719ba191971c4269159b89b
             env:
               TZ: Etc/UTC
               ALTITUDE: "0"
