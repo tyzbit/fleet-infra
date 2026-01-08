@@ -503,7 +503,7 @@ spec:
                   identifier: adsb3d
                   port: 80
               - <<: *3dpath
-                path: "/photos/(.*)"
+                path: "/(photos/.*)"
                 pathType: ImplementationSpecific
 
         tls:
