@@ -481,7 +481,7 @@ spec:
         hosts:
           - host: &3dhost "adsb3d.${personal_domain}"
             paths:
-              - path: "/data/"
+              - path: "/(data/.*)"
                 pathType: Prefix
                 service:
                   identifier: ultrafeeder
