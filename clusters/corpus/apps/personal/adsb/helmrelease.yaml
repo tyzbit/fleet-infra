@@ -196,6 +196,8 @@ spec:
               # only `latest` available
               tag: latest@sha256:b1dc8ca9697bfde1f540d83b2fef756b5739146f35e59569310136e97af2d7b0
             command:
+              - bash
+              - -c
               - |
                 sed -i.old 's#127.0.0.1#172.23.64.10#g' /etc/nginx/conf.d/default.conf && 
                 /entrypoint.sh
