@@ -482,7 +482,7 @@ spec:
           - host: &3dhost "adsb3d.${personal_domain}"
             paths:
               - path: "/(data/.*)"
-                pathType: Prefix
+                pathType: ImplementationSpecific
                 service:
                   identifier: ultrafeeder
                   port: 80
