@@ -492,7 +492,7 @@ spec:
                   port: 8000
               - &3dpath
                 path: "/(.*)"
-                pathType: Prefix
+                pathType: ImplementationSpecific
                 service:
                   identifier: adsb3d
                   port: 80
