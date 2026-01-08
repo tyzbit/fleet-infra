@@ -286,7 +286,7 @@ spec:
         pod: { nodeSelector: { adsb: "true" } }
         replicas: 1 # active longhorn-database
         containers:
-          adsbadsb3ddb3dtrack:
+          adsb3ddb:
             image:
               repository: timescale/timescaledb
               tag: 2.24.0-pg17
