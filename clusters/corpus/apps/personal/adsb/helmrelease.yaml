@@ -194,7 +194,6 @@ spec:
             image:
               repository: ghcr.io/hook-365/adsb-3d
               # only `latest` available
-              # tag: latest@sha256:e714d9eaa4395d54859788de82cea73830a1fa2b9df1dc64c84aa8defa48cca7
               tag: latest@sha256:6316e1be67a2d091e5dcd6d1c7112533be0c57c48719ba191971c4269159b89b
             env:
               TZ: Etc/UTC
@@ -224,7 +223,7 @@ spec:
           adsb3dtrack:
             image:
               repository: ghcr.io/hook-365/adsb-track-service
-              tag: latest # nothing else is available
+              tag: latest@sha256:4703e08af186e6a4d9b2a92de072c52c167ce53001b711ffcf197bccc0e41472 # nothing else is available
             env:
               TZ: Etc/UTC
               FEEDER_URL: http://adsb-ultrafeeder
@@ -244,9 +243,41 @@ spec:
             resources:
               requests:
                 cpu: 10m
-                memory: 512Mi
+                memory: 1Gi
               limits:
-                memory: 512Mi
+                memory: 1Gi
+
+      # # Not live yet
+      # adsb3dacars:
+      #   <<: *common_settings
+      #   replicas: 1
+      #   containers:
+      #     adsb3dacars:
+      #       image:
+      #         repository: ghcr.io/hook-365/adsb-acars-service
+      #         tag: latest # nothing else is available
+      #       env:
+      #         TZ: Etc/UTC
+      #         ACARS_HOST: acars-acarshub
+      #         ACARS_PORT: "15550"
+      #         DB_HOST: adsb-adsb3ddb
+      #         DB_PORT: "5432"
+      #         DB_NAME: adsb_tracks
+      #         DB_USER: adsb
+      #         DB_PASSWORD: ${adsb3ddb_password}
+      #       probes:
+      #         liveness:
+      #           enabled: true
+      #           port: 8000
+      #         readiness:
+      #           enabled: true
+      #           port: 8000
+      #       resources:
+      #         requests:
+      #           cpu: 10m
+      #           memory: 256Mi
+      #         limits:
+      #           memory: 256Mi
 
       adsb3ddb:
         type: statefulset
@@ -365,6 +396,12 @@ spec:
         ports:
           http:
             port: 8000
+      adsb3dacars:
+        controller: adsb3dacars
+        type: ClusterIP
+        ports:
+          http:
+            port: 8000
       adsb3ddb:
         controller: adsb3ddb
         type: ClusterIP
@@ -446,8 +483,8 @@ spec:
               - path: "/acars-api/"
                 pathType: Prefix
                 service:
-                  name: acars-acarshub
-                  port: 80
+                  identifier: adsb3dacars
+                  port: 8000
               - &3dpath
                 path: "/(/)?(.*)"
                 pathType: ImplementationSpecific
