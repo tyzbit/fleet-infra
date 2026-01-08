@@ -243,9 +243,9 @@ spec:
             resources:
               requests:
                 cpu: 10m
-                memory: 1Gi
+                memory: 4Gi
               limits:
-                memory: 1Gi
+                memory: 4Gi
 
       # # Not live yet
       # adsb3dacars:
