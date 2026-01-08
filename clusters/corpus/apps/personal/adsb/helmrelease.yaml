@@ -248,7 +248,7 @@ spec:
                 memory: 1Gi
 
       # # Not live yet
-      # adsb3dacars:
+      adsb3dacars: {}
       #   <<: *common_settings
       #   replicas: 1
       #   containers:
