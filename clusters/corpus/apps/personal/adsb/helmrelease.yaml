@@ -491,7 +491,7 @@ spec:
                   identifier: adsb3dtrack
                   port: 8000
               - &3dpath
-                path: "/"
+                path: "/(.*)"
                 pathType: Prefix
                 service:
                   identifier: adsb3d
