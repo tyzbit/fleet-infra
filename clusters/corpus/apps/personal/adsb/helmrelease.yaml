@@ -248,7 +248,7 @@ spec:
                 memory: 1Gi
 
       # # Not live yet
-      adsb3dacars: {}
+      # adsb3dacars:
       #   <<: *common_settings
       #   replicas: 1
       #   containers:
@@ -396,12 +396,12 @@ spec:
         ports:
           http:
             port: 8000
-      adsb3dacars:
-        controller: adsb3dacars
-        type: ClusterIP
-        ports:
-          http:
-            port: 8000
+      # adsb3dacars:
+      #   controller: adsb3dacars
+      #   type: ClusterIP
+      #   ports:
+      #     http:
+      #       port: 8000
       adsb3ddb:
         controller: adsb3ddb
         type: ClusterIP
@@ -480,11 +480,11 @@ spec:
                 service:
                   identifier: ultrafeeder
                   port: 80
-              - path: "/acars-api/"
-                pathType: Prefix
-                service:
-                  identifier: adsb3dacars
-                  port: 8000
+              # - path: "/acars-api/"
+              #   pathType: Prefix
+              #   service:
+              #     identifier: adsb3dacars
+              #     port: 8000
               - &3dpath
                 path: "/(/)?(.*)"
                 pathType: ImplementationSpecific
