@@ -41,7 +41,7 @@ spec:
           revolt-mongo:
             image:
               repository: docker.io/mongo
-              tag: 8.0.17
+              tag: 8.2.3
               pullPolicy: Always
             # args: [--replSet,rs0]
             env: {HOSTNAME: revolt-mongo}
