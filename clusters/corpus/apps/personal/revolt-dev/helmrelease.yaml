@@ -350,7 +350,7 @@ spec:
               - {<<: *autumn, path: "/(/)?(banners.*)"}
               - {<<: *autumn, path: "/(/)?(emojis.*)"}
 
-              - path: "/proxy(/)?(.*)"
+              - path: "/january(/)?(.*)"
                 pathType: ImplementationSpecific
                 service:
                   identifier: proxy
