@@ -338,7 +338,7 @@ spec:
                   identifier: events
 
               - &autumn
-                path: "/file-server(/)?(.*)"
+                path: "/autumn(/)?(.*)" # will change to file-server eventually
                 pathType: ImplementationSpecific
                 service:
                   identifier: file-server
