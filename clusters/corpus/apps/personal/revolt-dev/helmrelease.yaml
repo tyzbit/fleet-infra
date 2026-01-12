@@ -22,11 +22,11 @@ spec:
     reusable:
       l: &longhorncontroller
         type: statefulset
-        annotations: {reloader.stakater.com/auto: "true"}
-        pod: {nodeSelector: {longhorn: primary}}
+        annotations: { reloader.stakater.com/auto: "true" }
+        pod: { nodeSelector: { longhorn: primary } }
       d: &deploymentcontroller
         type: deployment
-        annotations: {reloader.stakater.com/auto: "true"}
+        annotations: { reloader.stakater.com/auto: "true" }
       c: &configmount
         path: /Revolt.toml
         readOnly: true
@@ -41,11 +41,11 @@ spec:
           revolt-mongo:
             image:
               repository: docker.io/mongo
-              tag: 8.0.17
+              tag: 8.2.3
               pullPolicy: Always
             # args: [--replSet,rs0]
-            env: {HOSTNAME: revolt-dev-mongo}
-            resources: {requests: {cpu: 10m},limits: {memory: 512Mi}}
+            env: { HOSTNAME: revolt-dev-mongo }
+            resources: { requests: { cpu: 10m }, limits: { memory: 512Mi } }
       "redis":
         <<: *longhorncontroller
         replicas: 1 # active longhorn
@@ -55,7 +55,7 @@ spec:
               repository: docker.io/eqalpha/keydb
               tag: alpine_x86_64_v6.3.4
               pullPolicy: Always
-            resources: {requests: {cpu: 10m},limits: {memory: 128Mi}}
+            resources: { requests: { cpu: 10m }, limits: { memory: 128Mi } }
       "rabbit":
         <<: *longhorncontroller
         replicas: 1 # active longhorn
@@ -65,20 +65,19 @@ spec:
               repository: docker.io/rabbitmq
               tag: 4
               pullPolicy: Always
-            env: &env
-              # Kinda just got lazy here
+            env: &env # Kinda just got lazy here
               RABBITMQ_DEFAULT_USER: rabbitmq
               RABBITMQ_DEFAULT_PASS: ${revolt_dev_rabbitmq_password}
               MINIO_ROOT_USER: minioautumn
               MINIO_ROOT_PASSWORD: ${revolt_dev_minio_password}
               RUST_LOG: debug
-            resources: {requests: {cpu: 10m},limits: {memory: 256Mi}}
+            resources: { requests: { cpu: 10m }, limits: { memory: 256Mi } }
       "minio":
         <<: *longhorncontroller
         replicas: 1 # active longhorn
         containers:
           revolt-minio:
-            command: [minio,server,/data]
+            command: [minio, server, /data]
             #   - /bin/sh
             #   - -c
             #   - |
@@ -88,14 +87,14 @@ spec:
             #       sleep 1
             #     done && \
             #     /usr/bin/mc mb minio/revolt-uploads &
-                # minio server /data
+            # minio server /data
             image:
               repository: docker.io/minio/minio
               tag: latest
               pullPolicy: Always
             env:
               <<: *env
-            resources: {requests: {cpu: 10m},limits: {memory: 1Gi}}
+            resources: { requests: { cpu: 10m }, limits: { memory: 1Gi } }
       "api":
         <<: *deploymentcontroller
         replicas: 1
@@ -105,7 +104,7 @@ spec:
               repository: ghcr.io/stoatchat/api
               tag: 20251023-1
               pullPolicy: Always
-            resources: {requests: {cpu: 10m},limits: {memory: 256Mi}}
+            resources: { requests: { cpu: 10m }, limits: { memory: 256Mi } }
       "events":
         <<: *deploymentcontroller
         replicas: 1
@@ -115,7 +114,7 @@ spec:
               repository: ghcr.io/stoatchat/events
               tag: 20251023-1
               pullPolicy: Always
-            resources: {requests: {cpu: 10m},limits: {memory: 128Mi}}
+            resources: { requests: { cpu: 10m }, limits: { memory: 128Mi } }
       "web":
         <<: *deploymentcontroller
         replicas: 1
@@ -153,7 +152,7 @@ spec:
               pullPolicy: Always
             env:
               REVOLT_PUBLIC_URL: https://test.${chat_domain}/api
-            resources: {requests: {cpu: 10m},limits: {memory: 256Mi}}
+            resources: { requests: { cpu: 10m }, limits: { memory: 256Mi } }
       "file-server":
         <<: *deploymentcontroller
         replicas: 1
@@ -163,7 +162,7 @@ spec:
               repository: ghcr.io/stoatchat/file-server
               tag: 20251023-1
               pullPolicy: Always
-            resources: {requests: {cpu: 10m},limits: {memory: 1Gi}}
+            resources: { requests: { cpu: 10m }, limits: { memory: 1Gi } }
             env:
               <<: *env
       "proxy":
@@ -175,7 +174,7 @@ spec:
               repository: ghcr.io/stoatchat/proxy
               tag: 20251023-1
               pullPolicy: Always
-            resources: {requests: {cpu: 10m},limits: {memory: 512Mi}}
+            resources: { requests: { cpu: 10m }, limits: { memory: 512Mi } }
       "gifbox":
         <<: *deploymentcontroller
         replicas: 1
@@ -185,7 +184,7 @@ spec:
               repository: ghcr.io/stoatchat/gifbox
               tag: 20251023-1
               pullPolicy: Always
-            resources: {requests: {cpu: 10m},limits: {memory: 512Mi}}
+            resources: { requests: { cpu: 10m }, limits: { memory: 512Mi } }
       "crond":
         <<: *deploymentcontroller
         replicas: 1
@@ -195,7 +194,7 @@ spec:
               repository: ghcr.io/stoatchat/crond
               tag: 20251023-1
               pullPolicy: Always
-            resources: {requests: {cpu: 10m},limits: {memory: 128Mi}}
+            resources: { requests: { cpu: 10m }, limits: { memory: 128Mi } }
       "pushd":
         <<: *deploymentcontroller
         replicas: 1
@@ -205,7 +204,7 @@ spec:
               repository: ghcr.io/stoatchat/pushd
               tag: 20251023-1
               pullPolicy: Always
-            resources: {requests: {cpu: 10m},limits: {memory: 128Mi}}
+            resources: { requests: { cpu: 10m }, limits: { memory: 128Mi } }
       "livekit":
         <<: *deploymentcontroller
         replicas: 1
@@ -215,101 +214,102 @@ spec:
               repository: ghcr.io/stoatchat/livekit-server
               tag: v1.9.6
               pullPolicy: Always
-            args: ["--config","/etc/livekit.yaml"]
-            resources: {requests: {cpu: 10m},limits: {memory: 128Mi}}
+            args: ["--config", "/etc/livekit.yaml"]
+            resources: { requests: { cpu: 10m }, limits: { memory: 128Mi } }
 
     persistence:
       "mongo":
         existingClaim: revolt-dev-mongo-longhorn-database
-        advancedMounts: {mongo: {revolt-mongo: [path: /data/db] } }
+        advancedMounts: { mongo: { revolt-mongo: [path: /data/db] } }
       "rabbit":
         existingClaim: revolt-dev-rabbit-longhorn-database
-        advancedMounts: {rabbit: {revolt-rabbitmq: [path: /var/lib/rabbitmq]}}
+        advancedMounts:
+          { rabbit: { revolt-rabbitmq: [path: /var/lib/rabbitmq] } }
       "minio":
         existingClaim: revolt-dev-minio-nas
-        advancedMounts: {minio: {revolt-minio: [path: /data]}}
+        advancedMounts: { minio: { revolt-minio: [path: /data] } }
       "redis":
         existingClaim: revolt-dev-redis-nas
-        advancedMounts: {redis: {revolt-redis: [path: /data]}}
+        advancedMounts: { redis: { revolt-redis: [path: /data] } }
       "config":
         name: revolt-dev
         type: configMap
         advancedMounts:
-          api: {revolt-api: [*configmount]}
-          events: {revolt-events: [*configmount]}
-          file-server: {revolt-file-server: [*configmount]}
-          gifbox: {revolt-gifbox: [*configmount]}
-          proxy: {revolt-proxy: [*configmount]}
-          crond: {revolt-crond: [*configmount]}
-          pushd: {revolt-pushd: [*configmount]}
+          api: { revolt-api: [*configmount] }
+          events: { revolt-events: [*configmount] }
+          file-server: { revolt-file-server: [*configmount] }
+          gifbox: { revolt-gifbox: [*configmount] }
+          proxy: { revolt-proxy: [*configmount] }
+          crond: { revolt-crond: [*configmount] }
+          pushd: { revolt-pushd: [*configmount] }
           livekit:
             revolt-livekit:
-              -  path: /etc/livekit.yaml
-                 readOnly: true
-                 subPath: livekit.yaml
+              - path: /etc/livekit.yaml
+                readOnly: true
+                subPath: livekit.yaml
 
     service:
       "mongo":
         controller: mongo
         type: ClusterIP
-        ports: {mongo: {port: 27017}}
+        ports: { mongo: { port: 27017 } }
       "redis":
         controller: redis
         type: ClusterIP
-        ports: {redis: {port: 6379}}
+        ports: { redis: { port: 6379 } }
       "rabbit":
         controller: rabbit
         type: ClusterIP
-        ports: {rabbit: {port: 5672}}
+        ports: { rabbit: { port: 5672 } }
       "minio":
         controller: minio
         type: ClusterIP
-        ports: {minio: {port: 9000}}
+        ports: { minio: { port: 9000 } }
       "web":
         controller: web
         type: ClusterIP
-        ports: {http: {port: 5000}}
+        ports: { http: { port: 5000 } }
       "api":
         controller: api
         type: ClusterIP
-        ports: {http: {port: 14702}}
+        ports: { http: { port: 14702 } }
       "events":
         controller: events
         type: ClusterIP
-        ports: {http: {port: 14703}}
+        ports: { http: { port: 14703 } }
       "file-server":
         controller: file-server
         type: ClusterIP
-        ports: {http: {port: 14704}}
+        ports: { http: { port: 14704 } }
       "proxy":
         controller: proxy
         type: ClusterIP
-        ports: {http: {port: 14705}}
+        ports: { http: { port: 14705 } }
       "livekit":
         controller: livekit
         type: ClusterIP
         ports:
-          connect: {port: 7880}
-          rtc-1: {port: 12321}
-          rtc-2: {port: 12322}
-          rtc-3: {port: 12323}
-          rtc-4: {port: 12324}
-          rtc-5: {port: 12325}
-          rtc-6: {port: 12326}
-          rtc-7: {port: 12327}
-          rtc-8: {port: 12328}
-          rtc-9: {port: 12329}
-          rtc-10: {port: 12330}
-          rtc-11: {port: 12331}
-          rtc-12: {port: 12332}
-          rtc-13: {port: 12333}
-          rtc-14: {port: 12334}
-          rtc-15: {port: 12335}
-          rtc-16: {port: 12336}
-          rtc-17: {port: 12337}
-          rtc-18: {port: 12338}
-          rtc-19: {port: 12339}
-          rtc-20: {port: 12340}
+          connect: { port: 7880 }
+          rtc-1: { port: 12321 }
+          rtc-2: { port: 12322 }
+          rtc-3: { port: 12323 }
+          rtc-4: { port: 12324 }
+          rtc-5: { port: 12325 }
+          rtc-6: { port: 12326 }
+          rtc-7: { port: 12327 }
+          rtc-8: { port: 12328 }
+          rtc-9: { port: 12329 }
+          rtc-10: { port: 12330 }
+          rtc-11: { port: 12331 }
+          rtc-12: { port: 12332 }
+          rtc-13: { port: 12333 }
+          rtc-14: { port: 12334 }
+          rtc-15: { port: 12335 }
+          rtc-16: { port: 12336 }
+          rtc-17: { port: 12337 }
+          rtc-18: { port: 12338 }
+          rtc-19: { port: 12339 }
+          rtc-20: { port: 12340 }
 
     # -- This is complex because it replaces Caddy
     ingress:
@@ -343,12 +343,12 @@ spec:
                 pathType: ImplementationSpecific
                 service:
                   identifier: file-server
-              - {<<: *autumn, path: "/(/)?(attachments.*)"}
-              - {<<: *autumn, path: "/(/)?(avatars.*)"}
-              - {<<: *autumn, path: "/(/)?(backgrounds.*)"}
-              - {<<: *autumn, path: "/(/)?(icons.*)"}
-              - {<<: *autumn, path: "/(/)?(banners.*)"}
-              - {<<: *autumn, path: "/(/)?(emojis.*)"}
+              - { <<: *autumn, path: "/(/)?(attachments.*)" }
+              - { <<: *autumn, path: "/(/)?(avatars.*)" }
+              - { <<: *autumn, path: "/(/)?(backgrounds.*)" }
+              - { <<: *autumn, path: "/(/)?(icons.*)" }
+              - { <<: *autumn, path: "/(/)?(banners.*)" }
+              - { <<: *autumn, path: "/(/)?(emojis.*)" }
 
               - path: "/january(/)?(.*)"
                 pathType: ImplementationSpecific
