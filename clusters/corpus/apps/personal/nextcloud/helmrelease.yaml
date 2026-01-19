@@ -122,7 +122,7 @@ spec:
             args:
               - |
                 while :; do su www-data \
-                  -s /var/www/html/custom_apps/notify_push/bin/x86_64/notify_push -- \
+                  -s /var/www/html/custom_apps/notify_push/notify_push/bin/x86_64/notify_push -- \
                   /var/www/html/config/config.php; sleep 1; done &
                 pid=$!
                 grey="\e[1;30m"
