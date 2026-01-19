@@ -121,9 +121,9 @@ spec:
             env: [{ name: NEXTCLOUD_URL, value: http://127.0.0.1 }]
             args:
               - |
-                chmod +x /var/www/html/custom_apps/notify_push/notify_push/bin/x86_64/notify_push && \
+                chmod +x /var/www/html/custom_apps/notify_push/bin/x86_64/notify_push && \
                 while :; do su www-data \
-                  -s /var/www/html/custom_apps/notify_push/notify_push/bin/x86_64/notify_push -- \
+                  -s /var/www/html/custom_apps/notify_push/bin/x86_64/notify_push -- \
                   /var/www/html/config/config.php; sleep 1; done &
                 pid=$!
                 grey="\e[1;30m"
