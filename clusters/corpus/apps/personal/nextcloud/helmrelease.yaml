@@ -123,7 +123,7 @@ spec:
               - |
                 while :; do su www-data \
                   -s /var/www/html/custom_apps/notify_push/bin/x86_64/notify_push -- \
-                  /var/www/html/config/config.php; done &
+                  /var/www/html/config/config.php; sleep 1; sdone &
                 pid=$!
                 grey="\e[1;30m"
                 reset="\e[0m"
