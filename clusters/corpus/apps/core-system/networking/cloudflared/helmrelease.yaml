@@ -28,7 +28,7 @@ spec:
           *app :
             image:
               repository: cloudflare/cloudflared
-              tag: "2025.11.1-amd64"
+              tag: "2026.1.1-amd64"
             args:
               - tunnel
               - --config
