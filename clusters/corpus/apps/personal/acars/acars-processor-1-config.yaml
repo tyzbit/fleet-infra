@@ -79,13 +79,9 @@ Steps:
         Labels:
           # - "10"
           # - "2A"
-          - "87"
-          - "85"
-          - "81"
+
           # - "1D"
           # - "30"
-          - "4R"
-          # - "41" # Lots of commas
           # Low concentration of human messages below
           - "11"
           - "3F"
@@ -104,6 +100,7 @@ Steps:
           - "83" # 0.7% human
           - "15" # 0.4% human
           - "10" # 0.4% human
+          # New labels being evaluated
           - "17"
           - "18"
           - "30"
@@ -114,6 +111,12 @@ Steps:
           - "4T"
           - "8"
           - "84"
+          - "25" # Polluted by uninteresting tower messages
+          - "87"
+          - "85"
+          - "81"
+          - "4R"
+          - "41" # Polluted by uninteresting tower messages
           # Suggest filtering
           - "H1" # 0.002% human (human messages were validated)
 
