@@ -31,7 +31,7 @@ Steps:
         CustomEventType: CustomACARS
 
   - Filter: { Builtin: { HasText: true } }
-  # - Filter: { Builtin: { DictionaryPhraseLengthMinimum: 2 } }
+  - Filter: { Builtin: { DictionaryPhraseLengthMinimum: 2 } }
 
   # The decoders often submit duplicate messages as they're able to reassemble
   # the messages
@@ -40,84 +40,84 @@ Steps:
         PreviousMessageSimilarity:
           Similarity: 0.90
           MaximumLookBehind: 1000
-          DontFilterIfLonger: false
+          DontFilterIfLonger: false # This means I'll see the shortest version of a message, which I prefer over noise.
 
-  # These labels have not had a human-written message in the last 30 days
-  - Filter:
-      Builtin:
-        Invert: true
-        Labels:
-          - "_d"
-          - ""
-          - ":;"
-          - "12"
-          - "16"
-          - "21"
-          - "22"
-          - "32"
-          - "33"
-          - "36"
-          - "3M"
-          - "43" # PAX REOPENED
-          - "44"
-          - "4N"
-          - "5V"
-          - "8X"
-          - "A9"
-          - "B9"
-          - "BA"
-          - "C1"
-          - "H1"
-          - "HX"
-          - "Q0"
-          - "SA"
-          - "SQ"
+  # # These labels have not had a human-written message in the last 30 days
+  # - Filter:
+  #     Builtin:
+  #       Invert: true
+  #       Labels:
+  #         - "_d"
+  #         - ""
+  #         - ":;"
+  #         - "12"
+  #         - "16"
+  #         - "21"
+  #         - "22"
+  #         - "32"
+  #         - "33"
+  #         - "36"
+  #         - "3M"
+  #         - "43" # PAX REOPENED
+  #         - "44"
+  #         - "4N"
+  #         - "5V"
+  #         - "8X"
+  #         - "A9"
+  #         - "B9"
+  #         - "BA"
+  #         - "C1"
+  #         - "H1"
+  #         - "HX"
+  #         - "Q0"
+  #         - "SA"
+  #         - "SQ"
 
-  # These labels have had human-written messages in the last 30 days
-  - Filter:
-      Builtin:
-        Labels:
-          # - "10"
-          # - "2A"
-          # - "1D"
-          # - "30"
-          # Low concentration of human messages below
-          - "11"
-          - "3F"
-          - "RA" # Tower, mostly routine messages
-          - "5Z"
-          - "1A"
-          - "40" # LOTS of routine tower messages
-          - "14" # Lots of "Good morning" and wheelchair requests
-          - "20" # Low concentration, VDL2 judging by lowercase text
-          - "80"
-          - "1L" # Diluted with encrypted messages and data reports
-          - "37"
-          # Might be filterable
-          - "34" # 1 PAX FROM CAB E TO CAB A 61B4
-          - "39" # Less than 1% human messages
-          - "83" # 0.7% human
-          - "15" # 0.4% human
-          - "10" # 0.4% human
-          # New labels being evaluated
-          - "17"
-          - "18"
-          - "30"
-          - "3E"
-          - "45"
-          - "4C"
-          - "4P"
-          - "4T"
-          - "8"
-          - "84"
-          - "25" # Polluted by uninteresting tower messages
-          - "87"
-          - "85"
-          - "81"
-          - "4R"
-          - "41" # Polluted by uninteresting tower messages
-          # Suggest filtering
-          - "H1" # 0.002% human (human messages were validated)
+  # # These labels have had human-written messages in the last 30 days
+  # - Filter:
+  #     Builtin:
+  #       Labels:
+  #         # - "10"
+  #         # - "2A"
+  #         # - "1D"
+  #         # - "30"
+  #         # Low concentration of human messages below
+  #         - "11"
+  #         - "3F"
+  #         - "RA" # Tower, mostly routine messages
+  #         - "5Z"
+  #         - "1A"
+  #         - "40" # LOTS of routine tower messages
+  #         - "14" # Lots of "Good morning" and wheelchair requests
+  #         - "20" # Low concentration, VDL2 judging by lowercase text
+  #         - "80"
+  #         - "1L" # Diluted with encrypted messages and data reports
+  #         - "37"
+  #         # Might be filterable
+  #         - "34" # 1 PAX FROM CAB E TO CAB A 61B4
+  #         - "39" # Less than 1% human messages
+  #         - "83" # 0.7% human
+  #         - "15" # 0.4% human
+  #         - "10" # 0.4% human
+  #         # New labels being evaluated
+  #         - "17"
+  #         - "18"
+  #         - "30"
+  #         - "3E"
+  #         - "45"
+  #         - "4C"
+  #         - "4P"
+  #         - "4T"
+  #         - "8"
+  #         - "84"
+  #         - "25" # Polluted by uninteresting tower messages
+  #         - "87"
+  #         - "85"
+  #         - "81"
+  #         - "4R"
+  #         - "41" # Polluted by uninteresting tower messages
+  #         # Suggest filtering
+  #         - "H1" # 0.002% human (human messages were validated)
 
   # These terms are present in routine messages that can be filtered
   - Filter:
@@ -199,11 +199,13 @@ Steps:
             - HOWGOZIT
             - RAMP FREQ
 
-  # This is to analyze and improve my built-in filtering rules
-  - Send:
-      NewRelic:
-        APIKey: "${new_relic_license_key}"
-        CustomEventType: CustomACARSBuiltinOnly
+  - Filter: { Builtin: { DictionaryPhraseLengthMinimum: 3 } }
+
+  # # This is to analyze and improve my built-in filtering rules
+  # - Send:
+  #     NewRelic:
+  #       APIKey: "${new_relic_license_key}"
+  #       CustomEventType: CustomACARSBuiltinOnly
 
   # Have local Ollama model look only for human-written messages
   # - Filter:
