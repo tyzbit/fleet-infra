@@ -41,36 +41,36 @@ Steps:
           MaximumLookBehind: 1000
           DontFilterIfLonger: false # This means I'll see the shortest version of a message, which I prefer over noise.
 
-  # # These labels have not had a human-written message in the last 30 days
-  # - Filter:
-  #     Builtin:
-  #       Invert: true
-  #       Labels:
-  #         - "_d"
-  #         - ""
-  #         - ":;"
-  #         - "12"
-  #         - "16"
-  #         - "21"
-  #         - "22"
-  #         - "32"
-  #         - "33"
-  #         - "36"
-  #         - "3M"
-  #         - "43" # PAX REOPENED
-  #         - "44"
-  #         - "4N"
-  #         - "5V"
-  #         - "8X"
-  #         - "A9"
-  #         - "B9"
-  #         - "BA"
-  #         - "C1"
-  #         - "H1"
-  #         - "HX"
-  #         - "Q0"
-  #         - "SA"
-  #         - "SQ"
+  # These labels have not had a human-written message in the last 30 days
+  - Filter:
+      Builtin:
+        Invert: true
+        Labels:
+          - "_d"
+          - ""
+          - ":;"
+          - "12"
+          - "16"
+          - "21"
+          - "22"
+          - "32"
+          - "33"
+          - "36"
+          - "3M"
+          - "43" # PAX REOPENED
+          - "44"
+          - "4N"
+          - "5V"
+          - "8X"
+          - "A9"
+          - "B9"
+          - "BA"
+          - "C1"
+          - "H1"
+          - "HX"
+          - "Q0"
+          - "SA"
+          - "SQ"
 
   # # These labels have had human-written messages in the last 30 days
   # - Filter:
