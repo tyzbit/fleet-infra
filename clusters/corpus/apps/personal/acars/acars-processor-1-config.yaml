@@ -70,39 +70,39 @@ Steps:
           - "SA"
           - "SQ"
 
-  # # These labels have had human-written messages in the last 30 days
-  # - Filter:
-  #     Builtin:
-  #       Labels:
-  #         - "10"
-  #         - "2A"
-  #         - "87"
-  #         - "85"
-  #         - "81"
-  #         - "1D"
-  #         - "30"
-  #         - "4R"
-  #         - "41" # Lots of commas
-  #         # Low concentration of human messages below
-  #         - "11"
-  #         - "3F"
-  #         - "RA" # Tower, mostly routine messages
-  #         - "5Z"
-  #         - "1A"
-  #         - "40" # LOTS of routine tower messages
-  #         - "14" # Lots of "Good morning" and wheelchair requests
-  #         - "20" # Low concentration, VDL2 judging by lowercase text
-  #         - "80"
-  #         - "1L" # Diluted with encrypted messages and data reports
-  #         - "37"
-  #         # Might be filterable
-  #         - "34" # 1 PAX FROM CAB E TO CAB A 61B4
-  #         - "39" # Less than 1% human messages
-  #         - "83" # 0.7% human
-  #         - "15" # 0.4% human
-  #         - "10" # 0.4% human
-  #         # Suggest filtering
-  #         - "H1" # 0.002% human (human messages were validated)
+  # These labels have had human-written messages in the last 30 days
+  - Filter:
+      Builtin:
+        Labels:
+          # - "10"
+          # - "2A"
+          # - "87"
+          # - "85"
+          # - "81"
+          # - "1D"
+          # - "30"
+          # - "4R"
+          # - "41" # Lots of commas
+          # Low concentration of human messages below
+          - "11"
+          - "3F"
+          - "RA" # Tower, mostly routine messages
+          - "5Z"
+          - "1A"
+          - "40" # LOTS of routine tower messages
+          - "14" # Lots of "Good morning" and wheelchair requests
+          - "20" # Low concentration, VDL2 judging by lowercase text
+          - "80"
+          - "1L" # Diluted with encrypted messages and data reports
+          - "37"
+          # Might be filterable
+          - "34" # 1 PAX FROM CAB E TO CAB A 61B4
+          - "39" # Less than 1% human messages
+          - "83" # 0.7% human
+          - "15" # 0.4% human
+          - "10" # 0.4% human
+          # Suggest filtering
+          - "H1" # 0.002% human (human messages were validated)
 
   # These terms are present in routine messages that can be filtered
   - Filter:
