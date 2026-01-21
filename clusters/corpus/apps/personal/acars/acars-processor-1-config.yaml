@@ -57,15 +57,18 @@ Steps:
           - "32"
           - "33"
           - "36"
+          - "3M"
           - "43" # PAX REOPENED
           - "44"
           - "4N"
           - "5V"
+          - "8X"
           - "A9"
           - "B9"
           - "BA"
           - "C1"
           - "H1"
+          - "HX"
           - "Q0"
           - "SA"
           - "SQ"
@@ -76,12 +79,12 @@ Steps:
         Labels:
           # - "10"
           # - "2A"
-          # - "87"
-          # - "85"
-          # - "81"
+          - "87"
+          - "85"
+          - "81"
           # - "1D"
           # - "30"
-          # - "4R"
+          - "4R"
           # - "41" # Lots of commas
           # Low concentration of human messages below
           - "11"
@@ -101,6 +104,16 @@ Steps:
           - "83" # 0.7% human
           - "15" # 0.4% human
           - "10" # 0.4% human
+          - "17"
+          - "18"
+          - "30"
+          - "3E"
+          - "45"
+          - "4C"
+          - "4P"
+          - "4T"
+          - "8"
+          - "84"
           # Suggest filtering
           - "H1" # 0.002% human (human messages were validated)
 
