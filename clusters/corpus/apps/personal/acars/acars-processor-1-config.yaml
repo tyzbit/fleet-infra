@@ -128,13 +128,19 @@ Steps:
             - ">"
             - +++
             - TAKEOFF_
+            - OUTRPT
             - .CSV
             - "LOC:"
             - TO 1)
             - PDC
             - YOW FROM
             - PART 01
+            - QUATLASAV
+            - /MPTO
+            - ---- G
             - ------------
+            - ---- ---- ---- ----
+            - /  /  /
             - "*** REMINDER MESSAGE ***"
             - AUTO CLOSEOUT
             - "EMAIL FROM:"
@@ -292,7 +298,7 @@ Steps:
   #         - 40-80 should indicate the message is emotional in some way.
   #         - 80-100 should indicate the message is very emotional.
 
-  - Filter: { Builtin: { LLMProcessedNumberAbove: 40 } }
+  # - Filter: { Builtin: { LLMProcessedNumberAbove: 40 } }
 
   # Send emotional messages to a different Discord channel
   # - Send:
