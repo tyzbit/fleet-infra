@@ -267,6 +267,8 @@ Steps:
 
           ```{{index . "ACARSProcessor.MessageText"}}```
 
+          (Message label {{index . "ACARSProcessor.Label"}})
+
           **Links**:
 
           [Translate this message]({{index . "ACARSProcessor.TranslateLink"}})
