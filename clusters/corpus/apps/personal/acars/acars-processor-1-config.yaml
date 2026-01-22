@@ -140,6 +140,8 @@ Steps:
             - EXTEND/DOWN
             - RETRACT/UP
             - RETRACT/DOWN
+            - AFT CARGO OPEN -
+            - AFT CARGO CLOSED -
             - /ACARG
             - /EV START
             - /EV STOP
