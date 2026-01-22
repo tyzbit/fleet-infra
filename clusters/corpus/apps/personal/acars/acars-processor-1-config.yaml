@@ -135,8 +135,20 @@ Steps:
             - USADCXA
             - "#DFREQ"
             - ET EXP TIME
+            - OFF EVENT
+            - EXTEND/UP
+            - EXTEND/DOWN
+            - RETRACT/UP
+            - RETRACT/DOWN
+            - /ACARG
+            - /EV START
+            - /EV STOP
+            - LIF RUNWAY REQUEST
+            - IF ERRORS ABOVE
             - AGFSR
             - PRG/
+            - LOAD CLOSEOUT RVSN
+            - ON-TIME ANALYSIS
             - APU START <
             - "<"
             - ">"
