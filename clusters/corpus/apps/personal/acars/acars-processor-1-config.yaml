@@ -159,6 +159,8 @@ Steps:
             - "LOC:"
             - TO 1)
             - "[  ]"
+            - ((
+            - ))
             - PDC
             - YOW FROM
             - PART 01
