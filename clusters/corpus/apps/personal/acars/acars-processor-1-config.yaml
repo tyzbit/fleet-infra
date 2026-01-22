@@ -175,6 +175,7 @@ Steps:
             - ---- ---- ---- ----
             - /  /  /
             - "*** REMINDER MESSAGE ***"
+            - "**AUTOMATED MESSAGE**"
             - AUTO CLOSEOUT
             - "EMAIL FROM:"
             # Airport DISP messages
