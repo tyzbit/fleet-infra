@@ -180,6 +180,9 @@ Steps:
             - "**AUTOMATED MESSAGE**"
             - AUTO CLOSEOUT
             - "EMAIL FROM:"
+            - "ENROUTE ALTERNATES:"
+            - "SENT: "
+            - 1FINAL WEIGHTS
             # Airport DISP messages
             - ATIS INFO
             - TAXI AND SHUTDOWN THE APU
