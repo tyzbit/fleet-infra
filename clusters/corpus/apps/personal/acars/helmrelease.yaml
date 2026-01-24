@@ -62,8 +62,8 @@ spec:
               STATEFULSETS: >-
                 acars-acarsdec,
                 acars-acarsdec2,
-                acars-dumpvdl2,
-                acars-dumpvdl2-2
+                acars-acarsdec3,
+                acars-dumpvdl2
 
       acarsdec: 
         <<: *common_settings
