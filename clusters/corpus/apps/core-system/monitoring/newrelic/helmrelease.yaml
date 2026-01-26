@@ -370,6 +370,14 @@ spec:
                 Exclude  log /DEBUG/
                 Exclude  $kubernetes['container_name'] unifi
 
+            # Filter Unifi stack trace lines
+            [FILTER]
+                Name     grep
+                Match    kube.*
+                Logical_Op and
+                Exclude  log /^ at /
+                Exclude  $kubernetes['container_name'] unifi
+
             # Filter etcd status checks
             [FILTER]
                 Name     grep
