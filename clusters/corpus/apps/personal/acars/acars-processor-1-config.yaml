@@ -1298,9 +1298,6 @@ Steps:
 
           [Translate this message]({{index . "ACARSProcessor.TranslateLink"}})
 
-          [ACARSDrama messages from this aircraft]({{index .
-          "ACARSProcessor.ACARSDramaTailNumberLink"}})
-
           [Aircraft Photos]({{index . "ACARSProcessor.PhotosLink"}})
 
   # Also send to New Relic as a human message
