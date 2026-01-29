@@ -33,7 +33,7 @@ spec:
           *app :
             image:
               repository: ghcr.io/almarklein/timetagger
-              tag: v26.1.1-nonroot
+              tag: v26.1.2-nonroot
             env:
               TIMETAGGER_DATADIR: /data
               TIMETAGGER_BIND: 0.0.0.0:80
