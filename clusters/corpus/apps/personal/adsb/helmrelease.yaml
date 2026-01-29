@@ -295,7 +295,7 @@ spec:
           adsb3ddb:
             image:
               repository: timescale/timescaledb
-              tag: 2.24.0-pg17
+              tag: 2.25.0-pg17
             env:
               TZ: Etc/UTC
               POSTGRES_DB: adsb_tracks
