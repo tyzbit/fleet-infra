@@ -233,7 +233,8 @@ Steps:
             - HOWGOZIT
             - RAMP FREQ
             - CRUISE LEVEL OFF
-            - CS REPORT
+            - |
+              CS REPORT
               FLT DATE
             - "TAXI - "
 
