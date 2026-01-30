@@ -239,6 +239,8 @@ Steps:
               CS REPORT
               FLT DATE
             - "TAXI - "
+            - AMEND TO RELEASE
+            - AMENDMENT TO RELEASE
 
   # This is for messages like this
   # /N35.549/W076.482/10/0.75/220/400/KSUA/2222/0059/00016/PRONI/WAALT/2050/OSTNN/2045/
