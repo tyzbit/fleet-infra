@@ -147,11 +147,12 @@ Steps:
             - /EV STOP
             - /   0
             - "    /"
-            - " 
- 
- 
- 
+            - "
+
+
+
               "
+            - /ENGR
             - LIF RUNWAY REQUEST
             - IF ERRORS ABOVE
             - AGFSR
@@ -209,6 +210,7 @@ Steps:
             - NEW MRD IS REQUIRED
             - SEND AN OPS CONTROL
             - FLIGHT OPS AUTOMATED MESSAGE
+            - AUTOMATED FLIGHT INFORMATION
             - DATA USED TO DETERMINE MESSAGE
             - NO ENTRIES IN PECT
             - FORMAT FAILED REPORT
