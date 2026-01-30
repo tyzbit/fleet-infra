@@ -235,9 +235,7 @@ Steps:
             - HOWGOZIT
             - RAMP FREQ
             - CRUISE LEVEL OFF
-            - |
-              CS REPORT
-              FLT DATE
+            - CS REPORT
             - "TAXI - "
             - AMEND TO RELEASE
             - AMENDMENT TO RELEASE
