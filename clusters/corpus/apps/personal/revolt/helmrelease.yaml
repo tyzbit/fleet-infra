@@ -139,7 +139,6 @@ spec:
                   banners=12_000_000 \
                   avatars=8_000_000 \
                   backgrounds=12_000_000 \
-                  attachments=200_000_000 \
                 ; do
                   type=$(echo $setting|cut -d= -f1)
                   setting=$(echo $setting|cut -d= -f2)
