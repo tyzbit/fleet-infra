@@ -285,9 +285,9 @@ spec:
             {path: /tmp/acars-usb-watchdog.sh,subPath: acars-usb-watchdog.sh}
             ]
           }
-      acarshub:
-        existingClaim: acars-data-longhorn-webapp
-        advancedMounts: {acarshub: {acarshub: [path: /run/acars]}}
+      # acarshub:
+      #   existingClaim: acars-data-longhorn-webapp
+      #   advancedMounts: {acarshub: {acarshub: [path: /run/acars]}}
 
     service:
       acarsrouter:
