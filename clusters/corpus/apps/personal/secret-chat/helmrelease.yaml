@@ -115,7 +115,7 @@ spec:
           &push secret-chat-push:
             image:
               repository: nextcloud
-              tag: *nextcloudver
+              tag: *secretchatver
               pullPolicy: Always
             command: ["/bin/bash", "-c"]
             env: [{ name: NEXTCLOUD_URL, value: http://127.0.0.1 }]
