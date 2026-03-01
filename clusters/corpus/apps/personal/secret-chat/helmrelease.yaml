@@ -29,7 +29,7 @@ spec:
             longhorn: primary
 
         containers:
-          &db earthlings-chat-db:
+          &db secret-chat-db:
             image:
               repository: mariadb
               tag: "10.8"
@@ -50,7 +50,7 @@ spec:
           reloader.stakater.com/auto: "true"
 
         containers:
-          &app earthlings-chat-app:
+          &app secret-chat-app:
             image:
               repository: nextcloud
               tag: &nextcloudver "32.0.6"
@@ -59,14 +59,14 @@ spec:
               privileged: true
             envFrom:
               - secretRef:
-                  name: earthlings-chat-config
+                  name: secret-chat-config
             resources:
               requests:
                 cpu: &nccpurequest 100m
               limits:
                 memory: &ncmemlimit 4Gi
 
-          &cache earthlings-chat-cache:
+          &cache secret-chat-cache:
             image:
               repository: redis
               tag: "8.6"
@@ -78,7 +78,7 @@ spec:
               limits:
                 memory: 256Mi
 
-          &worker earthlings-chat-worker:
+          &worker secret-chat-worker:
             image:
               repository: nextcloud
               tag: *nextcloudver
@@ -112,7 +112,7 @@ spec:
                 memory: *ncmemlimit
 
           # Requires https://github.com/nextcloud/notify_push to be installed
-          &push earthlings-chat-push:
+          &push secret-chat-push:
             image:
               repository: nextcloud
               tag: *nextcloudver
