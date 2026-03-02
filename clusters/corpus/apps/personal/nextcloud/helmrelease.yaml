@@ -57,6 +57,8 @@ spec:
               pullPolicy: Always
             securityContext:
               privileged: true
+            env:
+              PHP_OPCACHE_MEMORY_CONSUMPTION: "256"
             envFrom:
               - secretRef:
                   name: nextcloud-config
