@@ -9,7 +9,8 @@ detectors: {coral: {type: edgetpu, device: usb}}
 
 snapshots: {enabled: true, retain: {default: 30, objects: {person: 30}}}
 record: {enabled: true,
-  retain: {days: 14},
+  continuous: {days: 7},
+  motion: {days: 14},
   detections: {retain: {days: 30}},
   alerts: {retain: {days: 90, mode: active_objects}}
 }
