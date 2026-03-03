@@ -287,13 +287,13 @@ spec:
               - path: "/"
                 service:
                   identifier: main
-              - path: "/push"
-                service:
-                  identifier: push
               - path: "/hpb"
                 service:
                   identifier: talk
                   port: 8181
+              - path: "/push"
+                service:
+                  identifier: push
         tls:
           - hosts:
               - *host
