@@ -293,7 +293,7 @@ spec:
               - path: "/hpb"
                 service:
                   identifier: talk
-                  port: 3478
+                  port: 8181
         tls:
           - hosts:
               - *host
