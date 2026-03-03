@@ -82,7 +82,7 @@ spec:
               NC_DOMAIN: secret.${chat_domain}
               TALK_HOST: talk-backend.${chat_domain}
               TZ: America/New_York
-              TALK_PORT: 3478
+              TALK_PORT: 3477
             envFrom:
               - secretRef:
                   name: secret-chat-config
