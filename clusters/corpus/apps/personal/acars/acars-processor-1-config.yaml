@@ -1292,23 +1292,7 @@ Steps:
         URL: ${acars_webhook_url}
         Method: POST
         PayloadGoTemplate: |
-          -# From [{{index . "ACARSProcessor.TailCode"}}]({{index .
-          "ACARSProcessor.TrackingLink"}}){{if ne "" (index .
-          "ACARSProcessor.FlightNumber")}} on flight {{index .
-          "ACARSProcessor.FlightNumber"}}{{end}} <t:{{index .
-          "ACARSProcessor.UnixTimestamp"}}:R> {{if ne 0.0 (index .
-          "ACARSProcessor.AircraftDistanceMi")}} from {{printf "%.2f" (index .
-          "ACARSProcessor.AircraftDistanceMi")}} miles away{{end}}.
-
-          ```{{index . "ACARSProcessor.MessageText"}}```
-
-          (Message label {{index . "ACARSProcessor.Label"}})
-
-          **Links**:
-
-          [Translate this message]({{index . "ACARSProcessor.TranslateLink"}})
-
-          [Aircraft Photos]({{index . "ACARSProcessor.PhotosLink"}})
+          {"subject": "corpus", "event":"{{index . "ACARSProcessor.MessageText"}}"}
 
   # Also send to New Relic as a human message
   - Send:
