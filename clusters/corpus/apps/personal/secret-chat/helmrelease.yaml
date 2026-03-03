@@ -284,9 +284,6 @@ spec:
         hosts:
           - host: &host "secret.${chat_domain}"
             paths:
-              - path: "/"
-                service:
-                  identifier: main
               - path: "/hpb"
                 service:
                   identifier: talk
@@ -294,6 +291,9 @@ spec:
               - path: "/push"
                 service:
                   identifier: push
+              - path: "/"
+                service:
+                  identifier: main
         tls:
           - hosts:
               - *host
