@@ -32,6 +32,16 @@ Steps:
 
   - Filter: { Builtin: { HasText: true } }
 
+  - Send:
+      Webhook:
+        URL: ${acars_webhook_url}
+        Method: POST
+        Headers:
+          - Name: Content-Type
+            Value: application/json
+        PayloadGoTemplate: |
+          {"subject": "corpus", "event":"{{index . "ACARSProcessor.MessageText"}}"}
+
   # The decoders often submit duplicate messages as they're able to reassemble
   # the messages
   - Filter:
