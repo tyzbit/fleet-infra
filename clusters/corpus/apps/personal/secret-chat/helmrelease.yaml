@@ -73,6 +73,19 @@ spec:
               limits:
                 memory: &ncmemlimit 4Gi
 
+          secret-chat-talk-backend:
+            image:
+              repository: ghcr.io/nextcloud-releases/aio-talk
+              tag: ghcr.io/nextcloud-releases/aio-talk
+              pullPolicy: Always
+            env:
+              NC_DOMAIN: secret.${chat_domain}
+              TALK_HOST: talk.secret.${chat_domain}
+              TZ: America/New_York
+              TALK_PORT: 3478
+            envFrom:
+              - secretRef:
+                  name: secret-chat-config
           &cache secret-chat-cache:
             image:
               repository: redis
@@ -237,6 +250,16 @@ spec:
           http:
             primary: true
             port: 7867
+            
+      talk:
+        controller: app
+        type: ClusterIP
+        ports:
+          http:
+            primary: true
+            port: 8181
+          talk:
+            port: 3478
 
       db:
         controller: db
@@ -270,3 +293,25 @@ spec:
           - hosts:
               - *host
             secretName: *host
+
+      talk:
+        className: nginx
+        annotations:
+          nginx.ingress.kubernetes.io/proxy-body-size: 20480m
+          nginx.ingress.kubernetes.io/proxy-connect-timeout: "20"
+          nginx.ingress.kubernetes.io/proxy-read-timeout: "14400"
+          nginx.ingress.kubernetes.io/proxy-send-timeout: "14400"
+          cert-manager.io/cluster-issuer: letsencrypt
+          external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+          external-dns.alpha.kubernetes.io/target: ${home_domain_ddns}
+        hosts:
+          - host: &talkhost "talk.secret.${chat_domain}"
+            paths:
+              - path: "/"
+                service:
+                  identifier: talk
+                  port: 8181
+        tls:
+          - hosts:
+              - *talkhost
+            secretName: *talkhost
