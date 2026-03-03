@@ -218,6 +218,8 @@ Steps:
             - "LANDING PILOT:"
             - CONFIRM THE BELOW SOULS
             - ALL RWYS AND TWYS
+            - END BRIEFING
+            - WEATHER RESPONSE
             ###################
             - CODE BLEED STATUS
             - PREFLIGHT BRIEF
@@ -239,13 +241,13 @@ Steps:
             - "TAXI - "
             - AMEND TO RELEASE
             - AMENDMENT TO RELEASE
-            - -- PART 
+            - "-- PART"
             - "PART  1 OF "
             - "PART  2 OF "
             - "PART  3 OF "
             - "PART  4 OF "
             - "PART  5 OF "
-            - (AUTOMATED)
+            - "(AUTOMATED)"
 
   # This is for messages like this
   # /N35.549/W076.482/10/0.75/220/400/KSUA/2222/0059/00016/PRONI/WAALT/2050/OSTNN/2045/
@@ -1286,23 +1288,10 @@ Steps:
   # This should be a human message, so send to my private Discord channel, with
   # fancy templating.
   - Send:
-      Discord:
-        Embed: true
-        EmbedColorFacetFields: [ACARSProcessor.From]
-        # EmbedColorGradientField: ACARSProcessor.LLMProcessedNumber
-        URL: "${acars_discord_webhook}"
-        FormatText: true
-        FormatTimestamps: true
-        # MessageGoTemplate: |
-        #   -# From [{{index . "ACARSProcessor.TailCode"}}]({{index . "ACARSProcessor.TrackingLink"}}){{if ne "" (index . "ACARSProcessor.FlightNumber")}} on flight {{index . "ACARSProcessor.FlightNumber"}}{{else}}{{end}} <t:{{index . "ACARSProcessor.UnixTimestamp"}}:R>{{if ne 0.0 (index . "ACARSProcessor.AircraftDistanceMi")}} from {{printf "%.2f" (index . "ACARSProcessor.AircraftDistanceMi")}} miles away{{else}}{{end}}.
-        #   ```
-        #   {{index . "ACARSProcessor.MessageText"}}
-        #   ```
-        #   **Links**:
-        #   [Translate this message]({{index . "ACARSProcessor.TranslateLink"}})
-        #   [ACARSDrama messages from this aircraft]({{index . "ACARSProcessor.ACARSDramaTailNumberLink"}})
-        #   [Aircraft Photos]({{index . "ACARSProcessor.PhotosLink"}})
-        MessageGoTemplate: >-
+      Webhook:
+        URL: ${acars_webhook_url}
+        Method: POST
+        PayloadGoTemplate: |
           -# From [{{index . "ACARSProcessor.TailCode"}}]({{index .
           "ACARSProcessor.TrackingLink"}}){{if ne "" (index .
           "ACARSProcessor.FlightNumber")}} on flight {{index .
