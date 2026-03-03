@@ -292,16 +292,29 @@ spec:
         hosts:
           - host: &host "secret.${chat_domain}"
             paths:
-              - path: "/hpb"
-                service:
-                  identifier: talk
-                  port: 8081
               - path: "/push"
                 service:
                   identifier: push
               - path: "/"
                 service:
                   identifier: main
+        tls:
+          - hosts:
+              - *host
+            secretName: *host
+
+      talk:
+        className: nginx
+        annotations:
+          nginx.ingress.kubernetes.io/proxy-body-size: 20480m
+          nginx.ingress.kubernetes.io/proxy-connect-timeout: "20"
+          nginx.ingress.kubernetes.io/proxy-read-timeout: "14400"
+          nginx.ingress.kubernetes.io/proxy-send-timeout: "14400"
+          nginx.ingress.kubernetes.io/backend-protocol: HTTPS
+          cert-manager.io/cluster-issuer: letsencrypt
+          external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+          external-dns.alpha.kubernetes.io/target: ${cloudflared_tunnel_uuid}.cfargotunnel.com
+        hosts:
           - host: &host2 "talk.secret.${chat_domain}"
             paths:
               - path: "/"
@@ -310,6 +323,5 @@ spec:
                   port: 8081
         tls:
           - hosts:
-              - *host
               - *host2
-            secretName: *host
+            secretName: *host2
