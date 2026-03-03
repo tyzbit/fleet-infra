@@ -290,6 +290,10 @@ spec:
               - path: "/push"
                 service:
                   identifier: push
+              - path: "/hpb"
+                service:
+                  identifier: talk
+                  port: 3478
         tls:
           - hosts:
               - *host
