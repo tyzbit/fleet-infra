@@ -1295,7 +1295,7 @@ Steps:
           - Name: Content-Type
             Value: application/json
         PayloadGoTemplate: |
-          {"subject": "corpus", "event":"{{index . "ACARSProcessor.MessageText"}}"}
+          {"subject": "acars", "event":"{{index . "ACARSProcessor.MessageText"}}"}
 
   # Also send to New Relic as a human message
   - Send:
