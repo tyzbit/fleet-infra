@@ -255,9 +255,6 @@ spec:
       talk:
         controller: app
         type: ClusterIP
-        externalName: backend.secret.${chat_domain}
-        annotations:
-          external-dns.alpha.kubernetes.io/hostname: ${home_domain_ddns}
         ports:
           http:
             primary: true
