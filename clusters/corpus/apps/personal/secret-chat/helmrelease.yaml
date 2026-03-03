@@ -260,10 +260,10 @@ spec:
             primary: true
             port: 8081
           talk-tcp:
-            port: 3478
+            port: 3477
             protocol: TCP
           talk-udp:
-            port: 3478
+            port: 3477
             protocol: UDP
 
       db:
