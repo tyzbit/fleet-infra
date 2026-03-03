@@ -34,11 +34,7 @@ Steps:
         PayloadGoTemplate: |
           {
             "subject": "acars", 
-            "event": "
-              Tail Code: {{index . "ACARSProcessor.TailCode"}}{{if ne 0.0 (index .
-              "ACARSProcessor.AircraftDistanceMi")}} from {{printf "%.2f" (index .
-              "ACARSProcessor.AircraftDistanceMi")}} miles away{{end}}:
-              {{index . "ACARSProcessor.MessageText"}}"
+            "event": "{{index . "ACARSProcessor.MessageText"}}"
           }
         # PayloadGoTemplate: |
         #   {
