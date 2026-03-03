@@ -258,9 +258,13 @@ spec:
         ports:
           http:
             primary: true
-            port: 8181
-          talk:
+            port: 8081
+          talk-tcp:
             port: 3478
+            protocol: TCP
+          talk-udp:
+            port: 3478
+            protocol: UDP
 
       db:
         controller: db
@@ -287,7 +291,7 @@ spec:
               - path: "/hpb"
                 service:
                   identifier: talk
-                  port: 8181
+                  port: 8081
               - path: "/push"
                 service:
                   identifier: push
@@ -315,7 +319,7 @@ spec:
               - path: "/"
                 service:
                   identifier: talk
-                  port: 8181
+                  port: 8081
         tls:
           - hosts:
               - *talkhost
