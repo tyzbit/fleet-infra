@@ -24,6 +24,22 @@ Steps:
         URL: http://adsb-ultrafeeder
         ReferenceGeolocation: "${my_latitude},${my_longitude}"
 
+  - Send:
+      Webhook:
+        URL: ${acars_webhook_url}
+        Method: POST
+        Headers:
+          - Name: Content-Type
+            Value: application/json
+        PayloadGoTemplate: |
+          {
+            "subject": "acars", 
+            "event": "Tail Code: {{index . "ACARSProcessor.TailCode"}}{{if ne 0.0 (index .
+              "ACARSProcessor.AircraftDistanceMi")}} from {{printf "%.2f" (index .
+              "ACARSProcessor.AircraftDistanceMi")}} miles away{{end}}:
+              {{index . "ACARSProcessor.MessageText"}}"
+          }
+
   # Used for overall metrics and improving filters
   - Send:
       NewRelic:
