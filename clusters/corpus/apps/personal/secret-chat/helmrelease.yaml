@@ -57,7 +57,7 @@ spec:
               pullPolicy: Always
             securityContext:
               privileged: true
-            env:
+            env: &ncenv
               PHP_OPCACHE_MEMORY_CONSUMPTION: "256"
               TRUSTED_PROXIES: 127.0.0.1 172.23.0.0/16
               OVERWRITE_PROTOCOL: https
@@ -91,8 +91,7 @@ spec:
               tag: *secretchatver
               pullPolicy: Always
             command: ["/bin/bash", "-c"]
-            env:
-              PHP_OPCACHE_MEMORY_CONSUMPTION: "256"
+            env: *ncenv
             args:
               - |
                 ops=(
@@ -128,7 +127,7 @@ spec:
               pullPolicy: Always
             command: ["/bin/bash", "-c"]
             env:
-              PHP_OPCACHE_MEMORY_CONSUMPTION: "256"
+              <<: *ncenv
               NEXTCLOUD_URL: http://127.0.0.1
             args:
               - |

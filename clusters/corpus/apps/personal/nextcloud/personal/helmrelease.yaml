@@ -57,8 +57,13 @@ spec:
               pullPolicy: Always
             securityContext:
               privileged: true
-            env:
+            env: &ncenv
               PHP_OPCACHE_MEMORY_CONSUMPTION: "256"
+              TRUSTED_PROXIES: 127.0.0.1 172.23.0.0/16
+              OVERWRITE_PROTOCOL: https
+              SMTP_HOST: email-smtp.us-east-1.amazonaws.com
+              SMTP_SECURE: tls
+              SMTP_PORT: 587
             envFrom:
               - secretRef:
                   name: nextcloud-config
@@ -86,6 +91,7 @@ spec:
               tag: *nextcloudver
               pullPolicy: Always
             command: ["/bin/bash", "-c"]
+            env: *ncenv
             args:
               - |
                 ops=(
@@ -120,7 +126,9 @@ spec:
               tag: *nextcloudver
               pullPolicy: Always
             command: ["/bin/bash", "-c"]
-            env: [{ name: NEXTCLOUD_URL, value: http://127.0.0.1 }]
+            env: 
+              <<: *ncenv
+              NEXTCLOUD_URL: http://127.0.0.1
             args:
               - |
                 chmod +x /var/www/html/custom_apps/notify_push/bin/x86_64/notify_push && \
