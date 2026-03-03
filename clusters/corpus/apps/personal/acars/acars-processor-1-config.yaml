@@ -1291,6 +1291,9 @@ Steps:
       Webhook:
         URL: ${acars_webhook_url}
         Method: POST
+        Headers:
+          - Name: Content-Type
+            Value: application/json
         PayloadGoTemplate: |
           {"subject": "corpus", "event":"{{index . "ACARSProcessor.MessageText"}}"}
 
