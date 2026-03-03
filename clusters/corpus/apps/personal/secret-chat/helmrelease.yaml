@@ -261,6 +261,7 @@ spec:
         ports:
           http:
             primary: true
+            protocol: HTTPS
             port: 8081
           talk-tcp:
             port: 3478
