@@ -37,8 +37,7 @@ Steps:
             "event": "From Tail Code: {{index . "ACARSProcessor.TailCode"}}{{if
             ne 0.0 (index . "ACARSProcessor.AircraftDistanceMi")}} from {{printf
             "%.2f" (index . "ACARSProcessor.AircraftDistanceMi")}} miles
-            away{{end}}:
-            {{index . "ACARSProcessor.MessageText"}}"
+            away{{end}}: {{index . "ACARSProcessor.MessageText"}}"
           }
         # PayloadGoTemplate: |
         #   {
