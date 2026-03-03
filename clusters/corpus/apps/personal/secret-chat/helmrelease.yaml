@@ -255,6 +255,7 @@ spec:
       talk:
         controller: app
         type: ClusterIP
+        externalName: talk.secret.${chat_domain}
         annotations:
           external-dns.alpha.kubernetes.io/hostname: ${home_domain_ddns}
         ports:
@@ -304,25 +305,3 @@ spec:
           - hosts:
               - *host
             secretName: *host
-
-      talk:
-        className: nginx
-        annotations:
-          nginx.ingress.kubernetes.io/proxy-body-size: 20480m
-          nginx.ingress.kubernetes.io/proxy-connect-timeout: "20"
-          nginx.ingress.kubernetes.io/proxy-read-timeout: "14400"
-          nginx.ingress.kubernetes.io/proxy-send-timeout: "14400"
-          cert-manager.io/cluster-issuer: letsencrypt
-          external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
-          external-dns.alpha.kubernetes.io/target: ${cloudflared_tunnel_uuid}.cfargotunnel.com
-        hosts:
-          - host: &talkhost "talk.secret.${chat_domain}"
-            paths:
-              - path: "/"
-                service:
-                  identifier: talk
-                  port: 8081
-        tls:
-          - hosts:
-              - *talkhost
-            secretName: *talkhost
