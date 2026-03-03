@@ -59,6 +59,8 @@ spec:
               privileged: true
             env: &ncenv
               PHP_OPCACHE_MEMORY_CONSUMPTION: "256"
+              TRUSTED_PROXIES: 127.0.0.1 172.23.0.0/16
+              OVERWRITE_PROTOCOL: https
               SMTP_HOST: email-smtp.us-east-1.amazonaws.com
               SMTP_SECURE: tls
               SMTP_PORT: 587
