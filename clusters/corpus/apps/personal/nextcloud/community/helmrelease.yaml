@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: &app secret-chat
+  name: &app community-nextcloud
   namespace: flux-system
 spec:
   releaseName: *app
@@ -29,14 +29,14 @@ spec:
             longhorn: primary
 
         containers:
-          &db secret-chat-db:
+          &db community-nextcloud-db:
             image:
               repository: mariadb
               tag: "10.8"
               pullPolicy: Always
             envFrom:
               - secretRef:
-                  name: secret-chat-db
+                  name: community-nextcloud-db
             resources:
               requests:
                 cpu: 10m
@@ -50,30 +50,28 @@ spec:
           reloader.stakater.com/auto: "true"
 
         containers:
-          &app secret-chat-app:
+          &app community-nextcloud-app:
             image:
               repository: nextcloud
-              tag: &secretchatver "33.0.0"
+              tag: &nccommunityver "33.0.0"
               pullPolicy: Always
             securityContext:
               privileged: true
-            env:
+            env: &ncenv
               PHP_OPCACHE_MEMORY_CONSUMPTION: "256"
-              TRUSTED_PROXIES: 127.0.0.1 172.23.0.0/16
-              OVERWRITE_PROTOCOL: https
               SMTP_HOST: email-smtp.us-east-1.amazonaws.com
               SMTP_SECURE: tls
               SMTP_PORT: 587
             envFrom:
               - secretRef:
-                  name: secret-chat-config
+                  name: community-nextcloud-config
             resources:
               requests:
                 cpu: &nccpurequest 100m
               limits:
                 memory: &ncmemlimit 4Gi
 
-          &cache secret-chat-cache:
+          &cache community-nextcloud-cache:
             image:
               repository: redis
               tag: "8.6"
@@ -85,14 +83,13 @@ spec:
               limits:
                 memory: 256Mi
 
-          &worker secret-chat-worker:
+          &worker community-nextcloud-worker:
             image:
               repository: nextcloud
-              tag: *secretchatver
+              tag: *nccommunityver
               pullPolicy: Always
             command: ["/bin/bash", "-c"]
-            env:
-              PHP_OPCACHE_MEMORY_CONSUMPTION: "256"
+            env: *ncenv
             args:
               - |
                 ops=(
@@ -121,14 +118,14 @@ spec:
                 memory: *ncmemlimit
 
           # Requires https://github.com/nextcloud/notify_push to be installed
-          &push secret-chat-push:
+          &push community-nextcloud-push:
             image:
               repository: nextcloud
-              tag: *secretchatver
+              tag: *nccommunityver
               pullPolicy: Always
             command: ["/bin/bash", "-c"]
             env:
-              PHP_OPCACHE_MEMORY_CONSUMPTION: "256"
+              <<: *ncenv
               NEXTCLOUD_URL: http://127.0.0.1
             args:
               - |
@@ -144,7 +141,7 @@ spec:
                 echo -e "$${grey}Waiting a few seconds for services to start$${reset}"
                 sleep 10
                 echo -e "$${grey}Testing if push app is configured"
-                op="notify_push:setup https://secret.${chat_domain}/push"
+                op="notify_push:setup https://${social_domain}/push"
                 while ! su www-data -s /usr/local/bin/php -- occ "notify_push:self-test"; do
                   echo -e "$${grey}Self-test failed, running php occ $op $reset"
                   if ! su www-data -s /usr/local/bin/php -- occ $op; then
@@ -163,13 +160,13 @@ spec:
     persistence:
       # MariaDB
       db:
-        existingClaim: secret-chat-mariadb-longhorn-database
+        existingClaim: community-nextcloud-mariadb-longhorn-database
         advancedMounts:
           db:
             *db :
               - path: /var/lib/mysql
       db-config:
-        name: secret-chat-db-config
+        name: community-nextcloud-db-config
         type: configMap
         advancedMounts:
           db:
@@ -179,7 +176,7 @@ spec:
 
       # Nextcloud
       data:
-        existingClaim: secret-chat-data-nas
+        existingClaim: community-nextcloud-data-nas
         advancedMounts:
           app:
             *app :
@@ -213,7 +210,7 @@ spec:
             *cache :
               - path: /data
       cache-config:
-        name: secret-chat-cache-config
+        name: community-nextcloud-cache-config
         type: configMap
         advancedMounts:
           app:
@@ -259,7 +256,7 @@ spec:
           external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
           external-dns.alpha.kubernetes.io/target: ${cloudflared_tunnel_uuid}.cfargotunnel.com
         hosts:
-          - host: &host "secret.${chat_domain}"
+          - host: &host "${social_domain}"
             paths:
               - path: "/"
                 service:

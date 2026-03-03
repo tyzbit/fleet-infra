@@ -11,7 +11,7 @@ spec:
   wait: false
   prune: true
 
-  path: "./clusters/corpus/apps/personal/nextcloud"
+  path: "./clusters/corpus/apps/personal/nextcloud/personal"
   sourceRef:
     kind: GitRepository
     name: flux-system
