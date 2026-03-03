@@ -30,13 +30,6 @@ Steps:
         APIKey: "${new_relic_license_key}"
         CustomEventType: CustomACARS
 
-  - Send:
-      Webhook:
-        URL: ${acars_webhook_url}
-        Method: POST
-        PayloadGoTemplate: |
-          {"subject": "corpus", "event":"{{index . "ACARSProcessor.MessageText"}}"}
-
   - Filter: { Builtin: { HasText: true } }
 
   # The decoders often submit duplicate messages as they're able to reassemble
