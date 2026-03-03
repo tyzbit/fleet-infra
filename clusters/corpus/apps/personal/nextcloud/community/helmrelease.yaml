@@ -73,6 +73,20 @@ spec:
               limits:
                 memory: &ncmemlimit 4Gi
 
+          community-nextcloud-talk-backend:
+            image:
+              repository: ghcr.io/nextcloud-releases/aio-talk
+              tag: "20260218_123804"
+              pullPolicy: Always
+            env:
+              NC_DOMAIN: ${social_domain}
+              TALK_HOST: talk-backend.${social_domain}
+              TZ: America/New_York
+              TALK_PORT: 3478
+            envFrom:
+              - secretRef:
+                  name: community-nextcloud-config
+
           &cache community-nextcloud-cache:
             image:
               repository: redis
@@ -238,6 +252,20 @@ spec:
             primary: true
             port: 7867
 
+      talk:
+        controller: app
+        type: ClusterIP
+        ports:
+          http:
+            primary: true
+            port: 8081
+          talk-tcp:
+            port: 3478
+            protocol: TCP
+          talk-udp:
+            port: 3478
+            protocol: UDP
+
       db:
         controller: db
         type: ClusterIP
@@ -266,7 +294,14 @@ spec:
               - path: "/push"
                 service:
                   identifier: push
+          - host: &host2 "talk.${social_domain}"
+            paths:
+              - path: "/"
+                service:
+                  identifier: talk
+                  port: 8081
         tls:
           - hosts:
               - *host
+              - *host2
             secretName: *host
