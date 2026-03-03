@@ -255,7 +255,7 @@ spec:
       talk:
         controller: app
         type: ClusterIP
-        externalName: talk.secret.${chat_domain}
+        externalName: backend.secret.${chat_domain}
         annotations:
           external-dns.alpha.kubernetes.io/hostname: ${home_domain_ddns}
         ports:
@@ -301,7 +301,14 @@ spec:
               - path: "/"
                 service:
                   identifier: main
+          - host: &host2 "talk.secret.${chat_domain}"
+            paths:
+              - path: "/"
+                service:
+                  identifier: talk
+                  port: 8081
         tls:
           - hosts:
               - *host
+              - *host2
             secretName: *host
