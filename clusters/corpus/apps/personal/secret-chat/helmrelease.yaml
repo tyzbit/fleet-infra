@@ -76,7 +76,7 @@ spec:
           secret-chat-talk-backend:
             image:
               repository: ghcr.io/nextcloud-releases/aio-talk
-              tag: ghcr.io/nextcloud-releases/aio-talk
+              tag: 20260218_123804
               pullPolicy: Always
             env:
               NC_DOMAIN: secret.${chat_domain}
