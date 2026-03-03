@@ -86,6 +86,7 @@ spec:
             envFrom:
               - secretRef:
                   name: secret-chat-config
+
           &cache secret-chat-cache:
             image:
               repository: redis
