@@ -294,7 +294,7 @@ spec:
               - path: "/"
                 service:
                   identifier: main
-          - host: &host2 "talk.secret.${chat_domain}"
+          - host: &host2 "talk-secret.${chat_domain}"
             paths:
               - path: "/"
                 service:
