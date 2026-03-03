@@ -255,6 +255,8 @@ spec:
       talk:
         controller: app
         type: ClusterIP
+        annotations:
+          external-dns.alpha.kubernetes.io/hostname: ${home_domain_ddns}
         ports:
           http:
             primary: true
