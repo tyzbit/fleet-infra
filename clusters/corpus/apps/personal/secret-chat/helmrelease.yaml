@@ -80,7 +80,7 @@ spec:
               pullPolicy: Always
             env:
               NC_DOMAIN: secret.${chat_domain}
-              TALK_HOST: talk.secret.${chat_domain}
+              TALK_HOST: talk-secret.${chat_domain}
               TZ: America/New_York
               TALK_PORT: 3478
             envFrom:
