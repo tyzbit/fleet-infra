@@ -39,3 +39,11 @@ data:
                   - name: 'Last Timestamp'
                     value: '{{ .LastTimestamp }}'
                     inline: false
+      - name: "Home Assistant"
+        webhook:
+          endpoint: "${home_assistant_event_webhook}"
+          headers:
+            User-Agent: kube-event-exporter 1.0
+          layout:
+            subject: workbench
+            event: "{{ .Type }}: ({{ .Reason }}) {{ .Message }}"
