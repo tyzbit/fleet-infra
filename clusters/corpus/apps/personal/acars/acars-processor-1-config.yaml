@@ -1298,10 +1298,7 @@ Steps:
         PayloadGoTemplate: >-
           {
             "subject": "acars", 
-            "event": "From Tail Code: {{index . "ACARSProcessor.TailCode"}}{{if
-            ne 0.0 (index . "ACARSProcessor.AircraftDistanceMi")}} from {{printf
-            "%.2f" (index . "ACARSProcessor.AircraftDistanceMi")}} miles
-            away{{end}}\n{{index . "ACARSProcessor.MessageText"}}"
+            "event": "{{index . "ACARSProcessor.MessageText"}}"
           }
 
   # Also send to New Relic as a human message
