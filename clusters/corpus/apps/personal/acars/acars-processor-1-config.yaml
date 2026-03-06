@@ -1298,7 +1298,7 @@ Steps:
         PayloadGoTemplate: >-
           {
             "subject": "acars", 
-            "event": "{{index . "ACARSProcessor.MessageText"}}"
+            "event": "{{index . "ACARSProcessor.MessageText" | printf "%.250s" }}"
           }
 
   # Also send to New Relic as a human message
