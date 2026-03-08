@@ -32,6 +32,7 @@ spec:
             env:
               PORT: &port 5000
               PLAYWRIGHT_DRIVER_URL: ws://localhost:3000
+              ALLOW_IANA_RESTRICTED_ADDRESSES: "true"
             # resources:
             #   requests:
             #     cpu: 10m
