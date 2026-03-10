@@ -69,9 +69,9 @@ spec:
                   name: nextcloud-config
             resources:
               requests:
-                cpu: &nccpurequest 100m
+                cpu: 100m
               limits:
-                memory: &ncmemlimit 4Gi
+                memory: 4Gi
 
           &cache nextcloud-cache:
             image:
@@ -115,9 +115,9 @@ spec:
                 while :; do /cron.sh; done
             resources:
               requests:
-                cpu: *nccpurequest
+                cpu: 10m
               limits:
-                memory: *ncmemlimit
+                memory: 256Mi
 
           # Requires https://github.com/nextcloud/notify_push to be installed
           &push nextcloud-push:
@@ -155,9 +155,9 @@ spec:
                 wait $pid
             resources:
               requests:
-                cpu: *nccpurequest
+                cpu: 10m
               limits:
-                memory: *ncmemlimit
+                memory: 256Mi
 
     persistence:
       # MariaDB

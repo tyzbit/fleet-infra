@@ -71,7 +71,7 @@ spec:
               requests:
                 cpu: &nccpurequest 100m
               limits:
-                memory: &ncmemlimit 4Gi
+                memory: 4Gi
 
           community-nextcloud-talk-backend:
             image:
@@ -131,7 +131,7 @@ spec:
               requests:
                 cpu: *nccpurequest
               limits:
-                memory: *ncmemlimit
+                memory: 256Mi
 
           # Requires https://github.com/nextcloud/notify_push to be installed
           &push community-nextcloud-push:
@@ -171,7 +171,7 @@ spec:
               requests:
                 cpu: *nccpurequest
               limits:
-                memory: *ncmemlimit
+                memory: 256Mi
 
     persistence:
       # MariaDB
