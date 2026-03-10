@@ -41,7 +41,7 @@ spec:
             env:
               SERIALS: "98941503" # Naked SDR
               STATEFULSETS: >-
-                adsb-flightradar24, adsb-ultrafeeder
+                adsb-flightradar24,adsb-ultrafeeder
       #                adsb-dump978,
       ultrafeeder:
         <<: *common_settings
