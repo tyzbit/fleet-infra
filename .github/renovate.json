@@ -98,6 +98,15 @@
       "matchPackagePatterns": ["external-snapshotter", "snapshot-controller"],
       "additionalBranchPrefix": "",
       "separateMinorPatch": true
+    },
+    {
+      "description": "Auto-merge GitHub Releases",
+      "matchDatasources": ["docker"],
+      "automerge": true,
+      "automergeType": "branch",
+      "matchUpdateTypes": ["patch"],
+      "matchPackageNames": ["/reflector/"],
+      "ignoreTests": true
     }
   ]
 }
