@@ -101,11 +101,11 @@
     },
     {
       "description": "Auto-merge GitHub Releases",
-      "matchDatasources": ["docker"],
+      "matchDatasources": ["github-releases"],
       "automerge": true,
       "automergeType": "branch",
       "matchUpdateTypes": ["patch"],
-      "matchPackageNames": ["/reflector/"],
+      "matchPackageNames": ["/kubernetes-reflector/"],
       "ignoreTests": true
     }
   ]
