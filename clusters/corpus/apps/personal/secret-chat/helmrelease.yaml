@@ -20,7 +20,7 @@ spec:
   values:
     controllers:
       db:
-        replicas: 1 # active longhorn
+        replicas: 0 # active longhorn
         type: statefulset
         annotations:
           reloader.stakater.com/auto: "true"
@@ -44,7 +44,7 @@ spec:
                 memory: 1Gi
 
       app:
-        replicas: 1
+        replicas: 0
         type: statefulset
         annotations:
           reloader.stakater.com/auto: "true"
@@ -251,7 +251,7 @@ spec:
           http:
             primary: true
             port: 7867
-            
+
       talk:
         controller: app
         type: ClusterIP

@@ -36,7 +36,7 @@ spec:
     controllers:
       "mongo":
         <<: *longhorncontroller
-        replicas: 1 # active longhorn
+        replicas: 0 # active longhorn
         containers:
           revolt-mongo:
             image:
@@ -48,7 +48,7 @@ spec:
             resources: { requests: { cpu: 10m }, limits: { memory: 512Mi } }
       "redis":
         <<: *longhorncontroller
-        replicas: 1 # active longhorn
+        replicas: 0 # active longhorn
         containers:
           revolt-redis:
             image:
@@ -58,7 +58,7 @@ spec:
             resources: { requests: { cpu: 10m }, limits: { memory: 128Mi } }
       "rabbit":
         <<: *longhorncontroller
-        replicas: 1 # active longhorn
+        replicas: 0 # active longhorn
         containers:
           revolt-rabbit:
             image:
@@ -74,7 +74,7 @@ spec:
             resources: { requests: { cpu: 10m }, limits: { memory: 256Mi } }
       "minio":
         <<: *longhorncontroller
-        replicas: 1 # active longhorn
+        replicas: 0 # active longhorn
         containers:
           revolt-minio:
             command: [minio, server, /data]
@@ -98,7 +98,7 @@ spec:
             resources: { requests: { cpu: 10m }, limits: { memory: 1Gi } }
       "api":
         <<: *deploymentcontroller
-        replicas: 1
+        replicas: 0
         containers:
           revolt-api:
             image:
@@ -108,7 +108,7 @@ spec:
             resources: { requests: { cpu: 10m }, limits: { memory: 256Mi } }
       "events":
         <<: *deploymentcontroller
-        replicas: 1
+        replicas: 0
         containers:
           revolt-events:
             image:
@@ -118,7 +118,7 @@ spec:
             resources: { requests: { cpu: 10m }, limits: { memory: 128Mi } }
       "web":
         <<: *deploymentcontroller
-        replicas: 1
+        replicas: 0
         containers:
           revolt-web:
             command:
@@ -156,7 +156,7 @@ spec:
             resources: { requests: { cpu: 10m }, limits: { memory: 256Mi } }
       "file-server":
         <<: *deploymentcontroller
-        replicas: 1
+        replicas: 0
         containers:
           revolt-file-server:
             image:
@@ -167,7 +167,7 @@ spec:
             env: { RUST_LOG: info }
       "proxy":
         <<: *deploymentcontroller
-        replicas: 1
+        replicas: 0
         containers:
           revolt-proxy:
             image:
@@ -177,7 +177,7 @@ spec:
             resources: { requests: { cpu: 10m }, limits: { memory: 512Mi } }
       "gifbox":
         <<: *deploymentcontroller
-        replicas: 1
+        replicas: 0
         containers:
           revolt-gifbox:
             image:
@@ -187,7 +187,7 @@ spec:
             resources: { requests: { cpu: 10m }, limits: { memory: 512Mi } }
       "crond":
         <<: *deploymentcontroller
-        replicas: 1
+        replicas: 0
         containers:
           revolt-crond:
             image:
@@ -197,7 +197,7 @@ spec:
             resources: { requests: { cpu: 10m }, limits: { memory: 128Mi } }
       "pushd":
         <<: *deploymentcontroller
-        replicas: 1
+        replicas: 0
         containers:
           revolt-pushd:
             image:
@@ -207,7 +207,7 @@ spec:
             resources: { requests: { cpu: 10m }, limits: { memory: 128Mi } }
       "livekit":
         <<: *deploymentcontroller
-        replicas: 1
+        replicas: 0
         containers:
           revolt-livekit:
             image:
