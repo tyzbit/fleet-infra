@@ -60,6 +60,10 @@ camera_groups:
     cameras: [doorbell, garage]
     icon: LuTruck
     order: 2
+  "Front of House":
+    cameras: [doorbell, garage, sidegarage]
+    icon: LuHouse
+    order: 2
   "Just Doorbell":
     cameras: [doorbell]
     icon: LuBellRing
