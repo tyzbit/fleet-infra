@@ -154,7 +154,7 @@ cameras:
               0.493,0.539,0.471,0.53,0.379,0.533,0.347,0.53,
               0.29,0.545,0.417,0.527
             - &occasionalcar >- # the car that sometimes parks across the street
-              0.87,0.515,0.861,0.561,0.992,0.558,0.984,0.498
+              0.885,0.525,0.885,0.576,1,0.605,1,0.506
 
   sidegarage:
     enabled: true
