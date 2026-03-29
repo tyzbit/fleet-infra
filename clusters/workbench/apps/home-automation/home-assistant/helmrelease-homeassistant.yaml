@@ -86,6 +86,10 @@ spec:
         type: hostPath
         hostPath: &tty /dev/ttyACM0
         advancedMounts: { *app : { *app : [path: *tty] } }
+      meshtty1:
+        type: hostPath
+        hostPath: &tty1 /dev/ttyACM1
+        advancedMounts: { *app : { *app : [path: *tty1] } }
       dbus:
         type: hostPath
         hostPath: &dbus /run/dbus
