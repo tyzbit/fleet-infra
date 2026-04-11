@@ -325,9 +325,9 @@ spec:
             port: 5555
             protocol: UDP
           acarsoutput:
-            port: 15550
+            port: 5550
           vdsloutput:
-            port: 15555
+            port: 5555
 
     ingress:
       acarshub:
