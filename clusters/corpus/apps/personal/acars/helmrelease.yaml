@@ -232,11 +232,14 @@ spec:
           acarshub:
             image:
               repository: ghcr.io/sdr-enthusiasts/docker-acarshub
-              tag: v4-latest-build-68
+              # tag: v4-latest-build-68
+              tag: v3.8.0Build1379_nohealthcheck
             env:
               TZ: Etc/UTC
               ENABLE_ADSB: "true"
               ADSB_URL: http://adsb-ultrafeeder/data/aircraft.json
+              # ACARS_CONNECTIONS: tcp://acars_processor:15550
+              # VDLM2_CONNECTIONS: tcp://acars_processor:15555
               ADSB_LAT: ${my_latitude}
               ADSB_LON: ${my_longitude}
               ENABLE_ACARS: external

@@ -12,10 +12,10 @@ ACARSProcessorSettings:
     MaxConcurrentRequests: 1
     ACARS:
       Host: &acarshubhost acars-acarshub
-      Port: 5550
+      Port: 15550
     VDLM2:
       Host: *acarshubhost
-      Port: 5555
+      Port: 15555
 
 Steps:
   # Add geolocation if my local ADS-B receiver has information for the aircraft
@@ -1299,8 +1299,7 @@ Steps:
           {
             "subject": "acars", 
             "event": "{{index . "ACARSProcessor.MessageText" | printf "%.250s"
-          }}"
-          }
+          }}" }
 
   # Also send to New Relic as a human message
   - Send:
