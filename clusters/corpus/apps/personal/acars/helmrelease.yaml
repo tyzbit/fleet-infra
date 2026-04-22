@@ -294,9 +294,11 @@ spec:
                   },
                 ],
             }
-      # acarshub:
-      #   existingClaim: acars-data-longhorn-webapp
-      #   advancedMounts: {acarshub: {acarshub: [path: /run/acars]}}
+      acarshub:
+        type: emptyDir
+        medium: Memory
+        sizeLimit: 128Mi
+        advancedMounts: {acarshub: {acarshub: [path: /run/acars]}}
 
     service:
       acarsrouter:
