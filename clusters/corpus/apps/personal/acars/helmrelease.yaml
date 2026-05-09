@@ -42,8 +42,7 @@ spec:
             command:
               - bash
               - -c
-              - netstat -punt | awk "NR > 2 && !/127\.0\.0\.1/ && !/::1/ {
-                found=1 } END { if (!found) exit 1 }"
+              - "s6-svstat /run/service/acarsdec/ | grep -qv ') 0 seconds'"
 
     controllers:
       acars-usb-watchdog:
