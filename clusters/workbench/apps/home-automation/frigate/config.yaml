@@ -53,7 +53,7 @@ camera_groups:
     icon: LuBird
     order: 0
   "All Cameras":
-    cameras: [doorbell, garage, sidegarage, backdeck, sunroom, sidefence]
+    cameras: [doorbell, garage, sidegarage, backdeck, sunroom]
     icon: LuRadar
     order: 1
   "Deliveries":
@@ -69,7 +69,7 @@ camera_groups:
     icon: LuBellRing
     order: 3
   "Backyard and Garage":
-    cameras: [backdeck, garage, sidegarage, sunroom, sidefence]
+    cameras: [backdeck, garage, sidegarage, sunroom]
     icon: LuDog
     order: 4
 
@@ -249,7 +249,7 @@ cameras:
           0.759,0.196,0.424,0.181,0.419,0,0.73,0,1,0
 
   sidefence:
-    enabled: true
+    enabled: false
     detect: *doorbelldetect
     ffmpeg: {inputs:
       [{path: rtsp://localhost:8554/sidefence, roles: [detect,record]}]}
