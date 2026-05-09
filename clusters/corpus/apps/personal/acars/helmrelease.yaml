@@ -42,7 +42,7 @@ spec:
             command:
               - bash
               - -c
-              - "s6-svstat /run/service/acarsdec/ | grep -qv ') 0 seconds'"
+              - "s6-svstat /run/service/acarsdec | grep -qv ') 0 seconds'"
 
     controllers:
       acars-usb-watchdog:
@@ -169,7 +169,19 @@ spec:
               FREQUENCIES: 136.650;136.975;136.800;136.100;136.675
               ZMQ_MODE: client
               ZMQ_ENDPOINT: tcp://acars-acarsrouter:35555
-            probes: *probes
+            probes: &vdlprobes
+              liveness:
+                enabled: true
+                custom: true
+                spec:
+                  initialDelaySeconds: 60
+                  periodSeconds: 30
+                  failureThreshold: 3
+                  exec:
+                    command:
+                      - bash
+                      - -c
+                      - "s6-svstat /run/service/dumpvdl2 | grep -qv ') 0 seconds'"
             resources:
               requests:
                 cpu: 10m
@@ -196,7 +208,7 @@ spec:
               FREQUENCIES: "136.725;136.775;136.825;136.875;136.975"
               ZMQ_MODE: client
               ZMQ_ENDPOINT: tcp://acars-acarsrouter:35555
-            probes: *probes
+            probes: *vdlprobes
             resources:
               requests:
                 cpu: 10m
