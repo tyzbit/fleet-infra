@@ -36,13 +36,13 @@ spec:
         custom: true
         spec:
           initialDelaySeconds: 60
-          periodSeconds: 30
+          periodSeconds: 10
           failureThreshold: 3
           exec:
             command:
               - bash
               - -c
-              - "s6-svstat /run/service/acarsdec | grep -qv ') 0 seconds'"
+              - "s6-svstat /run/service/acarsdec | grep -qvE ') [0-9]{1} seconds'"
 
     controllers:
       acars-usb-watchdog:
@@ -175,13 +175,13 @@ spec:
                 custom: true
                 spec:
                   initialDelaySeconds: 60
-                  periodSeconds: 30
+                  periodSeconds: 10
                   failureThreshold: 3
                   exec:
                     command:
                       - bash
                       - -c
-                      - "s6-svstat /run/service/dumpvdl2 | grep -qv ') 0 seconds'"
+                      - "s6-svstat /run/service/dumpvdl2 | grep -qvE ') [0-9]{1} seconds'"
             resources:
               requests:
                 cpu: 10m
