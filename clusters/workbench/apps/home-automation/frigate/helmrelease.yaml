@@ -53,15 +53,17 @@ spec:
               - path: /media/frigate
               - path: /config/model_cache
                 subPath: model_cache
-      config:
-        name: frigate-config
-        type: configMap
-        advancedMounts:
-          *app :
-            *app :
               - path: /config/config.yml
-                readOnly: true
                 subPath: config.yml
+      # config:
+      #   name: frigate-config
+      #   type: configMap
+      #   advancedMounts:
+      #     *app :
+      #       *app :
+      #         - path: /config/config.yml
+      #           readOnly: true
+      #           subPath: config.yml
       usb:
         type: hostPath
         hostPath: /dev/bus/usb
