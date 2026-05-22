@@ -205,6 +205,7 @@ spec:
               TZ: Etc/UTC
               ALTITUDE: "0"
               LOCATION_NAME: "Origin"
+              ENABLE_HISTORICAL: "true"
               FEEDER_URL: http://adsb-ultrafeeder
               LATITUDE: ${my_latitude}
               LONGITUDE: ${my_longitude}
