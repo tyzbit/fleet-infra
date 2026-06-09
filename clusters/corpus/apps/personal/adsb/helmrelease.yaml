@@ -542,7 +542,7 @@ spec:
   chart:
     spec:
       chart: oauth2-proxy
-      version: "10.6.1"
+      version: "10.6.2"
       sourceRef:
         kind: HelmRepository
         name: oauth2-proxy
@@ -569,7 +569,7 @@ spec:
   chart:
     spec:
       chart: oauth2-proxy
-      version: "10.6.1"
+      version: "10.6.2"
       sourceRef:
         kind: HelmRepository
         name: oauth2-proxy
