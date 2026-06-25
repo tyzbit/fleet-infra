@@ -254,6 +254,75 @@ spec:
               limits:
                 memory: 4Gi
 
+      adsb3dpub:
+        <<: *common_settings
+        replicas: 1
+        containers:
+          adsb3d:
+            image:
+              repository: ghcr.io/hook-365/adsb-3d
+              # only `latest` available
+              tag: latest@sha256:0e8486086fbfea5db7a6ada9e7ed200a394b37ef50708cbc6c7f1a11292ef313
+            command:
+              - sh
+              - -c
+              - |
+                sed -i.old 's#127.0.0.11#172.23.64.10#g' /etc/nginx/conf.d/default.conf && 
+                /entrypoint.sh
+            env:
+              TZ: Etc/UTC
+              ALTITUDE: "0"
+              LOCATION_NAME: "Origin"
+              ENABLE_HISTORICAL: "true"
+              FEEDER_URL: https://globe.adsbexchange.com
+              LATITUDE: ${my_latitude}
+              LONGITUDE: ${my_longitude}
+            probes:
+              liveness:
+                enabled: true
+                port: 80
+              readiness:
+                enabled: true
+                port: 80
+            resources:
+              requests:
+                cpu: 10m
+                memory: 64Mi
+              limits:
+                memory: 64Mi
+
+      adsb3dpubtrack:
+        <<: *common_settings
+        replicas: 1
+        containers:
+          adsb3dtrack:
+            image:
+              repository: ghcr.io/hook-365/adsb-track-service
+              tag: latest@sha256:8c5b0d257a0b63b0b6166e38823c6516a8e5a263c5301a5fec8e570b9602581a # nothing else is available
+            env:
+              TZ: Etc/UTC
+              FEEDER_URL: http://adsb-ultrafeeder
+              COLLECTION_INTERVAL: "5"
+              DB_HOST: adsb-adsb3ddb
+              DB_PORT: "5432"
+              DB_NAME: adsb_tracks
+              DB_USER: adsb
+              DB_PASSWORD: ${adsb3ddb_password}
+            probes:
+              liveness:
+                enabled: true
+                port: 8000
+              readiness:
+                enabled: true
+                port: 8000
+            resources:
+              requests:
+                cpu: 10m
+                memory: 4Gi
+              limits:
+                memory: 4Gi
+
+
       # # Not live yet
       # adsb3dacars:
       #   <<: *common_settings
@@ -403,6 +472,18 @@ spec:
         ports:
           http:
             port: 8000
+      adsb3dpub:
+        controller: adsb3d
+        type: ClusterIP
+        ports:
+          http:
+            port: 80
+      adsb3dpubtrack:
+        controller: adsb3dtrack
+        type: ClusterIP
+        ports:
+          http:
+            port: 8000
       # adsb3dacars:
       #   controller: adsb3dacars
       #   type: ClusterIP
@@ -466,6 +547,53 @@ spec:
             secretName: *host
 
       adsb3d:
+        className: nginx
+        annotations:
+          nginx.ingress.kubernetes.io/auth-url: "http://adsb-adsb3dpub-oauth2-proxy.personal.svc.cluster.local/oauth2/auth"
+          nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
+          cert-manager.io/cluster-issuer: letsencrypt
+          nginx.ingress.kubernetes.io/use-regex: "true"
+          nginx.ingress.kubernetes.io/rewrite-target: /$1
+          external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+          external-dns.alpha.kubernetes.io/target: ${cloudflared_tunnel_uuid}.cfargotunnel.com
+          hajimari.io/enable: "true"
+          hajimari.io/icon: radar
+          hajimari.io/info: "Aircraft Map (3D)"
+          hajimari.io/targetBlank: "true"
+        hosts:
+          - host: &3dpubhost "adsb3dex.${personal_domain}"
+            paths:
+              - path: "/(data/.*)"
+                pathType: ImplementationSpecific
+                service:
+                  identifier: ultrafeeder
+                  port: 80
+              # - path: "/acars-api/(.*)"
+              #   pathType: ImplementationSpecific
+              #   service:
+              #     identifier: adsb3dacars
+              #     port: 8000
+              - path: "/api/(.*)"
+                pathType: ImplementationSpecific
+                service:
+                  identifier: adsb3dtrack
+                  port: 8000
+              - &3dpubpath
+                path: "/(.*)"
+                pathType: ImplementationSpecific
+                service:
+                  identifier: adsb3d
+                  port: 80
+              - <<: *3dpubpath
+                path: "/(photos/.*)"
+                pathType: ImplementationSpecific
+
+        tls:
+          - hosts:
+              - *3dpubhost
+            secretName: *3dpubhost
+
+      adsb3dpub:
         className: nginx
         annotations:
           nginx.ingress.kubernetes.io/auth-url: "http://adsb-adsb3d-oauth2-proxy.personal.svc.cluster.local/oauth2/auth"
