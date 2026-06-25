@@ -466,6 +466,12 @@ spec:
         advancedMounts:
           adsb3ddb:
             adsb3ddb: [{ path: /var/lib/postgresql/data, subPath: data }]
+      adsb3dpubdb:
+        existingClaim: adsb-3dpub-timescaledb-longhorn-database
+        advancedMounts:
+          adsb3ddb:
+            adsb3ddb: [{ path: /var/lib/postgresql/data, subPath: data }]
+
 
     service:
       ultrafeeder:
