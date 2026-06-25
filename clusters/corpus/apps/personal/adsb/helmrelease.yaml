@@ -295,7 +295,7 @@ spec:
         <<: *common_settings
         replicas: 1
         containers:
-          adsb3dtrack:
+          adsb3dpubtrack:
             image:
               repository: ghcr.io/hook-365/adsb-track-service
               tag: latest@sha256:8c5b0d257a0b63b0b6166e38823c6516a8e5a263c5301a5fec8e570b9602581a # nothing else is available
@@ -362,7 +362,7 @@ spec:
         pod: { nodeSelector: { adsb: "true" } }
         replicas: 1 # active longhorn-database
         containers:
-          adsb3ddb:
+          adsb3dpubdb:
             image:
               repository: timescale/timescaledb
               tag: 2.28.1-pg17
@@ -392,7 +392,7 @@ spec:
         pod: { nodeSelector: { adsb: "true" } }
         replicas: 1 # active longhorn-database
         containers:
-          adsb3ddb:
+          adsb3dpubdb:
             image:
               repository: timescale/timescaledb
               tag: 2.28.1-pg17
@@ -471,7 +471,6 @@ spec:
         advancedMounts:
           adsb3ddb:
             adsb3ddb: [{ path: /var/lib/postgresql/data, subPath: data }]
-
 
     service:
       ultrafeeder:
