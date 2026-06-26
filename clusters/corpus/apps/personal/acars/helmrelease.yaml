@@ -73,7 +73,7 @@ spec:
               repository: ghcr.io/sdr-enthusiasts/docker-acarsdec
               tag: latest-build-412
             env:
-              FEED_ID: TYZBIT-ACARS-1
+              FEED_ID: TYZBIT1
               DEVICE: "58322450"
               TZ: Etc/UTC
               SOAPYSDR: &soapy serial=$(DEVICE),driver=rtlsdr
@@ -102,7 +102,7 @@ spec:
               repository: ghcr.io/sdr-enthusiasts/docker-acarsdec
               tag: latest-build-412
             env:
-              FEED_ID: TYZBIT-ACARS-2
+              FEED_ID: TYZBIT1
               DEVICE: "30275839"
               TZ: Etc/UTC
               SOAPYSDR: *soapy
@@ -131,7 +131,7 @@ spec:
               repository: ghcr.io/sdr-enthusiasts/docker-acarsdec
               tag: latest-build-412
             env:
-              FEED_ID: TYZBIT-ACARS-3
+              FEED_ID: TYZBIT1
               DEVICE: "00000001"
               TZ: Etc/UTC
               SOAPYSDR: *soapy
@@ -160,7 +160,7 @@ spec:
               repository: ghcr.io/sdr-enthusiasts/docker-dumpvdl2
               tag: latest-build-348
             env:
-              FEED_ID: TYZBIT-VDL2-1
+              FEED_ID: TYZBIT1
               DEVICE: "13055074"
               TZ: Etc/UTC
               SOAPYSDR: *soapy
@@ -199,7 +199,7 @@ spec:
               repository: ghcr.io/sdr-enthusiasts/docker-dumpvdl2
               tag: latest-build-348
             env:
-              FEED_ID: TYZBIT-VDL2-2
+              FEED_ID: TYZBIT1
               DEVICE: "00000001"
               TZ: Etc/UTC
               SOAPYSDR: *soapy
