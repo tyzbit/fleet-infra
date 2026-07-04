@@ -81,6 +81,8 @@ spec:
                 done
                 echo "updated offline maps"
                 /tar1090-install.sh || true # we just need it to set up maps
+                cd /usr/local/share/tar1090/html-webroot
+                sed -i -e 's#https://www.planespotting.be/api/objects/imagesRegistration.php?registration=#/photo?aircraft=#g' script*
                 /init
             env:
               # https://github.com/sdr-enthusiasts/docker-adsb-ultrafeeder?tab=readme-ov-file#basic-ultrafeeder-parameters
@@ -137,6 +139,21 @@ spec:
                 memory: 128Mi
               limits:
                 memory: 512Mi
+
+      jetdev-wrapper:
+        <<: *common_settings
+        replicas: 1
+        containers:
+          jetdev-wrapper:
+            image:
+              repository: tyzbit/jetdev-wrapper
+              tag: latest
+            resources:
+              requests:
+                cpu: 10m
+                memory: 128Mi
+              limits:
+                memory: 128Mi
 
       dump978:
         <<: *common_settings
@@ -379,6 +396,12 @@ spec:
             port: 30005
           uat:
             port: 30978
+      jetdev-wrapper:
+        controller: jetdev-wrapper
+        type: ClusterIP
+        ports:
+          http:
+            port: 8080
       dump978:
         controller: dump978
         type: ClusterIP
@@ -438,6 +461,11 @@ spec:
                 service:
                   identifier: flightradar24
                   port: 8754
+              - path: /photos
+                pathType: Prefix
+                service:
+                  identifier: jetdev-wrapper
+                  port: 8080
               - path: "/"
                 pathType: Prefix
                 service:
