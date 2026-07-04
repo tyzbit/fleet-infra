@@ -140,11 +140,11 @@ spec:
               limits:
                 memory: 512Mi
 
-      jetdev-wrapper:
+      jetphotos:
         <<: *common_settings
         replicas: 1
         containers:
-          jetdev-wrapper:
+          jetphotos:
             image:
               repository: tyzbit/jetdev-wrapper
               tag: latest
@@ -396,8 +396,8 @@ spec:
             port: 30005
           uat:
             port: 30978
-      jetdev-wrapper:
-        controller: jetdev-wrapper
+      jetphotos:
+        controller: jetphotos
         type: ClusterIP
         ports:
           http:
@@ -464,7 +464,7 @@ spec:
               - path: /photos
                 pathType: Prefix
                 service:
-                  identifier: jetdev-wrapper
+                  identifier: jetphotos
                   port: 8080
               - path: "/"
                 pathType: Prefix
