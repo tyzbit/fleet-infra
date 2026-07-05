@@ -205,7 +205,7 @@ spec:
           roleRef:
             identifier: forgejo-runner
           subjects:
-            - identifier: forgejo-runner
+            - identifier: homeops-forgejo-runner
       roles:
         forgejo-runner:
           type: Role
