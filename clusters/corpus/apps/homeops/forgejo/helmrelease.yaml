@@ -200,7 +200,7 @@ spec:
 
     rbac:
       bindings:
-        forgejo-runner:
+        homeops-forgejo-runner:
           type: RoleBinding
           roleRef:
             identifier: homeops-forgejo-runner
