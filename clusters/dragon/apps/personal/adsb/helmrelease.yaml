@@ -1,4 +1,5 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-4.1.1/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-4.6.2/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -30,7 +31,7 @@ spec:
         replicas: 0
         containers:
           ultrafeeder:
-            securityContext: {privileged: true}
+            securityContext: { privileged: true }
             image:
               repository: ghcr.io/sdr-enthusiasts/docker-adsb-ultrafeeder
               tag: latest
@@ -76,7 +77,7 @@ spec:
               READSB_RTLSDR_DEVICE: stx:1090:0
               # readsb/decoder parameters: (these are in the secret)
               READSB_ALT: 3m
-              READSB_RX_LOCATION_ACCURACY: 2 
+              READSB_RX_LOCATION_ACCURACY: 2
               READSB_STATS_RANGE: "true"
               READSB_NET_BEAST_OUTPUT_PORT: "30005"
               READSB_JSON_TRACE_INTERVAL: "5"

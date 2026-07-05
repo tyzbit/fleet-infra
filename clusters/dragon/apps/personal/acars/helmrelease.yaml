@@ -1,4 +1,5 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-4.1.1/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-4.6.2/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -23,12 +24,12 @@ spec:
         reloader.stakater.com/auto: "true"
 
     controllers:
-      acarsdec: 
+      acarsdec:
         <<: *common_settings
         replicas: 0
         containers:
           acarsdec:
-            securityContext: {privileged: true}
+            securityContext: { privileged: true }
             image:
               repository: ghcr.io/sdr-enthusiasts/docker-acarsdec
               tag: latest-build-412
@@ -181,23 +182,18 @@ spec:
               FILTER_CRITERIA_HAS_TEXT: "true"
               # FILTER_CRITERIA_DICTIONARY_PHRASE_LENGTH_MINIMUM: "2"
               FILTER_OPENAI_PROMPT: >-
-                Does this end with text that looks like a message from one human to another?
+                Does this end with text that looks like a message from one human
+                to another?
               # FILTER_OPENAI_APIKEY: (set in envFrom)
               ACARS_ANNOTATOR_SELECTED_FIELDS: >-
-                acarsMessageText
-                acarsExtraPhotos
-                acarsExtraURL
+                acarsMessageText acarsExtraPhotos acarsExtraURL
                 acarsFlightNumber
               VDLM2_ANNOTATOR_SELECTED_FIELDS: >-
-                acarsMessageText
-                acarsExtraPhotos
-                acarsExtraURL
+                acarsMessageText acarsExtraPhotos acarsExtraURL
                 acarsFlightNumber
               TAR1090_ANNOTATOR_SELECTED_FIELDS: >-
-                tar1090AircraftDistanceMi
-                tar1090AircraftAltimeterGeometricFeet
-                tar1090AircraftNavModes
-                tar1090AircraftEmergency
+                tar1090AircraftDistanceMi tar1090AircraftAltimeterGeometricFeet
+                tar1090AircraftNavModes tar1090AircraftEmergency
             envFrom:
               - secretRef:
                   name: acars-processor2

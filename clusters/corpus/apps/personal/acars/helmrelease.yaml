@@ -1,4 +1,5 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-4.1.1/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-4.6.2/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -42,7 +43,8 @@ spec:
             command:
               - bash
               - -c
-              - "s6-svstat /run/service/acarsdec | grep -qvE ') [0-9]{1} seconds'"
+              - "s6-svstat /run/service/acarsdec | grep -qvE ') [0-9]{1}
+                seconds'"
 
     controllers:
       acars-usb-watchdog:
@@ -181,7 +183,8 @@ spec:
                     command:
                       - bash
                       - -c
-                      - "s6-svstat /run/service/dumpvdl2 | grep -qvE ') [0-9]{1} seconds'"
+                      - "s6-svstat /run/service/dumpvdl2 | grep -qvE ') [0-9]{1}
+                        seconds'"
             resources:
               requests:
                 cpu: 10m
