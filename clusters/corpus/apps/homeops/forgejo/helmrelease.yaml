@@ -203,9 +203,9 @@ spec:
         forgejo-runner:
           type: RoleBinding
           roleRef:
-            identifier: forgejo-runner
+            identifier: homeops-forgejo-runner
           subjects:
-            - identifier: forgejo-runner
+            - identifier: homeops-forgejo-runner
       roles:
         forgejo-runner:
           type: Role
