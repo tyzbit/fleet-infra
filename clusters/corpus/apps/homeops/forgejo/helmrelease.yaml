@@ -200,15 +200,17 @@ spec:
 
     rbac:
       bindings:
-        homeops-forgejo-runner:
+        orgejo-runner:
           type: RoleBinding
+          forceRename: forgejo-runner
           roleRef:
-            identifier: homeops-forgejo-runner
+            identifier: forgejo-runner
           subjects:
-            - identifier: homeops-forgejo-runner
+            - identifier: forgejo-runner
       roles:
         forgejo-runner:
           type: Role
+          forceRename: forgejo-runner
           rules:
             - apiGroups:
                 - ""
@@ -237,4 +239,6 @@ spec:
                 - get
 
     serviceAccount:
-      forgejo-runner: {}
+      forgejo-runner:
+        enabled: true
+        forceRename: forgejo-runner
