@@ -9,6 +9,15 @@ data:
     application-name: "Toot Now"
     host: "toot.now"
     account-domain: "toot.now"
+    instance-robots-allow-indexing: true
+
+    media-local-max-size: 200MiB
+    media-image-size-hint: 5MiB
+    media-video-size-hint: 100MiB
+    media-remote-max-size: 200MiB
+
+    media-emoji-local-max-size: 1MiB
+    media-emoji-remote-max-size: 1MiB
 
     protocol: "https"
     bind-address: "0.0.0.0"
