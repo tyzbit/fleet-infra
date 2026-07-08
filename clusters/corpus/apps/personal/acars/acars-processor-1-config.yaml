@@ -18,10 +18,15 @@ ACARSProcessorSettings:
       Port: 15555
 
 Steps:
-  # Add geolocation if my local ADS-B receiver has information for the aircraft
+  # # Add geolocation if my local ADS-B receiver has information for the aircraft
+  # - Annotate:
+  #     Tar1090:
+  #       URL: http://adsb-ultrafeeder
+  #       ReferenceGeolocation: "${my_latitude},${my_longitude}"
+
   - Annotate:
       Tar1090:
-        URL: http://adsb-ultrafeeder
+        URL: https://globe.adsbexchange.com
         ReferenceGeolocation: "${my_latitude},${my_longitude}"
 
   # Used for overall metrics and improving filters
