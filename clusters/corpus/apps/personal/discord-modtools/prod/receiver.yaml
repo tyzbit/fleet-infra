@@ -11,11 +11,11 @@ spec:
   secretRef:
     name: github-webhook-token
   resources:
-    - apiVersion: image.toolkit.fluxcd.io/v1beta2
+    - apiVersion: image.toolkit.fluxcd.io/v1
       kind: ImageRepository
       name: go-discord-modtools
       namespace: flux-system
-    - apiVersion: image.toolkit.fluxcd.io/v1beta1
+    - apiVersion: image.toolkit.fluxcd.io/v1
       kind: ImageUpdateAutomation
       name: flux-system
       namespace: flux-system
