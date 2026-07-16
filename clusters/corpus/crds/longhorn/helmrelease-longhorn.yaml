@@ -44,8 +44,8 @@ spec:
                   backupTarget: nfs://nas.home.arpa:/volume1/longhorn_corpus_backups
                   backupstore-poll-interval: 0
                   concurrent-automatic-engine-upgrade-per-node-limit: 3
-                  concurrent-replica-rebuild-per-node-limit: 10
-                  concurrent-volume-backup-restore-per-node-limit: 5
+                  concurrent-replica-rebuild-per-node-limit: 2
+                  concurrent-volume-backup-restore-per-node-limit: 2
                   create-default-disk-labeled-nodes: true
                   default-data-locality: best-effort
                   default-data-path: /var/lib/longhorn
