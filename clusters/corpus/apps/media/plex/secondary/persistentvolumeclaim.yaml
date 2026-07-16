@@ -6,7 +6,7 @@ metadata:
 spec:
   resources:
     requests:
-      storage: 60Gi
+      storage: 80Gi
   volumeMode: Filesystem
   storageClassName: longhorn-plex
   accessModes:
