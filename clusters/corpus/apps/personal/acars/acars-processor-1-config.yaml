@@ -37,19 +37,6 @@ Steps:
 
   - Filter: { Builtin: { HasText: true } }
 
-  - Send:
-      Webhook:
-        URL: ${acars_webhook_url}
-        Method: POST
-        Headers:
-          - Name: Content-Type
-            Value: application/json
-        PayloadGoTemplate: >-
-          {
-            "subject": "acars", 
-            "event": {{index . "ACARSProcessor.MessageText" | printf "%.2048q" }}
-          }
-
   # The decoders often submit duplicate messages as they're able to reassemble
   # the messages
   - Filter:
