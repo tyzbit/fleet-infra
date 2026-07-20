@@ -32,7 +32,7 @@ spec:
               tag: "0.55.8"
             env:
               PORT: &port 5000
-              PLAYWRIGHT_DRIVER_URL: ws://localhost:3000
+              PLAYWRIGHT_DRIVER_URL: ws://localhost:3000/chrome
               ALLOW_IANA_RESTRICTED_ADDRESSES: "true"
             # resources:
             #   requests:
@@ -60,6 +60,8 @@ spec:
               - name: CONNECTION_TIMEOUT
                 value: "300000"
               - name: MAX_CONCURRENT_SESSIONS
+                value: "10"
+              - name: MAX_CONCURRENT_CHROME_PROCESSES
                 value: "10"
               - name: CHROME_REFRESH_TIME
                 value: "600000"
