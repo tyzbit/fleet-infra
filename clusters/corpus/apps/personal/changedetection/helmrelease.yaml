@@ -44,8 +44,10 @@ spec:
           browser:
             image:
               pullPolicy: Always
-              repository: ghcr.io/browserless/chrome
-              tag: v2.55.0
+              # repository: ghcr.io/browserless/chrome
+              # tag: v2.55.0
+              repository: dgtlmoon/sockpuppetbrowser
+              tag: latest
             env:
               - name: SCREEN_WIDTH
                 value: "1920"
