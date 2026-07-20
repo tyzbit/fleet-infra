@@ -44,8 +44,8 @@ spec:
           browser:
             image:
               pullPolicy: Always
-              repository: docker.io/browserless/chrome
-              tag: "1-chrome-stable"
+              repository: ghcr.io/browserless/chrome
+              tag: v2.55.0
             env:
               - name: SCREEN_WIDTH
                 value: "1920"
