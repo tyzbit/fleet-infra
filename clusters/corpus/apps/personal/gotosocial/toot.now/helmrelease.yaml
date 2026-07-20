@@ -33,7 +33,7 @@ spec:
           *app :
             image:
               repository: docker.io/superseriousbusiness/gotosocial
-              tag: "0.22.0"
+              tag: "0.22.1"
             envFrom:
               # SMTP settings
               - secretRef:
