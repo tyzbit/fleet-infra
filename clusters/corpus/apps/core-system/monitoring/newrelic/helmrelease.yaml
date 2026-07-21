@@ -267,14 +267,6 @@ spec:
                 Match    kube.*
                 Exclude  log /PROPFIND/ 
 
-            # Filter ElectrumX ipv6 messages
-            [FILTER]
-                Name     grep
-                Match    kube.*
-                Logical_Op and
-                Exclude  log /Network unreachable/
-                Exclude  $kubernetes['container_name'] /(electrumx)/
-
             # Filter nextcloud GET messages on login
             [FILTER]
                 Name     grep
