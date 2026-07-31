@@ -42,3 +42,19 @@ spec:
   resources:
     requests:
       storage: 100Ti
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nas-volume1-switch
+  namespace: media
+spec:
+  volumeName: nas-volume1-media-switch-media
+  accessModes: 
+    - ReadWriteMany
+  volumeMode: Filesystem
+  storageClassName: ""
+  resources:
+    requests:
+      storage: 100Ti
+---
