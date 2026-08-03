@@ -223,8 +223,8 @@ spec:
               LOCATION_NAME: "Origin"
               ENABLE_HISTORICAL: "true"
               FEEDER_URL: http://adsb-ultrafeeder
-              LATITUDE: ${my_latitude}
-              LONGITUDE: ${my_longitude}
+              # LATITUDE: ${my_latitude}
+              # LONGITUDE: ${my_longitude}
             probes:
               liveness:
                 enabled: true
