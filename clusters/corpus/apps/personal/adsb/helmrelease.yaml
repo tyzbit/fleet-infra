@@ -223,6 +223,7 @@ spec:
               LOCATION_NAME: "Origin"
               ENABLE_HISTORICAL: "true"
               FEEDER_URL: http://adsb-ultrafeeder
+              HIDE_TOWER: "true"
               LATITUDE: "36.884018"
               LONGITUDE: "-76.204160"
             probes:
