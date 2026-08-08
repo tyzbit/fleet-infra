@@ -51,8 +51,8 @@ spec:
 
       media:
         existingClaim: nas-volume1-media
-      switch:
-        existingClaim: nas-volume1-switch
+      earthlings:
+        existingClaim: nas-volume1-earthlings
 
     service:
       main:
