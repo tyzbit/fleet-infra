@@ -5,7 +5,7 @@ metadata:
   namespace: media
 spec:
   volumeName: dri-pv-media
-  accessModes: 
+  accessModes:
     - ReadWriteMany
   volumeMode: Filesystem
   storageClassName: ""
@@ -20,7 +20,7 @@ metadata:
   namespace: media
 spec:
   volumeName: nas-volume1-media-media
-  accessModes: 
+  accessModes:
     - ReadWriteMany
   volumeMode: Filesystem
   storageClassName: ""
@@ -35,7 +35,7 @@ metadata:
   namespace: media
 spec:
   volumeName: nas-volume1-media-media-media
-  accessModes: 
+  accessModes:
     - ReadWriteMany
   volumeMode: Filesystem
   storageClassName: ""
@@ -50,7 +50,7 @@ metadata:
   namespace: media
 spec:
   volumeName: nas-volume1-media-switch-media
-  accessModes: 
+  accessModes:
     - ReadWriteMany
   volumeMode: Filesystem
   storageClassName: ""
