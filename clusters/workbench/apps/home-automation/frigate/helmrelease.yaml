@@ -46,16 +46,18 @@ spec:
                 memory: 12Gi
 
     persistence:
+      media:
+        existingClaim: nas-volume1-frigate
+        advancedMounts:
+          *app :
+            *app :
+              - path: /media/frigate
       data:
         existingClaim: frigate-data-nas
         advancedMounts:
           *app :
             *app :
-              - path: /media/frigate
-              - path: /config/model_cache
-                subPath: model_cache
-              - path: /config/config.yml
-                subPath: config.yml
+              - path: /config
       # config:
       #   name: frigate-config
       #   type: configMap
