@@ -70,8 +70,6 @@ spec:
         existingClaim: sabnzbd-config-longhorn-webapp
       media:
         existingClaim: nas-volume1-media
-      switch:
-        existingClaim: nas-volume1-switch
       intermediate:
         type: emptyDir
         # medium: Memory
