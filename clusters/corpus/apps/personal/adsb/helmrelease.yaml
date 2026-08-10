@@ -210,7 +210,7 @@ spec:
             image:
               repository: ghcr.io/hook-365/adsb-3d
               # only `latest` available
-              tag: latest@sha256:84ef8d57d581ab62f62b907842036eb20ea6be498117ec5a13a22ebca468e2a8
+              tag: latest@sha256:dc6177f991c45e326f4877cfdbc6b7186bb7b415189e94c1525966dfbfc02754
             command:
               - sh
               - -c
