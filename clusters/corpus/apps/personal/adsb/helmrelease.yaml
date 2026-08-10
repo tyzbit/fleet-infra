@@ -247,7 +247,7 @@ spec:
           adsb3dtrack:
             image:
               repository: ghcr.io/hook-365/adsb-track-service
-              tag: latest@sha256:c4be700a0da7c6dbbc8879dfb8aac2b19312e050c10564c20d6baa9d1bd33272 # nothing else is available
+              tag: latest@sha256:53fd773eec7ec04cd71cd480010b5e167836ae9f064dc4b0f6c0aa5de9eef13f # nothing else is available
             env:
               TZ: Etc/UTC
               FEEDER_URL: http://adsb-ultrafeeder
