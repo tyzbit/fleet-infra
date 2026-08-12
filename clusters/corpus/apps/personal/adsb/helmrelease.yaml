@@ -218,7 +218,8 @@ spec:
                 /entrypoint.sh &
                 sleep 1;
                 sed -i.old 's/127.0.0.11/172.23.64.10/g' /etc/nginx/conf.d/default.conf;
-                nginx -s reload
+                nginx -s reload;
+                wait 1
             env:
               TZ: Etc/UTC
               ALTITUDE: "0"
