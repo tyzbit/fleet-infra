@@ -219,7 +219,7 @@ spec:
                 sleep 1;
                 sed -i.old 's/127.0.0.11/172.23.64.10/g' /etc/nginx/conf.d/default.conf;
                 nginx -s reload;
-                pid=$(pidof nginx)
+                pid=$(pidof nginx | sed -E 's/[0-9 ]+(\d+)/\1/g')
                 wait $pid 
             env:
               TZ: Etc/UTC
