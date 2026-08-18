@@ -54,7 +54,7 @@ spec:
           &app nextcloud-app:
             image:
               repository: nextcloud
-              tag: &nextcloudver "34.0.2"
+              tag: &nextcloudver "34.0.3"
               pullPolicy: Always
             securityContext:
               privileged: true
