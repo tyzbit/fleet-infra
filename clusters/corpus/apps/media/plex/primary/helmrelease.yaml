@@ -44,7 +44,7 @@ spec:
           *app :
             image:
               repository: plexinc/pms-docker
-              tag: 1.43.3.10896-cb3ebc72d-amd64
+              tag: 1.43.3.10896-cb3ebc72d-armhf
             securityContext:
               privileged: true
             envFrom:
