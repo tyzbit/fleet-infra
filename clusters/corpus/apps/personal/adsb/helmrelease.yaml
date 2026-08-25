@@ -211,18 +211,9 @@ spec:
               repository: ghcr.io/hook-365/adsb-3d
               # only `latest` available
               tag: latest@sha256:9d0cce3a3837613935bc95f6177c111dfd7700d3ed5e91dd1ec7a25cbba78198
-            command:
-              - sh
-              - -c
-              - |
-                /entrypoint.sh &
-                sleep 1;
-                sed -i.old 's/127.0.0.11/172.23.64.10/g' /etc/nginx/conf.d/default.conf;
-                nginx -s reload;
-                pid=$(pidof nginx | sed -E 's/[0-9 ]+(\d+)/\1/g')
-                wait $pid 
             env:
               TZ: Etc/UTC
+              DNS_RESOLVER: 172.23.64.10
               ALTITUDE: "0"
               LOCATION_NAME: "Origin"
               ENABLE_HISTORICAL: "true"
