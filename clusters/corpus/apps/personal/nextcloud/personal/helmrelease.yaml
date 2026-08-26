@@ -100,6 +100,7 @@ spec:
                   "db:add-missing-indices"
                   "db:add-missing-columns"
                   "files:cleanup"
+                  "preview:pre-generate"
                 )
                 grey="\e[1;30m"
                 reset="\e[0m"
