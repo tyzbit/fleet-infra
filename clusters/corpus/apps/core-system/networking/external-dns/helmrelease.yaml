@@ -27,8 +27,7 @@ spec:
     txtPrefix: "k8s."
     sources: [ingress]
     extraArgs:
-      - --annotation-filter=external-dns.alpha.kubernetes.io/exclude notin
-        (true)
+      - --annotation-filter=external-dns.kubernetes.io/exclude notin (true)
       - --cloudflare-dns-records-per-page=5000
       - --txt-wildcard-replacement=dummy
       - --ignore-ingress-tls-spec

@@ -77,9 +77,9 @@ spec:
           nginx.ingress.kubernetes.io/proxy-send-timeout: "14400"
           # nginx.ingress.kubernetes.io/proxy-buffering: "off"
           # nginx.ingress.kubernetes.io/proxy-request-buffering: "off"
-          external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
-          # external-dns.alpha.kubernetes.io/target: ${cloudflared_tunnel_uuid}.cfargotunnel.com
-          external-dns.alpha.kubernetes.io/target: ${home_domain_ddns}
+          external-dns.kubernetes.io/cloudflare-proxied: "false"
+          # external-dns.kubernetes.io/target: ${cloudflared_tunnel_uuid}.cfargotunnel.com
+          external-dns.kubernetes.io/target: ${home_domain_ddns}
         hosts:
           - host: &host "mtx.${game_domain}"
             paths:

@@ -151,8 +151,8 @@ spec:
           nginx.ingress.kubernetes.io/proxy-connect-timeout: "20"
           nginx.ingress.kubernetes.io/proxy-read-timeout: "14400"
           nginx.ingress.kubernetes.io/proxy-send-timeout: "14400"
-          external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
-          external-dns.alpha.kubernetes.io/target: ${cloudflared_tunnel_uuid}.cfargotunnel.com
+          external-dns.kubernetes.io/cloudflare-proxied: "true"
+          external-dns.kubernetes.io/target: ${cloudflared_tunnel_uuid}.cfargotunnel.com
         hosts:
           - host: &host "home.${personal_domain}"
             paths:
