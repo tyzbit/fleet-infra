@@ -74,7 +74,7 @@ spec:
               limits:
                 memory: 4Gi
 
-          community-nextcloud-talk-backend:
+          &backend community-nextcloud-talk-backend:
             image:
               repository: ghcr.io/nextcloud-releases/aio-talk
               tag: "20260218_123804"
@@ -208,6 +208,8 @@ spec:
         advancedMounts:
           app:
             *app :
+              - path: /external/games
+            *worker :
               - path: /external/games
       socket:
         type: emptyDir
