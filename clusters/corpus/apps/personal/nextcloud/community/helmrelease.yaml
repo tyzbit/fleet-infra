@@ -49,12 +49,6 @@ spec:
         type: statefulset
         annotations:
           reloader.stakater.com/auto: "true"
-        pod:
-          securityContext:
-            fsGroup: 33
-            runAsGroup: 33
-            runAsUser: 33
-            fsGroupChangePolicy: OnRootMismatch
 
         containers:
           &app community-nextcloud-app:
