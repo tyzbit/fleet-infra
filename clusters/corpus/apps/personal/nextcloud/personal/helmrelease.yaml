@@ -119,7 +119,7 @@ spec:
               requests:
                 cpu: 10m
               limits:
-                memory: 256Mi
+                memory: 4Gi
 
           # Requires https://github.com/nextcloud/notify_push to be installed
           &push nextcloud-push:
