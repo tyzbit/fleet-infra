@@ -53,11 +53,10 @@ spec:
         existingClaim: nas-volume1-media
       games:
         existingClaim: nas-volume1-games
-      earthlings: # transitional
-        existingClaim: nas-volume1-games
         advancedMounts:
           *app :
             *app :
+              - path: /games
               - path: /earthlings/Games/
 
     service:
