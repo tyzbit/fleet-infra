@@ -20,7 +20,7 @@ spec:
   values:
     controllers:
       *app :
-        replicas: 1 # active nas
+        replicas: 0 # active nas
         type: statefulset
         annotations:
           reloader.stakater.com/auto: "true"
@@ -51,8 +51,14 @@ spec:
 
       media:
         existingClaim: nas-volume1-media
-      earthlings:
-        existingClaim: nas-volume1-earthlings
+      games:
+        existingClaim: nas-volume1-games
+      earthlings: # transitional
+        existingClaim: nas-volume1-games
+        advancedMounts:
+          *app :
+            *app :
+              - path: /earthlings/Games/
 
     service:
       main:

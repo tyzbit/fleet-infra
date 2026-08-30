@@ -52,7 +52,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: nas-volume1-media-earthlings
+  name: nas-volume1-media-games
   namespace: media
 spec:
   accessModes:
@@ -62,7 +62,7 @@ spec:
   capacity:
     storage: 100Ti
   nfs:
-    path: /volume1/cluster_storage/personal-community-nextcloud-data-nas/data/__groupfolders/1/files/
+    path: /volume1/games/
     server: nas.home.arpa
   persistentVolumeReclaimPolicy: Retain
   volumeMode: Filesystem

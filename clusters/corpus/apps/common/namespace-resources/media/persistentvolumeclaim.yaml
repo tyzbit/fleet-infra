@@ -46,10 +46,10 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: nas-volume1-earthlings
+  name: nas-volume1-games
   namespace: media
 spec:
-  volumeName: nas-volume1-media-earthlings
+  volumeName: nas-volume1-media-games
   accessModes:
     - ReadWriteMany
     - ReadWriteOnce

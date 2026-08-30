@@ -202,6 +202,13 @@ spec:
               - path: *datamount
             *push :
               - path: *datamount
+
+      games:
+        existingClaim: community-nextcloud-data-nas
+        advancedMounts:
+          app:
+            *app :
+              - path: /external/games
       socket:
         type: emptyDir
         medium: Memory
