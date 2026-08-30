@@ -211,6 +211,7 @@ spec:
               - path: /external/games
             *worker :
               - path: /external/games
+
       socket:
         type: emptyDir
         medium: Memory
