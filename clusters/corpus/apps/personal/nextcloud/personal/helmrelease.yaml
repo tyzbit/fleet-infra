@@ -114,7 +114,7 @@ spec:
                 echo -e "$${grey}Running php occ maintenance:repair --include-expensive $reset"
                 su www-data -s /usr/local/bin/php -- occ maintenance:repair --include-expensive && echo -en "$green" || echo -en "$red"
                 echo -e "Finished php occ maintenance:repair --include-expensive $reset"
-                echo "*/5 * * * * php occ preview:pre-generate" >> /var/spool/cron/crontabs/www-data
+                echo "*/5 * * * * php /var/www/html/occ preview:pre-generate" >> /var/spool/cron/crontabs/www-data
                 while :; do /cron.sh; done
             resources:
               requests:
