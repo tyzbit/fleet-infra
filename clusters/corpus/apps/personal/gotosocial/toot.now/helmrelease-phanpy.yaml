@@ -29,8 +29,8 @@ spec:
         containers:
           *app :
             image:
-              repository: "ghcr.io/jjgadgets/phanpy"
-              tag: rolling
+              repository: ghcr.io/jjgadgets/phanpy
+              tag: 2026.08.08.e6a2887
             resources:
               requests:
                 cpu: 10m
