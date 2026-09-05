@@ -31,7 +31,7 @@ spec:
           mariadb:
             image:
               repository: mariadb
-              tag: "10.8"
+              tag: "10.11"
             envFrom: [{ secretRef: { name: acars-processor-db } }]
             resources:
               requests:

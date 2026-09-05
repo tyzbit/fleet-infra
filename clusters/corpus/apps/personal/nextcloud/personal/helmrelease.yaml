@@ -33,7 +33,7 @@ spec:
           &db nextcloud-db:
             image:
               repository: mariadb
-              tag: "10.8"
+              tag: "10.11"
               pullPolicy: Always
             envFrom:
               - secretRef:
