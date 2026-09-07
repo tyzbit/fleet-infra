@@ -43,3 +43,19 @@ spec:
     requests:
       storage: 100Ti
 ---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nas-volume1-games
+  namespace: media
+spec:
+  volumeName: nas-volume1-media-games
+  accessModes:
+    - ReadWriteMany
+    - ReadWriteOnce
+  volumeMode: Filesystem
+  storageClassName: ""
+  resources:
+    requests:
+      storage: 100Ti
+---
