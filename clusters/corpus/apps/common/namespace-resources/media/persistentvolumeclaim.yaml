@@ -46,7 +46,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: nas-volume1-games
+  name: nas-volume1-media-games
   namespace: media
 spec:
   volumeName: nas-volume1-media-games

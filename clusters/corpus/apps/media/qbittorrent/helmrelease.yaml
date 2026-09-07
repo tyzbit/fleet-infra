@@ -52,7 +52,7 @@ spec:
       media:
         existingClaim: nas-volume1-media
       games:
-        existingClaim: nas-volume1-games
+        existingClaim: nas-volume1-media-games
         advancedMounts:
           *app :
             *app :
