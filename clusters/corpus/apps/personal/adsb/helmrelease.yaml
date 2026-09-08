@@ -210,7 +210,7 @@ spec:
             image:
               repository: ghcr.io/hook-365/adsb-3d
               # only `latest` available
-              tag: latest@sha256:9d0cce3a3837613935bc95f6177c111dfd7700d3ed5e91dd1ec7a25cbba78198
+              tag: latest@sha256:6def8d1cae2f9327fde5f55a8de45c84859c322b40d63c40bbd80abbe3e45336
             env:
               TZ: Etc/UTC
               DNS_RESOLVER: 172.23.64.10
