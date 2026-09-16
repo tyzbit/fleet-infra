@@ -215,6 +215,7 @@ spec:
               TZ: Etc/UTC
               ENABLE_ACARS: "true"
               DNS_RESOLVER: 172.23.64.10
+              CARTO_API_KEY: ${carto_api_key}
               ALTITUDE: "0"
               LOCATION_NAME: "Origin"
               ENABLE_HISTORICAL: "true"
