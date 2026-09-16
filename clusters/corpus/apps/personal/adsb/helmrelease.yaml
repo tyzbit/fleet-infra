@@ -246,6 +246,9 @@ spec:
             env:
               TZ: Etc/UTC
               FEEDER_URL: http://adsb-ultrafeeder
+              ACARS_HOST: acars-acarshub
+              ACARS_PORT: "15550"
+              STATION_ID: TYZBIT1
               COLLECTION_INTERVAL: "5"
               DB_HOST: adsb-adsb3ddb
               DB_PORT: "5432"
