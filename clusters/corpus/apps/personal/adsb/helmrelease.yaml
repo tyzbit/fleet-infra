@@ -242,13 +242,10 @@ spec:
           adsb3dtrack:
             image:
               repository: ghcr.io/hook-365/adsb-track-service
-              tag: latest@sha256:4359036023250d695d090679dd4fdb0214f623dfbf04b0774a7ddcd8cb523506 # nothing else is available
+              tag: latest@sha256:4359036023250d695d090679dd4fdb0214f623dfbf04b0774a7ddcd8cb523506
             env:
               TZ: Etc/UTC
               FEEDER_URL: http://adsb-ultrafeeder
-              ACARS_HOST: acars-acarshub
-              ACARS_PORT: "15550"
-              STATION_ID: TYZBIT1
               COLLECTION_INTERVAL: "5"
               DB_HOST: adsb-adsb3ddb
               DB_PORT: "5432"
@@ -269,37 +266,37 @@ spec:
               limits:
                 memory: 4Gi
 
-      # # Not live yet
-      # adsb3dacars:
-      #   <<: *common_settings
-      #   replicas: 1
-      #   containers:
-      #     adsb3dacars:
-      #       image:
-      #         repository: ghcr.io/hook-365/adsb-acars-service
-      #         tag: latest # nothing else is available
-      #       env:
-      #         TZ: Etc/UTC
-      #         ACARS_HOST: acars-acarshub
-      #         ACARS_PORT: "15550"
-      #         DB_HOST: adsb-adsb3ddb
-      #         DB_PORT: "5432"
-      #         DB_NAME: adsb_tracks
-      #         DB_USER: adsb
-      #         DB_PASSWORD: ${adsb3ddb_password}
-      #       probes:
-      #         liveness:
-      #           enabled: true
-      #           port: 8000
-      #         readiness:
-      #           enabled: true
-      #           port: 8000
-      #       resources:
-      #         requests:
-      #           cpu: 10m
-      #           memory: 256Mi
-      #         limits:
-      #           memory: 256Mi
+      adsb3dacars:
+        <<: *common_settings
+        replicas: 1
+        containers:
+          adsb3dacars:
+            image:
+              repository: ghcr.io/hook-365/adsb-acars-service
+              tag: latest@sha256:4359036023250d695d090679dd4fdb0214f623dfbf04b0774a7ddcd8cb523506
+            env:
+              TZ: Etc/UTC
+              ACARS_HOST: acars-acarshub
+              ACARS_PORT: "15550"
+              STATION_ID: TYZBIT1
+              DB_HOST: adsb-adsb3ddb
+              DB_PORT: "5432"
+              DB_NAME: adsb_tracks
+              DB_USER: adsb
+              DB_PASSWORD: ${adsb3ddb_password}
+            probes:
+              liveness:
+                enabled: true
+                port: 8000
+              readiness:
+                enabled: true
+                port: 8000
+            resources:
+              requests:
+                cpu: 10m
+                memory: 256Mi
+              limits:
+                memory: 256Mi
 
       adsb3ddb:
         type: statefulset
