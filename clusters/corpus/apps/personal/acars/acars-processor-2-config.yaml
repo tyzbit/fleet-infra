@@ -161,23 +161,23 @@ Steps:
   #         Based on these rules, should this message be forwarded?
 
   - Send:
-      Discord:
-        Embed: true
-        EmbedColorFacetFields: [ACARSProcessor.From]
-        # EmbedColorGradientField: ACARSProcessor.TailCode
-        URL: "${acars_development_discord_webhook}"
-        FormatText: true
-        FormatTimestamps: true
-        MessageGoTemplate: |
-          -# From [{{index . "ACARSProcessor.TailCode"}}]({{index . "ACARSProcessor.TrackingLink"}}){{if ne "" (index . "ACARSProcessor.FlightNumber")}} on flight {{index . "ACARSProcessor.FlightNumber"}}{{else}}{{end}} <t:{{index . "ACARSProcessor.UnixTimestamp"}}:R>{{if ne 0.0 (index . "ACARSProcessor.AircraftDistanceMi")}} from {{printf "%.2f" (index . "ACARSProcessor.AircraftDistanceMi")}} miles away{{else}}{{end}}.
-          ```
-          {{index . "ACARSProcessor.MessageText"}}
-          ```
-          Label: {{index . "ACARSProcessor.Label"}}
-          **Links**:
-          [Translate this message]({{index . "ACARSProcessor.TranslateLink"}})
-          [ACARSDrama messages from this aircraft]({{index . "ACARSProcessor.ACARSDramaTailNumberLink"}})
-          [Aircraft Photos]({{index . "ACARSProcessor.PhotosLink"}})
+      # Discord:
+      #   Embed: true
+      #   EmbedColorFacetFields: [ACARSProcessor.From]
+      #   # EmbedColorGradientField: ACARSProcessor.TailCode
+      #   URL: "${acars_development_discord_webhook}"
+      #   FormatText: true
+      #   FormatTimestamps: true
+      #   MessageGoTemplate: |
+      #     -# From [{{index . "ACARSProcessor.TailCode"}}]({{index . "ACARSProcessor.TrackingLink"}}){{if ne "" (index . "ACARSProcessor.FlightNumber")}} on flight {{index . "ACARSProcessor.FlightNumber"}}{{else}}{{end}} <t:{{index . "ACARSProcessor.UnixTimestamp"}}:R>{{if ne 0.0 (index . "ACARSProcessor.AircraftDistanceMi")}} from {{printf "%.2f" (index . "ACARSProcessor.AircraftDistanceMi")}} miles away{{else}}{{end}}.
+      #     ```
+      #     {{index . "ACARSProcessor.MessageText"}}
+      #     ```
+      #     Label: {{index . "ACARSProcessor.Label"}}
+      #     **Links**:
+      #     [Translate this message]({{index . "ACARSProcessor.TranslateLink"}})
+      #     [ACARSDrama messages from this aircraft]({{index . "ACARSProcessor.ACARSDramaTailNumberLink"}})
+      #     [Aircraft Photos]({{index . "ACARSProcessor.PhotosLink"}})
       NewRelic:
         APIKey: "${new_relic_license_key}"
         CustomEventType: CustomACARSDevMessages
