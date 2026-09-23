@@ -50,8 +50,8 @@ spec:
       className: nginx
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt
-        external-dns.kubernetes.io/cloudflare-proxied: "true"
-        external-dns.kubernetes.io/target: ${cloudflared_tunnel_uuid}.cfargotunnel.com
+        external-dns.kubernetes.io/cloudflare-proxied: "false"
+        external-dns.kubernetes.io/target: ${home_domain_ddns}
         nginx.ingress.kubernetes.io/proxy-body-size: 256m
       labels:
         use-cloudflare-dns-solver: "true"
