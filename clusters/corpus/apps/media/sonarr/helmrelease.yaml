@@ -69,8 +69,8 @@ spec:
           nginx.ingress.kubernetes.io/auth-url: "http://sonarr-oauth2-proxy.media.svc.cluster.local/oauth2/auth"
           nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
           cert-manager.io/cluster-issuer: letsencrypt
-          external-dns.kubernetes.io/cloudflare-proxied: "true"
-          external-dns.kubernetes.io/target: ${cloudflared_tunnel_uuid}.cfargotunnel.com
+          external-dns.kubernetes.io/cloudflare-proxied: "false"
+          external-dns.kubernetes.io/target: ${personal_services_ip}
         hosts:
           - host: &host "shows.${personal_domain}"
             paths:

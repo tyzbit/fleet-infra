@@ -443,8 +443,8 @@ spec:
           nginx.ingress.kubernetes.io/auth-url: "http://adsb-ultrafeeder-oauth2-proxy.personal.svc.cluster.local/oauth2/auth"
           nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
           cert-manager.io/cluster-issuer: letsencrypt
-          external-dns.kubernetes.io/cloudflare-proxied: "true"
-          external-dns.kubernetes.io/target: ${cloudflared_tunnel_uuid}.cfargotunnel.com
+          external-dns.kubernetes.io/cloudflare-proxied: "false"
+          external-dns.kubernetes.io/target: ${personal_services_ip}
           hajimari.io/enable: "true"
           hajimari.io/icon: radar
           hajimari.io/info: "Aircraft Map"
@@ -498,8 +498,8 @@ spec:
           cert-manager.io/cluster-issuer: letsencrypt
           nginx.ingress.kubernetes.io/use-regex: "true"
           nginx.ingress.kubernetes.io/rewrite-target: /$1
-          external-dns.kubernetes.io/cloudflare-proxied: "true"
-          external-dns.kubernetes.io/target: ${cloudflared_tunnel_uuid}.cfargotunnel.com
+          external-dns.kubernetes.io/cloudflare-proxied: "false"
+          external-dns.kubernetes.io/target: ${personal_services_ip}
           hajimari.io/enable: "true"
           hajimari.io/icon: radar
           hajimari.io/info: "Aircraft Map (3D)"

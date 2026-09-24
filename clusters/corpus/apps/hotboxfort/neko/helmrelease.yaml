@@ -88,8 +88,8 @@ spec:
           cert-manager.io/cluster-issuer: letsencrypt
           nginx.ingress.kubernetes.io/proxy-read-timeout: "14400"
           nginx.ingress.kubernetes.io/proxy-send-timeout: "14400"
-          external-dns.kubernetes.io/cloudflare-proxied: "true"
-          external-dns.kubernetes.io/target: ${cloudflared_tunnel_uuid}.cfargotunnel.com
+          external-dns.kubernetes.io/cloudflare-proxied: "false"
+          external-dns.kubernetes.io/target: ${public_services_ip}
         hosts:
           - host: movienight.${hotboxfort_domain}
             paths:

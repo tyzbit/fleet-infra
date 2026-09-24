@@ -78,8 +78,7 @@ spec:
           # nginx.ingress.kubernetes.io/proxy-buffering: "off"
           # nginx.ingress.kubernetes.io/proxy-request-buffering: "off"
           external-dns.kubernetes.io/cloudflare-proxied: "false"
-          # external-dns.kubernetes.io/target: ${cloudflared_tunnel_uuid}.cfargotunnel.com
-          external-dns.kubernetes.io/target: ${home_domain_ddns}
+          external-dns.kubernetes.io/target: ${personal_services_ip}
         hosts:
           - host: &host "mtx.${game_domain}"
             paths:
