@@ -11,7 +11,7 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt
     nginx.ingress.kubernetes.io/backend-protocol: HTTPS
     external-dns.kubernetes.io/cloudflare-proxied: "false"
-    external-dns.kubernetes.io/target: ${personal_services_ip}
+    external-dns.kubernetes.io/target: ${workbench_services_ip}
   labels:
     use-cloudflare-dns-solver: "true"
 spec:

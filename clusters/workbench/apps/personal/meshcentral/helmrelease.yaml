@@ -77,7 +77,7 @@ spec:
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt
           external-dns.kubernetes.io/cloudflare-proxied: "false"
-          external-dns.kubernetes.io/target: ${personal_services_ip}
+          external-dns.kubernetes.io/target: ${workbench_services_ip}
           nginx.ingress.kubernetes.io/proxy-body-size: 4096m
           nginx.ingress.kubernetes.io/backend-protocol: HTTPS
         hosts:
