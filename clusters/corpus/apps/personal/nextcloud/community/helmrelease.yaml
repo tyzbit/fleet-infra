@@ -77,7 +77,7 @@ spec:
           &backend community-nextcloud-talk-backend:
             image:
               repository: ghcr.io/nextcloud-releases/aio-talk
-              tag: "20260527_140826"
+              tag: "20260916_075031"
               pullPolicy: Always
             env:
               NC_DOMAIN: ${social_domain}
