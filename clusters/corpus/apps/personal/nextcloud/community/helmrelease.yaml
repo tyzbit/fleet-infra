@@ -314,5 +314,5 @@ spec:
         tls:
           - hosts:
               - *host
-              - *host2
+              - *talkhost
             secretName: *host
