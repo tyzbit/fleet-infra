@@ -81,7 +81,7 @@ spec:
               pullPolicy: Always
             env:
               NC_DOMAIN: ${social_domain}
-              TALK_HOST: talk-backend.${social_domain}
+              TALK_HOST: &talkhost talk-backend.${social_domain}
               TZ: America/New_York
               TALK_PORT: 3478
             envFrom:
@@ -305,7 +305,7 @@ spec:
               - path: "/push"
                 service:
                   identifier: push
-          - host: &host2 "talk.${social_domain}"
+          - host: *talkhost
             paths:
               - path: "/"
                 service:
