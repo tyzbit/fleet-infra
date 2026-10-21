@@ -16,7 +16,7 @@ spec:
   interval: 2m0s
   values:
     fullnameOverride: grav-${tech_blog_name}
-    replicaCount: 1 # active nas
+    replicaCount: 0 # active nas
     grav:
       image:
         repository: dsavell/grav
