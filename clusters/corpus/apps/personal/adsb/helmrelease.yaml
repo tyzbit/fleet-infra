@@ -223,6 +223,7 @@ spec:
               HIDE_TOWER: "true"
               LATITUDE: "36.884018"
               LONGITUDE: "-76.204160"
+              ROUTE_API_CONTACT: ${personal_email}
             probes:
               liveness:
                 enabled: true
