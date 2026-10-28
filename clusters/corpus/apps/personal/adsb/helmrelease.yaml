@@ -381,6 +381,11 @@ spec:
         advancedMounts:
           adsb3ddb:
             adsb3ddb: [{ path: /var/lib/postgresql/data, subPath: data }]
+      tiles:
+        type: emptyDir
+        advancedMounts:
+          adsb3d:
+            adsb3d: [{ path: /tiles }]
 
     service:
       ultrafeeder:
