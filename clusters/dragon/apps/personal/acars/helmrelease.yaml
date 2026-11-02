@@ -90,7 +90,7 @@ spec:
           acarsrouter:
             image:
               repository: ghcr.io/sdr-enthusiasts/acars_router
-              tag: 1.3.1_linux_amd64
+              tag: 1.3.1_linux_arm64
               pullPolicy: IfNotPresent
             env:
               TZ: Etc/UTC
