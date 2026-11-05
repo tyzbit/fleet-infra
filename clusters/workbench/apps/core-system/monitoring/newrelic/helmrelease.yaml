@@ -483,6 +483,14 @@ spec:
                 Exclude  log /does not generate unique IDs./
                 Exclude  $kubernetes['container_name'] home-assistant
 
+            # Filter home assistant DB
+            [FILTER]
+                Name     grep
+                Match    kube.*
+                Logical_Op and
+                Exclude  log InnoDB: IO Error: 5 during write of
+                Exclude  $kubernetes['container_name'] home-assistant-mariadb
+
             # Filter common frigate access logs
             [FILTER]
                 Name     grep
