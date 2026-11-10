@@ -121,6 +121,12 @@ spec:
         ports:
           sql:
             port: 3306
+      profiling:
+        controller: acars-processor-1
+        type: ClusterIP
+        ports:
+          prof:
+            port: 6060
       # postgres:
       #   forceRename: acars-processor-db-2
       #   controller: postgres
