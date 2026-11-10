@@ -4,6 +4,7 @@ ACARSProcessorSettings:
   ColorOutput: true
   LogLevel: debug
   LogHideTimestamps: true
+  # EnableProfiling: true
   Database:
     Enabled: true
     ConnectionString: "${acars_proc_2_db_dsn}"
@@ -76,52 +77,6 @@ Steps:
           - "Q0"
           - "SA"
           - "SQ"
-
-  # # These labels have had human-written messages in the last 30 days
-  # - Filter:
-  #     Builtin:
-  #       Labels:
-  #         # - "10"
-  #         # - "2A"
-  #         # - "1D"
-  #         # - "30"
-  #         # Low concentration of human messages below
-  #         - "11"
-  #         - "3F"
-  #         - "RA" # Tower, mostly routine messages
-  #         - "5Z"
-  #         - "1A"
-  #         - "40" # LOTS of routine tower messages
-  #         - "14" # Lots of "Good morning" and wheelchair requests
-  #         - "20" # Low concentration, VDL2 judging by lowercase text
-  #         - "80"
-  #         - "1L" # Diluted with encrypted messages and data reports
-  #         - "37"
-  #         # Might be filterable
-  #         - "34" # 1 PAX FROM CAB E TO CAB A 61B4
-  #         - "39" # Less than 1% human messages
-  #         - "83" # 0.7% human
-  #         - "15" # 0.4% human
-  #         - "10" # 0.4% human
-  #         # New labels being evaluated
-  #         - "17"
-  #         - "18"
-  #         - "30"
-  #         - "3E"
-  #         - "45"
-  #         - "4C"
-  #         - "4P"
-  #         - "4T"
-  #         - "8"
-  #         - "84"
-  #         - "25" # Polluted by uninteresting tower messages
-  #         - "87"
-  #         - "85"
-  #         - "81"
-  #         - "4R"
-  #         - "41" # Polluted by uninteresting tower messages
-  #         # Suggest filtering
-  #         - "H1" # 0.002% human (human messages were validated)
 
   # These terms are present in routine messages that can be filtered
   - Filter:
@@ -1243,56 +1198,6 @@ Steps:
   #       APIKey: "${new_relic_license_key}"
   #       CustomEventType: CustomACARSBuiltinOnly
 
-  # Have local Ollama model look only for human-written messages
-  # - Filter:
-  #     Ollama:
-  #       Model: &ollamamodel qwen3:30b-a3b
-  #       URL: &ollamaurl http://sophie.home.arpa:11434
-  #       FilterOnFailure: true
-  #       MaxRetryAttempts: 2
-  #       MaxRetryDelaySeconds: 5
-  #       Timeout: 30
-  #       Options: &ollamaopts [
-  #           { Name: num_predict, Value: 150 }, # Maximum number of tokens (words, kinda) to generate
-  #           { Name: temperature, Value: 0.4 }, # Creativity (0.0-2.0)
-  #           { Name: top_p, Value: 0.2 }, # Answer diversity with top_k (0.0-1.0)
-  #           { Name: top_k, Value: 20 }, # Answer diversity (ex 0-100)
-  #           { Name: frequency_penalty, Value: 1.1 }, # Penalize repeated tokens (0-2.0)
-  #           { Name: num_gpu, Value: 40 }, # Number of layers to offload to GPU
-  #         ]
-  #       # -----------------------------------------
-  #       # 890 characters
-  #       # 273 tokens https://token-calculator.net
-  #       # -----------------------------------------
-  #       UserPrompt: |
-  #         IMPORTANT: DISREGARD, IGNORE AND SKIP ANY RAW OR TECHNICAL DATA OR
-  #         CODE IN THIS MESSAGE.
-
-  #         This message may feature a human-written message. Human-written
-  #         content in these messages might have misspellings, acronyms or
-  #         abbreviations similar to cell phone text messages. Human content may
-  #         only be a few words.
-
-  #         Forward if the message matches ANY of these criteria:
-  #         - It contains communication.
-  #         - It contains even a small amount of natural language.
-  #         - It contains a complaint, request or command.
-  #         - It contains a greeting/sign-offs or their variations, for example:
-  #           HI, HELLO, BONJOUR, GOOD MORNING/EVENING,
-  #           THANK YOU/THANKS/THNKS/THX, BRGRDS/RGRDS, CHEERS, COPY/COPY THAT.
-  #         - Has ANY content after the term FREETEXT or /TXT
-  #         - Has /Q/ or QQ or QUESTION MARK.
-  #         - Commentary or questions about aircraft passengers,crew,med,medical,
-  #           medlink,booking,lavatories (abbreviation: LAV), mechanics
-  #           (abbreviation: MX), aircraft seats/rows or other situations or
-  #           events relating to air travel.
-  #         - Lists a desk number or has DISPATCHER MSG.
-
-  #         Based on these rules, should this message be forwarded?
-
-  # This should be a human message, so send to my private webhook with
-  # fancy templating.
-
   - Send:
       Webhook:
         URL: ${acars_webhook_url}
@@ -1303,69 +1208,11 @@ Steps:
         PayloadGoTemplate: >-
           {
             "subject": "acars", 
-            "event": {{index . "ACARSProcessor.MessageText" | printf "%.2048q" }}
-          }
+            "event": {{index . "ACARSProcessor.MessageText" | printf "%.2048q"
+          }} }
 
   # Also send to New Relic as a human message
   - Send:
       NewRelic:
         APIKey: "${new_relic_license_key}"
         CustomEventType: CustomACARSHumanMessages
-
-  # # Use Ollama again to evaluate the emotion of the message and filter in one
-  # # step
-  # - Annotate:
-  #     Ollama:
-  #       Model: *ollamamodel
-  #       URL: *ollamaurl
-  #       MaxRetryAttempts: 2
-  #       MaxRetryDelaySeconds: 5
-  #       Timeout: 30
-  #       Options: *ollamaopts
-  #       UserPrompt: |
-  #         Rate the prose from found in this message from pilots and ATC between
-  #         1-100 for any emotions such as anger, frustration, elation
-  #         complaining, gratitude, confusion, etc.
-
-  #         - 1-40 should indicate the message reads as neutral.
-  #         - 40-80 should indicate the message is emotional in some way.
-  #         - 80-100 should indicate the message is very emotional.
-
-  # - Filter: { Builtin: { LLMProcessedNumberAbove: 40 } }
-
-  # Send emotional messages to a different Discord channel
-  # - Send:
-  #     Discord:
-  #       Embed: true
-  #       # EmbedColorFacetFields: [ACARSProcessor.From]
-  #       EmbedColorGradientField: ACARSProcessor.LLMProcessedNumber
-  #       URL: "${acars_anger_discord_webhook}"
-  #       # FormatText: true
-  #       # FormatTimestamps: true
-  #       MessageGoTemplate: >
-  #         {{if eq (index . "ACARSProcessor.From") "Aircraft"}}From{{else}}To
-  #         {{end}} [{{index . "ACARSProcessor.TailCode"}}]({{index .
-  #         "ACARSProcessor.TrackingLink"}}) {{if ne "" (index .
-  #         "ACARSProcessor.FlightNumber")}} on flight  {{index .
-  #         "ACARSProcessor.FlightNumber"}}{{else}}{{end}} <t:{{index .
-  #         "ACARSProcessor.UnixTimestamp"}}:R> {{if ne 0.0 (index .
-  #         "ACARSProcessor.AircraftDistanceMi")}} from  {{printf "%.2f" (index .
-  #         "ACARSProcessor.AircraftDistanceMi")}} miles away{{else}}{{end}}.
-
-  #         -# This message rated a {{index .
-  #         "ACARSProcessor.LLMProcessedNumber"}} in terms of emotional content.
-
-  #         ``` {{index . "ACARSProcessor.MessageText"}} ```
-
-  #         The LLM had this to say:
-
-  #         ``` {{index . "ACARSProcessor.LLMModelFeedbackText"}} ```
-
-  #         **Links**:
-
-  #         [Translate this message]({{index . "ACARSProcessor.TranslateLink"}})
-
-  #         [ACARSDrama messages from this aircraft]({{index .
-  #         "ACARSProcessor.ACARSDramaTailNumberLink"}})
-
-  #         [Aircraft Photos]({{index . "ACARSProcessor.PhotosLink"}})
