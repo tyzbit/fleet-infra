@@ -4,6 +4,7 @@ ACARSProcessorSettings:
   ColorOutput: true
   LogLevel: debug
   LogHideTimestamps: true
+  MessageQueueSize: 10000
   ProfilingPort: 6060
   Database:
     Enabled: true
