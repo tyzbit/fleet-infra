@@ -82,7 +82,10 @@ spec:
               # See https://app.airframes.io/about
               # See also https://gist.github.com/tyzbit/8df46263085b0f3d9e2dd09069438f89
               FREQUENCIES: >-
-                131.725;131.550;131.425;131.125
+                131.125;
+                131.425;
+                131.550;
+                131.725;
               OUTPUT_SERVER: acars-acarsrouter
               OUTPUT_SERVER_PORT: "5550"
               OUTPUT_SERVER_MODE: tcp
@@ -111,7 +114,13 @@ spec:
               # See https://app.airframes.io/about
               # See also https://gist.github.com/tyzbit/8df46263085b0f3d9e2dd09069438f89
               FREQUENCIES: >-
-                130.025;130.450;130.825
+                129.125;
+                129.350;
+                129.525;
+                130.025;
+                130.425;
+                130.450;
+                130.825;
               OUTPUT_SERVER: acars-acarsrouter
               OUTPUT_SERVER_PORT: "5550"
               OUTPUT_SERVER_MODE: tcp
@@ -125,7 +134,7 @@ spec:
 
       acarsdec3:
         <<: *common_settings
-        replicas: 1
+        replicas: 0
         containers:
           acarsdec3:
             securityContext: *secopts
@@ -140,7 +149,9 @@ spec:
               # See https://app.airframes.io/about
               # See also https://gist.github.com/tyzbit/8df46263085b0f3d9e2dd09069438f89
               FREQUENCIES: >-
-                129.350;129.525;129.125
+                129.125;
+                129.350;
+                129.525;
               OUTPUT_SERVER: acars-acarsrouter
               OUTPUT_SERVER_PORT: "5550"
               OUTPUT_SERVER_MODE: tcp
@@ -168,7 +179,12 @@ spec:
               SOAPYSDR: *soapy
               # See https://app.airframes.io/about
               # See also https://gist.github.com/tyzbit/8df46263085b0f3d9e2dd09069438f89
-              FREQUENCIES: 136.650;136.975;136.800;136.100;136.675
+              FREQUENCIES: >-
+                136.650;
+                136.675;
+                136.700;
+                136.725;
+                136.800;
               ZMQ_MODE: client
               ZMQ_ENDPOINT: tcp://acars-acarsrouter:35555
             probes: &vdlprobes
@@ -194,7 +210,7 @@ spec:
 
       dumpvdl2-2:
         <<: *common_settings
-        replicas: 0
+        replicas: 1
         containers:
           dumpvdl2-2:
             securityContext: *secopts
@@ -208,7 +224,12 @@ spec:
               SOAPYSDR: *soapy
               # See https://app.airframes.io/about
               # See also https://gist.github.com/tyzbit/8df46263085b0f3d9e2dd09069438f89
-              FREQUENCIES: "136.725;136.775;136.825;136.875;136.975"
+              FREQUENCIES: >-
+                136.100;
+                136.775;
+                136.825;
+                136.875;
+                136.975;
               ZMQ_MODE: client
               ZMQ_ENDPOINT: tcp://acars-acarsrouter:35555
             probes: *vdlprobes
