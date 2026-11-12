@@ -67,10 +67,10 @@ spec:
             envFrom: &secret [secretRef: { name: acars-processor }]
             resources:
               requests:
-                cpu: 200m
-                memory: 1Gi
+                cpu: 10m
+                memory: 128Mi
               limits:
-                memory: 1Gi
+                memory: 128Mi
 
       acars-processor-2:
         <<: *common_settings
@@ -84,10 +84,10 @@ spec:
             envFrom: *secret
             resources:
               requests:
-                cpu: 200m
-                memory: 512Mi
+                cpu: 10m
+                memory: 128Mi
               limits:
-                memory: 512Mi
+                memory: 128Mi
 
     persistence:
       config-1:
