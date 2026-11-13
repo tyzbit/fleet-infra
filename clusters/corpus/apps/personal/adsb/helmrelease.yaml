@@ -499,8 +499,8 @@ spec:
       adsb3d:
         className: nginx
         annotations:
-          nginx.ingress.kubernetes.io/auth-url: "http://adsb-adsb3d-oauth2-proxy.personal.svc.cluster.local/oauth2/auth"
-          nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
+          # nginx.ingress.kubernetes.io/auth-url: "http://adsb-adsb3d-oauth2-proxy.personal.svc.cluster.local/oauth2/auth"
+          # nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
           cert-manager.io/cluster-issuer: letsencrypt
           nginx.ingress.kubernetes.io/use-regex: "true"
           nginx.ingress.kubernetes.io/rewrite-target: /$1
