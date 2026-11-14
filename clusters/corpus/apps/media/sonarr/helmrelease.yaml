@@ -37,8 +37,8 @@ spec:
         containers:
           *app :
             image:
-              repository: ghcr.io/onedr0p/sonarr-develop
-              tag: "4.0.14.2938"
+              repository: ghcr.io/home-operations/sonarr
+              tag: 5.0.0.2941
             env:
               TZ: America/New_York
               SONARR__AUTHENTICATION_METHOD: External
