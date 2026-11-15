@@ -319,10 +319,11 @@ spec:
                 echotop18,
                 echotop30,
                 freezing,
+                bbtop,
+                bbbottom,
                 preciprate,
                 preciptype,
                 mesh,
-                rotation,
                 lightning
             probes:
               liveness:
