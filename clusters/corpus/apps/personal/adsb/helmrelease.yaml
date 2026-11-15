@@ -306,10 +306,10 @@ spec:
         <<: *common_settings
         replicas: 1
         containers:
-          adsb3dacars:
+          adsb3dweather:
             image:
-              repository: ghcr.io/hook-365/adsb-acars-service
-              tag: latest@sha256:c765c9bbcde79b7317e84d983d12cd4ff34e1eb0c450061125a84b9c8e4db15c
+              repository: ghcr.io/hook-365/adsb-weather-service
+              tag: latest@sha256:38d2c17321406b59cd3238ed4cfac380d8ecb1886b20af7d749de314aaa2bc84
             env:
               TZ: Etc/UTC
               LATITUDE: "36.884018"
@@ -473,6 +473,12 @@ spec:
         ports:
           http:
             port: 8000
+      adsb3dweather:
+        controller: adsb3dweather
+        type: ClusterIP
+        ports:
+          http:
+            port: 8000
       adsb3ddb:
         controller: adsb3ddb
         type: ClusterIP
@@ -586,24 +592,6 @@ spec:
               - *3dhost
             secretName: *3dhost
 
-      oauth3d:
-        className: nginx
-        annotations:
-          external-dns.kubernetes.io/exclude: "true"
-        labels:
-          use-cloudflare-dns-solver: "true"
-        hosts:
-          - host: *3dhost
-            paths:
-              - path: "/oauth2"
-                pathType: Prefix
-                service:
-                  name: adsb-adsb3d-oauth2-proxy
-                  port: 80
-        tls:
-          - hosts:
-              - *3dhost
-            secretName: *3dhost
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
@@ -631,30 +619,3 @@ spec:
       cookie-expire: 8760h # one year
     config:
       existingSecret: adsb-ultrafeeder-oauth2-proxy
----
-apiVersion: helm.toolkit.fluxcd.io/v2
-kind: HelmRelease
-metadata:
-  name: &name adsb-adsb3d-oauth2-proxy
-  namespace: flux-system
-spec:
-  targetNamespace: personal
-  releaseName: *name
-  chart:
-    spec:
-      chart: oauth2-proxy
-      version: "10.7.2"
-      sourceRef:
-        kind: HelmRepository
-        name: oauth2-proxy
-        namespace: flux-system
-  interval: 2m0s
-  values:
-    replicaCount: 1
-    extraArgs:
-      provider: github
-      github-org: "${blog_name}"
-      github-team: "super-admins,adsb-3d"
-      cookie-expire: 8760h # one year
-    config:
-      existingSecret: adsb3d-ultrafeeder-oauth2-proxy
