@@ -122,6 +122,7 @@ spec:
               # GRAPHS1090 (Decoder and System Status Web Page) parameters:
               GRAPHS1090_DISABLE: "true"
               GRAPHS1090_DARKMODE: "true"
+              ENABLE_WEATHER3D: "true"
             probes:
               liveness:
                 enabled: true
@@ -300,6 +301,43 @@ spec:
                 memory: 256Mi
               limits:
                 memory: 256Mi
+
+      adsb3dweather:
+        <<: *common_settings
+        replicas: 1
+        containers:
+          adsb3dacars:
+            image:
+              repository: ghcr.io/hook-365/adsb-acars-service
+              tag: latest@sha256:c765c9bbcde79b7317e84d983d12cd4ff34e1eb0c450061125a84b9c8e4db15c
+            env:
+              TZ: Etc/UTC
+              LATITUDE: "36.884018"
+              LONGITUDE: "-76.204160"
+              ROUTE_API_CONTACT: ${personal_email}
+              WEATHER_FIELDS: >-
+                echotop18,
+                echotop30,
+                freezing,
+                preciprate,
+                preciptype,
+                mesh,
+                rotation,
+                lightning
+            probes:
+              liveness:
+                enabled: true
+                port: 8000
+              readiness:
+                enabled: true
+                port: 8000
+            resources:
+              requests:
+                cpu: 10m
+                memory: 256Mi
+              limits:
+                memory: 256Mi
+
 
       adsb3ddb:
         type: statefulset
@@ -522,6 +560,11 @@ spec:
                 pathType: ImplementationSpecific
                 service:
                   identifier: adsb3dacars
+                  port: 8000
+              - path: "/weather-api/(.*)"
+                pathType: ImplementationSpecific
+                service:
+                  identifier: adsb3dweather
                   port: 8000
               - path: "/api/(.*)"
                 pathType: ImplementationSpecific
