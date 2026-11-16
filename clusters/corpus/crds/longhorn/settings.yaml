@@ -1,0 +1,600 @@
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: allow-collecting-longhorn-usage-metrics}
+value: "false"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: allow-empty-disk-selector-volume}
+value: "true"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: allow-empty-node-selector-volume}
+value: "true"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: allow-instance-manager-automatic-upgrade}
+value: '{"v2":"false"}'
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: allow-live-engine-upgrade-on-same-image-commit}
+value: "false"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: allow-recurring-job-while-volume-detached}
+value: "false"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: allow-volume-creation-with-degraded-availability}
+value: "true"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: auto-cleanup-recurring-job-backup-snapshot}
+value: "true"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: auto-cleanup-snapshot-after-on-demand-backup-completed}
+value: "false"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: auto-cleanup-system-generated-snapshot}
+value: "true"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: auto-cleanup-when-delete-backup}
+value: "false"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: auto-delete-pod-when-volume-detached-unexpectedly}
+value: "true"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: auto-salvage}
+value: "true"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: backing-image-cleanup-wait-interval}
+value: "60"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: backing-image-recovery-wait-interval}
+value: "300"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: backup-compression-method}
+value: lz4
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: backup-concurrent-limit}
+value: "2"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: backup-execution-timeout}
+value: "1"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: blacklist-for-auto-delete-pod-when-volume-detached-unexpectedly}
+value: ""
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: concurrent-automatic-engine-upgrade-per-node-limit}
+value: "3"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: concurrent-backing-image-replenish-per-node-limit}
+value: "5"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: concurrent-replica-rebuild-per-node-limit}
+value: "2"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: concurrent-volume-backup-restore-per-node-limit}
+value: "2"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: crd-api-version}
+value: longhorn.io/v1beta2
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: create-default-disk-labeled-nodes}
+value: "true"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: csi-allowed-topology-keys}
+value: ""
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: csi-storage-capacity-tracking}
+value: "false"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: current-longhorn-version}
+value: v1.13.0
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: data-engine-cpu-isolation-enabled}
+value: '{"v2":"true"}'
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: data-engine-cpu-mask}
+value: '{"v2":"0x3"}'
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: data-engine-hugepage-enabled}
+value: '{"v2":"true"}'
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: data-engine-interrupt-mode-enabled}
+value: '{"v2":"false"}'
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: data-engine-iobuf-large-pool-size}
+value: '{"v2":"1024"}'
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: data-engine-iobuf-small-pool-size}
+value: '{"v2":"8192"}'
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: data-engine-log-flags}
+value: '{"v2":""}'
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: data-engine-log-level}
+value: '{"v2":"Notice"}'
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: data-engine-memory-size}
+value: '{"v2":"2048"}'
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: data-engine-number-of-cpu-cores}
+value: '{"v2":"0"}'
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: default-backing-image-manager-image}
+value: docker.io/longhornio/backing-image-manager:v1.13.0
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: default-backup-block-size}
+value: "2"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: default-data-locality}
+value: best-effort
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: default-data-path}
+value: /var/lib/longhorn
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: default-engine-image}
+value: docker.io/longhornio/longhorn-engine:v1.13.0
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: default-instance-manager-image}
+value: docker.io/longhornio/longhorn-instance-manager:v1.13.0
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: default-longhorn-static-storage-class}
+value: longhorn
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: default-min-number-of-backing-image-copies}
+value: "3"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: default-nvme-tcp-nr-io-queues}
+value: '{"v2":"0"}'
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: default-replica-count}
+value: '{"v1":"3","v2":"3"}'
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: default-ublk-number-of-queue}
+value: '{"v2":"1"}'
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: default-ublk-queue-depth}
+value: '{"v2":"128"}'
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: deleting-confirmation-flag}
+value: "false"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: detach-manually-attached-volumes-when-cordoned}
+value: "false"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: disable-revision-counter}
+value: '{"v1":"false"}'
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: disable-scheduling-on-cordoned-node}
+value: "true"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: disable-snapshot-purge}
+value: "false"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: endpoint-network-for-rwx-volume}
+value: ""
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: engine-image-pod-liveness-probe-failure-threshold}
+value: "3"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: engine-image-pod-liveness-probe-period}
+value: "5"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: engine-image-pod-liveness-probe-timeout}
+value: "4"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: engine-replica-timeout}
+value: '{"v1":"8","v2":"8"}'
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: failed-backup-ttl}
+value: "1440"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: fast-replica-rebuild-enabled}
+value: '{"v1":"true","v2":"true"}'
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: freeze-filesystem-for-snapshot}
+value: '{"v1":"false"}'
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: guaranteed-instance-manager-cpu}
+value: '{"v1":"12","v2":"12"}'
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: instance-manager-pod-liveness-probe-timeout}
+value: "10"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: instance-manager-upgrade-start-time}
+value: '{"v2":""}'
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: instance-manager-upgrade-timeout}
+value: '{"v2":"60"}'
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: kubernetes-cluster-autoscaler-enabled}
+value: "false"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: kubernetes-metrics-server-metrics-enabled}
+value: "true"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: latest-longhorn-version}
+value: ""
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: log-level}
+value: Info
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: log-path}
+value: /var/lib/longhorn/logs/
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: long-grpc-timeout}
+value: "86400"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: manager-url}
+value: ""
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: node-disk-health-monitoring}
+value: "true"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: node-down-pod-deletion-policy}
+value: delete-both-statefulset-and-deployment-pod
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: node-drain-policy}
+value: block-if-contains-last-replica
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: offline-replica-rebuilding}
+value: "false"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: orphan-resource-auto-deletion}
+value: ""
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: orphan-resource-auto-deletion-grace-period}
+value: "300"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: priority-class}
+value: ""
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: recurring-failed-jobs-history-limit}
+value: "1"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: recurring-job-max-retention}
+value: "100"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: recurring-successful-jobs-history-limit}
+value: "1"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: registry-secret}
+value: ""
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: remove-snapshots-during-filesystem-trim}
+value: "false"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: replica-auto-balance}
+value: best-effort
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: replica-auto-balance-disk-pressure-percentage}
+value: "90"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: replica-disk-soft-anti-affinity}
+value: "true"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: replica-file-sync-http-client-timeout}
+value: "30"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: replica-rebuild-concurrent-sync-limit}
+value: '{"v1":"1"}'
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: replica-rebuilding-bandwidth-limit}
+value: '{"v2":"0"}'
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: replica-replenishment-wait-interval}
+value: "90"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: replica-soft-anti-affinity}
+value: "false"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: replica-zone-soft-anti-affinity}
+value: "true"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: restore-concurrent-limit}
+value: "2"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: restore-volume-recurring-jobs}
+value: "true"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: rwx-volume-fast-failover}
+value: "false"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: snapshot-count-warning-threshold}
+value: "100"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: snapshot-data-integrity}
+value: '{"v1":"fast-check","v2":"fast-check"}'
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: snapshot-data-integrity-cronjob}
+value: '{"v1":"0 8 */7 * *","v2":"0 8 */7 * *"}'
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: snapshot-data-integrity-immediate-check-after-snapshot-creation}
+value: '{"v1":"false","v2":"false"}'
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: snapshot-heavy-task-concurrent-limit}
+value: "5"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: snapshot-max-count}
+value: "250"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: stable-longhorn-versions}
+value: ""
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: storage-minimal-available-percentage}
+value: "10"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: storage-network}
+value: ""
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: storage-over-provisioning-percentage}
+value: "100"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: storage-reserved-percentage-for-default-disk}
+value: "0"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: support-bundle-failed-history-limit}
+value: "1"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: support-bundle-manager-image}
+value: docker.io/longhornio/support-bundle-kit:v0.0.98
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: support-bundle-node-collection-timeout}
+value: "30"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: system-managed-components-node-selector}
+value: ""
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: system-managed-csi-components-resource-limits}
+value: ""
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: system-managed-pods-image-pull-policy}
+value: if-not-present
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: taint-toleration}
+value: ""
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: upgrade-checker}
+value: "false"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: upgrade-responder-url}
+value: https://longhorn-upgrade-responder.rancher.io/v1/checkupgrade
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: v1-data-engine}
+value: "true"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata: {namespace: longhorn-system, name: v2-data-engine}
+value: "false"
