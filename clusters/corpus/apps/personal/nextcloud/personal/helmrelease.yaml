@@ -72,7 +72,7 @@ spec:
               requests:
                 cpu: 100m
               limits:
-                memory: 8Gi
+                memory: 4Gi
 
           &cache nextcloud-cache:
             image:
@@ -95,6 +95,7 @@ spec:
             env: *ncenv
             args:
               - |
+                export PHP_MEMORY_LIMIT=12G
                 ops=(
                   "db:add-missing-primary-keys"
                   "db:add-missing-indices"
