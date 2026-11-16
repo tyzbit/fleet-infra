@@ -52,7 +52,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: nas-volume1-media-games
+  name: nas-volume1-games
   namespace: media
 spec:
   accessModes:
