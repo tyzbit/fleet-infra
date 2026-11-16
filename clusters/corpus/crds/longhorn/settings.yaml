@@ -114,10 +114,10 @@ kind: Setting
 metadata: {namespace: longhorn-system, name: concurrent-volume-backup-restore-per-node-limit}
 value: "2"
 ---
-apiVersion: longhorn.io/v1beta2
-kind: Setting
-metadata: {namespace: longhorn-system, name: crd-api-version}
-value: longhorn.io/v1beta2
+# apiVersion: longhorn.io/v1beta2
+# kind: Setting
+# metadata: {namespace: longhorn-system, name: crd-api-version}
+# value: longhorn.io/v1beta2
 ---
 apiVersion: longhorn.io/v1beta2
 kind: Setting
