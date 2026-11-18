@@ -51,6 +51,10 @@ spec:
           reloader.stakater.com/auto: "true"
 
         containers:
+          # father forgive me for i have sinned
+          # i used https://github.com/xuges/selfcontained to self-contain ffmpeg
+          # then i set up the run script at /var/www/html/ffmpeg/ffmpeg so it's
+          # saved in persistent storage
           &app nextcloud-app:
             image:
               repository: nextcloud
