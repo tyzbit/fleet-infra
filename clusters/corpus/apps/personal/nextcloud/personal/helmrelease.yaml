@@ -189,12 +189,13 @@ spec:
         existingClaim: nextcloud-data-nas
         advancedMounts:
           app:
-            *app :
-              - path: &datamount /var/www/html
-            *worker :
-              - path: *datamount
-            *push :
-              - path: *datamount
+            *app : &mounts
+              - path: /var/www/html
+                subPath: nextcloud
+              - path: /opt/tools
+                subPath: tools
+            *worker : *mounts
+            *push : *mounts
       socket:
         type: emptyDir
         medium: Memory
