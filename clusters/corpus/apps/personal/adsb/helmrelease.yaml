@@ -210,7 +210,7 @@ spec:
             image:
               repository: ghcr.io/hook-365/adsb-3d
               # only `latest` available
-              tag: latest@sha256:4cff3deeda5116966cdafd96ba7aa52dbca9fab90fb89f54ef4fbe3d66832353
+              tag: latest@sha256:e6ed73d271fba6dc69d4bfef203f2068b1789076970a8542ec3e5ad385a14a21
             env:
               TZ: Etc/UTC
               ENABLE_ACARS: "true"
