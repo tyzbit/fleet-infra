@@ -60,7 +60,7 @@ spec:
             # command: [sleep,infinity]
             command: [bash, "/tmp/acars-usb-watchdog.sh"]
             env:
-              SERIALS: "00000001,13055074,30275839,58322450"
+              SERIALS: "13055074,30275839,58322450"
               STATEFULSETS: >-
                 acars-acarsdec, acars-acarsdec2, acars-acarsdec3, acars-dumpvdl2
 
