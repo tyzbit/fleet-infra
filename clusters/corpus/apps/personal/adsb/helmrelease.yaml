@@ -94,7 +94,7 @@ spec:
               # READSB_RTLSDR_DEVICE: 1000001 # Serial number of device
               # DEVICE: "30275839"
               # DEVICE: "stx:1090:0" # Nano SDR
-              DEVICE: "98941503" #Naked SDR
+              READSB_RTLSDR_DEVICE: "98941503" #Naked SDR
               # readsb/decoder parameters: (these are in the secret)
               READSB_LAT: ${my_latitude}
               READSB_LON: ${my_longitude}
@@ -112,7 +112,7 @@ spec:
               TAR1090_PLANECOUNTINTITLE: "true"
               TAR1090_ENABLE_AC_DB: "true"
               TAR1090_FLIGHTAWARELINKS: "true"
-              HEYWHATSTHAT_ALTS: 5280,35000
+              HEYWHATSTHAT_ALTS: 1000,5280,35000
               TAR1090_SITESHOW: "true"
               TAR1090_RANGE_OUTLINE_COLORED_BY_ALTITUDE: "true"
               TAR1090_RANGE_OUTLINE_WIDTH: "2.0"
