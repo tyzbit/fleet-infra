@@ -492,8 +492,8 @@ spec:
       ultrafeeder:
         className: nginx
         annotations:
-          nginx.ingress.kubernetes.io/auth-url: "http://adsb-ultrafeeder-oauth2-proxy.personal.svc.cluster.local/oauth2/auth"
-          nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
+          # nginx.ingress.kubernetes.io/auth-url: "http://adsb-ultrafeeder-oauth2-proxy.personal.svc.cluster.local/oauth2/auth"
+          # nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
           cert-manager.io/cluster-issuer: letsencrypt
           external-dns.kubernetes.io/cloudflare-proxied: "false"
           external-dns.kubernetes.io/target: ${personal_services_ip}
@@ -523,6 +523,32 @@ spec:
           - hosts:
               - *host
             secretName: *host
+
+      fr24:
+        className: nginx
+        annotations:
+          # nginx.ingress.kubernetes.io/auth-url: "http://adsb-ultrafeeder-oauth2-proxy.personal.svc.cluster.local/oauth2/auth"
+          # nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
+          cert-manager.io/cluster-issuer: letsencrypt
+          external-dns.kubernetes.io/cloudflare-proxied: "false"
+          external-dns.kubernetes.io/target: ${personal_services_ip}
+          hajimari.io/enable: "true"
+          hajimari.io/icon: radar
+          hajimari.io/info: "Aircraft Map"
+          hajimari.io/targetBlank: "true"
+        hosts:
+          - host: &host "fr24.${personal_domain}"
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: dump978
+                  port: 80
+        tls:
+          - hosts:
+              - *host
+            secretName: *host
+
 
       oauth:
         className: nginx
