@@ -507,8 +507,8 @@ spec:
               - path: /fr24
                 pathType: Prefix
                 service:
-                  identifier: flightradar24
-                  port: 8754
+                  identifier: dump978
+                  port: 80
               # - path: /photos
               #   pathType: Prefix
               #   service:
