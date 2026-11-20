@@ -123,7 +123,7 @@ spec:
               GRAPHS1090_DARKMODE: "true"
             probes:
               liveness:
-                enabled: true
+                enabled: false
                 custom: true
                 spec:
                   initialDelaySeconds: 60
