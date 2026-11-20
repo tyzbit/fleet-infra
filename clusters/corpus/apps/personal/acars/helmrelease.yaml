@@ -180,11 +180,11 @@ spec:
               # See https://app.airframes.io/about
               # See also https://gist.github.com/tyzbit/8df46263085b0f3d9e2dd09069438f89
               FREQUENCIES: >-
+                136.100;
                 136.650;
                 136.675;
-                136.700;
-                136.725;
                 136.800;
+                136.975;
               ZMQ_MODE: client
               ZMQ_ENDPOINT: tcp://acars-acarsrouter:35555
             probes: &vdlprobes
@@ -210,7 +210,7 @@ spec:
 
       dumpvdl2-2:
         <<: *common_settings
-        replicas: 1
+        replicas: 0
         containers:
           dumpvdl2-2:
             securityContext: *secopts

@@ -53,7 +53,7 @@ spec:
             envFrom: [secretRef: { name: adsb-ultrafeeder }]
             image:
               repository: ghcr.io/sdr-enthusiasts/docker-adsb-ultrafeeder
-              tag: latest-build-722
+              tag: latest-build-922
               # tag: telegraf # for use with InfluxDB/Prometheus and Grafana
             command:
               - bash
@@ -89,7 +89,7 @@ spec:
               TZ: US/New_York
               # UUID: "568"
               READSB_DEVICE_TYPE: rtlsdr
-              ENABLE_978: "no"
+              ENABLE_978: "yes"
               URL_978: http://adsb-dump978/skyaware978
               # READSB_RTLSDR_DEVICE: 1000001 # Serial number of device
               # DEVICE: "30275839"
@@ -156,19 +156,20 @@ spec:
 
       dump978:
         <<: *common_settings
-        replicas: 0
+        replicas: 1
+        pod: { nodeSelector: { uat: "true" } }
         containers:
           dump978:
             securityContext: { privileged: true }
             image:
               repository: ghcr.io/sdr-enthusiasts/docker-dump978
-              tag: latest-build-744
+              tag: latest-build-814
             env:
               TZ: US/New_York
               LAT: ${my_latitude}
               LON: ${my_longitude}
               DUMP978_DEVICE_TYPE: rtlsdr
-              DUMP978_RTLSDR_DEVICE: "98941503"
+              DUMP978_RTLSDR_DEVICE: "00000001"
               # DUMP978_RTLSDR_DEVICE: "30275839" # Original Nooelect SDR
               # DUMP978_RTLSDR_DEVICE: "stx:1090:0" # Nooelec Nano SDR
               DUMP978_SDR_GAIN: autogain
@@ -192,9 +193,9 @@ spec:
             env:
               BEASTHOST: adsb-ultrafeeder
               FR24KEY: ${fr24_sharing_key}
-              # FR24KEY_UAT: ${fr24_uat_sharing_key}
-              # UATHOST: adsb-dump978
-              # UATPORT: "30978"
+              FR24KEY_UAT: ${fr24_uat_sharing_key}
+              UATHOST: adsb-dump978
+              UATPORT: "30978"
             resources:
               requests:
                 cpu: 10m
