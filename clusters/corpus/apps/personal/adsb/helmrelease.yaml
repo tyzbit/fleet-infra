@@ -40,7 +40,7 @@ spec:
             command: [bash, "/tmp/adsb-usb-watchdog.sh"]
             # env: {SERIALS: "30275839,98941503"}
             env:
-              SERIALS: "98941503" # Naked SDR
+              SERIALS: "00000001,98941503" # Naked SDR
               STATEFULSETS: >-
                 adsb-flightradar24,adsb-ultrafeeder
       #                adsb-dump978,
