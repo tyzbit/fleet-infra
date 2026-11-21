@@ -310,7 +310,7 @@ spec:
           adsb3dweather:
             image:
               repository: ghcr.io/hook-365/adsb-weather-service
-              tag: latest@sha256:237f5952fcab03ebb0af33e17f7db54859548d4cd6e81f39a7304f308d22f5bd
+              tag: latest@sha256:e5b85d1975bfa227acad8b827dcaca2ba66ea249189f206399ce2de83e87e84e
             env:
               TZ: Etc/UTC
               LATITUDE: "36.884018"
