@@ -171,8 +171,9 @@ spec:
               DUMP978_RTLSDR_DEVICE: "00000001"
               # DUMP978_RTLSDR_DEVICE: "30275839" # Original Nooelect SDR
               # DUMP978_RTLSDR_DEVICE: "stx:1090:0" # Nooelec Nano SDR
-              DUMP978_SDR_GAIN: autogain
-              DUMP978_SDR_PPM: "0"
+              # DUMP978_SDR_GAIN: autogain
+              # DUMP978_SDR_PPM: "0"
+              DUMP978_SDR_AGC: "any value"
             resources:
               requests:
                 cpu: 10m
