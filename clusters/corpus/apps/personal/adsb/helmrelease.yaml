@@ -278,7 +278,7 @@ spec:
           adsb3dacars:
             image:
               repository: ghcr.io/hook-365/adsb-acars-service
-              tag: latest@sha256:3f719f10d0331d74a0931ce4f28c12de4332b64654f504c89f298972ad253211
+              tag: latest@sha256:4f658734b3dc91d5cbe084166914d00d4246ded96c0af93d25d55281ae41f652
             env:
               TZ: Etc/UTC
               ACARS_HOST: acars-acarshub
