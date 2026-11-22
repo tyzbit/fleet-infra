@@ -30,7 +30,7 @@ spec:
   values:
     controller:
       fullnameOverride: *name
-      enabled: true
+      enabled: false
       strategy: node
       externalAttacher:
         enabled: false
