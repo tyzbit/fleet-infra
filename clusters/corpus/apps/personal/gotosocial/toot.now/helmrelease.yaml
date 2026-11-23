@@ -116,6 +116,8 @@ spec:
     service:
       main:
         controller: *app
+        type: NodePort
+        externalTrafficPolicy: Local
         ports:
           http:
             port: *http
