@@ -91,7 +91,7 @@ spec:
           &cache community-nextcloud-cache:
             image:
               repository: redis
-              tag: "8.10"
+              tag: "8.12"
               pullPolicy: Always
             command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
             resources:
